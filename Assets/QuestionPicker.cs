@@ -6,6 +6,8 @@ public class QuestionPicker : MonoBehaviour {
 	private Questions questions;
 	[SerializeField] QuestionDisplay display;
 	private Question curQuestion;
+	[SerializeField] GameObject correctFx;
+	[SerializeField] UnityEngine.UI.Text placeholder;
 
 	// Use this for initialization
 	void Start () {
@@ -19,11 +21,12 @@ public class QuestionPicker : MonoBehaviour {
 		return qArray[Random.Range(0, qArray.Length)];
 	}
 
-	public void OnAnswer(UnityEngine.UI.Text input) {
+	public void OnAnswer(UnityEngine.UI.InputField input) {
 		if (curQuestion.IsAnswerCorrect (input.text)) {
-			Debug.Log ("ok");
+			correctFx.SetActive (true);
 		} else {
-			Debug.Log ("nope");
+			placeholder.text = "Versuche es noch einmal...";
+			input.text = "";
 		}
 	}
 }
