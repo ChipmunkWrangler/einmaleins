@@ -51,6 +51,7 @@
      <Compile Include="Assets\PlayerPrefsPlus\Plugins\PlayerPrefsArray.cs" />
      <Compile Include="Assets\PlayerPrefsPlus\Plugins\PlayerPrefsPlus.cs" />
      <Compile Include="Assets\Question.cs" />
+     <Compile Include="Assets\QuestionDisplay.cs" />
      <Compile Include="Assets\QuestionPicker.cs" />
      <None Include="Assets\PlayerPrefsEditor\README.txt" />
  <Reference Include="UnityEngine.UI">

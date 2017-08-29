@@ -19,6 +19,10 @@ public class Question {
 		}
 	}
 
+	public string GetQuestionString() {
+		return a + " x " + b;
+	}
+
 	public void Load(string prefsKey) {
 		//		PlayerPrefs.SetInt (prefsKey + ":a", a);
 		//		PlayerPrefs.SetInt (prefsKey + ":b", b);

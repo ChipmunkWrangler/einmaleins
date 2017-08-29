@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class QuestionPicker : MonoBehaviour {
 	private Question[] questions;
-	const string prefsKey = "questions";
+	private const string prefsKey = "questions";
 	[SerializeField] private int maxNum = 3;
+	[SerializeField] QuestionDisplay display;
+	private Question curQuestion;
 
 	// Use this for initialization
 	void Start () {
-		InitEasiness ();
+		InitQuestions ();
+		curQuestion = PickQuestion ();
+		display.DisplayQuestion (curQuestion.GetQuestionString ());
 	}
 
-	void InitEasiness() {		
+	void InitQuestions() {		
 		CreateQuestions ();
 		Load ();
 		for (int i = 0; i < questions.Length; ++i) {
@@ -32,8 +36,8 @@ public class QuestionPicker : MonoBehaviour {
 		}
 	}
 	
-	void Update () {
-		
+	Question PickQuestion() {
+		return questions[Random.Range(0, questions.Length)];
 	}
 
 	public void Reset() {
