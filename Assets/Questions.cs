@@ -48,7 +48,7 @@ public class Questions : ScriptableObject {
 	void Save() {
 		PlayerPrefs.SetInt(prefsKey + ":ArrayLen", questions.Length);
 		for(int i = 0; i < questions.Length; ++i) {
-			questions [i].Save (prefsKey + ":" + i.ToString());
+			questions [i].Save ();
 		}
 	}
 

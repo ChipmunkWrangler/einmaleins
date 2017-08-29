@@ -27,7 +27,9 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	public void OnAnswer(UnityEngine.UI.InputField input) {
-		if (curQuestion.IsAnswerCorrect (input.text)) {
+		bool isCorrect = curQuestion.IsAnswerCorrect (input.text);
+		curQuestion.UpdateInterval (isCorrect);
+		if (isCorrect) {
 			StartCoroutine (OnCorrectAnswer (input));
 		} else {
 			placeholder.text = "Versuche es noch einmal...";
