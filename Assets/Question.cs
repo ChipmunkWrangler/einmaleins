@@ -20,7 +20,9 @@ public class Question {
 	}
 
 	public string GetQuestionString() {
-		return a + " x " + b;
+		int x = Random.Range(0,2);
+		Debug.Log (x);
+		return (x == 0) ? a + " x " + b : b + " x " + a;
 	}
 
 	public bool IsAnswerCorrect(string answer) {
