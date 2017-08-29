@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Questions {
+public class Questions : ScriptableObject {
 	private Question[] questions;
 	private const string prefsKey = "questions";
 	[SerializeField] private int maxNum = 3;

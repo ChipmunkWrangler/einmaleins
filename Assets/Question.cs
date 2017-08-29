@@ -23,10 +23,16 @@ public class Question {
 		return a + " x " + b;
 	}
 
+	public bool IsAnswerCorrect(string answer) {
+		int result;
+		int correctAnswer;
+		if (int.TryParse (answer, out result) && int.TryParse(answers[0], out correctAnswer)) {
+			return result == correctAnswer;
+		}
+		return false;
+	}
+
 	public void Load(string prefsKey) {
-		//		PlayerPrefs.SetInt (prefsKey + ":a", a);
-		//		PlayerPrefs.SetInt (prefsKey + ":b", b);
-		//		PlayerPrefsArray.SetStringArray(prefsKey + ":answers", answers);
 		float[] loaded = PlayerPrefsArray.GetFloatArray(prefsKey + ":easinesses");
 		if (loaded != null) {
 			easinesses = loaded;
@@ -34,9 +40,6 @@ public class Question {
 	}
 
 	public void Save(string prefsKey) {
-		//		PlayerPrefs.SetInt (prefsKey + ":a", a);
-		//		PlayerPrefs.SetInt (prefsKey + ":b", b);
-		//		PlayerPrefsArray.SetStringArray(prefsKey + ":answers", answers);
 		PlayerPrefsArray.SetFloatArray(prefsKey + ":easinesses", easinesses);
 	}
 

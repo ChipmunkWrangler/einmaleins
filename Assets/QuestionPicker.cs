@@ -19,6 +19,11 @@ public class QuestionPicker : MonoBehaviour {
 		return qArray[Random.Range(0, qArray.Length)];
 	}
 
-
-
+	public void OnAnswer(UnityEngine.UI.Text input) {
+		if (curQuestion.IsAnswerCorrect (input.text)) {
+			Debug.Log ("ok");
+		} else {
+			Debug.Log ("nope");
+		}
+	}
 }
