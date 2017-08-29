@@ -53,6 +53,7 @@
      <Compile Include="Assets\Question.cs" />
      <Compile Include="Assets\QuestionDisplay.cs" />
      <Compile Include="Assets\QuestionPicker.cs" />
+     <Compile Include="Assets\Questions.cs" />
      <None Include="Assets\PlayerPrefsEditor\README.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
