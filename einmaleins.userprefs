@@ -1,18 +1,25 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/PlayerPrefsEditor/Editor/PlayerPrefsEditor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ShowHideProgress.cs">
     <Files>
-      <File FileName="Assets/QuestionPicker.cs" Line="1" Column="1" />
-      <File FileName="Assets/Question.cs" Line="35" Column="21" />
-      <File FileName="Assets/QuestionDisplay.cs" Line="1" Column="1" />
-      <File FileName="../../ThinkTwice/FindingFishie/Assets/Scripts/TTLib.cs" Line="1" Column="1" />
-      <File FileName="Assets/Questions.cs" Line="23" Column="45" />
-      <File FileName="Assets/PlayerPrefsEditor/Editor/PlayerPrefsEditor.cs" Line="219" Column="20" />
-      <File FileName="Assets/PlayerPrefsEditor/PlayerPrefsUtility.cs" Line="6" Column="1" />
+      <File FileName="Assets/QuestionPicker.cs" Line="38" Column="44" />
+      <File FileName="../../ThinkTwice/FindingFishie/Assets/Scripts/TTLib.cs" Line="35" Column="1" />
+      <File FileName="Assets/Questions.cs" Line="54" Column="4" />
+      <File FileName="Assets/AnswerInput.cs" Line="21" Column="47" />
+      <File FileName="Assets/AnswerPlaceholder.cs" Line="15" Column="17" />
+      <File FileName="Assets/CCInputField.cs" Line="1" Column="1" />
+      <File FileName="Assets/Celebrate.cs" Line="26" Column="47" />
+      <File FileName="Assets/QuestionProgress.cs" Line="24" Column="1" />
+      <File FileName="Assets/QuestionDisplay.cs" Line="19" Column="55" />
+      <File FileName="Assets/Question.cs" Line="31" Column="34" />
+      <File FileName="Assets/OnCorrectAnswer.cs" Line="6" Column="40" />
+      <File FileName="Assets/ShowHideProgress.cs" Line="24" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/rafael/Documents/dev/einmaleins/Assets/QuestionPicker.cs" line="31" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

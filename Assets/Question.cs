@@ -16,6 +16,7 @@ public class Question {
 	private const int year = 12 * month;
 
 	static private int[] intervalSeconds = new int[] {
+		0,
 		25,
 		2 * minute,
 		10 * minute,
@@ -27,7 +28,7 @@ public class Question {
 		4 * month,
 		2 * year
 	};
-	private const int masteryIdx = 7; // if the next review is in a month, you have mastered this question
+	private const int masteryIdx = 8; // if the next review is in a month, you have mastered this question
 
 	private int a;
 	private int b;

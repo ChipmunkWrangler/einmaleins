@@ -65,6 +65,7 @@
      <Compile Include="Assets\QuestionPicker.cs" />
      <Compile Include="Assets\QuestionProgress.cs" />
      <Compile Include="Assets\Questions.cs" />
+     <Compile Include="Assets\ShowHideProgress.cs" />
      <None Include="Assets\Shaders\AlphaProgress.shader" />
      <None Include="Assets\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\PlayerPrefsEditor\README.txt" />

@@ -7,22 +7,19 @@ public class QuestionProgress : MonoBehaviour, OnCorrectAnswer, OnQuestionChange
 	float speed;
 	float curFraction;
 	float targetFraction;
-	Material mat;
-
-	void Start() {
-		mat = GetComponent<Renderer> ().material;
-	}
+	Material mat_;
 
 	public void OnCorrectAnswer (Question question) {
-		targetFraction = question.GetMasteryFraction();
+		SetProgress (curFraction);
+		targetFraction = question.GetMasteryFraction ();
 		speed = (targetFraction - curFraction) / transitionTime;
 	}
 
 	public void OnQuestionChanged(Question question) {
-		SetProgress(question.GetMasteryFraction ());
+		curFraction = question.GetMasteryFraction ();
 		targetFraction = curFraction;
 	}
-		
+				
 	void Update() {
 		if (!Mathf.Approximately(curFraction, targetFraction)) {
 			SetProgress(Mathf.MoveTowards (curFraction, targetFraction, Time.deltaTime * speed));
@@ -30,10 +27,15 @@ public class QuestionProgress : MonoBehaviour, OnCorrectAnswer, OnQuestionChange
 	}
 
 	void SetProgress (float progress) {
-		print ("progress " + progress);
 		curFraction = progress;
-		mat.SetFloat ("_Progress", curFraction);
+		GetMaterial().SetFloat ("_Progress", curFraction);
 	}
 
+	Material GetMaterial() {
+		if (!mat_) {
+			mat_ = GetComponent<Renderer> ().material;
+		}
+		return mat_;
+	}
 
 }
