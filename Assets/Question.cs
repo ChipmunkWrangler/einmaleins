@@ -89,16 +89,26 @@ public class Question {
 				Debug.Log ("Failed to parse nextTime " + asString + " for " + ToString());
 			}
 		}
+		string stageKey = prefsKey + ":stage";
+		if (PlayerPrefs.HasKey (stageKey)) {
+			try {
+				stage = (Stage) System.Enum.Parse(typeof(Stage), PlayerPrefs.GetString (stageKey));
+			} catch (System.ArgumentException e) {
+				Debug.Log ("Invalid stage " + e);
+				stage = Stage.Inactive;
+			}
+		}
 	}
 
 	public void Save() {
 		UnityEngine.Assertions.Assert.AreNotEqual (prefsKey.Length, 0);
 		PlayerPrefs.SetInt(prefsKey + ":intervalIdx", intervalIdx);
 		PlayerPrefs.SetString(prefsKey + ":nextTime", nextTime.ToBinary().ToString());	
+		PlayerPrefs.SetString(prefsKey + ":stage", stage.ToString());
 		Debug.Log ("Saving " + ToString ());
 	}
 
 	public override string ToString() {
-		return a + " * " + b + " : intervalIdx = " + intervalIdx + ", nextTime = " + nextTime.ToString();
+		return a + " * " + b + " : intervalIdx = " + intervalIdx + ", nextTime = " + nextTime.ToString() + ", " + stage;
 	}
 }

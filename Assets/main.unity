@@ -1023,6 +1023,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e37913b9f254327acffe0b4bd310aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minPlayMinutes: 1
+  minNumWrong: 3
   subscribers:
   - {fileID: 2083017402}
   - {fileID: 2144507856}

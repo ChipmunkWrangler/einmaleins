@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestionPicker : MonoBehaviour {
-	private Questions questions;
-	private Question curQuestion;
+	[SerializeField] int minPlayMinutes = 5;
+	[SerializeField] int minNumWrong = 3;
 	[SerializeField] GameObject[] subscribers;
+
+	Questions questions;
+	Question curQuestion;
 	List<OnQuestionChanged> onQuestionChangedSubscribers;
 	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
 	List<OnWrongAnswer> onWrongAnswerSubscribers;
+	int numWrong;
 
 	void Start () {
 		questions = new Questions();
@@ -17,7 +21,7 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	public void NextQuestion() {
-		curQuestion = questions.GetNextQuestion ();
+		curQuestion = questions.GetNextQuestion (AllowNewQuestion());
 		foreach (OnQuestionChanged subscriber in onQuestionChangedSubscribers) {
 			subscriber.OnQuestionChanged (curQuestion);
 		}
@@ -35,10 +39,15 @@ public class QuestionPicker : MonoBehaviour {
 			}
 
 		} else {
+			++numWrong;
 			foreach (OnWrongAnswer subscriber in onWrongAnswerSubscribers) {
 				subscriber.OnWrongAnswer ();
 			}
 		}
+	}
+
+	bool AllowNewQuestion() {
+		return numWrong < minNumWrong || Time.time <= minPlayMinutes * 60;
 	}
 
 	// I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...

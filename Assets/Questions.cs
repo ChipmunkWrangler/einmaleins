@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class Questions {
 	private Question[] questions;
 	private const string prefsKey = "questions";
-	[SerializeField] private int maxNum = 10;
+	private int maxNum = 10;
 
 	// Use this for initialization
 	public Questions() {
@@ -18,17 +17,44 @@ public class Questions {
 		Save ();
 	}
 
-	public Question GetNextQuestion() {
+	public Question GetNextQuestion(bool activeNewQuestionIfNecessary) {
+		Question question = GetExistingQuestion ();
+		if (question == null && activeNewQuestionIfNecessary) {
+			question = GetNewQuestion ();
+		}
+		return question;
+	}
+
+	Question GetExistingQuestion () {
 		Question question = null;
 		foreach (Question otherQuestion in questions) {
-			if (otherQuestion.stage == Question.Stage.Active 
-				&& otherQuestion.GetNextTime() <= System.DateTime.UtcNow
-				&& (question == null || otherQuestion.GetNextTime() < question.GetNextTime())
-			) { 
+			if (PreferSecondQuestion (question, otherQuestion)) {
 				question = otherQuestion;
 			}
 		}
 		return question;
+	}
+
+	bool PreferSecondQuestion(Question firstQuestion, Question secondQuestion) {
+		return secondQuestion.stage == Question.Stage.Active
+		&& secondQuestion.GetNextTime () <= System.DateTime.UtcNow
+		&& (firstQuestion == null || secondQuestion.GetNextTime () < firstQuestion.GetNextTime ());
+	}
+
+
+	Question GetNewQuestion() {
+		Question ret = null;
+		foreach (Question question in questions) {
+			if (question.stage == Question.Stage.Inactive) {
+				question.stage = Question.Stage.Active;
+				ret = question;
+				break;
+			}
+		}
+		if (ret != null) {
+			Debug.Log ("Adding new question " + ret);
+		}
+		return ret;
 	}
 
 	void CreateQuestions() {
