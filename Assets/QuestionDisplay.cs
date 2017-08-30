@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestionDisplay : MonoBehaviour, OnQuestionChanged {
-	private UnityEngine.UI.Text textField;
+	UnityEngine.UI.Text textField_;
 
-	void Start() {
-		textField = gameObject.GetComponent<UnityEngine.UI.Text> ();
-		UnityEngine.Assertions.Assert.IsNotNull (textField);
-	}
-		
 	public void OnQuestionChanged(Question question) {
 		if (question == null) {
-			textField.text = "You are done for now!";
+			GetTextField().text = "You are done for now!";
 		} else {
-			textField.text = question.GetQuestionString();
+			GetTextField().text = question.GetQuestionString();
 		}
 	}
+
+	UnityEngine.UI.Text GetTextField() {
+		if (textField_ == null) {
+			textField_ = gameObject.GetComponent<UnityEngine.UI.Text> ();
+			UnityEngine.Assertions.Assert.IsNotNull (textField_);
+		}
+		return textField_;
+	}
+
 }

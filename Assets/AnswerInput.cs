@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AnswerInput : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer, OnWrongAnswer {
-	UnityEngine.UI.InputField inputField;
-
-	void Start() {
-		inputField = gameObject.GetComponent<UnityEngine.UI.InputField> ();
-		UnityEngine.Assertions.Assert.IsNotNull (inputField);
-	}
+	UnityEngine.UI.InputField inputField_;
 
 	public void OnQuestionChanged(Question question) {
 		if (question == null) {
@@ -20,15 +15,23 @@ public class AnswerInput : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer, On
 	}
 
 	public void OnWrongAnswer() {
-		inputField.text = "";
+		GetInputField().text = "";
 	}
 
 	public void OnCorrectAnswer() {
-		inputField.interactable = false;
+		GetInputField().interactable = false;
 	}
 
-	private void Reset() {
-		inputField.text = "";
-		inputField.interactable = true;
+	void Reset() {
+		GetInputField().text = "";
+		GetInputField().interactable = true;
+	}
+
+	UnityEngine.UI.InputField GetInputField() {
+		if (inputField_ == null) {
+			inputField_ = gameObject.GetComponent<UnityEngine.UI.InputField> ();
+			UnityEngine.Assertions.Assert.IsNotNull (inputField_);
+		}
+		return inputField_;
 	}
 }

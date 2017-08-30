@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AnswerPlaceholder : MonoBehaviour, OnQuestionChanged, OnWrongAnswer {
-	UnityEngine.UI.Text textField;
+//	System.Lazy<UnityEngine.UI.Text> textField = new System.Lazy<UnityEngine.UI.Text>(Init);
 
-	void Start() {
-		textField = gameObject.GetComponent<UnityEngine.UI.Text> ();
-		UnityEngine.Assertions.Assert.IsNotNull (textField);
-	}
+	UnityEngine.UI.Text textField_;
 
 	public void OnQuestionChanged(Question question) {
-		textField.text = "ergibt...";
+		GetTextField().text = "ergibt...";
 	}
 
 	public void OnWrongAnswer() {
-		textField.text = "Versuche es noch einmal...";
+		GetTextField().text = "Versuche es noch einmal...";
+	}
+
+	UnityEngine.UI.Text GetTextField() {
+		if (textField_ == null) {
+			textField_ = gameObject.GetComponent<UnityEngine.UI.Text> ();
+			UnityEngine.Assertions.Assert.IsNotNull (textField_);
+		}
+		return textField_;
 	}
 }
