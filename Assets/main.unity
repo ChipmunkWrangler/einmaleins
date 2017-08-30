@@ -1035,7 +1035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   display: {fileID: 1088660494}
   placeholder: {fileID: 1647688749}
-  victoryCelebrationSecs: 5
+  victoryCelebrationSecs: 1
   victoryParticles:
   - {fileID: 1084702711}
   - {fileID: 175815069}

@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Question {
+	public enum Stage {
+		Inactive,
+		Active
+	}
+
 	private const int minute = 60;
 	private const int hour = 60 * minute;
 	private const int day = 24 * hour;
@@ -27,12 +32,14 @@ public class Question {
 	private int intervalIdx;
 	private System.DateTime nextTime;
 	private string prefsKey;
+	public Stage stage;
 
 	public Question(int _a, int _b) {
 		a = _a;
 		b = _b;
 		intervalIdx = 0;
 		nextTime = System.DateTime.UtcNow;
+		stage = Stage.Inactive;
 	}
 
 	public string GetQuestionString() {

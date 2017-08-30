@@ -6,7 +6,7 @@ using System.Linq;
 public class Questions {
 	private Question[] questions;
 	private const string prefsKey = "questions";
-	[SerializeField] private int maxNum = 3;
+	[SerializeField] private int maxNum = 10;
 
 	// Use this for initialization
 	public Questions() {
@@ -19,12 +19,16 @@ public class Questions {
 	}
 
 	public Question GetNextQuestion() {
-		int minPos = 0;
-		for (int i = 1; i < questions.Length; ++i)
-		{
-			if (questions[i].GetNextTime() < questions[minPos].GetNextTime()) { minPos = i; }
+		Question question = null;
+		foreach (Question otherQuestion in questions) {
+			if (otherQuestion.stage == Question.Stage.Active 
+				&& otherQuestion.GetNextTime() <= System.DateTime.UtcNow
+				&& (question == null || otherQuestion.GetNextTime() < question.GetNextTime())
+			) { 
+				question = otherQuestion;
+			}
 		}
-		return questions [minPos];
+		return question;
 	}
 
 	void CreateQuestions() {
@@ -36,6 +40,7 @@ public class Questions {
 				++idx;
 			}
 		}
+		questions [0].stage = Question.Stage.Active;
 	}
 
 //	public void Reset() {

@@ -18,7 +18,11 @@ public class QuestionPicker : MonoBehaviour {
 
 	void NextQuestion() {
 		curQuestion = PickQuestion ();
-		display.DisplayQuestion (curQuestion.GetQuestionString ());
+		if (curQuestion == null) {
+			display.DisplayQuestion ("You are done for now!");
+		} else {
+			display.DisplayQuestion (curQuestion.GetQuestionString ());
+		}
 	}
 
 	Question PickQuestion() {
@@ -26,6 +30,9 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	public void OnAnswer(UnityEngine.UI.InputField input) {
+		if (curQuestion == null) {
+			return;
+		}	
 		bool isCorrect = curQuestion.IsAnswerCorrect (input.text);
 		curQuestion.UpdateInterval (isCorrect);
 		if (isCorrect) {
