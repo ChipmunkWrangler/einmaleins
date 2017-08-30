@@ -88,6 +88,7 @@ public class Question {
 		UnityEngine.Assertions.Assert.AreNotEqual (prefsKey.Length, 0);
 		PlayerPrefs.SetInt(prefsKey + ":intervalIdx", intervalIdx);
 		PlayerPrefs.SetString(prefsKey + ":nextTime", nextTime.ToBinary().ToString());	
+		Debug.Log ("Saving " + ToString ());
 	}
 
 	public override string ToString() {

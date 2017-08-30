@@ -22,8 +22,7 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	Question PickQuestion() {
-		Question[] qArray = questions.GetArray ();
-		return qArray[Random.Range(0, qArray.Length)];
+		return questions.GetNextQuestion ();
 	}
 
 	public void OnAnswer(UnityEngine.UI.InputField input) {

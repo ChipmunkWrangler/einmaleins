@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class Questions : ScriptableObject {
+public class Questions {
 	private Question[] questions;
 	private const string prefsKey = "questions";
 	[SerializeField] private int maxNum = 3;
@@ -17,8 +18,13 @@ public class Questions : ScriptableObject {
 		Save ();
 	}
 
-	public Question[] GetArray() {
-		return questions;
+	public Question GetNextQuestion() {
+		int minPos = 0;
+		for (int i = 1; i < questions.Length; ++i)
+		{
+			if (questions[i].GetNextTime() < questions[minPos].GetNextTime()) { minPos = i; }
+		}
+		return questions [minPos];
 	}
 
 	void CreateQuestions() {
