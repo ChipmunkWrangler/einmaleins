@@ -6,10 +6,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{CF434FDF-F472-6099-0934-8E9F9BEF8244}</ProjectGuid>
+    <ProjectGuid>{B63D1931-18BD-B0CF-B1ED-FFAC59688F0A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -46,25 +46,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AnswerInput.cs" />
-     <Compile Include="Assets\AnswerPlaceholder.cs" />
-     <Compile Include="Assets\CCInputField.cs" />
-     <Compile Include="Assets\Celebrate.cs" />
-     <Compile Include="Assets\OnCorrectAnswer.cs" />
-     <Compile Include="Assets\OnQuestionChanged.cs" />
-     <Compile Include="Assets\OnWrongAnswer.cs" />
-     <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\ReverseNormals.cs" />
-     <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\randomParticleRotation.cs" />
-     <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\rotation.cs" />
-     <Compile Include="Assets\PlayerPrefsEditor\PlayerPrefsUtility.cs" />
-     <Compile Include="Assets\PlayerPrefsEditor\SimpleEncryption.cs" />
-     <Compile Include="Assets\PlayerPrefsPlus\Plugins\PlayerPrefsArray.cs" />
-     <Compile Include="Assets\PlayerPrefsPlus\Plugins\PlayerPrefsPlus.cs" />
-     <Compile Include="Assets\Question.cs" />
-     <Compile Include="Assets\QuestionDisplay.cs" />
-     <Compile Include="Assets\QuestionPicker.cs" />
-     <Compile Include="Assets\QuestionProgress.cs" />
-     <Compile Include="Assets\Questions.cs" />
+     <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\MoveSample.cs" />
+     <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\RotateSample.cs" />
+     <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\SampleInfo.cs" />
+     <Compile Include="Assets\Plugins\Pixelplacement\iTween\iTween.cs" />
      <None Include="Assets\Shaders\AlphaProgress.shader" />
      <None Include="Assets\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\PlayerPrefsEditor\README.txt" />
@@ -90,10 +75,6 @@
  <Reference Include="UnityEngine.VR">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{B63D1931-18BD-B0CF-B1ED-FFAC59688F0A}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

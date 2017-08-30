@@ -51,6 +51,7 @@
      <None Include="Assets\Shaders\AlphaProgress.shader" />
      <None Include="Assets\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\PlayerPrefsEditor\README.txt" />
+     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -119,6 +120,8 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{B63D1931-18BD-B0CF-B1ED-FFAC59688F0A}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{CF434FDF-F472-6099-0934-8E9F9BEF8244}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
