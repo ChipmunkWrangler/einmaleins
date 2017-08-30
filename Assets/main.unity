@@ -1155,6 +1155,7 @@ MonoBehaviour:
   - {fileID: 2144507856}
   - {fileID: 1647688747}
   - {fileID: 1088660491}
+  - {fileID: 1809035896}
 --- !u!4 &1088660493
 Transform:
   m_ObjectHideFlags: 0
@@ -1179,7 +1180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2179ecab0be94d81955ef567fdaae51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
+  duration: 2
   particleParent: {fileID: 2144438839}
   questionPicker: {fileID: 1088660492}
 --- !u!1 &1344206338
@@ -1609,6 +1610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5617295d7d5bd4990963a98468f0e637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionTime: 1.5
 --- !u!33 &1809035900
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1721,7 +1723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2051567062
 Transform:
   m_ObjectHideFlags: 0

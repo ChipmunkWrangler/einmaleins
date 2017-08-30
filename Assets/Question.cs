@@ -7,6 +7,7 @@ public class Question {
 		Inactive,
 		Active
 	}
+	public Stage stage;
 
 	private const int minute = 60;
 	private const int hour = 60 * minute;
@@ -26,13 +27,13 @@ public class Question {
 		4 * month,
 		2 * year
 	};
+	private const int masteryIdx = 7; // if the next review is in a month, you have mastered this question
 
 	private int a;
 	private int b;
 	private int intervalIdx;
 	private System.DateTime nextTime;
 	private string prefsKey;
-	public Stage stage;
 
 	public Question(int _a, int _b) {
 		a = _a;
@@ -54,6 +55,10 @@ public class Question {
 			return result == correctAnswer;
 		}
 		return false;
+	}
+
+	public float GetMasteryFraction() {
+		return Mathf.Clamp(intervalIdx, 0, masteryIdx) / (float)masteryIdx;
 	}
 
 	public void UpdateInterval(bool correct) {

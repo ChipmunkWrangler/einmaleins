@@ -35,7 +35,7 @@ public class QuestionPicker : MonoBehaviour {
 		curQuestion.UpdateInterval (isCorrect);
 		if (isCorrect) {
 			foreach (OnCorrectAnswer subscriber in onCorrectAnswerSubscribers) {
-				subscriber.OnCorrectAnswer ();
+				subscriber.OnCorrectAnswer (curQuestion);
 			}
 
 		} else {

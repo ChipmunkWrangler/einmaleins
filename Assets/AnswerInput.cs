@@ -18,7 +18,7 @@ public class AnswerInput : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer, On
 		GetInputField().text = "";
 	}
 
-	public void OnCorrectAnswer() {
+	public void OnCorrectAnswer(Question question) {
 		GetInputField().interactable = false;
 	}
 

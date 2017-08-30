@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface OnCorrectAnswer  {
-	void OnCorrectAnswer();
+	void OnCorrectAnswer(Question question);
 }
