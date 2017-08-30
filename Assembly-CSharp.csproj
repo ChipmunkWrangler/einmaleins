@@ -60,13 +60,12 @@
      <Compile Include="Assets\PlayerPrefsEditor\SimpleEncryption.cs" />
      <Compile Include="Assets\PlayerPrefsPlus\Plugins\PlayerPrefsArray.cs" />
      <Compile Include="Assets\PlayerPrefsPlus\Plugins\PlayerPrefsPlus.cs" />
-     <Compile Include="Assets\ProgressBar\Scripts\CiclularProgress.cs" />
-     <Compile Include="Assets\ProgressBar\Scripts\GameObjectRotate.cs" />
      <Compile Include="Assets\Question.cs" />
      <Compile Include="Assets\QuestionDisplay.cs" />
      <Compile Include="Assets\QuestionPicker.cs" />
+     <Compile Include="Assets\QuestionProgress.cs" />
      <Compile Include="Assets\Questions.cs" />
-     <None Include="Assets\ProgressBar\Shaders\AlphaProgress.shader" />
+     <None Include="Assets\Shaders\AlphaProgress.shader" />
      <None Include="Assets\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\PlayerPrefsEditor\README.txt" />
  <Reference Include="UnityEngine.UI">

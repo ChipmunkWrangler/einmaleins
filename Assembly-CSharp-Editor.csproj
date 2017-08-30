@@ -48,7 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\PlayerPrefsEditor\Editor\Mac\Plist.cs" />
      <Compile Include="Assets\PlayerPrefsEditor\Editor\PlayerPrefsEditor.cs" />
-     <None Include="Assets\ProgressBar\Shaders\AlphaProgress.shader" />
+     <None Include="Assets\Shaders\AlphaProgress.shader" />
      <None Include="Assets\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\PlayerPrefsEditor\README.txt" />
  <Reference Include="UnityEditor.Advertisements">
