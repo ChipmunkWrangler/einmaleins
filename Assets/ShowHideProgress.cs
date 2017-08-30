@@ -6,6 +6,10 @@ public class ShowHideProgress : MonoBehaviour, OnCorrectAnswer, OnQuestionChange
 	[SerializeField] float transitionTime;
 	bool wasWrong;
 
+	void Start() {
+		gameObject.transform.localScale = Vector3.zero;
+	}
+
 	public void OnCorrectAnswer (Question question) {
 		if (!wasWrong) {
 			Show ();

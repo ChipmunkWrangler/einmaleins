@@ -686,6 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionTime: 0.25
 --- !u!1 &631520264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1623,7 +1624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5617295d7d5bd4990963a98468f0e637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 1.5
+  transitionTime: 1.75
 --- !u!33 &1809035900
 MeshFilter:
   m_ObjectHideFlags: 0
