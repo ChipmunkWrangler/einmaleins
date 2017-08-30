@@ -25,6 +25,7 @@ public class AnswerInput : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer, On
 	void Reset() {
 		GetInputField().text = "";
 		GetInputField().interactable = true;
+		GetInputField().Select();
 	}
 
 	UnityEngine.UI.InputField GetInputField() {
