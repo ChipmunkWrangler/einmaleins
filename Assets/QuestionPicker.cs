@@ -4,65 +4,81 @@ using UnityEngine;
 
 public class QuestionPicker : MonoBehaviour {
 	private Questions questions;
-	[SerializeField] QuestionDisplay display;
 	private Question curQuestion;
-	[SerializeField] UnityEngine.UI.Text placeholder;
-	[SerializeField] float victoryCelebrationSecs;
-	[SerializeField] ParticleSystem[] victoryParticles;
+//	[SerializeField] float victoryCelebrationSecs;
+//	[SerializeField] ParticleSystem[] victoryParticles;
+	[SerializeField] GameObject[] subscribers;
+	List<OnQuestionChanged> onQuestionChangedSubscribers;
+	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
+	List<OnWrongAnswer> onWrongAnswerSubscribers;
 
 	// Use this for initialization
 	void Start () {
 		questions = new Questions();
+		SplitSubscribers ();
 		NextQuestion ();
 	}
 
-	void NextQuestion() {
-		curQuestion = PickQuestion ();
-		if (curQuestion == null) {
-			display.DisplayQuestion ("You are done for now!");
-		} else {
-			display.DisplayQuestion (curQuestion.GetQuestionString ());
+	private void NextQuestion() {
+		curQuestion = questions.GetNextQuestion ();
+		foreach (OnQuestionChanged subscriber in onQuestionChangedSubscribers) {
+			subscriber.OnQuestionChanged (curQuestion);
 		}
 	}
 
-	Question PickQuestion() {
-		return questions.GetNextQuestion ();
-	}
-
-	public void OnAnswer(UnityEngine.UI.InputField input) {
-		if (curQuestion == null) {
+	public void OnAnswer(string answer) {
+		if (curQuestion == null || answer.Length == 0) {
 			return;
-		}	
-		bool isCorrect = curQuestion.IsAnswerCorrect (input.text);
+		}
+		Debug.Log ("OnAnswer");
+		bool isCorrect = curQuestion.IsAnswerCorrect (answer);
 		curQuestion.UpdateInterval (isCorrect);
 		if (isCorrect) {
-			StartCoroutine (OnCorrectAnswer (input));
+			foreach (OnCorrectAnswer subscriber in onCorrectAnswerSubscribers) {
+				subscriber.OnCorrectAnswer ();
+			}
+
+//			StartCoroutine (OnCorrectAnswer (input));
 		} else {
-			placeholder.text = "Versuche es noch einmal...";
-			input.text = "";
-			foreach (ParticleSystem particles in victoryParticles) {
-				particles.Stop ();
+			foreach (OnWrongAnswer subscriber in onWrongAnswerSubscribers) {
+				subscriber.OnWrongAnswer ();
+			}
+//			foreach (ParticleSystem particles in victoryParticles) {
+//				particles.Stop ();
+//			}
+		}
+	}
+
+
+//	private IEnumerator OnCorrectAnswer(UnityEngine.UI.InputField input) {
+//		foreach (ParticleSystem particles in victoryParticles) {
+//			particles.Play ();
+//		}
+//		yield return new WaitForSeconds(victoryCelebrationSecs);
+//		foreach (ParticleSystem particles in victoryParticles) {
+//			particles.Stop ();
+//		}
+//		NextQuestion ();
+//	}
+
+	// I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
+	private void SplitSubscribers() {
+		onQuestionChangedSubscribers = new List<OnQuestionChanged> ();
+		onCorrectAnswerSubscribers = new List<OnCorrectAnswer> ();
+		onWrongAnswerSubscribers = new List<OnWrongAnswer> ();
+		foreach(GameObject subscriber in subscribers) {
+			OnQuestionChanged onQuestionChanged = subscriber.GetComponent<OnQuestionChanged>();
+			if (onQuestionChanged != null) {
+				onQuestionChangedSubscribers.Add (onQuestionChanged);
+			}
+			OnCorrectAnswer onCorrectAnswer = subscriber.GetComponent<OnCorrectAnswer>();
+			if (onCorrectAnswer != null) {
+				onCorrectAnswerSubscribers.Add (onCorrectAnswer);
+			}
+			OnWrongAnswer onWrongAnswer = subscriber.GetComponent<OnWrongAnswer>();
+			if (onWrongAnswer != null) {
+				onWrongAnswerSubscribers.Add (onWrongAnswer);
 			}
 		}
 	}
-
-	private IEnumerator OnCorrectAnswer(UnityEngine.UI.InputField input) {
-		input.readOnly = true;
-		foreach (ParticleSystem particles in victoryParticles) {
-			particles.Play ();
-		}
-		yield return new WaitForSeconds(victoryCelebrationSecs);
-		foreach (ParticleSystem particles in victoryParticles) {
-			particles.Stop ();
-		}
-		ResetInput (input);
-		NextQuestion ();
-	}
-
-	private void ResetInput(UnityEngine.UI.InputField input) {
-		input.text = "";
-		placeholder.text = "ergibt...";
-		input.readOnly = false;
-	}
-
 }
