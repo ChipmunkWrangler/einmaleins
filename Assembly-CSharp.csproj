@@ -49,6 +49,7 @@
      <Compile Include="Assets\AnswerInput.cs" />
      <Compile Include="Assets\AnswerPlaceholder.cs" />
      <Compile Include="Assets\CCInputField.cs" />
+     <Compile Include="Assets\Celebrate.cs" />
      <Compile Include="Assets\OnCorrectAnswer.cs" />
      <Compile Include="Assets\OnQuestionChanged.cs" />
      <Compile Include="Assets\OnWrongAnswer.cs" />

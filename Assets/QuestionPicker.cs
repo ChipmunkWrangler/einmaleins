@@ -5,21 +5,18 @@ using UnityEngine;
 public class QuestionPicker : MonoBehaviour {
 	private Questions questions;
 	private Question curQuestion;
-//	[SerializeField] float victoryCelebrationSecs;
-//	[SerializeField] ParticleSystem[] victoryParticles;
 	[SerializeField] GameObject[] subscribers;
 	List<OnQuestionChanged> onQuestionChangedSubscribers;
 	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
 	List<OnWrongAnswer> onWrongAnswerSubscribers;
 
-	// Use this for initialization
 	void Start () {
 		questions = new Questions();
 		SplitSubscribers ();
 		NextQuestion ();
 	}
 
-	private void NextQuestion() {
+	public void NextQuestion() {
 		curQuestion = questions.GetNextQuestion ();
 		foreach (OnQuestionChanged subscriber in onQuestionChangedSubscribers) {
 			subscriber.OnQuestionChanged (curQuestion);
@@ -30,7 +27,6 @@ public class QuestionPicker : MonoBehaviour {
 		if (curQuestion == null || answer.Length == 0) {
 			return;
 		}
-		Debug.Log ("OnAnswer");
 		bool isCorrect = curQuestion.IsAnswerCorrect (answer);
 		curQuestion.UpdateInterval (isCorrect);
 		if (isCorrect) {
@@ -38,28 +34,12 @@ public class QuestionPicker : MonoBehaviour {
 				subscriber.OnCorrectAnswer ();
 			}
 
-//			StartCoroutine (OnCorrectAnswer (input));
 		} else {
 			foreach (OnWrongAnswer subscriber in onWrongAnswerSubscribers) {
 				subscriber.OnWrongAnswer ();
 			}
-//			foreach (ParticleSystem particles in victoryParticles) {
-//				particles.Stop ();
-//			}
 		}
 	}
-
-
-//	private IEnumerator OnCorrectAnswer(UnityEngine.UI.InputField input) {
-//		foreach (ParticleSystem particles in victoryParticles) {
-//			particles.Play ();
-//		}
-//		yield return new WaitForSeconds(victoryCelebrationSecs);
-//		foreach (ParticleSystem particles in victoryParticles) {
-//			particles.Stop ();
-//		}
-//		NextQuestion ();
-//	}
 
 	// I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
 	private void SplitSubscribers() {

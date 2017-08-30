@@ -1004,6 +1004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1088660493}
   - component: {fileID: 1088660492}
+  - component: {fileID: 1088660494}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1026,6 +1027,7 @@ MonoBehaviour:
   - {fileID: 2083017402}
   - {fileID: 2144507856}
   - {fileID: 1647688747}
+  - {fileID: 1088660491}
 --- !u!4 &1088660493
 Transform:
   m_ObjectHideFlags: 0
@@ -1039,6 +1041,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1088660494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1088660491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2179ecab0be94d81955ef567fdaae51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1
+  particleParent: {fileID: 2144438839}
+  questionPicker: {fileID: 1088660492}
 --- !u!1 &1344206338
 GameObject:
   m_ObjectHideFlags: 0
