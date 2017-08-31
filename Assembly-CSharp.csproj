@@ -46,29 +46,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AnswerInput.cs" />
-     <Compile Include="Assets\AnswerPlaceholder.cs" />
-     <Compile Include="Assets\CCInputField.cs" />
-     <Compile Include="Assets\Celebrate.cs" />
-     <Compile Include="Assets\OnCorrectAnswer.cs" />
-     <Compile Include="Assets\OnQuestionChanged.cs" />
-     <Compile Include="Assets\OnWrongAnswer.cs" />
-     <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\ReverseNormals.cs" />
-     <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\randomParticleRotation.cs" />
-     <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\rotation.cs" />
-     <Compile Include="Assets\PlayerPrefsEditor\PlayerPrefsUtility.cs" />
-     <Compile Include="Assets\PlayerPrefsEditor\SimpleEncryption.cs" />
-     <Compile Include="Assets\PlayerPrefsPlus\Plugins\PlayerPrefsArray.cs" />
-     <Compile Include="Assets\PlayerPrefsPlus\Plugins\PlayerPrefsPlus.cs" />
-     <Compile Include="Assets\Question.cs" />
-     <Compile Include="Assets\QuestionDisplay.cs" />
-     <Compile Include="Assets\QuestionPicker.cs" />
-     <Compile Include="Assets\QuestionProgress.cs" />
-     <Compile Include="Assets\Questions.cs" />
-     <Compile Include="Assets\ShowHideProgress.cs" />
+     <Compile Include="Assets\Scripts\AnswerInput.cs" />
+     <Compile Include="Assets\Scripts\AnswerPlaceholder.cs" />
+     <Compile Include="Assets\Scripts\CCInputField.cs" />
+     <Compile Include="Assets\Scripts\Celebrate.cs" />
+     <Compile Include="Assets\Scripts\OnCorrectAnswer.cs" />
+     <Compile Include="Assets\Scripts\OnQuestionChanged.cs" />
+     <Compile Include="Assets\Scripts\OnWrongAnswer.cs" />
+     <Compile Include="Assets\Scripts\Question.cs" />
+     <Compile Include="Assets\Scripts\QuestionDisplay.cs" />
+     <Compile Include="Assets\Scripts\QuestionPicker.cs" />
+     <Compile Include="Assets\Scripts\QuestionProgress.cs" />
+     <Compile Include="Assets\Scripts\Questions.cs" />
+     <Compile Include="Assets\Scripts\ShowHideProgress.cs" />
      <None Include="Assets\Shaders\AlphaProgress.shader" />
-     <None Include="Assets\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
-     <None Include="Assets\PlayerPrefsEditor\README.txt" />
+     <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
+     <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />
      <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
