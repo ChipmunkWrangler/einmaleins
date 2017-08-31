@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShowHideProgress : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, OnWrongAnswer {
+public class ShowOnRight : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, OnWrongAnswer {
 	[SerializeField] float transitionTime;
 	bool wasWrong;
 
