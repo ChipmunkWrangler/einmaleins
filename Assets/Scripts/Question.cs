@@ -30,8 +30,8 @@ public class Question {
 	};
 	private const int masteryIdx = 8; // if the next review is in a month, you have mastered this question
 
-	private int a;
-	private int b;
+	public int a {  get; private set; }
+	public int b { get; private set; }
 	private int intervalIdx;
 	private System.DateTime nextTime;
 	private string prefsKey;
@@ -42,11 +42,6 @@ public class Question {
 		intervalIdx = 0;
 		nextTime = System.DateTime.UtcNow;
 		stage = Stage.Inactive;
-	}
-
-	public string GetQuestionString() {
-		int x = Random.Range(0,2);
-		return (x == 0) ? a + " x " + b : b + " x " + a;
 	}
 
 	public bool IsAnswerCorrect(string answer) {
