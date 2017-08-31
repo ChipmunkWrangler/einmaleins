@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class QuestionProgress : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] float transitionTime = 0.5f;
+	[SerializeField] float delay;
 	float speed;
+	float startTime;
 	float curFraction;
 	float targetFraction;
 	Material mat_;
 
 	public void OnCorrectAnswer (Question question) {
-		SetProgress (curFraction);
+		SetProgress (0);
 		targetFraction = question.GetMasteryFraction ();
 		speed = (targetFraction - curFraction) / transitionTime;
+		startTime = delay + Time.time;
 	}
 
 	public void OnQuestionChanged(Question question) {
@@ -21,7 +24,7 @@ public class QuestionProgress : MonoBehaviour, OnCorrectAnswer, OnQuestionChange
 	}
 				
 	void Update() {
-		if (!Mathf.Approximately(curFraction, targetFraction)) {
+		if (Time.time >= startTime && !Mathf.Approximately(curFraction, targetFraction)) {
 			SetProgress(Mathf.MoveTowards (curFraction, targetFraction, Time.deltaTime * speed));
 		}
 	}
