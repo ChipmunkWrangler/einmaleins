@@ -4,34 +4,30 @@ using UnityEngine;
 
 public class ShowOnRight : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, OnWrongAnswer {
 	[SerializeField] float transitionTime;
+	[SerializeField] bool hideOnRight;
+	[SerializeField] bool evenIfWrongFirst;
 	bool wasWrong;
 
 	void Start() {
-		gameObject.transform.localScale = Vector3.zero;
+		gameObject.transform.localScale = hideOnRight ? Vector3.one : Vector3.zero;
 	}
 
 	public void OnCorrectAnswer (Question question) {
-		if (!wasWrong) {
-			Show ();
+		if (evenIfWrongFirst || !wasWrong) {
+			ScaleTo( hideOnRight ? Vector3.zero : Vector3.one );
 		}
 	}
 
 	public void OnQuestionChanged(Question question) {
 		wasWrong = false;
-		Hide ();
+		ScaleTo( hideOnRight ? Vector3.one : Vector3.zero );
 	}
 
 	public void OnWrongAnswer() {
 		wasWrong = true;
 	}
 
-	void Hide() {
-		iTween.ScaleTo(gameObject, iTween.Hash( "scale", Vector3.zero, "easeType", iTween.EaseType.easeInSine, "time", transitionTime));
+	void ScaleTo(Vector3 tgtScale) {
+		iTween.ScaleTo(gameObject, iTween.Hash( "scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", transitionTime));
 	}
-
-	void Show() {
-		iTween.ScaleTo(gameObject, iTween.Hash( "scale", Vector3.one, "easeType", iTween.EaseType.easeInSine, "time", transitionTime));
-	}
-
-
 }
