@@ -1260,7 +1260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -6257,6 +6257,7 @@ GameObject:
   - component: {fileID: 2140881251}
   - component: {fileID: 2140881250}
   - component: {fileID: 2140881253}
+  - component: {fileID: 2140881254}
   m_Layer: 5
   m_Name: NumberButton Delete
   m_TagString: Untagged
@@ -6386,6 +6387,19 @@ MonoBehaviour:
   transitionTime: 0.5
   hideOnRight: 1
   evenIfWrongFirst: 1
+--- !u!114 &2140881254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2140881248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionTime: 0
+  timeToHide: 0
 --- !u!1 &2144438839
 GameObject:
   m_ObjectHideFlags: 0

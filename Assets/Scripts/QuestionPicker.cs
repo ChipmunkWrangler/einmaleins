@@ -56,17 +56,17 @@ public class QuestionPicker : MonoBehaviour {
 		onCorrectAnswerSubscribers = new List<OnCorrectAnswer> ();
 		onWrongAnswerSubscribers = new List<OnWrongAnswer> ();
 		foreach(GameObject subscriber in subscribers) {
-			OnQuestionChanged onQuestionChanged = subscriber.GetComponent<OnQuestionChanged>();
-			if (onQuestionChanged != null) {
-				onQuestionChangedSubscribers.Add (onQuestionChanged);
+			OnQuestionChanged[] onQuestionChangeds = subscriber.GetComponents<OnQuestionChanged>();
+			foreach(OnQuestionChanged s in onQuestionChangeds) {
+				onQuestionChangedSubscribers.Add (s);
 			}
-			OnCorrectAnswer onCorrectAnswer = subscriber.GetComponent<OnCorrectAnswer>();
-			if (onCorrectAnswer != null) {
-				onCorrectAnswerSubscribers.Add (onCorrectAnswer);
+			OnCorrectAnswer[] onCorrectAnswers = subscriber.GetComponents<OnCorrectAnswer>();
+			foreach(OnCorrectAnswer s in onCorrectAnswers) {
+				onCorrectAnswerSubscribers.Add (s);
 			}
-			OnWrongAnswer onWrongAnswer = subscriber.GetComponent<OnWrongAnswer>();
-			if (onWrongAnswer != null) {
-				onWrongAnswerSubscribers.Add (onWrongAnswer);
+			OnWrongAnswer[] onWrongAnswers = subscriber.GetComponents<OnWrongAnswer>();
+			foreach(OnWrongAnswer s in onWrongAnswers) {
+				onWrongAnswerSubscribers.Add (s);
 			}
 		}
 	}

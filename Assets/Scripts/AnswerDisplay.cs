@@ -22,7 +22,6 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer {
 		GetTextField().color = oldColor;
 		StopAllCoroutines();
 		StartCoroutine(Fade());
-
 	}
 
 	IEnumerator Fade() {
@@ -30,7 +29,7 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer {
 		yield return new WaitForSeconds (fadeTime);
 		answerTxt = "";
 		UpdateText ();
-		GetTextField ().CrossFadeColor (oldColor, fadeTime, false, true);
+		GetTextField ().CrossFadeColor (oldColor, 0, false, true);
 	}
 		
 	public void OnAnswerChanged(string nextDigit) {
@@ -40,6 +39,8 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer {
 		}
 
 		UpdateText ();
+		print ("newAnswer" + answerTxt);
+
 	}
 
 	public void OnBackspace() {
