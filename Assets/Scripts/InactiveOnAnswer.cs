@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer {
+public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnAnswerChanged {
 	[SerializeField] UnityEngine.UI.Button button = null;
 
 	public void OnCorrectAnswer (Question question) {
@@ -13,7 +13,7 @@ public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer {
 		button.interactable = false;
 	}
 
-	public void OnAnswerChanged() {
-		button.interactable = true;
+	public void OnAnswerChanged(bool isAnswerEmpty) {
+		button.interactable = !isAnswerEmpty;
 	}
 }
