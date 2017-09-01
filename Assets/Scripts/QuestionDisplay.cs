@@ -7,8 +7,8 @@ public class QuestionDisplay : TextDisplay, OnQuestionChanged {
 		string s = "";
 		if (question != null) {			
 			int x = Random.Range (0, 2);
-			s = (x == 0) ? question.a + " · " + question.b : question.b + " x " + question.a;
-			s += " =";
+			s = (x == 0) ? question.a + " · " + question.b : question.b + " · " + question.a;
+			s += " = ";
 		}
 		SetText(s);
 	}
