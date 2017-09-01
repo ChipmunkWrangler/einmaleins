@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\QuestionPicker.cs" />
      <Compile Include="Assets\Scripts\QuestionProgress.cs" />
      <Compile Include="Assets\Scripts\Questions.cs" />
+     <Compile Include="Assets\Scripts\Score.cs" />
      <Compile Include="Assets\Scripts\ShowOnRight.cs" />
      <Compile Include="Assets\Scripts\TextDisplay.cs" />
      <None Include="Assets\Shaders\AlphaProgress.shader" />
