@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\GotoChoosePlayer.cs" />
      <Compile Include="Assets\Scripts\HideOnWrong.cs" />
      <Compile Include="Assets\Scripts\InactiveOnAnswer.cs" />
+     <Compile Include="Assets\Scripts\MDPrefs.cs" />
      <Compile Include="Assets\Scripts\NewPlayerName.cs" />
      <Compile Include="Assets\Scripts\OnAnswerChanged.cs" />
      <Compile Include="Assets\Scripts\OnCorrectAnswer.cs" />

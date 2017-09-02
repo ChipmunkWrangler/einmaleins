@@ -19,7 +19,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	void Start() {
 		scoreText.text = "0";
 		highScoreText.text = "0";
-		SetHighScore (PlayerPrefs.GetInt (prefsKey));
+		SetHighScore (MDPrefs.GetInt (prefsKey));
 		foreach (var multiplierIcon in multiplierIcons) {
 			multiplierIcon.CrossFadeAlpha (0f, 0, false);
 //			Color c = multiplierIcon.color;
@@ -60,7 +60,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 
 	void SetHighScore(int newHighScore) {
 		highScore = newHighScore;
-		PlayerPrefs.SetInt (prefsKey, highScore);
+		MDPrefs.SetInt (prefsKey, highScore);
 		if (highScoreCoroutine != null) {
 			StopCoroutine (highScoreCoroutine);
 		}

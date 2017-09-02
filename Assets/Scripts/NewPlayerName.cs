@@ -49,6 +49,7 @@ public class NewPlayerName : MonoBehaviour {
 	}
 
 	void LoadMainScene() {
+		PlayerPrefs.Save ();
 		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("main");
 	}
 

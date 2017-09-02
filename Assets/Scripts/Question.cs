@@ -77,12 +77,12 @@ public class Question {
 	public void Load(string _prefsKey) {
 		prefsKey = _prefsKey;
 		string intervalKey = prefsKey + ":intervalIdx";
-		if (PlayerPrefs.HasKey(intervalKey)) {
-			intervalIdx = PlayerPrefs.GetInt(intervalKey);
+		if (MDPrefs.HasKey(intervalKey)) {
+			intervalIdx = MDPrefs.GetInt(intervalKey);
 		}
 		string nextTimeKey = prefsKey + ":nextTime";
-		if (PlayerPrefs.HasKey(nextTimeKey)) {
-			string asString = PlayerPrefs.GetString (nextTimeKey);
+		if (MDPrefs.HasKey(nextTimeKey)) {
+			string asString = MDPrefs.GetString (nextTimeKey);
 			long asLong;
 			if (long.TryParse (asString, out asLong)) {
 				nextTime = System.DateTime.FromBinary (asLong);
@@ -91,9 +91,9 @@ public class Question {
 			}
 		}
 		string stageKey = prefsKey + ":stage";
-		if (PlayerPrefs.HasKey (stageKey)) {
+		if (MDPrefs.HasKey (stageKey)) {
 			try {
-				stage = (Stage) System.Enum.Parse(typeof(Stage), PlayerPrefs.GetString (stageKey));
+				stage = (Stage) System.Enum.Parse(typeof(Stage), MDPrefs.GetString (stageKey));
 			} catch (System.ArgumentException e) {
 				Debug.Log ("Invalid stage " + e);
 				stage = Stage.Inactive;
@@ -103,9 +103,9 @@ public class Question {
 
 	public void Save() {
 		UnityEngine.Assertions.Assert.AreNotEqual (prefsKey.Length, 0);
-		PlayerPrefs.SetInt(prefsKey + ":intervalIdx", intervalIdx);
-		PlayerPrefs.SetString(prefsKey + ":nextTime", nextTime.ToBinary().ToString());	
-		PlayerPrefs.SetString(prefsKey + ":stage", stage.ToString());
+		MDPrefs.SetInt(prefsKey + ":intervalIdx", intervalIdx);
+		MDPrefs.SetString(prefsKey + ":nextTime", nextTime.ToBinary().ToString());	
+		MDPrefs.SetString(prefsKey + ":stage", stage.ToString());
 		Debug.Log ("Saving " + ToString ());
 	}
 

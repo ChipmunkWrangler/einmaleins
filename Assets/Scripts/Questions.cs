@@ -70,12 +70,12 @@ public class Questions {
 	}
 
 //	public void Reset() {
-//		PlayerPrefs.DeleteKey (prefsKey);
+//		MDPrefs.DeleteKey (prefsKey);
 //	}
 
 	void Load() {
-		if (PlayerPrefs.HasKey(prefsKey)) {
-			UnityEngine.Assertions.Assert.AreEqual (PlayerPrefs.GetInt (prefsKey + ":ArrayLen"), questions.Length);
+		if (MDPrefs.HasKey(prefsKey)) {
+			UnityEngine.Assertions.Assert.AreEqual (MDPrefs.GetInt (prefsKey + ":ArrayLen"), questions.Length);
 		}
 		for (int i = 0; i < questions.Length; ++i) {
 			questions [i].Load (prefsKey + ":" + i.ToString ());
@@ -83,7 +83,7 @@ public class Questions {
 	}
 
 	void Save() {
-		PlayerPrefs.SetInt(prefsKey + ":ArrayLen", questions.Length);
+		MDPrefs.SetInt(prefsKey + ":ArrayLen", questions.Length);
 		for(int i = 0; i < questions.Length; ++i) {
 			questions [i].Save ();
 		}
