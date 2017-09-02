@@ -7,6 +7,9 @@ public static class MDPrefs {
 		return PlayerPrefs.HasKey (GetKey (key));
 	}
 
+	public static void DeleteKey(string key) { 
+		PlayerPrefs.DeleteKey (GetKey (key));
+	}
 	public static int GetInt(string key) {
 		return PlayerPrefs.GetInt (GetKey(key));
 	}

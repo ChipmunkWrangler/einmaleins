@@ -32,7 +32,7 @@ public class Question {
 
 	public int a {  get; private set; }
 	public int b { get; private set; }
-	private int intervalIdx;
+	public int intervalIdx { get; private set; }
 	private System.DateTime nextTime;
 	private string prefsKey;
 

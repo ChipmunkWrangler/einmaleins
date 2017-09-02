@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	[SerializeField] UnityEngine.UI.Text scoreText = null;
-	[SerializeField] UnityEngine.UI.Text highScoreText = null;
 	[SerializeField] float delay = 0.5f;
 	[SerializeField] float scoreCountUpDuration = 2.5f;
-	[SerializeField] UnityEngine.UI.Image[] multiplierIcons;
-	[SerializeField] float multiplierFadeDuration;
+	[SerializeField] UnityEngine.UI.Image[] multiplierIcons = null;
+	[SerializeField] float multiplierFadeDuration = 0.5f;
 	int score;
 	int multiplier;
-	int highScore;
-	const string prefsKey = "highScore";
-	Coroutine highScoreCoroutine;
+	const string prefsKey = "score";
 	Coroutine scoreCoroutine;
 
 	void Start() {
 		scoreText.text = "0";
-		highScoreText.text = "0";
-		SetHighScore (MDPrefs.GetInt (prefsKey));
+		IncreaseScoreBy (MDPrefs.GetInt (prefsKey));
 		foreach (var multiplierIcon in multiplierIcons) {
 			multiplierIcon.CrossFadeAlpha (0f, 0, false);
-//			Color c = multiplierIcon.color;
-//			c.a = 0;
-//			multiplierIcon.color = c;
 		}
 	}
 
@@ -37,7 +30,8 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 
 	public void OnCorrectAnswer(Question question) {
 		IncrementMultiplier ();
-		IncreaseScoreBy (multiplier * question.a * question.b);
+		print (question);
+		IncreaseScoreBy (multiplier * Mathf.Max(question.a, question.b) * question.intervalIdx);
 	}
 
 	void IncrementMultiplier() {
@@ -53,18 +47,11 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 			StopCoroutine (scoreCoroutine);
 		}
 		scoreCoroutine = UpdateScoreDisplay (scoreText, score);
-		if (score > highScore) {
-			SetHighScore (score);
-		}
+		SaveScore (score);
 	}
 
-	void SetHighScore(int newHighScore) {
-		highScore = newHighScore;
-		MDPrefs.SetInt (prefsKey, highScore);
-		if (highScoreCoroutine != null) {
-			StopCoroutine (highScoreCoroutine);
-		}
-		highScoreCoroutine = UpdateScoreDisplay (highScoreText, highScore);
+	void SaveScore(int newScore) {
+		MDPrefs.SetInt (prefsKey, newScore);
 	}
 
 	Coroutine UpdateScoreDisplay(UnityEngine.UI.Text text, int newScore) {
