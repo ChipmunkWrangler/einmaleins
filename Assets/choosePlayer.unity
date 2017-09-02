@@ -310,6 +310,7 @@ MonoBehaviour:
   - {fileID: 104777414}
   - {fileID: 589766884}
   playButton: {fileID: 939087455}
+  inputField: {fileID: 2067377592}
 --- !u!4 &230957309
 Transform:
   m_ObjectHideFlags: 0
@@ -730,7 +731,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 60
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 1
     m_RichText: 0
     m_HorizontalOverflow: 1

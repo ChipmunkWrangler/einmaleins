@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class NewPlayerName : MonoBehaviour {
-	[SerializeField] GameObject enterNamePanel;
-	[SerializeField] TextButton[] playerButtons;
-	[SerializeField] Button playButton;
+	[SerializeField] GameObject enterNamePanel = null;
+	[SerializeField] TextButton[] playerButtons = null;
+	[SerializeField] Button playButton = null;
+	[SerializeField] InputField inputField = null;
 	const string playerNamesPrefsKey = "playerNames";
 	const string curPlayerPrefsKey = "curPlayer";
 	string[] playerNames;
@@ -17,6 +18,9 @@ public class NewPlayerName : MonoBehaviour {
 		playerNames = PlayerPrefsArray.GetStringArray (playerNamesPrefsKey);
 		int numPlayers = playerNames == null ? 0 : playerNames.Length;
 		enterNamePanel.SetActive (numPlayers < playerButtons.Length);
+		if (numPlayers == 0) {
+			inputField.Select ();
+		}
 		for(int i = 0; i < numPlayers; ++i) {
 			playerButtons [i].SetText (playerNames [i]);
 			playerButtons [i].SetActive (true);
