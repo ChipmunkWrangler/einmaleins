@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\PositionFx.cs" />
      <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
      <Compile Include="Assets\Scripts\CCInputField.cs" />
      <Compile Include="Assets\Scripts\Celebrate.cs" />
