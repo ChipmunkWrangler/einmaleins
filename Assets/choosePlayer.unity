@@ -142,7 +142,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 125, y: 125}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &73560128
 MonoBehaviour:
@@ -310,7 +310,10 @@ MonoBehaviour:
   - {fileID: 104777414}
   - {fileID: 589766884}
   playButton: {fileID: 939087455}
+  playButtonImage: {fileID: 73560128}
   inputField: {fileID: 2067377592}
+  buttonFadeAlpha: 0
+  buttonFadeDuration: 0.1
 --- !u!4 &230957309
 Transform:
   m_ObjectHideFlags: 0

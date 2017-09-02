@@ -7,14 +7,17 @@ public class NewPlayerName : MonoBehaviour {
 	[SerializeField] GameObject enterNamePanel = null;
 	[SerializeField] TextButton[] playerButtons = null;
 	[SerializeField] Button playButton = null;
+	[SerializeField] Image playButtonImage = null;
 	[SerializeField] InputField inputField = null;
+	[SerializeField] float buttonFadeAlpha = 0.5f;
+	[SerializeField] float buttonFadeDuration = 0.1f;
 	const string playerNamesPrefsKey = "playerNames";
 	const string curPlayerPrefsKey = "curPlayer";
 	string[] playerNames;
 	string newName;
 
 	void Start() {
-		playButton.interactable = false;
+		ActivatePlayButton (false);
 		playerNames = PlayerPrefsArray.GetStringArray (playerNamesPrefsKey);
 		int numPlayers = playerNames == null ? 0 : playerNames.Length;
 		enterNamePanel.SetActive (numPlayers < playerButtons.Length);
@@ -31,7 +34,7 @@ public class NewPlayerName : MonoBehaviour {
 	}
 
 	public void OnPlayerNameChanged(string name) {
-		playButton.interactable = name.Length > 0;
+		ActivatePlayButton(name.Length > 0);
 		newName = name;
 	}
 
@@ -47,6 +50,10 @@ public class NewPlayerName : MonoBehaviour {
 		Play ();
 	}
 
+	void ActivatePlayButton(bool b) {
+		playButton.interactable = b;
+		playButtonImage.CrossFadeAlpha (b ? 1.0f : buttonFadeAlpha, buttonFadeDuration, false);
+	}
 	void Play() {
 		// todo transition
 		LoadMainScene();
