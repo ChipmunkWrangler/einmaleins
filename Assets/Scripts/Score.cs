@@ -44,7 +44,6 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		if (multiplier < multiplierIcons.Length) {
 			++multiplier;
 		}
-		print ("fading star " + multiplier + " " + multiplierIcons [multiplier - 1]);
 		multiplierIcons [multiplier - 1].CrossFadeAlpha (1.0f, multiplierFadeDuration, false);
 	}
 
@@ -60,7 +59,6 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	}
 
 	void SetHighScore(int newHighScore) {
-		print ("newHighScore" + newHighScore);
 		highScore = newHighScore;
 		PlayerPrefs.SetInt (prefsKey, highScore);
 		if (highScoreCoroutine != null) {
@@ -80,13 +78,13 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	}
 
 	IEnumerator CountTextUp(UnityEngine.UI.Text text, int oldScore, int newScore) {
-		print ("CountTextUp" + newScore);
-		yield return new WaitForSeconds (delay);
-		float numbersPerSec = (newScore - oldScore) / scoreCountUpDuration;
-		for (int i = oldScore; i <= newScore; i += Mathf.CeilToInt(Time.deltaTime * numbersPerSec)) {
-			text.text = i.ToString();
-			print ("counting " + i + " of " + newScore);
-			yield return null;
+		if (newScore > oldScore) {
+			yield return new WaitForSeconds (delay);
+			float numbersPerSec = (newScore - oldScore) / scoreCountUpDuration;
+			for (int i = oldScore; i <= newScore; i += Mathf.CeilToInt (Time.deltaTime * numbersPerSec)) {
+				text.text = i.ToString ();
+				yield return null;
+			}
 		}
 	}
 }

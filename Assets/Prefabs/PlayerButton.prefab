@@ -39,6 +39,8 @@ GameObject:
   - component: {fileID: 222532386321144108}
   - component: {fileID: 114568051760210690}
   - component: {fileID: 114175582294699624}
+  - component: {fileID: 114983123473252286}
+  - component: {fileID: 114237257121221422}
   m_Layer: 5
   m_Name: PlayerButton
   m_TagString: Untagged
@@ -87,6 +89,24 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114237257121221422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1969393516823142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: 160
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
 --- !u!114 &114568051760210690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,6 +167,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Talea Van Daele-Hunt
+--- !u!114 &114983123473252286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1969393516823142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e6e815623d34dcf94034538b51a4f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222263446507097374
 CanvasRenderer:
   m_ObjectHideFlags: 1
