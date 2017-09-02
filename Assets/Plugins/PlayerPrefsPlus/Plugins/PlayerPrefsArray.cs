@@ -32,28 +32,23 @@ public class PlayerPrefsArray : MonoBehaviour {
 	
 	//Set an array of floats
 	public static void SetFloatArray( string key, float[] value ){
-	    PlayerPrefs.SetInt(key + ":ArrayLen", value.Length);
-	    int i = 0;
-	    while(i < value.Length){
+		key += ":FloatArray";
+		PlayerPrefs.SetInt(GetLengthKey(key), value.Length);
+		for(int i = 0; i < value.Length; ++i){
 			PlayerPrefs.SetFloat(key + ":" + i.ToString(), value[i]);
-	        ++i;
 	    }
 	}
 	
 	//Get an array of floats
 	public static float[] GetFloatArray( string key ){
-		string lenKey = key + ":ArrayLen";
-		if (!PlayerPrefs.HasKey (lenKey)) {
+		key += ":FloatArray";
+		int length = GetLength (key);
+		if (length <= 0) {
 			return null;
 		}
-		int length = PlayerPrefs.GetInt (lenKey);
 	    float[] returns = new float[length];
-	    
-	   	int i = 0;
-	    
-	    while(i < length){
+		for(int i = 0; i < length; ++i) {
 			returns.SetValue(PlayerPrefs.GetFloat(key + ":" + i.ToString()), i);
-	        ++i;
 	    }
 	    return returns;
 	}
@@ -61,26 +56,26 @@ public class PlayerPrefsArray : MonoBehaviour {
 	//############################################### String ##############################################
 	
 	//Set an array of strings
-	public static void SetStringArray( string key, string[] value ){
-	    PlayerPrefs.SetInt("PlayerPrefsArray:String:L:"+key, value.Length);
-	    int i = 0;
-	    while(i < value.Length){
-	        PlayerPrefs.SetString("PlayerPrefsArray:String:"+key + i.ToString(), value[i]);
-	        ++i;
-	    }
-	}
-	
-		//Get an array of strings
 	public static string[] GetStringArray( string key ){
-	    string[] returns = new string[PlayerPrefs.GetInt("PlayerPrefsArray:String:L:"+key)];
-	    
-	   	int i = 0;
-	    
-	    while(i < PlayerPrefs.GetInt("PlayerPrefsArray:String:L:"+key)){
-	        returns.SetValue(PlayerPrefs.GetString("PlayerPrefsArray:String:"+key + i.ToString()), i);
-	        ++i;
-	    }
-	    return returns;
+		key += ":StringArray";
+		int length = GetLength (key);
+		if (length <= 0) {
+			return null;
+		}
+		string[] returns = new string[length];
+		for(int i = 0; i < length; ++i) {
+			returns.SetValue(PlayerPrefs.GetString(key + ":" + i.ToString()), i);
+		}
+		return returns;
+	}
+
+	//Set an array of strings
+	public static void SetStringArray( string key, string[] value ){
+		key += ":StringArray";
+		PlayerPrefs.SetInt(GetLengthKey(key), value.Length);
+		for(int i = 0; i < value.Length; ++i){
+			PlayerPrefs.SetString(key + ":" + i.ToString(), value[i]);
+		}
 	}
 	
 	//############################################### bool ##############################################
@@ -281,6 +276,18 @@ public class PlayerPrefsArray : MonoBehaviour {
 	        ++i;
 	    }
 	    return returns;
+	}
+
+	static string GetLengthKey(string key) { 
+		return key + ":ArrayLen";
+	}
+
+	static int GetLength(string key) {
+		string lenKey = GetLengthKey(key);
+		if (!PlayerPrefs.HasKey (lenKey)) {
+			return -1;
+		}
+		return PlayerPrefs.GetInt (lenKey);
 	}
 	
 }
