@@ -46,7 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\PositionFx.cs" />
      <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
      <Compile Include="Assets\Scripts\CCInputField.cs" />
      <Compile Include="Assets\Scripts\Celebrate.cs" />
@@ -61,6 +60,7 @@
      <Compile Include="Assets\Scripts\OnCorrectAnswer.cs" />
      <Compile Include="Assets\Scripts\OnQuestionChanged.cs" />
      <Compile Include="Assets\Scripts\OnWrongAnswer.cs" />
+     <Compile Include="Assets\Scripts\PositionFx.cs" />
      <Compile Include="Assets\Scripts\Question.cs" />
      <Compile Include="Assets\Scripts\QuestionDisplay.cs" />
      <Compile Include="Assets\Scripts\QuestionPicker.cs" />
