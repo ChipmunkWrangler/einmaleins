@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Questions {
-	private Question[] questions;
+	public Question[] questions { get; private set; }
 	private const string prefsKey = "questions";
 	private int maxNum = 10;
 
-	// Use this for initialization
 	public Questions() {
 		CreateQuestions ();
 		Load ();
-		for (int i = 0; i < questions.Length; ++i) {
-			Debug.Log (questions [i]);
-		}
 		Save ();
 	}
 

@@ -28,7 +28,7 @@ public class Question {
 		4 * month,
 		2 * year
 	};
-	private const int masteryIdx = 8; // if the next review is in a month, you have mastered this question
+	private const int masteryThresholdIdx = 8; // if the next review is in a month, you have mastered this question
 
 	public int a {  get; private set; }
 	public int b { get; private set; }
@@ -54,7 +54,7 @@ public class Question {
 	}
 
 	public float GetMasteryFraction() {
-		return Mathf.Clamp(intervalIdx, 0, masteryIdx) / (float)masteryIdx;
+		return Mathf.Clamp(intervalIdx, 0, masteryThresholdIdx) / (float)masteryThresholdIdx;
 	}
 
 	public void UpdateInterval(bool correct, System.DateTime? time = null) {
