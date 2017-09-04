@@ -35,9 +35,9 @@ public class Questions {
 		return question;
 	}
 
-	bool PreferSecondQuestion(Question firstQuestion, Question secondQuestion) {
+	bool PreferSecondQuestion(Question firstQuestion, Question secondQuestion, System.DateTime? time = null) {
 		return secondQuestion.stage == Question.Stage.Active
-		&& secondQuestion.GetNextTime () <= System.DateTime.UtcNow
+		&& secondQuestion.GetNextTime () <= (time ?? System.DateTime.UtcNow)
 		&& (firstQuestion == null || secondQuestion.GetNextTime () < firstQuestion.GetNextTime ());
 	}
 

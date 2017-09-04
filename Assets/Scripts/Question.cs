@@ -36,11 +36,11 @@ public class Question {
 	private System.DateTime nextTime;
 	private string prefsKey;
 
-	public Question(int _a, int _b) {
+	public Question(int _a, int _b, System.DateTime? time = null) {
 		a = _a;
 		b = _b;
 		intervalIdx = 0;
-		nextTime = System.DateTime.UtcNow;
+		nextTime = time ?? System.DateTime.UtcNow;
 		stage = Stage.Inactive;
 	}
 
@@ -57,7 +57,7 @@ public class Question {
 		return Mathf.Clamp(intervalIdx, 0, masteryIdx) / (float)masteryIdx;
 	}
 
-	public void UpdateInterval(bool correct) {
+	public void UpdateInterval(bool correct, System.DateTime? time = null) {
 		if (correct) {
 			++intervalIdx;
 			if (intervalIdx >= intervalSeconds.Length) {
@@ -66,7 +66,7 @@ public class Question {
 		} else {
 			intervalIdx = 0;
 		}
-		nextTime = System.DateTime.UtcNow.AddSeconds(intervalSeconds[intervalIdx]);
+		nextTime = (time ?? System.DateTime.UtcNow).AddSeconds(intervalSeconds[intervalIdx]);
 		Save ();
 	}
 
