@@ -14,8 +14,8 @@ public class PositionFx : MonoBehaviour {
 	void Update () {
 		if (!isSet) { 
 			isSet = true;
-			print (transform.position);
-			gameObject.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+//			print (transform.position);
+//			gameObject.transform.position = Camera.main.WorldToScreenPoint(transform.position);
 		}
 	}
 }
