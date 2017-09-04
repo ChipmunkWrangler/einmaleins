@@ -52,6 +52,8 @@
      <Compile Include="Assets\Scripts\DoneDisplay.cs" />
      <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
      <Compile Include="Assets\Scripts\GotoChoosePlayer.cs" />
+     <Compile Include="Assets\Scripts\GotoMain.cs" />
+     <Compile Include="Assets\Scripts\GotoStats.cs" />
      <Compile Include="Assets\Scripts\HideOnWrong.cs" />
      <Compile Include="Assets\Scripts\InactiveOnAnswer.cs" />
      <Compile Include="Assets\Scripts\MDPrefs.cs" />

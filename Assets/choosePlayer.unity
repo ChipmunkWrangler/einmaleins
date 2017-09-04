@@ -262,6 +262,16 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
+        type: 2}
+      propertyPath: button
+      value: 
+      objectReference: {fileID: 104777410}
+    - target: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
+        type: 2}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 104777409}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b36423d3946c444009a161a3420a285d, type: 2}
   m_IsPrefabParent: 0
@@ -270,6 +280,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224589697144227802, guid: b36423d3946c444009a161a3420a285d,
     type: 2}
   m_PrefabInternal: {fileID: 104777407}
+--- !u!114 &104777409 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114619999442467450, guid: b36423d3946c444009a161a3420a285d,
+    type: 2}
+  m_PrefabInternal: {fileID: 104777407}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &104777410 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114175582294699624, guid: b36423d3946c444009a161a3420a285d,
+    type: 2}
+  m_PrefabInternal: {fileID: 104777407}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &104777414 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
@@ -418,6 +440,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
+        type: 2}
+      propertyPath: button
+      value: 
+      objectReference: {fileID: 235820489}
+    - target: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
+        type: 2}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 235820488}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b36423d3946c444009a161a3420a285d, type: 2}
   m_IsPrefabParent: 0
@@ -426,6 +458,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224589697144227802, guid: b36423d3946c444009a161a3420a285d,
     type: 2}
   m_PrefabInternal: {fileID: 235820486}
+--- !u!114 &235820488 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114619999442467450, guid: b36423d3946c444009a161a3420a285d,
+    type: 2}
+  m_PrefabInternal: {fileID: 235820486}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &235820489 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114175582294699624, guid: b36423d3946c444009a161a3420a285d,
+    type: 2}
+  m_PrefabInternal: {fileID: 235820486}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &235820493 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
@@ -659,6 +703,16 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
+        type: 2}
+      propertyPath: button
+      value: 
+      objectReference: {fileID: 589766880}
+    - target: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
+        type: 2}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 589766879}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b36423d3946c444009a161a3420a285d, type: 2}
   m_IsPrefabParent: 0
@@ -667,6 +721,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224589697144227802, guid: b36423d3946c444009a161a3420a285d,
     type: 2}
   m_PrefabInternal: {fileID: 589766877}
+--- !u!114 &589766879 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114619999442467450, guid: b36423d3946c444009a161a3420a285d,
+    type: 2}
+  m_PrefabInternal: {fileID: 589766877}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &589766880 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114175582294699624, guid: b36423d3946c444009a161a3420a285d,
+    type: 2}
+  m_PrefabInternal: {fileID: 589766877}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &589766884 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
@@ -1096,6 +1162,16 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
+        type: 2}
+      propertyPath: button
+      value: 
+      objectReference: {fileID: 1009282696}
+    - target: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
+        type: 2}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 1009282695}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b36423d3946c444009a161a3420a285d, type: 2}
   m_IsPrefabParent: 0
@@ -1104,6 +1180,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224589697144227802, guid: b36423d3946c444009a161a3420a285d,
     type: 2}
   m_PrefabInternal: {fileID: 1009282693}
+--- !u!114 &1009282695 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114619999442467450, guid: b36423d3946c444009a161a3420a285d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1009282693}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &1009282696 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114175582294699624, guid: b36423d3946c444009a161a3420a285d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1009282693}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &1009282700 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114983123473252286, guid: b36423d3946c444009a161a3420a285d,
