@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StatsColumnController : MonoBehaviour {
-	[SerializeField] UnityEngine.UI.Text[] cells;
+	[SerializeField] UnityEngine.UI.Text[] cells = null;
 
 	public void SetMasteryLevel(int row, int masteryLevel) {
-		cells [row].text = masteryLevel.ToString ();	
+		cells [row].text = masteryLevel.ToString();	
 	}
 }
