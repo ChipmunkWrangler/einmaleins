@@ -21,17 +21,17 @@ public class Question {
 	public int a {  get; private set; }
 	public int b { get; private set; }
 	public int intervalIdx { get; private set; } // remove this
+	int correctInARow = 0;
 
 	const float FAST_TIME = 5.0f;
 	const float OK_TIME = 10.0f;
-	System.DateTime nextTime; // remove this
+	const int CORRECT_BEFORE_MASTERED = 7;
 	string prefsKey;
 
-	public Question(int _a, int _b, System.DateTime? time = null) {
+	public Question(int _a, int _b) {
 		a = _a;
 		b = _b;
 		intervalIdx = 0;
-		nextTime = time ?? System.DateTime.UtcNow;
 		stage = Stage.Inactive;
 		stage2 = Stage2.Inactive;
 	}
@@ -46,10 +46,12 @@ public class Question {
 	}
 
 	public void UpdateStage(bool isCorrect, float timeRequired) {
-		Debug.Log ("timeRequired " + timeRequired + " " + ToString());
-		if (isCorrect && stage2 != Stage2.Wrong) { // once it is wrong, it stays wrong until the next list is generated. "Wrong" means "not right on the first try".
+		if (isCorrect && stage2 != Stage2.Wrong) { // once it is wrong, it stays wrong until the next list is generated. "Wrong" means "not right on the first try".)
+			++correctInARow;
 			if (timeRequired < FAST_TIME) {
 				stage2 = (stage2 == Stage2.Fast) ? Stage2.Mastered : Stage2.Fast;
+			} else if (correctInARow >= CORRECT_BEFORE_MASTERED) {
+				stage2 = Stage2.Mastered;
 			} else if (timeRequired < OK_TIME) {
 				stage2 = Stage2.Ok;
 			} else {
@@ -57,8 +59,9 @@ public class Question {
 			}
 		} else {
 			stage2 = Stage2.Wrong;
+			correctInARow = 0;
 		}
-		Debug.Log("New stage 2 = " + stage2.ToString());
+		Debug.Log(ToString());
 	}
 		
 	public void Load(string _prefsKey) {
@@ -66,16 +69,6 @@ public class Question {
 		string intervalKey = prefsKey + ":intervalIdx";
 		if (MDPrefs.HasKey(intervalKey)) {
 			intervalIdx = MDPrefs.GetInt(intervalKey, 0);
-		}
-		string nextTimeKey = prefsKey + ":nextTime";
-		if (MDPrefs.HasKey(nextTimeKey)) {
-			string asString = MDPrefs.GetString (nextTimeKey);
-			long asLong;
-			if (long.TryParse (asString, out asLong)) {
-				nextTime = System.DateTime.FromBinary (asLong);
-			} else {
-				Debug.Log ("Failed to parse nextTime " + asString + " for " + ToString());
-			}
 		}
 		string stageKey = prefsKey + ":stage";
 		if (MDPrefs.HasKey (stageKey)) {
@@ -92,17 +85,18 @@ public class Question {
 			}
 
 		}
+		correctInARow = MDPrefs.GetInt(prefsKey + ":inarow", 0);
 	}
 
 	public void Save() {
 		UnityEngine.Assertions.Assert.AreNotEqual (prefsKey.Length, 0);
-		MDPrefs.SetString(prefsKey + ":nextTime", nextTime.ToBinary().ToString());	
 		MDPrefs.SetString(prefsKey + ":stage", stage2.ToString());
+		MDPrefs.SetInt(prefsKey + ":inarow", correctInARow);
 //		Debug.Log ("Saving " + ToString ());
 	}
 
 	public override string ToString() {
-		return a + " * " + b + " : " + stage2;
+		return a + " * " + b + " : " + stage2 + " correct = " + correctInARow;
 	}
 		
 	void MapOldToNew() {

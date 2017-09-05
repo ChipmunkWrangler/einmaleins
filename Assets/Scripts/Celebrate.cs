@@ -6,13 +6,9 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 	[SerializeField] float duration;
 	[SerializeField] GameObject particleParent;
 	[SerializeField] QuestionPicker questionPicker;
-	ParticleSystem[] particles;
+	ParticleSystem[] particles_;
 	bool isCelebrating;
 	Coroutine coroutine;
-
-	void Start() {
-		particles = particleParent.GetComponentsInChildren<ParticleSystem> ();
-	}
 		
 	public void OnQuestionChanged(Question question) {
 		StopTimer ();
@@ -43,7 +39,7 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 	void StartCelebrating() {
 		if (!isCelebrating) {
 			isCelebrating = true;
-			foreach (ParticleSystem particles in particles) {
+			foreach (ParticleSystem particles in GetParticles()) {
 				particles.Play ();
 			}
 		}
@@ -52,7 +48,7 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 	void StopCelebrating ()
 	{
 		if (isCelebrating) {
-			foreach (ParticleSystem particles in particles) {
+			foreach (ParticleSystem particles in GetParticles()) {
 				particles.Stop ();
 			}
 			isCelebrating = false;
@@ -63,5 +59,12 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 		if (coroutine != null) {
 			StopCoroutine (coroutine);
 		}
+	}
+
+	ParticleSystem[] GetParticles() {
+		if (particles_ == null) {
+			particles_ = particleParent.GetComponentsInChildren<ParticleSystem> ();
+		}
+		return particles_;
 	}
 }
