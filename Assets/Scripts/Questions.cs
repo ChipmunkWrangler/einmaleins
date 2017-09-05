@@ -107,6 +107,7 @@ public class Questions {
 		UnityEngine.Assertions.Assert.AreEqual (MDPrefs.GetInt (prefsKey + ":ArrayLen", questions.Length), questions.Length);
 		for (int i = 0; i < questions.Length; ++i) {
 			questions [i].Load (prefsKey + ":" + i);
+//			questions [i].Load (i);
 		}
 	}
 
