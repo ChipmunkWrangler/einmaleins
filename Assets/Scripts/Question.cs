@@ -15,7 +15,7 @@ public class Question {
 
 	public int a {  get; private set; }
 	public int b { get; private set; }
-	int correctInARow = 0;
+	public int correctInARow { get; private set; }
 
 	const float FAST_TIME = 5.0f;
 	const float OK_TIME = 10.0f;
