@@ -15,7 +15,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 
 	void Start() {
 		scoreText.text = "0";
-		IncreaseScoreBy (MDPrefs.GetInt (prefsKey));
+		IncreaseScoreBy (MDPrefs.GetInt (prefsKey, 0));
 		foreach (var multiplierIcon in multiplierIcons) {
 			multiplierIcon.CrossFadeAlpha (0f, 0, false);
 		}
@@ -31,7 +31,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	public void OnCorrectAnswer(Question question) {
 		IncrementMultiplier ();
 		print (question);
-		IncreaseScoreBy (multiplier * Mathf.Max(question.a, question.b) * question.intervalIdx);
+		IncreaseScoreBy (multiplier * question.a * question.b);
 	}
 
 	void IncrementMultiplier() {

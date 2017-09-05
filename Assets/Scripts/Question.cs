@@ -3,38 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Question {
-	public enum Stage {
+	public enum Stage {//remove
 		Inactive,
 		Active
 	}
 	public Stage stage;
-
-	private const int minute = 60;
-	private const int hour = 60 * minute;
-	private const int day = 24 * hour;
-	private const int month = 30 * day;
-	private const int year = 12 * month;
-
-	static private int[] intervalSeconds = new int[] {
-		0,
-		25,
-		2 * minute,
-		10 * minute,
-		hour,
-		5 * hour,
-		day,
-		5 * day,
-		25 * day,
-		4 * month,
-		2 * year
-	};
-	private const int masteryThresholdIdx = 8; // if the next review is in a month, you have mastered this question
+	public enum Stage2 { //rename
+		Inactive,
+		Wrong,
+		Hard,
+		Ok,
+		Fast,
+		Mastered
+	}
+	public Stage2 stage2;
 
 	public int a {  get; private set; }
 	public int b { get; private set; }
-	public int intervalIdx { get; private set; }
-	private System.DateTime nextTime;
-	private string prefsKey;
+	public int intervalIdx { get; private set; } // remove this
+
+	const float FAST_TIME = 5.0f;
+	const float OK_TIME = 10.0f;
+	System.DateTime nextTime; // remove this
+	string prefsKey;
 
 	public Question(int _a, int _b, System.DateTime? time = null) {
 		a = _a;
@@ -42,6 +33,7 @@ public class Question {
 		intervalIdx = 0;
 		nextTime = time ?? System.DateTime.UtcNow;
 		stage = Stage.Inactive;
+		stage2 = Stage2.Inactive;
 	}
 
 	public bool IsAnswerCorrect(string answer) {
@@ -53,32 +45,27 @@ public class Question {
 		return false;
 	}
 
-	public float GetMasteryFraction() {
-		return Mathf.Clamp(intervalIdx, 0, masteryThresholdIdx) / (float)masteryThresholdIdx;
-	}
-
-	public void UpdateInterval(bool correct, System.DateTime? time = null) {
-		if (correct) {
-			++intervalIdx;
-			if (intervalIdx >= intervalSeconds.Length) {
-				intervalIdx = intervalSeconds.Length - 1;
+	public void UpdateStage(bool isCorrect, float timeRequired) {
+		Debug.Log ("timeRequired " + timeRequired + " " + ToString());
+		if (isCorrect && stage2 != Stage2.Wrong) { // once it is wrong, it stays wrong until the next list is generated. "Wrong" means "not right on the first try".
+			if (timeRequired < FAST_TIME) {
+				stage2 = (stage2 == Stage2.Fast) ? Stage2.Mastered : Stage2.Fast;
+			} else if (timeRequired < OK_TIME) {
+				stage2 = Stage2.Ok;
+			} else {
+				stage2 = Stage2.Hard;
 			}
 		} else {
-			intervalIdx = 0;
+			stage2 = Stage2.Wrong;
 		}
-		nextTime = (time ?? System.DateTime.UtcNow).AddSeconds(intervalSeconds[intervalIdx]);
-		Save ();
+		Debug.Log("New stage 2 = " + stage2.ToString());
 	}
-
-	public System.DateTime GetNextTime() {
-		return nextTime;
-	}
-
+		
 	public void Load(string _prefsKey) {
 		prefsKey = _prefsKey;
 		string intervalKey = prefsKey + ":intervalIdx";
 		if (MDPrefs.HasKey(intervalKey)) {
-			intervalIdx = MDPrefs.GetInt(intervalKey);
+			intervalIdx = MDPrefs.GetInt(intervalKey, 0);
 		}
 		string nextTimeKey = prefsKey + ":nextTime";
 		if (MDPrefs.HasKey(nextTimeKey)) {
@@ -98,18 +85,46 @@ public class Question {
 				Debug.Log ("Invalid stage " + e);
 				stage = Stage.Inactive;
 			}
+			try {
+				stage2 = (Stage2) System.Enum.Parse(typeof(Stage2), MDPrefs.GetString (stageKey));
+			} catch (System.ArgumentException) {
+				MapOldToNew ();
+			}
+
 		}
 	}
 
 	public void Save() {
 		UnityEngine.Assertions.Assert.AreNotEqual (prefsKey.Length, 0);
-		MDPrefs.SetInt(prefsKey + ":intervalIdx", intervalIdx);
 		MDPrefs.SetString(prefsKey + ":nextTime", nextTime.ToBinary().ToString());	
-		MDPrefs.SetString(prefsKey + ":stage", stage.ToString());
-		Debug.Log ("Saving " + ToString ());
+		MDPrefs.SetString(prefsKey + ":stage", stage2.ToString());
+//		Debug.Log ("Saving " + ToString ());
 	}
 
 	public override string ToString() {
-		return a + " * " + b + " : intervalIdx = " + intervalIdx + ", nextTime = " + nextTime.ToString() + ", " + stage;
+		return a + " * " + b + " : " + stage2;
+	}
+		
+	void MapOldToNew() {
+		if (stage == Stage.Inactive) {
+			stage2 = Stage2.Inactive;
+		} else {
+			switch (intervalIdx) {
+			case 0: 
+			case 1:
+				stage2 = Stage2.Wrong;
+				break;
+			case 2:
+			case 3:
+				stage2 = Stage2.Hard;
+				break;
+			case 4:
+			case 5:
+			default:
+				stage2 = Stage2.Ok;
+				break;
+			}
+		}
+//		MDPrefs.DeleteKey(prefsKey + ":intervalIdx", intervalIdx);
 	}
 }

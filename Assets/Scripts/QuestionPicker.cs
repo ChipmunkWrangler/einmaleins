@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestionPicker : MonoBehaviour {
-	[SerializeField] int minPlayMinutes = 5;
-	[SerializeField] int maxRecommendedPlayMinutes = 10;
-	[SerializeField] int minNumWrong = 3;
 	[SerializeField] GameObject[] subscribers;
 
 	Questions questions;
@@ -14,6 +11,7 @@ public class QuestionPicker : MonoBehaviour {
 	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
 	List<OnWrongAnswer> onWrongAnswerSubscribers;
 	int numWrong;
+	float questionTime;
 
 	void Start () {
 		questions = new Questions();
@@ -22,10 +20,11 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	public void NextQuestion() {
-		curQuestion = questions.GetNextQuestion (AllowNewQuestion());
+		curQuestion = questions.GetNextQuestion ();
 		foreach (OnQuestionChanged subscriber in onQuestionChangedSubscribers) {
 			subscriber.OnQuestionChanged (curQuestion);
 		}
+		questionTime = Time.time;
 	}
 
 	public void OnAnswer(string answer) {
@@ -33,7 +32,7 @@ public class QuestionPicker : MonoBehaviour {
 			return;
 		}
 		bool isCorrect = curQuestion.IsAnswerCorrect (answer);
-		curQuestion.UpdateInterval (isCorrect);
+		curQuestion.UpdateStage (isCorrect, Time.time - questionTime);
 		if (isCorrect) {
 			foreach (OnCorrectAnswer subscriber in onCorrectAnswerSubscribers) {
 				subscriber.OnCorrectAnswer (curQuestion);
@@ -45,12 +44,9 @@ public class QuestionPicker : MonoBehaviour {
 				subscriber.OnWrongAnswer ();
 			}
 		}
+		questions.Save ();
 	}
 		
-	bool AllowNewQuestion() {
-
-		return (numWrong < minNumWrong && Time.time <= maxRecommendedPlayMinutes) || Time.time <= minPlayMinutes * 60;
-	}
 	// I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
 	private void SplitSubscribers() {
 		onQuestionChangedSubscribers = new List<OnQuestionChanged> ();

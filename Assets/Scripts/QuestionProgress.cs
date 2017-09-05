@@ -13,13 +13,13 @@ public class QuestionProgress : MonoBehaviour, OnCorrectAnswer, OnQuestionChange
 
 	public void OnCorrectAnswer (Question question) {
 		SetProgress (0);
-		targetFraction = question.GetMasteryFraction ();
+//		targetFraction = question.GetMasteryFraction ();
 		speed = (targetFraction - curFraction) / transitionTime;
 		startTime = delay + Time.time;
 	}
 
 	public void OnQuestionChanged(Question question) {
-		curFraction = question.GetMasteryFraction ();
+//		curFraction = question.GetMasteryFraction ();
 		targetFraction = curFraction;
 	}
 				
