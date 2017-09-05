@@ -19,6 +19,12 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		foreach (var multiplierIcon in multiplierIcons) {
 			multiplierIcon.CrossFadeAlpha (0f, 0, false);
 		}
+		int newMult = MDPrefs.GetInt (prefsKey + ":mult", 0);
+		Debug.Log (newMult);
+		for (int i = 0; i < newMult; ++i) {
+			IncrementMultiplier ();
+		}
+		print (multiplier);
 	}
 
 	public void OnWrongAnswer() {
@@ -26,11 +32,13 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		foreach (var multiplierIcon in multiplierIcons) {
 			multiplierIcon.CrossFadeAlpha (0.0f, multiplierFadeDuration, false);
 		}
+		Save (score);
 	}
 
 	public void OnCorrectAnswer(Question question) {
 		IncrementMultiplier ();
 		IncreaseScoreBy (multiplier * question.a * question.b);
+		Save (score);
 	}
 
 	void IncrementMultiplier() {
@@ -46,11 +54,11 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 			StopCoroutine (scoreCoroutine);
 		}
 		scoreCoroutine = UpdateScoreDisplay (scoreText, score);
-		SaveScore (score);
 	}
 
-	void SaveScore(int newScore) {
+	void Save(int newScore) {
 		MDPrefs.SetInt (prefsKey, newScore);
+		MDPrefs.SetInt (prefsKey + ":mult", multiplier);
 	}
 
 	Coroutine UpdateScoreDisplay(UnityEngine.UI.Text text, int newScore) {
