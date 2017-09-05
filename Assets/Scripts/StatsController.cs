@@ -10,8 +10,8 @@ public class StatsController : MonoBehaviour {
 	void Start () {
 		questions = new Questions ();
 		foreach (Question question in questions.questions) {
-			columns [question.a - 1].SetMasteryLevel (question.b - 1, (int) question.stage2);
-			columns [question.b - 1].SetMasteryLevel (question.a - 1, (int) question.stage2);
+			columns [question.a - 1].SetMasteryLevel (question.b - 1, (int) question.stage);
+			columns [question.b - 1].SetMasteryLevel (question.a - 1, (int) question.stage);
 		}
 	}
 }

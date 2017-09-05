@@ -47,10 +47,10 @@ public class Questions {
 		return retVal;
 	}
 
-	void AppendByStage (Question.Stage2 stage)
+	void AppendByStage (Question.Stage stage)
 	{
 		for (int i = 0; i < questions.Length; ++i) {
-			if (questions [i].stage2 == stage) {
+			if (questions [i].stage == stage) {
 				toAsk.Add (i);
 			}
 		}
@@ -63,19 +63,19 @@ public class Questions {
 		}
 		++toAskListNum;
 		Debug.Log ("Filling list number " + toAskListNum);
-		AppendByStage (Question.Stage2.Wrong);
+		AppendByStage (Question.Stage.Wrong);
 		if (toAskListNum < TIMES_TO_REPEAT_HARDS) {
-			AppendByStage (Question.Stage2.Hard);
+			AppendByStage (Question.Stage.Hard);
 		}
 		if (toAskListNum < TIMES_TO_REPEAT_OKS) {
-			AppendByStage (Question.Stage2.Ok);
+			AppendByStage (Question.Stage.Ok);
 		}
 		if (toAskListNum < TIMES_TO_REPEAT_FASTS) {
-			AppendByStage (Question.Stage2.Fast);
+			AppendByStage (Question.Stage.Fast);
 		}
 		if (toAskListNum < TIMES_TO_ADD_NEW) {
 			for (int i = 0; i < questions.Length && toAsk.Count < MIN_INITIAL_ASK_LIST_LENGTH; ++i) {
-				if (questions [i].stage2 == Question.Stage2.Inactive) {
+				if (questions [i].stage == Question.Stage.Inactive) {
 					toAsk.Add (i);
 				}
 			}
@@ -84,8 +84,8 @@ public class Questions {
 			Debug.Log (questions [qIdx]);
 		}
 		foreach (var question in questions) {
-			if (question.stage2 == Question.Stage2.Wrong) {
-				question.stage2 = Question.Stage2.Hard;
+			if (question.stage == Question.Stage.Wrong) {
+				question.stage = Question.Stage.Hard;
 			}
 		}
 	}

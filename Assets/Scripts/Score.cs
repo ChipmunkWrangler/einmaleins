@@ -30,7 +30,6 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 
 	public void OnCorrectAnswer(Question question) {
 		IncrementMultiplier ();
-		print (question);
 		IncreaseScoreBy (multiplier * question.a * question.b);
 	}
 
