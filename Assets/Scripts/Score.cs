@@ -79,6 +79,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 				text.text = i.ToString ();
 				yield return null;
 			}
+			text.text = newScore.ToString();
 		}
 	}
 }
