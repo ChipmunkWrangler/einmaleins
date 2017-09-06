@@ -12,10 +12,10 @@ public class Question {
 		Mastered
 	}
 	public Stage stage;
-
 	public int a {  get; private set; }
 	public int b { get; private set; }
-	public int correctInARow { get; private set; }
+
+	int correctInARow;
 
 	const float FAST_TIME = 15.0f;
 	const float OK_TIME = 60.0f;
@@ -54,6 +54,10 @@ public class Question {
 			correctInARow = 0;
 		}
 		Debug.Log(ToString());
+	}
+
+	public float GetMasteryFraction() {
+		return correctInARow / (float)CORRECT_BEFORE_MASTERED;
 	}
 //	public void Load(int idx) {
 //		stage = Stage.Hard;

@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StatsColumnController : MonoBehaviour {
-	[SerializeField] UnityEngine.UI.Text[] cells = null;
+	[SerializeField] UnityEngine.UI.Image[] cells = null;
+	[SerializeField] float premasteredAlpha = 0.5f;
+	[SerializeField] float fadeTime = 0.5f;
 
-	public void SetMasteryLevel(int row, Question.Stage stage, int numCorrect) {
-		string s;
-		if (stage == Question.Stage.Inactive) {
-			s = "0";
-			cells [row].CrossFadeAlpha (0, 0f, false);
-		} else {
-			cells [row].CrossFadeAlpha (1.0f, 0f, false);
+	public void SetMasteryLevel(int row, Question.Stage stage, float masteryFraction) {
+		float alpha = 1.0f;
+		if (stage != Question.Stage.Inactive) {
 			if (stage == Question.Stage.Mastered) {
-				s = "*";
+				alpha = 0;
 			} else if (stage == Question.Stage.Fast) {
-				s = "F";
+				alpha = premasteredAlpha;
 			} else {
-				s = numCorrect.ToString ();
+				alpha = 1.0f - (1.0f - premasteredAlpha) * masteryFraction;
 			}
 		}
-		cells [row].text = s;	
+		Debug.Log ("row = " + row + " stage = " + stage.ToString () + " m = " + masteryFraction + " alpha = " + alpha);
+		cells [row].CrossFadeAlpha (alpha, fadeTime, false);
 	}
 }
