@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\QuestionProgress.cs" />
      <Compile Include="Assets\Scripts\Questions.cs" />
      <Compile Include="Assets\Scripts\Score.cs" />
+     <Compile Include="Assets\Scripts\ScrollBackground.cs" />
      <Compile Include="Assets\Scripts\ShowOnRight.cs" />
      <Compile Include="Assets\Scripts\StatsColumnController.cs" />
      <Compile Include="Assets\Scripts\StatsController.cs" />
