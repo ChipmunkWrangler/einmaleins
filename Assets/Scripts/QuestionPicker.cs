@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class QuestionPicker : MonoBehaviour {
 	[SerializeField] GameObject[] subscribers;
+	[SerializeField] bool isFlash;
 
 	Questions questions;
 	Question curQuestion;
 	List<OnQuestionChanged> onQuestionChangedSubscribers;
 	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
 	List<OnWrongAnswer> onWrongAnswerSubscribers;
-	int numWrong;
 	float questionTime;
 
 	void Start () {
-		questions = new SlowQuestions();
+		if (isFlash) {
+			questions = new FlashQuestions ();
+		} else {
+			questions = new SlowQuestions ();
+		}
 		SplitSubscribers ();
 		NextQuestion ();
 	}
@@ -32,14 +36,13 @@ public class QuestionPicker : MonoBehaviour {
 			return;
 		}
 		bool isCorrect = curQuestion.IsAnswerCorrect (answer);
-		curQuestion.UpdateStage (isCorrect, Time.time - questionTime);
+		curQuestion.UpdateStage (isCorrect, Time.time - questionTime, isFlash);
 		if (isCorrect) {
 			foreach (OnCorrectAnswer subscriber in onCorrectAnswerSubscribers) {
 				subscriber.OnCorrectAnswer (curQuestion);
 			}
 
 		} else {
-			++numWrong;
 			foreach (OnWrongAnswer subscriber in onWrongAnswerSubscribers) {
 				subscriber.OnWrongAnswer ();
 			}

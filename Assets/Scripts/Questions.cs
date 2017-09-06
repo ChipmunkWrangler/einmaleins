@@ -8,6 +8,7 @@ public abstract class Questions {
 
 	protected const int maxNum = 10;
 	protected List<int> toAsk = new List<int>(); // list of indices in questions[]
+	protected const string prefsKey = "questions";
 
 	public Questions() {
 		CreateQuestions ();
@@ -34,20 +35,19 @@ public abstract class Questions {
 		LoadQuestionsList ();
 	}
 	protected abstract void FillToAsk ();
-	protected abstract string GetPrefsKey();
 
 	protected void LoadQuestionsList ()
 	{
-		UnityEngine.Assertions.Assert.AreEqual (MDPrefs.GetInt (GetPrefsKey() + ":ArrayLen", questions.Length), questions.Length);
+		UnityEngine.Assertions.Assert.AreEqual (MDPrefs.GetInt (prefsKey + ":ArrayLen", questions.Length), questions.Length);
 		for (int i = 0; i < questions.Length; ++i) {
-			questions [i].Load (GetPrefsKey() + ":" + i);
+			questions [i].Load (prefsKey + ":" + i);
 //			questions [i].Load (i);
 		}
 	}
 
 	protected void SaveQuestionsList ()
 	{
-		MDPrefs.SetInt (GetPrefsKey() + ":ArrayLen", questions.Length);
+		MDPrefs.SetInt (prefsKey + ":ArrayLen", questions.Length);
 		for (int i = 0; i < questions.Length; ++i) {
 			questions [i].Save ();
 		}

@@ -23,7 +23,6 @@ public class FlashQuestions : Questions {
 	const int TIMES_TO_REPEAT_OKS = 3;
 	const int TIMES_TO_REPEAT_FASTS = 1;
 	const int TIMES_TO_ADD_NEW = 3;
-	const string prefsKey = "flashQuestions";
 	int toAskListNum = -1; // -1: no lists shown today, toAsk not generated. 0 => toAsk is today's first list. etc.
 
 	public override void Save() {
@@ -69,10 +68,6 @@ public class FlashQuestions : Questions {
 				question.stage = Question.Stage.Hard;
 			}
 		}
-	}
-
-	protected override string GetPrefsKey() {
-		return prefsKey;
 	}
 
 	void AppendByStage (Question.Stage stage)

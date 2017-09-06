@@ -23,15 +23,13 @@ public class SlowQuestions : Questions {
 	const int TIMES_TO_REPEAT_OKS = 3;
 	const int TIMES_TO_REPEAT_FASTS = 1;
 	const int TIMES_TO_ADD_NEW = 3;
-	const string prefsKey = "questions";
 	int toAskListNum = -1; // -1: no lists shown today, toAsk not generated. 0 => toAsk is today's first list. etc.
 
 	public override void Save() {
 		base.Save();
 		SaveAskList (prefsKey + ":askList:");
 	}
-
-
+		
 	protected override void Load() {
 		base.Load();
 		LoadAskList (prefsKey + ":askList:");
@@ -69,10 +67,6 @@ public class SlowQuestions : Questions {
 				question.stage = Question.Stage.Hard;
 			}
 		}
-	}
-
-	protected override string GetPrefsKey() {
-		return prefsKey;
 	}
 
 	void AppendByStage (Question.Stage stage)

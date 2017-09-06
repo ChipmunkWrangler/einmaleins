@@ -36,7 +36,8 @@ public class Question {
 		return false;
 	}
 
-	public void UpdateStage(bool isCorrect, float timeRequired) {
+	public void UpdateStage(bool isCorrect, float timeRequired, bool isFlash) {
+		//TODO use isFlash
 		if (isCorrect && stage != Stage.Wrong) { // once it is wrong, it stays wrong until the next list is generated. "Wrong" means "not right on the first try".)
 			++correctInARow;
 			if (timeRequired < FAST_TIME) {
