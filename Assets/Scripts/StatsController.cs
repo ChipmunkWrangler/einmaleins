@@ -24,7 +24,7 @@ public class StatsController : MonoBehaviour {
 		levelSeen = new int[columns.Length] [];
 		for (int i = 0; i < columns.Length; ++i) {
 			string key = prefsKey + ":" + i;
-			levelSeen [i] = PlayerPrefsArray.GetIntArray (key);
+			levelSeen [i] = MDPrefs.GetIntArray (key);
 			if (levelSeen [i].Length == 0) {
 				levelSeen [i] = new int[columns.Length];
 			}
@@ -33,7 +33,7 @@ public class StatsController : MonoBehaviour {
 
 	void Save() {
 		for (int i = 0; i < columns.Length; ++i) {
-			PlayerPrefsArray.SetIntArray (prefsKey + ":" + i, levelSeen [i]);
+			MDPrefs.SetIntArray (prefsKey + ":" + i, levelSeen [i]);
 		}
 	}
 }
