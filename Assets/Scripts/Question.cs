@@ -17,8 +17,8 @@ public class Question {
 	public int b { get; private set; }
 	public int correctInARow { get; private set; }
 
-	const float FAST_TIME = 5.0f;
-	const float OK_TIME = 10.0f;
+	const float FAST_TIME = 15.0f;
+	const float OK_TIME = 60.0f;
 	const int CORRECT_BEFORE_MASTERED = 7;
 	string prefsKey;
 
