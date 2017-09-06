@@ -14,7 +14,7 @@ public class QuestionPicker : MonoBehaviour {
 	float questionTime;
 
 	void Start () {
-		questions = new Questions();
+		questions = new SlowQuestions();
 		SplitSubscribers ();
 		NextQuestion ();
 	}

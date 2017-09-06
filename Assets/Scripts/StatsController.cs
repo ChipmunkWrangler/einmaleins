@@ -10,7 +10,7 @@ public class StatsController : MonoBehaviour {
 
 	void Start () {
 		Load ();
-		questions = new Questions ();
+		questions = new SlowQuestions ();
 		foreach (Question question in questions.questions) {
 			int i = question.a - 1;
 			int j = question.b - 1;

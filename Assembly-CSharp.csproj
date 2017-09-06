@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\Celebrate.cs" />
      <Compile Include="Assets\Scripts\DoneDisplay.cs" />
      <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
+     <Compile Include="Assets\Scripts\FlashQuestions.cs" />
      <Compile Include="Assets\Scripts\GotoChoosePlayer.cs" />
      <Compile Include="Assets\Scripts\GotoMain.cs" />
      <Compile Include="Assets\Scripts\GotoStats.cs" />
@@ -71,6 +72,7 @@
      <Compile Include="Assets\Scripts\Score.cs" />
      <Compile Include="Assets\Scripts\ScrollBackground.cs" />
      <Compile Include="Assets\Scripts\ShowOnRight.cs" />
+     <Compile Include="Assets\Scripts\SlowQuestions.cs" />
      <Compile Include="Assets\Scripts\StatsColumnController.cs" />
      <Compile Include="Assets\Scripts\StatsController.cs" />
      <Compile Include="Assets\Scripts\TextButton.cs" />
