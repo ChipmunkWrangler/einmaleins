@@ -7,25 +7,22 @@ public class PlayerPrefsArray : MonoBehaviour {
 	
 	//Set an array of ints
 	public static void SetIntArray( string key, int[] value ){
-	    PlayerPrefs.SetInt("PlayerPrefsArray:Int:L:"+key, value.Length);
-	    int i = 0;
-	    while(i < value.Length){
-	        PlayerPrefs.SetInt("PlayerPrefsArray:Int:"+key + i.ToString(), value[i]);
-	        ++i;
-	    }
+		key += ":IntArray";
+		SetLength (key, value.Length);
+		for(int i = 0; i < value.Length; ++i){
+			PlayerPrefs.SetInt(key + ":" + i.ToString(), value[i]);
+		}
 	}
 	
 	//Get an array of ints
 	public static int[] GetIntArray( string key ){
-	    int[] returns = new int[PlayerPrefs.GetInt("PlayerPrefsArray:Int:L:"+key)];
-	    
-	   	int i = 0;
-	    
-	    while(i < PlayerPrefs.GetInt("PlayerPrefsArray:Int:L:"+key)){
-	        returns.SetValue(PlayerPrefs.GetInt("PlayerPrefsArray:Int:"+key + i.ToString()), i);
-	        ++i;
-	    }
-	    return returns;
+		key += ":IntArray";
+		int length = GetLength (key);
+		int[] returns = new int[length];
+		for(int i = 0; i < length; ++i) {
+			returns.SetValue(PlayerPrefs.GetInt(key + ":" + i.ToString()), i);
+		}
+		return returns;
 	}
 	
 	//############################################### float ##############################################
@@ -33,7 +30,7 @@ public class PlayerPrefsArray : MonoBehaviour {
 	//Set an array of floats
 	public static void SetFloatArray( string key, float[] value ){
 		key += ":FloatArray";
-		PlayerPrefs.SetInt(GetLengthKey(key), value.Length);
+		SetLength (key, value.Length);
 		for(int i = 0; i < value.Length; ++i){
 			PlayerPrefs.SetFloat(key + ":" + i.ToString(), value[i]);
 	    }
@@ -43,9 +40,6 @@ public class PlayerPrefsArray : MonoBehaviour {
 	public static float[] GetFloatArray( string key ){
 		key += ":FloatArray";
 		int length = GetLength (key);
-		if (length <= 0) {
-			return null;
-		}
 	    float[] returns = new float[length];
 		for(int i = 0; i < length; ++i) {
 			returns.SetValue(PlayerPrefs.GetFloat(key + ":" + i.ToString()), i);
@@ -59,9 +53,6 @@ public class PlayerPrefsArray : MonoBehaviour {
 	public static string[] GetStringArray( string key ){
 		key += ":StringArray";
 		int length = GetLength (key);
-		if (length <= 0) {
-			return null;
-		}
 		string[] returns = new string[length];
 		for(int i = 0; i < length; ++i) {
 			returns.SetValue(PlayerPrefs.GetString(key + ":" + i.ToString()), i);
@@ -72,7 +63,7 @@ public class PlayerPrefsArray : MonoBehaviour {
 	//Set an array of strings
 	public static void SetStringArray( string key, string[] value ){
 		key += ":StringArray";
-		PlayerPrefs.SetInt(GetLengthKey(key), value.Length);
+		SetLength (key, value.Length);
 		for(int i = 0; i < value.Length; ++i){
 			PlayerPrefs.SetString(key + ":" + i.ToString(), value[i]);
 		}
@@ -82,25 +73,22 @@ public class PlayerPrefsArray : MonoBehaviour {
 	
 	//Set an array of bool
 	public static void SetBoolArray( string key, bool[] value ){
-	    PlayerPrefs.SetInt("PlayerPrefsArray:Bool:L:"+key, value.Length);
-	    int i = 0;
-	    while(i < value.Length){
-	        PlayerPrefsPlus.SetBool("PlayerPrefsArray:Bool:"+key + i.ToString(), value[i]);
-	        ++i;
-	    }
+		key += ":BoolArray";
+		SetLength (key, value.Length);
+		for(int i = 0; i < value.Length; ++i){
+			PlayerPrefsPlus.SetBool(key + ":" + i.ToString(), value[i]);
+		}
 	}
 	
 	//Get an array of bools
 	public static bool[] GetBoolArray( string key ){
-	    bool[] returns = new bool[PlayerPrefs.GetInt("PlayerPrefsArray:Bool:L:"+key)];
-	    
-	   	int i = 0;
-	    
-	    while(i < PlayerPrefs.GetInt("PlayerPrefsArray:Bool:L:"+key)){
-	        returns.SetValue(PlayerPrefsPlus.GetBool("PlayerPrefsArray:Bool:"+key + i.ToString()), i);
-	        ++i;
-	    }
-	    return returns;
+		key += ":BoolArray";
+		int length = GetLength (key);
+		bool[] returns = new bool[length];
+		for(int i = 0; i < length; ++i) {
+			returns.SetValue(PlayerPrefsPlus.GetBool(key + ":" + i.ToString()), i);
+		}
+		return returns;
 	}
 	
 	//############################################### Color ##############################################
@@ -283,13 +271,14 @@ public class PlayerPrefsArray : MonoBehaviour {
 	}
 
 	static int GetLength(string key) {
-		string lenKey = GetLengthKey(key);
-		if (!PlayerPrefs.HasKey (lenKey)) {
-			return -1;
-		}
-		return PlayerPrefs.GetInt (lenKey);
+		return PlayerPrefs.GetInt (GetLengthKey(key));
 	}
-	
+		
+
+	static void SetLength (string key, int len)
+	{
+		PlayerPrefs.SetInt (GetLengthKey (key), len);
+	}
 }
 
 public class PPA : PlayerPrefsArray{}
