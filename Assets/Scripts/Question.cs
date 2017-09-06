@@ -14,12 +14,11 @@ public class Question {
 	public Stage stage;
 	public int a {  get; private set; }
 	public int b { get; private set; }
-
-	int correctInARow;
+	public int correctInARow { get; private set; }
 
 	const float FAST_TIME = 15.0f;
 	const float OK_TIME = 60.0f;
-	const int CORRECT_BEFORE_MASTERED = 7;
+	public const int CORRECT_BEFORE_MASTERED = 7;
 	string prefsKey;
 
 	public Question(int _a, int _b) {
@@ -56,9 +55,6 @@ public class Question {
 		Debug.Log(ToString());
 	}
 
-	public float GetMasteryFraction() {
-		return correctInARow / (float)CORRECT_BEFORE_MASTERED;
-	}
 //	public void Load(int idx) {
 //		stage = Stage.Hard;
 //		switch (idx) {

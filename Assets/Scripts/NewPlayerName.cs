@@ -19,7 +19,7 @@ public class NewPlayerName : MonoBehaviour {
 	void Start() {
 		ActivatePlayButton (false);
 		playerNames = PlayerPrefsArray.GetStringArray (playerNamesPrefsKey);
-		int numPlayers = playerNames == null ? 0 : playerNames.Length;
+		int numPlayers = playerNames.Length;
 		enterNamePanel.SetActive (numPlayers < playerButtons.Length);
 		if (numPlayers == 0) {
 			inputField.Select ();
@@ -69,16 +69,12 @@ public class NewPlayerName : MonoBehaviour {
 	}
 
 	void AppendToPlayerNames(string name) {
-		if (playerNames == null) {
-			playerNames = new string[] {name};
-		} else {
-			string[] newPlayerNames = new string[playerNames.Length + 1];
-			for (int i = 0; i < playerNames.Length; ++i) {
-				newPlayerNames [i] = playerNames [i];
-			}
-			newPlayerNames [playerNames.Length] = name;
-			playerNames = newPlayerNames;
+		string[] newPlayerNames = new string[playerNames.Length + 1];
+		for (int i = 0; i < playerNames.Length; ++i) {
+			newPlayerNames [i] = playerNames [i];
 		}
+		newPlayerNames [playerNames.Length] = name;
+		playerNames = newPlayerNames;
 		PlayerPrefsArray.SetStringArray (playerNamesPrefsKey, playerNames);
 	}
 }

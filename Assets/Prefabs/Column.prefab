@@ -338,7 +338,8 @@ MonoBehaviour:
   - {fileID: 114746656756751420}
   - {fileID: 114087074422446182}
   premasteredAlpha: 0.7
-  fadeTime: 2
+  fadeTime: 5
+  highlightColor: {r: 0.9098039, g: 0.9098039, b: 0, a: 1}
 --- !u!114 &114174423993411606
 MonoBehaviour:
   m_ObjectHideFlags: 1
