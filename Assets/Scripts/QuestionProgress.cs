@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent (typeof (Material))]
 public class QuestionProgress : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] float transitionTime = 0.5f;
 	[SerializeField] float delay;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent (typeof (UnityEngine.UI.Image))]
 public class FadeOnInactive : MonoBehaviour, OnQuestionChanged, OnWrongAnswer, OnAnswerChanged {
 	[SerializeField] float transitionTime;
 	[SerializeField] float fadedAlpha;
