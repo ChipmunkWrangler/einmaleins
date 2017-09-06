@@ -628,7 +628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answerHandler: {fileID: 1088660492}
   fadeTime: 1
-  maxDigits: 2
+  maxDigits: 3
   subscribers:
   - {fileID: 252348861}
   - {fileID: 1415939561}
@@ -654,7 +654,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ac5ab3e05fb0c4f6c8a7eb275d74ff88, type: 3}
-    m_FontSize: 140
+    m_FontSize: 105
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -665,7 +665,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: 100
 --- !u!222 &151660326
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7714,7 +7714,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ac5ab3e05fb0c4f6c8a7eb275d74ff88, type: 3}
-    m_FontSize: 140
+    m_FontSize: 105
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -7725,7 +7725,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '9 x 9 = '
+  m_Text: '10 x 10 = '
 --- !u!222 &1985274888
 CanvasRenderer:
   m_ObjectHideFlags: 0
