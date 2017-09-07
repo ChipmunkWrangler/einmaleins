@@ -14,7 +14,6 @@ public class QuestionPicker : MonoBehaviour {
 
 	void Start () {
 		SplitSubscribers ();
-		NextQuestion ();
 	}
 
 	public void NextQuestion() {

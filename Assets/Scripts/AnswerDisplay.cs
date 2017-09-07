@@ -14,6 +14,7 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer {
 	void Start() {
 		oldColor = GetTextField ().color;
 		SplitSubscribers ();
+		SetText ("");
 	}
 
 	public void OnQuestionChanged(Question question) {

@@ -5,6 +5,10 @@ using UnityEngine;
 public class TextDisplay : MonoBehaviour {
 	UnityEngine.UI.Text textField;
 
+	void Start() {
+		GetTextField ().text = "";
+	}
+
 	protected void SetText(string text) {
 		GetTextField ().text = text;
 	}
