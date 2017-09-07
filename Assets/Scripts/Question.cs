@@ -47,16 +47,19 @@ public class Question {
 	public void UpdateState(bool isCorrect, float timeRequired) {
 		if (isCorrect && stage != Stage.Wrong) { // once it is wrong, it stays wrong until the next list is generated. "Wrong" means "not right on the first try".)
 			++correctInARow;
-			if (timeRequired < FAST_TIME) {
-				stage = (stage == Stage.Fast) ? Stage.Mastered : Stage.Fast;
-			} else if (correctInARow >= CORRECT_BEFORE_MASTERED) {
-				stage = Stage.Mastered;
-			} else if (timeRequired < OK_TIME) {
-				stage = Stage.Ok;
-			} else {
-				stage = Stage.Hard;
-			}
 			RecordAnswerTime (timeRequired);
+			if (timeRequired > OK_TIME) {
+				stage = Stage.Hard;
+			} else if (stage != Stage.Mastered) {
+				if (correctInARow >= CORRECT_BEFORE_MASTERED) {
+					stage = Stage.Mastered;
+				} else if (timeRequired < FAST_TIME) {
+					stage = (stage == Stage.Fast) ? Stage.Mastered : Stage.Fast;
+				} else {
+					UnityEngine.Assertions.Assert.IsTrue (timeRequired < OK_TIME);
+					stage = Stage.Ok;
+				}
+			}
 		} else {
 			stage = Stage.Wrong;
 			correctInARow = 0;

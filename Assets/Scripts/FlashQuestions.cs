@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-/*
- * The question list consists of the first N mastered questions, ordered by average response time in the last three trials.
- * If a question is answered correctly, record response time and update average
- * If a question is answered wrong, keep asking it (and keep timer running) until it is answered correctly. Move it back to the list of unmastered facts as WRONG.
- * If a question takes more than a minute to answer, move it back to the list of unmastered facts as HARD.
-*/
+// The question list consists of the first N mastered questions, ordered by average response time in the last three trials.
 public class FlashQuestions : Questions {
 	public const int ASK_LIST_LENGTH = 10;
 

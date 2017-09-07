@@ -11,7 +11,6 @@ public abstract class Questions : MonoBehaviour {
 	protected const string prefsKey = "questions";
 
 	void Awake() {
-		print ("Awake");
 		CreateQuestions ();
 		Load ();
 		FillToAsk ();
