@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public abstract class Questions {
+public abstract class Questions : MonoBehaviour {
 	public Question[] questions { get; private set; }
 
 	protected const int maxNum = 10;
 	protected List<int> toAsk = new List<int>(); // list of indices in questions[]
 	protected const string prefsKey = "questions";
 
-	public Questions() {
+	void Awake() {
+		print ("Awake");
 		CreateQuestions ();
 		Load ();
 		FillToAsk ();
@@ -40,7 +41,7 @@ public abstract class Questions {
 	{
 		UnityEngine.Assertions.Assert.AreEqual (MDPrefs.GetInt (prefsKey + ":ArrayLen", questions.Length), questions.Length);
 		for (int i = 0; i < questions.Length; ++i) {
-			questions [i].Load (prefsKey + ":" + i);
+			questions [i].Load (prefsKey + ":" + i, i);
 //			questions [i].Load (i);
 		}
 	}

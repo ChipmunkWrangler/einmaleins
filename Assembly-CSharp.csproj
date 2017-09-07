@@ -53,10 +53,12 @@
      <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
      <Compile Include="Assets\Scripts\FlashQuestions.cs" />
      <Compile Include="Assets\Scripts\GotoChoosePlayer.cs" />
+     <Compile Include="Assets\Scripts\GotoLaunch.cs" />
      <Compile Include="Assets\Scripts\GotoMain.cs" />
      <Compile Include="Assets\Scripts\GotoStats.cs" />
      <Compile Include="Assets\Scripts\HideOnWrong.cs" />
      <Compile Include="Assets\Scripts\InactiveOnAnswer.cs" />
+     <Compile Include="Assets\Scripts\LaunchButtonController.cs" />
      <Compile Include="Assets\Scripts\MDPrefs.cs" />
      <Compile Include="Assets\Scripts\NewPlayerName.cs" />
      <Compile Include="Assets\Scripts\OnAnswerChanged.cs" />

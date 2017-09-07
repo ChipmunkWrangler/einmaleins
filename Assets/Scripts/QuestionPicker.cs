@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class QuestionPicker : MonoBehaviour {
 	[SerializeField] GameObject[] subscribers;
-	[SerializeField] bool isFlash;
+	[SerializeField] Questions questions;
 
-	Questions questions;
 	Question curQuestion;
 	List<OnQuestionChanged> onQuestionChangedSubscribers;
 	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
@@ -14,11 +13,6 @@ public class QuestionPicker : MonoBehaviour {
 	float questionTime;
 
 	void Start () {
-		if (isFlash) {
-			questions = new FlashQuestions ();
-		} else {
-			questions = new SlowQuestions ();
-		}
 		SplitSubscribers ();
 		NextQuestion ();
 	}
@@ -36,7 +30,7 @@ public class QuestionPicker : MonoBehaviour {
 			return;
 		}
 		bool isCorrect = curQuestion.IsAnswerCorrect (answer);
-		curQuestion.UpdateStage (isCorrect, Time.time - questionTime, isFlash);
+		curQuestion.UpdateState (isCorrect, Time.time - questionTime);
 		if (isCorrect) {
 			foreach (OnCorrectAnswer subscriber in onCorrectAnswerSubscribers) {
 				subscriber.OnCorrectAnswer (curQuestion);

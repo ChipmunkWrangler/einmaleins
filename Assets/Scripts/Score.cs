@@ -20,11 +20,9 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 			multiplierIcon.CrossFadeAlpha (0f, 0, false);
 		}
 		int newMult = MDPrefs.GetInt (prefsKey + ":mult", 0);
-		Debug.Log (newMult);
 		for (int i = 0; i < newMult; ++i) {
 			IncrementMultiplier ();
 		}
-		print (multiplier);
 	}
 
 	public void OnWrongAnswer() {

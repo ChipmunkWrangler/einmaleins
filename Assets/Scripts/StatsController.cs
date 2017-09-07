@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class StatsController : MonoBehaviour {
 	[SerializeField] StatsColumnController[] columns = null;
-	Questions questions;
+	[SerializeField] Questions questions;
 	const string prefsKey = "statsSeen";
 	int[][] levelSeen;
 
 	void Start () {
 		Load ();
-		questions = new SlowQuestions ();
 		foreach (Question question in questions.questions) {
 			int i = question.a - 1;
 			int j = question.b - 1;

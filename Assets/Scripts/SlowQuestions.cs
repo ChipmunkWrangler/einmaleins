@@ -25,6 +25,15 @@ public class SlowQuestions : Questions {
 	const int TIMES_TO_ADD_NEW = 3;
 	int toAskListNum = -1; // -1: no lists shown today, toAsk not generated. 0 => toAsk is today's first list. etc.
 
+	public int GetNumMastered() {
+		print ("GetNumMastered");
+
+//		foreach (var question in questions.Where(q => q.stage == Question.Stage.Mastered)) {
+//			Debug.Log (question);
+//		}
+		return questions.Count (q => q.stage == Question.Stage.Mastered);
+	}
+
 	public override void Save() {
 		base.Save();
 		SaveAskList (prefsKey + ":askList:");
@@ -59,9 +68,9 @@ public class SlowQuestions : Questions {
 				}
 			}
 		}
-		foreach (int qIdx in toAsk) {
-			Debug.Log (questions [qIdx]);
-		}
+//		foreach (int qIdx in toAsk) {
+//			Debug.Log (questions [qIdx]);
+//		}
 		foreach (var question in questions) {
 			if (question.stage == Question.Stage.Wrong) {
 				question.stage = Question.Stage.Hard;

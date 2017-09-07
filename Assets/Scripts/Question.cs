@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Question {
 	public enum Stage { //rename
@@ -15,11 +16,14 @@ public class Question {
 	public int a {  get; private set; }
 	public int b { get; private set; }
 	public int correctInARow { get; private set; }
+	public int idx { get; private set; }
 
 	const float FAST_TIME = 15.0f;
 	const float OK_TIME = 60.0f;
 	public const int CORRECT_BEFORE_MASTERED = 7;
+	const int NUM_ANSWER_TIMES_TO_RECORD = 3;
 	string prefsKey;
+	List<float> answerTimes;
 
 	public Question(int _a, int _b) {
 		a = _a;
@@ -36,8 +40,11 @@ public class Question {
 		return false;
 	}
 
-	public void UpdateStage(bool isCorrect, float timeRequired, bool isFlash) {
-		//TODO use isFlash
+	public float GetAverageAnswerTime() {
+		return (answerTimes.Count == 0) ? float.MaxValue : answerTimes.Average ();
+	}
+
+	public void UpdateState(bool isCorrect, float timeRequired) {
 		if (isCorrect && stage != Stage.Wrong) { // once it is wrong, it stays wrong until the next list is generated. "Wrong" means "not right on the first try".)
 			++correctInARow;
 			if (timeRequired < FAST_TIME) {
@@ -49,10 +56,12 @@ public class Question {
 			} else {
 				stage = Stage.Hard;
 			}
+			RecordAnswerTime (timeRequired);
 		} else {
 			stage = Stage.Wrong;
 			correctInARow = 0;
 		}
+
 		Debug.Log(ToString());
 	}
 
@@ -125,8 +134,9 @@ public class Question {
 //		}
 //	}
 		
-	public void Load(string _prefsKey) {
+	public void Load(string _prefsKey, int _idx) {
 		prefsKey = _prefsKey;
+		idx = _idx;
 		string stageKey = prefsKey + ":stage";
 		if (MDPrefs.HasKey (stageKey)) {
 			try {
@@ -137,16 +147,32 @@ public class Question {
 
 		}
 		correctInARow = MDPrefs.GetInt(prefsKey + ":inarow", 0);
+		answerTimes = MDPrefs.GetFloatArray (prefsKey + ":times").ToList();
 	}
 
 	public void Save() {
 		UnityEngine.Assertions.Assert.AreNotEqual (prefsKey.Length, 0);
 		MDPrefs.SetString(prefsKey + ":stage", stage.ToString());
 		MDPrefs.SetInt(prefsKey + ":inarow", correctInARow);
+		MDPrefs.SetFloatArray (prefsKey + ":times", answerTimes.ToArray());
 //		Debug.Log ("Saving " + ToString ());
 	}
 
 	public override string ToString() {
-		return a + " * " + b + " : " + stage + " correct = " + correctInARow;
+		string s = idx + " is " + a + " * " + b + " : " + stage + " correct = " + correctInARow + " times = ";
+		foreach (var time in answerTimes) {
+			s += time + " ";
+		}
+		return s;
 	}
+
+	void RecordAnswerTime (float timeRequired)
+	{
+		if (answerTimes.Count >= NUM_ANSWER_TIMES_TO_RECORD) {
+			answerTimes.RemoveRange (0, 1 + answerTimes.Count - NUM_ANSWER_TIMES_TO_RECORD);
+		}
+		answerTimes.Add (timeRequired);
+
+	}
+
 }
