@@ -139,7 +139,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1118263539}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -939,7 +939,7 @@ GameObject:
   - component: {fileID: 245056393}
   - component: {fileID: 245056392}
   m_Layer: 5
-  m_Name: SpeedLabel
+  m_Name: ApogeeLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -957,7 +957,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1118263539}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1016,7 +1016,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Speed (DEBUG):'
+  m_Text: "H\xF6hepunkt dieses Flugs:"
 --- !u!222 &245056394
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4835,7 +4835,7 @@ GameObject:
   - component: {fileID: 470046947}
   - component: {fileID: 470046946}
   m_Layer: 5
-  m_Name: Speed
+  m_Name: Apogee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4853,7 +4853,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1118263539}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4912,7 +4912,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 1.000 km/s
+  m_Text: 1.000 km
 --- !u!222 &470046948
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5766,10 +5766,10 @@ RectTransform:
   m_Children:
   - {fileID: 592446858}
   - {fileID: 1996750749}
-  - {fileID: 1233026316}
-  - {fileID: 7089999}
   - {fileID: 245056391}
   - {fileID: 470046945}
+  - {fileID: 1233026316}
+  - {fileID: 7089999}
   m_Father: {fileID: 1698820438}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6093,7 +6093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heightText: {fileID: 1996750751}
   recordHeightText: {fileID: 7090001}
-  speedText: {fileID: 470046947}
+  apogeeText: {fileID: 470046947}
   background: {fileID: 1335787626}
   maxAttainableHeight: 1.287e+9
   targetAnswerTime: 6
@@ -6212,7 +6212,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1118263539}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

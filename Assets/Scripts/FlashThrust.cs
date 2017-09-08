@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	[SerializeField] Text heightText = null;
 	[SerializeField] Text recordHeightText = null;
-	[SerializeField] Text speedText = null;
+	[SerializeField] Text apogeeText = null;
 	[SerializeField] ScrollBackground background = null;
 	[SerializeField] float maxAttainableHeight = 1287000000.0f; // Saturn
 	[SerializeField] float targetAnswerTime = 6.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
@@ -14,6 +14,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	float accelerationOnCorrect; // total speed increase per correct answer.
 	float height; // km
 	float recordHeight;
+	float apogee;
 	float speed; // km per second
 	const string prefsKey = "recordHeight";
 	const string numFormat = "N0";
@@ -23,38 +24,45 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	int numAnswersGiven = 0;
 	void Start() {
 		heightText.text = "0";
-		speedText.text = "0";
+		apogeeText.text = "0";
 		recordHeight = MDPrefs.GetFloat (prefsKey, 0);
 		recordHeightText.text = recordHeight.ToString (numFormat) + unit;
 		accelerationOnCorrect = CalcAcceleration(maxAttainableHeight, FlashQuestions.ASK_LIST_LENGTH);
-		TestEquations ();
+//		TestEquations ();
 	}
 
 	void Update() {
-		if (timeForNextAnswer <= Time.time && numAnswersGiven < FlashQuestions.ASK_LIST_LENGTH) {
-			Debug.Log ("Actual speed = " + speed + " height = " + height);
-			++numAnswersGiven;
-			speed += accelerationOnCorrect;
-			timeForNextAnswer = Time.time + targetAnswerTime;
-		}
+//		if (timeForNextAnswer <= Time.time && numAnswersGiven < FlashQuestions.ASK_LIST_LENGTH) {
+//			Debug.Log ("Actual speed = " + speed + " height = " + height);
+//			OnCorrectAnswer (null);
+//			timeForNextAnswer = Time.time + targetAnswerTime * 2.0f;
+//		}
 
 		speed -= gravity * Time.deltaTime;
-		if (speed < 0) {
+		if (speed < 0 && numAnswersGiven >= FlashQuestions.ASK_LIST_LENGTH ) {
 			speed = 0;
 		}
 		background.SetRocketSpeed(speed);
 		height += speed * Time.deltaTime;
+		if (height < 0) {
+			height = 0;
+			speed = 0;
+		}
 		if (height > recordHeight) {
 			recordHeight = height;
 			MDPrefs.SetFloat (prefsKey, recordHeight);
 		}
-		speedText.text = speed.ToString ();
+		if (height > apogee) { 
+			apogee = height;
+		}
 		heightText.text = height.ToString (numFormat) + unit;
 		recordHeightText.text = recordHeight.ToString (numFormat) + unit;
+		apogeeText.text = apogee.ToString (numFormat) + unit;
 	}
 
 	public void OnCorrectAnswer(Question question) {
 		speed += accelerationOnCorrect;
+		++numAnswersGiven;
 	}
 
 	float CalcAcceleration(float maxHeight, int numChancesToAccelerate) {
