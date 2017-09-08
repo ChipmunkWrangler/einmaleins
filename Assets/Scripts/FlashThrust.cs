@@ -8,7 +8,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	[SerializeField] Text recordHeightText = null;
 	[SerializeField] Text speedText = null;
 	[SerializeField] ScrollBackground background = null;
-	[SerializeField] float maxAttainableHeight = 4357000000.0f;
+	[SerializeField] float maxAttainableHeight = 1287000000.0f; // Saturn
 	[SerializeField] float targetAnswerTime = 6.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
 	[SerializeField] float gravity = 9.8f;
 	float accelerationOnCorrect; // total speed increase per correct answer.
@@ -32,10 +32,10 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 
 	void Update() {
 		if (timeForNextAnswer <= Time.time && numAnswersGiven < FlashQuestions.ASK_LIST_LENGTH) {
+			Debug.Log ("Actual speed = " + speed + " height = " + height);
 			++numAnswersGiven;
 			speed += accelerationOnCorrect;
 			timeForNextAnswer = Time.time + targetAnswerTime;
-			Debug.Log ("Actual speed = " + speed + " height = " + height);
 		}
 
 		speed -= gravity * Time.deltaTime;
@@ -109,31 +109,4 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 		speed = 0;
 	
 	}
-//
-//	void TestEquations() {
-//		//		accelerationOnCorrect = 2.0f * targetAnswerTime * gravity;
-//		Debug.Log("Acceleration = " + accelerationOnCorrect);
-//		float decelarationByNextQuestion = gravity * targetAnswerTime;
-//		const int numQuestions = FlashQuestions.ASK_LIST_LENGTH;
-//		for (int i = 0; i < numQuestions; ++i) {
-//			// right after you answer the question:
-//			speed += accelerationOnCorrect; 
-//			// by the time you answer the next question in targetAnswerTime:
-//			height += (speed - 0.5f * decelarationByNextQuestion) * targetAnswerTime; 
-//			speed -= decelarationByNextQuestion;
-//			Debug.Log ("speed = " + speed + " height = " + height);
-//		}
-//		// height and speed at t = (targetAnswerTime after you answer the last question) = FlashQuestions.ASK_LIST_LENGTH * targetAnswerTime
-//		float totalAnswerTime = numQuestions * targetAnswerTime;
-//		const int n = numQuestions + 1;
-//		const int numAccelerations = n * (n + 1) / 2;
-//		height = decelarationByNextQuestion * totalAnswerTime * 0.5f + targetAnswerTime * (accelerationOnCorrect - decelarationByNextQuestion) * (n * n - numAccelerations);
-//		speed = numQuestions * accelerationOnCorrect - gravity * totalAnswerTime; 
-//		Debug.Log ("speed = " + speed + " height = " + height);
-//		height += speed * speed / (2.0f * gravity);
-//		float timeToStop = speed / gravity + totalAnswerTime;
-//		Debug.Log ("final height = " + height + " time = " + timeToStop + " of which freefall = " + speed / gravity);
-//		height = 0;
-//		speed = 0;
-//	}
 }

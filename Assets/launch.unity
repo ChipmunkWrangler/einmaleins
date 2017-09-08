@@ -6095,9 +6095,9 @@ MonoBehaviour:
   recordHeightText: {fileID: 7090001}
   speedText: {fileID: 470046947}
   background: {fileID: 1335787626}
-  maxAttainableHeight: 4357000
+  maxAttainableHeight: 1.287e+9
   targetAnswerTime: 6
-  gravity: 9.8
+  gravity: 500000
 --- !u!1 &1182825206
 GameObject:
   m_ObjectHideFlags: 0
@@ -6466,7 +6466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5caca2bd1af2746f3ba8bd684df58e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeedFactor: -0.01
+  scrollSpeedFactor: -0.0000002
   tileSizeY: 10
 --- !u!23 &1335787627
 MeshRenderer:
@@ -7997,7 +7997,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0 km
+  m_Text: 40.000 Lichtsekunden
 --- !u!222 &1996750752
 CanvasRenderer:
   m_ObjectHideFlags: 0
