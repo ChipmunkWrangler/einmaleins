@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\DoneDisplay.cs" />
      <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
      <Compile Include="Assets\Scripts\FlashQuestions.cs" />
+     <Compile Include="Assets\Scripts\FlashThrust.cs" />
      <Compile Include="Assets\Scripts\GotoChoosePlayer.cs" />
      <Compile Include="Assets\Scripts\GotoLaunch.cs" />
      <Compile Include="Assets\Scripts\GotoMain.cs" />
