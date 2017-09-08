@@ -20,7 +20,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	const string numFormat = "N0";
 	const string unit = " km";
 
-	float timeForNextAnswer;
+//	float timeForNextAnswer;
 	int numAnswersGiven = 0;
 	void Start() {
 		heightText.text = "0";
