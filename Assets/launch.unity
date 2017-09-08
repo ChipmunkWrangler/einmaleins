@@ -5849,7 +5849,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1149118389}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1335787630}
@@ -6094,6 +6094,7 @@ MonoBehaviour:
   heightText: {fileID: 1996750751}
   maxHeightText: {fileID: 7090001}
   speedText: {fileID: 470046947}
+  background: {fileID: 1335787626}
   accelerationOnCorrect: 10
 --- !u!1 &1182825206
 GameObject:
@@ -6463,7 +6464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5caca2bd1af2746f3ba8bd684df58e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 1
+  scrollSpeedFactor: -0.1
   tileSizeY: 10
 --- !u!23 &1335787627
 MeshRenderer:

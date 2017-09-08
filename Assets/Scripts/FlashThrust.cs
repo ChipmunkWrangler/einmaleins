@@ -7,8 +7,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	[SerializeField] Text heightText = null;
 	[SerializeField] Text maxHeightText = null;
 	[SerializeField] Text speedText = null;
-//	[SerializeField] float thrustDuration = 2.5f;
-	[SerializeField] float accelerationOnCorrect = 10; // total speed increase per correct answer. This will be spread out over thrustDuration
+	[SerializeField] ScrollBackground background = null;
+	[SerializeField] float accelerationOnCorrect = 10; // total speed increase per correct answer.
 	float height; // km
 	float maxHeight; // km
 	float speed; // km per second
@@ -38,6 +38,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 //		StopAllCoroutines ();
 //		int oldSpeed = speed;
 		speed += accelerationOnCorrect;
+		background.SetRocketSpeed(speed);
 //		IncreaseHeightBy (multiplier * question.a * question.b);
 	}
 
