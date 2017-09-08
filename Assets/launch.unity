@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 7090001}
   - component: {fileID: 7090000}
   m_Layer: 5
-  m_Name: MaxHeight
+  m_Name: RecordHeight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6092,10 +6092,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightText: {fileID: 1996750751}
-  maxHeightText: {fileID: 7090001}
+  recordHeightText: {fileID: 7090001}
   speedText: {fileID: 470046947}
   background: {fileID: 1335787626}
-  accelerationOnCorrect: 10
+  maxAttainableHeight: 4357000
+  targetAnswerTime: 6
+  gravity: 9.8
 --- !u!1 &1182825206
 GameObject:
   m_ObjectHideFlags: 0
@@ -6192,7 +6194,7 @@ GameObject:
   - component: {fileID: 1233026318}
   - component: {fileID: 1233026317}
   m_Layer: 5
-  m_Name: MaxHeightLabel
+  m_Name: RecordHeightLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6464,7 +6466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5caca2bd1af2746f3ba8bd684df58e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeedFactor: -0.1
+  scrollSpeedFactor: -0.01
   tileSizeY: 10
 --- !u!23 &1335787627
 MeshRenderer:
@@ -7897,7 +7899,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 385, y: -996.6667}
+  m_AnchoredPosition: {x: 385, y: -996.6666}
   m_SizeDelta: {x: 770, y: 747.91406}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1985274884 stripped

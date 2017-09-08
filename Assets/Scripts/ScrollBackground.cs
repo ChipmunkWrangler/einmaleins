@@ -9,7 +9,6 @@ public class ScrollBackground : MonoBehaviour {
 	Vector3 startPosition;
 	float baseOffset;
 	float scrollSpeed;
-	float speedChangeTime;
 
 	void Start() { 
 		startPosition = transform.position;
@@ -17,12 +16,12 @@ public class ScrollBackground : MonoBehaviour {
 
 	void Update ()
 	{
-		float newOffset = Mathf.Repeat((Time.time - speedChangeTime) * scrollSpeed + baseOffset, tileSizeY);
+		float newOffset = Mathf.Repeat((Time.deltaTime) * scrollSpeed + baseOffset, tileSizeY);
 		transform.position = startPosition + Vector3.up * newOffset;
 	}
 
 	public void SetRocketSpeed(float speed ) {
-		speedChangeTime = Time.time;
+		// This is assumed to be called every frame, so you should probably pull instead 
 		baseOffset = transform.position.y - startPosition.y;
 		scrollSpeed = speed * scrollSpeedFactor;
 	}
