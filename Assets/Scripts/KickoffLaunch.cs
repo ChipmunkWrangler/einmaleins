@@ -14,7 +14,8 @@ public class KickoffLaunch : MonoBehaviour {
 	[SerializeField] GameObject[] uiElementsToActivateOnPlay;
 	[SerializeField] GameObject[] uiElementsToDeactivateOnPlay;
 	[SerializeField] LaunchButtonController launchButtonController;
-	[SerializeField] FlashQuestions flashQuestions;
+	[SerializeField] UnityEngine.UI.Text doneText;
+	[SerializeField] string doneString;
 
 	void Start () {
 		if (MDPrefs.GetBool ("autolaunch")) {
@@ -37,7 +38,10 @@ public class KickoffLaunch : MonoBehaviour {
 			element.SetActive (false);
 		}
 
-		launchButtonController.ActivateIfCanLaunch (true, true);
+		launchButtonController.OnQuestionChanged (null);
+		if (!launchButtonController.CanLaunch (true)) {
+			doneText.text = doneString;
+		}
 	}
 
 	IEnumerator Kickoff () {
@@ -63,7 +67,6 @@ public class KickoffLaunch : MonoBehaviour {
 			element.SetActive (false);
 		}
 		yield return null;
-		flashQuestions.wasFilled = false;
 		questionPicker.NextQuestion ();
 	}
 }

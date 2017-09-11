@@ -12,11 +12,11 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 		ActivateIfCanLaunch (noMoreQuestions, CanLaunch (noMoreQuestions));
 	}
 
-	bool CanLaunch(bool noMoreQuestions) {
+	public bool CanLaunch(bool noMoreQuestions) {
 		return noMoreQuestions && questions.GetNumMastered () >= FlashQuestions.ASK_LIST_LENGTH;
 	}
 
-	public void ActivateIfCanLaunch (bool noMoreQuestions, bool canLaunch)
+	void ActivateIfCanLaunch (bool noMoreQuestions, bool canLaunch)
 	{
 		if (button.gameObject.activeSelf != canLaunch) {
 			button.interactable = canLaunch;

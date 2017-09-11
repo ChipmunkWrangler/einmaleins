@@ -12,6 +12,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	[SerializeField] float targetAnswerTime = 6.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
 	[SerializeField] float gravity = 9.8f;
 	[SerializeField] KickoffLaunch launch;
+	[SerializeField] FlashQuestions flashQuestions;
 	float accelerationOnCorrect; // total speed increase per correct answer.
 	float height; // km
 	float recordHeight;
@@ -78,6 +79,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	}
 
 	void OnDone() {
+		flashQuestions.wasFilled = false;
 		launch.ShowLaunchButton ();
 	}
 
