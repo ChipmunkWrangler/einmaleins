@@ -1502,11 +1502,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 278093662}
---- !u!1 &318849708 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1973347600642040, guid: 2ff712eae9d0f48ee80c09db91679d00,
-    type: 2}
-  m_PrefabInternal: {fileID: 1053224553}
 --- !u!1 &326226497
 GameObject:
   m_ObjectHideFlags: 0
@@ -5034,7 +5029,7 @@ Prefab:
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -36.979168
       objectReference: {fileID: 0}
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -5044,7 +5039,7 @@ Prefab:
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 73.958336
       objectReference: {fileID: 0}
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -5064,7 +5059,7 @@ Prefab:
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -36.979168
       objectReference: {fileID: 0}
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -5074,7 +5069,7 @@ Prefab:
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 73.958336
       objectReference: {fileID: 0}
     - target: {fileID: 224234462125267734, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -5249,6 +5244,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1152569277389004, guid: fdd7f431d6405436aaf88aceb283e9cb,
     type: 2}
   m_PrefabInternal: {fileID: 559811661}
+--- !u!1 &589841105 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1654012662620188, guid: 2ff712eae9d0f48ee80c09db91679d00,
+    type: 2}
+  m_PrefabInternal: {fileID: 1053224553}
 --- !u!1 &592446857
 GameObject:
   m_ObjectHideFlags: 0
@@ -5941,6 +5941,16 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224678402266117942, guid: 2ff712eae9d0f48ee80c09db91679d00,
     type: 2}
   m_PrefabInternal: {fileID: 1053224553}
+--- !u!1 &1053224555 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1973347600642040, guid: 2ff712eae9d0f48ee80c09db91679d00,
+    type: 2}
+  m_PrefabInternal: {fileID: 1053224553}
+--- !u!1 &1053224556 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1392586352605958, guid: 2ff712eae9d0f48ee80c09db91679d00,
+    type: 2}
+  m_PrefabInternal: {fileID: 1053224553}
 --- !u!1 &1063163213
 GameObject:
   m_ObjectHideFlags: 0
@@ -6347,13 +6357,30 @@ MonoBehaviour:
   delay: 1
   countdownTime: 3
   countdownText: {fileID: 219402599}
-  uiElementsToActivate:
-  - {fileID: 1445671524}
-  uiElementsToDeactivate:
+  uiElementsToActivateOnLaunchButton:
   - {fileID: 137489268}
-  - {fileID: 1303356867}
-  - {fileID: 318849708}
+  - {fileID: 589841105}
+  - {fileID: 1053224556}
+  - {fileID: 1053224555}
+  uiElementsToDeactivateOnLaunchButton:
+  - {fileID: 1445671524}
+  - {fileID: 219402597}
+  uiElementsToActivateOnCountdown:
+  - {fileID: 219402597}
+  uiElementsToDeactivateOnCountdown:
+  - {fileID: 1445671524}
+  - {fileID: 589841105}
+  - {fileID: 137489268}
+  uiElementsToActivateOnPlay:
+  - {fileID: 1445671524}
+  - {fileID: 589841105}
+  uiElementsToDeactivateOnPlay:
+  - {fileID: 1053224556}
+  - {fileID: 219402597}
+  - {fileID: 137489268}
+  - {fileID: 1053224555}
   launchButtonController: {fileID: 137489271}
+  flashQuestions: {fileID: 1170303751}
 --- !u!114 &1170303753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6369,9 +6396,10 @@ MonoBehaviour:
   recordHeightText: {fileID: 7090001}
   apogeeText: {fileID: 470046947}
   background: {fileID: 1335787626}
-  maxAttainableHeight: 1.287e+9
+  maxAttainableHeight: 400000
   targetAnswerTime: 6
-  gravity: 500000
+  gravity: 5000
+  launch: {fileID: 1170303752}
 --- !u!1 &1182825206
 GameObject:
   m_ObjectHideFlags: 0
@@ -6706,11 +6734,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1297158694}
---- !u!1 &1303356867 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1392586352605958, guid: 2ff712eae9d0f48ee80c09db91679d00,
-    type: 2}
-  m_PrefabInternal: {fileID: 1053224553}
 --- !u!1 &1335787625
 GameObject:
   m_ObjectHideFlags: 0

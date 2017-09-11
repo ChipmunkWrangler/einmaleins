@@ -6,7 +6,7 @@ using System.Linq;
 // The question list consists of the first N mastered questions, ordered by average response time in the last three trials.
 public class FlashQuestions : Questions {
 	public const int ASK_LIST_LENGTH = 10;
-	bool wasFilled;
+	public bool wasFilled { private get; set; }
 
 	protected override void FillToAsk() {
 		if (toAsk.Count > 0 || wasFilled) {

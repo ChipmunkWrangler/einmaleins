@@ -7,9 +7,14 @@ public class KickoffLaunch : MonoBehaviour {
 	[SerializeField] float delay = 1.0f;
 	[SerializeField] int countdownTime = 3;
 	[SerializeField] UnityEngine.UI.Text countdownText = null;
-	[SerializeField] GameObject[] uiElementsToActivate;
-	[SerializeField] GameObject[] uiElementsToDeactivate;
+	[SerializeField] GameObject[] uiElementsToActivateOnLaunchButton;
+	[SerializeField] GameObject[] uiElementsToDeactivateOnLaunchButton;
+	[SerializeField] GameObject[] uiElementsToActivateOnCountdown;
+	[SerializeField] GameObject[] uiElementsToDeactivateOnCountdown;
+	[SerializeField] GameObject[] uiElementsToActivateOnPlay;
+	[SerializeField] GameObject[] uiElementsToDeactivateOnPlay;
 	[SerializeField] LaunchButtonController launchButtonController;
+	[SerializeField] FlashQuestions flashQuestions;
 
 	void Start () {
 		if (MDPrefs.GetBool ("autolaunch")) {
@@ -24,13 +29,12 @@ public class KickoffLaunch : MonoBehaviour {
 		StartCoroutine (Kickoff ());
 	}
 
-	void ShowLaunchButton() {
-		countdownText.text = "";
-		foreach (var element in uiElementsToActivate) {
-			element.SetActive (false);
-		}
-		foreach (var element in uiElementsToDeactivate) {
+	public void ShowLaunchButton() {
+		foreach (var element in uiElementsToActivateOnLaunchButton) {
 			element.SetActive (true);
+		}
+		foreach (var element in uiElementsToDeactivateOnLaunchButton) {
+			element.SetActive (false);
 		}
 
 		launchButtonController.ActivateIfCanLaunch (true, true);
@@ -39,10 +43,10 @@ public class KickoffLaunch : MonoBehaviour {
 	IEnumerator Kickoff () {
 		countdownText.text = "";
 		countdownText.gameObject.SetActive (true);
-		foreach (var element in uiElementsToDeactivate) {
-			element.SetActive (false);
+		foreach (var element in uiElementsToActivateOnCountdown) {
+			element.SetActive (true);
 		}
-		foreach (var element in uiElementsToActivate) {
+		foreach (var element in uiElementsToDeactivateOnCountdown) {
 			element.SetActive (false);
 		}
 		yield return new WaitForSeconds (delay);
@@ -52,10 +56,14 @@ public class KickoffLaunch : MonoBehaviour {
 		}
 		countdownText.text = "";
 		countdownText.gameObject.SetActive (false);
-		foreach (var element in uiElementsToActivate) {
+		foreach (var element in uiElementsToActivateOnPlay) {
 			element.SetActive (true);
 		}
+		foreach (var element in uiElementsToDeactivateOnPlay) {
+			element.SetActive (false);
+		}
 		yield return null;
+		flashQuestions.wasFilled = false;
 		questionPicker.NextQuestion ();
 	}
 }
