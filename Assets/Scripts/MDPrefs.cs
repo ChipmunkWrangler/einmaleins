@@ -28,6 +28,12 @@ public static class MDPrefs {
 	public static void SetString(string key, string s) {
 		PlayerPrefs.SetString (GetKey(key), s);
 	}
+	public static bool GetBool(string key) {
+		return PlayerPrefsUtility.GetBool (GetKey(key));
+	}
+	public static void SetBool(string key, bool b) {
+		PlayerPrefsUtility.SetBool (GetKey(key), b);
+	}
 
 	public static System.DateTime GetDateTime(string key, System.DateTime defaultValue) {
 		return PlayerPrefsUtility.GetDateTime (GetKey(key), defaultValue);

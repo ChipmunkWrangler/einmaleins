@@ -2,20 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaunchButtonController : MonoBehaviour, OnCorrectAnswer {
-	[SerializeField] SlowQuestions questions;
+public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
+	[SerializeField] Questions questions;
 	[SerializeField] UnityEngine.UI.Button button;
+	[SerializeField] UnityEngine.UI.Text doneText;
 
-	void Start() {
-		ActivateIfEnoughMastered ();
+	public void OnQuestionChanged(Question question) {
+		bool noMoreQuestions = question == null;
+		ActivateIfCanLaunch (noMoreQuestions, CanLaunch (noMoreQuestions));
 	}
 
-	public void OnCorrectAnswer(Question question) {
-		ActivateIfEnoughMastered ();
+	bool CanLaunch(bool noMoreQuestions) {
+		return noMoreQuestions && questions.GetNumMastered () >= FlashQuestions.ASK_LIST_LENGTH;
 	}
 
-	void ActivateIfEnoughMastered ()
+	public void ActivateIfCanLaunch (bool noMoreQuestions, bool canLaunch)
 	{
-		button.interactable = questions.GetNumMastered () >= FlashQuestions.ASK_LIST_LENGTH;
+		if (button.gameObject.activeSelf != canLaunch) {
+			button.interactable = canLaunch;
+			button.gameObject.SetActive (canLaunch);
+		}
+		doneText.text = (noMoreQuestions && !canLaunch) ? "Fertig für Heute!" : "";
+
 	}
+
+
 }

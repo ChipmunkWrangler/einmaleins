@@ -17,6 +17,10 @@ public abstract class Questions : MonoBehaviour {
 		Save ();
 	}
 
+	public int GetNumMastered() {
+		return questions.Count (q => q.stage == Question.Stage.Mastered);
+	}
+		
 	public Question GetNextQuestion() {
 		FillToAsk ();
 		Question retVal = null;
