@@ -10,7 +10,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	[SerializeField] ScrollBackground background = null;
 	[SerializeField] float maxAttainableHeight = 1287000000.0f; // Saturn
 	[SerializeField] float targetAnswerTime = 6.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
-	[SerializeField] float gravity = 9.8f;
+	float gravity = 9.8f;
 	[SerializeField] KickoffLaunch launch;
 	[SerializeField] FlashQuestions flashQuestions;
 	float accelerationOnCorrect; // total speed increase per correct answer.
@@ -30,7 +30,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 		apogeeText.text = "0";
 		recordHeight = MDPrefs.GetFloat (prefsKey, 0);
 		recordHeightText.text = recordHeight.ToString (numFormat) + unit;
-		accelerationOnCorrect = CalcAcceleration(maxAttainableHeight, FlashQuestions.ASK_LIST_LENGTH);
+//		accelerationOnCorrect = CalcAcceleration(maxAttainableHeight, FlashQuestions.ASK_LIST_LENGTH);
+		CalcParams(maxAttainableHeight, FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
 	}
 
@@ -90,30 +91,45 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 		speed = 0;
 	}
 
-	float CalcAcceleration(float maxHeight, int numChancesToAccelerate) {
-		const int n = FlashQuestions.ASK_LIST_LENGTH;
-		float h = maxAttainableHeight;
-		float g = gravity;
-		float t = targetAnswerTime;
-		float k = n * (n-1) * t / 2; // or ((n*n * t)/2 - (n * t)/2);
-		// solve h = (n * x * (g * (t - n * t) + n * x)) / (2 * g) for x  // equation is from TestEquations()
-		// x = -(g (sqrt((2 h n^2)/g + ((n^2 t)/2 - (n t)/2)^2) - (n^2 t)/2 + (n t)/2))/n^2
-		//   = -(g (sqrt((2 h n^2)/g + k^2) - k))/n^2
-		//   = -(g * (sqrt      ((2 * h * n^2)  / g + k^2)   - k))/n^2
-		//   = -(g * (sqrt      ( 2 * h * n^2   / g + k^2)   - k))/n^2
-		//   = -(g * (sqrt      ( 2 * h * n^2   / g + k^2)   - k))/n^2
-		float root = Mathf.Sqrt( 2 * h * n * n / g + k * k);
-		float accel = g * (k + root) / (n * n);
-		if (accel < 0) {
-			accel = g * (k - root) / (n * n);
-		}
-		UnityEngine.Assertions.Assert.IsTrue (accel > 0);
-		return accel;
+	void CalcParams(float maxHeight, int numChancesToAccelerate) {
+		// we want the player to reach v = 0 at targetAnswerTime (=:t) seconds after getting accelerated (1)
+		// Let v = accelerationOnCorrect
+		// Let h = the max height from one acceleration, starting at height = 0 and v = 0
+		// Then h = v * v / 2g (2)
+		// and time to reach h = v / g (3)
+		// But (1) => time to reach h = t, so (3) => t = v / g => g = v / t (4)
+		// (2) & (4) => h = v * v / 2(v/t) = v * t / 2 (5)
+		// Also, if we accelerate each time from a speed of zero, then total height (=: H) is just
+		// H = n * h => h = H / n (6)
+		// (5) & (6) => H / n = v * t / 2 => 2H / nt = v
+		accelerationOnCorrect = 2 * maxHeight / (numChancesToAccelerate * targetAnswerTime);
+		gravity = accelerationOnCorrect / targetAnswerTime;
 	}
+
+//	float CalcAcceleration(float maxHeight, int numChancesToAccelerate) {
+//		const int n = FlashQuestions.ASK_LIST_LENGTH;
+//		float h = maxAttainableHeight;
+//		float g = gravity;
+//		float t = targetAnswerTime;
+//		float k = n * (n-1) * t / 2; // or ((n*n * t)/2 - (n * t)/2);
+//		// solve h = (n * x * (g * (t - n * t) + n * x)) / (2 * g) for x  // equation is from TestEquations()
+//		// x = -(g (sqrt((2 h n^2)/g + ((n^2 t)/2 - (n t)/2)^2) - (n^2 t)/2 + (n t)/2))/n^2
+//		//   = -(g (sqrt((2 h n^2)/g + k^2) - k))/n^2
+//		//   = -(g * (sqrt      ((2 * h * n^2)  / g + k^2)   - k))/n^2
+//		//   = -(g * (sqrt      ( 2 * h * n^2   / g + k^2)   - k))/n^2
+//		//   = -(g * (sqrt      ( 2 * h * n^2   / g + k^2)   - k))/n^2
+//		float root = Mathf.Sqrt( 2 * h * n * n / g + k * k);
+//		float accel = g * (k + root) / (n * n);
+//		if (accel < 0) {
+//			accel = g * (k - root) / (n * n);
+//		}
+//		UnityEngine.Assertions.Assert.IsTrue (accel > 0);
+//		return accel;
+//	}
 
 	void TestEquations() {
 //		accelerationOnCorrect = 2.0f * targetAnswerTime * gravity;
-		Debug.Log("Acceleration = " + accelerationOnCorrect);
+		Debug.Log("Acceleration = " + accelerationOnCorrect + " gravity = " + gravity);
 		float g = gravity;
 		float t = targetAnswerTime;
 		float decelarationByNextQuestion = g * t;
