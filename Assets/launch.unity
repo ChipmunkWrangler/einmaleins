@@ -6358,10 +6358,9 @@ MonoBehaviour:
   countdownTime: 3
   countdownText: {fileID: 219402599}
   uiElementsToActivateOnLaunchButton:
-  - {fileID: 137489268}
+  - {fileID: 1053224555}
   - {fileID: 589841105}
   - {fileID: 1053224556}
-  - {fileID: 1053224555}
   uiElementsToDeactivateOnLaunchButton:
   - {fileID: 1445671524}
   - {fileID: 219402597}
@@ -6380,7 +6379,8 @@ MonoBehaviour:
   - {fileID: 137489268}
   - {fileID: 1053224555}
   launchButtonController: {fileID: 137489271}
-  flashQuestions: {fileID: 1170303751}
+  doneText: {fileID: 1421311203}
+  doneString: "Fertig f\xFCr Heute!"
 --- !u!114 &1170303753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6400,6 +6400,7 @@ MonoBehaviour:
   targetAnswerTime: 6
   gravity: 5000
   launch: {fileID: 1170303752}
+  flashQuestions: {fileID: 1170303751}
 --- !u!1 &1182825206
 GameObject:
   m_ObjectHideFlags: 0
@@ -6905,6 +6906,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 234, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1421311203 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114331783516396428, guid: fdd7f431d6405436aaf88aceb283e9cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 559811661}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1445671524
 GameObject:
   m_ObjectHideFlags: 0

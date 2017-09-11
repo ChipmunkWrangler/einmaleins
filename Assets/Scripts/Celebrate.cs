@@ -6,13 +6,14 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 	[SerializeField] float duration;
 	[SerializeField] GameObject particleParent;
 	[SerializeField] QuestionPicker questionPicker;
+	[SerializeField] bool continueAfterQuestions;
 	ParticleSystem[] particles_;
 	bool isCelebrating;
 	Coroutine coroutine;
 		
 	public void OnQuestionChanged(Question question) {
 		StopTimer ();
-		if (question == null) { 
+		if (continueAfterQuestions && question == null) {
 			StartCelebrating (); // indefinitely
 		} else {
 			StopCelebrating ();
