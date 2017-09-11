@@ -89,6 +89,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 		height = 0;
 		apogee = 0;
 		speed = 0;
+		numAnswersGiven = 0;
 	}
 
 	void CalcParams(float maxHeight, int numChancesToAccelerate) {
