@@ -46,6 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\PreciseLocale\Example\PreciseLocaleText.cs" />
+     <Compile Include="Assets\PreciseLocale\PreciseLocale.cs" />
      <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
      <Compile Include="Assets\Scripts\CCInputField.cs" />
      <Compile Include="Assets\Scripts\Celebrate.cs" />
@@ -61,6 +63,7 @@
      <Compile Include="Assets\Scripts\KickoffLaunch.cs" />
      <Compile Include="Assets\Scripts\KickoffMain.cs" />
      <Compile Include="Assets\Scripts\LaunchButtonController.cs" />
+     <Compile Include="Assets\Scripts\MDCulture.cs" />
      <Compile Include="Assets\Scripts\MDPrefs.cs" />
      <Compile Include="Assets\Scripts\NewPlayerName.cs" />
      <Compile Include="Assets\Scripts\OnAnswerChanged.cs" />

@@ -10,9 +10,11 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	[SerializeField] float multiplierFadeDuration = 0.5f;
 	const string numFormat = "N0";
 	int score;
+	int shownScore;
 	int multiplier;
 	const string prefsKey = "score";
 	Coroutine scoreCoroutine;
+	System.IFormatProvider formatProvider;
 
 	void Start() {
 		scoreText.text = "0";
@@ -24,6 +26,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		for (int i = 0; i < newMult; ++i) {
 			IncrementMultiplier ();
 		}
+		formatProvider = MDCulture.GetCulture();
 	}
 
 	public void OnWrongAnswer() {
@@ -61,24 +64,20 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	}
 
 	Coroutine UpdateScoreDisplay(UnityEngine.UI.Text text, int newScore) {
-		int oldScore = 0;
-		if (int.TryParse(text.text, out oldScore)) {
-			return StartCoroutine (CountTextUp (text, oldScore, newScore));
-		} else {
-			text.text = newScore.ToString();
-		}
-		return null;
+		return StartCoroutine (CountTextUp (text, newScore));
 	}
 
-	IEnumerator CountTextUp(UnityEngine.UI.Text text, int oldScore, int newScore) {
-		if (newScore > oldScore) {
+	IEnumerator CountTextUp(UnityEngine.UI.Text text, int newScore) {
+		if (newScore > shownScore) {
 			yield return new WaitForSeconds (delay);
-			float numbersPerSec = (newScore - oldScore) / scoreCountUpDuration;
-			for (int i = oldScore; i <= newScore; i += Mathf.CeilToInt (Time.deltaTime * numbersPerSec)) {
-				text.text = i.ToString (numFormat);
+			float numbersPerSec = (newScore - shownScore) / scoreCountUpDuration;
+			for (int i = shownScore; i <= newScore; i += Mathf.CeilToInt (Time.deltaTime * numbersPerSec)) {
+				text.text = i.ToString (numFormat, formatProvider);
+				shownScore = i;
 				yield return null;
 			}
-			text.text = newScore.ToString(numFormat);
+			text.text = newScore.ToString(numFormat, formatProvider);
+			shownScore = newScore;
 		}
 	}
 }

@@ -22,6 +22,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	const string numFormat = "N0";
 	const string unit = " km";
 	bool isRunning;
+	System.IFormatProvider formatProvider;
 
 //	float timeForNextAnswer;
 	int numAnswersGiven = 0;
@@ -33,6 +34,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 //		accelerationOnCorrect = CalcAcceleration(maxAttainableHeight, FlashQuestions.ASK_LIST_LENGTH);
 		CalcParams(maxAttainableHeight, FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
+		formatProvider = MDCulture.GetCulture();
 	}
 
 	void Update() {
@@ -61,9 +63,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 			if (height > apogee) { 
 				apogee = height;
 			}
-			heightText.text = height.ToString (numFormat) + unit;
-			recordHeightText.text = recordHeight.ToString (numFormat) + unit;
-			apogeeText.text = apogee.ToString (numFormat) + unit;
+			heightText.text = height.ToString (numFormat, formatProvider) + unit;
+			recordHeightText.text = recordHeight.ToString (numFormat, formatProvider) + unit;
+			apogeeText.text = apogee.ToString (numFormat, formatProvider) + unit;
 
 			if (!isRunning) {
 				OnDone ();
