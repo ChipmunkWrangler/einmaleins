@@ -8,6 +8,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	[SerializeField] float scoreCountUpDuration = 2.5f;
 	[SerializeField] UnityEngine.UI.Image[] multiplierIcons = null;
 	[SerializeField] float multiplierFadeDuration = 0.5f;
+	const string numFormat = "N0";
 	int score;
 	int multiplier;
 	const string prefsKey = "score";
@@ -74,10 +75,10 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 			yield return new WaitForSeconds (delay);
 			float numbersPerSec = (newScore - oldScore) / scoreCountUpDuration;
 			for (int i = oldScore; i <= newScore; i += Mathf.CeilToInt (Time.deltaTime * numbersPerSec)) {
-				text.text = i.ToString ();
+				text.text = i.ToString (numFormat);
 				yield return null;
 			}
-			text.text = newScore.ToString();
+			text.text = newScore.ToString(numFormat);
 		}
 	}
 }
