@@ -53,8 +53,8 @@
      <Compile Include="Assets\Scripts\FlashQuestions.cs" />
      <Compile Include="Assets\Scripts\FlashThrust.cs" />
      <Compile Include="Assets\Scripts\GotoChoosePlayer.cs" />
+     <Compile Include="Assets\Scripts\GotoGame.cs" />
      <Compile Include="Assets\Scripts\GotoLaunch.cs" />
-     <Compile Include="Assets\Scripts\GotoMain.cs" />
      <Compile Include="Assets\Scripts\GotoStats.cs" />
      <Compile Include="Assets\Scripts\HideOnWrong.cs" />
      <Compile Include="Assets\Scripts\InactiveOnAnswer.cs" />

@@ -22,8 +22,8 @@ public static class MDPrefs {
 	public static void SetFloat(string key, float f) {
 		PlayerPrefs.SetFloat (GetKey(key), f);
 	}
-	public static string GetString(string key) {
-		return PlayerPrefs.GetString (GetKey(key));
+	public static string GetString(string key, string defaultValue = default(string)) {
+		return PlayerPrefs.GetString (GetKey(key), defaultValue);
 	}
 	public static void SetString(string key, string s) {
 		PlayerPrefs.SetString (GetKey(key), s);
