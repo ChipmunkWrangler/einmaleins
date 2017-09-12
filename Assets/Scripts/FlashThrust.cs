@@ -15,9 +15,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 
 	public float speed { get; private set; } // km per second
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
+	public float height { get; private set; } // km
 
 	float gravity = 9.8f;
-	float height; // km
 	float recordHeight;
 	float apogee;
 	bool isRunning;
@@ -52,12 +52,12 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 				speed = 0;
 				isRunning = false;
 			}
-			background.SetRocketSpeed (speed);
 			height += speed * Time.deltaTime;
 			if (height < 0) {
 				height = 0;
 				speed = 0;
 			}
+			background.SetRocketSpeed (speed);
 			if (height > recordHeight) {
 				recordHeight = height;
 				MDPrefs.SetFloat (prefsKey, recordHeight);
