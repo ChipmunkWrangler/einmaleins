@@ -6744,6 +6744,7 @@ MonoBehaviour:
   launchButtonController: {fileID: 137489271}
   doneText: {fileID: 1421311203}
   doneString: "Fertig f\xFCr Heute!"
+  thrust: {fileID: 1170303753}
 --- !u!114 &1170303753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7643,7 +7644,7 @@ MonoBehaviour:
   baseY: -2.53
   maxSpeed: 3
   earth: {fileID: 2119229087}
-  earthSpeed: 0.0005
+  earthSpeed: 0.0002
 --- !u!1 &1597647421
 GameObject:
   m_ObjectHideFlags: 0
