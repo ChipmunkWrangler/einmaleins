@@ -10,6 +10,7 @@ public class QuestionPicker : MonoBehaviour {
 	List<OnQuestionChanged> onQuestionChangedSubscribers;
 	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
 	List<OnWrongAnswer> onWrongAnswerSubscribers;
+	List<OnNewlyMastered> onNewlyMasteredSubscribers;
 	float questionTime;
 
 	void Start () {
@@ -29,12 +30,16 @@ public class QuestionPicker : MonoBehaviour {
 			return;
 		}
 		bool isCorrect = curQuestion.IsAnswerCorrect (answer);
-		curQuestion.UpdateState (isCorrect, Time.time - questionTime);
+		bool isNewlyMastered = curQuestion.UpdateState (isCorrect, Time.time - questionTime);
 		if (isCorrect) {
 			foreach (OnCorrectAnswer subscriber in onCorrectAnswerSubscribers) {
 				subscriber.OnCorrectAnswer (curQuestion);
 			}
-
+			if (isNewlyMastered) {
+				foreach (OnNewlyMastered subscriber in onNewlyMasteredSubscribers) {
+					subscriber.OnNewlyMastered ();
+				}
+			}
 		} else {
 			foreach (OnWrongAnswer subscriber in onWrongAnswerSubscribers) {
 				subscriber.OnWrongAnswer ();
@@ -47,6 +52,7 @@ public class QuestionPicker : MonoBehaviour {
 	private void SplitSubscribers() {
 		onQuestionChangedSubscribers = new List<OnQuestionChanged> ();
 		onCorrectAnswerSubscribers = new List<OnCorrectAnswer> ();
+		onNewlyMasteredSubscribers = new List<OnNewlyMastered> ();
 		onWrongAnswerSubscribers = new List<OnWrongAnswer> ();
 		foreach(GameObject subscriber in subscribers) {
 			OnQuestionChanged[] onQuestionChangeds = subscriber.GetComponents<OnQuestionChanged>();
@@ -60,6 +66,10 @@ public class QuestionPicker : MonoBehaviour {
 			OnWrongAnswer[] onWrongAnswers = subscriber.GetComponents<OnWrongAnswer>();
 			foreach(OnWrongAnswer s in onWrongAnswers) {
 				onWrongAnswerSubscribers.Add (s);
+			}
+			OnNewlyMastered[] onNewlyMastereds = subscriber.GetComponents<OnNewlyMastered>();
+			foreach(OnNewlyMastered s in onNewlyMastereds) {
+				onNewlyMasteredSubscribers.Add (s);
 			}
 		}
 	}

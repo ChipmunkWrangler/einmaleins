@@ -24,6 +24,7 @@ public class Question {
 	const int NUM_ANSWER_TIMES_TO_RECORD = 3;
 	string prefsKey;
 	List<float> answerTimes;
+	bool wasMastered; // even if it is no longer mastered. This is for awarding rocket parts
 
 	public Question(int _a, int _b) {
 		a = _a;
@@ -44,28 +45,30 @@ public class Question {
 		return (answerTimes.Count == 0) ? float.MaxValue : answerTimes.Average ();
 	}
 
-	public void UpdateState(bool isCorrect, float timeRequired) {
+	public bool UpdateState(bool isCorrect, float timeRequired) {
+		bool isNewlyMastered = false;
 		if (isCorrect && stage != Stage.Wrong) { // once it is wrong, it stays wrong until the next list is generated. "Wrong" means "not right on the first try".)
 			++correctInARow;
 			RecordAnswerTime (timeRequired);
 			if (timeRequired > OK_TIME) {
-				stage = Stage.Hard;
+				SetStage(Stage.Hard);
 			} else if (stage != Stage.Mastered) {
 				if (correctInARow >= CORRECT_BEFORE_MASTERED) {
-					stage = Stage.Mastered;
+					isNewlyMastered = SetStage (Stage.Mastered);
 				} else if (timeRequired < FAST_TIME) {
-					stage = (stage == Stage.Fast) ? Stage.Mastered : Stage.Fast;
+					isNewlyMastered = SetStage((stage == Stage.Fast) ? Stage.Mastered : Stage.Fast);
 				} else {
 					UnityEngine.Assertions.Assert.IsTrue (timeRequired < OK_TIME);
-					stage = Stage.Ok;
+					SetStage(Stage.Ok);
 				}
 			}
 		} else {
-			stage = Stage.Wrong;
+			SetStage(Stage.Wrong);
 			correctInARow = 0;
 		}
 
 		Debug.Log(ToString());
+		return isNewlyMastered;
 	}
 
 //	public void Load(int idx) {
@@ -151,6 +154,7 @@ public class Question {
 		}
 		correctInARow = MDPrefs.GetInt(prefsKey + ":inarow", 0);
 		answerTimes = MDPrefs.GetFloatArray (prefsKey + ":times").ToList();
+		wasMastered = MDPrefs.GetBool (prefsKey + ":wasMastered");
 	}
 
 	public void Save() {
@@ -158,11 +162,12 @@ public class Question {
 		MDPrefs.SetString(prefsKey + ":stage", stage.ToString());
 		MDPrefs.SetInt(prefsKey + ":inarow", correctInARow);
 		MDPrefs.SetFloatArray (prefsKey + ":times", answerTimes.ToArray());
+		MDPrefs.SetBool (prefsKey + ":wasMastered", wasMastered);
 //		Debug.Log ("Saving " + ToString ());
 	}
 
 	public override string ToString() {
-		string s = idx + " is " + a + " * " + b + " : " + stage + " correct = " + correctInARow + " times = ";
+		string s = idx + " is " + a + " * " + b + " : " + stage + " wasMastered = " + wasMastered + " correct = " + correctInARow + " times = ";
 		foreach (var time in answerTimes) {
 			s += time + " ";
 		}
@@ -176,6 +181,17 @@ public class Question {
 		}
 		answerTimes.Add (timeRequired);
 
+	}
+
+	bool SetStage (Stage newStage)
+	{
+		stage = newStage;
+		bool isNewlyMastered = false;
+		if (newStage == Stage.Mastered) {
+			isNewlyMastered = !wasMastered;
+			wasMastered = true;
+		}
+		return isNewlyMastered;
 	}
 
 }

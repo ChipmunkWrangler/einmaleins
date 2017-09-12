@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\NewPlayerName.cs" />
      <Compile Include="Assets\Scripts\OnAnswerChanged.cs" />
      <Compile Include="Assets\Scripts\OnCorrectAnswer.cs" />
+     <Compile Include="Assets\Scripts\OnNewlyMastered.cs" />
      <Compile Include="Assets\Scripts\OnQuestionChanged.cs" />
      <Compile Include="Assets\Scripts\OnWrongAnswer.cs" />
      <Compile Include="Assets\Scripts\PositionFx.cs" />
@@ -77,6 +78,7 @@
      <Compile Include="Assets\Scripts\QuestionProgress.cs" />
      <Compile Include="Assets\Scripts\Questions.cs" />
      <Compile Include="Assets\Scripts\RocketMotion.cs" />
+     <Compile Include="Assets\Scripts\RocketPartCounter.cs" />
      <Compile Include="Assets\Scripts\Score.cs" />
      <Compile Include="Assets\Scripts\ScrollBackground.cs" />
      <Compile Include="Assets\Scripts\ShowOnRight.cs" />
