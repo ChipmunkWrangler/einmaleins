@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
+public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] Text heightText = null;
 	[SerializeField] Text recordHeightText = null;
 	[SerializeField] Text apogeeText = null;
@@ -23,6 +23,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	bool isRunning;
 	System.IFormatProvider formatProvider;
 	int numAnswersGiven;
+	bool noMoreQuestions;
 
 	const string prefsKey = "recordHeight";
 	const string numFormat = "N0";
@@ -48,7 +49,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 //		}
 
 			speed -= gravity * Time.deltaTime;
-			if (speed < 0 && numAnswersGiven >= FlashQuestions.ASK_LIST_LENGTH) {
+			if (speed < 0 && noMoreQuestions) {
 				speed = 0;
 				isRunning = false;
 			}
@@ -83,7 +84,14 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 		++numAnswersGiven;
 	}
 
+	public void OnQuestionChanged(Question question) {
+		if (question == null) {
+			noMoreQuestions = true;
+		}
+	}
+
 	void OnDone() {
+		noMoreQuestions = false;
 		flashQuestions.wasFilled = false;
 		launch.ShowLaunchButton ();
 	}
