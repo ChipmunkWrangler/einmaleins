@@ -77,9 +77,6 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	public void OnCorrectAnswer(Question question) {
-		if (!isRunning) {
-			OnLaunch ();
-		}
 		speed += accelerationOnCorrect;
 		++numAnswersGiven;
 	}
@@ -96,7 +93,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		launch.ShowLaunchButton ();
 	}
 
-	void OnLaunch() {
+	public void OnCountdown() {
 		isRunning = true;
 		height = 0;
 		apogee = 0;

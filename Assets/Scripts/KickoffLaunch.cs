@@ -16,6 +16,7 @@ public class KickoffLaunch : MonoBehaviour {
 	[SerializeField] LaunchButtonController launchButtonController;
 	[SerializeField] UnityEngine.UI.Text doneText;
 	[SerializeField] string doneString;
+	[SerializeField] FlashThrust thrust;
 
 	void Start () {
 		if (MDPrefs.GetBool ("autolaunch")) {
@@ -45,6 +46,7 @@ public class KickoffLaunch : MonoBehaviour {
 	}
 
 	IEnumerator Kickoff () {
+		thrust.OnCountdown ();
 		countdownText.text = "";
 		countdownText.gameObject.SetActive (true);
 		foreach (var element in uiElementsToActivateOnCountdown) {
