@@ -76,7 +76,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		}
 	}
 
-	public void OnCorrectAnswer(Question question) {
+	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		speed += accelerationOnCorrect;
 		++numAnswersGiven;
 	}

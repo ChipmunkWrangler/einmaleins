@@ -12,7 +12,7 @@ public class ShowOnRight : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, On
 		gameObject.transform.localScale = hideOnRight ? Vector3.one : Vector3.zero;
 	}
 
-	public void OnCorrectAnswer (Question question) {
+	public void OnCorrectAnswer (Question question, bool isNewlyMastered) {
 		if (evenIfWrongFirst || !wasWrong) {
 			ScaleTo( hideOnRight ? Vector3.zero : Vector3.one );
 		}

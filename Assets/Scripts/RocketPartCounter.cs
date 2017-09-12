@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketPartCounter : MonoBehaviour, OnNewlyMastered {
+public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer {
 	[SerializeField] UnityEngine.UI.Text text = null;
 	int rocketParts;
 	const string prefsKey = "rocketParts";
@@ -13,10 +13,12 @@ public class RocketPartCounter : MonoBehaviour, OnNewlyMastered {
 		UpdateText ();
 	}
 
-	public void OnNewlyMastered() {
-		++rocketParts;
-		MDPrefs.SetInt (prefsKey, rocketParts);
-		UpdateText ();
+	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
+		if (isNewlyMastered) {
+			++rocketParts;
+			MDPrefs.SetInt (prefsKey, rocketParts);
+			UpdateText ();
+		}
 	}
 
 	void UpdateText () {

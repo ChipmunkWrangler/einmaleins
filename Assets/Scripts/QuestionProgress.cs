@@ -12,7 +12,7 @@ public class QuestionProgress : MonoBehaviour, OnCorrectAnswer, OnQuestionChange
 	float targetFraction;
 	Material mat_;
 
-	public void OnCorrectAnswer (Question question) {
+	public void OnCorrectAnswer (Question question, bool isNewlyMastered) {
 		SetProgress (0);
 //		targetFraction = question.GetMasteryFraction ();
 		speed = (targetFraction - curFraction) / transitionTime;

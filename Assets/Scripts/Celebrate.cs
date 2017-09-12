@@ -20,7 +20,7 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 		}
 	}
 
-	public void OnCorrectAnswer(Question question) {
+	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		StopTimer ();
 		coroutine = StartCoroutine (DoCelebration ());
 	}

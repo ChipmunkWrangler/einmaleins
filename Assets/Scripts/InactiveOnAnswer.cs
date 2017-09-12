@@ -5,7 +5,7 @@ using UnityEngine;
 public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnAnswerChanged {
 	[SerializeField] UnityEngine.UI.Button button = null;
 
-	public void OnCorrectAnswer (Question question) {
+	public void OnCorrectAnswer (Question question, bool isNewlyMastered) {
 		button.interactable = false;
 	}
 

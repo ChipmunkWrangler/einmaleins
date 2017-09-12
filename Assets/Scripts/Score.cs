@@ -37,7 +37,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		Save (score);
 	}
 
-	public void OnCorrectAnswer(Question question) {
+	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		IncrementMultiplier ();
 		IncreaseScoreBy (multiplier * question.a * question.b);
 		Save (score);
