@@ -7641,7 +7641,7 @@ MonoBehaviour:
   minY: -6.35
   maxY: 3.07
   baseY: -2.53
-  maxSpeed: 1
+  maxSpeed: 3
   earth: {fileID: 2119229087}
   earthSpeed: 0.0005
 --- !u!1 &1597647421
