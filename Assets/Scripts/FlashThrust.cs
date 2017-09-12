@@ -10,22 +10,24 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer {
 	[SerializeField] ScrollBackground background = null;
 	[SerializeField] float maxAttainableHeight = 1287000000.0f; // Saturn
 	[SerializeField] float targetAnswerTime = 6.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
+	[SerializeField] KickoffLaunch launch = null;
+	[SerializeField] FlashQuestions flashQuestions = null;
+
+	public float speed { get; private set; } // km per second
+	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
+
 	float gravity = 9.8f;
-	[SerializeField] KickoffLaunch launch;
-	[SerializeField] FlashQuestions flashQuestions;
-	float accelerationOnCorrect; // total speed increase per correct answer.
 	float height; // km
 	float recordHeight;
 	float apogee;
-	float speed; // km per second
+	bool isRunning;
+	System.IFormatProvider formatProvider;
+	int numAnswersGiven;
+
 	const string prefsKey = "recordHeight";
 	const string numFormat = "N0";
 	const string unit = " km";
-	bool isRunning;
-	System.IFormatProvider formatProvider;
 
-//	float timeForNextAnswer;
-	int numAnswersGiven = 0;
 	void Start() {
 		heightText.text = "0";
 		apogeeText.text = "0";
