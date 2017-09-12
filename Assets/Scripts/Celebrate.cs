@@ -5,16 +5,18 @@ using UnityEngine;
 public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuestionChanged {
 	[SerializeField] float duration;
 	[SerializeField] GameObject particleParent;
+	[SerializeField] GameObject masteryParticleParent;
 	[SerializeField] QuestionPicker questionPicker;
 	[SerializeField] bool continueAfterQuestions;
 	ParticleSystem[] particles_;
+	ParticleSystem[] masteryParticles_;
 	bool isCelebrating;
 	Coroutine coroutine;
 		
 	public void OnQuestionChanged(Question question) {
 		StopTimer ();
 		if (continueAfterQuestions && question == null) {
-			StartCelebrating (); // indefinitely
+			StartCelebrating (false); // indefinitely
 		} else {
 			StopCelebrating ();
 		}
@@ -22,7 +24,7 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		StopTimer ();
-		coroutine = StartCoroutine (DoCelebration ());
+		coroutine = StartCoroutine (DoCelebration (isNewlyMastered));
 	}
 
 	public void OnWrongAnswer() {
@@ -30,18 +32,23 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 		StopCelebrating ();
 	}
 		
-	IEnumerator DoCelebration() {
-		StartCelebrating ();
+	IEnumerator DoCelebration(bool superSize) {
+		StartCelebrating (superSize);
 		yield return new WaitForSeconds(duration);
 		StopCelebrating ();
 		questionPicker.NextQuestion ();
 	}
 
-	void StartCelebrating() {
+	void StartCelebrating(bool isNewlyMastered) {
 		if (!isCelebrating) {
 			isCelebrating = true;
 			foreach (ParticleSystem particles in GetParticles()) {
 				particles.Play ();
+			}
+			if (isNewlyMastered) {
+				foreach (ParticleSystem particles in GetMasteryParticles()) {
+					particles.Play ();
+				}
 			}
 		}
 	}
@@ -50,6 +57,9 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 	{
 		if (isCelebrating) {
 			foreach (ParticleSystem particles in GetParticles()) {
+				particles.Stop ();
+			}
+			foreach (ParticleSystem particles in GetMasteryParticles()) {
 				particles.Stop ();
 			}
 			isCelebrating = false;
@@ -68,4 +78,12 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 		}
 		return particles_;
 	}
+
+	ParticleSystem[] GetMasteryParticles() {
+		if (masteryParticles_ == null) {
+			masteryParticles_ = masteryParticleParent.GetComponentsInChildren<ParticleSystem> ();
+		}
+		return masteryParticles_;
+	}
+
 }
