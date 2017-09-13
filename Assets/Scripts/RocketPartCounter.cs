@@ -23,7 +23,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	}
 
 	void Start () {
-		rocketParts  = MDPrefs.GetInt (prefsKey, 0);
+		rocketParts = GetNumRocketParts ();
 		UpdateText ();
 	}
 
@@ -52,6 +52,10 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 			MDPrefs.SetInt (prefsKey, rocketParts);
 			UpdateText ();
 		}
+	}
+
+	public static int GetNumRocketParts() {
+		return MDPrefs.GetInt (prefsKey, 0);
 	}
 
 	IEnumerator FadeText(Color end, float fadeTime, Text text) {

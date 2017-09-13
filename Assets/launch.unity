@@ -679,12 +679,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1468191838450822, guid: fdd7f431d6405436aaf88aceb283e9cb,
     type: 2}
   m_PrefabInternal: {fileID: 559811661}
---- !u!114 &137489271 stripped
+--- !u!114 &137489272 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114945130522967264, guid: fdd7f431d6405436aaf88aceb283e9cb,
+  m_PrefabParentObject: {fileID: 114292043915376424, guid: fdd7f431d6405436aaf88aceb283e9cb,
     type: 2}
   m_PrefabInternal: {fileID: 559811661}
-  m_Script: {fileID: 11500000, guid: e65f7ceb65848497bbe8faaee7c2e756, type: 3}
+  m_Script: {fileID: 11500000, guid: ccea1aee47cc34a4d96decbe1a83a809, type: 3}
 --- !u!1 &213606992
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,7 +776,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 559811662}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -5145,11 +5145,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1170303752}
+      objectReference: {fileID: 137489272}
     - target: {fileID: 114922919336085486, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Launch
+      value: LoadScene
       objectReference: {fileID: 0}
     - target: {fileID: 114945130522967264, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -5217,13 +5217,18 @@ Prefab:
     - target: {fileID: 224641568189213898, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 110
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224641568189213898, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114197520798966568, guid: fdd7f431d6405436aaf88aceb283e9cb,
+        type: 2}
+      propertyPath: questions
+      value: 
+      objectReference: {fileID: 1170303751}
     m_RemovedComponents:
     - {fileID: 114155254037480764, guid: fdd7f431d6405436aaf88aceb283e9cb, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fdd7f431d6405436aaf88aceb283e9cb, type: 2}
@@ -5249,6 +5254,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1152569277389004, guid: fdd7f431d6405436aaf88aceb283e9cb,
     type: 2}
   m_PrefabInternal: {fileID: 559811661}
+--- !u!114 &559811666 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114197520798966568, guid: fdd7f431d6405436aaf88aceb283e9cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 559811661}
+  m_Script: {fileID: 11500000, guid: e65f7ceb65848497bbe8faaee7c2e756, type: 3}
 --- !u!1 &582928271
 GameObject:
   m_ObjectHideFlags: 0
@@ -6518,7 +6529,7 @@ MonoBehaviour:
   - {fileID: 219402597}
   - {fileID: 137489268}
   - {fileID: 1868318711}
-  launchButtonController: {fileID: 137489271}
+  launchButtonController: {fileID: 559811666}
   doneText: {fileID: 1421311203}
   doneString: "Fertig f\xFCr Heute!"
   thrust: {fileID: 1170303753}

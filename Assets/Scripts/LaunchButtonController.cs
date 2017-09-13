@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
-	[SerializeField] Questions questions;
-	[SerializeField] UnityEngine.UI.Button button;
-	[SerializeField] UnityEngine.UI.Text doneText;
+	[SerializeField] Questions questions = null;
+	[SerializeField] UnityEngine.UI.Button launchButton = null;
+	[SerializeField] UnityEngine.UI.Button upgradeButton = null;
+	[SerializeField] UnityEngine.UI.Text upgradeButtonText = null;
+	[SerializeField] UnityEngine.UI.Text doneText = null;
+	[SerializeField] string buildRocketText = "";
+	[SerializeField] string upgradeRocketText = "";
 
 	public void OnQuestionChanged(Question question) {
 		bool noMoreQuestions = question == null;
@@ -18,11 +22,16 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 
 	void ActivateIfCanLaunch (bool noMoreQuestions, bool canLaunch)
 	{
-		if (button.gameObject.activeSelf != canLaunch) {
-			button.interactable = canLaunch;
-			button.gameObject.SetActive (canLaunch);
+		if (launchButton.gameObject.activeSelf != canLaunch) {
+			launchButton.interactable = canLaunch;
+			launchButton.gameObject.SetActive (canLaunch);
 		}
-		doneText.text = (noMoreQuestions && !canLaunch) ? "Fertig für Heute!" : "";
+		bool canUpgrade = RocketPartCounter.GetNumRocketParts () > 0;
+		if (canUpgrade) {
+			upgradeButtonText.text = canLaunch ? upgradeRocketText : buildRocketText;
+		}
+		upgradeButton.gameObject.SetActive (canUpgrade);
+		doneText.gameObject.SetActive( noMoreQuestions && !canLaunch && !canUpgrade );
 
 	}
 
