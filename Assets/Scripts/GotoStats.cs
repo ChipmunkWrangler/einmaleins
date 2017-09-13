@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GotoStats : MonoBehaviour {
 
-	public void LoadStatsScene(string fromScene) {
-		MDPrefs.SetString ("statsFromScene", fromScene);
+	public void LoadStatsScene() {
+		BackStack.PushCurrentScene();
 		PlayerPrefs.Save ();
 		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("stats");
 	}

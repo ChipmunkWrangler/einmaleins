@@ -49,13 +49,15 @@
      <Compile Include="Assets\PreciseLocale\Example\PreciseLocaleText.cs" />
      <Compile Include="Assets\PreciseLocale\PreciseLocale.cs" />
      <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
+     <Compile Include="Assets\Scripts\BackStack.cs" />
      <Compile Include="Assets\Scripts\CCInputField.cs" />
      <Compile Include="Assets\Scripts\Celebrate.cs" />
      <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
      <Compile Include="Assets\Scripts\FlashQuestions.cs" />
      <Compile Include="Assets\Scripts\FlashThrust.cs" />
+     <Compile Include="Assets\Scripts\GoBack.cs" />
+     <Compile Include="Assets\Scripts\GotoBuildRocket.cs" />
      <Compile Include="Assets\Scripts\GotoChoosePlayer.cs" />
-     <Compile Include="Assets\Scripts\GotoGame.cs" />
      <Compile Include="Assets\Scripts\GotoLaunch.cs" />
      <Compile Include="Assets\Scripts\GotoStats.cs" />
      <Compile Include="Assets\Scripts\HideOnWrong.cs" />
