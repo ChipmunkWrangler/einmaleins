@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] Text numText = null;
-	[SerializeField] Image[] imagesToHighlight;
-	[SerializeField] Text[] textsToHighlight;
+	[SerializeField] Image[] imagesToHighlight = null;
+	[SerializeField] Text[] textsToHighlight = null;
 	[SerializeField] Color highlightColour;
-	[SerializeField] float highlightFadeTime;
+	[SerializeField] Vector3 highlightScale;
+	[SerializeField] float highlightFadeTime = 0.5f;
 	int rocketParts;
 	const string prefsKey = "rocketParts";
 	Color[] baseColor;
@@ -31,6 +32,9 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 		foreach (Text text in textsToHighlight) {
 			StartCoroutine (FadeText (baseColor[i++], highlightFadeTime, text));
 		}
+		foreach (Text text in textsToHighlight) {
+			StartCoroutine (Scale (Vector3.one, highlightFadeTime, text.gameObject));
+		}
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
@@ -41,6 +45,9 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 			}
 			foreach (Text text in textsToHighlight) {
 				StartCoroutine (FadeText (highlightColour, highlightFadeTime, text));
+			}
+			foreach (Text text in textsToHighlight) {
+				StartCoroutine (Scale (highlightScale, highlightFadeTime, text.gameObject));
 			}
 			MDPrefs.SetInt (prefsKey, rocketParts);
 			UpdateText ();
@@ -54,6 +61,17 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 		while (t <= 1.0f) {
 			text.color = Color.Lerp (startColor, end, t);
 			t = (Time.time - startTime) / fadeTime;
+			yield return null;
+		}
+	}
+
+	IEnumerator Scale(Vector3 endScale, float tweenTime, GameObject o) {
+		Vector3 startScale = o.transform.localScale;
+		float startTime = Time.time;
+		float t = 0;
+		while (t <= 1.0f) {
+			o.transform.localScale = Vector3.Lerp (startScale, endScale, t);
+			t = (Time.time - startTime) / tweenTime;
 			yield return null;
 		}
 	}
