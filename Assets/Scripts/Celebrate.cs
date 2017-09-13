@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuestionChanged {
-	[SerializeField] float duration;
-	[SerializeField] GameObject particleParent;
-	[SerializeField] GameObject masteryParticleParent;
-	[SerializeField] QuestionPicker questionPicker;
-	[SerializeField] bool continueAfterQuestions;
+	[SerializeField] float duration = 3.0f;
+	[SerializeField] GameObject particleParent = null;
+	[SerializeField] GameObject masteryParticleParent = null;
+	[SerializeField] QuestionPicker questionPicker = null;
+	[SerializeField] bool continueAfterQuestions = false;
 	ParticleSystem[] particles_;
 	ParticleSystem[] masteryParticles_;
 	bool isCelebrating;
@@ -81,7 +81,7 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 
 	ParticleSystem[] GetMasteryParticles() {
 		if (masteryParticles_ == null) {
-			masteryParticles_ = masteryParticleParent.GetComponentsInChildren<ParticleSystem> ();
+			masteryParticles_ = (masteryParticleParent == null) ? new ParticleSystem[0] : masteryParticleParent.GetComponentsInChildren<ParticleSystem> ();
 		}
 		return masteryParticles_;
 	}
