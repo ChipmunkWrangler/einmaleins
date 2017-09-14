@@ -10,9 +10,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	[SerializeField] Color highlightColour;
 	[SerializeField] Vector3 highlightScale;
 	[SerializeField] float highlightFadeTime = 0.5f;
-	int rocketParts;
-	const string prefsKey = "rocketParts";
-	Color[] baseColor;
+	Color[] baseColor = null;
 
 	void Awake() {
 		baseColor = new Color[textsToHighlight.Length];
@@ -23,7 +21,6 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	}
 
 	void Start () {
-		rocketParts = GetNumRocketParts ();
 		UpdateText ();
 	}
 
@@ -39,7 +36,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		if (isNewlyMastered) {
-			++rocketParts;
+			RocketParts.Inc ();
 			foreach (Image image in imagesToHighlight) {
 				StartCoroutine (FadeImage (highlightColour, highlightFadeTime, image));
 			}
@@ -49,13 +46,8 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 			foreach (Text text in textsToHighlight) {
 				StartCoroutine (Scale (highlightScale, highlightFadeTime, text.gameObject));
 			}
-			MDPrefs.SetInt (prefsKey, rocketParts);
 			UpdateText ();
 		}
-	}
-
-	public static int GetNumRocketParts() {
-		return MDPrefs.GetInt (prefsKey, 0);
 	}
 
 	IEnumerator FadeText(Color end, float fadeTime, Text text) {
@@ -92,7 +84,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	}
 
 	void UpdateText () {
-		numText.text = rocketParts.ToString();
+		numText.text = RocketParts.GetNumRocketParts().ToString();
 	}
 
 

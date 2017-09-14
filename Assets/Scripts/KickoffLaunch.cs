@@ -14,8 +14,6 @@ public class KickoffLaunch : MonoBehaviour {
 	[SerializeField] GameObject[] uiElementsToActivateOnPlay;
 	[SerializeField] GameObject[] uiElementsToDeactivateOnPlay;
 	[SerializeField] LaunchButtonController launchButtonController;
-	[SerializeField] UnityEngine.UI.Text doneText;
-	[SerializeField] string doneString;
 	[SerializeField] FlashThrust thrust;
 
 	void Start () {
@@ -40,9 +38,6 @@ public class KickoffLaunch : MonoBehaviour {
 		}
 
 		launchButtonController.OnQuestionChanged (null);
-		if (!launchButtonController.CanLaunch (true)) {
-			doneText.text = doneString;
-		}
 	}
 
 	IEnumerator Kickoff () {
