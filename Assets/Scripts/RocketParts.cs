@@ -10,15 +10,19 @@ public static class RocketParts {
 
 	public static void Inc() {
 		UnityEngine.Assertions.Assert.AreEqual ((Questions.maxNum - PARTS_TO_BUILD_ROCKET) % PARTS_PER_UPGRADE, 0);
-		MDPrefs.SetInt (prefsKey, GetNumRocketParts() + 1);
+		SetNumParts (GetNumParts () + 1);
 	}
 
-	public static int GetNumRocketParts() {
+	public static int GetNumParts() {
 		return MDPrefs.GetInt (prefsKey, 0);
+	}
+		
+	public static int GetNumPartsRequired() {
+		return IsRocketBuilt () ? PARTS_PER_UPGRADE : PARTS_TO_BUILD_ROCKET;
 	}
 
 	public static bool CanUpgrade() {
-		return GetNumRocketParts () > PARTS_PER_UPGRADE;
+		return GetNumParts () >= PARTS_PER_UPGRADE;
 	}
 
 	public static bool IsRocketBuilt() {
@@ -26,6 +30,19 @@ public static class RocketParts {
 	}
 		
 	public static bool CanBuild() {
-		return !IsRocketBuilt() && GetNumRocketParts() > PARTS_TO_BUILD_ROCKET;
+		return !IsRocketBuilt() && GetNumParts() >= PARTS_TO_BUILD_ROCKET;
 	}
+
+	public static void Build() {
+		if (CanBuild()) {
+			SetNumParts (GetNumParts () - PARTS_TO_BUILD_ROCKET);
+			MDPrefs.SetBool (prefsKey + ":isBuilt", true);
+		}
+	}
+
+	static void SetNumParts(int newNum) {
+		MDPrefs.SetInt (prefsKey, newNum);
+	}
+		
+			
 }

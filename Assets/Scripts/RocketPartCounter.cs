@@ -10,6 +10,8 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	[SerializeField] Color highlightColour;
 	[SerializeField] Vector3 highlightScale;
 	[SerializeField] float highlightFadeTime = 0.5f;
+	[SerializeField] float scoreCountdownDuration = 5.0f;
+	[SerializeField] float scoreCountdownDelay = 0.5f;
 	Color[] baseColor = null;
 
 	void Awake() {
@@ -21,7 +23,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	}
 
 	void Start () {
-		UpdateText ();
+		UpdateText (RocketParts.GetNumParts());
 	}
 
 	public void OnQuestionChanged(Question question) {
@@ -46,8 +48,13 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 			foreach (Text text in textsToHighlight) {
 				StartCoroutine (Scale (highlightScale, highlightFadeTime, text.gameObject));
 			}
-			UpdateText ();
+			UpdateText (RocketParts.GetNumParts());
 		}
+	}
+
+	public void OnSpend(int oldNumParts, int newNumParts) {
+		StopAllCoroutines ();
+		StartCoroutine(CountTextDown (oldNumParts, newNumParts));
 	}
 
 	IEnumerator FadeText(Color end, float fadeTime, Text text) {
@@ -83,9 +90,17 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 		}
 	}
 
-	void UpdateText () {
-		numText.text = RocketParts.GetNumRocketParts().ToString();
+	void UpdateText (int numParts) {
+		numText.text = numParts + " von " +  RocketParts.GetNumPartsRequired();
 	}
 
-
+	IEnumerator CountTextDown(int oldScore, int newScore) {
+		yield return new WaitForSeconds (scoreCountdownDelay);
+		float secsPerNum = Mathf.Abs(scoreCountdownDuration / (float)(newScore - oldScore));
+		for (int i = oldScore; i >= newScore; --i) {
+			UpdateText( i );
+			yield return new WaitForSeconds(secsPerNum);
+		}
+		UpdateText( newScore );
+	}
 }
