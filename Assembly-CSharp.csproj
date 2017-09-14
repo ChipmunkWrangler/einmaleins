@@ -90,6 +90,7 @@
      <Compile Include="Assets\Scripts\StatsController.cs" />
      <Compile Include="Assets\Scripts\TextButton.cs" />
      <Compile Include="Assets\Scripts\TextDisplay.cs" />
+     <Compile Include="Assets\Scripts\UpgradeButton.cs" />
      <None Include="Assets\Shaders\AlphaProgress.shader" />
      <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />

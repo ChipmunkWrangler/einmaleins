@@ -6,7 +6,7 @@ using System.Linq;
 public abstract class Questions : MonoBehaviour {
 	public Question[] questions { get; private set; }
 
-	public const int maxNum = 10;
+	const int maxNum = 10;
 	protected List<int> toAsk = new List<int>(); // list of indices in questions[]
 	protected const string prefsKey = "questions";
 
@@ -19,6 +19,9 @@ public abstract class Questions : MonoBehaviour {
 
 	public int GetNumMastered() {
 		return questions.Count (q => q.stage == Question.Stage.Mastered);
+	}
+	public static int GetNumQuestions() {
+		return maxNum * (maxNum + 1) / 2;
 	}
 		
 	public Question GetNextQuestion() {

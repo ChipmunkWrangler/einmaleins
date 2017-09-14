@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public static class RocketParts {
 	const string prefsKey = "rocketParts";
-	const int PARTS_TO_BUILD_ROCKET = FlashQuestions.ASK_LIST_LENGTH;
-	const int PARTS_PER_UPGRADE = 5;
+	const int PARTS_TO_BUILD_ROCKET = 15;
+	const int PARTS_PER_UPGRADE = 10;
 
 	public static void Inc() {
-		UnityEngine.Assertions.Assert.AreEqual ((Questions.maxNum - PARTS_TO_BUILD_ROCKET) % PARTS_PER_UPGRADE, 0);
+		UnityEngine.Assertions.Assert.IsTrue (FlashQuestions.ASK_LIST_LENGTH >= PARTS_TO_BUILD_ROCKET);
 		SetNumParts (GetNumParts () + 1);
 	}
 
@@ -22,7 +22,7 @@ public static class RocketParts {
 	}
 
 	public static bool CanUpgrade() {
-		return GetNumParts () >= PARTS_PER_UPGRADE;
+		return IsRocketBuilt() && GetNumParts () >= PARTS_PER_UPGRADE && GetUpgradeLevel() < GetNumUpgrades();
 	}
 
 	public static bool IsRocketBuilt() {
@@ -38,6 +38,22 @@ public static class RocketParts {
 			SetNumParts (GetNumParts () - PARTS_TO_BUILD_ROCKET);
 			MDPrefs.SetBool (prefsKey + ":isBuilt", true);
 		}
+	}
+
+	public static void Upgrade() {
+		if (CanUpgrade ()) {
+			SetNumParts (GetNumParts () - PARTS_PER_UPGRADE);
+			MDPrefs.SetInt (prefsKey + ":upgradeLevel", GetUpgradeLevel () + 1);
+		}
+	}
+
+	public static int GetNumUpgrades() {
+		UnityEngine.Assertions.Assert.AreEqual ((Questions.GetNumQuestions() - PARTS_TO_BUILD_ROCKET) % PARTS_PER_UPGRADE, 0);
+		return (Questions.GetNumQuestions() - PARTS_TO_BUILD_ROCKET) / PARTS_PER_UPGRADE;
+	}
+
+	public static int GetUpgradeLevel() {
+		return MDPrefs.GetInt (prefsKey + ":upgradeLevel", 0);
 	}
 
 	static void SetNumParts(int newNum) {
