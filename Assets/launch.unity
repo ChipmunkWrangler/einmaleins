@@ -2940,7 +2940,7 @@ MonoBehaviour:
   - 630000000
   - 1.287e+9
   - 2.73e+9
-  targetAnswerTime: 6
+  targetAnswerTime: 5.5
   launch: {fileID: 1170303752}
   flashQuestions: {fileID: 1170303751}
   celebrate: {fileID: 1170303754}
