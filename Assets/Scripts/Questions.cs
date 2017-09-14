@@ -16,10 +16,7 @@ public abstract class Questions : MonoBehaviour {
 		FillToAsk ();
 		Save ();
 	}
-
-	public int GetNumMastered() {
-		return questions.Count (q => q.stage == Question.Stage.Mastered);
-	}
+		
 	public static int GetNumQuestions() {
 		return maxNum * (maxNum + 1) / 2;
 	}
