@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuestionChanged {
 	[SerializeField] float duration = 3.0f;
-	[SerializeField] GameObject particleParent = null;
-	[SerializeField] GameObject masteryParticleParent = null;
+	[SerializeField] ParticleSystem[] particles = null;
+	[SerializeField] ParticleSystem masteryParticles;
 	[SerializeField] QuestionPicker questionPicker = null;
 	[SerializeField] bool continueAfterQuestions = false;
-	ParticleSystem[] particles_;
-	ParticleSystem[] masteryParticles_;
 	bool isCelebrating;
 	Coroutine coroutine;
+	public int curParticleIdx { private get; set; }
 		
 	public void OnQuestionChanged(Question question) {
 		StopTimer ();
@@ -42,13 +41,10 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 	void StartCelebrating(bool isNewlyMastered) {
 		if (!isCelebrating) {
 			isCelebrating = true;
-			foreach (ParticleSystem particles in GetParticles()) {
-				particles.Play ();
-			}
-			if (isNewlyMastered) {
-				foreach (ParticleSystem particles in GetMasteryParticles()) {
-					particles.Play ();
-				}
+			GetParticles ().gameObject.SetActive (true);
+			GetParticles ().Play ();
+			if (isNewlyMastered && GetMasteryParticles()) {
+				GetMasteryParticles().Play ();
 			}
 		}
 	}
@@ -56,11 +52,9 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 	void StopCelebrating ()
 	{
 		if (isCelebrating) {
-			foreach (ParticleSystem particles in GetParticles()) {
-				particles.Stop ();
-			}
-			foreach (ParticleSystem particles in GetMasteryParticles()) {
-				particles.Stop ();
+			GetParticles ().Stop ();
+			if (GetMasteryParticles ()) {
+				GetMasteryParticles ().Stop ();
 			}
 			isCelebrating = false;
 		}
@@ -72,18 +66,12 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 		}
 	}
 
-	ParticleSystem[] GetParticles() {
-		if (particles_ == null) {
-			particles_ = particleParent.GetComponentsInChildren<ParticleSystem> ();
-		}
-		return particles_;
+	ParticleSystem GetParticles() {
+		return particles [curParticleIdx];
 	}
 
-	ParticleSystem[] GetMasteryParticles() {
-		if (masteryParticles_ == null) {
-			masteryParticles_ = (masteryParticleParent == null) ? new ParticleSystem[0] : masteryParticleParent.GetComponentsInChildren<ParticleSystem> ();
-		}
-		return masteryParticles_;
+	ParticleSystem GetMasteryParticles() {
+		return masteryParticles;
 	}
 
 }

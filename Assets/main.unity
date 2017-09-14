@@ -2277,6 +2277,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8906de79e38d722448ed84e0c648ed37, type: 2}
   m_IsPrefabParent: 0
+--- !u!198 &969455687 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 19820518, guid: 8906de79e38d722448ed84e0c648ed37,
+    type: 2}
+  m_PrefabInternal: {fileID: 969455686}
 --- !u!114 &1088660492 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114448925386902148, guid: fab51348f5802451bbc8d2dc1f085efe,
@@ -2295,6 +2300,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114657463298905038, guid: fab51348f5802451bbc8d2dc1f085efe,
+        type: 2}
+      propertyPath: particles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114448925386902148, guid: fab51348f5802451bbc8d2dc1f085efe,
         type: 2}
       propertyPath: subscribers.Array.size
@@ -2452,6 +2462,16 @@ Prefab:
       propertyPath: masteryParticleParent
       value: 
       objectReference: {fileID: 139045088}
+    - target: {fileID: 114657463298905038, guid: fab51348f5802451bbc8d2dc1f085efe,
+        type: 2}
+      propertyPath: masteryParticles
+      value: 
+      objectReference: {fileID: 1533430789}
+    - target: {fileID: 114657463298905038, guid: fab51348f5802451bbc8d2dc1f085efe,
+        type: 2}
+      propertyPath: particles.Array.data[0]
+      value: 
+      objectReference: {fileID: 969455687}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fab51348f5802451bbc8d2dc1f085efe, type: 2}
   m_IsPrefabParent: 0
@@ -3791,6 +3811,11 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 461792, guid: b5ea624fac4bcb44f96ad51d3745727e, type: 2}
   m_PrefabInternal: {fileID: 1533430787}
+--- !u!198 &1533430789 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 19812458, guid: b5ea624fac4bcb44f96ad51d3745727e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1533430787}
 --- !u!1 &1537421870
 GameObject:
   m_ObjectHideFlags: 0
@@ -4153,7 +4178,7 @@ Prefab:
     - target: {fileID: 224641568189213898, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 110
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224023531985672196, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -4173,7 +4198,7 @@ Prefab:
     - target: {fileID: 224023531985672196, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -185
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224023531985672196, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -4183,7 +4208,7 @@ Prefab:
     - target: {fileID: 224023531985672196, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 110
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}

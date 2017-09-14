@@ -8,10 +8,11 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] Text recordHeightText = null;
 	[SerializeField] Text apogeeText = null;
 	[SerializeField] ScrollBackground background = null;
-	[SerializeField] float maxAttainableHeight = 1287000000.0f; // Saturn
-	[SerializeField] float targetAnswerTime = 6.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
+	[SerializeField] float[] maxAttainableHeights = null;
+	[SerializeField] float targetAnswerTime = 5.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
 	[SerializeField] KickoffLaunch launch = null;
 	[SerializeField] FlashQuestions flashQuestions = null;
+	[SerializeField] Celebrate celebrate;
 
 	public float speed { get; private set; } // km per second
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
@@ -35,7 +36,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		recordHeight = MDPrefs.GetFloat (prefsKey, 0);
 		recordHeightText.text = recordHeight.ToString (numFormat) + unit;
 //		accelerationOnCorrect = CalcAcceleration(maxAttainableHeight, FlashQuestions.ASK_LIST_LENGTH);
-		CalcParams(maxAttainableHeight, FlashQuestions.ASK_LIST_LENGTH);
+		UnityEngine.Assertions.Assert.AreEqual(RocketParts.GetNumUpgrades() + 1, maxAttainableHeights.Length);
+		CalcParams(maxAttainableHeights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
 		formatProvider = MDCulture.GetCulture();
 	}
@@ -99,6 +101,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		apogee = 0;
 		speed = 0;
 		numAnswersGiven = 0;
+		celebrate.curParticleIdx = RocketParts.GetUpgradeLevel ();
 	}
 
 	void CalcParams(float maxHeight, int numChancesToAccelerate) {
