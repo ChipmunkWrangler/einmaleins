@@ -9,7 +9,7 @@ public static class RocketParts {
 	const int PARTS_PER_UPGRADE = 10;
 
 	public static void Inc() {
-		UnityEngine.Assertions.Assert.IsTrue (FlashQuestions.ASK_LIST_LENGTH >= PARTS_TO_BUILD_ROCKET);
+		UnityEngine.Assertions.Assert.IsTrue (FlashQuestions.ASK_LIST_LENGTH <= PARTS_TO_BUILD_ROCKET); // having enough rocket parts to run FlashQuestions should imply having enough questions
 		SetNumParts (GetNumParts () + 1);
 	}
 
