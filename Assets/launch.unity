@@ -637,6 +637,8 @@ MonoBehaviour:
   - scale: 0
     yPos: 0
   transitionTime: 2
+  verticalPadding: 0.3
+  rocket: {fileID: 216424642}
 --- !u!1 &129064944
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +826,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 216424640}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f99a5e42ce3449db8a797bcdc395e2b, type: 3}
   m_Name: 
@@ -1428,7 +1430,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 262504410}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0481a2c619d5e449fa6f67d721b5e10c, type: 3}
   m_Name: 
