@@ -13,10 +13,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] float minSpeedFactor = 0.25f;
 	[SerializeField] KickoffLaunch launch = null;
 	[SerializeField] FlashQuestions flashQuestions = null;
-	[SerializeField] Celebrate celebrate;
+	[SerializeField] Celebrate celebrate = null;
 
-//	float startTime;
-//	float prevTime;
 	float minSpeed;
 	public float speed { get; private set; } // km per second
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
@@ -63,7 +61,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 				height = 0;
 				speed = 0;
 			}
-			background.SetRocketSpeed (speed);
+			background.SetRocketSpeed (speed, accelerationOnCorrect);
 			if (height > recordHeight) {
 				recordHeight = height;
 				MDPrefs.SetFloat (prefsKey, recordHeight);
@@ -100,15 +98,13 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	}
 
-//	IEnumerator AutoAnswerQuestion() {
-//		startTime = Time.time;
-//		while(numAnswersGiven < FlashQuestions.ASK_LIST_LENGTH) {
-//			prevTime = Time.time;
-//			OnCorrectAnswer(null, false);
-//			yield return new WaitForSeconds(targetAnswerTime);
-//		}
-//		noMoreQuestions = true;
-//	}
+	IEnumerator AutoAnswerQuestion() {
+		while(numAnswersGiven < FlashQuestions.ASK_LIST_LENGTH) {
+			OnCorrectAnswer(null, false);
+			yield return new WaitForSeconds(targetAnswerTime);
+		}
+		noMoreQuestions = true;
+	}
 
 	void OnDone() {
 		isRunning = false;

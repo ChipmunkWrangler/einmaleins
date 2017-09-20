@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScrollBackground : MonoBehaviour {
-	[SerializeField] float scrollSpeedFactor;
-	[SerializeField] float tileSizeY;
+	[SerializeField] float[] scrollSpeedMultiplier = null;
+	[SerializeField] float maxScrollSpeed = 0.0001f;
+	[SerializeField] float tileSizeY = 80.0f;
 
 	Vector3 startPosition;
 	float baseOffset;
@@ -20,9 +21,10 @@ public class ScrollBackground : MonoBehaviour {
 		transform.position = startPosition + Vector3.up * newOffset;
 	}
 
-	public void SetRocketSpeed(float speed ) {
+	public void SetRocketSpeed(float speed, float maxSpeed ) {
 		// This is assumed to be called every frame, so you should probably pull instead 
 		baseOffset = transform.position.y - startPosition.y;
-		scrollSpeed = speed * scrollSpeedFactor;
+		float speedFraction = speed / maxSpeed;
+		scrollSpeed = speedFraction * maxScrollSpeed * scrollSpeedMultiplier[RocketParts.GetUpgradeLevel()];
 	}
 }
