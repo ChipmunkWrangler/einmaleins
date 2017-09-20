@@ -14,7 +14,9 @@ public class StatsController : MonoBehaviour {
 			int i = question.a - 1;
 			int j = question.b - 1;
 			levelSeen[i][j] = columns [i].SetMasteryLevel (j, question.stage, question.correctInARow, levelSeen[i][j]);
-			levelSeen[j][i] = columns [j].SetMasteryLevel (i, question.stage, question.correctInARow, levelSeen[j][i]);
+			if (i != j) {
+				levelSeen [j] [i] = columns [j].SetMasteryLevel (i, question.stage, question.correctInARow, levelSeen [j] [i]);
+			}
 		}
 		Save ();
 	}
