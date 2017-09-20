@@ -603,7 +603,7 @@ Transform:
   m_GameObject: {fileID: 120347945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3.12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9347117, y: 0.9347117, z: 0.9347117}
   m_Children:
   - {fileID: 1433111214}
   - {fileID: 537378125}
@@ -622,21 +622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61be346aedf0d4cfaa0ccce9df96dda9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  play:
-    scale: 1
-    yPos: -3.12
-  solarSystemByUpgradeLevel:
-  - scale: 0.17
-    yPos: -3.12
-  - scale: 0
-    yPos: 0
-  - scale: 0
-    yPos: 0
-  - scale: 0
-    yPos: 0
-  - scale: 0
-    yPos: 0
-  transitionTime: 2
   verticalPadding: 0.3
   rocket: {fileID: 216424642}
 --- !u!1 &129064944
@@ -811,7 +796,6 @@ GameObject:
   - component: {fileID: 216424644}
   - component: {fileID: 216424643}
   - component: {fileID: 216424642}
-  - component: {fileID: 216424641}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -819,25 +803,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &216424641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114988698509211160, guid: 3c39545835daf4e3580e505f4596504b,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 216424640}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f99a5e42ce3449db8a797bcdc395e2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thrust: {fileID: 1170303753}
-  minY: -12
-  maxY: 3
-  baseY: -2
-  maxSpeed: 3
-  earth: {fileID: 2119229087}
-  earthSpeed: 0.0001
 --- !u!23 &216424642
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -887,8 +852,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 216424640}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.12, z: -1}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: 0, y: 2.09, z: -1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 9895738}
   m_Father: {fileID: 262504411}
@@ -2122,7 +2087,7 @@ Prefab:
     - target: {fileID: 224641568189213898, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 224023531985672196, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -2142,7 +2107,7 @@ Prefab:
     - target: {fileID: 224023531985672196, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -185
       objectReference: {fileID: 0}
     - target: {fileID: 224023531985672196, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -2152,7 +2117,7 @@ Prefab:
     - target: {fileID: 224023531985672196, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -2172,7 +2137,7 @@ Prefab:
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -65
       objectReference: {fileID: 0}
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -2197,7 +2162,7 @@ Prefab:
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -65
       objectReference: {fileID: 0}
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -4987,11 +4952,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2053896169}
---- !u!1 &2119229087 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1713983474969716, guid: 44625a12812304180a43f0b1dda580eb,
-    type: 2}
-  m_PrefabInternal: {fileID: 1433111213}
 --- !u!1 &2140881248
 GameObject:
   m_ObjectHideFlags: 0

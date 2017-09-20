@@ -9,19 +9,8 @@ public class ForegroundDisplaySettings {
 }
 
 public class ShowSolarSystem : MonoBehaviour {
-	[SerializeField] ForegroundDisplaySettings play = null;
-	[SerializeField] ForegroundDisplaySettings[] solarSystemByUpgradeLevel = null;
-	[SerializeField] float transitionTime = 2.0f;
 	[SerializeField] float verticalPadding = 0.1f; // 1.0 would be the whole screen
 	[SerializeField] Renderer rocket = null;
-
-	public void ShowResults() {
-		MoveTo(solarSystemByUpgradeLevel[RocketParts.GetUpgradeLevel()], transitionTime);
-	}
-
-	void Start () {
-		MoveTo (play, 0);
-	}
 
 	void Update() {
 		float viewportTop = Camera.main.WorldToViewportPoint(rocket.bounds.max).y + verticalPadding;
