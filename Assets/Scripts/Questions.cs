@@ -6,7 +6,7 @@ using System.Linq;
 public abstract class Questions : MonoBehaviour {
 	public Question[] questions { get; private set; }
 
-	const int maxNum = 10;
+	public const int maxNum = 10;
 	protected List<int> toAsk = new List<int>(); // list of indices in questions[]
 	protected const string prefsKey = "questions";
 

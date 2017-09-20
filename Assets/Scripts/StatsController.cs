@@ -18,6 +18,9 @@ public class StatsController : MonoBehaviour {
 				levelSeen [j] [i] = columns [j].SetMasteryLevel (i, question.stage, question.correctInARow, levelSeen [j] [i]);
 			}
 		}
+		foreach (StatsColumnController column in columns) {
+			column.DoneSettingMasteryLevels ();
+		}
 		Save ();
 	}
 

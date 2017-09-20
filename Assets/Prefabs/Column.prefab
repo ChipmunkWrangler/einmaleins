@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 222224728664830974}
   - component: {fileID: 114678680511088030}
   - component: {fileID: 114545320254395000}
+  - component: {fileID: 114883666880762260}
   m_Layer: 5
   m_Name: Factor (1)
   m_TagString: Untagged
@@ -337,6 +338,8 @@ MonoBehaviour:
   - {fileID: 114174423993411606}
   - {fileID: 114746656756751420}
   - {fileID: 114087074422446182}
+  header: {fileID: 114329627375299462}
+  rowHeader: {fileID: 0}
   premasteredAlpha: 0.7
   fadeTime: 5
   highlightColor: {r: 0.9098039, g: 0.9098039, b: 0, a: 1}
@@ -536,7 +539,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ac5ab3e05fb0c4f6c8a7eb275d74ff88, type: 3}
-    m_FontSize: 70
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -547,7 +550,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 2
 --- !u!114 &114746656756751420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -629,6 +632,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114883666880762260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1875254278339888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.13725491, g: 0.09019608, b: 0.33333334, a: 0.5019608}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!222 &222004028294497888
 CanvasRenderer:
   m_ObjectHideFlags: 1
