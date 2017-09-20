@@ -1835,7 +1835,7 @@ Prefab:
     - target: {fileID: 114373970780218426, guid: 168338c7e4fe642dc8a8f7dfd09f58ef,
         type: 2}
       propertyPath: maxScrollSpeed
-      value: -8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 168338c7e4fe642dc8a8f7dfd09f58ef, type: 2}
