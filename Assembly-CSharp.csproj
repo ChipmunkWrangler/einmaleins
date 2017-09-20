@@ -80,6 +80,7 @@
      <Compile Include="Assets\Scripts\Questions.cs" />
      <Compile Include="Assets\Scripts\RocketBuilder.cs" />
      <Compile Include="Assets\Scripts\RocketMotion.cs" />
+     <Compile Include="Assets\Scripts\RocketMotionSolarSystem.cs" />
      <Compile Include="Assets\Scripts\RocketPartCounter.cs" />
      <Compile Include="Assets\Scripts\RocketParts.cs" />
      <Compile Include="Assets\Scripts\Score.cs" />
