@@ -618,6 +618,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 114500065999471308, guid: 2ff712eae9d0f48ee80c09db91679d00,
         type: 2}
+      propertyPath: textsToFadeOut.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114500065999471308, guid: 2ff712eae9d0f48ee80c09db91679d00,
+        type: 2}
       propertyPath: textsToHighlight.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -747,6 +752,16 @@ Prefab:
       propertyPath: scoreCountdownDelay
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114500065999471308, guid: 2ff712eae9d0f48ee80c09db91679d00,
+        type: 2}
+      propertyPath: parentToHide
+      value: 
+      objectReference: {fileID: 1238403552}
+    - target: {fileID: 114500065999471308, guid: 2ff712eae9d0f48ee80c09db91679d00,
+        type: 2}
+      propertyPath: textsToFadeOut.Array.data[0]
+      value: 
+      objectReference: {fileID: 1238403549}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2ff712eae9d0f48ee80c09db91679d00, type: 2}
   m_IsPrefabParent: 0
@@ -773,6 +788,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1238403547}
   m_Script: {fileID: 11500000, guid: 724261f2c3195438e92bf894f0b8e891, type: 3}
+--- !u!1 &1238403552 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1780407775647980, guid: 2ff712eae9d0f48ee80c09db91679d00,
+    type: 2}
+  m_PrefabInternal: {fileID: 1238403547}
 --- !u!1001 &1310004273
 Prefab:
   m_ObjectHideFlags: 0

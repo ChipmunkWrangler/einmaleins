@@ -7,6 +7,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	[SerializeField] Text numText = null;
 	[SerializeField] Image[] imagesToHighlight = null;
 	[SerializeField] Text[] textsToHighlight = null;
+	[SerializeField] Text[] textsToFadeOut = null;
 	[SerializeField] Color highlightColour;
 	[SerializeField] Vector3 highlightScale;
 	[SerializeField] float highlightFadeTime = 0.5f;
@@ -23,7 +24,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	}
 
 	void Start () {
-		UpdateText (RocketParts.GetNumParts());
+		UpdateText (RocketParts.GetNumParts(), true);
 	}
 
 	public void OnQuestionChanged(Question question) {
@@ -79,6 +80,11 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 		}
 	}
 
+	IEnumerator HideText(Text text) {
+		yield return StartCoroutine (Scale (Vector3.zero, highlightFadeTime, text.gameObject));
+		text.text = "";
+	}
+
 	IEnumerator FadeImage(Color end, float fadeTime, Image image) {
 		Color startColor = image.color;
 		float startTime = Time.time;
@@ -90,8 +96,21 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 		}
 	}
 
-	void UpdateText (int numParts) {
-		numText.text = numParts + " von " +  RocketParts.GetNumPartsRequired();
+	void UpdateText (int numParts, bool instant = false) {
+		if (RocketParts.GetUpgradeLevel () >= RocketParts.GetNumUpgrades () && numParts == 0) {
+			if (numText.text.Length > 0) {
+				numText.text = "";
+				foreach (Text text in textsToFadeOut) {
+					if (instant) {
+						text.text = "";
+					} else {
+						StartCoroutine (HideText (text));
+					}
+				}
+			}
+		} else {
+			numText.text = numParts + " von " + RocketParts.GetNumPartsRequired ();
+		}
 	}
 
 	IEnumerator CountTextDown(int oldScore, int newScore) {

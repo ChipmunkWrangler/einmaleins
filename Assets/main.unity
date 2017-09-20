@@ -4223,7 +4223,7 @@ Prefab:
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 278.64584
+      value: 265
       objectReference: {fileID: 0}
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -4233,7 +4233,7 @@ Prefab:
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 557.2917
+      value: 530
       objectReference: {fileID: 0}
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -4248,7 +4248,7 @@ Prefab:
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 653.125
+      value: 650
       objectReference: {fileID: 0}
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -4258,7 +4258,7 @@ Prefab:
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 191.66667
+      value: 240
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fdd7f431d6405436aaf88aceb283e9cb, type: 2}
@@ -4517,6 +4517,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1698820438}
     m_Modifications:
+    - target: {fileID: 114500065999471308, guid: 2ff712eae9d0f48ee80c09db91679d00,
+        type: 2}
+      propertyPath: textsToFadeOut.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224678402266117942, guid: 2ff712eae9d0f48ee80c09db91679d00,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -4638,6 +4643,20 @@ Prefab:
       propertyPath: highlightScale.y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114500065999471308, guid: 2ff712eae9d0f48ee80c09db91679d00,
+        type: 2}
+      propertyPath: parentToHide
+      value: 
+      objectReference: {fileID: 1873232301}
+    - target: {fileID: 1780407775647980, guid: 2ff712eae9d0f48ee80c09db91679d00, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114500065999471308, guid: 2ff712eae9d0f48ee80c09db91679d00,
+        type: 2}
+      propertyPath: textsToFadeOut.Array.data[0]
+      value: 
+      objectReference: {fileID: 1873232302}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2ff712eae9d0f48ee80c09db91679d00, type: 2}
   m_IsPrefabParent: 0
@@ -4646,6 +4665,17 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224678402266117942, guid: 2ff712eae9d0f48ee80c09db91679d00,
     type: 2}
   m_PrefabInternal: {fileID: 1873232299}
+--- !u!1 &1873232301 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1780407775647980, guid: 2ff712eae9d0f48ee80c09db91679d00,
+    type: 2}
+  m_PrefabInternal: {fileID: 1873232299}
+--- !u!114 &1873232302 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114987161137949244, guid: 2ff712eae9d0f48ee80c09db91679d00,
+    type: 2}
+  m_PrefabInternal: {fileID: 1873232299}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1884880960 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1608065647123664, guid: fdd7f431d6405436aaf88aceb283e9cb,
