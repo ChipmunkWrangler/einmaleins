@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RocketMotionSolarSystem : MonoBehaviour {
 	[SerializeField] FlashThrust thrust = null;
-	[SerializeField] float heightScale = 0.0001f;
+	[SerializeField] Params paramObj = null;
 	float minY;
 
 	void Start() {
@@ -14,7 +14,7 @@ public class RocketMotionSolarSystem : MonoBehaviour {
 	void Update () {
 		Vector3 pos = gameObject.transform.position;
 
-		pos.y = minY + thrust.height * heightScale * gameObject.transform.parent.localScale.y;
+		pos.y = minY + thrust.height * paramObj.heightScale * gameObject.transform.parent.localScale.y;
 		gameObject.transform.position = pos;
 	}
 }

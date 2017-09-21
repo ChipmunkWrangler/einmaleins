@@ -14,7 +14,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] KickoffLaunch launch = null;
 	[SerializeField] FlashQuestions flashQuestions = null;
 	[SerializeField] Celebrate celebrate = null;
-
+	[SerializeField] GameObject oldRecord = null;
+	[SerializeField] Params paramObj = null;
 	float minSpeed;
 	public float speed { get; private set; } // km per second
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
@@ -37,6 +38,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		apogeeText.text = "0";
 		recordHeight = MDPrefs.GetFloat (prefsKey, 0);
 		recordHeightText.text = recordHeight.ToString (numFormat) + unit;
+		var recordPos = oldRecord.transform.position;
+		recordPos.y += recordHeight * paramObj.heightScale * oldRecord.transform.parent.localScale.y;
+		oldRecord.transform.position = recordPos;
 		UnityEngine.Assertions.Assert.AreEqual(RocketParts.GetNumUpgrades() + 1, maxAttainableHeights.Length);
 		CalcParams(maxAttainableHeights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
 //		accelerationOnCorrect = CalcAcceleration(maxAttainableHeights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
