@@ -12,12 +12,14 @@ public class ShowSolarSystem : MonoBehaviour {
 	[SerializeField] float verticalPadding = 0.1f; // 1.0 would be the whole screen
 	[SerializeField] Renderer rocket = null;
 	[SerializeField] GameObject particleParent = null;
-	[SerializeField] float[] planetScale = null;
+	[SerializeField] Renderer[] planets = null;
+	[SerializeField] Renderer earth = null;
 	Vector3 originalScale;
 	Transform particleSystemTransform;
 
 	void Start() {
 		originalScale = transform.localScale;
+		AdjustPlanetPositions ();
 	}
 
 	void Update() {
@@ -37,5 +39,14 @@ public class ShowSolarSystem : MonoBehaviour {
 
 	public void Reset() {
 		transform.localScale = originalScale;
+	}
+
+	void AdjustPlanetPositions() {
+		float earthAndRocketOffsets = earth.bounds.extents.y + rocket.bounds.size.y;
+		foreach (var planet in planets) {
+			Vector3 newPos = planet.transform.position;
+			newPos.y += planet.bounds.extents.y + earthAndRocketOffsets; // planet.transform.y could be replaced by FlashThrust.maxAttainableHeights
+			planet.transform.position = newPos;
+		}
 	}
 }
