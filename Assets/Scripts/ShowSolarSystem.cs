@@ -12,6 +12,7 @@ public class ShowSolarSystem : MonoBehaviour {
 	[SerializeField] float verticalPadding = 0.1f; // 1.0 would be the whole screen
 	[SerializeField] Renderer rocket = null;
 	[SerializeField] GameObject particleParent = null;
+	[SerializeField] float[] planetScale = null;
 	Vector3 originalScale;
 	Transform particleSystemTransform;
 
