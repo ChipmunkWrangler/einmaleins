@@ -46,8 +46,10 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer {
 	}
 
 	public void OnBackspace() {
-		answerTxt = answerTxt.Substring(0, answerTxt.Length - 1);
-		UpdateText ();
+		if (answerTxt.Length > 0) {
+			answerTxt = answerTxt.Substring (0, answerTxt.Length - 1);
+			UpdateText ();
+		}
 	}
 		
 	public void OnSubmitAnswer() {
