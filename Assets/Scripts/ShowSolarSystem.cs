@@ -44,8 +44,12 @@ public class ShowSolarSystem : MonoBehaviour {
 	void AdjustPlanetPositions() {
 		float earthAndRocketOffsets = earth.bounds.extents.y + rocket.bounds.size.y;
 		foreach (var planet in planets) {
-			Vector3 newPos = planet.transform.position;
-			newPos.y += planet.bounds.extents.y + earthAndRocketOffsets; // planet.transform.y could be replaced by FlashThrust.maxAttainableHeights
+			Vector3 newPos = planet.transform.position;  // planet.transform.y could be replaced by FlashThrust.maxAttainableHeights
+			float offset = planet.bounds.extents.y + earthAndRocketOffsets;
+			if (planet.transform.localPosition.y < 0) {
+				offset = -offset;
+			}
+			newPos.y += offset;
 			planet.transform.position = newPos;
 		}
 	}
