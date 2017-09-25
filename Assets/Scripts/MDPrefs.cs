@@ -50,12 +50,12 @@ public static class MDPrefs {
 		}
 	}
 
-	public static int[] GetIntArray( string key ){
+	public static int[] GetIntArray( string key, int dfault = default(int) ){
 		key += ":IntArray";
 		int length = GetLength (key);
 		int[] returns = new int[length];
 		for(int i = 0; i < length; ++i) {
-			returns.SetValue(MDPrefs.GetInt(key + ":" + i, default(int)), i);
+			returns.SetValue(MDPrefs.GetInt(key + ":" + i, dfault), i);
 		}
 		return returns;
 	}
@@ -103,7 +103,7 @@ public static class MDPrefs {
 	}
 
 	static string GetLengthKey(string key) { 
-		return key + ":ArrayLen";
+		return GetKey(key) + ":ArrayLen";
 	}
 
 	static int GetLength(string key) {
