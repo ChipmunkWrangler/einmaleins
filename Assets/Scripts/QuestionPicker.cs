@@ -14,6 +14,7 @@ public class QuestionPicker : MonoBehaviour {
 
 	void Start () {
 		SplitSubscribers ();
+	//	Test ();
 	}
 
 	public void NextQuestion() {
@@ -29,16 +30,8 @@ public class QuestionPicker : MonoBehaviour {
 			return;
 		}
 		bool isCorrect = curQuestion.IsAnswerCorrect (answer);
-		bool isNewlyMastered = curQuestion.UpdateState (isCorrect, Time.time - questionTime);
-		if (isCorrect) {
-			foreach (OnCorrectAnswer subscriber in onCorrectAnswerSubscribers) {
-				subscriber.OnCorrectAnswer (curQuestion, isNewlyMastered);
-			}
-		} else {
-			foreach (OnWrongAnswer subscriber in onWrongAnswerSubscribers) {
-				subscriber.OnWrongAnswer ();
-			}
-		}
+		float answerTime = Time.time - questionTime;
+		HandleAnswer (isCorrect, answerTime);
 		questions.Save ();
 	}
 		
@@ -61,5 +54,54 @@ public class QuestionPicker : MonoBehaviour {
 				onWrongAnswerSubscribers.Add (s);
 			}
 		}
+	}
+
+	void HandleAnswer (bool isCorrect, float answerTime)
+	{
+		bool wasNew = curQuestion.IsNew ();
+		bool isNewlyMastered = curQuestion.UpdateState (isCorrect, answerTime);
+		if (isCorrect) {
+			foreach (OnCorrectAnswer subscriber in onCorrectAnswerSubscribers) {
+				subscriber.OnCorrectAnswer (curQuestion, isNewlyMastered);
+			}
+		}
+		else {
+			foreach (OnWrongAnswer subscriber in onWrongAnswerSubscribers) {
+				subscriber.OnWrongAnswer (wasNew);
+			}
+		}
+	}
+
+	void Test() {
+		float totalTime = 0;
+		int day = 0;
+		const float CHANCE_WRONG = 0.25f;
+		const float MIN_ANSWER_TIME = 5.0f;
+		const float MAX_ANSWER_TIME = 60.0f;
+		while(true) {
+			++day;
+			Debug.Log ("Day " + day);
+			questions.Reset();
+			NextQuestion ();
+			if (curQuestion == null) {
+				break;
+			}
+			float dayTime = 0;
+			while (curQuestion != null) {
+				bool right;
+				float time = 0;
+				do {
+					float chance = Mathf.Clamp01((float)curQuestion.difficulty / Question.NEW_CARD_DIFFICULTY);
+					right = Random.value > CHANCE_WRONG * chance; 
+					time += Random.Range (MIN_ANSWER_TIME, MAX_ANSWER_TIME);
+					HandleAnswer (right, time);
+				} while (!right);
+				dayTime += time;
+				NextQuestion();
+			}
+			Debug.Log ("dayTime = " + totalTime);
+			totalTime += dayTime;
+		}
+		Debug.Log ("totalTime = " + totalTime);
 	}
 }

@@ -35,9 +35,12 @@ public abstract class Questions : MonoBehaviour {
 		SaveQuestionsList ();
 	}
 
+	public abstract void Reset();
+
 	protected virtual void Load() {
 		LoadQuestionsList ();
 	}
+
 	protected abstract void FillToAsk ();
 
 	protected void LoadQuestionsList ()
