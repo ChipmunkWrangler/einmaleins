@@ -4,35 +4,65 @@ using UnityEngine;
 using System.Linq;
 
 /*
- * At the beginning of the day, make an "active" list: all the wrongs, then the hards, then the oks, then the fasts.
- * Fill the list up to N cards with new cards.
- * A wrong answer causes the card to repeat until right, then go to "wrong", regardless of its previous category
- * A right answer shifts the card depending on answer time:
-  * > 1m: hard
-  * <= 1m and > 10s: ok
-  * <= 10s: fast, or mastered if already fast.
- * Track the number of times answered correctly since the last wrong answer. If a card is answered correctly seven times in a row, it also counts as mastered regardless of times.
- * Once the active list is empty, create a new active list with wrongs, hards, and oks, and repeat. Do this twice.
- * Now every card that is not >= fast has been shown thrice.
- * Create an active list with wrongs only. Repeat until empty.
- * If a card would be shown twice in a row, and there are still cards left or new cards available, move it one back in the list.
- */
-public class SlowQuestions : Questions {
-	const int MIN_INITIAL_ASK_LIST_LENGTH = 10;
-	const int TIMES_TO_REPEAT_HARDS = 3;
-	const int TIMES_TO_REPEAT_OKS = 3;
-	const int TIMES_TO_REPEAT_FASTS = 1;
-	const int TIMES_TO_ADD_NEW = 3;
-	int toAskListNum = -1; // -1: no lists shown today, toAsk not generated. 0 => toAsk is today's first list. etc.
+ * Track effort and frustration of player on a given day.
+ * Wrong answers are frustrating, fast answers are low effort, etc.
+ * If effort < EFFORT_PER_DAY, ask another question:
+  * if frustration > 0, pick the easiest nonmastered card
+  * otherwise pick the hardest nonmastered card that wasn't just asked
+  * See Question class for question difficulties
+*/
+public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
+	const int EFFORT_NEWWRONG = 7; // N.B. Since the question is repeated until it is correct, the actual effort will be >= 8. Also, it will likely be repeated soon.
+	const int EFFORT_WRONG = 1; // N.B. Since the question is repeated until it is correct, the actual effort will be >= 1.
+	const int EFFORT_RIGHT = 3;
+	const int EFFORT_FAST = 1;
+	const int FRUSTRATION_WRONG = 2; // N.B. Since the question is repeated until it is correct, a wrong followed by a right will only add net 0 (if fast) or 1 (if slow).
+	const int FRUSTRATION_RIGHT = -1;
+	const int FRUSTRATION_FAST = -2;
+	const int EFFORT_PER_DAY = 30;
+	const int MIN_FRUSTRATION = -2;
+	const int MAX_FRUSTRATION = 3;
+	int previousQuestionIdx = -1;
+	int frustration;
+	int effort;
+
+	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
+		if (question.LastAnswerWasFast ()) {
+			effort += EFFORT_FAST;
+			frustration += FRUSTRATION_FAST;
+		} else {
+			effort += EFFORT_RIGHT;
+			frustration += FRUSTRATION_RIGHT;
+		}
+		frustration = Mathf.Clamp (frustration, MIN_FRUSTRATION, MAX_FRUSTRATION);
+	}
+
+	public void OnWrongAnswer(bool wasNew) {
+		frustration += FRUSTRATION_WRONG;
+		frustration = Mathf.Clamp (frustration, MIN_FRUSTRATION, MAX_FRUSTRATION);
+		effort += wasNew ? EFFORT_NEWWRONG : EFFORT_WRONG;
+	}
 
 	public override void Save() {
 		base.Save();
-		SaveAskList (prefsKey + ":askList:");
+		MDPrefs.SetDateTime (prefsKey + ":date", System.DateTime.Today);
+		MDPrefs.SetInt (prefsKey + ":frustration", frustration);
+		MDPrefs.SetInt (prefsKey + ":effort", effort);
+	}
+
+	public override void Reset() {
+		frustration = 0;
+		effort = 0;
 	}
 		
 	protected override void Load() {
 		base.Load();
-		LoadAskList (prefsKey + ":askList:");
+		if (MDPrefs.GetDateTime (prefsKey + ":date", System.DateTime.MinValue) < System.DateTime.Today) {
+			Reset ();  // yesterday's data are obsolete
+		} else {
+			frustration = MDPrefs.GetInt (prefsKey + ":frustration", 0);
+			effort = MDPrefs.GetInt (prefsKey + ":effort", 0);
+		}
 	}
 
 	protected override void FillToAsk() {
@@ -40,63 +70,22 @@ public class SlowQuestions : Questions {
 			Debug.Log ("AskList count " + toAsk.Count);
 			return;
 		}
-		++toAskListNum;
-		Debug.Log ("Filling list number " + toAskListNum);
-		AppendByStage (Question.Stage.Wrong);
-		if (toAskListNum < TIMES_TO_REPEAT_HARDS) {
-			AppendByStage (Question.Stage.Hard);
-		}
-		if (toAskListNum < TIMES_TO_REPEAT_OKS) {
-			AppendByStage (Question.Stage.Ok);
-		}
-		if (toAskListNum < TIMES_TO_REPEAT_FASTS) {
-			AppendByStage (Question.Stage.Fast);
-		}
-		if (toAskListNum < TIMES_TO_ADD_NEW) {
-			for (int i = 0; i < questions.Length && toAsk.Count < MIN_INITIAL_ASK_LIST_LENGTH; ++i) {
-				if (questions [i].stage == Question.Stage.Inactive) {
-					toAsk.Add (i);
-				}
-			}
-		}
-//		foreach (int qIdx in toAsk) {
-//			Debug.Log (questions [qIdx]);
-//		}
-		foreach (var question in questions) {
-			if (question.stage == Question.Stage.Wrong) {
-				question.stage = Question.Stage.Hard;
-			}
+		Debug.Log("frustration = " + frustration + " effort = " + effort);
+		int expectedReviewEffort = questions.Count (q => q.difficulty >= Question.REVIEW_DIFFICULTY) * EFFORT_RIGHT;
+		bool reviewQuestionsOnly = effort + expectedReviewEffort > EFFORT_PER_DAY;
+		var candidates = questions.Where (q => IsQuestionAllowed (q, reviewQuestionsOnly));
+		var candidatesByDifficulty = (frustration > 0) ? candidates.OrderBy (q => q.difficulty) : candidates.OrderByDescending (q => q.difficulty);
+		Question question = candidatesByDifficulty.ThenBy (q => q.lastAnsweredAt).FirstOrDefault ();
+		if (question != null) {
+			previousQuestionIdx = question.idx;
+			toAsk.Add (previousQuestionIdx);
+		} else {
+			previousQuestionIdx = -1;
 		}
 	}
 
-	void AppendByStage (Question.Stage stage)
-	{
-		for (int i = 0; i < questions.Length; ++i) {
-			if (questions [i].stage == stage) {
-				toAsk.Add (i);
-			}
-		}
+	bool IsQuestionAllowed(Question q, bool reviewQuestionsOnly) {
+		return q.idx != previousQuestionIdx && q.difficulty > Question.MASTERED_DIFFICULTY && (!reviewQuestionsOnly || q.difficulty >= Question.REVIEW_DIFFICULTY);
 	}
 
-	void LoadAskList(string prefix) {
-		if (MDPrefs.GetDateTime (prefix + "date", System.DateTime.MinValue) < System.DateTime.Today) {
-			return; // yesterday's lists are obsolete
-		}
-		toAskListNum = MDPrefs.GetInt (prefix + "toAskListNum", -1);
-		for( int i = 0; i < MDPrefs.GetInt (prefix + "ArrayLen", -1); ++i) {
-			toAsk.Add( MDPrefs.GetInt (prefix + i, -1));
-		}
-
-	}
-
-	void SaveAskList (string prefix)
-	{
-		MDPrefs.SetDateTime (prefix + "date", System.DateTime.Today);
-		MDPrefs.SetInt (prefix + "toAskListNum", toAskListNum);
-		int len = toAsk.Count;
-		MDPrefs.SetInt (prefix + "ArrayLen", len);
-		for( int i = 0; i < len; ++i) {
-			MDPrefs.SetInt (prefix + i, toAsk [i]);
-		}
-	}
 }

@@ -4,23 +4,22 @@ using UnityEngine;
 using System.Linq;
 
 public class Question {
-	public enum Stage { //rename
-		Inactive,
-		Wrong,
-		Hard,
-		Ok,
-		Fast,
-		Mastered
-	}
-	public Stage stage;
 	public int a {  get; private set; }
 	public int b { get; private set; }
-	public int correctInARow { get; private set; }
 	public int idx { get; private set; }
+	public int difficulty { get; private set; }
+	public System.DateTime lastAnsweredAt { get; private set; }
+
+	public const int NEW_CARD_DIFFICULTY = 3;
+	public const int MASTERED_DIFFICULTY = 0;
+	public const int REVIEW_DIFFICULTY = 5; // must review all of these before quitting for the day
 
 	const float FAST_TIME = 15.0f;
 	const float OK_TIME = 60.0f;
-	public const int CORRECT_BEFORE_MASTERED = 7;
+	const int ADD_TO_DIFFICULTY_FAST = -3;
+	const int ADD_TO_DIFFICULTY_OK = -1;
+	const int ADD_TO_DIFFICULTY_WRONG = 3; // really 2 because a wrong question will be repeated and, if answered correctly, ADD_TO_DIFFICULTY_OK applied.
+	const int MAX_DIFFICULTY = 6;
 	const int NUM_ANSWER_TIMES_TO_RECORD = 3;
 	string prefsKey;
 	List<float> answerTimes;
@@ -29,7 +28,7 @@ public class Question {
 	public Question(int _a, int _b) {
 		a = _a;
 		b = _b;
-		stage = Stage.Inactive;
+		difficulty = NEW_CARD_DIFFICULTY;
 	}
 
 	public bool IsAnswerCorrect(string answer) {
@@ -41,32 +40,34 @@ public class Question {
 		return false;
 	}
 
+	public bool IsNew() {
+		return answerTimes.Count == 0 && difficulty == NEW_CARD_DIFFICULTY;
+	}
+
+	public bool LastAnswerWasFast() {
+		return answerTimes.Count > 0 && answerTimes [answerTimes.Count - 1] < FAST_TIME;
+	}
+
 	public float GetAverageAnswerTime() {
 		return (answerTimes.Count == 0) ? float.MaxValue : answerTimes.Average ();
 	}
 
 	public bool UpdateState(bool isCorrect, float timeRequired) {
 		bool isNewlyMastered = false;
-		if (isCorrect && stage != Stage.Wrong) { // once it is wrong, it stays wrong until the next list is generated. "Wrong" means "not right on the first try".)
-			++correctInARow;
+		if (isCorrect) {
 			RecordAnswerTime (timeRequired);
-			if (timeRequired > OK_TIME) {
-				SetStage(Stage.Hard);
-			} else if (stage != Stage.Mastered) {
-				if (correctInARow >= CORRECT_BEFORE_MASTERED) {
-					isNewlyMastered = SetStage (Stage.Mastered);
-				} else if (timeRequired < FAST_TIME) {
-					isNewlyMastered = SetStage((stage == Stage.Fast) ? Stage.Mastered : Stage.Fast);
-				} else {
-					UnityEngine.Assertions.Assert.IsTrue (timeRequired < OK_TIME);
-					SetStage(Stage.Ok);
+			lastAnsweredAt = System.DateTime.UtcNow;
+			if (difficulty > MASTERED_DIFFICULTY) {
+				difficulty += (timeRequired <= FAST_TIME) ? ADD_TO_DIFFICULTY_FAST : ADD_TO_DIFFICULTY_OK;
+				if (difficulty <= MASTERED_DIFFICULTY) {
+					difficulty = MASTERED_DIFFICULTY;
+					isNewlyMastered = true;
 				}
-			}
+			} // else once it is mastered we leave it alone
 		} else {
-			SetStage(Stage.Wrong);
-			correctInARow = 0;
+			difficulty += ADD_TO_DIFFICULTY_WRONG;
 		}
-
+		difficulty = Mathf.Clamp (difficulty, MASTERED_DIFFICULTY, MAX_DIFFICULTY);
 		Debug.Log(ToString());
 		return isNewlyMastered;
 	}
@@ -144,30 +145,27 @@ public class Question {
 		prefsKey = _prefsKey;
 		idx = _idx;
 		string stageKey = prefsKey + ":stage";
-		if (MDPrefs.HasKey (stageKey)) {
-			try {
-				stage = (Stage) System.Enum.Parse(typeof(Stage), MDPrefs.GetString (stageKey));
-			} catch (System.ArgumentException e) {
-				Debug.Log ("Invalid stage " + e);
-			}
-
-		}
-		correctInARow = MDPrefs.GetInt(prefsKey + ":inarow", 0);
+		if (MDPrefs.HasKey (prefsKey + ":difficulty")) {
+			difficulty = MDPrefs.GetInt (prefsKey + ":difficulty", NEW_CARD_DIFFICULTY);
+		} else if (MDPrefs.HasKey (stageKey)) {
+			difficulty = (MDPrefs.GetString (stageKey) == "Mastered") ? MASTERED_DIFFICULTY : NEW_CARD_DIFFICULTY;
+			MDPrefs.DeleteKey (stageKey);
+		} 
 		answerTimes = MDPrefs.GetFloatArray (prefsKey + ":times").ToList();
 		wasMastered = MDPrefs.GetBool (prefsKey + ":wasMastered");
+		lastAnsweredAt = MDPrefs.GetDateTime (prefsKey + "lastAnsweredAt", System.DateTime.MaxValue);
 	}
 
 	public void Save() {
 		UnityEngine.Assertions.Assert.AreNotEqual (prefsKey.Length, 0);
-		MDPrefs.SetString(prefsKey + ":stage", stage.ToString());
-		MDPrefs.SetInt(prefsKey + ":inarow", correctInARow);
+		MDPrefs.SetInt(prefsKey + ":difficulty", difficulty);
 		MDPrefs.SetFloatArray (prefsKey + ":times", answerTimes.ToArray());
 		MDPrefs.SetBool (prefsKey + ":wasMastered", wasMastered);
-//		Debug.Log ("Saving " + ToString ());
+		MDPrefs.SetDateTime (prefsKey + "lastAnsweredAt", lastAnsweredAt);
 	}
 
 	public override string ToString() {
-		string s = idx + " is " + a + " * " + b + " : " + stage + " wasMastered = " + wasMastered + " correct = " + correctInARow + " times = ";
+		string s = idx + " is " + a + " * " + b + " : difficulty = " + difficulty + " wasMastered = " + wasMastered + " last answered at = " + lastAnsweredAt + " times = ";
 		foreach (var time in answerTimes) {
 			s += time + " ";
 		}
@@ -182,16 +180,4 @@ public class Question {
 		answerTimes.Add (timeRequired);
 
 	}
-
-	bool SetStage (Stage newStage)
-	{
-		stage = newStage;
-		bool isNewlyMastered = false;
-		if (newStage == Stage.Mastered) {
-			isNewlyMastered = !wasMastered;
-			wasMastered = true;
-		}
-		return isNewlyMastered;
-	}
-
 }

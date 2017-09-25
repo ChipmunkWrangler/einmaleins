@@ -6,16 +6,16 @@ public class StatsController : MonoBehaviour {
 	[SerializeField] StatsColumnController[] columns = null;
 	[SerializeField] Questions questions;
 	const string prefsKey = "statsSeen";
-	int[][] levelSeen;
+	int[][] minDifficultySeen;
 
 	void Start () {
 		Load ();
 		foreach (Question question in questions.questions) {
 			int i = question.a - 1;
 			int j = question.b - 1;
-			levelSeen[i][j] = columns [i].SetMasteryLevel (j, question.stage, question.correctInARow, levelSeen[i][j]);
+			minDifficultySeen[i][j] = columns [i].SetMasteryLevel (j, question.difficulty, minDifficultySeen[i][j]);
 			if (i != j) {
-				levelSeen [j] [i] = columns [j].SetMasteryLevel (i, question.stage, question.correctInARow, levelSeen [j] [i]);
+				minDifficultySeen [j] [i] = columns [j].SetMasteryLevel (i, question.difficulty, minDifficultySeen [j] [i]);
 			}
 		}
 		foreach (StatsColumnController column in columns) {
@@ -25,19 +25,19 @@ public class StatsController : MonoBehaviour {
 	}
 
 	void Load() {
-		levelSeen = new int[columns.Length] [];
+		minDifficultySeen = new int[columns.Length] [];
 		for (int i = 0; i < columns.Length; ++i) {
 			string key = prefsKey + ":" + i;
-			levelSeen [i] = MDPrefs.GetIntArray (key);
-			if (levelSeen [i].Length == 0) {
-				levelSeen [i] = new int[columns.Length];
+			minDifficultySeen [i] = MDPrefs.GetIntArray (key, Question.NEW_CARD_DIFFICULTY);
+			if (minDifficultySeen [i].Length == 0) {
+				minDifficultySeen [i] = new int[columns.Length];
 			}
 		}
 	}
 
 	void Save() {
 		for (int i = 0; i < columns.Length; ++i) {
-			MDPrefs.SetIntArray (prefsKey + ":" + i, levelSeen [i]);
+			MDPrefs.SetIntArray (prefsKey + ":" + i, minDifficultySeen [i]);
 		}
 	}
 }
