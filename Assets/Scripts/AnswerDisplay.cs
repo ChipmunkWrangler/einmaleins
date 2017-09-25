@@ -22,7 +22,7 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer {
 		UpdateText ();
 	}
 
-	public void OnWrongAnswer() {
+	public void OnWrongAnswer(bool wasNew) {
 		GetTextField().color = oldColor;
 		StopAllCoroutines();
 		StartCoroutine(Fade());

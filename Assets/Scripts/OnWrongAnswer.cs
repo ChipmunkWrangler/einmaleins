@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface OnWrongAnswer  {
-	void OnWrongAnswer();
+	void OnWrongAnswer(bool wasNew);
 }

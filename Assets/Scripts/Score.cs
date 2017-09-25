@@ -29,7 +29,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		formatProvider = MDCulture.GetCulture();
 	}
 
-	public void OnWrongAnswer() {
+	public void OnWrongAnswer(bool wasNew) {
 		multiplier = 0;
 		foreach (var multiplierIcon in multiplierIcons) {
 			multiplierIcon.CrossFadeAlpha (0.0f, multiplierFadeDuration, false);

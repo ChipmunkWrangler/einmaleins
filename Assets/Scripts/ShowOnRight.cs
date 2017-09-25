@@ -23,7 +23,7 @@ public class ShowOnRight : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, On
 		ScaleTo( hideOnRight == (question != null) ? Vector3.one : Vector3.zero );
 	}
 
-	public void OnWrongAnswer() {
+	public void OnWrongAnswer(bool wasNew) {
 		wasWrong = true;
 	}
 

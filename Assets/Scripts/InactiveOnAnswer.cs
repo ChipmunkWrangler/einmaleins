@@ -9,7 +9,7 @@ public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, O
 		button.interactable = false;
 	}
 
-	public void OnWrongAnswer () {
+	public void OnWrongAnswer (bool wasNew) {
 		button.interactable = false;
 	}
 

@@ -12,7 +12,7 @@ public class FadeOnInactive : MonoBehaviour, OnQuestionChanged, OnWrongAnswer, O
 		FadeTo (fadedAlpha);
 	}
 
-	public void OnWrongAnswer () {
+	public void OnWrongAnswer (bool wasNew) {
 		FadeTo (fadedAlpha);
 	}
 
