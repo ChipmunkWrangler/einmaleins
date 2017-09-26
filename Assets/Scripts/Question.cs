@@ -8,22 +8,23 @@ public class Question {
 	public int b { get; private set; }
 	public int idx { get; private set; }
 	public int difficulty { get; private set; }
-	public System.DateTime lastAnsweredAt { get; private set; }
+	public System.DateTime reviewAt { get; private set; }
 
 	public const int NEW_CARD_DIFFICULTY = 3;
-	public const int MASTERED_DIFFICULTY = 0;
-	public const int REVIEW_DIFFICULTY = 5; // must review all of these before quitting for the day
 
+	const int MASTERED_DIFFICULTY = 0;
 	const float FAST_TIME = 15.0f;
 	const float OK_TIME = 60.0f;
 	const int ADD_TO_DIFFICULTY_FAST = -3;
 	const int ADD_TO_DIFFICULTY_OK = -1;
-	const int ADD_TO_DIFFICULTY_WRONG = 3; // really 2 because a wrong question will be repeated and, if answered correctly, ADD_TO_DIFFICULTY_OK applied.
-	const int MAX_DIFFICULTY = 6;
+	const int ADD_TO_DIFFICULTY_WRONG = 2;
+	const int MAX_DIFFICULTY = 5;
 	const int NUM_ANSWER_TIMES_TO_RECORD = 3;
 	string prefsKey;
 	List<float> answerTimes;
 	bool wasMastered; // even if it is no longer mastered. This is for awarding rocket parts
+	bool isRetry; // if a question is answered wrong, then isRetry is true until it is answered right (which must happen before proceeding to a new question)
+	bool isInstantReview;
 
 	public Question(int _a, int _b) {
 		a = _a;
@@ -41,7 +42,15 @@ public class Question {
 	}
 
 	public bool IsNew() {
-		return answerTimes.Count == 0 && difficulty == NEW_CARD_DIFFICULTY;
+		return reviewAt == System.DateTime.MinValue && !isRetry;
+	}
+
+	public bool IsMastered() {
+		return difficulty <= MASTERED_DIFFICULTY;
+	}
+
+	public bool IsUrgent() {
+		return isInstantReview;
 	}
 
 	public bool LastAnswerWasFast() {
@@ -56,18 +65,27 @@ public class Question {
 		bool isNewlyMastered = false;
 		if (isCorrect) {
 			RecordAnswerTime (timeRequired);
-			lastAnsweredAt = System.DateTime.UtcNow;
-			if (difficulty > MASTERED_DIFFICULTY) {
-				difficulty += (timeRequired <= FAST_TIME) ? ADD_TO_DIFFICULTY_FAST : ADD_TO_DIFFICULTY_OK;
-				if (difficulty <= MASTERED_DIFFICULTY) {
-					difficulty = MASTERED_DIFFICULTY;
-					isNewlyMastered = true;
-				}
-			} // else once it is mastered we leave it alone
+			reviewAt = System.DateTime.UtcNow;
+			if (isRetry) {
+				isRetry = false;
+				isInstantReview = true;
+			} else { // right first try!
+				reviewAt = reviewAt.AddDays (1).Date;
+				if (!IsMastered()) {
+					difficulty += (timeRequired <= FAST_TIME && !isInstantReview) ? ADD_TO_DIFFICULTY_FAST : ADD_TO_DIFFICULTY_OK;  // if you got it right, but you got it wrong like a minute ago, being fast isn't so impressive
+					if (IsMastered()) {
+						difficulty = MASTERED_DIFFICULTY;
+						isNewlyMastered = true;
+					}
+				} // else once it is mastered we leave it alone
+				isInstantReview = false;
+			}
 		} else {
 			difficulty += ADD_TO_DIFFICULTY_WRONG;
+			isRetry = true;
 		}
 		difficulty = Mathf.Clamp (difficulty, MASTERED_DIFFICULTY, MAX_DIFFICULTY);
+		UnityEngine.Assertions.Assert.IsFalse (IsNew());
 		Debug.Log(ToString());
 		return isNewlyMastered;
 	}
@@ -144,16 +162,12 @@ public class Question {
 	public void Load(string _prefsKey, int _idx) {
 		prefsKey = _prefsKey;
 		idx = _idx;
-		string stageKey = prefsKey + ":stage";
-		if (MDPrefs.HasKey (prefsKey + ":difficulty")) {
-			difficulty = MDPrefs.GetInt (prefsKey + ":difficulty", NEW_CARD_DIFFICULTY);
-		} else if (MDPrefs.HasKey (stageKey)) {
-			difficulty = (MDPrefs.GetString (stageKey) == "Mastered") ? MASTERED_DIFFICULTY : NEW_CARD_DIFFICULTY;
-			MDPrefs.DeleteKey (stageKey);
-		} 
+		difficulty = MDPrefs.GetInt (prefsKey + ":difficulty", NEW_CARD_DIFFICULTY);
 		answerTimes = MDPrefs.GetFloatArray (prefsKey + ":times").ToList();
 		wasMastered = MDPrefs.GetBool (prefsKey + ":wasMastered");
-		lastAnsweredAt = MDPrefs.GetDateTime (prefsKey + "lastAnsweredAt", System.DateTime.MaxValue);
+		reviewAt = MDPrefs.GetDateTime (prefsKey + "reviewAt", System.DateTime.MinValue);
+		isRetry = MDPrefs.GetBool (prefsKey + "isRetry");
+		isInstantReview = MDPrefs.GetBool (prefsKey + "isInstantReview");
 	}
 
 	public void Save() {
@@ -161,15 +175,24 @@ public class Question {
 		MDPrefs.SetInt(prefsKey + ":difficulty", difficulty);
 		MDPrefs.SetFloatArray (prefsKey + ":times", answerTimes.ToArray());
 		MDPrefs.SetBool (prefsKey + ":wasMastered", wasMastered);
-		MDPrefs.SetDateTime (prefsKey + "lastAnsweredAt", lastAnsweredAt);
+		MDPrefs.SetDateTime (prefsKey + "reviewAt", reviewAt);
+		MDPrefs.SetBool (prefsKey + ":isRetry", isRetry);
+		MDPrefs.SetBool (prefsKey + ":isInstantReview", isInstantReview);
 	}
 
 	public override string ToString() {
-		string s = idx + " is " + a + " * " + b + " : difficulty = " + difficulty + " wasMastered = " + wasMastered + " last answered at = " + lastAnsweredAt + " times = ";
+		string s = idx + " is " + a + " * " + b + " : difficulty = " + difficulty + " wasMastered = " + wasMastered + " isRetry " + isRetry + " isInstantReview " + isInstantReview + " times = ";
 		foreach (var time in answerTimes) {
 			s += time + " ";
 		}
+		s += " reviewAt " + reviewAt;
 		return s;
+	}
+
+	public void Debug_Tomorrow() {
+		if (reviewAt != System.DateTime.MinValue) {
+			reviewAt = reviewAt.AddDays (-1.0f);
+		}
 	}
 
 	void RecordAnswerTime (float timeRequired)

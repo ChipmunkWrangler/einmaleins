@@ -12,14 +12,14 @@ public class StatsColumnController : MonoBehaviour {
 	int numMastered;
 	bool isSomethingHighlighed;
 
-	public int SetMasteryLevel(int row, int difficulty, int minDifficultySeen) {
+	public int SetMasteryLevel(int row, Question q, int minDifficultySeen) {
 		int newDifficultySeen = minDifficultySeen;
-		float alpha = Mathf.Clamp01 ((float)difficulty / Question.NEW_CARD_DIFFICULTY); // or clamp to premasteredAlpha below
-		if (difficulty <= Question.MASTERED_DIFFICULTY) {
+		float alpha = Mathf.Clamp01 ((float)q.difficulty / Question.NEW_CARD_DIFFICULTY); // or clamp to premasteredAlpha below
+		if (q.IsMastered()) {
 			numMastered++;
 		}
-		if (difficulty < minDifficultySeen) {
-			newDifficultySeen = difficulty;
+		if (q.difficulty < minDifficultySeen) {
+			newDifficultySeen = q.difficulty;
 			cells [row].color = highlightColor;
 			cells [row].CrossFadeAlpha (alpha, fadeTime, false);
 			isSomethingHighlighed = true;

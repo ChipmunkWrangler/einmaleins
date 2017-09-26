@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class QuestionPicker : MonoBehaviour {
 	[SerializeField] GameObject[] subscribers;
@@ -75,6 +76,7 @@ public class QuestionPicker : MonoBehaviour {
 	void Test() {
 		float totalTime = 0;
 		int day = 0;
+		float maxDayTime = 0;
 		const float CHANCE_WRONG = 0.25f;
 		const float MIN_ANSWER_TIME = 5.0f;
 		const float MAX_ANSWER_TIME = 60.0f;
@@ -97,11 +99,16 @@ public class QuestionPicker : MonoBehaviour {
 					HandleAnswer (right, time);
 				} while (!right);
 				dayTime += time;
+				if (dayTime > maxDayTime) {
+					maxDayTime = dayTime;
+				}
 				NextQuestion();
 			}
-			Debug.Log ("dayTime = " + totalTime);
+			Debug.Log ("dayTime = " + dayTime);
 			totalTime += dayTime;
+			((SlowQuestions)questions).Debug_Tomorrow ();
 		}
-		Debug.Log ("totalTime = " + totalTime);
+		Debug.Log ("totalTime = " + totalTime + " maxDay = " + maxDayTime);
+		UnityEngine.Assertions.Assert.IsFalse(questions.questions.Any(q => !q.IsMastered()));
 	}
 }

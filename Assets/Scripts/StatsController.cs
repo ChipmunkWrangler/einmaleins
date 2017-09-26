@@ -13,9 +13,9 @@ public class StatsController : MonoBehaviour {
 		foreach (Question question in questions.questions) {
 			int i = question.a - 1;
 			int j = question.b - 1;
-			minDifficultySeen[i][j] = columns [i].SetMasteryLevel (j, question.difficulty, minDifficultySeen[i][j]);
+			minDifficultySeen[i][j] = columns [i].SetMasteryLevel (j, question, minDifficultySeen[i][j]);
 			if (i != j) {
-				minDifficultySeen [j] [i] = columns [j].SetMasteryLevel (i, question.difficulty, minDifficultySeen [j] [i]);
+				minDifficultySeen [j] [i] = columns [j].SetMasteryLevel (i, question, minDifficultySeen [j] [i]);
 			}
 		}
 		foreach (StatsColumnController column in columns) {
