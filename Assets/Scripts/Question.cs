@@ -24,7 +24,7 @@ public class Question {
 	List<float> answerTimes;
 	bool wasMastered; // even if it is no longer mastered. This is for awarding rocket parts
 	bool isRetry; // if a question is answered wrong, then isRetry is true until it is answered right (which must happen before proceeding to a new question)
-	bool isInstantReview;
+	bool isMandatoryReview; // if you get a question wrong, you have to review it in this session regardless of difficulty level and reviewAt
 
 	public Question(int _a, int _b) {
 		a = _a;
@@ -50,7 +50,7 @@ public class Question {
 	}
 
 	public bool IsUrgent() {
-		return isInstantReview;
+		return isMandatoryReview;
 	}
 
 	public bool LastAnswerWasFast() {
@@ -68,17 +68,17 @@ public class Question {
 			reviewAt = System.DateTime.UtcNow;
 			if (isRetry) {
 				isRetry = false;
-				isInstantReview = true;
+				isMandatoryReview = true;
 			} else { // right first try!
 				reviewAt = reviewAt.AddDays (1).Date;
 				if (!IsMastered()) {
-					difficulty += (timeRequired <= FAST_TIME && !isInstantReview) ? ADD_TO_DIFFICULTY_FAST : ADD_TO_DIFFICULTY_OK;  // if you got it right, but you got it wrong like a minute ago, being fast isn't so impressive
+					difficulty += (timeRequired <= FAST_TIME && !isMandatoryReview) ? ADD_TO_DIFFICULTY_FAST : ADD_TO_DIFFICULTY_OK;  // if you got it right, but you got it wrong like a minute ago, being fast isn't so impressive
 					if (IsMastered()) {
 						difficulty = MASTERED_DIFFICULTY;
 						isNewlyMastered = true;
 					}
 				} // else once it is mastered we leave it alone
-				isInstantReview = false;
+				isMandatoryReview = false;
 			}
 		} else {
 			difficulty += ADD_TO_DIFFICULTY_WRONG;
@@ -167,7 +167,7 @@ public class Question {
 		wasMastered = MDPrefs.GetBool (prefsKey + ":wasMastered");
 		reviewAt = MDPrefs.GetDateTime (prefsKey + "reviewAt", System.DateTime.MinValue);
 		isRetry = MDPrefs.GetBool (prefsKey + "isRetry");
-		isInstantReview = MDPrefs.GetBool (prefsKey + "isInstantReview");
+		isMandatoryReview = MDPrefs.GetBool (prefsKey + "isMandatoryReview");
 	}
 
 	public void Save() {
@@ -177,11 +177,11 @@ public class Question {
 		MDPrefs.SetBool (prefsKey + ":wasMastered", wasMastered);
 		MDPrefs.SetDateTime (prefsKey + "reviewAt", reviewAt);
 		MDPrefs.SetBool (prefsKey + ":isRetry", isRetry);
-		MDPrefs.SetBool (prefsKey + ":isInstantReview", isInstantReview);
+		MDPrefs.SetBool (prefsKey + ":isMandatoryReview", isMandatoryReview);
 	}
 
 	public override string ToString() {
-		string s = idx + " is " + a + " * " + b + " : difficulty = " + difficulty + " wasMastered = " + wasMastered + " isRetry " + isRetry + " isInstantReview " + isInstantReview + " times = ";
+		string s = idx + " is " + a + " * " + b + " : difficulty = " + difficulty + " wasMastered = " + wasMastered + " isRetry " + isRetry + " isMandatoryReview " + isMandatoryReview + " times = ";
 		foreach (var time in answerTimes) {
 			s += time + " ";
 		}
