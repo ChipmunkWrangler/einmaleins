@@ -77,7 +77,6 @@ public class Question {
 			RecordAnswerTime (timeRequired);
 			if (isRetry) {
 				isRetry = false;
-				isMandatoryReview = true;
 			} else { // right first try!
 				if (!IsMastered()) {
 					difficulty += (timeRequired <= FAST_TIME && !isMandatoryReview) ? ADD_TO_DIFFICULTY_FAST : ADD_TO_DIFFICULTY_OK;  // if you got it right, but you got it wrong like a minute ago, being fast isn't so impressive
@@ -94,6 +93,7 @@ public class Question {
 			difficulty += ADD_TO_DIFFICULTY_WRONG;
 			difficulty = Mathf.Clamp (difficulty, MASTERED_DIFFICULTY, MAX_DIFFICULTY);
 			isRetry = true;
+			isMandatoryReview = true;
 		}
 		UnityEngine.Assertions.Assert.IsFalse (IsNew());
 		Debug.Log(ToString());
