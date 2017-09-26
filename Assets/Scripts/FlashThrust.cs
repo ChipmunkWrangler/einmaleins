@@ -8,7 +8,6 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] Text recordHeightText = null;
 	[SerializeField] Text apogeeText = null;
 	[SerializeField] ScrollBackground background = null;
-	[SerializeField] float[] maxAttainableHeights = null;
 	[SerializeField] float targetAnswerTime = 5.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
 	[SerializeField] float minSpeedFactor = 0.25f;
 	[SerializeField] KickoffLaunch launch = null;
@@ -44,11 +43,11 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		var recordPos = oldRecord.transform.position;
 		recordPos.y += recordHeight * paramObj.heightScale * oldRecord.transform.parent.localScale.y;
 		oldRecord.transform.position = recordPos;
-		UnityEngine.Assertions.Assert.AreEqual(RocketParts.GetNumUpgrades() + 1, maxAttainableHeights.Length);
-		CalcParams(maxAttainableHeights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
-//		accelerationOnCorrect = CalcAcceleration(maxAttainableHeights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
 		checkForRecord = recordHeight > 0;
 		oldRecord.SetActive (checkForRecord);
+		UnityEngine.Assertions.Assert.AreEqual(RocketParts.GetNumUpgrades() + 1, TargetPlanet.heights.Length);
+		CalcParams(TargetPlanet.heights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
+//		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
 		formatProvider = MDCulture.GetCulture();
 	}
@@ -74,7 +73,10 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 			if (height > recordHeight) {
 				recordHeight = height;
 				MDPrefs.SetFloat (prefsKey, recordHeight);
-				if (checkForRecord) {
+				string planetReachedString = TargetPlanet.RecordIfPlanetReached (height);
+				if (planetReachedString.Length > 0) {
+					CelebrateReachingPlanet (planetReachedString);
+				} else if (checkForRecord) {
 					CelebrateBreakingRecord();
 				}
 				checkForRecord = false;
@@ -136,6 +138,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		celebrate.curParticleIdx = RocketParts.GetUpgradeLevel ();
 	}
 
+	void CelebrateReachingPlanet(string msg) {
+		achievementText.text = msg;
+	}
 
 	void CelebrateBreakingRecord() {
 		achievementText.text = recordBrokenMsg;
