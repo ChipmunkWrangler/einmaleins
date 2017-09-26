@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
-	[SerializeField] UnityEngine.UI.Button launchButton = null;
-	[SerializeField] UnityEngine.UI.Button upgradeButton = null;
-	[SerializeField] UnityEngine.UI.Text upgradeButtonLabel = null;
-	[SerializeField] UnityEngine.UI.Text doneText = null;
+	[SerializeField] Button launchButton = null;
+	[SerializeField] Button upgradeButton = null;
+	[SerializeField] Text upgradeButtonLabel = null;
+	[SerializeField] Text doneText = null;
 	[SerializeField] string buildRocketText = "";
 	[SerializeField] string upgradeRocketText = "";
 
