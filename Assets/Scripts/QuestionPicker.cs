@@ -14,7 +14,7 @@ public class QuestionPicker : MonoBehaviour {
 	float questionTime;
 
 	void Start () {
-		Test ();
+//		Test ();
 		SplitSubscribers ();
 	}
 
@@ -155,9 +155,5 @@ public class QuestionPicker : MonoBehaviour {
 			sessions = 72 - 84 totalTime = 39335 - 46654 maxSessionTime =  968 - 1592
 	    const float INITIAL_CHANCE_RIGHT = 0.4f;
 			sessions = 49 - 58 totalTime = 22364 - 25897 maxSessionTime =  816 - 1130			
-		const float INITIAL_CHANCE_RIGHT = 0.6f;
-			
-		const float INITIAL_CHANCE_RIGHT = 0.8f;
-
 */	    
 }
