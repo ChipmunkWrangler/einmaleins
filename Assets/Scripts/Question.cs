@@ -175,9 +175,9 @@ public class Question {
 		difficulty = MDPrefs.GetInt (prefsKey + ":difficulty", NEW_CARD_DIFFICULTY);
 		answerTimes = MDPrefs.GetFloatArray (prefsKey + ":times").ToList();
 		wasMastered = MDPrefs.GetBool (prefsKey + ":wasMastered");
-		reviewAt = MDPrefs.GetDateTime (prefsKey + "reviewAt", System.DateTime.MinValue);
-		isRetry = MDPrefs.GetBool (prefsKey + "isRetry");
-		isMandatoryReview = MDPrefs.GetBool (prefsKey + "isMandatoryReview");
+		reviewAt = MDPrefs.GetDateTime (prefsKey + ":reviewAt", System.DateTime.MinValue);
+		isRetry = MDPrefs.GetBool (prefsKey + ":isRetry");
+		isMandatoryReview = MDPrefs.GetBool (prefsKey + ":isMandatoryReview");
 	}
 
 	public void Save() {
@@ -185,7 +185,7 @@ public class Question {
 		MDPrefs.SetInt(prefsKey + ":difficulty", difficulty);
 		MDPrefs.SetFloatArray (prefsKey + ":times", answerTimes.ToArray());
 		MDPrefs.SetBool (prefsKey + ":wasMastered", wasMastered);
-		MDPrefs.SetDateTime (prefsKey + "reviewAt", reviewAt);
+		MDPrefs.SetDateTime (prefsKey + ":reviewAt", reviewAt);
 		MDPrefs.SetBool (prefsKey + ":isRetry", isRetry);
 		MDPrefs.SetBool (prefsKey + ":isMandatoryReview", isMandatoryReview);
 	}
