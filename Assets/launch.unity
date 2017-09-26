@@ -19365,6 +19365,7 @@ RectTransform:
   - {fileID: 304}
   - {fileID: 251}
   - {fileID: 265}
+  - {fileID: 1660461387}
   m_Father: {fileID: 264}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19719,6 +19720,7 @@ RectTransform:
   - {fileID: 263}
   - {fileID: 283}
   - {fileID: 247}
+  - {fileID: 379558593}
   m_Father: {fileID: 285}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20525,6 +20527,7 @@ MonoBehaviour:
   - {fileID: 1862998284}
   earth: {fileID: 184}
   minParticleScale: 0.1
+  paramObj: {fileID: 451636923}
 --- !u!114 &316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21547,7 +21550,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchButton: {fileID: 359}
   upgradeButton: {fileID: 318}
+  launchButtonText: {fileID: 412}
   upgradeButtonLabel: {fileID: 352}
+  reachPlanetToUpgradeLabel: {fileID: 1660461389}
   doneText: {fileID: 437}
   buildRocketText: Rakete bauen
   upgradeRocketText: Rakete verbessern
@@ -22494,12 +22499,6 @@ MonoBehaviour:
   recordHeightText: {fileID: 306}
   apogeeText: {fileID: 353}
   background: {fileID: 400}
-  maxAttainableHeights:
-  - 78000000
-  - 630000000
-  - 1.287e+9
-  - 2.73e+9
-  - 4.357e+9
   targetAnswerTime: 5.5
   minSpeedFactor: 0.25
   launch: {fileID: 388}
@@ -22507,6 +22506,8 @@ MonoBehaviour:
   celebrate: {fileID: 390}
   oldRecord: {fileID: 1862998282}
   paramObj: {fileID: 451636923}
+  achievementText: {fileID: 379558591}
+  recordBrokenMsg: Neuer Rekord!
 --- !u!114 &390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23904,6 +23905,84 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &379558590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1425657324519130, guid: fdd7f431d6405436aaf88aceb283e9cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 379558593}
+  - component: {fileID: 379558592}
+  - component: {fileID: 379558591}
+  m_Layer: 5
+  m_Name: AchievementMessage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &379558591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114860594135729052, guid: fdd7f431d6405436aaf88aceb283e9cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 379558590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9098039, g: 0.9098039, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: ac5ab3e05fb0c4f6c8a7eb275d74ff88, type: 3}
+    m_FontSize: 32
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 140
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &379558592
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222136710346311016, guid: fdd7f431d6405436aaf88aceb283e9cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 379558590}
+--- !u!224 &379558593
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 224471591331313920, guid: fdd7f431d6405436aaf88aceb283e9cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 379558590}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.96, y: 0.96, z: 0.96}
+  m_Children: []
+  m_Father: {fileID: 279}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &380686419
 GameObject:
   m_ObjectHideFlags: 0
@@ -23963,6 +24042,104 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1660461386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1608065647123664, guid: fdd7f431d6405436aaf88aceb283e9cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1660461387}
+  - component: {fileID: 1660461390}
+  - component: {fileID: 1660461389}
+  - component: {fileID: 1660461388}
+  m_Layer: 5
+  m_Name: ReachPlanetToUpgrade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1660461387
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 224888635629694170, guid: fdd7f431d6405436aaf88aceb283e9cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1660461386}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 261}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 385, y: -165}
+  m_SizeDelta: {x: 770, y: 40}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1660461388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114088261695123038, guid: fdd7f431d6405436aaf88aceb283e9cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1660461386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: 40
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+--- !u!114 &1660461389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114753362603410858, guid: fdd7f431d6405436aaf88aceb283e9cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1660461386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.21568628, g: 0.5764706, b: 0.57254905, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: ac5ab3e05fb0c4f6c8a7eb275d74ff88, type: 3}
+    m_FontSize: 33
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 1
+    m_RichText: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: Erreiche Jupiter, um Deine Rakete zu verbessern
+--- !u!222 &1660461390
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222051734668330468, guid: fdd7f431d6405436aaf88aceb283e9cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1660461386}
 --- !u!1 &1862998282
 GameObject:
   m_ObjectHideFlags: 0

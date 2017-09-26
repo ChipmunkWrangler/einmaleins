@@ -21,8 +21,12 @@ public static class RocketParts {
 		return IsRocketBuilt () ? PARTS_PER_UPGRADE : PARTS_TO_BUILD_ROCKET;
 	}
 
-	public static bool CanUpgrade() {
+	public static bool HasEnoughPartsToUpgrade() {
 		return IsRocketBuilt() && GetNumParts () >= PARTS_PER_UPGRADE && GetUpgradeLevel() < GetNumUpgrades();
+	}
+
+	public static bool HasReachedPlanetToUpgrade() {
+		return GetUpgradeLevel () < TargetPlanet.GetIdx ();
 	}
 
 	public static bool IsRocketBuilt() {
@@ -41,7 +45,7 @@ public static class RocketParts {
 	}
 
 	public static void Upgrade() {
-		if (CanUpgrade ()) {
+		if (HasEnoughPartsToUpgrade () && HasReachedPlanetToUpgrade()) {
 			SetNumParts (GetNumParts () - PARTS_PER_UPGRADE);
 			MDPrefs.SetInt (prefsKey + ":upgradeLevel", GetUpgradeLevel () + 1);
 		}

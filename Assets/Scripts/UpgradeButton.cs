@@ -21,7 +21,7 @@ public class UpgradeButton : MonoBehaviour {
 	}
 
 	void ShowOrHide() {
-		bool enable = RocketParts.CanUpgrade ();
+		bool enable = RocketParts.HasEnoughPartsToUpgrade () && RocketParts.HasReachedPlanetToUpgrade();
 		if (enable) {
 			label.text = engineNames [RocketParts.GetUpgradeLevel ()];
 		}
