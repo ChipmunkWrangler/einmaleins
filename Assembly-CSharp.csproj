@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
      <Compile Include="Assets\Scripts\BackStack.cs" />
      <Compile Include="Assets\Scripts\CCInputField.cs" />
+     <Compile Include="Assets\Scripts\CCTime.cs" />
      <Compile Include="Assets\Scripts\Celebrate.cs" />
      <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
      <Compile Include="Assets\Scripts\FlashQuestions.cs" />

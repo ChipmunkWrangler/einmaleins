@@ -56,12 +56,6 @@ public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
 		effort = 0;
 	}
 
-	public void Debug_Tomorrow() {
-		foreach (Question question in questions) {
-			question.Debug_Tomorrow ();
-		}
-	}
-
 	protected override void Load() {
 		base.Load();
 		if (MDPrefs.GetDateTime (prefsKey + ":date", System.DateTime.MinValue) < System.DateTime.Today) {
@@ -77,7 +71,7 @@ public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
 			Debug.Log ("AskList count " + toAsk.Count);
 			return;
 		}
-		Debug.Log("frustration = " + frustration + " effort = " + effort);
+		Debug.Log("frustration = " + frustration + " effort = " + effort + " time = " + CCTime.Now());
 		int expectedUrgentEffort = questions.Count (q => q.IsUrgent()) * EFFORT_RIGHT;
 		bool urgentOnly = effort + expectedUrgentEffort > EFFORT_PER_DAY;
 		var candidates = questions.Where (q => IsQuestionAllowed (q, urgentOnly));
@@ -100,8 +94,8 @@ public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
 	bool IsQuestionAllowed(Question q, bool urgentOnly) {
 		return q.idx != previousQuestionIdx 
 			&& !q.IsMastered() 
-			&& (!urgentOnly || q.IsUrgent()) 
-			&& (q.reviewAt <= System.DateTime.UtcNow);
+			&& ((urgentOnly && q.IsUrgent())
+				|| (!urgentOnly && q.reviewAt <= CCTime.Now()));
 	}
 
 }

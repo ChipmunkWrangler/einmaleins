@@ -15,7 +15,7 @@ public class QuestionPicker : MonoBehaviour {
 
 	void Start () {
 		SplitSubscribers ();
-	//	Test ();
+		Test ();
 	}
 
 	public void NextQuestion() {
@@ -80,6 +80,7 @@ public class QuestionPicker : MonoBehaviour {
 		const float CHANCE_WRONG = 0.25f;
 		const float MIN_ANSWER_TIME = 5.0f;
 		const float MAX_ANSWER_TIME = 60.0f;
+		CCTime.SetNow(System.DateTime.UtcNow.Date.AddHours(7));
 		while(true) {
 			++day;
 			Debug.Log ("Day " + day);
@@ -95,7 +96,9 @@ public class QuestionPicker : MonoBehaviour {
 				do {
 					float chance = Mathf.Clamp01((float)curQuestion.difficulty / Question.NEW_CARD_DIFFICULTY);
 					right = Random.value > CHANCE_WRONG * chance; 
-					time += Random.Range (MIN_ANSWER_TIME, MAX_ANSWER_TIME);
+					float answerTime = Random.Range (MIN_ANSWER_TIME, MAX_ANSWER_TIME);
+					time += answerTime;
+					CCTime.SetNow( CCTime.Now().AddSeconds(answerTime) );
 					HandleAnswer (right, time);
 				} while (!right);
 				dayTime += time;
@@ -106,7 +109,7 @@ public class QuestionPicker : MonoBehaviour {
 			}
 			Debug.Log ("dayTime = " + dayTime);
 			totalTime += dayTime;
-			((SlowQuestions)questions).Debug_Tomorrow ();
+			CCTime.SetNow( CCTime.Now().AddDays (1).Date.AddHours (7));
 		}
 		Debug.Log ("totalTime = " + totalTime + " maxDay = " + maxDayTime);
 		UnityEngine.Assertions.Assert.IsFalse(questions.questions.Any(q => !q.IsMastered()));

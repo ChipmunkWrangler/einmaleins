@@ -20,6 +20,14 @@ public class Question {
 	const int ADD_TO_DIFFICULTY_WRONG = 2;
 	const int MAX_DIFFICULTY = 5;
 	const int NUM_ANSWER_TIMES_TO_RECORD = 3;
+	readonly int[] reviewInSecondsByDifficulty = {
+		5 * 60 * 60 * 24, // not actually used
+		1 * 60 * 60 * 24,
+		1 * 60 * 60,
+		10 * 60,
+		2 * 60,
+		25
+	};
 	string prefsKey;
 	List<float> answerTimes;
 	bool wasMastered; // even if it is no longer mastered. This is for awarding rocket parts
@@ -65,12 +73,10 @@ public class Question {
 		bool isNewlyMastered = false;
 		if (isCorrect) {
 			RecordAnswerTime (timeRequired);
-			reviewAt = System.DateTime.UtcNow;
 			if (isRetry) {
 				isRetry = false;
 				isMandatoryReview = true;
 			} else { // right first try!
-				reviewAt = reviewAt.AddDays (1).Date;
 				if (!IsMastered()) {
 					difficulty += (timeRequired <= FAST_TIME && !isMandatoryReview) ? ADD_TO_DIFFICULTY_FAST : ADD_TO_DIFFICULTY_OK;  // if you got it right, but you got it wrong like a minute ago, being fast isn't so impressive
 					if (IsMastered()) {
@@ -80,11 +86,13 @@ public class Question {
 				} // else once it is mastered we leave it alone
 				isMandatoryReview = false;
 			}
+			difficulty = Mathf.Clamp (difficulty, MASTERED_DIFFICULTY, MAX_DIFFICULTY);
+			reviewAt = CCTime.Now().AddSeconds(reviewInSecondsByDifficulty[difficulty]);
 		} else {
 			difficulty += ADD_TO_DIFFICULTY_WRONG;
+			difficulty = Mathf.Clamp (difficulty, MASTERED_DIFFICULTY, MAX_DIFFICULTY);
 			isRetry = true;
 		}
-		difficulty = Mathf.Clamp (difficulty, MASTERED_DIFFICULTY, MAX_DIFFICULTY);
 		UnityEngine.Assertions.Assert.IsFalse (IsNew());
 		Debug.Log(ToString());
 		return isNewlyMastered;
@@ -187,12 +195,6 @@ public class Question {
 		}
 		s += " reviewAt " + reviewAt;
 		return s;
-	}
-
-	public void Debug_Tomorrow() {
-		if (reviewAt != System.DateTime.MinValue) {
-			reviewAt = reviewAt.AddDays (-1.0f);
-		}
 	}
 
 	void RecordAnswerTime (float timeRequired)
