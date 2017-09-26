@@ -16,6 +16,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] Celebrate celebrate = null;
 	[SerializeField] GameObject oldRecord = null;
 	[SerializeField] Params paramObj = null;
+	[SerializeField] Text achievementText = null;
+	[SerializeField] string recordBrokenMsg = "Neuer Rekord!";
 	float minSpeed;
 	public float speed { get; private set; } // km per second
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
@@ -28,6 +30,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	System.IFormatProvider formatProvider;
 	int numAnswersGiven;
 	bool noMoreQuestions;
+	bool checkForRecord;
 
 	const string prefsKey = "recordHeight";
 	const string numFormat = "N0";
@@ -44,6 +47,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		UnityEngine.Assertions.Assert.AreEqual(RocketParts.GetNumUpgrades() + 1, maxAttainableHeights.Length);
 		CalcParams(maxAttainableHeights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
 //		accelerationOnCorrect = CalcAcceleration(maxAttainableHeights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
+		checkForRecord = recordHeight > 0;
+		oldRecord.SetActive (checkForRecord);
 //		TestEquations ();
 		formatProvider = MDCulture.GetCulture();
 	}
@@ -69,6 +74,10 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 			if (height > recordHeight) {
 				recordHeight = height;
 				MDPrefs.SetFloat (prefsKey, recordHeight);
+				if (checkForRecord) {
+					CelebrateBreakingRecord();
+				}
+				checkForRecord = false;
 			}
 			if (height > apogee) { 
 				apogee = height;
@@ -125,6 +134,11 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		numAnswersGiven = 0;
 		noMoreQuestions = false;
 		celebrate.curParticleIdx = RocketParts.GetUpgradeLevel ();
+	}
+
+
+	void CelebrateBreakingRecord() {
+		achievementText.text = recordBrokenMsg;
 	}
 
 	// The rocket reaches speed zero at targetAnswerTime. Calculate acceleration and gravity to guarantee given maxHeight
