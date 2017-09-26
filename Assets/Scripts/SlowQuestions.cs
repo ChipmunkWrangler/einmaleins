@@ -73,7 +73,7 @@ public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
 		}
 		Debug.Log("frustration = " + frustration + " effort = " + effort + " time = " + CCTime.Now());
 		int expectedUrgentEffort = questions.Count (q => q.IsUrgent()) * EFFORT_RIGHT;
-		bool urgentOnly = effort + expectedUrgentEffort > EFFORT_PER_DAY;
+		bool urgentOnly = effort + expectedUrgentEffort >= EFFORT_PER_DAY;
 		var candidates = questions.Where (q => IsQuestionAllowed (q, urgentOnly));
 		var nonNewCandidates = candidates.Where (q => !q.IsNew ());
 		Question question = null;
