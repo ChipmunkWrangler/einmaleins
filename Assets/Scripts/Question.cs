@@ -10,6 +10,8 @@ public class Question {
 	public int difficulty { get; private set; }
 	public System.DateTime reviewAt { get; private set; }
 
+	public float Debug_chanceOfCorrectAnswer;
+
 	public const int NEW_CARD_DIFFICULTY = 3;
 
 	const int MASTERED_DIFFICULTY = 0;
