@@ -17,7 +17,9 @@ public class NewPlayerName : MonoBehaviour {
 	string newName;
 
 	void Start() {
-		BackStack.Clear ();
+		if (PlayerPrefs.HasKey (curPlayerPrefsKey)) {
+			BackStack.Clear ();
+		} // else this is initial start
 		ActivatePlayButton (false);
 		playerNames = PlayerPrefsArray.GetStringArray (playerNamesPrefsKey);
 		int numPlayers = playerNames.Length;
