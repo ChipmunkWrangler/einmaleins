@@ -82,7 +82,8 @@ public class Question {
 					difficulty += (timeRequired <= FAST_TIME && !isMandatoryReview) ? ADD_TO_DIFFICULTY_FAST : ADD_TO_DIFFICULTY_OK;  // if you got it right, but you got it wrong like a minute ago, being fast isn't so impressive
 					if (IsMastered()) {
 						difficulty = MASTERED_DIFFICULTY;
-						isNewlyMastered = true;
+						isNewlyMastered = !wasMastered;
+						wasMastered = true;
 					}
 				} // else once it is mastered we leave it alone
 				isMandatoryReview = false;
