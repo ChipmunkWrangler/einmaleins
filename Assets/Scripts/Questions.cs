@@ -30,6 +30,13 @@ public abstract class Questions : MonoBehaviour {
 		}
 		return retVal;
 	}
+
+	public bool HasEnoughFlashQuestions() { // hack
+//		foreach (Question question in questions.Where(q => q.IsMastered()).OrderByDescending (q => q.GetAverageAnswerTime ())) {
+//			Debug.Log (question.GetAverageAnswerTime() + " " + question);
+//		}
+		return questions.Count(q => q.IsMastered() && q.GetAverageAnswerTime () > FlashThrust.targetAnswerTime) >= FlashQuestions.ASK_LIST_LENGTH;
+	}
 		
 	public virtual void Save() {
 		SaveQuestionsList ();

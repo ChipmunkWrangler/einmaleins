@@ -17,7 +17,7 @@ public class FlashQuestions : Questions {
 			return;
 		}
 //		Debug.Log ("Filling list");
-		toAsk = questions.Where(q => q.IsMastered()).OrderBy (q => q.GetAverageAnswerTime ()).Take (ASK_LIST_LENGTH).Select(q => q.idx).ToList();
+		toAsk = questions.Where(q => q.IsMastered()).OrderByDescending (q => q.GetAverageAnswerTime ()).Take (ASK_LIST_LENGTH).Select(q => q.idx).ToList();
 //		Debug.Log ("Questions");
 //		foreach (Question question in questions.Where(q => q.difficulty == Question.MASTERED_DIFFICULTY).OrderBy (q => q.GetAverageAnswerTime ())) {
 //			Debug.Log (question);

@@ -10,6 +10,9 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 	[SerializeField] Text doneText = null;
 	[SerializeField] string buildRocketText = "";
 	[SerializeField] string upgradeRocketText = "";
+	[SerializeField] Questions questions = null;
+	const string prefsKey = "hasLaunchedOnDate";
+
 	readonly string[] launchButtonLabels = {
 		"Auf zum Mars",
 		"Auf zum Jupiter",
@@ -31,10 +34,15 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 		bool noMoreQuestions = question == null;
 		ActivateIfCanLaunch (noMoreQuestions);
 	}
+
+	public void OnLaunch() {
+		MDPrefs.SetDateTime (prefsKey, System.DateTime.Today);
+	}
 		
 	void ActivateIfCanLaunch (bool noMoreQuestions)
 	{
-		bool canLaunch = RocketParts.IsRocketBuilt();
+		bool hasLaunchedToday = MDPrefs.GetDateTime (prefsKey, System.DateTime.MinValue) >= System.DateTime.Today;
+		bool canLaunch = RocketParts.IsRocketBuilt () && (!hasLaunchedToday || questions.HasEnoughFlashQuestions());
 		bool canBuild = RocketParts.CanBuild ();
 		bool canUpgrade = RocketParts.HasEnoughPartsToUpgrade () && RocketParts.HasReachedPlanetToUpgrade();
 		upgradeButtonLabel.text = canBuild ? buildRocketText : upgradeRocketText;
@@ -44,8 +52,5 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 		reachPlanetToUpgradeLabel.text = reachPlanetLabels [TargetPlanet.GetIdx ()];
 		reachPlanetToUpgradeLabel.gameObject.SetActive (noMoreQuestions && canLaunch && (RocketParts.HasEnoughPartsToUpgrade () && !RocketParts.HasReachedPlanetToUpgrade()));
 		doneText.gameObject.SetActive( noMoreQuestions && !canLaunch && !canUpgrade && !canBuild);
-
 	}
-
-
 }
