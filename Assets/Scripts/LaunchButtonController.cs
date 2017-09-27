@@ -42,7 +42,7 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 		upgradeButtonLabel.text = canBuild ? buildRocketText : upgradeRocketText;
 		upgradeButton.gameObject.SetActive (noMoreQuestions && (canBuild || canUpgrade));
 		launchButtonText.text = launchButtonLabels [TargetPlanet.GetIdx ()];
-		launchButton.gameObject.SetActive (noMoreQuestions && canLaunch);
+		launchButton.gameObject.SetActive (noMoreQuestions && canLaunch && !canUpgrade);
 		reachPlanetToUpgradeLabel.text = reachPlanetLabels [TargetPlanet.GetIdx ()];
 		reachPlanetToUpgradeLabel.gameObject.SetActive (noMoreQuestions && canLaunch && (RocketParts.HasEnoughPartsToUpgrade () && !RocketParts.HasReachedPlanetToUpgrade()));
 		doneText.gameObject.SetActive( noMoreQuestions && !canLaunch && !canUpgrade && !canBuild);
