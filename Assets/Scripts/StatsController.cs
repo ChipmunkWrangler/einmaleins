@@ -31,6 +31,9 @@ public class StatsController : MonoBehaviour {
 			minDifficultySeen [i] = MDPrefs.GetIntArray (key, Question.NEW_CARD_DIFFICULTY);
 			if (minDifficultySeen [i].Length == 0) {
 				minDifficultySeen [i] = new int[columns.Length];
+				for (int j = 0; j < minDifficultySeen [i].Length; ++j) {
+					minDifficultySeen [i] [j] = Question.NEW_CARD_DIFFICULTY;
+				}
 			}
 		}
 	}
