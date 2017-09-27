@@ -12,7 +12,6 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 	[SerializeField] string upgradeRocketText = "";
 	readonly string[] launchButtonLabels = {
 		"Auf zum Mars",
-		"Auf zur Venus",
 		"Auf zum Jupiter",
 		"Auf zum Saturn",
 		"Auf zum Uranus",
@@ -21,7 +20,6 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 	};
 	readonly string[] reachPlanetLabels = {
 		"Erreiche Mars, um Deine Rakete zu verbessern",
-		"Erreiche Venus, um Deine Rakete zu verbessern",
 		"Erreiche Jupiter, um Deine Rakete zu verbessern",
 		"Erreiche Saturn, um Deine Rakete zu verbessern",
 		"Erreiche Uranus, um Deine Rakete zu verbessern",
