@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 	[SerializeField] Button launchButton = null;
@@ -39,10 +40,14 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 		MDPrefs.SetDateTime (prefsKey, System.DateTime.Today);
 	}
 		
+	bool HasMasteredAllQuestions() {
+		return questions.questions.Count(q => q.wasMastered) == Questions.GetNumQuestions();
+	}
+
 	void ActivateIfCanLaunch (bool noMoreQuestions)
 	{
 		bool hasLaunchedToday = MDPrefs.GetDateTime (prefsKey, System.DateTime.MinValue) >= System.DateTime.Today;
-		bool canLaunch = RocketParts.IsRocketBuilt () && (!hasLaunchedToday || questions.HasEnoughFlashQuestions());
+		bool canLaunch = RocketParts.IsRocketBuilt () && (!hasLaunchedToday || HasMasteredAllQuestions() || questions.HasEnoughFlashQuestions());
 		bool canBuild = RocketParts.CanBuild ();
 		bool canUpgrade = RocketParts.HasEnoughPartsToUpgrade () && RocketParts.HasReachedPlanetToUpgrade();
 		upgradeButtonLabel.text = canBuild ? buildRocketText : upgradeRocketText;

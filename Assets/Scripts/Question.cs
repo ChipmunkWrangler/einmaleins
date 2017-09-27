@@ -9,6 +9,7 @@ public class Question {
 	public int idx { get; private set; }
 	public int difficulty { get; private set; }
 	public System.DateTime reviewAt { get; private set; }
+	public bool wasMastered { get; private set; } // even if it is no longer mastered. This is for awarding rocket parts
 
 	public float Debug_chanceOfCorrectAnswer;
 
@@ -32,7 +33,6 @@ public class Question {
 	};
 	string prefsKey;
 	List<float> answerTimes;
-	bool wasMastered; // even if it is no longer mastered. This is for awarding rocket parts
 	bool isRetry; // if a question is answered wrong, then isRetry is true until it is answered right (which must happen before proceeding to a new question)
 	bool isMandatoryReview; // if you get a question wrong, you have to review it in this session regardless of difficulty level and reviewAt
 
