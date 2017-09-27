@@ -19365,7 +19365,6 @@ RectTransform:
   - {fileID: 304}
   - {fileID: 251}
   - {fileID: 265}
-  - {fileID: 1660461387}
   m_Father: {fileID: 264}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19447,6 +19446,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 290}
+  - {fileID: 1660461387}
   m_Father: {fileID: 261}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20527,7 +20527,6 @@ MonoBehaviour:
   - {fileID: 1862998284}
   earth: {fileID: 184}
   minParticleScale: 0.1
-  paramObj: {fileID: 451636923}
 --- !u!114 &316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21643,8 +21642,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 357}
-        m_MethodName: LoadLaunchScene
+      - m_Target: {fileID: 388}
+        m_MethodName: Launch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24053,7 +24052,6 @@ GameObject:
   - component: {fileID: 1660461387}
   - component: {fileID: 1660461390}
   - component: {fileID: 1660461389}
-  - component: {fileID: 1660461388}
   m_Layer: 5
   m_Name: ReachPlanetToUpgrade
   m_TagString: Untagged
@@ -24072,33 +24070,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 261}
-  m_RootOrder: 3
+  m_Father: {fileID: 265}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 385, y: -165}
-  m_SizeDelta: {x: 770, y: 40}
+  m_AnchoredPosition: {x: 385, y: -104.61536}
+  m_SizeDelta: {x: 770, y: 50}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1660461388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114088261695123038, guid: fdd7f431d6405436aaf88aceb283e9cb,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1660461386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: 40
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
 --- !u!114 &1660461389
 MonoBehaviour:
   m_ObjectHideFlags: 0
