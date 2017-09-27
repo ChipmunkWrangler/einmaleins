@@ -15,6 +15,7 @@ public class ShowSolarSystem : MonoBehaviour {
 	[SerializeField] Renderer[] planets = null;
 	[SerializeField] Renderer earth = null;
 	[SerializeField] float minParticleScale = 0.1f;
+	[SerializeField] GameObject recordLine;
 	Vector3 originalScale;
 	Transform particleSystemTransform;
 
@@ -35,6 +36,7 @@ public class ShowSolarSystem : MonoBehaviour {
 		if (viewportTop > 1.0f) {
 			transform.localScale /= viewportTop;
 			particleSystemTransform.localScale /= viewportTop;
+			recordLine.transform.localScale *= viewportTop;
 			float maintainMinScaleFactor = minParticleScale / particleSystemTransform.localScale.y;
 			if (maintainMinScaleFactor > 1.0f) {
 				particleSystemTransform.localScale *= maintainMinScaleFactor;

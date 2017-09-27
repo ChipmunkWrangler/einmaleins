@@ -20133,6 +20133,7 @@ MonoBehaviour:
   - {fileID: 1862998284}
   earth: {fileID: 184}
   minParticleScale: 0.1
+  recordLine: {fileID: 1862998282}
 --- !u!114 &316
 MonoBehaviour:
   m_ObjectHideFlags: 0
