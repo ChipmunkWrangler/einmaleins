@@ -306,6 +306,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114197520798966568}
+        m_MethodName: OnLaunch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114197520798966568
@@ -327,6 +338,7 @@ MonoBehaviour:
   doneText: {fileID: 114331783516396428}
   buildRocketText: Rakete bauen
   upgradeRocketText: Rakete verbessern
+  questions: {fileID: 0}
 --- !u!114 &114216840474445470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -461,7 +473,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Fertig f\xFCr Heute!"
+  m_Text: Fertig!
 --- !u!114 &114337813455317212
 MonoBehaviour:
   m_ObjectHideFlags: 1

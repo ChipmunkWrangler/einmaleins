@@ -23239,7 +23239,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Fertig f\xFCr Heute!"
+  m_Text: Fertig!
 --- !u!114 &438
 MonoBehaviour:
   m_ObjectHideFlags: 0
