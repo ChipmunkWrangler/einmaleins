@@ -20,7 +20,7 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 		"Auf zum Saturn",
 		"Auf zum Uranus",
 		"Auf zum Neptun",
-		""
+		"Auf ins All"
 	};
 	readonly string[] reachPlanetLabels = {
 		"Erreiche Mars, um Deine Rakete zu verbessern",
