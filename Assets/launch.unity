@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 256}
   - component: {fileID: 197}
   - component: {fileID: 330}
+  - component: {fileID: 57}
   m_Layer: 5
   m_Name: ApogeeLabel
   m_TagString: Untagged
@@ -537,6 +538,7 @@ GameObject:
   - component: {fileID: 263}
   - component: {fileID: 205}
   - component: {fileID: 353}
+  - component: {fileID: 48}
   m_Layer: 5
   m_Name: Apogee
   m_TagString: Untagged
@@ -627,6 +629,7 @@ GameObject:
   - component: {fileID: 362}
   - component: {fileID: 354}
   - component: {fileID: 361}
+  - component: {fileID: 43}
   m_Layer: 5
   m_Name: Answer
   m_TagString: Untagged
@@ -647,6 +650,7 @@ GameObject:
   - component: {fileID: 365}
   - component: {fileID: 364}
   - component: {fileID: 363}
+  - component: {fileID: 47}
   m_Layer: 5
   m_Name: Question
   m_TagString: Untagged
@@ -706,6 +710,7 @@ GameObject:
   - component: {fileID: 268}
   - component: {fileID: 209}
   - component: {fileID: 366}
+  - component: {fileID: 86}
   m_Layer: 5
   m_Name: HeightLabel
   m_TagString: Untagged
@@ -770,6 +775,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &43
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 35}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &44
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,6 +844,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &47
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 36}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &48
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 30}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &49
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,6 +1014,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &57
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 17}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &58
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,6 +1115,7 @@ GameObject:
   - component: {fileID: 283}
   - component: {fileID: 224}
   - component: {fileID: 395}
+  - component: {fileID: 68}
   m_Layer: 5
   m_Name: RecordHeightLabel
   m_TagString: Untagged
@@ -1153,6 +1215,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &68
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 62}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &69
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,6 +1546,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &86
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 39}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &87
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,6 +1589,7 @@ GameObject:
   - component: {fileID: 300}
   - component: {fileID: 241}
   - component: {fileID: 430}
+  - component: {fileID: 92}
   m_Layer: 5
   m_Name: Height
   m_TagString: Untagged
@@ -1556,6 +1647,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &92
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &93
 GameObject:
   m_ObjectHideFlags: 0
@@ -20155,17 +20260,17 @@ MonoBehaviour:
   postDelay: 0
   planetZooms:
   - 2000
-  - 0
-  - 0
-  - 0
-  - 0
+  - 13000
+  - 11000
+  - 45000
+  - 68000
   - 0
   planetYs:
   - 10000
-  - 0
-  - 0
-  - 0
-  - 0
+  - 60000
+  - 135000
+  - 290000
+  - 470000
   - 0
 --- !u!114 &316
 MonoBehaviour:
@@ -23327,6 +23432,7 @@ GameObject:
   - component: {fileID: 379558593}
   - component: {fileID: 379558592}
   - component: {fileID: 379558591}
+  - component: {fileID: 379558594}
   m_Layer: 5
   m_Name: AchievementMessage
   m_TagString: Untagged
@@ -23394,6 +23500,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &379558594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 379558590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &380686419
 GameObject:
   m_ObjectHideFlags: 0
@@ -23405,6 +23525,7 @@ GameObject:
   - component: {fileID: 247}
   - component: {fileID: 189}
   - component: {fileID: 306}
+  - component: {fileID: 380686420}
   m_Layer: 5
   m_Name: RecordHeight
   m_TagString: Untagged
@@ -23412,6 +23533,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &380686420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 380686419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &451636922
 GameObject:
   m_ObjectHideFlags: 0
