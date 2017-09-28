@@ -22,6 +22,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
 	public float height { get; private set; } // km
 
+	const float INITIAL_ACCELERATION_FRACTION = 0.75f;
 	float gravity = 50f;
 	float recordHeight;
 	float apogee;
@@ -46,7 +47,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		checkForRecord = recordHeight > 0;
 		oldRecord.SetActive (checkForRecord);
 		UnityEngine.Assertions.Assert.AreEqual(RocketParts.GetNumUpgrades() + 1, TargetPlanet.heights.Length);
-		CalcParams(TargetPlanet.heights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
+		int upgradeLevel = RocketParts.GetUpgradeLevel ();
+		float oldHeight = (upgradeLevel > 0) ? TargetPlanet.heights [upgradeLevel - 1] : 0;
+		CalcParams(oldHeight, TargetPlanet.heights[upgradeLevel], FlashQuestions.ASK_LIST_LENGTH);
 //		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
 		formatProvider = MDCulture.GetCulture();
@@ -147,7 +150,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	// The rocket reaches speed zero at targetAnswerTime. Calculate acceleration and gravity to guarantee given maxHeight
-	void CalcParams(float maxHeight, int numChancesToAccelerate) {
+	void CalcParams(float oldEngineMaxHeight, float maxHeight, int numChancesToAccelerate) {
 		// we want the player to reach v = 0 at targetAnswerTime (=:t) seconds after getting accelerated (1)
 		// Let v = accelerationOnCorrect
 		// Let h = the max height from one acceleration, starting at height = 0 and v = 0
@@ -158,9 +161,18 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		// Also, if we accelerate each time from a speed of zero, then total height (=: H) is just
 		// H = n * h => h = H / n (6)
 		// (5) & (6) => H / n = v * t / 2 => 2H / nt = v
-		accelerationOnCorrect = 2 * maxHeight / (numChancesToAccelerate * targetAnswerTime);
+		float previousAcceleration = GetAccelerationNewStyle (oldEngineMaxHeight, numChancesToAccelerate);
+		accelerationOnCorrect = GetAccelerationNewStyle (maxHeight, numChancesToAccelerate);
 		gravity = accelerationOnCorrect / targetAnswerTime;
+//		Debug.Log ("accelerationOnCorrect " + accelerationOnCorrect + " " + (INITIAL_ACCELERATION_FRACTION + ((1.0f-INITIAL_ACCELERATION_FRACTION) * RocketParts.GetNumParts () / RocketParts.GetNumPartsRequired ())));
+		accelerationOnCorrect = Mathf.Lerp (previousAcceleration, accelerationOnCorrect, INITIAL_ACCELERATION_FRACTION + ((1.0f-INITIAL_ACCELERATION_FRACTION) * RocketParts.GetNumParts () / RocketParts.GetNumPartsRequired ())); // to make it hard to reach the target planet without mastering more slow questions
+//		Debug.Log ("modified accelerationOnCorrect " + accelerationOnCorrect);
 		minSpeed = -accelerationOnCorrect * minSpeedFactor;
+	}
+
+	float GetAccelerationNewStyle(float maxHeight, int numChancesToAccelerate)
+	{
+		return 2 * maxHeight / (numChancesToAccelerate * targetAnswerTime);
 	}
 
 	// Fixed gravity, acceleration calculated to reach maxHeight
