@@ -22,7 +22,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
 	public float height { get; private set; } // km
 
-	const float INITIAL_ACCELERATION_FRACTION = 0.75f;
+	const float INITIAL_ACCELERATION_FRACTION = 0.7f;
+	const float INITIAL_HEIGHT_FRACTION = 0.5f;
 	float gravity = 50f;
 	float recordHeight;
 	float apogee;
@@ -48,8 +49,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		oldRecord.SetActive (checkForRecord);
 		UnityEngine.Assertions.Assert.AreEqual(RocketParts.GetNumUpgrades() + 1, TargetPlanet.heights.Length);
 		int upgradeLevel = RocketParts.GetUpgradeLevel ();
-		float oldHeight = (upgradeLevel > 0) ? TargetPlanet.heights [upgradeLevel - 1] : 0;
-		CalcParams(oldHeight, TargetPlanet.heights[upgradeLevel], FlashQuestions.ASK_LIST_LENGTH + 1); // +1 because of the initial launch acceleration
+		float newTargetHeight = TargetPlanet.heights [upgradeLevel];
+		float oldTargetHeight = (upgradeLevel > 0) ? TargetPlanet.heights [upgradeLevel - 1] : newTargetHeight * INITIAL_HEIGHT_FRACTION;
+		CalcParams(oldTargetHeight, newTargetHeight, FlashQuestions.ASK_LIST_LENGTH + 1); // +1 because of the initial launch acceleration
 //		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
 		formatProvider = MDCulture.GetCulture();
