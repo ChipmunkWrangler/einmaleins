@@ -13,6 +13,10 @@ public class FlashQuestions : Questions {
 		toAsk.Clear ();
 	}
 
+	public override void Abort() {
+		toAsk.Clear ();
+	}
+
 	protected override void FillToAsk() {
 		if (toAsk.Count > 0 || wasFilled) {
 			Debug.Log ("AskList count " + toAsk.Count);

@@ -19382,7 +19382,6 @@ RectTransform:
   - {fileID: 263}
   - {fileID: 283}
   - {fileID: 247}
-  - {fileID: 379558593}
   m_Father: {fileID: 285}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19641,6 +19640,7 @@ RectTransform:
   - {fileID: 285}
   - {fileID: 299}
   - {fileID: 264}
+  - {fileID: 379558593}
   m_Father: {fileID: 250}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20149,6 +20149,24 @@ MonoBehaviour:
   earth: {fileID: 184}
   minParticleScale: 0.1
   recordLine: {fileID: 1862998282}
+  zoomInTime: 7
+  zoomOutTime: 3
+  preDelay: 0
+  postDelay: 0
+  planetZooms:
+  - 2000
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  planetYs:
+  - 10000
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!114 &316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21920,12 +21938,15 @@ MonoBehaviour:
   background: {fileID: 400}
   minSpeedFactor: 0.25
   launch: {fileID: 388}
-  flashQuestions: {fileID: 387}
+  questionPicker: {fileID: 382}
   celebrate: {fileID: 390}
   oldRecord: {fileID: 1862998282}
   paramObj: {fileID: 451636923}
   achievementText: {fileID: 379558591}
   recordBrokenMsg: Neuer Rekord!
+  zoomToPlanet: {fileID: 315}
+  achievementTextTransitionTime: 5
+  planetAchievementTextDelay: 2
 --- !u!114 &390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23335,13 +23356,13 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ac5ab3e05fb0c4f6c8a7eb275d74ff88, type: 3}
-    m_FontSize: 32
+    m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 140
-    m_Alignment: 3
-    m_AlignByGeometry: 0
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 1
     m_RichText: 0
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
@@ -23363,16 +23384,16 @@ RectTransform:
   m_GameObject: {fileID: 379558590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.96, y: 0.96, z: 0.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 279}
-  m_RootOrder: 6
+  m_Father: {fileID: 293}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 1}
+  m_SizeDelta: {x: 100, y: 45}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &380686419
 GameObject:
   m_ObjectHideFlags: 0

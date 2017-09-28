@@ -56,6 +56,9 @@ public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
 		effort = 0;
 	}
 
+	public override void Abort() {
+	}
+
 	protected override void Load() {
 		base.Load();
 		if (MDPrefs.GetDateTime (prefsKey + ":date", System.DateTime.MinValue) < System.DateTime.Today) {

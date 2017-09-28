@@ -7,15 +7,6 @@ public class TargetPlanet {
 
 	static int targetPlanetIdx = -1;
 
-	static readonly string[] reachedTexts = {
-		"Mars erreicht!",
-		"Jupiter erreicht!",
-		"Saturn erreicht!",
-		"Uranus erreicht!",
-		"Neptun erreicht!",
-		"Ende erreicht!" // should never happen
-	};
-		
 	public static readonly float[] heights = {
 		7.8e+07f,
 		6.3e+08f,
@@ -24,13 +15,13 @@ public class TargetPlanet {
 		4.357e+09f
 	};
 
-	public static string RecordIfPlanetReached(float rocketHeight) {
-		string reachedText = "";
+	public static int RecordIfPlanetReached(float rocketHeight) {
+		int oldIdx = -1;
 		if (rocketHeight > GetTargetPlanetHeight ()) {
-			reachedText = GetReachedText ();
-			SetIdx (GetIdx () + 1);
+			oldIdx = GetIdx ();
+			SetIdx (oldIdx + 1);
 		}
-		return reachedText;
+		return oldIdx;
 	}
 
 	public static int GetIdx() {
@@ -38,10 +29,6 @@ public class TargetPlanet {
 			targetPlanetIdx = MDPrefs.GetInt (prefsKey, 0);
 		}
 		return targetPlanetIdx; 
-	}
-
-	static string GetReachedText() {
-		return reachedTexts [GetIdx ()];
 	}
 
 	static float GetTargetPlanetHeight() {

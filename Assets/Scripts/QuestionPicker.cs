@@ -18,6 +18,15 @@ public class QuestionPicker : MonoBehaviour {
 		SplitSubscribers ();
 	}
 
+	public void Abort() {
+		questions.Abort ();
+		NextQuestion ();
+	}
+
+	public void Reset() {
+		questions.Reset ();
+	}
+
 	public void NextQuestion() {
 		curQuestion = questions.GetNextQuestion ();
 		foreach (OnQuestionChanged subscriber in onQuestionChangedSubscribers) {

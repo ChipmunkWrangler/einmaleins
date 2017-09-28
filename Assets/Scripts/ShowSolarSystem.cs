@@ -15,9 +15,26 @@ public class ShowSolarSystem : MonoBehaviour {
 	[SerializeField] Renderer[] planets = null;
 	[SerializeField] Renderer earth = null;
 	[SerializeField] float minParticleScale = 0.1f;
-	[SerializeField] GameObject recordLine;
+	[SerializeField] GameObject recordLine = null;
+	[SerializeField] float zoomInTime = 5.0f;
+	[SerializeField] float zoomOutTime = 5.0f;
+	[SerializeField] float preDelay = 2.0f;
+	[SerializeField] float postDelay = 2.0f;
+	[SerializeField] float[] planetZooms = null;
+	[SerializeField] float[] planetYs = null;
 	Vector3 originalScale;
 	Transform particleSystemTransform;
+
+	public float ZoomToPlanet(int i) {
+		GameObject planet = planets [i].gameObject;
+		Transform oldTransform = planet.transform;
+		float zoomedScale = planetZooms [i];
+		iTween.MoveTo(planet, iTween.Hash("y", planetYs[i], "time", zoomInTime, "delay", preDelay, "islocal", true));	
+		iTween.ScaleTo(planet, iTween.Hash("scale", new Vector3(zoomedScale, zoomedScale, zoomedScale), "time", zoomInTime, "delay", preDelay));
+		iTween.MoveTo(planet, iTween.Hash("y", oldTransform.localPosition.y, "time", zoomOutTime, "delay", preDelay + zoomInTime, "islocal", true));	
+		iTween.ScaleTo(planet, iTween.Hash("scale", oldTransform.localScale, "time", zoomOutTime, "delay", preDelay + zoomInTime));
+		return preDelay + zoomInTime + zoomOutTime + postDelay;
+	}
 
 	void Start() {
 		originalScale = transform.localScale;

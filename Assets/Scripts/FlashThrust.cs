@@ -11,16 +11,28 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	public const float targetAnswerTime = 6.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
 	[SerializeField] float minSpeedFactor = 0.25f;
 	[SerializeField] KickoffLaunch launch = null;
-	[SerializeField] FlashQuestions flashQuestions = null;
+	[SerializeField] QuestionPicker questionPicker = null;
 	[SerializeField] Celebrate celebrate = null;
 	[SerializeField] GameObject oldRecord = null;
 	[SerializeField] Params paramObj = null;
 	[SerializeField] Text achievementText = null;
 	[SerializeField] string recordBrokenMsg = "Neuer Rekord!";
+	[SerializeField] ShowSolarSystem zoomToPlanet = null;
+	[SerializeField] float achievementTextTransitionTime = 3.0f;
+	[SerializeField] float planetAchievementTextDelay = 2.0f;
 	float minSpeed;
 	public float speed { get; private set; } // km per second
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
 	public float height { get; private set; } // km
+
+	readonly string[] planetReachedTexts = {
+		"Mars erreicht!",
+		"Jupiter erreicht!",
+		"Saturn erreicht!",
+		"Uranus erreicht!",
+		"Neptun erreicht!",
+		"Ende erreicht!" // should never happen
+	};
 
 	const float INITIAL_ACCELERATION_FRACTION = 0.7f;
 	const float INITIAL_HEIGHT_FRACTION = 0.5f;
@@ -78,9 +90,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 			if (height > recordHeight) {
 				recordHeight = height;
 				MDPrefs.SetFloat (prefsKey, recordHeight);
-				string planetReachedString = TargetPlanet.RecordIfPlanetReached (height);
-				if (planetReachedString.Length > 0) {
-					CelebrateReachingPlanet (planetReachedString);
+				int planetIdx = TargetPlanet.RecordIfPlanetReached (height);
+				if (planetIdx >=0 ) {
+					StartCoroutine(CelebrateReachingPlanet (planetIdx));
 				} else if (checkForRecord) {
 					CelebrateBreakingRecord();
 				}
@@ -131,10 +143,21 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	void OnDone() {
-		isRunning = false;
+		StopRunning ();
+		PrepareNewStart ();
+	}
+
+	void PrepareNewStart ()
+	{
 		noMoreQuestions = false;
-		flashQuestions.Reset();
+		questionPicker.Reset ();
 		launch.ShowLaunchButton ();
+	}
+
+	void StopRunning ()
+	{
+		isRunning = false;
+		questionPicker.Abort ();
 	}
 
 	public void OnCountdown() {
@@ -147,13 +170,35 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		celebrate.curParticleIdx = RocketParts.GetUpgradeLevel ();
 	}
 
-	void CelebrateReachingPlanet(string msg) {
-		achievementText.text = msg;
-		OnDone ();
+	IEnumerator CelebrateReachingPlanet(int planetIdx) {
+		StopRunning ();
+		float zoomTime = zoomToPlanet.ZoomToPlanet (planetIdx);
+		UnityEngine.Assertions.Assert.IsTrue (zoomTime - planetAchievementTextDelay >= 0);
+		ClearAchievementText (planetAchievementTextDelay * 0.9f);
+		yield return new WaitForSeconds (planetAchievementTextDelay);
+		ActivateAchievementText (planetReachedTexts [planetIdx]);
+		yield return new WaitForSeconds (zoomTime - planetAchievementTextDelay);
+		PrepareNewStart ();
+		yield return null;
+	}
+
+	void ClearAchievementText(float transitionTime) {
+		if (achievementText.text.Length > 0) {
+			iTween.ScaleTo (achievementText.gameObject, iTween.Hash ("scale", Vector3.zero, "time", transitionTime));
+		}
+	}
+
+	void ActivateAchievementText (string text)
+	{
+		achievementText.text = text;
+		achievementText.CrossFadeAlpha (1.0f, 0, false);
+		achievementText.CrossFadeAlpha (0, achievementTextTransitionTime, false);
+		achievementText.transform.localScale = Vector3.zero;
+		iTween.ScaleTo (achievementText.gameObject, iTween.Hash ("scale", Vector3.one, "time", achievementTextTransitionTime, "easeType", iTween.EaseType.easeOutQuad));
 	}
 
 	void CelebrateBreakingRecord() {
-		achievementText.text = recordBrokenMsg;
+		ActivateAchievementText( recordBrokenMsg );
 	}
 
 	// The rocket reaches speed zero at targetAnswerTime. Calculate acceleration and gravity to guarantee given maxHeight

@@ -43,6 +43,7 @@ public abstract class Questions : MonoBehaviour {
 	}
 
 	public abstract void Reset();
+	public abstract void Abort();
 
 	protected virtual void Load() {
 		LoadQuestionsList ();
