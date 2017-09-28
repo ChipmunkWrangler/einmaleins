@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class KickoffLaunch : MonoBehaviour {
-	[SerializeField] QuestionPicker questionPicker = null;
+	[SerializeField] Celebrate celebrate = null;
 	[SerializeField] float delay = 1.0f;
 	[SerializeField] int countdownTime = 3;
 	[SerializeField] UnityEngine.UI.Text countdownText = null;
@@ -57,13 +57,15 @@ public class KickoffLaunch : MonoBehaviour {
 		}
 		countdownText.text = "";
 		countdownText.gameObject.SetActive (false);
-		foreach (var element in uiElementsToActivateOnPlay) {
-			element.SetActive (true);
-		}
 		foreach (var element in uiElementsToDeactivateOnPlay) {
 			element.SetActive (false);
 		}
 		yield return null;
-		questionPicker.NextQuestion ();
+		thrust.Accelerate ();
+		celebrate.OnCorrectAnswer (null, false); // this triggers the question once the flames are done
+		yield return new WaitForSeconds(celebrate.duration);
+		foreach (var element in uiElementsToActivateOnPlay) {
+			element.SetActive (true);
+		}
 	}
 }

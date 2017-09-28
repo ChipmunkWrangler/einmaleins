@@ -21860,7 +21860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a03990d3353d4d0ea2c2664b026e185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionPicker: {fileID: 382}
+  celebrate: {fileID: 390}
   delay: 1
   countdownTime: 3
   countdownText: {fileID: 327}

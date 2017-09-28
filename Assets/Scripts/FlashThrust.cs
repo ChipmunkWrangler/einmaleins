@@ -49,7 +49,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		UnityEngine.Assertions.Assert.AreEqual(RocketParts.GetNumUpgrades() + 1, TargetPlanet.heights.Length);
 		int upgradeLevel = RocketParts.GetUpgradeLevel ();
 		float oldHeight = (upgradeLevel > 0) ? TargetPlanet.heights [upgradeLevel - 1] : 0;
-		CalcParams(oldHeight, TargetPlanet.heights[upgradeLevel], FlashQuestions.ASK_LIST_LENGTH);
+		CalcParams(oldHeight, TargetPlanet.heights[upgradeLevel], FlashQuestions.ASK_LIST_LENGTH + 1); // +1 because of the initial launch acceleration
 //		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
 		formatProvider = MDCulture.GetCulture();
@@ -99,11 +99,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
-//		Debug.Log ("t = " + (Time.time - startTime) + " oldSpeed = " + speed + " newSpeed = " + (speed + accelerationOnCorrect) + " height = " + height);
-		if (speed < 0) {
-			speed = 0; // anything else is too discouraging.
-		}
-		speed += accelerationOnCorrect;
+		Accelerate ();
 		++numAnswersGiven;
 	}
 
@@ -114,6 +110,14 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 //			StartCoroutine (AutoAnswerQuestion ());
 		}
 
+	}
+
+	public void Accelerate() {
+		//		Debug.Log ("t = " + (Time.time - startTime) + " oldSpeed = " + speed + " newSpeed = " + (speed + accelerationOnCorrect) + " height = " + height);
+		if (speed < 0) {
+			speed = 0; // anything else is too discouraging.
+		}
+		speed += accelerationOnCorrect;
 	}
 
 	IEnumerator AutoAnswerQuestion() {

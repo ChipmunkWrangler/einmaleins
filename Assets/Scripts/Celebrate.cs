@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuestionChanged {
-	[SerializeField] float duration = 3.0f;
+	public float duration = 3.0f;
 	[SerializeField] ParticleSystem[] particles = null;
-	[SerializeField] ParticleSystem masteryParticles;
+	[SerializeField] ParticleSystem masteryParticles = null;
 	[SerializeField] QuestionPicker questionPicker = null;
 	[SerializeField] bool continueAfterQuestions = false;
 	bool isCelebrating;
