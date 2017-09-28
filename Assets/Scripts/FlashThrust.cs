@@ -8,7 +8,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] Text recordHeightText = null;
 	[SerializeField] Text apogeeText = null;
 	[SerializeField] ScrollBackground background = null;
-	public const float targetAnswerTime = 5.5f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
+	public const float targetAnswerTime = 6.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
 	[SerializeField] float minSpeedFactor = 0.25f;
 	[SerializeField] KickoffLaunch launch = null;
 	[SerializeField] FlashQuestions flashQuestions = null;
@@ -131,7 +131,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	void OnDone() {
 		isRunning = false;
 		noMoreQuestions = false;
-		flashQuestions.wasFilled = false;
+		flashQuestions.Reset();
 		launch.ShowLaunchButton ();
 	}
 
@@ -147,6 +147,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	void CelebrateReachingPlanet(string msg) {
 		achievementText.text = msg;
+		OnDone ();
 	}
 
 	void CelebrateBreakingRecord() {
