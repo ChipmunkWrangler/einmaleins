@@ -30,7 +30,7 @@ public class ShowSolarSystem : MonoBehaviour {
 		Transform oldTransform = planet.transform;
 		float zoomedScale = planetZooms [i];
 		iTween.MoveTo(planet, iTween.Hash("y", planetYs[i], "time", zoomInTime, "delay", preDelay, "islocal", true));	
-		iTween.ScaleTo(planet, iTween.Hash("scale", new Vector3(zoomedScale, zoomedScale, zoomedScale), "time", zoomInTime, "delay", preDelay));
+		iTween.ScaleTo(planet, iTween.Hash("scale", new Vector3(zoomedScale, zoomedScale, 1.0f), "time", zoomInTime, "delay", preDelay));
 		iTween.MoveTo(planet, iTween.Hash("y", oldTransform.localPosition.y, "time", zoomOutTime, "delay", preDelay + zoomInTime, "islocal", true));	
 		iTween.ScaleTo(planet, iTween.Hash("scale", oldTransform.localScale, "time", zoomOutTime, "delay", preDelay + zoomInTime));
 		return preDelay + zoomInTime + zoomOutTime + postDelay;
