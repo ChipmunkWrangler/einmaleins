@@ -25,6 +25,6 @@ public class ScrollBackground : MonoBehaviour {
 		// This is assumed to be called every frame, so you should probably pull instead 
 		baseOffset = transform.position.y - startPosition.y;
 		float speedFraction = speed / maxSpeed;
-		scrollSpeed = speedFraction * maxScrollSpeed * scrollSpeedMultiplier[RocketParts.GetUpgradeLevel()];
+		scrollSpeed = speedFraction * maxScrollSpeed * scrollSpeedMultiplier[RocketParts.instance.upgradeLevel];
 	}
 }

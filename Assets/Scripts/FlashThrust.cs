@@ -59,12 +59,12 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		oldRecord.transform.position = recordPos;
 		checkForRecord = recordHeight > 0;
 		oldRecord.SetActive (checkForRecord);
-		UnityEngine.Assertions.Assert.AreEqual(RocketParts.GetNumUpgrades() + 1, TargetPlanet.heights.Length);
-		int upgradeLevel = RocketParts.GetUpgradeLevel ();
+		UnityEngine.Assertions.Assert.AreEqual(RocketParts.instance.numUpgrades + 1, TargetPlanet.heights.Length);
+		int upgradeLevel = RocketParts.instance.upgradeLevel;
 		float newTargetHeight = TargetPlanet.heights [upgradeLevel];
 		float oldTargetHeight = (upgradeLevel > 0) ? TargetPlanet.heights [upgradeLevel - 1] : newTargetHeight * INITIAL_HEIGHT_FRACTION;
 		CalcParams(oldTargetHeight, newTargetHeight, FlashQuestions.ASK_LIST_LENGTH + 1); // +1 because of the initial launch acceleration
-//		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.GetUpgradeLevel()], FlashQuestions.ASK_LIST_LENGTH);
+//		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.instance.UpgradeLevel], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
 		formatProvider = MDCulture.GetCulture();
 	}
@@ -167,7 +167,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		speed = 0;
 		numAnswersGiven = 0;
 		noMoreQuestions = false;
-		celebrate.curParticleIdx = RocketParts.GetUpgradeLevel ();
+		celebrate.curParticleIdx = RocketParts.instance.upgradeLevel;
 	}
 
 	IEnumerator CelebrateReachingPlanet(int planetIdx) {
@@ -216,9 +216,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		float previousAcceleration = GetAccelerationNewStyle (oldEngineMaxHeight, numChancesToAccelerate);
 		accelerationOnCorrect = GetAccelerationNewStyle (maxHeight, numChancesToAccelerate);
 		gravity = accelerationOnCorrect / targetAnswerTime;
-//		Debug.Log ("accelerationOnCorrect " + accelerationOnCorrect + " " + (INITIAL_ACCELERATION_FRACTION + ((1.0f-INITIAL_ACCELERATION_FRACTION) * RocketParts.GetNumParts () / RocketParts.GetNumPartsRequired ())));
-		accelerationOnCorrect = Mathf.Lerp (previousAcceleration, accelerationOnCorrect, INITIAL_ACCELERATION_FRACTION + ((1.0f-INITIAL_ACCELERATION_FRACTION) * RocketParts.GetNumParts () / RocketParts.GetNumPartsRequired ())); // to make it hard to reach the target planet without mastering more slow questions
-//		Debug.Log ("modified accelerationOnCorrect " + accelerationOnCorrect);
+		float engineEfficiency = INITIAL_ACCELERATION_FRACTION + ((1.0f-INITIAL_ACCELERATION_FRACTION) * RocketParts.instance.numParts / RocketParts.instance.numPartsRequired);
+		Debug.Log ("engineEfficiency " + engineEfficiency);
+		accelerationOnCorrect = Mathf.Lerp (previousAcceleration, accelerationOnCorrect, engineEfficiency); // to make it hard to reach the target planet without mastering more slow questions
 		minSpeed = -accelerationOnCorrect * minSpeedFactor;
 	}
 

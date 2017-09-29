@@ -24,7 +24,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	}
 
 	void Start () {
-		UpdateText (RocketParts.GetNumParts(), true);
+		UpdateText (RocketParts.instance.numParts, true);
 	}
 
 	public void OnQuestionChanged(Question question) {
@@ -39,7 +39,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		if (isNewlyMastered) {
-			RocketParts.Inc ();
+			RocketParts.instance.Inc ();
 			foreach (Image image in imagesToHighlight) {
 				StartCoroutine (FadeImage (highlightColour, highlightFadeTime, image));
 			}
@@ -49,7 +49,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 			foreach (Text text in textsToHighlight) {
 				StartCoroutine (Scale (highlightScale, highlightFadeTime, text.gameObject));
 			}
-			UpdateText (RocketParts.GetNumParts());
+			UpdateText (RocketParts.instance.numParts);
 		}
 	}
 
@@ -97,7 +97,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	}
 
 	void UpdateText (int numParts, bool instant = false) {
-		if (RocketParts.GetUpgradeLevel () >= RocketParts.GetNumUpgrades () && numParts == 0) {
+		if (RocketParts.instance.upgradeLevel >= RocketParts.instance.numUpgrades && numParts == 0) {
 			if (numText.text.Length > 0) {
 				numText.text = "";
 				foreach (Text text in textsToFadeOut) {
@@ -109,7 +109,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 				}
 			}
 		} else {
-			numText.text = numParts + " von " + RocketParts.GetNumPartsRequired ();
+			numText.text = numParts + " von " + RocketParts.instance.numPartsRequired;
 		}
 	}
 

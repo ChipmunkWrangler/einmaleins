@@ -47,15 +47,15 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 	void ActivateIfCanLaunch (bool noMoreQuestions)
 	{
 		bool hasLaunchedToday = MDPrefs.GetDateTime (prefsKey, System.DateTime.MinValue) >= System.DateTime.Today;
-		bool canLaunch = RocketParts.IsRocketBuilt () && (!hasLaunchedToday || HasMasteredAllQuestions() || questions.HasEnoughFlashQuestions());
-		bool canBuild = RocketParts.CanBuild ();
-		bool canUpgrade = RocketParts.HasEnoughPartsToUpgrade () && RocketParts.HasReachedPlanetToUpgrade();
+		bool canLaunch = RocketParts.instance.isRocketBuilt&& (!hasLaunchedToday || HasMasteredAllQuestions() || questions.HasEnoughFlashQuestions());
+		bool canBuild = RocketParts.instance.canBuild;
+		bool canUpgrade = RocketParts.instance.hasEnoughPartsToUpgrade && RocketParts.instance.hasReachedPlanetToUpgrade;
 		upgradeButtonLabel.text = canBuild ? buildRocketText : upgradeRocketText;
 		upgradeButton.gameObject.SetActive (noMoreQuestions && (canBuild || canUpgrade));
 		launchButtonText.text = launchButtonLabels [TargetPlanet.GetIdx ()];
 		launchButton.gameObject.SetActive (noMoreQuestions && canLaunch && !canUpgrade);
 		reachPlanetToUpgradeLabel.text = reachPlanetLabels [TargetPlanet.GetIdx ()];
-		reachPlanetToUpgradeLabel.gameObject.SetActive (noMoreQuestions && canLaunch && (RocketParts.HasEnoughPartsToUpgrade () && !RocketParts.HasReachedPlanetToUpgrade()));
+		reachPlanetToUpgradeLabel.gameObject.SetActive (noMoreQuestions && canLaunch && (RocketParts.instance.hasEnoughPartsToUpgrade && !RocketParts.instance.hasReachedPlanetToUpgrade));
 		doneText.gameObject.SetActive( noMoreQuestions && !canLaunch && !canUpgrade && !canBuild);
 	}
 }

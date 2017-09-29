@@ -22,23 +22,23 @@ public class RocketBuilder : MonoBehaviour {
 
 	void Start () {
 		Vector3 pos = gameObject.transform.position;
-		pos.y = (RocketParts.IsRocketBuilt()) ? builtY : hiddenY;
+		pos.y = (RocketParts.instance.isRocketBuilt) ? builtY : hiddenY;
 		gameObject.transform.position = pos;
-		if (!RocketParts.IsRocketBuilt () && RocketParts.CanBuild ()) {
+		if (!RocketParts.instance.isRocketBuilt&& RocketParts.instance.canBuild) {
 			Build ();
 		}
 	}
 
 	public void OnUpgrade() {
-		UnityEngine.Assertions.Assert.AreEqual (exhaustParticles.Length, RocketParts.GetNumUpgrades () + 1);
-		counter.OnSpend (RocketParts.GetNumParts (), RocketParts.GetNumParts () - RocketParts.GetNumPartsRequired());
-		RocketParts.Upgrade ();
+		UnityEngine.Assertions.Assert.AreEqual (exhaustParticles.Length, RocketParts.instance.numUpgrades + 1);
+		counter.OnSpend (RocketParts.instance.numParts, RocketParts.instance.numParts - RocketParts.instance.numPartsRequired);
+		RocketParts.instance.Upgrade ();
 		StartEngine ();
 	}
 
 	void StartEngine ()
 	{
-		int upgradeLevel = RocketParts.GetUpgradeLevel ();
+		int upgradeLevel = RocketParts.instance.upgradeLevel;
 		for (int i = 0; i < exhaustParticles.Length; ++i) {
 			exhaustParticles [i].gameObject.SetActive (i == upgradeLevel);
 		}
@@ -51,7 +51,7 @@ public class RocketBuilder : MonoBehaviour {
 	}
 
 	void DoneUpgrading() {
-		exhaustParticles [RocketParts.GetUpgradeLevel ()].Stop ();
+		exhaustParticles [RocketParts.instance.upgradeLevel].Stop ();
 		button.OnDoneBuildOrUpgrade ();
 	}
 
@@ -63,11 +63,11 @@ public class RocketBuilder : MonoBehaviour {
 	{
 		GotoBasePos("DoneBuilding");
 		buildParticles.Play ();
-		counter.OnSpend (RocketParts.GetNumParts (), RocketParts.GetNumParts () - RocketParts.GetNumPartsRequired());
+		counter.OnSpend (RocketParts.instance.numParts, RocketParts.instance.numParts - RocketParts.instance.numPartsRequired);
 	}
 
 	void DoneBuilding() {
-		RocketParts.Build ();
+		RocketParts.instance.Build ();
 		buildParticles.Stop ();
 		button.OnDoneBuildOrUpgrade ();
 	}

@@ -8,7 +8,7 @@ public class UpgradeButton : MonoBehaviour {
 	[SerializeField] string[] engineNames = null;
 
 	void Start () {
-		UnityEngine.Assertions.Assert.AreEqual (engineNames.Length, RocketParts.GetNumUpgrades ());
+		UnityEngine.Assertions.Assert.AreEqual (engineNames.Length, RocketParts.instance.numUpgrades);
 		ShowOrHide ();
 	}
 
@@ -21,9 +21,9 @@ public class UpgradeButton : MonoBehaviour {
 	}
 
 	void ShowOrHide() {
-		bool enable = RocketParts.HasEnoughPartsToUpgrade () && RocketParts.HasReachedPlanetToUpgrade();
+		bool enable = RocketParts.instance.hasEnoughPartsToUpgrade && RocketParts.instance.hasReachedPlanetToUpgrade;
 		if (enable) {
-			label.text = engineNames [RocketParts.GetUpgradeLevel ()];
+			label.text = engineNames [RocketParts.instance.upgradeLevel];
 		}
 		button.gameObject.SetActive (enable);
 		button.enabled = enable;
