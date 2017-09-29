@@ -216,7 +216,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		float previousAcceleration = GetAccelerationNewStyle (oldEngineMaxHeight, numChancesToAccelerate);
 		accelerationOnCorrect = GetAccelerationNewStyle (maxHeight, numChancesToAccelerate);
 		gravity = accelerationOnCorrect / targetAnswerTime;
-		float engineEfficiency = INITIAL_ACCELERATION_FRACTION + ((1.0f-INITIAL_ACCELERATION_FRACTION) * RocketParts.instance.numParts / RocketParts.instance.numPartsRequired);
+		bool isRocketFinished = RocketParts.instance.upgradeLevel >= RocketParts.instance.numUpgrades;
+		float engineEfficiency = isRocketFinished ? 1.0f : (INITIAL_ACCELERATION_FRACTION + ((1.0f-INITIAL_ACCELERATION_FRACTION) * RocketParts.instance.numParts / RocketParts.instance.numPartsRequired));
 		Debug.Log ("engineEfficiency " + engineEfficiency);
 		accelerationOnCorrect = Mathf.Lerp (previousAcceleration, accelerationOnCorrect, engineEfficiency); // to make it hard to reach the target planet without mastering more slow questions
 		minSpeed = -accelerationOnCorrect * minSpeedFactor;
