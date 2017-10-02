@@ -59,6 +59,10 @@ public class Question {
 		return difficulty <= MASTERED_DIFFICULTY;
 	}
 
+	public bool IsFlashMastered () {
+		return answerTimes.Count == NUM_ANSWER_TIMES_TO_RECORD && GetAverageAnswerTime () <= FlashThrust.targetAnswerTime;
+	}
+
 	public bool IsUrgent() {
 		return isMandatoryReview;
 	}
