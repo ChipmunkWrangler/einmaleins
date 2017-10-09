@@ -8,8 +8,36 @@ public static class MDPrefs {
 	}
 
 	public static void DeleteKey(string key) { 
-		PlayerPrefs.DeleteKey (GetKey (key));
+		string arrayKey = GetArrayKey (key);
+		if (arrayKey.Length > 0) { // is array 
+			string lengthKey = GetLengthKey(arrayKey);
+			int length = PlayerPrefs.GetInt (lengthKey);
+			string arrayKeyWithPlayer = GetKey (arrayKey);
+			for (int i = 0; i < length; ++i) {
+				PlayerPrefs.DeleteKey (arrayKeyWithPlayer + ":" + i);
+			}
+			PlayerPrefs.DeleteKey (lengthKey);
+		} else {
+			PlayerPrefs.DeleteKey (GetKey (key));
+		}
 	}
+
+	static string GetArrayKey(string key) {
+		string arrayKey = key + ":IntArray";
+		if (PlayerPrefs.HasKey (GetLengthKey(arrayKey))) {
+			return arrayKey;
+		}
+		arrayKey = key + ":FloatArray";
+		if (PlayerPrefs.HasKey (GetLengthKey(arrayKey))) {
+			return arrayKey;
+		}
+		arrayKey = key + ":StringArray";
+		if (PlayerPrefs.HasKey (GetLengthKey(arrayKey))) {
+			return arrayKey;
+		}
+		return "";
+	}
+
 	public static int GetInt(string key, int defaultValue) {
 		return PlayerPrefs.GetInt (GetKey(key), defaultValue);
 	}

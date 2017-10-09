@@ -2656,6 +2656,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionPicker: {fileID: 1088660492}
   delay: 0
+--- !u!114 &1170303753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1170303750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f0abe27b360440fca96b7cb667941c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1191303865
 Prefab:
   m_ObjectHideFlags: 0
@@ -4742,7 +4753,7 @@ Prefab:
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224630311735300226, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
@@ -4767,7 +4778,7 @@ Prefab:
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224857145123936142, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}

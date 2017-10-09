@@ -9,7 +9,10 @@ public class BackStack : MonoBehaviour {
 		if (backStack.Count > 0) {
 			sceneName = backStack [backStack.Count - 1];
 			backStack.RemoveAt (backStack.Count - 1);
-			MDPrefs.SetStringArray ("backStack", backStack.ToArray ());
+			Clear ();
+			if (backStack.Count > 0) {
+				MDPrefs.SetStringArray ("backStack", backStack.ToArray ());
+			}
 		}
 		return sceneName;
 	}
