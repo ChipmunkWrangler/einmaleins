@@ -200,7 +200,7 @@ public class Question {
 		foreach (var time in answerTimes) {
 			s += time + " ";
 		}
-		s += " reviewAt " + reviewAt;
+		s += " averageTime " + GetAverageAnswerTime() + " reviewAt " + reviewAt;
 		return s;
 	}
 
