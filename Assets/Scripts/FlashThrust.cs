@@ -216,7 +216,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		gravity = accelerationOnCorrect / targetAnswerTime;
 		minSpeed = -accelerationOnCorrect * minSpeedFactor;
 		float maxTime = numChancesToAccelerate * targetAnswerTime;
-		maxSpeed = maxHeight / maxTime;//accelerationOnCorrect * maxHeight / targetHeight;
+		maxSpeed = maxHeight / maxTime;
 	}
 
 	float GetAccelerationNewStyle(float maxHeight, int numChancesToAccelerate)

@@ -23,6 +23,7 @@ public class FlashQuestions : Questions {
 		}
 //		Debug.Log ("Filling list");
 		toAsk = questions.Where(q => q.isFlashQuestion).OrderBy (q => q.IsMastered()).ThenByDescending(q => q.GetAverageAnswerTime ()).Take (ASK_LIST_LENGTH).Select(q => q.idx).ToList();
+		toAsk.Reverse(); // so that the player won't have a discouraging start
 //		Debug.Log ("Questions");
 //		foreach (Question question in questions.Where(q => q.difficulty == Question.MASTERED_DIFFICULTY).OrderBy (q => q.GetAverageAnswerTime ())) {
 //			Debug.Log (question);
