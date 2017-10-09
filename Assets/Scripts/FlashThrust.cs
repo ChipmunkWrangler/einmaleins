@@ -21,7 +21,6 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] float achievementTextTransitionTime = 3.0f;
 	[SerializeField] float planetAchievementTextDelay = 2.0f;
 	float minSpeed;
-	float maxSpeed = float.MaxValue;
 	public float speed { get; private set; } // km per second
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
 	public float height { get; private set; } // km
@@ -63,8 +62,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		UnityEngine.Assertions.Assert.AreEqual(RocketParts.instance.numUpgrades + 1, TargetPlanet.heights.Length);
 		int upgradeLevel = RocketParts.instance.upgradeLevel;
 		float newTargetHeight = TargetPlanet.heights [upgradeLevel];
-		float maxHeight = (upgradeLevel < TargetPlanet.heights.Length - 1) ? TargetPlanet.heights [upgradeLevel + 1] : float.MaxValue;
-		CalcParams(maxHeight, newTargetHeight, FlashQuestions.ASK_LIST_LENGTH + 1); // +1 because of the initial launch acceleration
+		CalcParams(newTargetHeight, questions.GetAskListLength() + 1); // +1 because of the initial launch acceleration
 //		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.instance.UpgradeLevel], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
 		formatProvider = MDCulture.GetCulture();
@@ -78,9 +76,10 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 //			timeForNextAnswer = Time.time + targetAnswerTime * 2.0f;
 //		}
 			speed -= gravity * Time.deltaTime;
-//			float curMaxSpeed = height Mathf.Max (accelerationOnCorrect, maxSpeed);
-			speed = Mathf.Clamp (speed, minSpeed, maxSpeed);
-			height += speed * Time.deltaTime; // we don't want to cap speed for acceleration purposes, just for distance travelled
+			if (speed < minSpeed) {
+				speed = minSpeed;
+			}
+			height += speed * Time.deltaTime;
 			if (height < 0) {
 				height = 0;
 				speed = 0;
@@ -203,25 +202,20 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	// The rocket reaches speed zero at targetAnswerTime. Calculate acceleration and gravity to guarantee given maxHeight
-	void CalcParams(float maxHeight, float targetHeight, int numChancesToAccelerate) {
+	void CalcParams(float targetHeight, int numChancesToAccelerate) {
 		// we want the player to reach v = 0 at targetAnswerTime (=:t) seconds after getting accelerated (1)
-		// Let a = accelerationOnCorrect
-		// Let v = min(a, maxSpeed)
+		// Let v = accelerationOnCorrect
 		// Let h = the max height from one acceleration, starting at height = 0 and v = 0
-		// Then time to reach h = a / g (3)
-		// And h = timeToReachH * avgSpeed = (a / g) * v / 2 = av / 2g (2)    // == v * v / 2g if maxSpeed > a
-		// But (1) => time to reach h = t, so (3) => t = a / g => g = a / t (4)
-		// (2) & (4) => h = av / 2(a/t) = vt / 2 (5)
+		// Then h = v * v / 2g (2)
+		// and time to reach h = v / g (3)
+		// But (1) => time to reach h = t, so (3) => t = v / g => g = v / t (4)
+		// (2) & (4) => h = v * v / 2(v/t) = v * t / 2 (5)
 		// Also, if we accelerate each time from a speed of zero, then total height (=: H) is just
 		// H = n * h => h = H / n (6)
 		// (5) & (6) => H / n = vt / 2 => 2H / nt = v
-//		accelerationOnCorrect = Mathf.Max(maxSpeed, GetAccelerationNewStyle (targetHeight, numChancesToAccelerate));
 		accelerationOnCorrect = GetAccelerationNewStyle (targetHeight, numChancesToAccelerate);
 		gravity = accelerationOnCorrect / targetAnswerTime;
 		minSpeed = -accelerationOnCorrect * minSpeedFactor;
-		float maxTime = numChancesToAccelerate * targetAnswerTime;
-		maxSpeed = Mathf.Max(accelerationOnCorrect, maxHeight / maxTime);
-		Debug.Log("expected height per acceleration=" + targetHeight / numChancesToAccelerate + " with " + numChancesToAccelerate + " chances");
 	}
 
 	float GetAccelerationNewStyle(float targetHeight, int numChancesToAccelerate)
@@ -253,12 +247,12 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 				
 //	void TestEquations() {
 //		Debug.Log("Acceleration = " + accelerationOnCorrect + " gravity = " + gravity);
-//		ShowResultsForT (0); // this simplifies to numQuestions * maxHeight if maxSpeed is unset
+//		ShowResultsForT (0); // this simplifies to numQuestions * maxHeight
 //		ShowResultsForT (0.1f);
 //		ShowResultsForT (3.0f); // this should be the practical minimum, because the celebration lasts this long
 //		ShowResultsForT (targetAnswerTime);
-////		ShowResultsForT (targetAnswerTime * 5);
-//////		ShowResultsForT (targetAnswerTime * 10);
+//		ShowResultsForT (targetAnswerTime * 5);
+////		ShowResultsForT (targetAnswerTime * 10);
 //	
 //	}
 //
@@ -273,11 +267,12 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 //				speed = 0;
 //			}
 //			speed += accelerationOnCorrect;
-//			speed = Mathf.Clamp (speed, minSpeed, maxSpeed);
 //			// by the time you answer the next question in targetAnswerTime:
 //			height += (speed - 0.5f * decelarationByNextQuestion) * t;
 //			speed -= decelarationByNextQuestion;
-//			speed = Mathf.Clamp (speed, minSpeed, maxSpeed);
+//			if (speed < minSpeed) {
+//				speed = minSpeed;
+//			}
 //			Debug.Log ("speed = " + speed + " height = " + height);
 //		}
 //		// height and speed at t = (targetAnswerTime after you answer the last question) = FlashQuestions.ASK_LIST_LENGTH * targetAnswerTime
@@ -286,7 +281,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 //		const int gauss	 = n1 * (n1 + 1) / 2;
 //		height = decelarationByNextQuestion * totalAnswerTime * 0.5f + t * (accelerationOnCorrect - decelarationByNextQuestion) * (n1 * n1 - gauss);
 //		speed = n * accelerationOnCorrect - g * totalAnswerTime; 
-//		Debug.Log ("Closed form speed = " + speed + " height = " + height); // can't handle maxHeight
+//		Debug.Log ("Closed form speed = " + speed + " height = " + height);
 //		height += speed * speed / (2.0f * g);
 //		float x = accelerationOnCorrect;
 //		float altHeight = (n * x * (g * (t - n * t) + n * x)) / (2 * g);
