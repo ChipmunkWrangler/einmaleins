@@ -35,7 +35,7 @@ public abstract class Questions : MonoBehaviour {
 //		foreach (Question question in questions.Where(q => q.IsMastered()).OrderByDescending (q => q.GetAverageAnswerTime ())) {
 //			Debug.Log (question.GetAverageAnswerTime() + " " + question);
 //		}
-		return questions.Count(q => q.IsMastered() && !q.IsFlashMastered()) >= FlashQuestions.ASK_LIST_LENGTH;
+		return questions.Count(q => q.wasMastered && !q.IsFlashMastered()) >= FlashQuestions.ASK_LIST_LENGTH;
 	}
 		
 	public virtual void Save() {
