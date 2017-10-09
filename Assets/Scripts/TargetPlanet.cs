@@ -12,7 +12,8 @@ public class TargetPlanet {
 		6.3e+08f,
 		1.287e+09f,
 		2.73e+09f,
-		4.357e+09f
+		4.357e+09f,
+		5.772e+09f
 	};
 
 	public static int RecordIfPlanetReached(float rocketHeight) {
@@ -29,6 +30,10 @@ public class TargetPlanet {
 			targetPlanetIdx = MDPrefs.GetInt (prefsKey, 0);
 		}
 		return targetPlanetIdx; 
+	}
+
+	public static int GetNumPlanets() {
+		return heights.Length;
 	}
 
 	static float GetTargetPlanetHeight() {

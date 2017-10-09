@@ -20,6 +20,7 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 		"Auf zum Saturn",
 		"Auf zum Uranus",
 		"Auf zum Neptun",
+		"Auf zum Pluto",
 		"Auf ins All"
 	};
 	readonly string[] reachPlanetLabels = {
@@ -28,6 +29,7 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 		"Erreiche Saturn, um Deine Rakete zu verbessern",
 		"Erreiche Uranus, um Deine Rakete zu verbessern",
 		"Erreiche Neptun, um Deine Rakete zu verbessern",
+		"",
 		""
 	};
 
@@ -39,15 +41,11 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 	public void OnLaunch() {
 		MDPrefs.SetDateTime (prefsKey, System.DateTime.Today);
 	}
-		
-	bool HasMasteredAllQuestions() {
-		return questions.questions.Count(q => q.wasMastered) == Questions.GetNumQuestions();
-	}
 
 	void ActivateIfCanLaunch (bool noMoreQuestions)
 	{
 		bool hasLaunchedToday = MDPrefs.GetDateTime (prefsKey, System.DateTime.MinValue) >= System.DateTime.Today;
-		bool canLaunch = RocketParts.instance.isRocketBuilt && (!hasLaunchedToday || HasMasteredAllQuestions() || questions.HasEnoughFlashQuestions());
+		bool canLaunch = RocketParts.instance.isRocketBuilt && (!hasLaunchedToday || questions.HasMasteredAllQuestions() || questions.HasEnoughFlashQuestions());
 		bool canBuild = RocketParts.instance.canBuild;
 		bool canUpgrade = RocketParts.instance.hasEnoughPartsToUpgrade && RocketParts.instance.hasReachedPlanetToUpgrade;
 		upgradeButtonLabel.text = canBuild ? buildRocketText : upgradeRocketText;

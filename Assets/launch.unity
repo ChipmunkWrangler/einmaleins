@@ -20247,9 +20247,9 @@ MonoBehaviour:
   - {fileID: 177}
   - {fileID: 187}
   - {fileID: 176}
-  - {fileID: 179}
-  - {fileID: 185}
   - {fileID: 181}
+  - {fileID: 185}
+  - {fileID: 179}
   - {fileID: 1862998284}
   earth: {fileID: 184}
   minParticleScale: 0.1
@@ -20264,14 +20264,14 @@ MonoBehaviour:
   - 11000
   - 45000
   - 68000
-  - 0
+  - 21380
   planetYs:
   - 10000
   - 60000
   - 135000
   - 290000
   - 470000
-  - 0
+  - 640000
 --- !u!114 &316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22052,6 +22052,7 @@ MonoBehaviour:
   zoomToPlanet: {fileID: 315}
   achievementTextTransitionTime: 5
   planetAchievementTextDelay: 2
+  questions: {fileID: 387}
 --- !u!114 &390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22070,6 +22071,7 @@ MonoBehaviour:
   - {fileID: 169}
   - {fileID: 168}
   - {fileID: 167}
+  - {fileID: 166}
   - {fileID: 166}
   masteryParticles: {fileID: 0}
   questionPicker: {fileID: 382}
@@ -22362,6 +22364,7 @@ MonoBehaviour:
   - 0.125
   - 0.25
   - 0.5
+  - 1
   - 1
   maxScrollSpeed: 0
   tileSizeY: 80

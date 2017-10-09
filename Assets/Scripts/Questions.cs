@@ -38,6 +38,14 @@ public abstract class Questions : MonoBehaviour {
 		return questions.Count(q => q.isFlashQuestion && !q.IsFlashMastered()) >= FlashQuestions.ASK_LIST_LENGTH;
 	}
 		
+	public bool HasMasteredAllQuestions() {
+		return questions.Count(q => q.wasMastered) == Questions.GetNumQuestions();
+	}
+
+	public int GetAskListLength() {
+		return toAsk.Count ();
+	}
+
 	public virtual void Save() {
 		SaveQuestionsList ();
 	}

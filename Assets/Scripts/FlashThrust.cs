@@ -20,6 +20,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] ShowSolarSystem zoomToPlanet = null;
 	[SerializeField] float achievementTextTransitionTime = 3.0f;
 	[SerializeField] float planetAchievementTextDelay = 2.0f;
+	[SerializeField] Questions questions = null;
 	float minSpeed;
 	public float speed { get; private set; } // km per second
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
@@ -31,6 +32,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		"Saturn erreicht!",
 		"Uranus erreicht!",
 		"Neptun erreicht!",
+		"Pluto erreicht!",
 		"Ende erreicht!" // should never happen
 	};
 
@@ -90,6 +92,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 				MDPrefs.SetFloat (prefsKey, recordHeight);
 				int planetIdx = TargetPlanet.RecordIfPlanetReached (height);
 				if (planetIdx >=0 ) {
+					if (planetIdx == TargetPlanet.GetNumPlanets () - 2) {
+						RocketParts.instance.FinalUpgrade ();
+					}
 					StartCoroutine(CelebrateReachingPlanet (planetIdx));
 				} else if (checkForRecord) {
 					CelebrateBreakingRecord();
@@ -125,7 +130,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	public void Accelerate() {
-//		Debug.Log ("t = " + Time.time + " oldSpeed = " + speed + " newSpeed = " + (speed + accelerationOnCorrect) + " height = " + height);
+//		Debug.Log ("t = " + Time.time + " oldSpeed = " + speed + " newSpeed = " + (Mathf.Max(0, speed) + accelerationOnCorrect) + " height = " + height);
 		if (speed < 0) {
 			speed = 0; // anything else is too discouraging.
 		}
@@ -135,8 +140,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	IEnumerator AutoAnswerQuestion() {
 		float tgtTime = targetAnswerTime; // - 3.0f;
 		yield return new WaitForSeconds (tgtTime - 3.0f); // 3.0f is the celebration time HACK
-		while(numAnswersGiven < FlashQuestions.ASK_LIST_LENGTH) {
+		while(numAnswersGiven < questions.GetAskListLength() + 1) { // +1 because the first question has been shown.
 			OnCorrectAnswer(null, false);
+			Debug.Log ("NumAnswersGiven " + numAnswersGiven + " of " + (questions.GetAskListLength()+1));
 			yield return new WaitForSeconds (tgtTime);
 		}
 		noMoreQuestions = true;
