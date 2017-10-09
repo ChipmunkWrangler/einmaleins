@@ -78,7 +78,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 //			timeForNextAnswer = Time.time + targetAnswerTime * 2.0f;
 //		}
 			speed -= gravity * Time.deltaTime;
-			height += Mathf.Clamp (speed, minSpeed, maxSpeed) * Time.deltaTime; // we don't want to cap speed for acceleration purposes, just for distance travelled
+//			float curMaxSpeed = height Mathf.Max (accelerationOnCorrect, maxSpeed);
+			speed = Mathf.Clamp (speed, minSpeed, maxSpeed);
+			height += speed * Time.deltaTime; // we don't want to cap speed for acceleration purposes, just for distance travelled
 			if (height < 0) {
 				height = 0;
 				speed = 0;
@@ -203,25 +205,28 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	// The rocket reaches speed zero at targetAnswerTime. Calculate acceleration and gravity to guarantee given maxHeight
 	void CalcParams(float maxHeight, float targetHeight, int numChancesToAccelerate) {
 		// we want the player to reach v = 0 at targetAnswerTime (=:t) seconds after getting accelerated (1)
-		// Let v = accelerationOnCorrect
+		// Let a = accelerationOnCorrect
+		// Let v = min(a, maxSpeed)
 		// Let h = the max height from one acceleration, starting at height = 0 and v = 0
-		// Then h = v * v / 2g (2)
-		// and time to reach h = v / g (3)
-		// But (1) => time to reach h = t, so (3) => t = v / g => g = v / t (4)
-		// (2) & (4) => h = v * v / 2(v/t) = v * t / 2 (5)
+		// Then time to reach h = a / g (3)
+		// And h = timeToReachH * avgSpeed = (a / g) * v / 2 = av / 2g (2)    // == v * v / 2g if maxSpeed > a
+		// But (1) => time to reach h = t, so (3) => t = a / g => g = a / t (4)
+		// (2) & (4) => h = av / 2(a/t) = vt / 2 (5)
 		// Also, if we accelerate each time from a speed of zero, then total height (=: H) is just
 		// H = n * h => h = H / n (6)
-		// (5) & (6) => H / n = v * t / 2 => 2H / nt = v
+		// (5) & (6) => H / n = vt / 2 => 2H / nt = v
+//		accelerationOnCorrect = Mathf.Max(maxSpeed, GetAccelerationNewStyle (targetHeight, numChancesToAccelerate));
 		accelerationOnCorrect = GetAccelerationNewStyle (targetHeight, numChancesToAccelerate);
 		gravity = accelerationOnCorrect / targetAnswerTime;
 		minSpeed = -accelerationOnCorrect * minSpeedFactor;
 		float maxTime = numChancesToAccelerate * targetAnswerTime;
-		maxSpeed = maxHeight / maxTime;
+		maxSpeed = Mathf.Max(accelerationOnCorrect, maxHeight / maxTime);
+		Debug.Log("expected height per acceleration=" + targetHeight / numChancesToAccelerate + " with " + numChancesToAccelerate + " chances");
 	}
 
-	float GetAccelerationNewStyle(float maxHeight, int numChancesToAccelerate)
+	float GetAccelerationNewStyle(float targetHeight, int numChancesToAccelerate)
 	{
-		return 2 * maxHeight / (numChancesToAccelerate * targetAnswerTime);
+		return 2 * targetHeight / (numChancesToAccelerate * targetAnswerTime);
 	}
 
 	// Fixed gravity, acceleration calculated to reach maxHeight
