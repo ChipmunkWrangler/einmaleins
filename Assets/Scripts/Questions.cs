@@ -35,11 +35,15 @@ public abstract class Questions : MonoBehaviour {
 //		foreach (Question question in questions.Where(q => q.IsMastered()).OrderByDescending (q => q.GetAverageAnswerTime ())) {
 //			Debug.Log (question.GetAverageAnswerTime() + " " + question);
 //		}
-		return questions.Count(q => q.wasMastered && !q.IsFlashMastered()) >= FlashQuestions.ASK_LIST_LENGTH;
+		return questions.Count(q => q.isFlashQuestion && !q.IsFlashMastered()) >= FlashQuestions.ASK_LIST_LENGTH;
 	}
 		
 	public virtual void Save() {
 		SaveQuestionsList ();
+	}
+
+	public static void OnUpgrade() {
+		MDPrefs.SetBool (prefsKey + ":wasJustUpgraded", true);
 	}
 
 	public abstract void Reset();
@@ -56,6 +60,9 @@ public abstract class Questions : MonoBehaviour {
 		UnityEngine.Assertions.Assert.AreEqual (MDPrefs.GetInt (prefsKey + ":ArrayLen", questions.Length), questions.Length);
 		for (int i = 0; i < questions.Length; ++i) {
 			questions [i].Load (prefsKey + ":" + i, i);
+		}
+		if (MDPrefs.GetBool (prefsKey + ":wasJustUpgraded")) {
+			ConvertMasteredToFlash ();
 		}
 	}
 
@@ -76,5 +83,12 @@ public abstract class Questions : MonoBehaviour {
 				++idx;
 			}
 		}
+	}
+
+	void ConvertMasteredToFlash() {
+		foreach( Question question in questions.Where(q => q.wasMastered && !q.isFlashQuestion)) {
+			question.isFlashQuestion = true;
+		}
+		MDPrefs.SetBool (prefsKey + ":wasJustUpgraded", false);
 	}
 }

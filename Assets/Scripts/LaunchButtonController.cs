@@ -47,7 +47,7 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 	void ActivateIfCanLaunch (bool noMoreQuestions)
 	{
 		bool hasLaunchedToday = MDPrefs.GetDateTime (prefsKey, System.DateTime.MinValue) >= System.DateTime.Today;
-		bool canLaunch = RocketParts.instance.isRocketBuilt&& (!hasLaunchedToday || HasMasteredAllQuestions() || questions.HasEnoughFlashQuestions());
+		bool canLaunch = RocketParts.instance.isRocketBuilt && (!hasLaunchedToday || HasMasteredAllQuestions() || questions.HasEnoughFlashQuestions());
 		bool canBuild = RocketParts.instance.canBuild;
 		bool canUpgrade = RocketParts.instance.hasEnoughPartsToUpgrade && RocketParts.instance.hasReachedPlanetToUpgrade;
 		upgradeButtonLabel.text = canBuild ? buildRocketText : upgradeRocketText;

@@ -10,6 +10,7 @@ public class Question {
 	public int difficulty { get; private set; }
 	public System.DateTime reviewAt { get; private set; }
 	public bool wasMastered { get; private set; } // even if it is no longer mastered. This is for awarding rocket parts
+	public bool isFlashQuestion; // mastered questions are only asked in flash list after the next upgrade, to ensure that flashquestions gets easier (through practising the same questions) until the next upgrade
 
 	public float Debug_chanceOfCorrectAnswer;
 
@@ -183,6 +184,7 @@ public class Question {
 		reviewAt = MDPrefs.GetDateTime (prefsKey + ":reviewAt", System.DateTime.MinValue);
 		isRetry = MDPrefs.GetBool (prefsKey + ":isRetry");
 		isMandatoryReview = MDPrefs.GetBool (prefsKey + ":isMandatoryReview");
+		isFlashQuestion = MDPrefs.GetBool (prefsKey + ":isFlashQuestion");
 	}
 
 	public void Save() {
@@ -193,10 +195,11 @@ public class Question {
 		MDPrefs.SetDateTime (prefsKey + ":reviewAt", reviewAt);
 		MDPrefs.SetBool (prefsKey + ":isRetry", isRetry);
 		MDPrefs.SetBool (prefsKey + ":isMandatoryReview", isMandatoryReview);
+		MDPrefs.SetBool (prefsKey + ":isFlashQuestion", isFlashQuestion);
 	}
 
 	public override string ToString() {
-		string s = idx + " is " + a + " * " + b + " : difficulty = " + difficulty + " wasMastered = " + wasMastered + " isRetry " + isRetry + " isMandatoryReview " + isMandatoryReview + " times = ";
+		string s = idx + " is " + a + " * " + b + " : difficulty = " + difficulty + " wasMastered = " + wasMastered + " isFlashQuestion = " + isFlashQuestion + " isRetry " + isRetry + " isMandatoryReview " + isMandatoryReview + " times = ";
 		foreach (var time in answerTimes) {
 			s += time + " ";
 		}

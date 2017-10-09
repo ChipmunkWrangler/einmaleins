@@ -75,11 +75,13 @@ public class RocketParts : MonoBehaviour {
 		}
 	}
 
-	public void Upgrade() {
+	public bool Upgrade() {
 		if (hasEnoughPartsToUpgrade && hasReachedPlanetToUpgrade) {
 			numParts -= PARTS_PER_UPGRADE;
 			++upgradeLevel;
+			return true;
 		}
+		return false;
 	}
 
 	public void Inc() {
