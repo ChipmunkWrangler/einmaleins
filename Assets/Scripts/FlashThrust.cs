@@ -47,14 +47,14 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	bool noMoreQuestions;
 	bool checkForRecord;
 
-	const string prefsKey = "recordHeight";
+	const string recordPrefsKey = "recordHeight";
 	const string numFormat = "N0";
 	const string unit = " km";
 
 	void Start() {
 		heightText.text = "0";
 		apogeeText.text = "0";
-		recordHeight = MDPrefs.GetFloat (prefsKey, 0);
+		recordHeight = MDPrefs.GetFloat (recordPrefsKey, 0);
 		recordHeightText.text = recordHeight.ToString (numFormat) + unit;
 		var recordPos = oldRecord.transform.position;
 		recordPos.y += recordHeight * paramObj.heightScale * oldRecord.transform.parent.localScale.y;
@@ -87,14 +87,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 				speed = 0;
 			}
 			background.SetRocketSpeed (speed, accelerationOnCorrect);
-			if (height > recordHeight) {
-				recordHeight = height;
-				MDPrefs.SetFloat (prefsKey, recordHeight);
-				if (checkForRecord) {
-					checkForRecord = false;
-					CelebrateBreakingRecord();
-				}
-			} 
+				recordHeight = UpdateRecord (height, recordHeight, recordPrefsKey);
 			if (TargetPlanet.IsTargetPlanetReached (height)) {
 				int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx ();
 				if (TargetPlanet.IsAlreadyReached (planetReachedIdx)) {
@@ -215,6 +208,18 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	void CelebrateBreakingRecord() {
 		ActivateAchievementText( recordBrokenMsg );
+	}
+
+	float UpdateRecord(float dist, float record, string key) {
+		if (dist > record) {
+			record = dist;
+			MDPrefs.SetFloat (key, record);
+			if (checkForRecord) {
+				checkForRecord = false;
+				CelebrateBreakingRecord ();
+			}
+		} 
+		return record;
 	}
 
 	// The rocket reaches speed zero at targetAnswerTime. Calculate acceleration and gravity to guarantee given maxHeight
