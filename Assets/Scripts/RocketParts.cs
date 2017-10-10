@@ -50,7 +50,7 @@ public class RocketParts : MonoBehaviour {
 
 	public bool hasReachedPlanetToUpgrade {
 		get {
-			return upgradeLevel < TargetPlanet.GetIdx ();
+			return upgradeLevel <= TargetPlanet.GetLastReachedIdx();
 		}
 	}
 		
@@ -78,13 +78,13 @@ public class RocketParts : MonoBehaviour {
 	public void FinalUpgrade() {
 		UnityEngine.Assertions.Assert.IsTrue (hasReachedPlanetToUpgrade);
 		UnityEngine.Assertions.Assert.AreEqual (upgradeLevel, numUpgrades-1);
-		++upgradeLevel;
+		DoUpgrade ();
 	}
 
 	public bool Upgrade() {
 		if (hasEnoughPartsToUpgrade && hasReachedPlanetToUpgrade) {
 			numParts -= PARTS_PER_UPGRADE;
-			++upgradeLevel;
+			DoUpgrade ();
 			return true;
 		}
 		return false;
@@ -127,4 +127,9 @@ public class RocketParts : MonoBehaviour {
 		}
 	}
 			
+	void DoUpgrade ()
+	{
+		TargetPlanet.TargetNextPlanet ();
+		++upgradeLevel;
+	}
 }

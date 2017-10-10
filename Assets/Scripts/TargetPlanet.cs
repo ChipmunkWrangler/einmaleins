@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetPlanet {
-	const string prefsKey = "targetPlanet";
+	const string targetKey = "targetPlanet";
+	const string lastReachedKey = "lastReachedPlanet";
 
 	static int targetPlanetIdx = -1;
+	static int lastReachedPlanetIdx = -2;
 
 	public static readonly float[] heights = {
 		7.8e+07f,
@@ -16,18 +18,33 @@ public class TargetPlanet {
 		5.772e+09f
 	};
 
-	public static int RecordIfPlanetReached(float rocketHeight) {
-		int oldIdx = -1;
-		if (rocketHeight > GetTargetPlanetHeight ()) {
-			oldIdx = GetIdx ();
-			SetIdx (oldIdx + 1);
-		}
-		return oldIdx;
+	public static bool IsTargetPlanetReached(float rocketHeight) {
+		return rocketHeight > GetTargetPlanetHeight ();
 	}
 
-	public static int GetIdx() {
+	public static bool IsAlreadyReached(int planetIdx) {
+		return planetIdx <= GetLastReachedIdx ();
+	}
+
+	public static int GetLastReachedIdx() {
+		if (lastReachedPlanetIdx < -1) {
+			lastReachedPlanetIdx = MDPrefs.GetInt (lastReachedKey, -1);
+		}
+		return lastReachedPlanetIdx; 
+	}
+
+	public static void SetLastReachedIdx(int planetIdx) {
+		MDPrefs.SetInt (lastReachedKey, planetIdx);
+		lastReachedPlanetIdx = planetIdx;
+	}
+
+	public static void TargetNextPlanet() {
+		SetIdx (GetTargetPlanetIdx() + 1);
+	}
+
+	public static int GetTargetPlanetIdx() {
 		if (targetPlanetIdx < 0) {
-			targetPlanetIdx = MDPrefs.GetInt (prefsKey, 0);
+			targetPlanetIdx = MDPrefs.GetInt (targetKey, 0);
 		}
 		return targetPlanetIdx; 
 	}
@@ -37,11 +54,11 @@ public class TargetPlanet {
 	}
 
 	static float GetTargetPlanetHeight() {
-		return (GetIdx() < heights.Length) ? heights [GetIdx ()] : float.MaxValue;
+		return (GetTargetPlanetIdx() < heights.Length) ? heights [GetTargetPlanetIdx ()] : float.MaxValue;
 	}
 
 	static void SetIdx(int newIdx ) {
-		MDPrefs.SetInt (prefsKey, newIdx);
+		MDPrefs.SetInt (targetKey, newIdx);
 		targetPlanetIdx = newIdx;
 	}
 

@@ -23,7 +23,7 @@ public class FlashQuestions : Questions {
 		}
 //		Debug.Log ("Filling list");
 		var candidates = questions.Where(q => q.isFlashQuestion).OrderBy (q => q.IsMastered()).ThenByDescending(q => q.GetAverageAnswerTime ());
-		bool isFinalGauntlet = TargetPlanet.GetIdx () == TargetPlanet.heights.Length - 1;
+		bool isFinalGauntlet = TargetPlanet.GetTargetPlanetIdx () == TargetPlanet.heights.Length - 1;
 		if (isFinalGauntlet) {
 			toAsk = candidates.Select (q => q.idx).ToList ();
 		} else {

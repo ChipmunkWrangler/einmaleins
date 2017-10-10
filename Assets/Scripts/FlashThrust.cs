@@ -90,16 +90,26 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 			if (height > recordHeight) {
 				recordHeight = height;
 				MDPrefs.SetFloat (prefsKey, recordHeight);
-				int planetIdx = TargetPlanet.RecordIfPlanetReached (height);
-				if (planetIdx >=0 ) {
-					if (planetIdx == TargetPlanet.GetNumPlanets () - 2) {
-						RocketParts.instance.FinalUpgrade ();
-					}
-					StartCoroutine(CelebrateReachingPlanet (planetIdx));
-				} else if (checkForRecord) {
+				if (checkForRecord) {
+					checkForRecord = false;
 					CelebrateBreakingRecord();
 				}
-				checkForRecord = false;
+			} 
+			if (TargetPlanet.IsTargetPlanetReached (height)) {
+				int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx ();
+				if (TargetPlanet.IsAlreadyReached (planetReachedIdx)) {
+					if (planetReachedIdx <= TargetPlanet.GetNumPlanets ()) {
+						Debug.Log ("orbit now"); //switch to orbit mode
+					}
+				} else {
+					TargetPlanet.SetLastReachedIdx (planetReachedIdx);
+					if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 2) {
+						RocketParts.instance.FinalUpgrade ();
+					} else if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 1) {
+						TargetPlanet.TargetNextPlanet ();
+					}
+					StartCoroutine (CelebrateReachingPlanet (planetReachedIdx));
+				}
 			}
 			if (height > apogee) { 
 				apogee = height;

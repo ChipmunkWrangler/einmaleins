@@ -521,6 +521,7 @@ MonoBehaviour:
   - Ionenantrieb einbauen
   - Fusionsreaktor einbauen
   - Antimaterienantrieb einbauen
+  - Antimaterienantrieb einbauen
 --- !u!198 &913052535 stripped
 ParticleSystem:
   m_PrefabParentObject: {fileID: 198908519644782384, guid: 97558bf9f2ab24a2d92e51c992308848,
@@ -1600,6 +1601,7 @@ MonoBehaviour:
   - {fileID: 422959968}
   - {fileID: 227475307}
   - {fileID: 913052535}
+  - {fileID: 1580502498}
   - {fileID: 1580502498}
 --- !u!1 &1894804566
 GameObject:
