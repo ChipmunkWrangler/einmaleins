@@ -22,6 +22,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] float planetAchievementTextDelay = 2.0f;
 	[SerializeField] Questions questions = null;
 	float minSpeed;
+	float maxSpeed = float.MaxValue;
 	public float speed { get; private set; } // km per second
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
 	public float height { get; private set; } // km
@@ -64,7 +65,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		UnityEngine.Assertions.Assert.AreEqual(RocketParts.instance.numUpgrades + 1, TargetPlanet.heights.Length);
 		int upgradeLevel = RocketParts.instance.upgradeLevel;
 		float newTargetHeight = TargetPlanet.heights [upgradeLevel];
-		CalcParams(newTargetHeight, questions.GetAskListLength() + 1); // +1 because of the initial launch acceleration
+		float maxHeight = (upgradeLevel < TargetPlanet.heights.Length - 1) ? TargetPlanet.heights [upgradeLevel + 1] : float.MaxValue;
+		CalcParams(maxHeight, newTargetHeight, questions.GetAskListLength() + 1); // +1 because of the initial launch acceleration
 //		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.instance.UpgradeLevel], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
 		formatProvider = MDCulture.GetCulture();
@@ -81,7 +83,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 			if (speed < minSpeed) {
 				speed = minSpeed;
 			}
-			height += speed * Time.deltaTime;
+			height += Mathf.Clamp (speed, minSpeed, maxSpeed) * Time.deltaTime;
 			if (height < 0) {
 				height = 0;
 				speed = 0;
@@ -223,7 +225,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	// The rocket reaches speed zero at targetAnswerTime. Calculate acceleration and gravity to guarantee given maxHeight
-	void CalcParams(float targetHeight, int numChancesToAccelerate) {
+	void CalcParams(float maxHeight, float targetHeight, int numChancesToAccelerate) {
 		// we want the player to reach v = 0 at targetAnswerTime (=:t) seconds after getting accelerated (1)
 		// Let v = accelerationOnCorrect
 		// Let h = the max height from one acceleration, starting at height = 0 and v = 0
@@ -254,10 +256,10 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		accelerationOnCorrect = GetAccelerationNewStyle (targetHeight, numChancesToAccelerate);
 		gravity = accelerationOnCorrect / targetAnswerTime;
 		minSpeed = -accelerationOnCorrect * minSpeedFactor;
-//		maxSpeed = numChancesToAccelerate * accelerationOnCorrect - 
-//			Mathf.Sqrt (targetAnswerTime * targetAnswerTime * numChancesToAccelerate * numChancesToAccelerate * accelerationOnCorrect * accelerationOnCorrect 
-//				- 2 * targetAnswerTime * accelerationOnCorrect * maxHeight) / targetAnswerTime;
-//		UnityEngine.Assertions.Assert.IsTrue (maxSpeed >= accelerationOnCorrect);
+		maxSpeed = Mathf.Max(accelerationOnCorrect, numChancesToAccelerate * accelerationOnCorrect - 
+			Mathf.Sqrt (targetAnswerTime * targetAnswerTime * numChancesToAccelerate * numChancesToAccelerate * accelerationOnCorrect * accelerationOnCorrect 
+				- 2 * targetAnswerTime * accelerationOnCorrect * maxHeight) / targetAnswerTime);
+		UnityEngine.Assertions.Assert.IsTrue (maxSpeed >= accelerationOnCorrect);
 	}
 
 	float GetAccelerationNewStyle(float targetHeight, int numChancesToAccelerate)
