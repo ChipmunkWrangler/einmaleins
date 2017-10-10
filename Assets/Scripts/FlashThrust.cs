@@ -216,12 +216,33 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		// and time to reach h = v / g (3)
 		// But (1) => time to reach h = t, so (3) => t = v / g => g = v / t (4)
 		// (2) & (4) => h = v * v / 2(v/t) = v * t / 2 (5)
-		// Also, if we accelerate each time from a speed of zero, then total height (=: H) is just
+		// Also, if we accelerate each time from a speed of zero, then total height (=: H, which we want to equal targetHeight) is just
 		// H = n * h => h = H / n (6)
 		// (5) & (6) => H / n = vt / 2 => 2H / nt = v
+		//
+		// In addition, we want to cap the max movement rate so that even a God-player can't reach the next planet.
+		// While the movement rate is capped, we keep track of the uncapped rate for deceleration purposes.
+		// Since a God-player would answer all questions instantly, the initial (uncapped) velocity v0 = vn (7).
+		// Since deceleration is based on uncapped velocity, the time to reach speed 0 (and hence max height) will be T = an/g = ant/a (by (4)) = nt (8)
+		// The height is more complex, because we have a segment in which we are travelling at velocity cap m (deceleration tracked internally but doesn't change movement rate)
+		//   and one in which our uncapped speed has diminished to equal m (and movement rate == internal speed)
+		// That is, H' = h1 + h2 = (m * t1) + (m/2 * t2).
+		// t1 = (v0 - m) / g = (vn - m) / g
+		// t2 = m / g
+		// So H' = (m * (vn - m) / g) + (m^2 / 2g)    			 // m^2 / 2g is the usual height formula (2), as expected
+		//       = (2mvn - m^2) / 2g = (2mvn - m^2)t / 2v by (4) => m^2(t) - m (2tvn) + 2vH' = 0 => m = nv +/- sqrt((tnv)^2 - 2tvH) / t  
+		// For the root to be real, we need n > H'/H, which is no problem.
+		// for m >= a, we need H'/H >= 2 - 1/n.
+		// Basically, we need 2H <= H' <= nH.
+		// Unfortunately, Neptune is less than twice as far as Uranus and Pluto less than twice as far as Neptune. 
+		// Even with realistic god (answers instantly after question is displayed), you still go too far if m is set >= a.
 		accelerationOnCorrect = GetAccelerationNewStyle (targetHeight, numChancesToAccelerate);
 		gravity = accelerationOnCorrect / targetAnswerTime;
 		minSpeed = -accelerationOnCorrect * minSpeedFactor;
+//		maxSpeed = numChancesToAccelerate * accelerationOnCorrect - 
+//			Mathf.Sqrt (targetAnswerTime * targetAnswerTime * numChancesToAccelerate * numChancesToAccelerate * accelerationOnCorrect * accelerationOnCorrect 
+//				- 2 * targetAnswerTime * accelerationOnCorrect * maxHeight) / targetAnswerTime;
+//		UnityEngine.Assertions.Assert.IsTrue (maxSpeed >= accelerationOnCorrect);
 	}
 
 	float GetAccelerationNewStyle(float targetHeight, int numChancesToAccelerate)
