@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
+	[SerializeField] GameObject heightWidget = null;
 	[SerializeField] Text heightText = null;
 	[SerializeField] Text recordHeightText = null;
 	[SerializeField] Text apogeeText = null;
+	[SerializeField] GameObject orbitsWidget = null;
+	[SerializeField] Text orbitsText = null;
+	[SerializeField] Text recordOrbitsText = null;
+	[SerializeField] Text apogeeOrbitsText = null;
 	[SerializeField] ScrollBackground background = null;
 	public const float targetAnswerTime = 6.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
 	[SerializeField] float minSpeedFactor = 0.25f;
@@ -21,8 +26,10 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] float achievementTextTransitionTime = 3.0f;
 	[SerializeField] float planetAchievementTextDelay = 2.0f;
 	[SerializeField] Questions questions = null;
+	[SerializeField] GameObject rocket = null;
 	float minSpeed;
 	float maxSpeed = float.MaxValue;
+	bool isOrbiting;
 	public float speed { get; private set; } // km per second
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
 	public float height { get; private set; } // km
@@ -37,11 +44,23 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		"Ende erreicht!" // should never happen
 	};
 
-	const float INITIAL_ACCELERATION_FRACTION = 0.7f;
-	const float INITIAL_HEIGHT_FRACTION = 0.5f;
+	public static readonly float[] planetCircumferances = {
+		21344.0f,
+		439264.0f,
+		365882.4f,
+		159354.1f,
+		154704.6f,
+		7231.9f
+	};
+
 	float gravity = 50f;
 	float recordHeight;
 	float apogee;
+	float planetCircumferance;
+	float orbitStartHeight;
+	Transform initialRocketTransform;
+	float recordOrbitalDistance;
+	float orbitalApogee;
 	bool isRunning;
 	System.IFormatProvider formatProvider;
 	int numAnswersGiven;
@@ -49,10 +68,13 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	bool checkForRecord;
 
 	const string recordPrefsKey = "recordHeight";
+	const string recordOrbitalDistancePrefsKey = "recordOrbitalDistance";
 	const string numFormat = "N0";
 	const string unit = " km";
 
 	void Start() {
+		heightWidget.SetActive (true);
+		orbitsWidget.SetActive (false);
 		heightText.text = "0";
 		apogeeText.text = "0";
 		recordHeight = MDPrefs.GetFloat (recordPrefsKey, 0);
@@ -60,12 +82,12 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		var recordPos = oldRecord.transform.position;
 		recordPos.y += recordHeight * paramObj.heightScale * oldRecord.transform.parent.localScale.y;
 		oldRecord.transform.position = recordPos;
-		checkForRecord = recordHeight > 0;
+		checkForRecord = recordHeight > 0 && TargetPlanet.GetLastReachedIdx() < TargetPlanet.GetTargetPlanetIdx();
 		oldRecord.SetActive (checkForRecord);
 		UnityEngine.Assertions.Assert.AreEqual(RocketParts.instance.numUpgrades + 1, TargetPlanet.heights.Length);
 		int upgradeLevel = RocketParts.instance.upgradeLevel;
 		float newTargetHeight = TargetPlanet.heights [upgradeLevel];
-		float maxHeight = (upgradeLevel < TargetPlanet.heights.Length - 1) ? TargetPlanet.heights [upgradeLevel + 1] : float.MaxValue;
+		float maxHeight = (upgradeLevel < TargetPlanet.heights.Length - 1) ? TargetPlanet.heights [upgradeLevel + 1] : TargetPlanet.heights [upgradeLevel] * 2.0f;
 		CalcParams(maxHeight, newTargetHeight, questions.GetAskListLength() + 1); // +1 because of the initial launch acceleration
 //		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.instance.UpgradeLevel], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
@@ -84,35 +106,49 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 				speed = minSpeed;
 			}
 			height += Mathf.Clamp (speed, minSpeed, maxSpeed) * Time.deltaTime;
-			if (height < 0) {
-				height = 0;
-				speed = 0;
-			}
-			background.SetRocketSpeed (speed, accelerationOnCorrect);
-				recordHeight = UpdateRecord (height, recordHeight, recordPrefsKey);
-			if (TargetPlanet.IsTargetPlanetReached (height)) {
-				int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx ();
-				if (TargetPlanet.IsAlreadyReached (planetReachedIdx)) {
-					if (planetReachedIdx <= TargetPlanet.GetNumPlanets ()) {
-						Debug.Log ("orbit now"); //switch to orbit mode
-					}
-				} else {
-					TargetPlanet.SetLastReachedIdx (planetReachedIdx);
-					if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 2) {
-						RocketParts.instance.FinalUpgrade ();
-					} else if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 1) {
-						TargetPlanet.TargetNextPlanet ();
-					}
-					StartCoroutine (CelebrateReachingPlanet (planetReachedIdx));
+			if (isOrbiting) { 
+				float orbitalDistance = height - orbitStartHeight;
+				recordOrbitalDistance = UpdateRecord (orbitalDistance, recordOrbitalDistance, recordOrbitalDistancePrefsKey);
+				if (orbitalDistance > orbitalApogee) { 
+					orbitalApogee = orbitalDistance;
 				}
+				orbitsText.text = GetNumOrbits (orbitalDistance).ToString (numFormat, formatProvider);
+				recordOrbitsText.text = GetNumOrbits(recordOrbitalDistance).ToString (numFormat, formatProvider);
+				apogeeOrbitsText.text = GetNumOrbits(orbitalApogee).ToString (numFormat, formatProvider);
+				Vector3 newRocketPos = initialRocketTransform.position;
+				newRocketPos.x += planetCircumferance * Mathf.Cos (orbitalDistance/planetCircumferance);
+				newRocketPos.y += planetCircumferance * Mathf.Sin (orbitalDistance/planetCircumferance);
+				rocket.transform.position = newRocketPos; 
+			} else {
+				if (height < 0) {
+					height = 0;
+					speed = 0;
+				}
+				background.SetRocketSpeed (speed, accelerationOnCorrect);
+				recordHeight = UpdateRecord (height, recordHeight, recordPrefsKey);
+				if (TargetPlanet.IsTargetPlanetReached (height)) {
+					int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx ();
+					if (TargetPlanet.IsAlreadyReached (planetReachedIdx)) {
+						if (planetReachedIdx <= TargetPlanet.GetNumPlanets ()) {
+							StartOrbiting (planetReachedIdx);
+						}
+					} else {
+						TargetPlanet.SetLastReachedIdx (planetReachedIdx);
+						if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 2) {
+							RocketParts.instance.FinalUpgrade ();
+						} else if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 1) {
+							TargetPlanet.TargetNextPlanet ();
+						}
+						StartCoroutine (CelebrateReachingPlanet (planetReachedIdx));
+					}
+				} 
+				if (height > apogee) { 
+					apogee = height;
+				}
+				heightText.text = height.ToString (numFormat, formatProvider) + unit;
+				recordHeightText.text = recordHeight.ToString (numFormat, formatProvider) + unit;
+				apogeeText.text = apogee.ToString (numFormat, formatProvider) + unit;
 			}
-			if (height > apogee) { 
-				apogee = height;
-			}
-			heightText.text = height.ToString (numFormat, formatProvider) + unit;
-			recordHeightText.text = recordHeight.ToString (numFormat, formatProvider) + unit;
-			apogeeText.text = apogee.ToString (numFormat, formatProvider) + unit;
-
 			if (speed <= 0 && noMoreQuestions) {
 				OnDone ();
 //				Debug.Log("Coasting time = " + (Time.time - prevTime));
@@ -129,7 +165,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		if (question == null) {
 			noMoreQuestions = true;
 		} else { // test
-//			StartCoroutine (AutoAnswerQuestion ());
+			StartCoroutine (AutoAnswerQuestion ());
 		}
 
 	}
@@ -143,7 +179,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	IEnumerator AutoAnswerQuestion() {
-		float tgtTime = targetAnswerTime; // - 3.0f;
+		float tgtTime = targetAnswerTime - 3.0f;
 		yield return new WaitForSeconds (tgtTime - 3.0f); // 3.0f is the celebration time HACK
 		while(numAnswersGiven < questions.GetAskListLength() + 1) { // +1 because the first question has been shown.
 			OnCorrectAnswer(null, false);
@@ -151,6 +187,24 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 			yield return new WaitForSeconds (tgtTime);
 		}
 		noMoreQuestions = true;
+	}
+
+	void StartOrbiting(int planetIdx) {
+		isOrbiting = true;
+		orbitStartHeight = height;
+		planetCircumferance = planetCircumferances [planetIdx];
+		initialRocketTransform = rocket.transform;
+		orbitsText.text = "0";
+		apogeeOrbitsText.text = "0";
+		recordOrbitalDistance = MDPrefs.GetFloat (recordOrbitalDistancePrefsKey, 0);
+		recordOrbitsText.text = GetNumOrbits(recordOrbitalDistance).ToString (numFormat);
+		checkForRecord = recordOrbitalDistance > 0;
+		heightWidget.SetActive (false);
+		orbitsWidget.SetActive (true);
+	}
+
+	float GetNumOrbits(float linearDistance) {
+		return linearDistance / planetCircumferance;
 	}
 
 	void OnDone() {
@@ -183,6 +237,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	IEnumerator CelebrateReachingPlanet(int planetIdx) {
 		StopRunning ();
+		oldRecord.SetActive (false);
 		float zoomTime = zoomToPlanet.ZoomToPlanet (planetIdx);
 		UnityEngine.Assertions.Assert.IsTrue (zoomTime - planetAchievementTextDelay >= 0);
 		ClearAchievementText (planetAchievementTextDelay * 0.9f);
