@@ -9,6 +9,7 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 	[SerializeField] Text upgradeButtonLabel = null;
 	[SerializeField] Text reachPlanetToUpgradeLabel = null;
 	[SerializeField] Text doneText = null;
+	[SerializeField] Text youWinText = null;
 	[SerializeField] string buildRocketText = "";
 	[SerializeField] string upgradeRocketText = "";
 	[SerializeField] Questions questions = null;
@@ -59,12 +60,14 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 		bool canUpgrade = RocketParts.instance.hasEnoughPartsToUpgrade && RocketParts.instance.hasReachedPlanetToUpgrade;
 		upgradeButtonLabel.text = canBuild ? buildRocketText : upgradeRocketText;
 		upgradeButton.gameObject.SetActive (noMoreQuestions && (canBuild || canUpgrade));
-		bool hasReachedTargetPlanet = TargetPlanet.GetLastReachedIdx() == TargetPlanet.GetTargetPlanetIdx();
+		int targetPlanetIdx = TargetPlanet.GetTargetPlanetIdx ();
+		bool hasReachedTargetPlanet = TargetPlanet.GetLastReachedIdx() == targetPlanetIdx;
 		string[] labels = hasReachedTargetPlanet ? orbitLaunchButtonLabels : launchButtonLabels;
-		launchButtonText.text = labels [TargetPlanet.GetTargetPlanetIdx ()];
+		launchButtonText.text = labels [targetPlanetIdx];
 		launchButton.gameObject.SetActive (noMoreQuestions && canLaunch && !canUpgrade);
-		reachPlanetToUpgradeLabel.text = reachPlanetLabels [TargetPlanet.GetTargetPlanetIdx ()];
+		reachPlanetToUpgradeLabel.text = reachPlanetLabels [targetPlanetIdx];
 		reachPlanetToUpgradeLabel.gameObject.SetActive (noMoreQuestions && canLaunch && (RocketParts.instance.hasEnoughPartsToUpgrade && !RocketParts.instance.hasReachedPlanetToUpgrade));
+		youWinText.gameObject.SetActive (launchButton.gameObject.activeSelf && targetPlanetIdx == TargetPlanet.GetNumPlanets ());
 		doneText.gameObject.SetActive( noMoreQuestions && !canLaunch && !canUpgrade && !canBuild);
 	}
 }
