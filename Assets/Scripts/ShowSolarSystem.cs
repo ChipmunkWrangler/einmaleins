@@ -22,18 +22,27 @@ public class ShowSolarSystem : MonoBehaviour {
 	[SerializeField] float postDelay = 2.0f;
 	[SerializeField] float[] planetZooms = null;
 	[SerializeField] float[] planetYs = null;
+	[SerializeField] FlashThrust thrust = null;
 	Vector3 originalScale;
 	Transform particleSystemTransform;
 
-	public float ZoomToPlanet(int i) {
+	public float ZoomToPlanet(int i, bool thenZoomOut) {
 		GameObject planet = planets [i].gameObject;
 		Transform oldTransform = planet.transform;
 		float zoomedScale = planetZooms [i];
 		iTween.MoveTo(planet, iTween.Hash("y", planetYs[i], "time", zoomInTime, "delay", preDelay, "islocal", true));	
 		iTween.ScaleTo(planet, iTween.Hash("scale", new Vector3(zoomedScale, zoomedScale, 1.0f), "time", zoomInTime, "delay", preDelay));
-		iTween.MoveTo(planet, iTween.Hash("y", oldTransform.localPosition.y, "time", zoomOutTime, "delay", preDelay + zoomInTime, "islocal", true));	
-		iTween.ScaleTo(planet, iTween.Hash("scale", oldTransform.localScale, "time", zoomOutTime, "delay", preDelay + zoomInTime));
-		return preDelay + zoomInTime + zoomOutTime + postDelay;
+		float duration = preDelay + zoomInTime + postDelay;
+		if (thenZoomOut) {
+			iTween.MoveTo (planet, iTween.Hash ("y", oldTransform.localPosition.y, "time", zoomOutTime, "delay", preDelay + zoomInTime, "islocal", true));	
+			iTween.ScaleTo (planet, iTween.Hash ("scale", oldTransform.localScale, "time", zoomOutTime, "delay", preDelay + zoomInTime));
+			duration += zoomOutTime;
+		}
+		return duration;
+	}
+
+	public Renderer GetPlanet(int i) {
+		return planets [i];
 	}
 
 	void Start() {
@@ -48,16 +57,17 @@ public class ShowSolarSystem : MonoBehaviour {
 				particleSystemTransform = sys.transform;
 			}
 		}
-
-		float viewportTop = Camera.main.WorldToViewportPoint(rocket.bounds.max).y + verticalPadding;
-		if (viewportTop > 1.0f) {
-			transform.localScale /= viewportTop;
-			particleSystemTransform.localScale /= viewportTop;
-			recordLine.transform.localScale *= viewportTop;
-			float maintainMinScaleFactor = minParticleScale / particleSystemTransform.localScale.y;
-			if (maintainMinScaleFactor > 1.0f) {
-				particleSystemTransform.localScale *= maintainMinScaleFactor;
-				rocket.transform.localScale *= maintainMinScaleFactor;
+		if (thrust.orbitingPlanet == null) {
+			float viewportTop = Camera.main.WorldToViewportPoint (rocket.bounds.max).y + verticalPadding;
+			if (viewportTop > 1.0f) {
+				transform.localScale /= viewportTop;
+				particleSystemTransform.localScale /= viewportTop;
+				recordLine.transform.localScale *= viewportTop;
+				float maintainMinScaleFactor = minParticleScale / particleSystemTransform.localScale.y;
+				if (maintainMinScaleFactor > 1.0f) {
+					particleSystemTransform.localScale *= maintainMinScaleFactor;
+					rocket.transform.localScale *= maintainMinScaleFactor;
+				}
 			}
 		}
 	}

@@ -1826,28 +1826,28 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 14}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2000, z: -1000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1000, z: 2000}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 96}
   m_Father: {fileID: 103}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &103
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 21}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 102}
   m_Father: {fileID: 98}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &104
 Transform:
   m_ObjectHideFlags: 0
@@ -20260,19 +20260,20 @@ MonoBehaviour:
   preDelay: 0
   postDelay: 0
   planetZooms:
-  - 2000
+  - 1900
   - 13000
   - 11000
   - 45000
   - 68000
   - 21380
   planetYs:
-  - 10000
+  - 9500
   - 60000
   - 135000
   - 290000
   - 470000
   - 640000
+  thrust: {fileID: 389}
 --- !u!114 &316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20933,6 +20934,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: {fileID: 389}
   paramObj: {fileID: 451636923}
+  rocketItself: {fileID: 102}
+  orbitScaleFactor: 1.1
 --- !u!114 &342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22059,7 +22062,7 @@ MonoBehaviour:
   achievementTextTransitionTime: 5
   planetAchievementTextDelay: 2
   questions: {fileID: 387}
-  rocket: {fileID: 21}
+  circumferanceFactor: 2000
 --- !u!114 &390
 MonoBehaviour:
   m_ObjectHideFlags: 0
