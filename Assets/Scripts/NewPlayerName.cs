@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class NewPlayerName : MonoBehaviour {
 	[SerializeField] GameObject enterNamePanel = null;
@@ -39,7 +40,7 @@ public class NewPlayerName : MonoBehaviour {
 	}
 
 	public void OnPlayerNameChanged(string name) {
-		ActivatePlayButton(name.Length > 0);
+		ActivatePlayButton(IsNameValid(name));
 		newName = name;
 	}
 
@@ -53,6 +54,10 @@ public class NewPlayerName : MonoBehaviour {
 		AppendToPlayerNames(newName);
 		SetCurPlayerName (newName);
 		Play ();
+	}
+
+	bool IsNameValid(string playerName) {
+		return playerName.Length > 0 && !playerNames.Contains (playerName);
 	}
 
 	void ActivatePlayButton(bool b) {
