@@ -20261,16 +20261,16 @@ MonoBehaviour:
   postDelay: 0
   planetZooms:
   - 1900
-  - 13000
+  - 12500
   - 11000
-  - 45000
-  - 68000
+  - 40000
+  - 58000
   - 21380
   planetYs:
   - 9500
   - 60000
   - 135000
-  - 290000
+  - 288000
   - 470000
   - 640000
   thrust: {fileID: 389}
@@ -20935,7 +20935,13 @@ MonoBehaviour:
   thrust: {fileID: 389}
   paramObj: {fileID: 451636923}
   rocketItself: {fileID: 102}
-  orbitScaleFactor: 1.1
+  orbitScaleFactors:
+  - 1.1
+  - 1.1
+  - 0.5
+  - 1.1
+  - 1.1
+  - 1.1
 --- !u!114 &342
 MonoBehaviour:
   m_ObjectHideFlags: 0

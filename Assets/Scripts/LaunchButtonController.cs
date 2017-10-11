@@ -23,6 +23,15 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 		"Auf zum Pluto",
 		"Auf ins All"
 	};
+	readonly string[] orbitLaunchButtonLabels = {
+		"Mars umrunden",
+		"Jupiter umrunden",
+		"Saturn umrunden",
+		"Uranus umrunden",
+		"Neptun umrunden",
+		"Pluto umrunden",
+		"Auf ins All"
+	};
 	readonly string[] reachPlanetLabels = {
 		"Erreiche Mars, um Deine Rakete zu verbessern",
 		"Erreiche Jupiter, um Deine Rakete zu verbessern",
@@ -50,7 +59,9 @@ public class LaunchButtonController : MonoBehaviour, OnQuestionChanged {
 		bool canUpgrade = RocketParts.instance.hasEnoughPartsToUpgrade && RocketParts.instance.hasReachedPlanetToUpgrade;
 		upgradeButtonLabel.text = canBuild ? buildRocketText : upgradeRocketText;
 		upgradeButton.gameObject.SetActive (noMoreQuestions && (canBuild || canUpgrade));
-		launchButtonText.text = launchButtonLabels [TargetPlanet.GetTargetPlanetIdx ()];
+		bool hasReachedTargetPlanet = TargetPlanet.GetLastReachedIdx() == TargetPlanet.GetTargetPlanetIdx();
+		string[] labels = hasReachedTargetPlanet ? orbitLaunchButtonLabels : launchButtonLabels;
+		launchButtonText.text = labels [TargetPlanet.GetTargetPlanetIdx ()];
 		launchButton.gameObject.SetActive (noMoreQuestions && canLaunch && !canUpgrade);
 		reachPlanetToUpgradeLabel.text = reachPlanetLabels [TargetPlanet.GetTargetPlanetIdx ()];
 		reachPlanetToUpgradeLabel.gameObject.SetActive (noMoreQuestions && canLaunch && (RocketParts.instance.hasEnoughPartsToUpgrade && !RocketParts.instance.hasReachedPlanetToUpgrade));

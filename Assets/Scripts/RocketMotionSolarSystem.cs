@@ -6,7 +6,7 @@ public class RocketMotionSolarSystem : MonoBehaviour {
 	[SerializeField] FlashThrust thrust = null;
 	[SerializeField] Params paramObj = null;
 	[SerializeField] Transform rocketItself = null;
-	[SerializeField] float orbitScaleFactor = 0.1f;
+	[SerializeField] float[] orbitScaleFactors = null;
 	float minY;
 
 	void Start() {
@@ -33,8 +33,8 @@ public class RocketMotionSolarSystem : MonoBehaviour {
 		zeroPos.y = rocketItself.transform.localPosition.y;
 		rocketItself.transform.localPosition = zeroPos;
 		Vector3 pos = thrust.orbitingPlanet.transform.position;
-		float radius = thrust.orbitingPlanet.bounds.extents.x * orbitScaleFactor;
-		float fraction = thrust.orbitalDistance / thrust.planetCircumferance;
+		float radius = thrust.orbitingPlanet.bounds.extents.x * orbitScaleFactors[thrust.orbitingPlanetIdx];
+		float fraction = thrust.orbitalDistance / thrust.planetCircumferance - 0.25f; // -0.25f to start at the bottom of the planet
 		float radians = 2.0f * Mathf.PI * fraction;
 		pos.x += radius * Mathf.Cos (radians);
 		pos.y += radius * Mathf.Sin (radians);

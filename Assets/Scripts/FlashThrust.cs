@@ -30,6 +30,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	float minSpeed;
 	float maxSpeed = float.MaxValue;
 	public Renderer orbitingPlanet { get; private set; }
+	public int orbitingPlanetIdx { get; private set; }
 	public float speed { get; private set; } // km per second
 	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
 	public float height { get; private set; } // km
@@ -82,7 +83,11 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		var recordPos = oldRecord.transform.position;
 		recordPos.y += recordHeight * paramObj.heightScale * oldRecord.transform.parent.localScale.y;
 		oldRecord.transform.position = recordPos;
-		checkForRecord = recordHeight > 0 && TargetPlanet.GetLastReachedIdx() < TargetPlanet.GetTargetPlanetIdx();
+		bool hasReachedTargetPlanet = TargetPlanet.GetLastReachedIdx() == TargetPlanet.GetTargetPlanetIdx();
+		checkForRecord = recordHeight > 0 && !hasReachedTargetPlanet;
+		if (!hasReachedTargetPlanet) { // new planet counts new orbits
+			MDPrefs.SetFloat (recordOrbitalDistancePrefsKey, 0);
+		}
 		oldRecord.SetActive (checkForRecord);
 		UnityEngine.Assertions.Assert.AreEqual(RocketParts.instance.numUpgrades + 1, TargetPlanet.heights.Length);
 		int upgradeLevel = RocketParts.instance.upgradeLevel;
@@ -210,6 +215,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		orbitsWidget.SetActive (true);
 		zoomToPlanet.ZoomToPlanet (planetIdx, false);
 		orbitingPlanet = zoomToPlanet.GetPlanet(planetIdx);
+		orbitingPlanetIdx = planetIdx;
 	}
 
 	float GetNumOrbits(float linearDistance) {
