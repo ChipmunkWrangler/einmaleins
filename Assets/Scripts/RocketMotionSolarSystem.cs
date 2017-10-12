@@ -7,6 +7,7 @@ public class RocketMotionSolarSystem : MonoBehaviour {
 	[SerializeField] Params paramObj = null;
 	[SerializeField] Transform rocketItself = null;
 	[SerializeField] float[] orbitScaleFactors = null;
+	[SerializeField] float[] orbitYOffsets = null;
 	float minY;
 
 	void Start() {
@@ -37,7 +38,7 @@ public class RocketMotionSolarSystem : MonoBehaviour {
 		float fraction = thrust.orbitalDistance / thrust.planetCircumferance - 0.25f; // -0.25f to start at the bottom of the planet
 		float radians = 2.0f * Mathf.PI * fraction;
 		pos.x += radius * Mathf.Cos (radians);
-		pos.y += radius * Mathf.Sin (radians);
+		pos.y += radius * Mathf.Sin (radians) + thrust.orbitingPlanet.bounds.extents.x * orbitYOffsets[thrust.orbitingPlanetIdx];
 		Debug.Log (thrust.orbitalDistance + " fraction = " + fraction + " radians = " + radians + " cos = " + Mathf.Cos (radians) + " pos = " + pos);
 		gameObject.transform.position = pos;
 		rocketItself.transform.localRotation = Quaternion.Euler(0, -radians * 180.0f / Mathf.PI, 0);
