@@ -327,7 +327,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		maxSpeed = Mathf.Max(accelerationOnCorrect, numChancesToAccelerate * accelerationOnCorrect - 
 			Mathf.Sqrt (targetAnswerTime * targetAnswerTime * numChancesToAccelerate * numChancesToAccelerate * accelerationOnCorrect * accelerationOnCorrect 
 				- 2 * targetAnswerTime * accelerationOnCorrect * maxHeight) / targetAnswerTime);
-		UnityEngine.Assertions.Assert.IsTrue (maxSpeed >= accelerationOnCorrect);
+//		UnityEngine.Assertions.Assert.IsTrue (maxSpeed >= accelerationOnCorrect);
 	}
 
 	float GetAccelerationNewStyle(float targetHeight, int numChancesToAccelerate)
