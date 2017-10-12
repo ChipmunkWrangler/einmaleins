@@ -24,6 +24,7 @@ public class NewPlayerName : MonoBehaviour {
 			Destroy(RocketParts.instance);
 		} // else this is initial start
 		ActivatePlayButton (false);
+//		PlayerPrefs.SetInt (playerNamesPrefsKey + ":StringArray:ArrayLen", 2);
 		playerNames = PlayerPrefsArray.GetStringArray (playerNamesPrefsKey);
 		int numPlayers = playerNames.Length;
 		enterNamePanel.SetActive (numPlayers < playerButtons.Length);
