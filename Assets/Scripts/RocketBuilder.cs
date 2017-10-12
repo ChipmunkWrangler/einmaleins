@@ -42,7 +42,9 @@ public class RocketBuilder : MonoBehaviour {
 	{
 		int upgradeLevel = RocketParts.instance.upgradeLevel;
 		for (int i = 0; i < exhaustParticles.Length; ++i) {
-			exhaustParticles [i].gameObject.SetActive (i == upgradeLevel);
+			if (exhaustParticles [i] != null) {
+				exhaustParticles [i].gameObject.SetActive (i == upgradeLevel);
+			}
 		}
 		exhaustParticles [upgradeLevel].Play ();
 		iTween.MoveTo (gameObject, iTween.Hash ("y", maxY, "time", upgradeFlightTime, "delay", buildingDelay, "easetype", easeTypes[upgradeLevel-1], "oncomplete", "Descend"));
