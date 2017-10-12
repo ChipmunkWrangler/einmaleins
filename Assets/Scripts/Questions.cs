@@ -14,7 +14,6 @@ public abstract class Questions : MonoBehaviour {
 		CreateQuestions ();
 		Load ();
 		FillToAsk ();
-		Save ();
 	}
 		
 	public static int GetNumQuestions() {
@@ -66,11 +65,17 @@ public abstract class Questions : MonoBehaviour {
 	protected void LoadQuestionsList ()
 	{
 		UnityEngine.Assertions.Assert.AreEqual (MDPrefs.GetInt (prefsKey + ":ArrayLen", questions.Length), questions.Length);
-		for (int i = 0; i < questions.Length; ++i) {
-			questions [i].Load (prefsKey + ":" + i, i);
-		}
-		if (MDPrefs.GetBool (prefsKey + ":wasJustUpgraded")) {
-			ConvertMasteredToFlash ();
+		if (MDPrefs.HasKey (prefsKey + ":ArrayLen")) {
+			for (int i = 0; i < questions.Length; ++i) {
+				questions [i].Load (prefsKey + ":" + i, i);
+			}
+			if (MDPrefs.GetBool (prefsKey + ":wasJustUpgraded")) {
+				ConvertMasteredToFlash ();
+			}
+		} else {
+			for (int i = 0; i < questions.Length; ++i) {
+				questions [i].Create (prefsKey + ":" + i, i);
+			}
 		}
 	}
 

@@ -186,6 +186,13 @@ public class Question {
 		isMandatoryReview = MDPrefs.GetBool (prefsKey + ":isMandatoryReview");
 		isFlashQuestion = MDPrefs.GetBool (prefsKey + ":isFlashQuestion");
 	}
+		
+	public void Create(string _prefsKey, int _idx) {
+		prefsKey = _prefsKey;
+		idx = _idx;
+		answerTimes = new List<float>();
+		reviewAt = System.DateTime.MinValue;
+	}
 
 	public void Save() {
 		UnityEngine.Assertions.Assert.AreNotEqual (prefsKey.Length, 0);
