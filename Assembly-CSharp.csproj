@@ -46,7 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\PreciseLocale\Example\PreciseLocaleText.cs" />
      <Compile Include="Assets\PreciseLocale\PreciseLocale.cs" />
      <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
      <Compile Include="Assets\Scripts\BackStack.cs" />
