@@ -13,6 +13,8 @@ public class RocketBuilder : MonoBehaviour {
 	[SerializeField] UpgradeButton button = null;
 	[SerializeField] ParticleSystem buildParticles = null;
 	[SerializeField] ParticleSystem[] exhaustParticles = null;
+	[SerializeField] LaunchButtonController launchButton;
+
 	iTween.EaseType[] easeTypes = new iTween.EaseType[] {
 		iTween.EaseType.easeInOutCubic,
 		iTween.EaseType.easeOutQuad,
@@ -56,7 +58,7 @@ public class RocketBuilder : MonoBehaviour {
 
 	void DoneUpgrading() {
 		exhaustParticles [RocketParts.instance.upgradeLevel].Stop ();
-		button.OnDoneBuildOrUpgrade ();
+		DoneBuildingOrUpgrading ();
 	}
 
 	void GotoBasePos(string onComplete) {
@@ -73,8 +75,13 @@ public class RocketBuilder : MonoBehaviour {
 	void DoneBuilding() {
 		RocketParts.instance.Build ();
 		buildParticles.Stop ();
-		button.OnDoneBuildOrUpgrade ();
 		Questions.OnBuildOrUpgrade ();
+		DoneBuildingOrUpgrading ();
 	}
 
+	void DoneBuildingOrUpgrading() {
+		button.OnDoneBuildOrUpgrade ();
+		launchButton.SetLaunchButtonText ();
+		launchButton.gameObject.SetActive (true);
+	}
 }
