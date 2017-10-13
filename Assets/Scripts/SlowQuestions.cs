@@ -74,17 +74,19 @@ public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
 			Debug.Log ("AskList count " + toAsk.Count);
 			return;
 		}
-		Debug.Log("frustration = " + frustration + " effort = " + effort + " time = " + CCTime.Now());
-		int expectedUrgentEffort = questions.Count (q => q.IsUrgent()) * EFFORT_RIGHT;
-		bool urgentOnly = effort + expectedUrgentEffort >= EFFORT_PER_DAY;
-		var candidates = questions.Where (q => IsQuestionAllowed (q, urgentOnly));
-		var nonNewCandidates = candidates.Where (q => !q.IsNew ());
 		Question question = null;
-		if (nonNewCandidates.Any()) {
-			var candidatesByDifficulty = (frustration > 0) ? nonNewCandidates.OrderBy (q => q.difficulty) : nonNewCandidates.OrderByDescending (q => q.difficulty);
-			question = candidatesByDifficulty.ThenBy (q => q.reviewAt).First ();
-		} else {
-			question = candidates.FirstOrDefault ();
+		if (!(RocketParts.instance.canBuild || RocketParts.instance.hasEnoughPartsToUpgrade)) { // stop asking questions if we can build or upgrade
+			Debug.Log ("frustration = " + frustration + " effort = " + effort + " time = " + CCTime.Now ());
+			int expectedUrgentEffort = questions.Count (q => q.IsUrgent ()) * EFFORT_RIGHT;
+			bool urgentOnly = effort + expectedUrgentEffort >= EFFORT_PER_DAY;
+			var candidates = questions.Where (q => IsQuestionAllowed (q, urgentOnly));
+			var nonNewCandidates = candidates.Where (q => !q.IsNew ());
+			if (nonNewCandidates.Any ()) {
+				var candidatesByDifficulty = (frustration > 0) ? nonNewCandidates.OrderBy (q => q.difficulty) : nonNewCandidates.OrderByDescending (q => q.difficulty);
+				question = candidatesByDifficulty.ThenBy (q => q.reviewAt).First ();
+			} else {
+				question = candidates.FirstOrDefault ();
+			}
 		}
 		if (question != null) {
 			previousQuestionIdx = question.idx;
