@@ -4777,7 +4777,7 @@ Prefab:
     - target: {fileID: 114331783516396428, guid: fdd7f431d6405436aaf88aceb283e9cb,
         type: 2}
       propertyPath: m_Text
-      value: "Fertig f\xFCr Heute!"
+      value: "F\xFCr Heute fertig!"
       objectReference: {fileID: 0}
     - target: {fileID: 1674178823437034, guid: fdd7f431d6405436aaf88aceb283e9cb, type: 2}
       propertyPath: m_IsActive
