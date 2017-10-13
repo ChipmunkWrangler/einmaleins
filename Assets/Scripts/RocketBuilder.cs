@@ -24,7 +24,7 @@ public class RocketBuilder : MonoBehaviour {
 		Vector3 pos = gameObject.transform.position;
 		pos.y = (RocketParts.instance.isRocketBuilt) ? builtY : hiddenY;
 		gameObject.transform.position = pos;
-		if (!RocketParts.instance.isRocketBuilt&& RocketParts.instance.canBuild) {
+		if (!RocketParts.instance.isRocketBuilt && RocketParts.instance.canBuild) {
 			Build ();
 		}
 	}
@@ -32,7 +32,7 @@ public class RocketBuilder : MonoBehaviour {
 	public void OnUpgrade() {
 		UnityEngine.Assertions.Assert.AreEqual (exhaustParticles.Length, RocketParts.instance.numUpgrades + 1);
 		if (RocketParts.instance.Upgrade ()) {
-			Questions.OnUpgrade ();
+			Questions.OnBuildOrUpgrade ();
 			counter.OnSpend (RocketParts.instance.numParts + RocketParts.instance.numPartsRequired, RocketParts.instance.numParts);
 			StartEngine ();
 		}
@@ -74,6 +74,7 @@ public class RocketBuilder : MonoBehaviour {
 		RocketParts.instance.Build ();
 		buildParticles.Stop ();
 		button.OnDoneBuildOrUpgrade ();
+		Questions.OnBuildOrUpgrade ();
 	}
 
 }

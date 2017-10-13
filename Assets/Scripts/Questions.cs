@@ -49,7 +49,7 @@ public abstract class Questions : MonoBehaviour {
 		SaveQuestionsList ();
 	}
 
-	public static void OnUpgrade() {
+	public static void OnBuildOrUpgrade() {
 		MDPrefs.SetBool (prefsKey + ":wasJustUpgraded", true);
 	}
 
@@ -102,6 +102,7 @@ public abstract class Questions : MonoBehaviour {
 		foreach( Question question in questions.Where(q => q.wasMastered && !q.isFlashQuestion)) {
 			question.isFlashQuestion = true;
 		}
+		SaveQuestionsList ();
 		MDPrefs.SetBool (prefsKey + ":wasJustUpgraded", false);
 	}
 }
