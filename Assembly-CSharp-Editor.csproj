@@ -46,17 +46,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Mirza Beig\Editor Extensions\Effects\Particle Twister\Editor\ParticleTwisterEditorWindow.cs" />
-     <Compile Include="Assets\Mirza Beig\Editor Extensions\Effects\Particle Twister\Editor\ParticleTwisterExtensions.cs" />
-     <Compile Include="Assets\Mirza Beig\Editor Extensions\Utilities\Particle Playback\Editor\ParticlePlayback.cs" />
-     <Compile Include="Assets\Mirza Beig\Editor Extensions\Utilities\Particle Playback\Editor\ParticlePlaybackEditorWindow.cs" />
-     <Compile Include="Assets\Mirza Beig\Editor Extensions\Utilities\Particle Playback\Editor\ParticlePlaybackExtensions.cs" />
-     <Compile Include="Assets\Mirza Beig\_Common\Editor\ParticleEditorUtility.cs" />
      <None Include="Assets\Shaders\AlphaProgress.shader" />
      <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />
      <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
-     <None Include="Assets\Mirza Beig\README - Particle Twister.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>

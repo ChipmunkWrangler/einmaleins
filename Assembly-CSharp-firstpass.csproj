@@ -57,6 +57,7 @@
      <Compile Include="Assets\Plugins\PlayerPrefsEditor\SimpleEncryption.cs" />
      <Compile Include="Assets\Plugins\PlayerPrefsPlus\Plugins\PlayerPrefsArray.cs" />
      <Compile Include="Assets\Plugins\PlayerPrefsPlus\Plugins\PlayerPrefsPlus.cs" />
+     <None Include="Assets\xARM\_Changelog.txt" />
      <None Include="Assets\Shaders\AlphaProgress.shader" />
      <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />
