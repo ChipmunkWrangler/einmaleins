@@ -51,7 +51,6 @@ public class NewPlayerName : MonoBehaviour {
 	}
 
 	public void OnPlay() {
-		// TODO check that newName is different from all existing names
 		AppendToPlayerNames(newName);
 		SetCurPlayerName (newName);
 		Play ();
