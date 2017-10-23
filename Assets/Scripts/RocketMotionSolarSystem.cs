@@ -39,7 +39,7 @@ public class RocketMotionSolarSystem : MonoBehaviour {
 		float radians = 2.0f * Mathf.PI * fraction;
 		pos.x += radius * Mathf.Cos (radians);
 		pos.y += radius * Mathf.Sin (radians) + thrust.orbitingPlanet.bounds.extents.x * orbitYOffsets[thrust.orbitingPlanetIdx];
-		Debug.Log (thrust.orbitalDistance + " fraction = " + fraction + " radians = " + radians + " cos = " + Mathf.Cos (radians) + " pos = " + pos);
+//		Debug.Log (thrust.orbitalDistance + " fraction = " + fraction + " radians = " + radians + " cos = " + Mathf.Cos (radians) + " pos = " + pos);
 		gameObject.transform.position = pos;
 		rocketItself.transform.localRotation = Quaternion.Euler(0, -radians * 180.0f / Mathf.PI, 0);
 

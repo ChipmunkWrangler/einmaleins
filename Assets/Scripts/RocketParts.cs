@@ -48,7 +48,7 @@ public class RocketParts : MonoBehaviour {
 		}
 	}
 
-	public bool hasReachedPlanetToUpgrade {
+	bool hasReachedPlanetToUpgrade {
 		get {
 			return upgradeLevel <= TargetPlanet.GetLastReachedIdx();
 		}

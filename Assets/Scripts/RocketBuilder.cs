@@ -23,10 +23,10 @@ public class RocketBuilder : MonoBehaviour {
 	};
 
 	void Start () {
-		Vector3 pos = gameObject.transform.position;
-		pos.y = (RocketParts.instance.isRocketBuilt) ? builtY : hiddenY;
-		gameObject.transform.position = pos;
-		if (!RocketParts.instance.isRocketBuilt && RocketParts.instance.canBuild) {
+		if (RocketParts.instance.isRocketBuilt) {
+			SetY (builtY);
+		} else {
+			SetY (hiddenY);
 			Build ();
 		}
 	}
@@ -81,7 +81,12 @@ public class RocketBuilder : MonoBehaviour {
 
 	void DoneBuildingOrUpgrading() {
 		button.OnDoneBuildOrUpgrade ();
-		launchButton.SetLaunchButtonText ();
-		launchButton.gameObject.SetActive (true);
+		launchButton.ActivateLaunch ();
 	}
+		
+	void SetY(float y) {
+		Vector3 pos = gameObject.transform.position;
+		pos.y = y;
+		gameObject.transform.position = pos;
+	}				
 }

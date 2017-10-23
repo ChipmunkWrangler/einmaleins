@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Linq;
 
 public class FlashQuestions : Questions {
+	[SerializeField] Goal goal = null;
+
 	public const int ASK_LIST_LENGTH = 10;
 	bool wasFilled;
 
@@ -23,12 +25,15 @@ public class FlashQuestions : Questions {
 		}
 //		Debug.Log ("Filling list");
 		var candidates = questions.Where(q => q.isFlashQuestion).OrderBy (q => q.IsMastered()).ThenByDescending(q => q.GetAverageAnswerTime ());
-		bool isFinalGauntlet = TargetPlanet.GetTargetPlanetIdx () == TargetPlanet.heights.Length - 1;
-		if (isFinalGauntlet) {
+		Goal.CurGoal curGoal = goal.curGoal;
+		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.ORBIT || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
+		if (curGoal == Goal.CurGoal.GAUNTLET) {
 			toAsk = candidates.Select (q => q.idx).ToList ();
 		} else {
 			toAsk = candidates.Take (ASK_LIST_LENGTH).Select(q => q.idx).ToList();
-			toAsk.Reverse(); // so that the player won't have a discouraging start
+			// now move the easiest element to the front to avoid a discouraging start
+			toAsk.Insert (0, toAsk.Last ());
+			toAsk.RemoveAt (toAsk.Count - 1);
 		}
 //		Debug.Log ("Questions");
 //		foreach (Question question in questions.Where(q => q.difficulty == Question.MASTERED_DIFFICULTY).OrderBy (q => q.GetAverageAnswerTime ())) {

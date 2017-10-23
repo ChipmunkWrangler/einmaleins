@@ -9,7 +9,7 @@ public class UpgradeButton : MonoBehaviour {
 
 	void Start () {
 		UnityEngine.Assertions.Assert.AreEqual (engineNames.Length, RocketParts.instance.numUpgrades);
-		ShowOrHide ();
+		ShowOrHide (RocketParts.instance.isRocketBuilt);
 	}
 
 	public void OnPressed() {
@@ -17,14 +17,11 @@ public class UpgradeButton : MonoBehaviour {
 	}
 
 	public void OnDoneBuildOrUpgrade() {
-		ShowOrHide ();
+		ShowOrHide (false);
 	}
 
-	void ShowOrHide() {
-		bool enable = RocketParts.instance.hasEnoughPartsToUpgrade && RocketParts.instance.hasReachedPlanetToUpgrade;
-		if (enable) {
-			label.text = engineNames [RocketParts.instance.upgradeLevel];
-		}
+	void ShowOrHide(bool enable) {		
+		label.text = engineNames [RocketParts.instance.upgradeLevel];
 		button.gameObject.SetActive (enable);
 		button.enabled = enable;
 	}

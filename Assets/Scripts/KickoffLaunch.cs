@@ -13,7 +13,7 @@ public class KickoffLaunch : MonoBehaviour {
 	[SerializeField] GameObject[] uiElementsToDeactivateOnCountdown;
 	[SerializeField] GameObject[] uiElementsToActivateOnPlay;
 	[SerializeField] GameObject[] uiElementsToDeactivateOnPlay;
-	[SerializeField] LaunchButtonController launchButtonController;
+	[SerializeField] GoalButtonControler launchButtonController;
 	[SerializeField] FlashThrust thrust;
 
 	void Start () {

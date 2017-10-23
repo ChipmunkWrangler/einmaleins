@@ -18,14 +18,6 @@ public class TargetPlanet {
 		5.772e+09f
 	};
 
-	public static bool IsTargetPlanetReached(float rocketHeight) {
-		return rocketHeight > GetTargetPlanetHeight ();
-	}
-
-	public static bool IsAlreadyReached(int planetIdx) {
-		return planetIdx <= GetLastReachedIdx ();
-	}
-
 	public static int GetLastReachedIdx() {
 		if (lastReachedPlanetIdx < -1) {
 			lastReachedPlanetIdx = MDPrefs.GetInt (lastReachedKey, -1);
@@ -53,8 +45,12 @@ public class TargetPlanet {
 		return heights.Length;
 	}
 
-	static float GetTargetPlanetHeight() {
-		return (GetTargetPlanetIdx() < heights.Length) ? heights [GetTargetPlanetIdx ()] : float.MaxValue;
+	public static bool IsLeavingSolarSystem() {
+		return GetTargetPlanetIdx () >= GetNumPlanets();
+	}
+
+	public static float GetTargetPlanetHeight() {
+		return IsLeavingSolarSystem() ? heights [heights.Length - 1] : heights [GetTargetPlanetIdx ()];
 	}
 
 	static void SetIdx(int newIdx ) {

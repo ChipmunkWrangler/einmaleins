@@ -8,11 +8,13 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	[SerializeField] Image[] imagesToHighlight = null;
 	[SerializeField] Text[] textsToHighlight = null;
 	[SerializeField] Text[] textsToFadeOut = null;
+	[SerializeField] int baseFontSize;
 	[SerializeField] Color highlightColour;
-	[SerializeField] Vector3 highlightScale;
+	[SerializeField] int highlightFontSize;
 	[SerializeField] float highlightFadeTime = 0.5f;
 	[SerializeField] float scoreCountdownDuration = 5.0f;
 	[SerializeField] float scoreCountdownDelay = 0.5f;
+
 	Color[] baseColor = null;
 
 	void Awake() {
@@ -24,7 +26,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	}
 
 	void Start () {
-		UpdateText (RocketParts.instance.numParts, true);
+		UpdateText (RocketParts.instance.numParts);
 	}
 
 	public void OnQuestionChanged(Question question) {
@@ -33,7 +35,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 			StartCoroutine (FadeText (baseColor[i++], highlightFadeTime, text));
 		}
 		foreach (Text text in textsToHighlight) {
-			StartCoroutine (Scale (Vector3.one, highlightFadeTime, text.gameObject));
+			StartCoroutine (Scale (baseFontSize, highlightFadeTime, text));
 		}
 	}
 
@@ -47,7 +49,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 				StartCoroutine (FadeText (highlightColour, highlightFadeTime, text));
 			}
 			foreach (Text text in textsToHighlight) {
-				StartCoroutine (Scale (highlightScale, highlightFadeTime, text.gameObject));
+				StartCoroutine (Scale (highlightFontSize, highlightFadeTime, text));
 			}
 			UpdateText (RocketParts.instance.numParts);
 		}
@@ -69,20 +71,15 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 		}
 	}
 
-	IEnumerator Scale(Vector3 endScale, float tweenTime, GameObject o) {
-		Vector3 startScale = o.transform.localScale;
+	IEnumerator Scale(int endFontSize, float tweenTime, Text text) {
+		int startFontSize = text.fontSize;
 		float startTime = Time.time;
 		float t = 0;
 		while (t <= 1.0f) {
-			o.transform.localScale = Vector3.Lerp (startScale, endScale, t);
+			text.fontSize = Mathf.RoundToInt(Mathf.Lerp (startFontSize, endFontSize, t));
 			t = (Time.time - startTime) / tweenTime;
 			yield return null;
 		}
-	}
-
-	IEnumerator HideText(Text text) {
-		yield return StartCoroutine (Scale (Vector3.zero, highlightFadeTime, text.gameObject));
-		text.text = "";
 	}
 
 	IEnumerator FadeImage(Color end, float fadeTime, Image image) {
@@ -96,16 +93,12 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 		}
 	}
 
-	void UpdateText (int numParts, bool instant = false) {
+	void UpdateText (int numParts) {
 		if (RocketParts.instance.upgradeLevel >= RocketParts.instance.numUpgrades - 1 && numParts == 0) {
 			if (numText.text.Length > 0) {
 				numText.text = "";
 				foreach (Text text in textsToFadeOut) {
-					if (instant) {
-						text.text = "";
-					} else {
-						StartCoroutine (HideText (text));
-					}
+					text.text = "";
 				}
 			}
 		} else {

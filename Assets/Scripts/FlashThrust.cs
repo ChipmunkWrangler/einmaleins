@@ -26,6 +26,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] float planetAchievementTextDelay = 2.0f;
 	[SerializeField] Questions questions = null;
 	[SerializeField] float circumferanceFactor = 1000.0f;
+	[SerializeField] Goal goal = null;
 	float minSpeed;
 	float maxSpeed = float.MaxValue;
 	public Renderer orbitingPlanet { get; private set; }
@@ -65,6 +66,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	int numAnswersGiven;
 	bool noMoreQuestions;
 	bool checkForRecord;
+	Goal.CurGoal curGoal;
 
 	const string recordPrefsKey = "recordHeight";
 	const string recordOrbitalDistancePrefsKey = "recordOrbitalDistance";
@@ -77,21 +79,21 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		orbitsWidget.SetActive (false);
 		heightText.text = "0";
 		apogeeText.text = "0";
+		curGoal = goal.curGoal;
+		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.ORBIT || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
 		recordHeight = MDPrefs.GetFloat (recordPrefsKey, 0);
 		recordHeightText.text = recordHeight.ToString (heightFormat) + unit;
 		var recordPos = oldRecord.transform.position;
 		recordPos.y += recordHeight * paramObj.heightScale * oldRecord.transform.parent.localScale.y;
 		oldRecord.transform.position = recordPos;
-		bool hasReachedTargetPlanet = TargetPlanet.GetLastReachedIdx() == TargetPlanet.GetTargetPlanetIdx();
-		checkForRecord = recordHeight > 0 && !hasReachedTargetPlanet;
-		if (!hasReachedTargetPlanet) { // new planet counts new orbits
+		checkForRecord = recordHeight > 0 && curGoal != Goal.CurGoal.ORBIT;
+		if (curGoal != Goal.CurGoal.ORBIT) { // new planet counts new orbits
 			MDPrefs.SetFloat (recordOrbitalDistancePrefsKey, 0);
 		}
 		oldRecord.SetActive (checkForRecord);
 		UnityEngine.Assertions.Assert.AreEqual(RocketParts.instance.numUpgrades + 1, TargetPlanet.heights.Length);
-		int upgradeLevel = RocketParts.instance.upgradeLevel;
-		float newTargetHeight = TargetPlanet.heights [upgradeLevel];
-		float maxHeight = (upgradeLevel < TargetPlanet.heights.Length - 1) ? TargetPlanet.heights [upgradeLevel + 1] : TargetPlanet.heights [upgradeLevel] * 2.0f;
+		float newTargetHeight = TargetPlanet.GetTargetPlanetHeight();
+		float maxHeight = newTargetHeight * 2.0f;
 		CalcParams(maxHeight, newTargetHeight, questions.GetAskListLength() + 1); // +1 because of the initial launch acceleration
 //		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.instance.UpgradeLevel], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
@@ -162,22 +164,18 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 			speed = 0;
 		}
 		recordHeight = UpdateRecord (height, recordHeight, recordPrefsKey);
-		if (TargetPlanet.IsTargetPlanetReached (height)) {
+		if (curGoal != Goal.CurGoal.WON && height > TargetPlanet.GetTargetPlanetHeight ()) {
 			int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx ();
-			if (TargetPlanet.IsAlreadyReached (planetReachedIdx)) {
-				if (planetReachedIdx <= TargetPlanet.GetNumPlanets ()) {
-					StartOrbiting (planetReachedIdx);
-				}
+			if (curGoal == Goal.CurGoal.ORBIT) {
+				StartOrbiting (planetReachedIdx);
 			}
 			else {
 				TargetPlanet.SetLastReachedIdx (planetReachedIdx);
-				if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 2) {
+				if (curGoal == Goal.CurGoal.GAUNTLET) {
+					TargetPlanet.TargetNextPlanet ();
+				} else if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 2) {
 					RocketParts.instance.FinalUpgrade ();
 				}
-				else
-					if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 1) {
-						TargetPlanet.TargetNextPlanet ();
-					}
 				StartCoroutine (CelebrateReachingPlanet (planetReachedIdx));
 			}
 		}

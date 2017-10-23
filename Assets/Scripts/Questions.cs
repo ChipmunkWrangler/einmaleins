@@ -5,8 +5,10 @@ using System.Linq;
 
 public abstract class Questions : MonoBehaviour {
 	public Question[] questions { get; private set; }
+	public EffortTracker effortTracker = null;
 
 	public const int maxNum = 10;
+
 	protected List<int> toAsk = new List<int>(); // list of indices in questions[]
 	protected const string prefsKey = "questions";
 
@@ -37,16 +39,13 @@ public abstract class Questions : MonoBehaviour {
 		return questions.Count(q => q.isFlashQuestion && !q.IsFlashMastered()) >= FlashQuestions.ASK_LIST_LENGTH;
 	}
 		
-	public bool HasMasteredAllQuestions() {
-		return questions.Count(q => q.wasMastered) == Questions.GetNumQuestions();
-	}
-
 	public int GetAskListLength() {
 		return toAsk.Count ();
 	}
 
 	public virtual void Save() {
 		SaveQuestionsList ();
+		effortTracker.Save ();
 	}
 
 	public static void OnBuildOrUpgrade() {
@@ -58,6 +57,7 @@ public abstract class Questions : MonoBehaviour {
 
 	protected virtual void Load() {
 		LoadQuestionsList ();
+		effortTracker.Load ();
 	}
 
 	protected abstract void FillToAsk ();
