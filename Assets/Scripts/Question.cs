@@ -61,7 +61,7 @@ public class Question {
 	}
 
 	public bool IsFlashMastered () {
-		return answerTimes.Count == NUM_ANSWER_TIMES_TO_RECORD && GetAverageAnswerTime () <= FlashThrust.targetAnswerTime;
+		return GetAverageAnswerTime () <= FlashThrust.targetAnswerTime;
 	}
 
 	public bool IsUrgent() {
@@ -73,7 +73,10 @@ public class Question {
 	}
 
 	public float GetAverageAnswerTime() {
-		return (answerTimes.Count == 0) ? float.MaxValue : answerTimes.Average ();
+		for (int i = answerTimes.Count; i < NUM_ANSWER_TIMES_TO_RECORD; ++i) {
+			answerTimes.Add (ANSWER_TIME_MAX);
+		}
+		return answerTimes.Average ();
 	}
 
 	public bool UpdateState(bool isCorrect, float timeRequired) {
