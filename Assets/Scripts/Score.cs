@@ -39,7 +39,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		IncrementMultiplier ();
-		IncreaseScoreBy (multiplier * question.a * question.b);
+		IncreaseScoreBy (1 + multiplier * question.a * question.b); // 1+ to avoid only awarding one point and having to unpluralize "Punkte" :p
 		Save (score);
 	}
 
