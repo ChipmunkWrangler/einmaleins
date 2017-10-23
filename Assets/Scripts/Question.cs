@@ -73,9 +73,6 @@ public class Question {
 	}
 
 	public float GetAverageAnswerTime() {
-		for (int i = answerTimes.Count; i < NUM_ANSWER_TIMES_TO_RECORD; ++i) {
-			answerTimes.Add (ANSWER_TIME_MAX);
-		}
 		return answerTimes.Average ();
 	}
 
@@ -194,6 +191,9 @@ public class Question {
 		prefsKey = _prefsKey;
 		idx = _idx;
 		answerTimes = new List<float>();
+		for (int i = 0; i < NUM_ANSWER_TIMES_TO_RECORD; ++i) {
+			answerTimes.Add (ANSWER_TIME_MAX);
+		}
 		reviewAt = System.DateTime.MinValue;
 	}
 
