@@ -96,8 +96,8 @@ public class RocketParts : MonoBehaviour {
 
 // private
 	const string prefsKey = "rocketParts";
-	const int PARTS_TO_BUILD_ROCKET = 15;
-	const int PARTS_PER_UPGRADE = 10;
+	const int PARTS_TO_BUILD_ROCKET = 11;
+	const int PARTS_PER_UPGRADE = 11;
 
 	int numParts_;
 	bool isRocketBuilt_;
