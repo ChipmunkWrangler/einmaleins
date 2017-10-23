@@ -23,9 +23,12 @@ public class FlashQuestions : Questions {
 			Debug.Log ("AskList count " + toAsk.Count);
 			return;
 		}
+		Goal.CurGoal curGoal = goal.curGoal;
+		if (curGoal == Goal.CurGoal.COLLECT_PARTS) {
+			return;
+		}
 //		Debug.Log ("Filling list");
 		var candidates = questions.Where(q => q.isFlashQuestion).OrderBy (q => q.IsMastered()).ThenByDescending(q => q.GetAverageAnswerTime ());
-		Goal.CurGoal curGoal = goal.curGoal;
 		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.ORBIT || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
 		if (curGoal == Goal.CurGoal.GAUNTLET) {
 			toAsk = candidates.Select (q => q.idx).ToList ();
