@@ -216,10 +216,9 @@ public class Question {
 
 	void RecordAnswerTime (float timeRequired)
 	{
-		if (answerTimes.Count >= NUM_ANSWER_TIMES_TO_RECORD) {
-			answerTimes.RemoveRange (0, 1 + answerTimes.Count - NUM_ANSWER_TIMES_TO_RECORD);
 		answerTimes.Add (Mathf.Min(timeRequired,ANSWER_TIME_MAX));
+		if (answerTimes.Count > NUM_ANSWER_TIMES_TO_RECORD) {
+			answerTimes.RemoveRange (0, answerTimes.Count - NUM_ANSWER_TIMES_TO_RECORD);
 		}
-
 	}
 }
