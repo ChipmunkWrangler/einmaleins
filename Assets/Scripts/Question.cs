@@ -18,12 +18,12 @@ public class Question {
 
 	const int MASTERED_DIFFICULTY = 0;
 	const float FAST_TIME = 15.0f;
-	const float OK_TIME = 60.0f;
 	const int ADD_TO_DIFFICULTY_FAST = -3;
 	const int ADD_TO_DIFFICULTY_OK = -1;
 	const int ADD_TO_DIFFICULTY_WRONG = 2;
 	const int MAX_DIFFICULTY = 5;
 	const int NUM_ANSWER_TIMES_TO_RECORD = 3;
+	const int ANSWER_TIME_MAX = 60;
 	readonly int[] reviewInSecondsByDifficulty = {
 		5 * 60 * 60 * 24, // not actually used
 		1 * 60 * 60 * 24,
@@ -218,8 +218,8 @@ public class Question {
 	{
 		if (answerTimes.Count >= NUM_ANSWER_TIMES_TO_RECORD) {
 			answerTimes.RemoveRange (0, 1 + answerTimes.Count - NUM_ANSWER_TIMES_TO_RECORD);
+		answerTimes.Add (Mathf.Min(timeRequired,ANSWER_TIME_MAX));
 		}
-		answerTimes.Add (timeRequired);
 
 	}
 }
