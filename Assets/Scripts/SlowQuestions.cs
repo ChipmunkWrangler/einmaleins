@@ -25,13 +25,15 @@ public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
 			Debug.Log ("AskList count " + toAsk.Count);
 			return;
 		}
-		previousQuestionIdx = -1;
+		Question question = null;
 		if (goal != null && goal.curGoal == Goal.CurGoal.COLLECT_PARTS) {
-			Question question = effortTracker.GetQuestion (questions, previousQuestionIdx);
-			if (question != null) {
-				previousQuestionIdx = question.idx;
-				toAsk.Add (previousQuestionIdx);
-			} 
+			question = effortTracker.GetQuestion (questions, previousQuestionIdx);
 		}
+		if (question == null) {
+			previousQuestionIdx = -1;
+		} else {
+			previousQuestionIdx = question.idx;
+			toAsk.Add (previousQuestionIdx);
+		} 
 	}
 }
