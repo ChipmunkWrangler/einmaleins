@@ -25,6 +25,9 @@ public class RocketBuilder : MonoBehaviour {
 	void Start () {
 		if (RocketParts.instance.isRocketBuilt) {
 			SetY (builtY);
+			if (!RocketParts.instance.hasEnoughPartsToUpgrade) {
+				DoneBuildingOrUpgrading ();
+			}
 		} else {
 			SetY (hiddenY);
 			Build ();
