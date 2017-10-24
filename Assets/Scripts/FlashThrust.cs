@@ -12,7 +12,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] Text orbitsText = null;
 	[SerializeField] Text recordOrbitsText = null;
 	[SerializeField] Text apogeeOrbitsText = null;
-	public const float targetAnswerTime = 6.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight -- remember to include celebration time!
+	public const float targetAnswerTime = 3.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight
 	[SerializeField] float minSpeedFactor = 0.25f;
 	[SerializeField] KickoffLaunch launch = null;
 	[SerializeField] QuestionPicker questionPicker = null;
@@ -27,6 +27,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] Questions questions = null;
 	[SerializeField] float circumferanceFactor = 1000.0f;
 	[SerializeField] Goal goal = null;
+	float targetTimeBetweenAnswers;
 	float minSpeed;
 	float maxSpeed = float.MaxValue;
 	public Renderer orbitingPlanet { get; private set; }
@@ -75,6 +76,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	const string unit = " km";
 
 	void Start() {
+		targetTimeBetweenAnswers = targetAnswerTime + celebrate.duration;
 		heightWidget.SetActive (true);
 		orbitsWidget.SetActive (false);
 		heightText.text = "0";
@@ -146,8 +148,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	IEnumerator AutoAnswerQuestion() {
-		float tgtTime = targetAnswerTime;// - 3.0f;
-		yield return new WaitForSeconds (tgtTime - 3.0f); // 3.0f is the celebration time HACK
+		float tgtTime = targetTimeBetweenAnswers;// - 3.0f;
+		yield return new WaitForSeconds (tgtTime - celebrate.duration);
 		while(numAnswersGiven < questions.GetAskListLength() + 1) { // +1 because the first question has been shown.
 			OnCorrectAnswer(null, false);
 			Debug.Log ("NumAnswersGiven " + numAnswersGiven + " of " + (questions.GetAskListLength()+1));
@@ -320,24 +322,24 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		// Unfortunately, Neptune is less than twice as far as Uranus and Pluto less than twice as far as Neptune. 
 		// Even with realistic god (answers instantly after question is displayed), you still go too far if m is set >= a.
 		accelerationOnCorrect = GetAccelerationNewStyle (targetHeight, numChancesToAccelerate);
-		gravity = accelerationOnCorrect / targetAnswerTime;
+		gravity = accelerationOnCorrect / targetTimeBetweenAnswers;
 		minSpeed = -accelerationOnCorrect * minSpeedFactor;
 		maxSpeed = Mathf.Max(accelerationOnCorrect, numChancesToAccelerate * accelerationOnCorrect - 
-			Mathf.Sqrt (targetAnswerTime * targetAnswerTime * numChancesToAccelerate * numChancesToAccelerate * accelerationOnCorrect * accelerationOnCorrect 
-				- 2 * targetAnswerTime * accelerationOnCorrect * maxHeight) / targetAnswerTime);
+			Mathf.Sqrt (targetTimeBetweenAnswers * targetTimeBetweenAnswers * numChancesToAccelerate * numChancesToAccelerate * accelerationOnCorrect * accelerationOnCorrect 
+				- 2 * targetTimeBetweenAnswers * accelerationOnCorrect * maxHeight) / targetTimeBetweenAnswers);
 //		UnityEngine.Assertions.Assert.IsTrue (maxSpeed >= accelerationOnCorrect);
 	}
 
 	float GetAccelerationNewStyle(float targetHeight, int numChancesToAccelerate)
 	{
-		return 2 * targetHeight / (numChancesToAccelerate * targetAnswerTime);
+		return 2 * targetHeight / (numChancesToAccelerate * targetTimeBetweenAnswers);
 	}
 
 	// Fixed gravity, acceleration calculated to reach maxHeight
 	// Todo: I guess what we want is to calculate gravity and acceleration based on reaching a velocity of e.g. (initialVelocity + accelerationOnCorrect/2), since slowing significantly in the time it takes to answer a question makes things look more exciting
 	float CalcAcceleration(float h, int n) {
 		float g = gravity;
-		float t = targetAnswerTime;
+		float t = targetTimeBetweenAnswers;
 		float k = n * (n-1) * t / 2; // or ((n*n * t)/2 - (n * t)/2);
 		// solve h = (n * x * (g * (t - n * t) + n * x)) / (2 * g) for x  // equation is from TestEquations()
 		// x = -(g (sqrt((2 h n^2)/g + ((n^2 t)/2 - (n t)/2)^2) - (n^2 t)/2 + (n t)/2))/n^2
