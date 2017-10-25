@@ -27,7 +27,6 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] Questions questions = null;
 	[SerializeField] float circumferanceFactor = 1000.0f;
 	[SerializeField] Goal goal = null;
-	float targetTimeBetweenAnswers;
 	float minSpeed;
 	float maxSpeed = float.MaxValue;
 	public Renderer orbitingPlanet { get; private set; }
@@ -76,30 +75,45 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	const string unit = " km";
 
 	void Start() {
-		targetTimeBetweenAnswers = targetAnswerTime + celebrate.duration;
+		InitScoreWidget ();
+		oldRecord.SetActive (false);
+	}
+
+	void InitScoreWidget() {
+		formatProvider = MDCulture.GetCulture();
 		heightWidget.SetActive (true);
 		orbitsWidget.SetActive (false);
 		heightText.text = "0";
 		apogeeText.text = "0";
-		curGoal = goal.calcCurGoal(true);
-		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.ORBIT || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
 		recordHeight = MDPrefs.GetFloat (recordPrefsKey, 0);
 		recordHeightText.text = recordHeight.ToString (heightFormat) + unit;
+	}
+
+	void InitOldRecordLine(bool enable) {
 		var recordPos = oldRecord.transform.position;
 		recordPos.y += recordHeight * paramObj.heightScale * oldRecord.transform.parent.localScale.y;
 		oldRecord.transform.position = recordPos;
+		oldRecord.SetActive (enable);
+	}
+
+	void InitGoalDependent() {
+		curGoal = goal.calcCurGoal(true);
+		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.ORBIT || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
 		checkForRecord = recordHeight > 0 && curGoal != Goal.CurGoal.ORBIT;
 		if (curGoal != Goal.CurGoal.ORBIT) { // new planet counts new orbits
 			MDPrefs.SetFloat (recordOrbitalDistancePrefsKey, 0);
 		}
-		oldRecord.SetActive (checkForRecord);
+		InitOldRecordLine (checkForRecord);
+	}
+
+	void InitParams() {
+		float targetTimeBetweenAnswers = targetAnswerTime + celebrate.duration;
 		UnityEngine.Assertions.Assert.AreEqual(RocketParts.instance.numUpgrades + 1, TargetPlanet.heights.Length);
 		float newTargetHeight = TargetPlanet.GetTargetPlanetHeight();
 		float maxHeight = newTargetHeight * 2.0f;
-		CalcParams(maxHeight, newTargetHeight, questions.GetAskListLength() + 1); // +1 because of the initial launch acceleration
+		CalcParams(maxHeight, newTargetHeight, targetTimeBetweenAnswers, questions.GetAskListLength() + 1); // +1 because of the initial launch acceleration
 //		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.instance.UpgradeLevel], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
-		formatProvider = MDCulture.GetCulture();
 	}
 
 	void Update() {
@@ -148,7 +162,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	IEnumerator AutoAnswerQuestion() {
-		float tgtTime = targetTimeBetweenAnswers;// - 3.0f;
+		float tgtTime = 3.0f;//
 		yield return new WaitForSeconds (tgtTime - celebrate.duration);
 		while(numAnswersGiven < questions.GetAskListLength() + 1) { // +1 because the first question has been shown.
 			OnCorrectAnswer(null, false);
@@ -239,6 +253,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	public void OnCountdown() {
+		InitGoalDependent ();
+		InitParams ();
 		isRunning = true;
 		height = 0;
 		apogee = 0;
@@ -293,8 +309,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	// The rocket reaches speed zero at targetAnswerTime. Calculate acceleration and gravity to guarantee given maxHeight
-	void CalcParams(float maxHeight, float targetHeight, int numChancesToAccelerate) {
-		// we want the player to reach v = 0 at targetAnswerTime (=:t) seconds after getting accelerated (1)
+	void CalcParams(float maxHeight, float targetHeight, float t, int numChancesToAccelerate) {
+		// we want the player to reach v = 0 at t seconds after getting accelerated (1)
 		// Let v = accelerationOnCorrect
 		// Let h = the max height from one acceleration, starting at height = 0 and v = 0
 		// Then h = v * v / 2g (2)
@@ -321,25 +337,24 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		// Basically, we need 2H <= H' <= nH.
 		// Unfortunately, Neptune is less than twice as far as Uranus and Pluto less than twice as far as Neptune. 
 		// Even with realistic god (answers instantly after question is displayed), you still go too far if m is set >= a.
-		accelerationOnCorrect = GetAccelerationNewStyle (targetHeight, numChancesToAccelerate);
-		gravity = accelerationOnCorrect / targetTimeBetweenAnswers;
+		accelerationOnCorrect = GetAccelerationNewStyle (targetHeight, t, numChancesToAccelerate);
+		gravity = accelerationOnCorrect / t;
 		minSpeed = -accelerationOnCorrect * minSpeedFactor;
 		maxSpeed = Mathf.Max(accelerationOnCorrect, numChancesToAccelerate * accelerationOnCorrect - 
-			Mathf.Sqrt (targetTimeBetweenAnswers * targetTimeBetweenAnswers * numChancesToAccelerate * numChancesToAccelerate * accelerationOnCorrect * accelerationOnCorrect 
-				- 2 * targetTimeBetweenAnswers * accelerationOnCorrect * maxHeight) / targetTimeBetweenAnswers);
+			Mathf.Sqrt (t * t * numChancesToAccelerate * numChancesToAccelerate * accelerationOnCorrect * accelerationOnCorrect 
+				- 2 * t * accelerationOnCorrect * maxHeight) / t);
 //		UnityEngine.Assertions.Assert.IsTrue (maxSpeed >= accelerationOnCorrect);
 	}
 
-	float GetAccelerationNewStyle(float targetHeight, int numChancesToAccelerate)
+	float GetAccelerationNewStyle(float targetHeight, float t, int numChancesToAccelerate)
 	{
-		return 2 * targetHeight / (numChancesToAccelerate * targetTimeBetweenAnswers);
+		return 2 * targetHeight / (numChancesToAccelerate * t);
 	}
 
 	// Fixed gravity, acceleration calculated to reach maxHeight
 	// Todo: I guess what we want is to calculate gravity and acceleration based on reaching a velocity of e.g. (initialVelocity + accelerationOnCorrect/2), since slowing significantly in the time it takes to answer a question makes things look more exciting
-	float CalcAcceleration(float h, int n) {
+	float CalcAcceleration(float h, float t, int n) {
 		float g = gravity;
-		float t = targetTimeBetweenAnswers;
 		float k = n * (n-1) * t / 2; // or ((n*n * t)/2 - (n * t)/2);
 		// solve h = (n * x * (g * (t - n * t) + n * x)) / (2 * g) for x  // equation is from TestEquations()
 		// x = -(g (sqrt((2 h n^2)/g + ((n^2 t)/2 - (n t)/2)^2) - (n^2 t)/2 + (n t)/2))/n^2

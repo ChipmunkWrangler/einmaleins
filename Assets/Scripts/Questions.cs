@@ -15,7 +15,6 @@ public abstract class Questions : MonoBehaviour {
 	void Awake() {
 		CreateQuestions ();
 		Load ();
-		FillToAsk ();
 	}
 		
 	public static int GetNumQuestions() {
@@ -40,6 +39,7 @@ public abstract class Questions : MonoBehaviour {
 	}
 		
 	public int GetAskListLength() {
+		FillToAsk ();
 		return toAsk.Count ();
 	}
 
