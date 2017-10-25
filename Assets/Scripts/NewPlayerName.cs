@@ -22,6 +22,7 @@ public class NewPlayerName : MonoBehaviour {
 		if (PlayerPrefs.HasKey (curPlayerPrefsKey)) {
 			BackStack.Clear ();
 			Destroy(RocketParts.instance);
+			TargetPlanet.Reset ();
 		} // else this is initial start
 		ActivatePlayButton (false);
 //		PlayerPrefs.SetInt (playerNamesPrefsKey + ":StringArray:ArrayLen", 2);

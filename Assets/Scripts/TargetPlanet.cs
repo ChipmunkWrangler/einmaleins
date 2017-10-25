@@ -18,6 +18,11 @@ public class TargetPlanet {
 		5.772e+09f
 	};
 
+	public static void Reset() {
+		targetPlanetIdx = -1;
+		lastReachedPlanetIdx = -2;
+	}
+
 	public static int GetLastReachedIdx() {
 		if (lastReachedPlanetIdx < -1) {
 			lastReachedPlanetIdx = MDPrefs.GetInt (lastReachedKey, -1);
