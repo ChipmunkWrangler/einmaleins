@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
-	int previousQuestionIdx = -1;
 	[SerializeField] Goal goal;
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
@@ -27,13 +26,11 @@ public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
 		}
 		Question question = null;
 		if (goal != null && goal.calcCurGoal(false) == Goal.CurGoal.COLLECT_PARTS) {
-			question = effortTracker.GetQuestion (questions, previousQuestionIdx);
+			question = effortTracker.GetQuestion (questions);
 		}
-		if (question == null) {
-			previousQuestionIdx = -1;
-		} else {
-			previousQuestionIdx = question.idx;
-			toAsk.Add (previousQuestionIdx);
+		if (question != null) {
+			effortTracker.SetPreviousQuestionIdx (question.idx); 
+			toAsk.Add (question.idx);
 		} 
 	}
 }

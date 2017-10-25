@@ -29,6 +29,7 @@ public class EffortTracker : MonoBehaviour {
 		set { _frustration = Mathf.Clamp (value, MIN_FRUSTRATION, MAX_FRUSTRATION); }
 	}
 	int effort;
+	int previousQuestionIdx = -1;
 	const string prefsKey = "effortTracking";
 
 	public void HandleFastAnswer() {
@@ -63,7 +64,7 @@ public class EffortTracker : MonoBehaviour {
 		}
 	}
 
-	public Question GetQuestion(Question[] questions, int previousQuestionIdx = -1) {
+	public Question GetQuestion(Question[] questions) {
 		Debug.Log ("frustration = " + frustration + " effort = " + effort + " time = " + CCTime.Now ());
 		Question question = null;
 		int expectedUrgentEffort = questions.Count (q => q.IsUrgent ()) * EFFORT_RIGHT;
@@ -77,6 +78,10 @@ public class EffortTracker : MonoBehaviour {
 			question = candidates.FirstOrDefault ();
 		}
 		return question;
+	}
+
+	public void SetPreviousQuestionIdx(int idx) {
+		previousQuestionIdx = idx;
 	}
 
 	bool IsQuestionAllowed(Question q, bool urgentOnly, int previousQuestionIdx) {
