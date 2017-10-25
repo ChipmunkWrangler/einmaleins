@@ -81,8 +81,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		orbitsWidget.SetActive (false);
 		heightText.text = "0";
 		apogeeText.text = "0";
-		curGoal = goal.curGoal;
-		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.COLLECT_PARTS || curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.ORBIT || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
+		curGoal = goal.calcCurGoal(true);
+		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.ORBIT || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
 		recordHeight = MDPrefs.GetFloat (recordPrefsKey, 0);
 		recordHeightText.text = recordHeight.ToString (heightFormat) + unit;
 		var recordPos = oldRecord.transform.position;

@@ -26,7 +26,7 @@ public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
 			return;
 		}
 		Question question = null;
-		if (goal != null && goal.curGoal == Goal.CurGoal.COLLECT_PARTS) {
+		if (goal != null && goal.calcCurGoal(false) == Goal.CurGoal.COLLECT_PARTS) {
 			question = effortTracker.GetQuestion (questions, previousQuestionIdx);
 		}
 		if (question == null) {

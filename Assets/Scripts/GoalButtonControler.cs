@@ -28,7 +28,7 @@ public class GoalButtonControler : MonoBehaviour, OnQuestionChanged {
 			gotoMainButton.SetActive (false); 
 		}
 		if (noMoreQuestions) {
-			switch (goal.curGoal) {
+			switch (goal.calcCurGoal(false)) {
 			case Goal.CurGoal.COLLECT_PARTS:
 				if (gotoMainButton != null) {
 					gotoMainButton.SetActive (true);
