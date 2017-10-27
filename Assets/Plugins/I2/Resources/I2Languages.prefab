@@ -57,8 +57,168 @@ MonoBehaviour:
   Google_LastUpdatedVersion: 
   GoogleUpdateFrequency: 3
   GoogleUpdateDelay: 5
-  mTerms: []
-  mLanguages: []
+  mTerms:
+  - Term: choosePlayer_whatIsYourName
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - "Wie hei\xDFt Du?"
+    - What's your name?
+    Flags: 0000
+  - Term: Neuer Spielername eingeben...
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Neuer Spielername eingeben...
+    - Type new player's name...
+    Flags: 0000
+  - Term: "H\xF6he:"
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - "H\xF6he:"
+    - 'Height:'
+    Flags: 0000
+  - Term: "Max. H\xF6he:"
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - "Max. H\xF6he:"
+    - 'Max Height:'
+    Flags: 0000
+  - Term: 'Rekord:'
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - 'Rekord:'
+    - 'Record:'
+    Flags: 0000
+  - Term: 'Umrundungen:'
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - 'Umrundungen:'
+    - 'Orbits:'
+    Flags: 0000
+  - Term: 'Max. Umrundungen:'
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - 'Max. Umrundungen:'
+    - 'Max Orbits:'
+    Flags: 0000
+  - Term: 'Raketenteile:'
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - 'Raketenteile:'
+    - 'Rocket Parts:'
+    Flags: 0000
+  - Term: "F\xFCr Heute fertig!"
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - "F\xFCr Heute fertig!"
+    - Done for today!
+    Flags: 0000
+  - Term: Rakete verbessern
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Rakete verbessern
+    - Upgrade rocket
+    Flags: 0000
+  - Term: Du hast gewonnen! Spiel nur weiter, wenn du Lust hast
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - 'Du hast gewonnen!
+
+      Spiel nur weiter, wenn Du lust hast'
+    - 'You win!
+
+      You can keep playing if you want to'
+    Flags: 0000
+  - Term: Raketenteile holen
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Raketenteile holen
+    - Get more parts
+    Flags: 0000
+  - Term: Raketenteile
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Raketenteile
+    - Rocket Parts
+    Flags: 0000
+  - Term: Punkte
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Punkte
+    - Points
+    Flags: 0000
+  - Term: Erreiche Jupiter, um Deine Rakete zu verbessern
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  mLanguages:
+  - Name: German
+    Code: de
+    Flags: 0
+  - Name: English
+    Code: en
+    Flags: 0
   CaseInsensitiveTerms: 0
   Assets: []
   NeverDestroy: 1
