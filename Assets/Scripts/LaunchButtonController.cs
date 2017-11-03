@@ -35,7 +35,8 @@ public class LaunchButtonController : MonoBehaviour {
 	}
 		
 	void ActivateAndSetText(string[] labels) {
-		launchButtonText.text = labels [TargetPlanet.GetTargetPlanetIdx ()];
+		
+		launchButtonText.text = I2.Loc.LocalizationManager.GetTermTranslation (labels [TargetPlanet.GetTargetPlanetIdx ()]);
 		launchButton.SetActive (true);
 	}
 }

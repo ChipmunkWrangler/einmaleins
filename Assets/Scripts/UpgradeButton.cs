@@ -5,10 +5,9 @@ using UnityEngine;
 public class UpgradeButton : MonoBehaviour {
 	[SerializeField] UnityEngine.UI.Button button = null;
 	[SerializeField] UnityEngine.UI.Text label = null;
-	[SerializeField] string[] engineNames = null;
+	[SerializeField] string engineTermPrefix = "engineNames_";
 
 	void Start () {
-		UnityEngine.Assertions.Assert.AreEqual (engineNames.Length, RocketParts.instance.numUpgrades);
 		ShowOrHide (RocketParts.instance.isRocketBuilt);
 	}
 
@@ -21,7 +20,7 @@ public class UpgradeButton : MonoBehaviour {
 	}
 
 	void ShowOrHide(bool enable) {		
-		label.text = engineNames [RocketParts.instance.upgradeLevel];
+		label.text = I2.Loc.LocalizationManager.GetTermTranslation( engineTermPrefix + RocketParts.instance.upgradeLevel );
 		button.gameObject.SetActive (enable);
 		button.enabled = enable;
 	}

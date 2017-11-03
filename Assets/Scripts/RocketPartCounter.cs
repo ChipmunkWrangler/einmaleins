@@ -102,7 +102,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 				}
 			}
 		} else {
-			numText.text = numParts + " von " + RocketParts.instance.numPartsRequired;
+			numText.text = I2.Loc.LocalizationManager.GetTermTranslation ("numRocketParts").Replace("{[numParts]}", numParts.ToString()).Replace("{[numPartsRequired]}", RocketParts.instance.numPartsRequired.ToString());
 		}
 	}
 

@@ -288,9 +288,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		}
 	}
 
-	void ActivateAchievementText (string text)
+	void ActivateAchievementText (string term)
 	{
-		achievementText.text = text;
+		achievementText.text = I2.Loc.LocalizationManager.GetTermTranslation( term );
 		achievementText.CrossFadeAlpha (1.0f, 0, false);
 		achievementText.CrossFadeAlpha (0, achievementTextTransitionTime, false);
 		achievementText.transform.localScale = Vector3.zero;

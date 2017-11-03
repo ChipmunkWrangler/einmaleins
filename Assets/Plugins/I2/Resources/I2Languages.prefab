@@ -212,6 +212,266 @@ MonoBehaviour:
     - 
     - 
     Flags: 0000
+  - Term: Auf zum Mars
+    TermType: 0
+    Description: 
+    Languages:
+    - Auf zum Mars
+    - Mars ho!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Auf zum Jupiter
+    TermType: 0
+    Description: 
+    Languages:
+    - Auf zum Jupiter
+    - On to Jupiter!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Auf zum Saturn
+    TermType: 0
+    Description: 
+    Languages:
+    - Auf zum Saturn
+    - Off to Saturn!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Auf zum Uranus
+    TermType: 0
+    Description: 
+    Languages:
+    - Auf zum Uranus
+    - Uranus ahead!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Auf zum Neptun
+    TermType: 0
+    Description: 
+    Languages:
+    - Auf zum Neptun
+    - On to Neptune!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Auf zum Pluto
+    TermType: 0
+    Description: 
+    Languages:
+    - Auf zum Pluto
+    - Off to Pluto!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Auf ins All
+    TermType: 0
+    Description: 
+    Languages:
+    - Auf ins All
+    - Into Deep Space!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Mars umrunden
+    TermType: 0
+    Description: 
+    Languages:
+    - Mars umrunden
+    - Orbit Mars
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Jupiter umrunden
+    TermType: 0
+    Description: 
+    Languages:
+    - Jupiter umrunden
+    - Orbit Jupiter
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Saturn umrunden
+    TermType: 0
+    Description: 
+    Languages:
+    - Saturn umrunden
+    - Orbit Saturn
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Uranus umrunden
+    TermType: 0
+    Description: 
+    Languages:
+    - Uranus umrunden
+    - Orbit Uranus
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Neptun umrunden
+    TermType: 0
+    Description: 
+    Languages:
+    - Neptun umrunden
+    - Orbit Neptune
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Pluto umrunden
+    TermType: 0
+    Description: 
+    Languages:
+    - Pluto umrunden
+    - Orbit Pluto
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: engineNames_0
+    TermType: 0
+    Description: 
+    Languages:
+    - Lichtbogentriebwerk einbauen
+    - 'Get Arcjet Engine '
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: engineNames_1
+    TermType: 0
+    Description: 
+    Languages:
+    - Ionenantrieb einbauen
+    - Get Ion Drive
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: engineNames_2
+    TermType: 0
+    Description: 
+    Languages:
+    - Fusionsreaktor einbauen
+    - Get Fusion Reactor
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: engineNames_3
+    TermType: 0
+    Description: 
+    Languages:
+    - Antimaterienantrieb einbauen
+    - Get Antimatter Drive
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: engineNames_4
+    TermType: 0
+    Description: 
+    Languages:
+    - Antimaterienantrieb einbauen
+    - Get Antimatter Drive
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Mars erreicht!
+    TermType: 0
+    Description: 
+    Languages:
+    - Mars erreicht!
+    - Reached Mars!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Jupiter erreicht!
+    TermType: 0
+    Description: 
+    Languages:
+    - Jupiter erreicht!
+    - Reached Jupiter!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Saturn erreicht!
+    TermType: 0
+    Description: 
+    Languages:
+    - Saturn erreicht!
+    - Reached Saturn!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Uranus erreicht!
+    TermType: 0
+    Description: 
+    Languages:
+    - Uranus erreicht!
+    - Reached Uranus!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Neptun erreicht!
+    TermType: 0
+    Description: 
+    Languages:
+    - Neptun erreicht!
+    - Reached Neptune!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Pluto erreicht!
+    TermType: 0
+    Description: 
+    Languages:
+    - Pluto erreicht!
+    - Reached Pluto!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Ende erreicht!
+    TermType: 0
+    Description: 
+    Languages:
+    - Ende erreicht!
+    - In Deep Space!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: numRocketParts
+    TermType: 0
+    Description: 
+    Languages:
+    - '{[numParts]} von {[numPartsRequired]}'
+    - '{[numParts]} of {[numPartsRequired]}'
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
   mLanguages:
   - Name: German
     Code: de
