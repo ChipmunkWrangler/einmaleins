@@ -60,10 +60,6 @@ public class Question {
 		return difficulty <= MASTERED_DIFFICULTY;
 	}
 
-	public bool IsFlashMastered () {
-		return GetAverageAnswerTime () <= FlashThrust.targetAnswerTime;
-	}
-
 	public bool IsUrgent() {
 		return isMandatoryReview;
 	}

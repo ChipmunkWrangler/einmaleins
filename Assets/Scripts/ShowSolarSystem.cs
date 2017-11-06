@@ -22,7 +22,6 @@ public class ShowSolarSystem : MonoBehaviour {
 	[SerializeField] float postDelay = 2.0f;
 	[SerializeField] float[] planetZooms = null;
 	[SerializeField] float[] planetYs = null;
-	[SerializeField] FlashThrust thrust = null;
 	Vector3 originalScale;
 	Transform particleSystemTransform;
 
@@ -57,17 +56,15 @@ public class ShowSolarSystem : MonoBehaviour {
 				particleSystemTransform = sys.transform;
 			}
 		}
-		if (thrust.orbitingPlanet == null) {
-			float viewportTop = Camera.main.WorldToViewportPoint (rocket.bounds.max).y + verticalPadding;
-			if (viewportTop > 1.0f) {
-				transform.localScale /= viewportTop;
-				particleSystemTransform.localScale /= viewportTop;
-				recordLine.transform.localScale *= viewportTop;
-				float maintainMinScaleFactor = minParticleScale / particleSystemTransform.localScale.y;
-				if (maintainMinScaleFactor > 1.0f) {
-					particleSystemTransform.localScale *= maintainMinScaleFactor;
-					rocket.transform.localScale *= maintainMinScaleFactor;
-				}
+		float viewportTop = Camera.main.WorldToViewportPoint (rocket.bounds.max).y + verticalPadding;
+		if (viewportTop > 1.0f) {
+			transform.localScale /= viewportTop;
+			particleSystemTransform.localScale /= viewportTop;
+			recordLine.transform.localScale *= viewportTop;
+			float maintainMinScaleFactor = minParticleScale / particleSystemTransform.localScale.y;
+			if (maintainMinScaleFactor > 1.0f) {
+				particleSystemTransform.localScale *= maintainMinScaleFactor;
+				rocket.transform.localScale *= maintainMinScaleFactor;
 			}
 		}
 	}

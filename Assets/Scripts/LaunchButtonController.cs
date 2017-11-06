@@ -13,30 +13,13 @@ public class LaunchButtonController : MonoBehaviour {
 		"Auf zum Pluto",
 		"Auf ins All"
 	};
-	readonly string[] orbitLaunchButtonLabels = {
-		"Mars umrunden",
-		"Jupiter umrunden",
-		"Saturn umrunden",
-		"Uranus umrunden",
-		"Neptun umrunden",
-		"Pluto umrunden"
-	};
 
 	public void Deactivate() {
 		launchButton.SetActive(false);
 	}
 
 	public void ActivateLaunch() {
-		ActivateAndSetText (launchButtonLabels);
-	}
-
-	public void ActivateOrbit() {
-		ActivateAndSetText (orbitLaunchButtonLabels);
-	}
-		
-	void ActivateAndSetText(string[] labels) {
-		
-		launchButtonText.text = I2.Loc.LocalizationManager.GetTermTranslation (labels [TargetPlanet.GetTargetPlanetIdx ()]);
+		launchButtonText.text = I2.Loc.LocalizationManager.GetTermTranslation (launchButtonLabels [TargetPlanet.GetTargetPlanetIdx ()]);
 		launchButton.SetActive (true);
 	}
 }

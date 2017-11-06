@@ -554,8 +554,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 129064944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 255, y: 383.5, z: 0}
-  m_LocalScale: {x: 0.6375, y: 0.6375, z: 0.6375}
+  m_LocalPosition: {x: 212, y: 383.5, z: 0}
+  m_LocalScale: {x: 0.53, y: 0.53, z: 0.53}
   m_Children:
   - {fileID: 1698820438}
   m_Father: {fileID: 0}
@@ -2440,58 +2440,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &848318479
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 848318482}
-  - component: {fileID: 848318481}
-  - component: {fileID: 848318480}
-  m_Layer: 0
-  m_Name: xARMProxy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &848318480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 848318479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b007041b7e1f6422aa03eda4dc1ba2d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &848318481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 848318479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d66198e525d924c4885cbba537eb3222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &848318482
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 848318479}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &914864910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2892,7 +2840,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1149214578}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -375, y: -64, z: 0}
+  m_LocalPosition: {x: -375.00003, y: -64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1884509622}
@@ -3019,7 +2967,7 @@ Prefab:
     - target: {fileID: 114448925386902148, guid: fab51348f5802451bbc8d2dc1f085efe,
         type: 2}
       propertyPath: subscribers.Array.size
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 4948373694449184, guid: fab51348f5802451bbc8d2dc1f085efe, type: 2}
       propertyPath: m_LocalPosition.x
@@ -3167,7 +3115,7 @@ Prefab:
         type: 2}
       propertyPath: subscribers.Array.data[20]
       value: 
-      objectReference: {fileID: 1226808614}
+      objectReference: {fileID: 930894553}
     - target: {fileID: 114657463298905038, guid: fab51348f5802451bbc8d2dc1f085efe,
         type: 2}
       propertyPath: masteryParticleParent
@@ -3687,8 +3635,8 @@ MonoBehaviour:
   upgradeButtonLabel: {fileID: 1869725846}
   doneText: {fileID: 1884880960}
   youWinText: {fileID: 1749487197}
-  buildRocketText: Rakete bauen
-  upgradeRocketText: Rakete verbessern
+  buildRocketTerm: Rakete bauen
+  upgradeRocketTerm: Rakete verbessern
   goal: {fileID: 720589289}
 --- !u!114 &1411416770
 MonoBehaviour:
@@ -4650,7 +4598,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1639318428}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -375, y: -64, z: 0}
+  m_LocalPosition: {x: -375.00003, y: -64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1445928270}
@@ -4866,7 +4814,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1666222578}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -586.5686, z: 0}
+  m_LocalPosition: {x: 0, y: -708.5849, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1698820438}
@@ -5576,7 +5524,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1778109102}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 375, y: -64, z: 0}
+  m_LocalPosition: {x: 375.00003, y: -64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 436275322}
@@ -6056,7 +6004,6 @@ GameObject:
   - component: {fileID: 1869725845}
   - component: {fileID: 1869725847}
   - component: {fileID: 1869725846}
-  - component: {fileID: 1869725848}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -6124,39 +6071,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1869725844}
---- !u!114 &1869725848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1869725844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mTerm: Rakete verbessern
-  mTermSecondary: 
-  PrimaryTermModifier: 0
-  SecondaryTermModifier: 0
-  TermPrefix: 
-  TermSuffix: 
-  LocalizeOnAwake: 1
-  Source: {fileID: 0}
-  mTarget: {fileID: 1869725846}
-  IgnoreRTL: 0
-  MaxCharactersInRTL: 0
-  IgnoreNumbersInRTL: 1
-  CorrectAlignmentForRTL: 1
-  AddSpacesToJoinedLanguages: 0
-  TranslatedObjects: []
-  LocalizeCallBack:
-    Target: {fileID: 0}
-    MethodName: 
-  AlwaysForceLocalize: 0
-  mGUI_ShowReferences: 0
-  mGUI_ShowTems: 1
-  mGUI_ShowCallback: 0
 --- !u!224 &1873232300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6165,7 +6079,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 186780898}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 586.56866, z: 0}
+  m_LocalPosition: {x: 0, y: 708.58496, z: 0}
   m_LocalScale: {x: 1.0416667, y: 1.0416667, z: 1.0416667}
   m_Children:
   - {fileID: 1639318429}
@@ -6632,7 +6546,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 148210667}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -586.56866, z: 0}
+  m_LocalPosition: {x: 0, y: -708.58496, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 66259327}
@@ -6775,7 +6689,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 386707065}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 466.56866, z: 0}
+  m_LocalPosition: {x: -0.000030517578, y: 588.58496, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1985274889}

@@ -108,26 +108,6 @@ MonoBehaviour:
     - 'Rekord:'
     - 'Record:'
     Flags: 0000
-  - Term: 'Umrundungen:'
-    TermType: 0
-    Description: 
-    Languages:
-    - 
-    - 
-    Languages_Touch:
-    - 'Umrundungen:'
-    - 'Orbits:'
-    Flags: 0000
-  - Term: 'Max. Umrundungen:'
-    TermType: 0
-    Description: 
-    Languages:
-    - 
-    - 
-    Languages_Touch:
-    - 'Max. Umrundungen:'
-    - 'Max Orbits:'
-    Flags: 0000
   - Term: 'Raketenteile:'
     TermType: 0
     Description: 
@@ -282,66 +262,6 @@ MonoBehaviour:
     - 
     - 
     Flags: 0000
-  - Term: Mars umrunden
-    TermType: 0
-    Description: 
-    Languages:
-    - Mars umrunden
-    - Orbit Mars
-    Languages_Touch:
-    - 
-    - 
-    Flags: 0000
-  - Term: Jupiter umrunden
-    TermType: 0
-    Description: 
-    Languages:
-    - Jupiter umrunden
-    - Orbit Jupiter
-    Languages_Touch:
-    - 
-    - 
-    Flags: 0000
-  - Term: Saturn umrunden
-    TermType: 0
-    Description: 
-    Languages:
-    - Saturn umrunden
-    - Orbit Saturn
-    Languages_Touch:
-    - 
-    - 
-    Flags: 0000
-  - Term: Uranus umrunden
-    TermType: 0
-    Description: 
-    Languages:
-    - Uranus umrunden
-    - Orbit Uranus
-    Languages_Touch:
-    - 
-    - 
-    Flags: 0000
-  - Term: Neptun umrunden
-    TermType: 0
-    Description: 
-    Languages:
-    - Neptun umrunden
-    - Orbit Neptune
-    Languages_Touch:
-    - 
-    - 
-    Flags: 0000
-  - Term: Pluto umrunden
-    TermType: 0
-    Description: 
-    Languages:
-    - Pluto umrunden
-    - Orbit Pluto
-    Languages_Touch:
-    - 
-    - 
-    Flags: 0000
   - Term: engineNames_0
     TermType: 0
     Description: 
@@ -468,6 +388,16 @@ MonoBehaviour:
     Languages:
     - '{[numParts]} von {[numPartsRequired]}'
     - '{[numParts]} of {[numPartsRequired]}'
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
+  - Term: Rakete bauen
+    TermType: 0
+    Description: 
+    Languages:
+    - Rakete bauen
+    - Build Rocket
     Languages_Touch:
     - 
     - 

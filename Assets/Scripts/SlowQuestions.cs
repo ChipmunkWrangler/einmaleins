@@ -1,20 +1,8 @@
 ﻿using UnityEngine;
 
-public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
+public class SlowQuestions : Questions {
 	[SerializeField] Goal goal;
 
-	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
-		if (question.LastAnswerWasFast ()) {
-			effortTracker.HandleFastAnswer ();
-		} else {
-			effortTracker.HandleSlowAnswer ();
-		}
-	}
-
-	public void OnWrongAnswer(bool wasNew) {
-		effortTracker.HandleWrongAnswer (wasNew);
-	}
-		
 	public override void Reset() {}
 
 	public override void Abort() {}
@@ -25,7 +13,7 @@ public class SlowQuestions : Questions, OnWrongAnswer, OnCorrectAnswer {
 			return;
 		}
 		Question question = null;
-		if (goal != null && goal.calcCurGoal(false) == Goal.CurGoal.COLLECT_PARTS) {
+		if (goal != null && goal.calcCurGoal() == Goal.CurGoal.COLLECT_PARTS) {
 			question = effortTracker.GetQuestion (questions);
 		}
 		if (question != null) {

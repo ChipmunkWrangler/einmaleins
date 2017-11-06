@@ -9,8 +9,8 @@ public class GoalButtonControler : MonoBehaviour, OnQuestionChanged {
 	[SerializeField] Text upgradeButtonLabel = null;
 	[SerializeField] GameObject doneText = null;
 	[SerializeField] GameObject youWinText = null;
-	[SerializeField] string buildRocketText = "";
-	[SerializeField] string upgradeRocketText = "";
+	[SerializeField] string buildRocketTerm = "Rakete bauen";
+	[SerializeField] string upgradeRocketTerm = "Rakete verbessern";
 	[SerializeField] Goal goal = null;
 
 	public void OnQuestionChanged(Question question) {
@@ -28,17 +28,17 @@ public class GoalButtonControler : MonoBehaviour, OnQuestionChanged {
 			gotoMainButton.SetActive (false); 
 		}
 		if (noMoreQuestions) {
-			switch (goal.calcCurGoal(false)) {
+			switch (goal.calcCurGoal()) {
 			case Goal.CurGoal.COLLECT_PARTS:
 				if (gotoMainButton != null) {
 					gotoMainButton.SetActive (true);
 				}
 				break;
 			case Goal.CurGoal.BUILD_ROCKET:
-				ActivateBuildAndUpgradeButton (buildRocketText);
+				ActivateBuildAndUpgradeButton (buildRocketTerm);
 				break;
 			case Goal.CurGoal.UPGRADE_ROCKET:
-				ActivateBuildAndUpgradeButton (upgradeRocketText);
+				ActivateBuildAndUpgradeButton (upgradeRocketTerm);
 				break;
 			case Goal.CurGoal.FLY_TO_PLANET:
 			case Goal.CurGoal.GAUNTLET:
@@ -46,9 +46,6 @@ public class GoalButtonControler : MonoBehaviour, OnQuestionChanged {
 				break;
 			case Goal.CurGoal.DONE_FOR_TODAY:
 				doneText.SetActive(true);
-				break;
-			case Goal.CurGoal.ORBIT:
-				launchButton.ActivateOrbit ();
 				break;
 			case Goal.CurGoal.WON:
 				launchButton.ActivateLaunch ();
@@ -59,8 +56,8 @@ public class GoalButtonControler : MonoBehaviour, OnQuestionChanged {
 	}
 
 
-	void ActivateBuildAndUpgradeButton(string text) {
-		upgradeButtonLabel.text = text;
+	void ActivateBuildAndUpgradeButton(string term) {
+		upgradeButtonLabel.text = I2.Loc.LocalizationManager.GetTermTranslation( term );
 		upgradeButton.SetActive (true);
 	}
 }

@@ -12,7 +12,7 @@ using System.Linq;
   * otherwise pick the hardest nonmastered card that wasn't just asked
   * See Question class for question difficulties.
 */
-public class EffortTracker : MonoBehaviour {
+public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	const int EFFORT_NEWWRONG = 7; // N.B. Since the question is repeated until it is correct, the actual effort will be greater. Also, it will be repeated soon.
 	const int EFFORT_WRONG = 1; // N.B. Since the question is repeated until it is correct, the actual effort will be greater.
 	const int EFFORT_RIGHT = 3;
@@ -32,17 +32,30 @@ public class EffortTracker : MonoBehaviour {
 	int previousQuestionIdx = -1;
 	const string prefsKey = "effortTracking";
 
-	public void HandleFastAnswer() {
+	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
+		if (question.LastAnswerWasFast ()) {
+			HandleFastAnswer ();
+		} else {
+			HandleSlowAnswer ();
+		}
+	}
+
+	public void OnWrongAnswer(bool wasNew) {
+		HandleWrongAnswer (wasNew);
+	}
+
+
+	void HandleFastAnswer() {
 		effort += EFFORT_FAST;
 		frustration += FRUSTRATION_FAST;
 	}
 
-	public void HandleSlowAnswer() {
+	void HandleSlowAnswer() {
 		effort += EFFORT_RIGHT;
 		frustration += FRUSTRATION_RIGHT;
 	}
 
-	public void HandleWrongAnswer(bool wasNew) {
+	void HandleWrongAnswer(bool wasNew) {
 		frustration += FRUSTRATION_WRONG;
 		effort += wasNew ? EFFORT_NEWWRONG : EFFORT_WRONG;
 	}
@@ -62,6 +75,10 @@ public class EffortTracker : MonoBehaviour {
 			frustration = MDPrefs.GetInt (prefsKey + ":frustration", 0);
 			effort = MDPrefs.GetInt (prefsKey + ":effort", 0);
 		}
+	}
+
+	public bool HasMaxedEffort() { 
+		return effort >= EFFORT_PER_DAY;
 	}
 
 	public Question GetQuestion(Question[] questions) {
