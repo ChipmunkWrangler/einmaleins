@@ -79,29 +79,27 @@ Check private schools as market.
 ++Approach
  * There is only flash mode, so I will refer to mastered instead of flash-mastered 
  * Each day, you get k launches
- * Each launch ends after N questions or t = N * 6s (3s question answering time plus 3s celebration time), whichever comes first.
-  * Do you display this to the player? That would be high-pressure and unnatural, but not showing it might make it feel arbitrary or unfair 
+ * Each launch ends after t = N * 6s (3s answer time plus 3s celebration time), or when you reach a new planet, whichever comes first.
+  * Do you display this to the player? Perhaps as fuel? Or oxygen? That would be high-pressure, but not showing it might feel arbitrary
   * *Answering one question quickly gives you more time for the next! Do you want this?* 
    * If you don't, reduce time limit after fast answer. 
-   * Then you also don't need the question limit (which is there to limit max attainable height to be the next planet)
+   * But then there is no way to break your planet-reaching record without an upgrade!
  * Each correct answer increases rocket height by a fixed amount H = planetHeight / N
   * So if you answer all questions in the allotted time, you reach the planet 
   * Could also establish a MIN_PLAUSIBLE_ANSWER_TIME and make that the time limit. 
    * Then people have to be very good to reach the planet without an upgrade, and 
    * They are unlikely to get much past the planet
+ * Wrong answers tend to take longer, and also only move you up a fraction as high 
  * Mastering a question gives you a rocket part => upgrade after P => planetHeight for H is increased to next planet
   * Interrupt launch for upgrade *???* 
  * initial answer time is 3.0 + epsilon seconds 
   * Thus, if you answer the question on time first try, it is mastered
- * A question answered wrong has its answer time set to MAX_ANSWER_TIME = 60s 
  * Start with frustration = 0. +2 for wrong answer, -1 for right answer, -2 for fast answer, capped at [-2, 3] 
  * Question ordering:
   * First ask all questions that you got wrong during the last launch.
   * Are there non-new, non-mastered questions available?
    * If so:
-    * if frustration <= 0, take the hardest. In practice, this should mean:
-     * questions you answered wrong recently
-     * Then questions you answered slowly
+    * if frustration <= 0, take the hardest
     * if frustration > 0, take the easiest
    * If not, are there new questions available?
     * If so:
@@ -120,6 +118,7 @@ Check private schools as market.
   * This makes it possible to keep breaking records, but doesn't guarantee it
  * Effects:
   * Flash mastery causes a "Mastered!" to appear
+  * After wrong answer, exhaust sputters
   * show simple particles when a question is answered in target time and mastery particles on mastery
   * The rocket engine run from answer through the next question's target time, so if you are on track, they keep firing
 +++Variant: Spaced repetition
