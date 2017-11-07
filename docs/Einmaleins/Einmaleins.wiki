@@ -44,7 +44,7 @@ tabhistory_maxentries = 25
 template_pagenamesre = ^template/
 further_wiki_words = 
 wiki_name = Einmaleins
-last_wiki_word = DesignDoc
+last_wiki_word = TestReports
 tree_last_root_wiki_word = Einmaleins
 
 [wiki_db]

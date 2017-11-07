@@ -77,24 +77,39 @@ Check private schools as market.
  * all questions mastered before reaching pluto
  * don't repeat questions right away
 ++Approach
-
- * Each correct answer increases rocket height by a fixed amount.
  * There is only flash mode, so I will refer to mastered instead of flash-mastered 
- * Each day, you get N launches that each end after M = 33 - 3 * numMasteredForThisPlanet questions or M * 6s (3s question answering time plus 3s celebration time). 
+ * Each day, you get k launches
+ * Each launch ends after N questions or t = N * 6s (3s question answering time plus 3s celebration time), whichever comes first.
   * Do you display this to the player? That would be high-pressure and unnatural, but not showing it might make it feel arbitrary or unfair 
- * initial answer time is 3.1s 
+  * *Answering one question quickly gives you more time for the next! Do you want this?* 
+   * If you don't, reduce time limit after fast answer. 
+   * Then you also don't need the question limit (which is there to limit max attainable height to be the next planet)
+ * Each correct answer increases rocket height by a fixed amount H = planetHeight / N
+  * So if you answer all questions in the allotted time, you reach the planet 
+  * Could also establish a MIN_PLAUSIBLE_ANSWER_TIME and make that the time limit. 
+   * Then people have to be very good to reach the planet without an upgrade, and 
+   * They are unlikely to get much past the planet
+ * Mastering a question gives you a rocket part => upgrade after P => planetHeight for H is increased to next planet
+  * Interrupt launch for upgrade *???* 
+ * initial answer time is 3.0 + epsilon seconds 
+  * Thus, if you answer the question on time first try, it is mastered
+ * A question answered wrong has its answer time set to MAX_ANSWER_TIME = 60s 
  * Start with frustration = 0. +2 for wrong answer, -1 for right answer, -2 for fast answer, capped at [-2, 3] 
- * Questions are ordered thus:
-  * The ones you got wrong last launch.
-  * If frustration <= 0, take the hardest nonmastered question available. 
-   * Since initial answer time is only slightly above target time, this implies:
-    * the hardest non-new question available
-    * a random new question if there are no non-new questions available, or
-   * If > 0, take the easiest non-mastered.
-   * Since initial answer time is only slightly above target time, this implies:
-    * the first new question in question order (1x1, 1x2...)
- * Correct answer advances by 1/33 of planet distance (so answering all questions on time reaches the planet)
-  * Answering one question quickly gives you more time for the next! Do you want this? 
+ * Question ordering:
+  * First ask all questions that you got wrong during the last launch.
+  * Are there non-new, non-mastered questions available?
+   * If so:
+    * if frustration <= 0, take the hardest. In practice, this should mean:
+     * questions you answered wrong recently
+     * Then questions you answered slowly
+    * if frustration > 0, take the easiest
+   * If not, are there new questions available?
+    * If so:
+     * if frustration <= 0, take one at random
+     * if frustration > 0, take the first (1x1, 1x2...)
+   * If not, take a mastered question -- easiest or hardest depending on frustration
+   
+   
  * After you reach Neptune (which implies that you have 55 questions either mastered or answered fast in this set), do the gauntlet
   * No mastery boost -- mastered questions are treated as normal questions
   * You have 55 * 3 = 165 seconds to answer all questions to reach Pluto.
@@ -107,15 +122,52 @@ Check private schools as market.
   * Flash mastery causes a "Mastered!" to appear
   * show simple particles when a question is answered in target time and mastery particles on mastery
   * The rocket engine run from answer through the next question's target time, so if you are on track, they keep firing
-++++Spaced repetition
++++Variant: Spaced repetition
  * Repeat wrong questions in 5s, right questions in Pimsleur progression
  * No frustration, difficulty, or mastery: Show the question that has been due longest, then new questions in order
  * This doesn't guarantee that all questions will have been seen by Neptune
  * See if this is helpful after writing a test for the answer-time-based version
-++++Variant: instead of boost, give rocket parts
-You either need a perfect run of 33 to reach the planet, or enough rocket parts to upgrade, which means you only need about 16 to reach the planet. Of course, this might mean you have seen all the questions before reaching mars, but that's not necessarily a problem. It is harder to get height records, but upgrades are satisfying and provde an interlocking reward.
++++Variant: Boost
+ * Upgrade comes when you reach a planet
+ * mastered questions from for this planet boost 3x as much as a correct answer and reduce N
+  * 3x because that guarantees you need to answer at least 3 post-boost questions to reach the planet (if 3 divides N)
+ * Should give smoother progress than upgrade-based 
 ++Does Approach Match Goals
+ * Say P = 11, N = 21, t = 21 * 6 = 126, each planet twice as far as the last, Mars height = 1
+ * The results seem to depend on P & N in a way I don't like
+ * Is there a natural P and / or N?
+ * Perfect kid (always answers correctly in 1.5s, 4.5 with celebration):
+  * Masters 11 questions (11/55), gets upgrade, reaches height 11 / 21
+  * Masters 11 questions (22/55), reaches Mars, gets upgrade to 4x (Saturn).
+  * Masters 11 questions (33/55), reaches Jupiter, gets upgrade to 8x (Uranus)
+  * Masters 11 questions (44/55), reaches Saturn, gets upgrade to 16x (Neptune)
+  * Masters 11 questions (55/55), reaches Uranus, gets upgrade to 32x (Pluto)
+  * Reviews 11 questions, reaches Neptune.
++++Variant: Allow collecting more parts than you need (don't interrupt to upgrade, do interrupt when planet is reached)
+ * Perfect kid (always answers correctly in 1.5s, 4.5 with celebration):
+  * Masters 21 questions (21/55), reaches Mars, gets upgrade to 2x (Jupiter).
+  * Masters 11 questions (32/55), reaches Jupiter, gets upgrade to 4x (Saturn).
+  * Masters 11 questions (43/55), reaches Saturn, gets upgrade to 8x (Uranus)
+  * Masters 11 questions (54/55), reaches Uranus, upgrade to 16x
+  * Masters 1 question, reviews 10, reaches Neptune.
 
++++Compare to Boost Version
+ * Perfect kid:
+  * Masters 21 questions (21/55), reaches Mars, gets upgrade to 2x (Jupiter).
+  * Masters 21 questions (42/55), reaches Jupiter, gets upgrade to 4 (Saturn).
+  * Masters 13 questions (55/55), reviews 8, reaches Saturn, gets upgrade to 8x (Uranus)
+  * Reviews 21 questions, reaches Uranus, upgrade to 16x
+  * Reviews 21 questions, reaches Neptune.
+++++Boost variant
+ * mastered questions exceeding the minimum for this planet boost 3x as much as a correct answer and reduce N
+ * Need N = 33
+ * Perfect kid:
+  * Masters 33 questions (33/55), reaches Mars, gets upgrade to 2x (Jupiter).
+  * Boost straight to Jupiter (33 - 11 = 22 >= 11), gets upgrade to 4x (Saturn).
+  * Boost straight to Saturn (33 - 22 = 11), gets upgrade to 8x (Uranus)
+  * Masters 22 questions (55/55), reviews 11, reaches Uranus, upgrade to 16x
+  * Boost straight to Neptune (22 - 11 = 11).
+ 
 +Ideas
  * Even mastered skills need occasional review
  * If a card would be shown twice in a row, and there are still cards left or new cards available, move it one back in the list.
