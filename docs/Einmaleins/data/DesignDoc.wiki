@@ -5,106 +5,80 @@ Drill the times tables.
 Check private schools as market.
 
 +Todo
- * Change font
- * Write test code for various user models. We want:
-  * Fairly steady progress
-  * drill difficult questions
-  * don't repeat easy questions
-  * all questions mastered before reaching pluto
-  * don't repeat questions right away
-  * is it ok to ask 1x10 three times in a row? Probably, ask long as there is also progress.
-  * assume mastery for questions that are answered very fast right away
- * Make horizontal version with linear button array 
- * Check Amalia test list
+++v0.2.0
+ * Change font to Classic Robot Regular
+ * Write test code for various user models. See Does Approach Match Goals
  * Release to Talea & me
  * Ask Amalia and Matthias daughter to retest
  * Release to English kids   
- * Questions for testers:
-  * Ask testers if they would prefer other graphics, show them a screenshot
-  * Hat es Dein Kind demotiviert, wenn die Rakete wieder herunterfiel?
-++Orbiting is boring, falling is sad 
- * Each correct answer increases rocket height by a fixed amount.
-+++Only Flash Questions, Mastery Boost
- * There is only flash mode, so I will refer to mastered instead of flash-mastered
- * You are always asked N questions
- * The list of N consists of the following, in priority order:
-  * Questions that you got wrong last time they were asked, sorted by descending average answer time
-  * Non-new, non-mastered questions, sorted by descending average answer time
-  * New questions, sorted by question order
-  * Mastered questions, sorted by descending average answer time (will only happen if there are fewer than N non-mastered left)
- * Track effort and frustration. 
-  * If frustration is high, ask the easiest non-new question in the list (wrong, mastered, or neither), or the first new question 
-  * If frustration is low, the next question will be the hardest non-new question on the list
-  * If effort breaks MAX_EFFORT_PER_DAY, stop after this set of N.
- * Thrust is neptuneDistance / 55 * min(1, timeAllotted / (min(60,timeRequired)). Wrong answers timeRequired counts as 60.
- * Mastered questions give an initial boost of 1/55 each, maxing out at (55-N)/55
-  * use itween or similar so that the time taken is constant
- * Effects:
-  * Flash mastery causes a "Mastered!" to appear
-  * the mastered questions fly out of the exhaust
-  * show simple particles when a question is answered in target time and mastery particles on mastery
-  * The rocket engine run from answer through the next question's target time? So if you are on track, they keep firing
- * After you reach Neptune (which implies that you have 55 questions either mastered or answered fast in this set), do the gauntlet
-  * Must answer all 55 questions fast to reach Pluto.
-  * No mastery boost
-  * Thrust is plutoDistance / 55 for answers in timeAllotted, otherwise 0
-   * gauntlet aborts as soon as a question is failed (wrong or requires more than target time)
-  * questions are always asked in order of decreasing difficulty
- * After you reach Pluto, keep the gauntlet, but allow answers faster than targetTime:   
-  * Thrust is plutoDistance / 55 * timeAllotted / (min(60,timeRequired)
-  * This makes it possible to keep breaking records, but doesn't guarantee it
- * This is a smooth way to ensure always having enough questions and asking the trickiest while gradually introducing new ones.
- * However, it has no natural milestones. Can you incorporate planets and upgrades?
-++++Variants
- * instead of each question advancing you by 1/55, how about 1/160? Mastery boost gives you 3/160.  But then to give a chance of reaching the planet immediately, must ask 33 questions, which could be brutal. You could track effort within the quiz, but then ...
- * also, add new questions based on number of flash-mastered. E.g. allow twenty new questions, ask ten questions at a time, add a new one every time an old one is flash mastered.
+++v0.2.1
+ * Make horizontal version with linear button array 
+ * Improve buttons
+  * Make center button more obvious -- pulse the first time or something
+   * Replace it with more normal enter button? 
+  * Make buttons more 3d or otherwise more obviously buttons, or glow or something
+  * Buttons states more visible, especially respond more visibly to taps
 
-++++Autoupgrade at planet, lose old boost, start with boost to old planet
- * Thrust is marsDistance / 11 * min(...)
- * Receive upgrade when you reach Mars, then thrust is (jupiterDistance-marsDistance) / 11, etc.
- * Initial boost is (oldPlanetDistance), or you just start at the last planet reached.
- * Only questions mastered since the last planet give you a boost
- * Gauntlet as above? Of course, this is an engine downgrade.
-  * Maybe you are at Pluto and this lets you fly back to earth?  
- * This works. However, the upgrade still won't feel as powerful as it does now.
- * Also, we have only one improvement cycle: mastery = boost = rocket parts = cards on stat screen. Interlocking cycles would be better.
-  * However, your current version also doesn't have such cycles, although it does have two currencies. 
-++++Repetition and Stagnation
- * You get 1x1 through 1x10 and answer them all fast. This almost gets you to Mars.
- * You answer 1x1 through 1x10 again and end up at exactly the same place.
- * You answer 1x1 through 1x10 again and end up at exactly the same place. Now they are all mastered.
- * You get a 10/11 boost, answer 2x2 fast, and reach Mars.
- * You start at Mars, answer 2x2 through 2x10, 3x3, 3x4 and almost get to Jupiter.
- * Same questions again, same result.
- * 1/11 boost from 2x2, 2x3 through 2x10, 3x3 through 3x5, get to Jupiter.
- * Start at Jupiter, 3x5 through 3x10, 4x4 through 4x7.
- * This is actually two problems:
-  * Questions are repeated. This could be prevented by
-   * allowing mastery after the first try, or
-   * initializing unanswered questions with a question time of 4 or 15s and not distinguishing new from old in the sorting. 
-    * Then new questions would appear in preference to old questions that were answered quickly, but after old questions answered slowly
-     * And "easy" questions could be mixed in in a natural way if you choose from the whole nonmastered list, not the top ten
-     * For 15s, we would have:
-      * You get 1x1 through 1x10 and answer them all fast. This almost gets you to Mars.
-      * You get 2x2 through 3x4 and answer all the 2x fast, but 3x4 in 20s. Now the difficulty list goes:
-       * 3x4 (avg > 15s), 3x5 on (avg = 15s), 3x3, 3x2... 1x1 (avg. < 15s)
-      * You get 3x4, are slow on 3x5, get 3x6 wrong, are frustrated, get 1x1
-      * This sounds ok, but doesn't yet solve the second problem (see below)
-  * There is no progress, because at first you get ten easy ones but max out at 10/11, then ten slightly harder ones... you *can't* do better until you have answered a question three times to master it
-   * Allow mastery after the first try. or
-   * Make N = 11. Then you reach the planet immediately and can try for the next planet
-    * You probably don't want people using the same questions to reach multiple planets, so effectively this implies mastery after the first try.      
-  * You can combine both by defining mastery as "avg < 3s" and making new questions start with an avg of 3 or 4s.
-   * Answering swiftly the first time will count is as mastered, giving you the boost and causing progress.
-   * Answering slower will cause it to be reviewed next time
-++++N = 11, autoupgrade at planet, initial avg = 3.1s, no mastery
-   * This gives:
-    * Answer 1x1 through 2x2 fast. Effort is 10, frustration -2
-    * Reach Mars
-    * Answer 2x3 slow (e 13 f -2), 2x4 new wrong (e 23 f 0), 2x5 slow (e 26 f-1), 2x6 new wrong (e31 f1), 1x1 fast (e32 f-1), 2x7 wrong (e42, f1), 1x2 fast (e43, f-1), 2x8 slow (e46 f-2), 2x9 slow (e49 f-2), 2x10 fast (e50 f-3). Total distance swswfwfssf
-     * Ideally you would want to show easy questions when e > EFFORT_PER_DAY as well, but that would lead to reaching Jupiter with many of the old Mars questions; perhaps easy questions also give less thrust and reduce the following question's thrust as well?
- 
-+++Time based
+++v1.0.0 
+ * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
+ * Android back button
+ * Store page https://developer.apple.com/app-store/categories/
+ * Test that it works with 512 Mb devices (https://hwstats.unity3d.com/mobile/os.html)
+ * Change iOS build to Fast but no Exceptions option.
+ * Remove or disable Debug.Log
+ * Turn off logging
+ * Optimize: don't save all questions every time a question changes -- just the relevant question
+ * update OSX and XCode to be iPhoneX compatible
+  * show status bar? 
+  * Ensure that iPhone X divot at the top of screen doesn't mess up my layout https://forum.unity.com/threads/iphone-x-notch-in-screen.495028/
+  * iPhone X overall dimensions 2436 x 1125 pixels
+  * Overall safe area 2172 x 1062 pixels
+  * Left & right insets (accounts for the notch and curved corners, plus a margin) 132 pixels each
+  * Bottom inset (accounts for the bottom nav bar) 63 pixels
+  * Top inset zero pixels
+ * Classic Robot Font $20 http://www.pixelsagas.com/?download=classic-robot
++++Credits
+ * Creative commons attribution 
+  * spaceship by Jonathan Li from the Noun Project
+  * Olga Prikhodko (exit arrow)
+  * Numero Uno (Play Button)
+  * Gauge By Roberto Chiaveri
+  * Kuber (Back button)
+
++Before deploying
+ * Update build and/or version numbers
+ * use xARM to test the devices with the highest resolution, smallest & largest height & width, and extreme aspect ratios 16:9 and 4:3
+ * Ensure that screenshots / video are up to date
+  * Add grid button screenshots for small devices
+ * Update Noun Project credits 
+++Apple
+ * Upload
+  * 1) choose "generic iOS device" (don't choose Ipad or any other devices connected or a simulator) 
+  * 2) Go to Product --> Archive
+  * 3) If everything is fine, it should open the archive in the Organizer. Click "validate" and then "Submit to App Store". 
+ * When you get the first email ("processed"), go to iTunesConnect and
+  * update compliance info at iTunesConnect
+  * Check "Test Information" under IOSBuilds...Test Details in testflight, in the right language -- see Texts below (https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=build&subsection=testdetails&id=24416006)
+  * Add groups to the build
++++On major changes
+ * Check Beta App Description, etc. in Testflight...Test Informationhttps://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=testinformation
+ * Ensure that Datenschutzerklärung is still true (e.g. if you add tracking or cross-branding). Model is https://www.carlsen.de/datenschutzerklaerung-apps 
+
+++Google
+~/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_26_x86
+ https://support.google.com/googleplay/android-developer/answer/3131213?hl=en
+
++Orbiting is boring, falling is sad 
+++Goals
+ * Fairly steady progress
+ * drill difficult questions
+ * don't repeat easy questions
+  * assume mastery for questions that are answered very fast right away
+ * all questions mastered before reaching pluto
+ * don't repeat questions right away
+++Approach
+
+ * Each correct answer increases rocket height by a fixed amount.
  * There is only flash mode, so I will refer to mastered instead of flash-mastered 
  * Each day, you get N launches that each end after M = 33 - 3 * numMasteredForThisPlanet questions or M * 6s (3s question answering time plus 3s celebration time). 
   * Do you display this to the player? That would be high-pressure and unnatural, but not showing it might make it feel arbitrary or unfair 
@@ -140,60 +114,11 @@ Check private schools as market.
  * See if this is helpful after writing a test for the answer-time-based version
 ++++Variant: instead of boost, give rocket parts
 You either need a perfect run of 33 to reach the planet, or enough rocket parts to upgrade, which means you only need about 16 to reach the planet. Of course, this might mean you have seen all the questions before reaching mars, but that's not necessarily a problem. It is harder to get height records, but upgrades are satisfying and provde an interlocking reward.
-++++Variant: boost
- * Mastered questions each move you up by 1/11 of the planet distance as part of the initial launch 
-  * the mastered questions fly out of the exhaust upon launch
-+++++Planet Upgrades
- * lose old mastery boost, thrust is (newPlanetDistance / 33). This feels more powerful, but you may take a step back in final height.
- * lose old mastery boost, Get initial boost to old planet, then thrust is (distanceBetweenPrevAndNextPlanets / 33), or
- * lose old mastery boost, start on old planet, thrust is as above, or
- * keep old mastery boost, upgrade is purely cosmetic.
+++Does Approach Match Goals
 
-++Before deploying
- * Update build and/or version numbers
- * use xARM to test the devices with the highest resolution, smallest & largest height & width, and extreme aspect ratios 16:9 and 4:3
- * Ensure that screenshots / video are up to date
-  * Add grid button screenshots for small devices
- * Update Noun Project credits 
-+++Apple
- * Upload
-  * 1) choose "generic iOS device" (don't choose Ipad or any other devices connected or a simulator) 
-  * 2) Go to Product --> Archive
-  * 3) If everything is fine, it should open the archive in the Organizer. Click "validate" and then "Submit to App Store". 
- * When you get the first email ("processed"), go to iTunesConnect and
-  * update compliance info at iTunesConnect
-  * Check "Test Information" under IOSBuilds...Test Details in testflight, in the right language -- see Texts below (https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=build&subsection=testdetails&id=24416006)
-  * Add groups to the build
-++++On major changes
- * Check Beta App Description, etc. in Testflight...Test Informationhttps://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=testinformation
- * Ensure that Datenschutzerklärung is still true (e.g. if you add tracking or cross-branding). Model is https://www.carlsen.de/datenschutzerklaerung-apps 
-
-+++Google
-~/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_26_x86
- https://support.google.com/googleplay/android-developer/answer/3131213?hl=en
-++Eventually 
- * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
- * Android back button
- * Store page https://developer.apple.com/app-store/categories/
- * Test that it works with 512 Mb devices (https://hwstats.unity3d.com/mobile/os.html)
- * Change iOS build to Fast but no Exceptions option.
- * Remove or disable Debug.Log
- * Turn off logging
- * Optimize: don't save all questions every time a question changes -- just the relevant question
- * update OSX and XCode to be iPhoneX compatible
-  * show status bar? 
-  * Ensure that iPhone X divot at the top of screen doesn't mess up my layout https://forum.unity.com/threads/iphone-x-notch-in-screen.495028/
-  * iPhone X overall dimensions 2436 x 1125 pixels
-  * Overall safe area 2172 x 1062 pixels
-  * Left & right insets (accounts for the notch and curved corners, plus a margin) 132 pixels each
-  * Bottom inset (accounts for the bottom nav bar) 63 pixels
-  * Top inset zero pixels
-+++Nice To Have
-Spend a day on these after classroom tests
- * Landscape mode: buttons in row at bottom, rocket goes sideways?
- * Make center button more obvious -- pulse the first time or something
- * Make buttons more 3d or otherwise more obviously buttons, or glow or something
-  * Buttons states more visible, especially respond more visibly to taps
++Ideas
+ * Even mastered skills need occasional review
+ * If a card would be shown twice in a row, and there are still cards left or new cards available, move it one back in the list.
  * Cartoony - low poly: 
   * https://www.pinterest.de/pin/464081936581196391/
   * http://www.freeiconspng.com/img/40799
@@ -201,7 +126,7 @@ Spend a day on these after classroom tests
   * https://www.assetstore.unity3d.com/#!/content/34894
   * btw. könntest Du auch die Grafiken in Magica Voxel machen. Kannst Du dann auch sehr simple in Einzelteile zerlegen und Stück für Stück zusammenbauen
   * Then you can set the distances each to 2x prev distance and avoid the math complications and the orbiting 
- * Change font to Classic Robot Regular?
+ * Use red bubble notifications
  * Nicer delete icon
  * particles come out of the stars to make the connection to multipliers (could also move stars under score) 
  * Use a rocket as rocket parts progress bar instead of a number
@@ -209,7 +134,6 @@ Spend a day on these after classroom tests
  * Matthias wünscht sich Schrifteingabe
  * Ich wünsche mir Stimmeingabe
  * x3 and x2 resolutions for backgrounds
- * higher resolution multiplier stars 
  * Add tracking of questions posed & answered to see how people play it
  * tutorial with rocket instead of finger? Decide with Talea and other parents what needs a tutorial
  * Parent mode
@@ -220,7 +144,6 @@ Spend a day on these after classroom tests
  * bigger rocket on icon (use xcf in unusedassets as base)
  * If you want to make it free and sell it after you have reached Mars: https://developer.apple.com/app-store/parental-gates/
  * Final congratulation with magic tree.
- * When doing the gauntlet, allow aborting with <- button.
  * Explain the slow last round based on it being a cargo ship for the tree
  * Flash Stats screen with "collected" planets an orbit records?
  * Split saturn into two layers (front of rings & (planet + back of rings) so you can go through the rings
@@ -242,350 +165,19 @@ Spend a day on these after classroom tests
   * Rocket building screen shows the rocket under construction for the first 10 pieces. You can build it piece by piece
   * Colouring book for rocket
  * Main screen: highlight stats button if there are any unseen improvements (anything that would be yellow)
- * Make buttons more 3-d and obviously pressable
- * Voice recognition
- * Get a new alien for each planet reached
-  * Or a plant
-  * Or at least have a collection screen for the planets themselves 
  * Switch from PlayerPrefs to another system https://unity3d.com/learn/tutorials/topics/scripting/persistence-saving-and-loading-data
  * Optimize graphics:
    * https://gamedev.stackexchange.com/questions/75376/why-does-unity-in-2d-mode-employ-scaling-and-the-default-othographic-size-the-wa 
    * https://docs.unity3d.com/Manual/Profiler.html
    * http://answers.unity3d.com/questions/1009179/why-a-texture-always-consume-twice-ram-when-runnin.html
    * http://answers.unity3d.com/questions/401716/determining-texture-memory-usage.html
+ * Make the timed parts a reward. So you are struggling through stuff, and then comes something you know well and have to do fast. The music changes, cool shit happens if you succeed, maybe there's action (have a plane flying that goes up every time you get it within the time limit, for example)
+  * Matthias B says: consider visual flow: ATM it starts at the question, then down to the buttons, then up to the answer, down to the rocket, up to the result... he thinks it would be better to go from top to bottom or vice versa
 
-+First Make It Right, Then Make It Fast
- * Show progress towards launch: Add a progress bar that increases whenever they master a question, maybe even slightly when they get one correct and hence progress. 
- * Bigger celebration if you answer something fast in normal mode.
-++Thoughts
-+++Progress vs Upgrades
- * Engine inefficiency is mysteriously frustrating. Is there a better solution to (a) reaching next planet (could have inefficiency kick in after you reach it) and (b) ensuring that players are motivated to keep playing after reaching mars
-  * The need to upgrade engines should keep them playing the main game. However, as talea proved, you can still reach neptune while screwing up a lot. Maybe mastered questions that you get wrong should appear in both lists? But that can be discouraging. Maybe if you have wrong wasMastered questions, after that round don't show launch -- instead, show the back button and return to slow mode until those questions are mastered again? But that could block for a long time. 
-
-1. WasMastered but not mastered appear on both lists and are prioritized in flash list. 
-2. Don't add new flash mastered questions to flash list until upgrade. This should ensure steady record-breaking.
-3. Add max speed so that the difference between perfect answers and target time answers is not so great, to make it impossible to reach the next planet before the upgrade (also means that easy questions don't subsidize hard ones)
-4. Put the easiest of the 10 hardest questions at the beginning of the list to reduce the chance of landing on earth again. 
-5. Add Pluto mode. 
-
-What do we want?
-Player has 15 parts, answers 10 hardest questions, reaches mars. Can break records regularly with pratice, but not reach jupiter until they have 10 more questions (why? Because otherwise they can get there via easy questions). Otoh, it is probably ok if they reach jupiter -- they won't reach saturn, so they will still have an incentive to upgrade. But this could mean records become hard to break, because you keep adding new, perhaps harder questions. Also, we definitely don't want people to reach pluto early.
-
-++Done
- * At first, a correct answer counts as correct no matter how long it takes
- * Once a question is mastered in this way (90% success), switch to a timed version
- * There is no negative feedback for failure, but also no reward
- * When mastery is reached for the first time, show more or different particles
- * Highlight stats button when a skill is mastered for the first time
- * Highlight (color and enlarge) rocket parts text when a skill is mastered for the first time
- * If the rocket hits the top of the screen, zoom back to keep it on screen
-
-++Rejected
- * Check that new version is stable to and from stats screen, e.g. with repeated questions 
-  * Say you get 2x3 wrong => difficulty 5, then 2x4 right => difficulty 2. You should show 2x3 again, but the time is not ripe, so you show 2x5. But if you go to stats and return, it should switch to 2x3. But if you just got 2x5 wrong, then 2x5 is set to isRetry = true. Nonetheless, it will show 2x3 first, because difficulty is higher (say 2x5 has difficulty 3 after the wrong answer). In itself that is ok, but is it a problem that you are counting 2x5 as a retry later? If you do, the player gets no credit for answering it later, even though much time might have elapsed. But if you don't save isRetry, then the player can bounce to the stats screen and back for extra credit. You could save the time between attempts, but what if they spend the whole time thinking about the problem? I will ignore this edge case for now, since no credit is not a big problem. 
- * Every correct answer either 
-  * reduces the allotted time to X% of the previous value, or
-  * simply incorporates the new time into the average (maybe just average the last N attempts)
- * There is a universally fixed threshold time for what counts as "known instantly".
- * Once the timer reaches that threshold, it no longer decreases
- * One the student hits that threshhold three times in a row, the skill counts as flash mastered
- * Initially, the timed version starts with the average time they took to answer the question.
- * The timed version shows the answer after a certain amount of time and counts that as a failure
-+Rejected
- * If you rely on them getting better and better, they may see no benefit until they have mastered all facts; or the benefit they see may depend on how relatively often they play each mode
- * You could give them more and more facts, but that defeats the spaced-repetition purpose
- * Stats screen: Rocket button goes to rocket building screen
- * Stats screen: Rocket building button is highlighted if you have unspent rocket parts
-
-Orbiting is boring, falling is sad 
- * Also, there is currently no limit on the orbits per day
- * Also, if each flash test causes you to master a few questions and totally fail the rest, it should be possible to run out of questions without ever reaching the planet.
-++Orbiting sucks
-++++Autoupgrade at planet, lose old mastered boost: 
- * Thrust is marsDistance / 11 * min(...)
- * Receive upgrade when you reach Mars, then thrust is jupiterDistance / 11, etc.
- * Only questions mastered since the last planet give you a boost
- * But then the upgrade will be a downgrade: When you reach Mars, initial thrust could be 10/11 * marsDistance; after upgrade it is 0/11 jupiter distance. Even the first right question gives you 1/11 jupiter distance, which is less than 10/11 * marsDistance
-++++Autoupgrade at planet, keep old mastered boost:
- * Thrust is marsDistance / 11 * min(...)
- * Receive upgrade when you reach Mars, then thrust is jupiterDistance / 22, etc.
- * So launch speed before upgrade is k/11 * marsDistance, afterwards >= k/22 * jupiterDistance. 
-  * This is an improvement iff jupiterDistance > 2 * marsDistance.
-   * That doesn't hold for Uranus to Neptune or Neptune to Pluto.
-+++Two Modes, mastery boost
- * _Let N be the number of rocket parts needed for the current planet_
- * _Choose M <= N, e.g. M = ciel(0.8 * N)._
- * _Ask min(M, numMasteredButNotFlashMasteredAvailable) questions_
-  * _there is no minimum number of flash questions -- we just keep going until we flash master M of them._
- * Each correct answer increases rocket height by a fixed amount.
-  * 1/M * min(1, timeAllotted / (min(60,timeRequired))
-  * This means you reach the planet if you can answer M questions in the time allotted, flash-mastered or not
-   * This already decreases the chance of getting stuck, since if only a few questions are left, you only have to answer them quickly once to move on 
- * Flash mastery causes a "Mastered!" to appear
- * On launch, each mastered question causes a "mastery boost" that moves the rocket up by 1/M the planet distance
-  * use itween or similar so that the time taken is constant
-  * the mastered questions fly out of the exhaust
- * in the gauntlet, there is no mastery boost _and no flash-mastery. N = 55, and_ if you answer all M questions in the time allotted, you reach Pluto
- * Post-Pluto, _we ask the hardest M questions and no flash-mastery_
-
-  * 1/M * min(1, timeAllotted / (min(60,timeRequired)) (* 0.9 if not flash mastered, except gauntlet and deep space)
-+++Problem: We could end up repeating a tricky question indefinitely
- * Consider using reviewTime for flash questions and changing goal to collectparts if we run out of questions, still haven't reaching the planet, and still have the effort left for slow questions.
-  * But if M < N, there will always be planetIdx * (N-M) flash questions available, so repetition shouldn't be too bad 
-  * No! Due to the boost system, you only ask M - numFlashMastered questions!
-  * Could also mitigate but not eliminate the problem by discarding any answerTimes older than a given date, or by adding 1s to the oldest one every day
-  * How about this: 
-   * Show M questions
-   * Flashmastered questions do give you a boost, but don't decrease the number of questions. 
-   * The coefficient for thrust / boost is not 1/M, but 1/(M+numFlashMastered). That is, after the first k flashmastered questions, you are still asked M questions, with an initial boost of k/(M+k), meaning you still have to answer all M remaining questions correctly to reach the planet (total distance k/(M+k) + M/(M+k) = 1), but your boost height still increases monotonically (k/(M+k) < (k+1)/(M+k+1) iff k(M+k+1) < (k+1)*(M+k) iff kM + k^2 + k < kM + k^2 + M + k iff 0 < M).
-   * If you run out of non-flashmastered questions, you can only show m < M. Then coefficient then is 1/(m+k) > 1/(M+k)
-   * It can still happen that m = 1 and you repeat a question, but it is less likely and at least you have learned all questions by then
-+++Tweaks
- * Add to effort for flash questions so you don't have to orbit six times a day
- * Or Don't allow a flash question to be answered correctly more than once per day, or only orbit at most twice per day -- Otherwise you have to orbit a whole pile at once, then nothing for several days.
- * Get Talea, Amalia, Matthias daughter to test
-+++Flash Mastery increases starting height
- * Instead of launching every time, launch once per planet. Save position after questions
-  * Advance only when you answer a question quickly enough? Sounds unsatisfying.
-  * Or checkpoint every time you flash master a question (and collect something?)
-   * Instead of increasing starting height, it could increase initial thrust, which is effectively the same 
-++++Simplify down to one mode
- * Flash-mastering a question increases your starting and current heights by 104M km
- * Each correct question increases your height by <= 104M km but doesn't change starting height
- * Use effort system to determine when day is done   
- * Use spaced repetition for everything?
-+++Reach planet when enough questions are flash-mastered
- * Ensure that you reach the planet exactly when you run out of flash questions
- * Let N be the number of mastered but not flash mastered questions
-  * Then you must flash-master N - 9 questions to run out of questions
-   * => If N = 19, you must flash-master all ten questions asked to reach the planet
-    * => Each question flash-mastered must move you 1/10 of the distance, and each non-flash-mastered less than that
-    * So let's say that each flash-mastered question moves you 1/(N-9) of the distance
-     * => If N = 10, any question flash-mastered moves you the whole distance! No good.
-+++No Flash Mastery
- * You must answer M < N = 11 questions within the allotted time, correctly, to reach the planet. 
- * Flash mastery doesn't remove questions: you always have all questions available
- * Sort the questions from hardest to easiest
- * Each question answered correctly within the allotted time moves the ship exactly 1/M of the planetary distance (rounding errors!)
- * Each question answered wrong or in more than 60s counts as 60s
- * Each question answered in more than the allotted time moves the ship between 1/11 and 1/55 of the distance, interpolated
-  * 1/M * min(1, timeAllotted / (min(60,timeRequired))
-  * 1/5M + 4/5M * (1 - (max(timeAllotted, timeRequired) - timeAllotted) / (60 - timeAllotted))
- * If you answer a question wrong, it becomes the last question for this quiz
- * Problem: let's say you answer the first question in 30 seconds and all others instantly. You will be forced to repeat all questions until you master the first question. This is excatly contrary to your principles.
-  * Solution: Only ask 5 questions. If there are all answered fast enough, you reach the planet and continue.
-   * Problem: You can reach the gauntlet after only having answered a fraction of the questions.
-    * Gauntlet skips flash questions? But that has the usual problems  
-+++Surface flash mastery
- * Rocket parts give you an upgrade to reach the next planet, but you also need to collect all the data / animals / whatever from the planet you just reached, which means flash-mastering enough questions to get down to < 10 mastered-but-not-flash-mastered questions.
-+++Other Thoughts
-  * Don't let rocket fall; instead, it stops. This is not enough to reach the planet. But if you answer while moving, you get bonus speed. 
-  * umrunden is only used to slow the rocket down so that they slingshot, but don't reach the next planet
-   * but what do you write as your text? "Jupiter umrunden" doesn't imply that you *can* reach Saturn, which is good 
-   * instead of tracking orbits, keep tracking total height. Perhaps rename height to distance
-   * Best system? Note that in practice, I only need to answer 37 gauntlet questions to reach pluto. 
-    * Current: Flash-mastery is optional until Pluto (current system). It is encouraged to flash-master all but 9 questions at each planet before Neptune, although a good kid can skip orbiting mars entirely and hence be encouraged to orbit Jupiter a lot. For Neptune, they get a bunch more, so they probably have > 20 non-flash-mastered questions when they are sent to Pluto. They they have to do the gauntlet. The idea behind this was that the kid shouldn't need to have to flash-master everything -- they should focus on the tricky questions. But the gauntlet contradicts this, right?
-     * Maybe track review time for flash questions? Either decay their average answer time gradually, or add a delay before the same question can be asked again as you do for slow questions
-    * Force orbiting for each planet before progressing to next. When completing Mars, 2 - 11 questions are flash mastered, leaving 0 - 9 mastered but not flash mastered. At Jupiter, this gives them 11 - 20 mbnfm initially, which they must reduce to < 9, meaning they need to fm 2 to 20, leaving 0 to 9 mbnfm. The other planets repeat. This tends to cause drilling of each question heavily in flash mode right after mastering it.
-    * Force orbiting Neptune before progressing to gauntlet. This ensures flash-mastery of all but 0 - 9, which is good prep for gauntlet, but might leave zou hanging at Neptune for a long time. At least need to motivate this.
-+Game
-
-++Variants
- * We now have choices:
-  * Show progress in absolute scale the whole way. Progress is cool, but the rocket is very small and doesn't move far. Use 0.11 for moon below question, 0.17 for moon at top of screen.
-  * Show rocket bouncing up and down as you currently do. Show progress at the end.
-  * Zoom out as you go. This is fairly dynamic, but doesn't really say much about your progress. Also, the rocket stays at the top if you are doing well.
-  * Switch back and forth. Probably hectic, but you haven't tried yet. 
-
- * Deliver a pizza to ISS / spacecraft / moon / repair satellite
- * After you run out of questions, you can steer the rocket to collect things (on the rest of the way up, then the way back down) 
- * No deceleration: the rocket just gets faster the more questions you answer. The faster you answer them, the more time it has to be fast
-  * There could also be a total time limit and as many questions as you can answer in that time, but that seems less natural.
- * The question list is either always all available facts, or between N and M, or M > N, filled in with other questions. 
- * Consider using spaced repetition due dates here. Things that are due appear first on the list, then average response time order? Or have a time decay on the response time.
- * Repeat questions within a session? 
- * Instead of lerping rocket,  use a tween -- but this is problematic, because the speed changes each frame
- * tip rocket as it slows
- * Look at launch games and see what they do
-++Done
- * Once stats screen is completely clear, remove the row and column headers
- * There are two ways to handle the frustration that Talea experienced in the rocket falling:
-  * Rocket can never fall, just stop.
-   * Don't show max height
-   * Rocket motion looks super boring, because you want it to take, say, idealTime * 3 seconds to stop completely (so that kids notice an improvement even if they haven't mastered a question yet), but that means it takes the rocket 10 - 18 seconds to move from the top to the bottom of the screen and for the starts to slow down. 
-    * Also, that's if you set it to hit max height when speed = acceleration, which means if you are doing well, it sticks to the top of the screen the whole time. 
-   * You currently have no way to calculate gravity s.t. it takes the rocket X seconds to stop completely. Empirically, g = 50 works well for h = 400.000, leading to a full stop at 3t and a worst case height attained of 60.000, and a 2t per question height of 230.000
-    * You could just scale the displayed height instead of the actual speed. 
-   * Long coasting times are dull. To solve this:
-    * Once the last question has been answered, pull back to a long distance view with the earth at the bottom and the target planet at the top (or the projected final height, if that is higher), and show the rest of the movement in Zeitraffer (duration = X s, calculate scale accordingly).
-    * This might be cool anyway, once you are done.
- * Rocket has a max negative speed, and If your speed is less than zero it is set to zero before accelerating (so you can't dig yourself a hole).
-  * You could also ensure that you can never fall lower than the *height* when you answered the previous question.
-  * This looks good, but could still be discouraging.
-  * Capping negative speed at a/4 seems to work well: 2t answers give 240.000km, 3t gives 60.000. This scales linearly with better engines.
-
- * Give them upgrade points each time they master a new fact (that is a natural way to explain the unlock: the first N facts are needed to build the rocket in the first place). Then they get steady progress as they master facts; once they have done so, their own expertise must increase for them to get higher.
- * Adjust scrolling speed and final destination based on maximum performance + maximum upgrade, then ensure that base upgrade + max performance is still satisfying
- * In the main and launch screens, show "Rakete bauen" / "Rakete verbessern" if you have unused rocket parts. If Auf zum Mond is available (e.g. you have finished the base rocket), show it as well, underneath. "Fertig" is shown (in the main screen) only if nothing else is available.
- * You lose rocket parts when you build.
- * Spend rocket parts to get upgrades: fusion engine, etherium engine, Ionenantrieb, Antimaterie, Hochdruckbrennkammer
- * In LaunchButtonController, make CanLaunch depend on rocket being built, not numquestions directly.
- * Build rocket with parts
- * Rocket slows down over time due to "gravity". You are not allowed to skip questions, so eventually you will fall if you hit a question you don't know quickly. However, previous questions' acceleration buys you more time 
- * Rocket flies, and answering questions gives a turbo boost. The more frequently this happens the better, so the faster the better.
- * Game unlocks when there are at least N mastered questions.
- * The question list consists of the first N mastered questions, ordered by average response time in the last three trials.
- * If a question is answered correctly, record response time and update average
- * Move rocket based on speed. Lerp it to its "correct position", which is highest when speed >= acceleration, at base of screen when speed = 0, and barely showing at speed <= -acceleration
- * Rocket lands properly.
- * Stats screen: replace exit button with back to game button.
-
-+Planetary Distance
-Could do ISS, Moon, Venus, Mercury, Sun (1 AU)
-or       ISS, Moon, Mars, Jupiter, Saturn (8.6 AU)
-or       ISS, Moon, Venus, Mars, Mercury (0.61 AU) But you go back and forth.
-Could also start from last achieved planet, e.g.
-Moon -> Mars (still 78M) -> Jupiter (550M instead of 630M) -> Saturn (650M instead of 1290)
-Moon -> Venus (still 42M) -> Mercury (50M) -> Sun (60M) But that's actually too easy.
-
-Planet 	Average distance from Sun in AU
-Sun 149.6M km
-Mercury 	0.61 * 150 = 91.5M km
-Venus  0.28 * 150 = 42M km
-Earth 	0
-Moon 400 000 km = 400 Mm = 0.4 Gm = 400000 / 300000 = 1.3 light seconds
-Mars 	0.52 * 150 = 78M km = 78000000 / 300000 = 260 light seconds = 78 000 Mm = 78 Gm
-Ceres 1.7675 * 150 = 265.125 
-Jupiter 	4.2  * 150 = 630M km
-Saturn 	8.58  * 150 = 1287M km
-Uranus 	18.2  * 150 = 2730M km
-Neptune 	29.05  * 150 = 4357M km = 4357000000 / 300000 = 14523.3333333
-Pluto (dwarf planet) 	38.48 * 150 = 5772M km = 5 772 000 000 km = 19 240 light seconds = 5 772 000 Mm = 5 772 Gm
-v = math.sqrt(4357000000 * 19.6) = 292228 / NumQuestions
-++Musings
-"Reaching the planet" is touching it with the tip of the rocket. So the planet positions must be actualPos + 2.56 * planetScale (because the natural scale is 5.12 units, so the scaled size of half the planet is scale * 5.12 / 2) + rocketLength. And the initial rocketPos is with the anchor on the top edge of the earth. So bottomEdgeOfMars - topEdgeOfEarth - rocketLength must be actualMarsDistance. centreOfMars = marsRadius + earthRadius + actualMarsDistace + rocketLength. earthRadius = earthScale*5.12 (because the graphic is twice as big), which is currently 1638.4.
- * Scale:
-  * If we show planet distance and size on the same scale, then when we zoom out to see earth and the moon (foreground = 0.11), the moon is invisible and the earth is tiny. We need the planets scaled up at least 10 times. 
-  * To see the earth and Mars at the same time (foreground = 0.0005), both need to be scaled up by at least 1000 times (100 times more than before).   This makes the Earth's radius 6.371.000km, which puts the moon inside it. 
-  * If you skip the moon and do Mars through Neptune, your distances go up to 4357M km. Then you need to scale Earth up 5000 times to see it (foreground scale 2e-05). This makes Jupter and Saturn almost touch. 
-  * If you do the moon through Uranus, you need to scale planets up 3333 times. Foreground Scale 3e-05. Jupiter and Saturn no longer touch.
-  * If you do ISS through Saturn (which looks more impressive anyway), you need to scale up 1677 times (1 unit = 6km (scale is 0.067 * radius in km), vs 1 unit = 10.000km for distances). Foreground scale 5.5e-05. This looks good at Saturn scale. At Jupiter scale (foreground = 0.0001) also good. At Mars scale (0.00095) the moon is visible on top of Earth. But you could make zero the top line of Earth and the bottom line of all other planets, then they would just touch. Yes! That looks pretty good, plus you can count victory when the tip of the rocket touches the planet, which kids probably expect. At moon scale, the moon is ridiculously big and close. If you reduce the scale of moon and earth by 10 (1 unit = 60km) for this scale, foreground scale is 0.006 and it looks ok. Maybe after reaching the moon you should just hide it and change the earth scale? ISS is 108m, which at 1 unit = 6km means it should be 0.018 units, for a scale of 0.0036. Orbit height is 408km. To be visible, it should be scaled up about 100 times (1 unit = 60m). For the earth to look good scale, reduce it by 100 (1 unit = 600km). Foreground scale is 0.6. Automatically move the earth down to XScale * 5.12 = its natural radius in units. Foreground y is such that earth is half-visible, which means move the center of the earth down to ...
-  * Ceres doesn't help, because it is too small.
-  * Try making it work with Neptune. Max foregound scale 2e-05, distance scale 1 unit = 10.000km, planet scale 1 unit = 10km, scale factor is 0.1 * radius in km, foreground y = -4.46, initial foreground scale 0.002. Rocketscale = 100, Rockety = earthRadius + rocketHeight/2, rocketZ = -200. rocketHeight = rocketScale * 10 = 1000 (empirical).
-  ISS = 108m = 0.1km = scale 0.01
-  
-
-+Spaced Repetition
- * Red bubble on icon shows number of questions up for review or number of days since last review
- * Even mastered skills need occasional review
- * If a card would be shown twice in a row, and there are still cards left or new cards available, move it one back in the list.
-++Done
-+++My Algo For Nonmastered
- * At the beginning of the day, make an "active" list: all the wrongs, then the hards, then the oks, then the fasts.
- * Fill the list up to N cards with new cards.
- * A wrong answer causes the card to repeat until right, then go to "wrong", regardless of its previous category
- * A right answer shifts the card depending on answer time:
-  * > 1m: hard
-  * <= 1m and > 10s: ok
-  * <= 10s: fast, or mastered if already fast.
- * DONE Track the number of times answered correctly since the last wrong answer. If a card is answered correctly seven times in a row, it also counts as mastered regardless of times.
- * DONE Once the active list is empty, create a new active list with wrongs, hards, and oks, and repeat. Do this twice.
- * DONE Now every card that is not >= fast has been shown thrice.
- * DONE Create an active list with wrongs only. Repeat until empty.
-++Rejected
- * Count a session as continued if the last question was answered within the last 5 minutes.
- * If the player answers the question in less than 10s, it moves to category 6 (1 day) if not there already.
- * Notifications to remind you to review now, or that review should happen today sometime.
- * If the player answers the question in a minute or more, it stays in its current category? No. Someone could just get distracted, interrupted, etc. Flash mastery mode will handle this.
- * Wrong, hard and ok cards are due in 30s. Fast cards are due tomorrow.
-++++Sm2 
-Algorithm SM-2 used in the computer-based variant of the SuperMemo method and involving the calculation of easiness factors for particular items:
-
-        Split the knowledge into smallest possible items.
-        Start with 10 items.
-        With all items associate an E-Factor equal to 2.5.
-        Repeat items using the following intervals:
-        I(1):=30
-        for n>1: I(n):=I(n-1) * EF
-        where:
-        I(n) - inter-repetition interval after the n-th repetition (in seconds),
-        EF - E-Factor of a given item
-        If interval is a fraction, round it up to the nearest integer.
-        After each repetition assess the quality of repetition response in 0-5 grade scale:
-        5 - perfect response
-        4 - correct response after a hesitation
-        3 - correct response recalled with serious difficulty
-        2 - incorrect response; where the correct one seemed easy to recall
-        1 - incorrect response; the correct one remembered
-        0 - complete blackout.
-        After each repetition modify the E-Factor of the recently repeated item according to the formula:
-        EF':=EF+(0.1-(5-q) * (0.08+(5-q) * 0.02))
-        where:
-        EF' - new value of the E-Factor,
-        EF - old value of the E-Factor,
-        q - quality of the response in the 0-5 grade scale.
-        If EF is less than 1.3 then let EF be 1.3.
-        If the quality response was lower than 3 then start repetitions for the item from the beginning without changing the E-Factor (i.e. use intervals I(1), I(2) etc. as if the item was memorized anew).
-        After each repetition session of a given day repeat again all items that scored below four in the quality assessment. Continue the repetitions until all of these items score at least four or ten minutes are up.
-        If the session has taken less than five minutes
-
- easiness += -0.8 + 0.28 * performanceRating - 0.02 * performanceRating^2
- -0.8 + 0.28 * 5 - 0.02 * 25 = 0.1 seriously correct makes it easier
- -0.8 + 0.28 * 4 - 0.02 * 16 = 0 reasonably correct keeps it the same
- -0.8 + 0.28 * 3 - 0.02 * 9 = -0.14 = just barely correct makes it harder
- -0.8 + 0.28 * 1 - 0.02 * 1 = -0.54 = somewhat wrong makes it harder
- -0.8 + 0.28 * 0 - 0.02 * 0 = -0.8 = seriously wrong makes it harder
- 
- so if you keep getting it right, easiness goes:
- 2.5, 2.6, 2.7...
- which means time goes 30, 30 * 2.6 = 78 = 1m18s, 78 * 2.7 = 210 = 3m30s, 210 * 2.8 = 588 = ca. 10m, 588 * 2.9 = 1705 = ca 28m
-https://www.supermemo.com/english/ol/sm2.htm
-++++Sm2+
-http://www.blueraja.com/blog/477/a-better-spaced-repetition-learning-algorithm-sm2
-
-
-     difficulty:float – How difficult the item is, from [0.0, 1.0].  Defaults to 0.3 (if the software has no way of determining a better default for an item)
-    daysBetweenReviews:float – How many days should occur between review attempts for this item
-    dateLastReviewed:datetime – The last time this item was reviewed
-
-When the user wants to review items, choose the top 10~20 items, ordered descending by percentageOverdue(defined below), discarding items reviewed in the past 8 or so hours.
-
-After an item is attempted, choose a performanceRating from 0.0 to 1.0, with 1.0 being the best.  Set a cutoff point for the answer being “correct” (default is 0.6). Then set
-
- percentOverdue = 
-  * Min(2, days(dateNow - dateLastReviewed)/daysBetweenReviews), if correct
-  * 1 if incorrect
-
-difficulty += percentOverdue * (8 - 9 * performanceRating)/17, clamp to [0,1]
-worst case: 1 * (8 - 9 * 0)/17 = 8/17 = 0.470588235294
-min correct, on time: 1 * (8 - 9 * .6)/17 = 0.152941176471 Still gets harder...
-best correct, on time: 1 * (8 - 9 * 1)/17 = -0.0588235294118 Slightly easier
-Min correct, maximally late: gets harder more than if it had been on time
-
-
-difficultyWeight = 3 - 1.7 * difficulty
-
-daysBetweenReviews *= 
- * 1 + (difficultyWeight-1) * percentOverdue, if correct
- * 1 / difficultyWeight^2, if incorrect (min days = 1)
-
-++++Boxes
- * Each card has a difficulty category. They all start at 0 and can go up to 9.
- * Whenever you start the app, review all 0 cards in LRU order.
- * If you have spent less than 5 min in the app, review the 2 cards, etc. until you have either spend five minutes or reviewed all cards <= 4.
- * If you have no cards <= 4 and still less than 5 minutes, add a new card.
- * Do cards 5+
- * But this means the new card will be reviews 5 times in a row!
-++Algorithm
-+++Pimsleur
- * Consider adding a 15 minute cutoff regardless of number of errors
- * Have the option to do extra review in LRU order.
-++Done
- * Tell them when they have done enough for now
- * The intervals published in Pimsleur's paper were: 5 seconds, 25 seconds, 2 minutes, 10 minutes, 1 hour, 5 hours, 1 day, 5 days, 25 days, 4 months, and 2 years.
- * If there are no cards left to drill, and there is a new card available, and (you have spent less than 5 minutes in the app or have fewer than three mistakes), add a new card.
-+Collectibles
-++Variants
+++Collectibles
+ * Get a new alien for each planet reached
+  * Or a plant
+  * Or at least have a collection screen for the planets themselves 
  * Award a collectible animal when a skill is mastered
  * Upgrade the animal or award another when a skill is flash mastered
  * That is 100 - 400 animals (double if 6x8 is not 8x6 -- maybe cheat by adding the same animal in a different color)!
@@ -595,12 +187,12 @@ daysBetweenReviews *=
  * After they get the animal, they have to feed the animal:
   * It starts to get hungry when they need to review its skills
   * They can't force the right exercise to come, but they know it will come soon after the animal gets hungry if they play. 
-
-++Done
- * Make the stats screen a picture that is revealed at the skills are learned
- * While a skill is being mastered, award currency or duolingo style progress meters
-  * Note that things in Duolingo always improve, even if you messed up, or at least don't get worse. 
-+Presentation
+++Algorithm
+ * Consider adding a 15 minute cutoff regardless of number of errors
+ * Have the option to do extra review in LRU order.
+ * The intervals published in Pimsleur's paper were: 5 seconds, 25 seconds, 2 minutes, 10 minutes, 1 hour, 5 hours, 1 day, 5 days, 25 days, 4 months, and 2 years.
+ * If there are no cards left to drill, and there is a new card available, and (you have spent less than 5 minutes in the app or have fewer than three mistakes), add a new card.
+++Presentation
  * Present the questions both visually and orally
  * Show untimed multiplication as a square of dots (or animals), maybe initially marching out in rows
   * http://www.mathplayground.com/tb_multiplication/thinking_blocks_multiplication_division.html
@@ -614,19 +206,6 @@ daysBetweenReviews *=
  * Clock solitaire http://www.timestableclock.com/index.html
  * Show a bunch of numbers and say "which of these are multiples of N"
  * Mnemonic stories: http://www.multiplication.com/student-manager/premium/video-player/84
-+++Variants
- * Arrange number buttons like a calculator
- * Make the timed parts a reward. So you are struggling through stuff, and then comes something you know well and have to do fast. The music changes, cool shit happens if you succeed, maybe there's action (have a plane flying that goes up every time you get it within the time limit, for example)
-++Fonts
- * Classic Robot $20 http://www.pixelsagas.com/?download=classic-robot
- * Downlink $20 http://www.pixelsagas.com/?download=downlink
- * Neuropol Free with images, $66 to embed in app https://www.fontspring.com/fonts/typodermic/neuropol
- * Nulshock $20 image, $60 embed per family https://www.fontspring.com/fonts/typodermic/nulshock
- * Xirod Imges free, $24 embedding https://www.fontspring.com/fonts/typodermic/xirod
- * New Mars (Talea Pick) or Skirmisher donation ($20 suggested) http://www.iconian.com/commercial.html
- * Protoculture (Talea Pick) $20 http://www.pixelsagas.com/?download=protoculture
- * Renegade $5 (Talea Pick) http://www.pixelsagas.com/?download=renegade
- * Subatomic Tsoonami Public Domain
 ++Games
  * Maybe a minigame to play with the collected animals?
  * Most math drill games are a game (some simple, some complex, like Tower Math) interrupted by a math question. Sometimes this feels more plausible than others (e.g. tower defense works better than shooter). Maybe you could have something where buying is a main mechanic, and the price is always given as N x M.
@@ -639,66 +218,45 @@ daysBetweenReviews *=
   * Coordinates of moon or stargate (could even offer a choice of problems (all due) to go different places or directions)
   * Alas, the best endless runners are based on flow, which you would interrupt with your questions. So maybe separate it: Play cube race or doodle jump for earned ticket; otherwise play booster rockets which is just solving the math (a glorified progress meter) for high scores. 
  * General problem: You can only sensibly allow the game to be played when at least one fact is due. But then the game might be very short, or if you show all facts, encourage wasting time by reviewing things already known, probably at the expense of the other modes. 
-+++Launch Game Musings
-But what if there aren't many questions to answer?
- * If you just repeat them, it will get too easy. 
- * If you don't, the game has an end, which is ok, but it might happen after one question. 
- * If you only offer it when there are enough, some things may not get drilled soon enough. 
- * Really, you'd have to include everything you have ever mastered, to give the sense of constant improvement that this kind of game demands.
-  * No, you can used mastered facts to upgrade the rocket
- * Keep showing questions until the player crashes or they have seen all their mastered but not flashmastered facts.
- * If they get through all mastered facts, they land.
- * Show everything due, first due first.
- * If nothing is due, show next due thing that hasn't been shown yet.
- * If the answer is correct, get a boost.
- * If it is correct and on time and was due, level++.
- * If it is correct and not on time, level--. Min 1.
- * If it is wrong, level = 0 but don't repeat until correct.
-Let's say:
- * All facts are level 3.
- * Facts A, B and C are due, in that order.
- * Facts D and E are not due.
-t = 0. Show fact A (due). Player gets it wrong => No boost. Set to level 0 => It will return in 0s (but the others are still ahead because they came due earlier).
-t = 0m10. Show B (due). Player gets it right, but too slow => Boost. Level--. => It will return in 2m (2m20)
-t = 1m20. Show C (due). Right and on time => Boost, level++ => show in 1 hour.
-t = 1m25. Show A (due again). Right and on time => Boost, level++ => show in 25s (1m55)
-t = 1m30s. Nothing is due. The next due would be A, but it has already been shown, so 
-          Show D. Right and on time => Boost, level stays the same because it was not due => show in 10m (11m35). 
-t = 1m35. Show E (not due). Right, but too slow => Boost. Level-- => Return in 2m (4m45).
-t = 2m45. Show A (due again). Right, on time => Boost, level++ => Return in 2m (4m50).
-t = 2m50. Show B (due again). Right, too slow => Boost, level-- => Return in 25s (4m25)
-t = 4m. Nothing due, everything has been shown. Done.
-
-If they play again, they get:
-t = 4m30. Show B (due again). Right, too slow => Boost, level-- => Return in 25s.
-t = 5m40. Show E (due again). Right, fast enough => Boost, level++ => Return in 10m (15m45)
-t = 5m45. Show A (due again). Right, on time => Boost, level++ => Return in 10m (15m50)
-t = 5m50. Show B (due again). Right, fast => Boost, level ++ => Return 2m (7m55).
-t = 5m55. Show D (not due). Right, on time => Boost => Return in 10m (16m)
-t = 6m. Show C (not due). Right, on time => Boost => Return in 1h (1h6m)
-t = 6m05. Done
-
-Don't allow game to be played unless at least one fact is due?
++++Battleship
+Battleship where the grid has numbers for x and y and you make your attack by entering x times y and receive a shot by decording x times y.
+agar.io where you can eat any equation smaller than you and run from those who are larger
 
 +++Doodle Jump
 Doodle jump / cube racer thing where the powerups are digits. Maybe write the question on your ship. Make it easy to hit the digit you want (make it lane-based, slow ship down when digits come) -- if you want, you can include normal obstacles at normal speeds as well.
-
 ++++Musings
  * However, this means that the right answer must be repeated, making it recognizable unless all answers are repeated
    * Also, I don't really like multiple choice
     * Could make them fly through individual digits -- that would solve both problems 
    * And the player could hit the wrong answer through lack of coordination
     * Maybe instead of "this number or that" it could be "number or not", and it is easy to control, e.g. only two lanes and plenty of time to switch 
+++Hints
+ * Always show 5x8 and ask for 40, but if the kid gets it wrong or takes too long, walk them through some tricks (or ask them how they did it)
+ * Base hints on player mastery -- if we know they know 6x6, use things based on 6x6.
+++Tricks
+ * 5s end in 5 or 0
+ * 10s end in 0
+ * 9s digits add up to 9, and the first digit is one less than the multiplier (3x9 = {(3-1),(10-3)})
+ * 3s digits add up to 3, 6 or 9 (but this is more useful for other stuff)
+ * Songs or jingles?
+ * Focus on 1, 2, 3, 4, 9, 10. Then you only really have to memorize 6, 7, 8 by 6, 7, 8
+ * Hand trick 
+ * Take the nearest 5x and add
+ * Take the nearest 10x and subtract
+ * Remembering squares is useful because whenever you multiply numbers that are separated by two you can simply square the middle number and then subtract one to get the answer.  5x7=6x6-1
+ * Rhymes http://www.teacherweb.com/NY/Quogue/MrsLevy/MULTIPLICATION-RHYMES.pdf
+
+++Number Sense
+https://bhi61nm2cr3mkdgk1dtaov18-wpengine.netdna-ssl.com/wp-content/uploads/2017/03/FluencyWithoutFear-2015.pdf
+https://www.mathsolutions.com/documents/NumberTalks_SParrish.pdf (for 2 digit multiplications)
+++Skinning (Talea Ideas)
++++Dinosaur
+You are one of the mighty dinosaurs -- King Dinosaur -- and you have to travel across Pangea to get to a big volcano before it explodes, because if it explodes all the dinosaurs will die.
++++Fairies & Unicorns
++++Plants
+When you reach Pluto, there should be a tree with a golden trunk and multicoloured leaves. You have to dig it out carefully to take it somewhere warmer where it can survive. It has magical powers that can save your grandmother or the king or someone.
 
 +Store
-++Credits
- * Creative commons attribution 
-  * spaceship by Jonathan Li from the Noun Project
-  * Olga Prikhodko (exit arrow)
-  * Numero Uno (Play Button)
-  * Gauge By Roberto Chiaveri
-  * Kuber (Back button)
-  * 
 ++Marketing Ideas
  * Bundle chocolate with apps: email us with your address and we will mail you a ritter sport of your choice.
 ++Advice
@@ -794,149 +352,5 @@ Ich nehme an, dass Lissie inzwischen keinen Bedarf mehr an Einmaleinsübung hat,
 Liebe Grüße
 
 Rafael 
-+Hints
- * Always show 5x8 and ask for 40, but if the kid gets it wrong or takes too long, walk them through some tricks (or ask them how they did it)
- * Base hints on player mastery -- if we know they know 6x6, use things based on 6x6.
-++Tricks
- * 5s end in 5 or 0
- * 10s end in 0
- * 9s digits add up to 9, and the first digit is one less than the multiplier (3x9 = {(3-1),(10-3)})
- * 3s digits add up to 3, 6 or 9 (but this is more useful for other stuff)
- * Songs or jingles?
- * Focus on 1, 2, 3, 4, 9, 10. Then you only really have to memorize 6, 7, 8 by 6, 7, 8
- * Hand trick 
- * Take the nearest 5x and add
- * Take the nearest 10x and subtract
- * Remembering squares is useful because whenever you multiply numbers that are separated by two you can simply square the middle number and then subtract one to get the answer.  5x7=6x6-1
- * Rhymes http://www.teacherweb.com/NY/Quogue/MrsLevy/MULTIPLICATION-RHYMES.pdf
-
-++Number Sense
-https://bhi61nm2cr3mkdgk1dtaov18-wpengine.netdna-ssl.com/wp-content/uploads/2017/03/FluencyWithoutFear-2015.pdf
-https://www.mathsolutions.com/documents/NumberTalks_SParrish.pdf (for 2 digit multiplications)
-+First ordered, then random
- * First get the kids to count by ones, twos, threes, and fours
- * Accelerate that
- * Then ask them multiplication questions in order (1x3, 2x3, 3x3...)
- * Make that fast
- * Then randomize it as described above
-+Extensions
-Battleship where the grid has numbers for x and y and you make your attack by entering x times y and receive a shot by decording x times y.
-agar.io where you can eat any equation smaller than you and run from those who are larger
-++Talea
-+++Dinosaur
-You are one of the mighty dinosaurs -- King Dinosaur -- and you have to travel across Pangea to get to a big volcano before it explodes, because if it explodes all the dinosaurs will die.
-+++Fairies & Unicorns
-+++Plants
-When you reach Pluto, there should be a tree with a golden trunk and multicoloured leaves. You have to dig it out carefully to take it somewhere warmer where it can survive. It has magical powers that can save your grandmother or the king or someone.
-++Done
- * sourMultiple accounts for siblings
-
-  * To run in simulator, you need to comment out lines 50 & 51 in PreciseLocation
-    //				#elif UNITY_IPHONE && !UNITY_EDITOR
-    //				_platform = new PreciseLocaleiOS(); 
-
- * Buttons
-  * Ok on 
-   * Android  5.1"  1080x1800  5:3 2.6" x 4.4"  xxhdpi = 480. Reported width 2.25". This will be misclassified.
-   * Android  6"    1440x2560 16:9              xxhdpi = 480. Reported width 3".
-   * iPhone   5.5"  1242x2208 16:9 2.7" x 4.8"     dpi = 461. Reported width 2.7"
-   * iPhone   5.5"  1080x1920 16:9                 dpi = 401. Reported width 2.7"
-   * iPad Pro 12.9" 2048x2732  4:3 7.7" x 10.3"
-  * Too small on 
-   * Android  3.2"   320x480   3:2 1.8" x 2.7"    mdpi = 160. Reported width 2".
-   * Android  3.7"   480x800   5:3                hdpi = 240. Reported width 2".
-   * Android  4"     480x854  16:9                hdpi = 240. Reported width 2"                  
-   * iPhone   4.7"   750x1334 16:9 2.3" x 4.1"     dpi = 326. Reported width 2.3"
-   * Android  4.7"   720x1280  5:3 2.4" x 4"     xhdpi = 320. Reported width 2.25"
-   * Android  5"    1080x1920 16:9 2.5" x 4.4"  xxhdpi = 480. Reported width 2.25" 
-So it depends on width, which must be > 2.5". But how do I calculate that?
-
 +Competitors
 https://www.youtube.com/watch?v=tDkn9bxr31U Allows lots of parental configuration (timer or not, lock stuff that is too easy, different modes (in order, got wrong, random, fill in the gaps, ...)
-+Tests
-++Talea
-First time played 15 minutes. Second time not interested but played 10 without complaint. Third time played 15 minutes until done, but not very happily. Fourth time: new stats display with revealed picture is motivating, at least for someone who can alreadz do it: she played 10 minutes voluntarily and would have continued had I not stopped her to fix a bug. Later, she asked whether it was fixed. And when it said "Fertig", she actually started a new player just to keep going.
-She keeps asking me when the rocket will be finished, since she can't play the slow mode anymore.
-
-Fast mode: initial strong motivation, found the effects cool, but after the second round started to enter numbers at random -- gap between success and failure maybe too strong? Maybe reduce acceleration when speed less than zero, or cap it?
-
-She found the version with capped falling speed and acceleration from >=0 less frustrating, but it was a halfhearted try. Probably need fresh testers.
-
-13.10. Talea misses the moon and finds the orbiting weird.
-++Matthias Bauchinger plus gerade 5 yo Tochter
- * Macht Spass, weil man es ganz genau machen muss und man schoen Rechnen kann
- * Fragten sich, was passiert, wenn man es falsch macht
- * Bedienung hat funktioniert
- * Punkte nicht beachtet
- * Wondered what the stars were for
- * Raketenteile nicht beachtet
- * Sich nicht für Statistikbutton interessiert
- * Looked for a "finished" button (when she was done, "what do I do?")
- * "Wie kann ich noch mal anfangen?"
- * Button problems
-  * Delete button not obvious
-  * 0r nicht als 0 wieder erkannt
-  * Enter button not obvious
-  * Matthias says: consider visual flow: ATM it starts at the question, then down to the buttons, then up to the answer, down to the rocket, up to the result... he thinks it would be better to go from top to bottom or vice versa
- * Both Matthias and daughter stopped playing before the day was over
-
- * [19/10/17 16:13:08] Matthias Bauchinger: Meine Tochter ist begeistert vom Raketenantrieb. Sie hat sich das Tablet schon wieder geschnappt und rechnet weiter... :-)
- * [19/10/17 16:21:10] Matthias Bauchinger: jetzt wollte sie aufhören, weil der Raketenmodus sie zu sehr gestresst hat
-
-Meine Tochter fand es stressig, weil die Rakete wieder runterfällt. Sie ist vom Typ her jemand, der immer gewinnen will, erster sein, alles richtig machen. Und weil sie noch nicht so gut multiplizieren, fällt die Rakete schnell runter und sie wird "nicht gewinnen". Und das mag sie nicht :slightly_smiling_face:
-Sie hat seit dem die App nicht mehr erwähnt. Ich denke, das ist "normal" bei ihr. Es gibt nur wenige Spiele die sie proaktiv einfordert (malen, Play-Doh, etc - Dinge die sie regelmäßig spielt). Die anderen Spiele müssen aktiv "getriggert" werden, z.B. durch Öffnen des Spieleschranks oder weil die Eltern einen Tipp geben.
-Ich denke, dass meine Tochter wieder spielen würde, wenn ich es ihr anbiete; aber nur wenn ich erkläre, dass es auch einen Modus ohne Zeitstress gibt (gibt es den überhaupt?)
-++Matthias Schindler
-Die Rakete sieht die aus wie ein Nuklearsprengkopf :smile:
-Die Grafik ist mir etwas zu erwachsen, sollte Comic mäßiger sein. Ich denke dass Du mit Lowpolyplaneten und einer "lustigen Rakete mit Augen" oder so besser fahren würdest
-Die Idee mit den Raketenteilen finde ich super. Nur leider sieht man nicht wie sich die Rakete zusammenbaut
-++Olivia
-++Amalia
-v0.1.7, 1.11.2017
-Pro:
-Tolle Animation
-Die App begrenzt die Spieldauer von alleine, so dass man weiß: für heute reicht es!
-Die Aufgaben haben sich immer mal wiederholt, so dass man daraus bei der nächsten Lösung lernen konnte.
-Die Aufgaben sind für erste und zweite Klasse sicher super und motivieren zum Lernen.
-
-Womit wir / Amalia Schwierigkeiten hatte:
-die Ziffern und Buchstaben (schrifttype) waren schwer zu lesen, so dass es am Anfang zu Verwechslungen kam (2 oder 3, was ist die 0)
-Die Worte der Belohnungssätze waren teilweise schwer und lang: „Raketenbrennstoff...“,, da hatte Amalia beim Lesen ihre Schwierigkeiten.
-Amalia störte es, dass sie so viele Runden um den Jupiter drehen sollte (und nichts neues passierte).
-Die App lässt sich nur hochkant bedienen, nicht im Querformat (hab keine Ahnung von Apps... ist wahrscheinlich oft so, weil die Animation sonst viel schwieriger wäre!?)
-Zu Beginn haben wir nicht gleich verstanden, dass die Rakete in der Mitte die Bestätigungstaste ist... obwohl sie dann gelb leuchtet.
-
-Jonathan: 
-Der Zahlengenerator hat am Anfang der Reihenfolge nach 1 mal 2, 1 mal 3, etc. gerechnet, was sehr einfach war. 
-Jonathan wünscht sich ein kurzes Tutorial.
-Er bemängelt, dass die Zeit zwischen den Aufgaben zu lang dauere (liegt wahrscheinlich daran, dass man mit 14 anderes gewohnt ist!)
-
-++Linda
-++Joerg
-++Eddie
-++Joachim
-Die Idee, Raumfahrt-Punkte zu sammeln, gefällt uns gut, und die Grafik ist sehr nett! Insgesamt hat es Joachim und seinen Eltern sehr gut gefallen, und Spaß gemacht.
-
-Der Anfang des Spiels mit nur 1x1, 1x2, 1x3... dauert zu lange, und ist zu vorhersehbar.
-
-Die Spielregeln sind nicht klar. Ich verstehe durchaus, was ich wann zu tun habe, aber nicht so recht, was wieviele Punkte gibt, und wie sich das Spiel weiterentwickeln könnte, je nachdem, wieviele Punkte ich zu sammeln geschafft habe. Und wie hängt die Punkte-Zahl von meiner Geschwindigkeit ab? Etc.
-
-Joachim war am Anfang verwirrt davon, wie die Zahlen angeordnet sind - er hat lange gebraucht - einfach deshalb, weil er lange brauchte, um die Zahlen zu finden. Eine lineare Anordnung 0,1,2,3,... wäre vielleicht einfacher. Das ist vielleicht sehr individuell, aber ich gebe zu, dass auch ich mich durch die kreisförmige Anordnung der Zahlen verlangsamt fühlte.
-
-Irgendwann hat das Programm für uns entschieden, dass Schluss für heute ist. Willst Du damit verhindern, dass Kinder 1x1-süchtig werden?  :-)  Ernsthaft, das ist ein anderer Teil der Spielregeln, die nicht klar sind, und es ist ein bisschen frustrierend.
-
-Eine mögliche Erweiterung wäre, dass man zum Beispiel nur die Multiplikationen mit 7 (7x1, 7x2 etc) oder einer anderen Zahl, die man wählen kann, macht.
- 
-++Rafael Morlock
-+To Ask
-Robert, Carrie, Marilisa, Mich, Paul, 
-+Future Testers
- * andrea_egner@web.de
- * klaas@flaregames.com
- * ole@flaregames.com
- * "Julia Steegmüller" <Julia.Steegmueller@gmx.de>
- * Susan Berry
- * Jonas Harm (hates math)
- * Linda's friend Nathalie
- * Tarek
-+For Next Time
