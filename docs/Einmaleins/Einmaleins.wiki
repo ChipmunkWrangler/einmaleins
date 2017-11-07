@@ -1,0 +1,53 @@
+[main]
+trashcan_maxnoofbags = 200
+wikipagefiles_gracefuloutsideaddandremove = True
+filestorage_identity_filenamemustmatch = False
+indexsearch_enabled = False
+wiki_lastactivetabno = 0
+indexsearch_formatno = 1
+filestorage_identity_moddateisenough = False
+headingsasaliases_depth = 0
+tree_expandednodes_rememberduration = 2
+versioning_storagelocation = 0
+trashcan_askondelete = True
+tree_expandednodes_descriptorpathes_main = wikipage/Einmaleins
+first_wiki_word = 
+wiki_mainarea_auiperspective = v1/5a01688800000ec800000002=@layout2|name=dummy;caption=;state=67372030;dir=3;layer=0;row=0;pos=0;prop=100000;bestw=618;besth=397;minw=618;minh=397;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1;notebookid=-1;transparent=255|name=5a01688800000ec800000002;caption=;state=67372028;dir=3;layer=0;row=0;pos=0;prop=100000;bestw=200;besth=200;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1;notebookid=-1;transparent=255|
+wiki_lasttabssubctrls = textedit
+export_default_dir = 
+tabs_maxcharacters = 0
+log_window_autoshow = Gray
+footnotes_as_wikiwords = False
+wiki_wikilanguage = wikidpad_default_2_0
+wikipagetitle_creationmode = 1
+wiki_onopen_rebuild = 0
+wikipagetitle_fromlinktitle = False
+wikipagetitleprefix = 
+editor_text_mode = False
+db_pagefile_suffix = .wiki
+wikipagefiles_maxnamelength = 120
+wikiwidehistory_maxentries = 100
+wiki_readonly = False
+wiki_onopen_tabssubctrl = 
+tree_expandednodes_descriptorpathes_views = 
+hotkey_showhide_bywiki = 
+filestorage_identity_moddatemustmatch = False
+wikipagetitle_headinglevel = 2
+tree_force_scratchpad_visibility = True
+trashcan_storagelocation = 0
+filesignature_timecoarsening = 0
+wikipagefiles_asciionly = False
+wiki_database_type = original_gadfly
+wiki_icon = 
+versioning_completesteps = 10
+tabhistory_maxentries = 25
+template_pagenamesre = ^template/
+further_wiki_words = 
+wiki_name = Einmaleins
+last_wiki_word = DesignDoc
+tree_last_root_wiki_word = Einmaleins
+
+[wiki_db]
+db_filename = 
+data_dir = data
+

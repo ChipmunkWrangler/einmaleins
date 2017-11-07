@@ -9,3 +9,4 @@ UnusedAssets/PostProcessing
 PluginDocs
 Screenshots
 android.apk
+*.lock
