@@ -102,6 +102,7 @@
      <Compile Include="Assets\Scripts\StatsColumnController.cs" />
      <Compile Include="Assets\Scripts\StatsController.cs" />
      <Compile Include="Assets\Scripts\TargetPlanet.cs" />
+     <Compile Include="Assets\Scripts\TestAlgorithm.cs" />
      <Compile Include="Assets\Scripts\TextButton.cs" />
      <Compile Include="Assets\Scripts\TextDisplay.cs" />
      <Compile Include="Assets\Scripts\UpgradeButton.cs" />

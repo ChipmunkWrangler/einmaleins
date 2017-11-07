@@ -20559,8 +20559,8 @@ MonoBehaviour:
   upgradeButtonLabel: {fileID: 352}
   doneText: {fileID: 95}
   youWinText: {fileID: 550210464}
-  buildRocketText: Rakete bauen
-  upgradeRocketText: Rakete verbessern
+  buildRocketTerm: Rakete bauen
+  upgradeRocketTerm: Rakete verbessern
   goal: {fileID: 1045511061}
 --- !u!114 &356
 MonoBehaviour:
@@ -22552,7 +22552,7 @@ Prefab:
     - target: {fileID: 224075400530928758, guid: 2ff712eae9d0f48ee80c09db91679d00,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -112.5
+      value: -67.5
       objectReference: {fileID: 0}
     - target: {fileID: 1666182919470646, guid: 2ff712eae9d0f48ee80c09db91679d00, type: 2}
       propertyPath: m_IsActive
@@ -22561,7 +22561,7 @@ Prefab:
     - target: {fileID: 224388671587432316, guid: 2ff712eae9d0f48ee80c09db91679d00,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -112.5
+      value: -67.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsActive
@@ -22765,6 +22765,46 @@ MonoBehaviour:
   mGUI_ShowReferences: 0
   mGUI_ShowTems: 1
   mGUI_ShowCallback: 0
+--- !u!1 &312986912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 312986914}
+  - component: {fileID: 312986913}
+  m_Layer: 0
+  m_Name: TestAlgorithm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &312986913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 312986912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 757b929fddc34421a92053420603913e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &312986914
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 312986912}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 459, y: 757.4375, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &379558590
 GameObject:
   m_ObjectHideFlags: 0
@@ -23560,6 +23600,58 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1390498115}
+--- !u!1 &1491156186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1491156189}
+  - component: {fileID: 1491156188}
+  - component: {fileID: 1491156187}
+  m_Layer: 0
+  m_Name: xARMProxy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1491156187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1491156186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b007041b7e1f6422aa03eda4dc1ba2d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1491156188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1491156186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d66198e525d924c4885cbba537eb3222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1491156189
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1491156186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1535142616
 GameObject:
   m_ObjectHideFlags: 0
