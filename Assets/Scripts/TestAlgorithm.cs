@@ -5,8 +5,9 @@ using System.Linq;
 
 public class TestAlgorithm : MonoBehaviour {
 	const float TARGET_TIME = 3.0f;
-	const int QUIZZES_PER_DAY = 3;
-	const int MAX_QUESTIONS_PER_QUIZ = 11;
+	const int MIN_QUIZZES_PER_DAY = 3;
+	const int MIN_TIME_PER_DAY = 5 * 60;
+	const int MAX_QUESTIONS_PER_QUIZ = 7; // because that's enough to get previous questions out of short term memory, I guess
 	const int QUESTIONS_PER_PLANET = MAX_QUESTIONS_PER_QUIZ - 1;
 	const float MAX_TIME_PER_QUIZ = TARGET_TIME * MAX_QUESTIONS_PER_QUIZ;
 	public static readonly float[] PLANET_HEIGHTS = TargetPlanet.heights;
@@ -146,10 +147,10 @@ public class TestAlgorithm : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-//		Test (new KidModel( 1000, 5, -999.0f, 10.0f) );
+		Test (new KidModel( 1000, 5, -999.0f, 10.0f) );
 //		Test (new KidModel( 110, 5, -7.0f, 10.0f) );
 //		Test (new KidModel( 60, 3, 15.0f, 6.0f) );
-		Test (new KidModel( 30, 1, 30.0f, 3.0f) );
+//		Test (new KidModel( 30, 1, 30.0f, 3.0f) );
 	}
 
 	void InitQuestions() {
@@ -172,20 +173,21 @@ public class TestAlgorithm : MonoBehaviour {
 			Debug.Log ("Day = " + day);
 			TestDay(kid, maxThrustFactor, q, ref targetPlanet, ref upgradeLevel, ref rocketParts, ref frustration, ref recordHeight);
 		}
-		Debug.Log ("Ready for gauntlet. Num mastered = " + questions.Count (question => question.wasMastered));
-		foreach (var question in questions) {
-			Debug.Log (question);
-		}
+		Debug.Log ("Ready for gauntlet. Num mastered = " + questions.Count (question => question.wasMastered) + " total right = " + questions.Sum(question => question.timesAnsweredCorrectly) + " total wrong = " + questions.Sum(question => question.timesAnsweredWrong)  );
+//		foreach (var question in questions) {
+//			Debug.Log (question);
+//		}
 	}
 
 	void TestDay (KidModel kid, float maxThrustFactor, float q, ref int targetPlanet, ref int upgradeLevel, ref int rocketParts, ref int frustration, ref float recordHeight) {
-		for (int i = 0; i < QUIZZES_PER_DAY && !IsReadyForGauntlet (targetPlanet); ++i ) {
+		float timeToday = 0;
+		for (int i = 0; ( i < MIN_QUIZZES_PER_DAY || timeToday < MIN_TIME_PER_DAY ) && !IsReadyForGauntlet (targetPlanet); ++i ) {
 			Debug.Log ("Quiz " + i + " upgradeLevel = " + upgradeLevel + " targetPlanet " + targetPlanet + " rocketparts = " + rocketParts + " frustration = " + frustration);
-			TestQuiz (kid, maxThrustFactor, q, ref targetPlanet, ref upgradeLevel, ref rocketParts, ref frustration, ref recordHeight);
+			timeToday += TestQuiz (kid, maxThrustFactor, q, ref targetPlanet, ref upgradeLevel, ref rocketParts, ref frustration, ref recordHeight);
 		}
 	}
 
-	void TestQuiz(KidModel kid, float maxThrustFactor, float q, ref int targetPlanet, ref int upgradeLevel, ref int rocketParts, ref int frustration, ref float recordHeight) {
+	float TestQuiz(KidModel kid, float maxThrustFactor, float q, ref int targetPlanet, ref int upgradeLevel, ref int rocketParts, ref int frustration, ref float recordHeight) {
 		float height = 0;
 		float time = 0;
 		float questionsAnswered = 0;
@@ -253,6 +255,7 @@ public class TestAlgorithm : MonoBehaviour {
 		if (gotUpgrade || isNewRecord || reachedNewPlanet) {
 			Debug.Log ("Answered " + questionsAnswered + " questions (" + numNew + " new, " + numWrong + " wrong, " + numMastered + " mastered) in " + time + " seconds. Reached " + height + (isNewRecord ? " new record" : "") + (reachedNewPlanet ? (" reached planet " + (targetPlanet - 1)) : "") + (gotUpgrade ? (" gotUpgrade " + upgradeLevel) : ""));
 		}
+		return time;
 	}
 
 	static bool IsReadyForGauntlet (int targetPlanet)
