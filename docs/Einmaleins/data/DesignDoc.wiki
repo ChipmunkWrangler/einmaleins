@@ -79,7 +79,6 @@ Check private schools as market.
   * assume mastery for questions that are answered very fast right away
  * all questions mastered before reaching pluto
   * this probably means forcing mastering of 11 questions before reaching Mars or at least Jupiter, etc. 
- * once all questions are mastered, do the pluto gauntlet? 
  * intuitive but not too punishing sense of urgency
 Try a falling and a non-falling version
 ++Musings
@@ -122,223 +121,81 @@ But the steady trickle is pedagogically sensible, I think, and prevents asking t
      * if frustration <= 0, take one at random
      * if frustration > 0, take the first (1x1, 1x2...)
    * If not, take a mastered question -- easiest or hardest depending on frustration
-
+ * Mastering a question gives you a rocket part => upgrade after 11 parts
+  * We can't just upgrade when reaching a planet, because it is not necessary or sufficient to master questions to reach planets 
+  * Don't interrupt quiz for upgrade?
+ * The player may need to grind upgrades (even i+2!) in order to reach planet i
+ * Gauntlet: N = 55
+  * *Aborts as soon as a question is failed (wrong or requires more than target time)?*
+ * Into space: N normal, planetHeight[max] = 2 * plutoHeight
+ * Effects:
+  * Flash mastery causes a "Mastered!" to appear
+  * show simple particles when a question is answered in target time and mastery particles on mastery
 
 ++Approach: Falling
  * Relaunch if you hit Earth again
 ++Approach: Nonfalling
 +++Time limit, fixed height per answer
- * Each correct answer increases rocket height by a fixed amount H = planetHeight[i] / M, at upgrade level i
-  * So if you answer each of the first M questions in (on average) the allotted time you reach planet i.
+ * The moon is a planet.
+ * Each correct answer increases rocket height by a fixed amount H = planetHeight[i] / N, at upgrade level i
+  * So if you answer each of the first N questions in (on average) the allotted time you reach planet i.
   * But we want it to be impossible to reach planet i+1 with upgrade level i 
- * Mastering a question gives you a rocket part => upgrade after 11 parts
-  * We can't just upgrade when reaching a planet, because it is not necessary or sufficient to master questions to reach planets 
-  * *Interrupt launch for upgrade?* 
-   * *But then increase number of quizzes per day?*
- * So the rhythm should be:
-  * Try to reach planet i
-  * Reach planet i
-  * Get upgrade i+1
-  * Try to reach planet i+i
-   * or
-  * Try to reach planet i
-  * Get upgrade i+1
-  * Reach planet i
-  * Try to reach planet i+i
-   * but it could even happen that
-  * Try to reach planet i
-  * Get upgrade i+1
-  * Get upgrade i+2
-  * Reach planet i
-  * Try to reach planet i+i
+ * A wrong answer reduces the remaining time 
  * Each launch ends after whichever comes first:
   * you reach a new planet, or
-  * t = M * (allottedTime + celebrationTime) seconds elapse
+  * t = N * (allottedTime + celebrationTime) seconds elapse
    * This gives a natural limit: You can't answer more Q = t / celebrationTime questions, so you can't get heigher than QH.
-    * maxHeight = QH = (M * (allottedTime + celebrationTime) / celebrationTime)) * planetHeight[i] / M = 
-    *           = planetHeight[i] * (allottedTime + celebrationTime) / celebrationTime
-    *           = planetHeight[i] * (1 + allottedTime / celebrationTime)
-    * We want planetHeight[i+1] > maxHeight = planetHeight[i] * (1 + allottedTime / celebrationTime)
-    * planetHeight[i+1] / planetHeight[i] > 1 + allottedTime / celebrationTime
-    * celebrationTime > allottedTime / (planetHeight[i+1] / planetHeight[i] - 1)
-    * So if the new planet is at least twice as high as the old planet, celebrationTime > allottedTime suffices.
-    * For i = 3, celebrationTime > allottedTime / 0.6. So for allottedTime of 3s, celebration must be >= 5s. Or a = 2.5s, c = 4.17
-    * For i = 4, celebrationTime > allottedTime / 0.33. This can't be fudged. 
-     * But if we add the moon, then i=4 becomes i = 5 and you have mastered all questions
-     * So in order to have a shot at reaching Neptune, you must already have mastered all questions
-      * But then Neptune is already review, which is Pluto's role
-      * That might not be so bad, though, because it is a pre-review that prepares you for the gauntlet
-     * Or you only have a shot at Neptune after mastering 44 questions (if there is no moon)
-      * And there are only 11 questions left, which could be a natural limit to stop you from getting to Pluto early
-      * But as you master some of these 11, there will be too few questions to ask
-      * We could fill in with review questions, but then the natural limit is gone
-     * Or you switch to the gauntlet as soon as Neptune is reached
-      * But then you may not have mastered all questions before targeting Pluto
-      * You could switch to the gauntlet with an inadequate engine and offer one more upgrade once you master the last questions
-      * But this wastes the player's time   
-  * you can add a question limit to stop before the natural time-based limit
-   * but this is less transparent for the player
-   * Also, the closer N is to M, the less scope there is for breaking records after reaching the planet, while grinding for the upgrade 
-   * maxQuestions = N s.t. planetHeight[i+i] > NH
-    * => planetHeight[i+i] > N * planetHeight[i] / M 
-    * => M * planetHeight[i+1] / planetHeight[i] > N
-    * => M * 1.6  > N for i = 3
-    * => M * 1.33 > N for i = 4, e.g. M = 11 => N <= 14.
- * Wrong answers tend to take longer, and also only move you up a fraction as high 
- * Display is a problem: Do you display this to the player? Perhaps as fuel? Or oxygen? That would be high-pressure, but not showing it might feel arbitrary
-   
-   
- * After you reach Neptune (which implies that you have 55 questions either mastered or answered fast in this set), do the gauntlet
-  * No mastery boost -- mastered questions are treated as normal questions
-  * You have 55 * 3 = 165 seconds to answer all questions to reach Pluto.
-  * Height += is plutoDistance / 55 per correct answer
-  * gauntlet aborts as soon as a question is failed (wrong or requires more than target time)
- * After you reach Pluto, return to 99s limit with thrust = plutoDistance / 33.
-  * Since you don't abort or stop at the planet, you go further if you require less than target time
-  * This makes it possible to keep breaking records, but doesn't guarantee it
+    * We want planetHeight[i+1] > maxHeight = QH => celebrationTime > allottedTime / (planetHeight[i+1] / planetHeight[i] - 1)
+    * For i = 0 through 3, our current celebrationTime == allottedTime suffices.
+    * For i = 4, celebrationTime > allottedTime / 0.6. So for allottedTime of 3s, celebration must be >= 5s. Or a = 2.5s, c = 4.17. Ok.
+    * At i = 5, we have mastered all questions and have not yet reached Neptune (maybe not other planets either).
+     * At this point, it is just review
+     * And in fact review has started before this, as soon as numUnmastered < N
+     * As soon as we reach Neptune, we switch to the Pluto gauntlet
+ * Display time limit as as fuel? Or oxygen?
  * Effects:
-  * Flash mastery causes a "Mastered!" to appear
   * After wrong answer, exhaust sputters
-  * show simple particles when a question is answered in target time and mastery particles on mastery
   * The rocket engine run from answer through the next question's target time, so if you are on track, they keep firing
+++++Goals satisfied?
+ * OK? Fairly steady progress: 
+  * GOOD Cap is asymptotic.
+  * BAD As you master questions, new ones are mixed in steadily, so no natural progress.
+  * GOOD Upgrade grinding eventually causes leaps in progess.
+ * OK drill difficult questions
+  * OK but don't repeat them immediately (you never repeat a question within a quiz, and quizzes are always several questions long)
+ * OK don't repeat easy questions
+ * OK all questions mastered before reaching pluto
+ * OK? intuitive but not too punishing sense of urgency
 +++Question limit, variable height per answer
+ * Each quiz consists of N questions (can show as fuel indicator) or reaching the target planet
+ * Each correct answer increases rocket height by a generalized logistic function H(t)
+  * H(t) = planetHeight[i]                        M - m
+  *        --------------- * (m + ---------------------------------------------)
+  *               N                        (m - M)^v 
+  *                               ( (1 + ( (-----)    - 1 ) * e^(t-a) ) ^ (1/v)
+  *                                        (m - 1)
+  * Where M = max height increase from one question = planetHeight[i+1] / planetHeight[i]
+  *       m = min height increase from one question, e.g. 0.1
+  *       v is a factor which, as it increases, makes slow answers more effective, e.g. 4
+  *       t is the timer required to answer the question
+  *       a is the allotted time
+  * Then H(a) = planetHeight[i] / N, so if you answer all questions in an average of allotted time, you exactly reach the planet.
+  * And H(0) < M * planetHeight[i] / N, so max height for one quiz is < N * H(0) = M * planetHeight[i] = planetHeight[i+1] 
+ * A wrong answer consumes fuel, i.e. one less question is asked.
+ * To reach Pluto, we need to have mastered all questions.
+  * As soon has we have mastered all questions and reached Neptune, we switch to the gauntlet
+  * But this could make the upgrade into a downgrade if you reach Neptune first, then get it
+   * Well, it has more fuel but less thrust per fuel unit. :-)
+ * Or add Moon. Then to reach Neptune, must have mastered all questions.
+   * At this point, it is just review
+   * And in fact review has started before this, as soon as numUnmastered < N
+   * As soon as we reach Neptune, we switch to the Pluto gauntlet
 
 +++Variant: Spaced repetition
  * Repeat wrong questions in 5s, right questions in Pimsleur progression
  * No frustration, difficulty, or mastery: Show the question that has been due longest, then new questions in order
  * This doesn't guarantee that all questions will have been seen by Neptune
  * See if this is helpful after writing a test for the answer-time-based version
-+++Does Approach Match Goals
- * P = 11, N = 33
- * Perfect kid (always answers correctly in 1 - 3s):
-  * Masters 11 questions (11/55), gets upgrade (Jupiter), reaches height 2.68125E+07
-  * Masters 4 questions (15/55), reaches Mars (7.875E+07)
-  * Masters 7 questions (22/55), gets upgrade (Saturn). Reached 1.378125E+08
-  * Masters 11 questions (33/55), gets upgrade (Uranus). Reached 4.424063E+08
-  * Masters 8 questions (41/55), reaches Jupiter (6.825E+08)
-  * Masters 3 questions (44/55), gets upgrade (Neptune).
-  * Masters 10 questions (54/55), reaches Saturn (1.361563E+09)
-  * Masters 1 questions (55/55), gets upgrade (Pluto)
-  * Reviews 16 questions, reaches Uranus (2.886E+09)
-  * Reviews 25 questions, reaches Neptune (4.509375E+09)
-  * Reviews 32 questions, reaches Pluto (5.772001E+09)
-
- * P = 11, N = 11
- * Perfect kid:
-  * Asked 10 questions (10 new, 10 mastered) in 18.49088 seconds. Reached 7.8E+07 new record reached planet 0
-  * Asked 1 questions (1 new, 1 mastered) in 2.707518 seconds. Reached 7800000 gotUpgrade 1
-  * Asked 10 questions (10 new, 10 mastered) in 19.20398 seconds. Reached 6.3E+08 new record reached planet 1
-  * Asked 1 questions (1 new, 1 mastered) in 2.120146 seconds. Reached 6.3E+07 gotUpgrade 2
-  * Asked 10 questions (10 new, 10 mastered) in 18.8326 seconds. Reached 1.287E+09 new record reached planet 2
-  * Asked 1 questions (1 new, 1 mastered) in 2.842604 seconds. Reached 1.287E+08 gotUpgrade 3
-  * Asked 11 questions (11 new, 11 mastered) in 21.7934 seconds. Reached 3.003E+09 new record reached planet 3 gotUpgrade 4
-  * Asked 10 questions (10 new, 10 mastered) in 20.54603 seconds. Reached 4.357E+09 new record reached planet 4
-  * Asked 1 questions (1 new, 1 mastered) in 2.877691 seconds. Reached 4.357E+08 gotUpgrade 5
-  * Asked 10 questions (0 new, 0 mastered) in 21.16559 seconds. Reached 5.772001E+09 new record reached planet 5
- * Good kid, difficulty order of new questions
-  * At the end, three questions are not mastered.
-  * One question was wrong 7 times, 3 were wrong thrice, 3 twice, 12 once 
-  * Asked 10 questions (10 new, 0 wrong, 10 mastered) in 20.54792 seconds. Reached 7.8E+07 new record reached planet 0
-  * Asked 1 questions (1 new, 0 wrong, 1 mastered) in 2.677147 seconds. Reached 7800000 gotUpgrade 1
-  * Asked 7 questions (7 new, 2 wrong, 3 mastered) in 30.88376 seconds. Reached 2.835E+08 new record
-  * Asked 7 questions (3 new, 0 wrong, 0 mastered) in 25.52539 seconds. Reached 3.78E+08 new record
-  * Asked 9 questions (2 new, 0 wrong, 1 mastered) in 24.93449 seconds. Reached 5.04E+08 new record
-  * Asked 10 questions (2 new, 0 wrong, 3 mastered) in 29.13233 seconds. Reached 5.67E+08 new record
-  * Asked 7 questions (0 new, 0 wrong, 4 mastered) in 19.61382 seconds. Reached 4.41E+08 gotUpgrade 2
-  * Asked 5 questions (2 new, 0 wrong, 1 mastered) in 26.18573 seconds. Reached 6.435E+08 new record reached planet 1
-  * Asked 7 questions (3 new, 0 wrong, 3 mastered) in 27.64838 seconds. Reached 7.722001E+08 new record
-  * Asked 4 questions (0 new, 0 wrong, 0 mastered) in 8.364923 seconds. Reached 3.861E+08
-  * Asked 5 questions (1 new, 0 wrong, 1 mastered) in 23.11545 seconds. Reached 5.148E+08
-  * Asked 5 questions (1 new, 1 wrong, 1 mastered) in 28.92314 seconds. Reached 4.18275E+08
-  * Asked 4 questions (0 new, 0 wrong, 1 mastered) in 12.52968 seconds. Reached 3.861E+08
-  * Asked 5 questions (2 new, 0 wrong, 1 mastered) in 32.81306 seconds. Reached 5.148E+08
-  * Asked 5 questions (1 new, 0 wrong, 0 mastered) in 23.34378 seconds. Reached 5.148E+08
-  * Asked 5 questions (0 new, 0 wrong, 1 mastered) in 12.43761 seconds. Reached 5.148E+08
-  * Asked 6 questions (2 new, 0 wrong, 1 mastered) in 21.60003 seconds. Reached 6.435E+08
-  * Asked 3 questions (0 new, 0 wrong, 1 mastered) in 11.75908 seconds. Reached 3.861E+08 gotUpgrade 3
-  * Asked 4 questions (0 new, 0 wrong, 1 mastered) in 18.03757 seconds. Reached 8.19E+08 new record
-  * Asked 4 questions (1 new, 1 wrong, 0 mastered) in 28.21548 seconds. Reached 6.1425E+08
-  * Asked 5 questions (1 new, 0 wrong, 1 mastered) in 30.61595 seconds. Reached 1.092E+09 new record
-  * Asked 5 questions (1 new, 0 wrong, 0 mastered) in 26.35472 seconds. Reached 1.092E+09
-  * Asked 5 questions (0 new, 0 wrong, 1 mastered) in 32.90954 seconds. Reached 1.365E+09 new record reached planet 2
-  * Asked 6 questions (2 new, 0 wrong, 1 mastered) in 25.50396 seconds. Reached 1.365E+09
-  * Asked 4 questions (0 new, 1 wrong, 0 mastered) in 11.38121 seconds. Reached 6.1425E+08
-  * Asked 3 questions (0 new, 1 wrong, 1 mastered) in 31.02793 seconds. Reached 3.4125E+08
-  * Asked 7 questions (3 new, 1 wrong, 1 mastered) in 27.38183 seconds. Reached 1.43325E+09 new record
-  * Asked 3 questions (0 new, 1 wrong, 0 mastered) in 7.727959 seconds. Reached 3.4125E+08
-  * Asked 6 questions (0 new, 0 wrong, 1 mastered) in 27.36381 seconds. Reached 1.365E+09
-  * Asked 3 questions (0 new, 1 wrong, 0 mastered) in 30.9641 seconds. Reached 3.4125E+08
-  * Asked 6 questions (1 new, 0 wrong, 1 mastered) in 16.82231 seconds. Reached 1.365E+09
-  * Asked 5 questions (0 new, 0 wrong, 1 mastered) in 18.73364 seconds. Reached 1.092E+09
-  * Asked 3 questions (0 new, 1 wrong, 2 mastered) in 19.36616 seconds. Reached 6.1425E+08 gotUpgrade 4
-  * Asked 2 questions (0 new, 1 wrong, 0 mastered) in 8.792386 seconds. Reached 1.08925E+08
-  * Asked 2 questions (0 new, 0 wrong, 0 mastered) in 1.242726 seconds. Reached 4.357E+08
-  * Asked 4 questions (2 new, 0 wrong, 0 mastered) in 17.84107 seconds. Reached 1.3071E+09
-  * Asked 2 questions (0 new, 0 wrong, 0 mastered) in 11.05083 seconds. Reached 4.357E+08
-  * Asked 3 questions (0 new, 0 wrong, 0 mastered) in 30.44263 seconds. Reached 8.714001E+08
-  * Asked 2 questions (0 new, 0 wrong, 0 mastered) in 23.76594 seconds. Reached 4.357E+08
-  * Asked 3 questions (0 new, 0 wrong, 0 mastered) in 29.04846 seconds. Reached 8.714001E+08
-  * Asked 3 questions (0 new, 0 wrong, 0 mastered) in 25.09968 seconds. Reached 8.714001E+08
-  * Asked 5 questions (1 new, 0 wrong, 1 mastered) in 14.6744 seconds. Reached 1.7428E+09 new record
-  * Asked 4 questions (0 new, 1 wrong, 0 mastered) in 8.378592 seconds. Reached 9.803251E+08
-  * Asked 4 questions (0 new, 0 wrong, 2 mastered) in 5.692072 seconds. Reached 1.3071E+09
-  * Asked 2 questions (0 new, 0 wrong, 1 mastered) in 2.168637 seconds. Reached 4.357E+08
-  * Asked 4 questions (3 new, 0 wrong, 2 mastered) in 32.85133 seconds. Reached 1.3071E+09
-  * Asked 2 questions (0 new, 0 wrong, 0 mastered) in 32.68066 seconds. Reached 4.357E+08
-  * Asked 2 questions (0 new, 0 wrong, 0 mastered) in 21.96708 seconds. Reached 4.357E+08
-  * Asked 3 questions (1 new, 0 wrong, 0 mastered) in 28.68383 seconds. Reached 8.714001E+08
-  * Asked 3 questions (0 new, 1 wrong, 0 mastered) in 15.74315 seconds. Reached 5.44625E+08
-  * Asked 3 questions (0 new, 0 wrong, 0 mastered) in 14.5767 seconds. Reached 8.714001E+08
-  * Asked 3 questions (0 new, 0 wrong, 1 mastered) in 3.83011 seconds. Reached 8.714001E+08
-  * Asked 3 questions (1 new, 1 wrong, 0 mastered) in 16.70282 seconds. Reached 5.44625E+08
-  * Asked 2 questions (0 new, 0 wrong, 0 mastered) in 32.90604 seconds. Reached 4.357E+08
-  * Asked 3 questions (0 new, 0 wrong, 1 mastered) in 23.34747 seconds. Reached 8.714001E+08
-  * Asked 2 questions (0 new, 0 wrong, 0 mastered) in 11.42554 seconds. Reached 4.357E+08
-  * Asked 3 questions (1 new, 0 wrong, 0 mastered) in 19.57675 seconds. Reached 8.714001E+08
-  * Asked 3 questions (0 new, 1 wrong, 0 mastered) in 11.85628 seconds. Reached 5.44625E+08
-  * Asked 3 questions (0 new, 0 wrong, 0 mastered) in 26.69951 seconds. Reached 8.714001E+08
-  * Asked 6 questions (0 new, 1 wrong, 0 mastered) in 32.5293 seconds. Reached 1.851725E+09 new record
-  * Asked 2 questions (0 new, 0 wrong, 0 mastered) in 8.39099 seconds. Reached 4.357E+08
-  * Asked 8 questions (0 new, 1 wrong, 2 mastered) in 32.39131 seconds. Reached 2.723125E+09 new record
-  * Asked 6 questions (0 new, 0 wrong, 0 mastered) in 13.69829 seconds. Reached 2.1785E+09
-  * Asked 2 questions (0 new, 0 wrong, 1 mastered) in 3.695359 seconds. Reached 8.714001E+08 gotUpgrade 5. WHAT???
-  * Asked 2 questions (0 new, 0 wrong, 0 mastered) in 2.910368 seconds. Reached 5.772001E+08
-  * Asked 2 questions (0 new, 0 wrong, 1 mastered) in 2.391191 seconds. Reached 5.772001E+08
-  * Asked 4 questions (0 new, 0 wrong, 0 mastered) in 32.59198 seconds. Reached 1.7316E+09
-  * Asked 5 questions (0 new, 0 wrong, 0 mastered) in 27.31391 seconds. Reached 2.886E+09 new record reached planet 3
-  * Asked 8 questions (0 new, 0 wrong, 0 mastered) in 23.44429 seconds. Reached 4.617601E+09 new record reached planet 4
-  * Asked 10 questions (0 new, 0 wrong, 0 mastered) in 29.39641 seconds. Reached 5.772001E+09 new record reached planet 5
- * Good kid (KidModel( 110, 5, -7.0f, 10.0f) )
-  * Asked 3 questions (3 new, 0 mastered) in 42.97609 seconds. Reached 2.34E+07 new record
-  * Asked 3 questions (0 new, 0 mastered) in 33.14442 seconds. Reached 2.34E+07
-  * Asked 4 questions (1 new, 1 mastered) in 40.25467 seconds. Reached 3.12E+07 new record
-  * Asked 7 questions (4 new, 1 mastered) in 38.19511 seconds. Reached 5.46E+07 new record
-  * Asked 6 questions (0 new, 0 mastered) in 40.39234 seconds. Reached 4.68E+07
-  * Asked 10 questions (4 new, 4 mastered) in 90.17191 seconds. Reached 7.215E+07 new record
-  * Asked 7 questions (1 new, 1 mastered) in 39.864 seconds. Reached 4.29E+07
-  * Asked 7 questions (1 new, 1 mastered) in 71.9958 seconds. Reached 4.875E+07
-  * Asked 7 questions (1 new, 2 mastered) in 42.47381 seconds. Reached 5.46E+07
-  * Asked 4 questions (0 new, 1 mastered) in 21.30294 seconds. Reached 3.12E+07, upgrade (Jupiter)
-  * Asked 2 questions (0 new, 0 mastered) in 13.45739 seconds. Reached 1.26E+08 new record. Reached Mars
-  * Asked 7 questions (3 new, 2 mastered) in 36.86876 seconds. Reached 3.9375E+08 new record
-  * Asked 8 questions (3 new, 3 mastered) in 44.6061 seconds. Reached 4.5675E+08 new record
-  * Asked 3 questions (0 new, 0 mastered) in 48.44188 seconds. Reached 1.4175E+08
-  * Asked 6 questions (1 new, 1 mastered) in 49.63277 seconds. Reached 3.78E+08
-  * Asked 6 questions (1 new, 2 mastered) in 40.80743 seconds. Reached 3.78E+08
-  * Asked 5 questions (1 new, 0 mastered) in 35.03214 seconds. Reached 2.6775E+08
-  * Asked 6 questions (1 new, 1 mastered) in 48.68303 seconds. Reached 3.3075E+08
-  * Asked 5 questions (0 new, 2 mastered) in 12.24933 seconds. Reached 3.15E+08. Upgrade (Saturn)
-  * Asked 5 questions (2 new, 2 mastered) in 12.4933 seconds. Reached 6.435E+08 new record. Reached Jupiter.
-  * Asked 2 questions (0 new, 0 mastered) in 67.61806 seconds. Reached 1.60875E+08
-  * Asked 10 questions (7 new, 7 mastered) in 27.04075 seconds. Reached 1.287E+09 new record. Reached Saturn.
-  * Asked 4 questions (1 new, 0 mastered) in 87.11512 seconds. Reached 4.18275E+08
-  * Asked 1 questions (0 new, 0 mastered) in 42.78511 seconds. Reached 3.2175E+07
-
-
-
- * The results seem to depend on P & N in a way I don't like
- * Is there a natural P and / or N?
-
 
 +Ideas
  * Even mastered skills need occasional review
