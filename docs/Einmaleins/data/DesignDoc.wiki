@@ -124,13 +124,214 @@ But the steady trickle is pedagogically sensible, I think, and prevents asking t
  * Mastering a question gives you a rocket part => upgrade after 11 parts
   * We can't just upgrade when reaching a planet, because it is not necessary or sufficient to master questions to reach planets 
   * Don't interrupt quiz for upgrade?
- * The player may need to grind upgrades (even i+2!) in order to reach planet i
+ * The player may need to grind upgrades (even i+2!) in order to reach planet i. The harder the questions, the more likely this is.
  * Gauntlet: N = 55
   * *Aborts as soon as a question is failed (wrong or requires more than target time)?*
  * Into space: N normal, planetHeight[max] = 2 * plutoHeight
  * Effects:
   * Flash mastery causes a "Mastered!" to appear
   * show simple particles when a question is answered in target time and mastery particles on mastery
+ * N.B. it is possible to not have all questions mastered by the end because you lose mastery in the final quiz.
++++Goals met?
+ * OK? Fairly steady progress: 
+  * GOOD Cap is asymptotic.
+  * BAD As you master questions, new ones are mixed in steadily, so no natural progress.
+  * GOOD Upgrade grinding eventually causes leaps in progess.
+ * OK drill difficult questions
+  * OK but don't repeat them immediately (you never repeat a question within a quiz, and quizzes are always several questions long)
+ * OK don't repeat easy questions
+ * 780/3.85 = 202.597402597
++++Test
+N = 11
+++++Perfect Kid
+Answered 10 questions (10 new, 0 wrong, 10 mastered) in 21.34749 seconds. Reached 393380.6 new record reached planet 0
+Answered 11 questions (11 new, 0 wrong, 11 mastered) in 22.81051 seconds. Reached 434657.9 new record gotUpgrade 1
+Answered 10 questions (10 new, 0 wrong, 10 mastered) in 20.2782 seconds. Reached 8.028187E+07 new record reached planet 1 gotUpgrade 2
+Answered 10 questions (10 new, 0 wrong, 10 mastered) in 19.13157 seconds. Reached 6.569708E+08 new record reached planet 2 gotUpgrade 3
+Answered 10 questions (10 new, 0 wrong, 10 mastered) in 20.06801 seconds. Reached 1.329655E+09 new record reached planet 3 gotUpgrade 4
+Answered 10 questions (4 new, 0 wrong, 4 mastered) in 18.47182 seconds. Reached 2.870595E+09 new record reached planet 4 gotUpgrade 5
+Answered 10 questions (0 new, 0 wrong, 0 mastered) in 20.95661 seconds. Reached 4.46361E+09 new record reached planet 5
+++++Good Kid (KidModel( 110, 5, -7.0f, 10.0f)), ordered questions
++++++First Try
+Answered 10 questions (10 new, 0 wrong, 10 mastered) in 19.76948 seconds. Reached 398540.3 new record reached planet 0
+Answered 11 questions (11 new, 0 wrong, 3 mastered) in 56.20811 seconds. Reached 290868.2 gotUpgrade 1
+Answered 11 questions (3 new, 0 wrong, 3 mastered) in 32.83249 seconds. Reached 7.793654E+07 new record
+Answered 11 questions (3 new, 0 wrong, 3 mastered) in 52.00147 seconds. Reached 6.701134E+07
+Answered 10 questions (2 new, 1 wrong, 5 mastered) in 29.06561 seconds. Reached 7.310731E+07 gotUpgrade 2
+Answered 2 questions (0 new, 0 wrong, 0 mastered) in 5.442348 seconds. Reached 1.194172E+08 new record reached planet 1
+Answered 11 questions (6 new, 0 wrong, 2 mastered) in 88.99606 seconds. Reached 4.018297E+08 new record
+Answered 9 questions (0 new, 2 wrong, 3 mastered) in 85.63431 seconds. Reached 3.202317E+08
+Answered 10 questions (4 new, 1 wrong, 0 mastered) in 86.10661 seconds. Reached 4.011977E+08
+Answered 10 questions (0 new, 1 wrong, 1 mastered) in 67.14085 seconds. Reached 5.028524E+08 new record
+Answered 11 questions (2 new, 0 wrong, 4 mastered) in 90.48462 seconds. Reached 4.856486E+08 gotUpgrade 3
+Answered 6 questions (0 new, 1 wrong, 0 mastered) in 21.83726 seconds. Reached 6.30207E+08 new record reached planet 2
+Answered 9 questions (2 new, 2 wrong, 3 mastered) in 82.8539 seconds. Reached 8.052644E+08 new record
+Answered 9 questions (3 new, 3 wrong, 2 mastered) in 131.2088 seconds. Reached 6.931533E+08
+Answered 11 questions (4 new, 0 wrong, 1 mastered) in 162.2789 seconds. Reached 5.288587E+08
+Answered 8 questions (0 new, 3 wrong, 0 mastered) in 100.7327 seconds. Reached 4.721767E+08
+Answered 8 questions (0 new, 3 wrong, 1 mastered) in 86.95761 seconds. Reached 6.492865E+08
+Answered 11 questions (2 new, 1 wrong, 1 mastered) in 167.0358 seconds. Reached 8.246031E+08 new record
+Answered 9 questions (0 new, 2 wrong, 2 mastered) in 47.62501 seconds. Reached 8.315428E+08 new record gotUpgrade 4
+Answered 7 questions (0 new, 1 wrong, 2 mastered) in 31.39995 seconds. Reached 1.453949E+09 new record reached planet 3
+Answered 8 questions (2 new, 4 wrong, 1 mastered) in 101.5094 seconds. Reached 1.433291E+09
+Answered 8 questions (1 new, 3 wrong, 2 mastered) in 132.942 seconds. Reached 1.399974E+09
+Answered 8 questions (0 new, 4 wrong, 2 mastered) in 74.35861 seconds. Reached 1.397644E+09 -- interesting: if the last question is wrong, it has no negative effect. Also, you were overall must fater, but reached the same height. Distribution? 
+Answered 11 questions (0 new, 0 wrong, 1 mastered) in 47.95075 seconds. Reached 2.748975E+09 new record reached planet 4
+Answered 11 questions (0 new, 0 wrong, 1 mastered) in 38.38253 seconds. Reached 2.610896E+09
+Answered 11 questions (0 new, 0 wrong, 1 mastered) in 23.92449 seconds. Reached 3.024121E+09 new record
+Answered 11 questions (0 new, 0 wrong, 2 mastered) in 22.75515 seconds. Reached 3.076644E+09 new record gotUpgrade 5
+Answered 10 questions (0 new, 0 wrong, 1 mastered) in 20.9777 seconds. Reached 4.452628E+09 new record reached planet 5
++++++Second Try
+Answered 11 questions (11 new, 0 wrong, 11 mastered) in 20.24108 seconds. Reached 385000 new record reached planet 0 got upgrade 1
+Answered 11 questions (11 new, 0 wrong, 2 mastered) in 61.88012 seconds. Reached 5.112896E+07 new record
+Answered 11 questions (2 new, 0 wrong, 2 mastered) in 25.23164 seconds. Reached 8.563334E+07 new record
+Answered 11 questions (2 new, 0 wrong, 3 mastered) in 46.51605 seconds. Reached 7.537093E+07
+Answered 10 questions (2 new, 1 wrong, 6 mastered) in 53.81649 seconds. Reached 5.890871E+07 gotUpgrade 2
+Answered 2 questions (0 new, 0 wrong, 0 mastered) in 3.416615 seconds. Reached 7.8E+07 new record reached planet 1
+Answered 9 questions (5 new, 2 wrong, 1 mastered) in 137.2927 seconds. Reached 3.066539E+08 new record
+Answered 10 questions (2 new, 1 wrong, 2 mastered) in 65.8667 seconds. Reached 4.298458E+08 new record
+Answered 10 questions (2 new, 1 wrong, 2 mastered) in 57.60568 seconds. Reached 4.939328E+08 new record
+Answered 9 questions (1 new, 2 wrong, 1 mastered) in 57.14925 seconds. Reached 4.258081E+08
+Answered 9 questions (1 new, 2 wrong, 3 mastered) in 47.88803 seconds. Reached 4.13245E+08 gotUpgrade 3
+Answered 9 questions (3 new, 2 wrong, 2 mastered) in 139.0334 seconds. Reached 6.382566E+08 new record
+Answered 9 questions (2 new, 1 wrong, 0 mastered) in 76.00417 seconds. Reached 6.3E+08 new record reached planet 2
+Answered 9 questions (0 new, 3 wrong, 2 mastered) in 73.45967 seconds. Reached 8.129589E+08 new record
+Answered 9 questions (2 new, 2 wrong, 2 mastered) in 76.82056 seconds. Reached 7.227427E+08
+Answered 9 questions (2 new, 2 wrong, 1 mastered) in 102.5353 seconds. Reached 7.524814E+08
+Answered 9 questions (1 new, 2 wrong, 1 mastered) in 97.97702 seconds. Reached 7.280045E+08
+Answered 9 questions (1 new, 2 wrong, 3 mastered) in 107.369 seconds. Reached 7.222511E+08 gotUpgrade 4
+Answered 8 questions (2 new, 3 wrong, 1 mastered) in 138.5744 seconds. Reached 8.977031E+08 new record
+Answered 9 questions (2 new, 2 wrong, 0 mastered) in 82.90231 seconds. Reached 1.33965E+09 new record
+Answered 9 questions (0 new, 2 wrong, 2 mastered) in 102.0696 seconds. Reached 1.317546E+09
+Answered 7 questions (0 new, 2 wrong, 0 mastered) in 61.89626 seconds. Reached 1.287E+09 new record reached planet 3
+Answered 9 questions (1 new, 2 wrong, 2 mastered) in 72.15045 seconds. Reached 1.963937E+09 new record
+Answered 11 questions (0 new, 0 wrong, 2 mastered) in 53.43055 seconds. Reached 2.640123E+09 new record
+Answered 11 questions (0 new, 0 wrong, 1 mastered) in 28.6313 seconds. Reached 2.918651E+09 new record
+Answered 10 questions (0 new, 2 wrong, 1 mastered) in 31.94756 seconds. Reached 2.644033E+09
+Answered 11 questions (0 new, 0 wrong, 1 mastered) in 22.31137 seconds. Reached 2.73E+09 new record reached planet 4
+Answered 11 questions (0 new, 0 wrong, 0 mastered) in 24.18273 seconds. Reached 3.019285E+09 new record
+Answered 10 questions (0 new, 1 wrong, 0 mastered) in 24.11104 seconds. Reached 2.662053E+09
+Answered 11 questions (0 new, 0 wrong, 1 mastered) in 22.19974 seconds. Reached 3.092171E+09 new record gotUpgrade 5
+Answered 11 questions (0 new, 0 wrong, 0 mastered) in 22.04065 seconds. Reached 4.357E+09 new record reached planet 5
+
+++++Good Kid (KidModel( 110, 5, -7.0f, 10.0f)), random questions
++++++First Test
+9 days
+Answered 11 questions (11 new, 0 wrong, 6 mastered) in 99.08784 seconds. Reached 286824.3 new record
+Answered 10 questions (5 new, 1 wrong, 2 mastered) in 141.7631 seconds. Reached 156894.4
+Answered 10 questions (2 new, 1 wrong, 1 mastered) in 146.162 seconds. Reached 201406
+Answered 9 questions (0 new, 2 wrong, 1 mastered) in 99.02176 seconds. Reached 253500.6
+Answered 10 questions (2 new, 1 wrong, 3 mastered) in 47.71608 seconds. Reached 277323.2 gotUpgrade 1
+Answered 2 questions (0 new, 1 wrong, 0 mastered) in 5.418863 seconds. Reached 385000 new record reached planet 0
+Answered 9 questions (2 new, 2 wrong, 4 mastered) in 42.95743 seconds. Reached 5.361159E+07 new record
+Answered 11 questions (6 new, 0 wrong, 4 mastered) in 47.73838 seconds. Reached 7.354499E+07 new record
+Answered 9 questions (2 new, 2 wrong, 3 mastered) in 103.0196 seconds. Reached 4.682596E+07 gotUpgrade 2
+Answered 4 questions (0 new, 0 wrong, 1 mastered) in 38.04312 seconds. Reached 7.8E+07 new record reached planet 1
+Answered 9 questions (4 new, 2 wrong, 1 mastered) in 161.0481 seconds. Reached 2.598285E+08 new record
+Answered 9 questions (1 new, 2 wrong, 1 mastered) in 109.0254 seconds. Reached 3.169282E+08 new record
+Answered 9 questions (1 new, 2 wrong, 2 mastered) in 75.08464 seconds. Reached 3.861408E+08 new record
+Answered 8 questions (1 new, 3 wrong, 1 mastered) in 55.56624 seconds. Reached 2.601816E+08
+Answered 8 questions (1 new, 3 wrong, 1 mastered) in 42.29845 seconds. Reached 3.819389E+08
+Answered 10 questions (3 new, 2 wrong, 0 mastered) in 41.95529 seconds. Reached 5.006068E+08 new record
+Answered 11 questions (1 new, 0 wrong, 6 mastered) in 34.19894 seconds. Reached 6.342259E+08 new record gotUpgrade 3
+Answered 7 questions (2 new, 4 wrong, 1 mastered) in 119.4544 seconds. Reached 6.091739E+08
+Answered 8 questions (2 new, 2 wrong, 3 mastered) in 82.63161 seconds. Reached 6.3E+08 new record reached planet 2
+Answered 11 questions (6 new, 0 wrong, 4 mastered) in 89.15846 seconds. Reached 9.515546E+08 new record gotUpgrade 4
+Answered 9 questions (2 new, 2 wrong, 0 mastered) in 72.92973 seconds. Reached 1.323518E+09 new record
+Answered 7 questions (0 new, 0 wrong, 1 mastered) in 32.61758 seconds. Reached 1.287E+09 new record reached planet 3
+Answered 10 questions (1 new, 1 wrong, 1 mastered) in 56.72032 seconds. Reached 2.402664E+09 new record
+Answered 9 questions (0 new, 2 wrong, 4 mastered) in 51.90427 seconds. Reached 2.183903E+09
+Answered 11 questions (0 new, 0 wrong, 2 mastered) in 24.79253 seconds. Reached 2.73E+09 new record reached planet 4
+Answered 11 questions (0 new, 0 wrong, 1 mastered) in 27.88639 seconds. Reached 2.891306E+09 new record
+Answered 10 questions (0 new, 1 wrong, 0 mastered) in 31.19574 seconds. Reached 2.535504E+09
+Answered 11 questions (0 new, 0 wrong, 1 mastered) in 29.90357 seconds. Reached 2.825923E+09 gotUpgrade 5
+Answered 11 questions (0 new, 0 wrong, 0 mastered) in 23.64521 seconds. Reached 4.357E+09 new record reached planet 5
++++++Second
+10 days
+Answered 10 questions (10 new, 1 wrong, 4 mastered) in 207.8211 seconds. Reached 206426.4 new record
+Answered 9 questions (3 new, 2 wrong, 1 mastered) in 153.4553 seconds. Reached 138351.1
+Answered 9 questions (1 new, 2 wrong, 1 mastered) in 138.2997 seconds. Reached 188208.8
+Answered 10 questions (2 new, 1 wrong, 2 mastered) in 68.04834 seconds. Reached 270260.8 new record
+Answered 9 questions (1 new, 2 wrong, 2 mastered) in 43.85046 seconds. Reached 260617.6
+Answered 8 questions (1 new, 3 wrong, 1 mastered) in 58.75886 seconds. Reached 213063.1 gotUpgrade 1
+Answered 2 questions (0 new, 0 wrong, 0 mastered) in 4.378625 seconds. Reached 385000 new record reached planet 0
+Answered 9 questions (2 new, 2 wrong, 2 mastered) in 25.57191 seconds. Reached 6.49206E+07 new record
+Answered 9 questions (2 new, 2 wrong, 4 mastered) in 89.61386 seconds. Reached 5.543337E+07
+Answered 9 questions (4 new, 2 wrong, 2 mastered) in 103.284 seconds. Reached 3.891093E+07
+Answered 8 questions (1 new, 4 wrong, 2 mastered) in 154.2972 seconds. Reached 2.181676E+07
+Answered 9 questions (3 new, 2 wrong, 1 mastered) in 88.8185 seconds. Reached 2.770685E+07 gotUpgrade 2
+Answered 4 questions (0 new, 1 wrong, 0 mastered) in 40.50484 seconds. Reached 7.8E+07 new record reached planet 1
+Answered 10 questions (2 new, 1 wrong, 0 mastered) in 51.34295 seconds. Reached 5.010233E+08 new record
+Answered 10 questions (0 new, 1 wrong, 2 mastered) in 46.41871 seconds. Reached 5.234571E+08 new record
+Answered 10 questions (2 new, 1 wrong, 5 mastered) in 41.2264 seconds. Reached 5.277264E+08 new record
+Answered 9 questions (4 new, 2 wrong, 3 mastered) in 63.50894 seconds. Reached 4.390733E+08
+Answered 9 questions (3 new, 2 wrong, 2 mastered) in 72.40693 seconds. Reached 3.558844E+08 gotUpgrade 3
+Answered 7 questions (0 new, 0 wrong, 2 mastered) in 25.0023 seconds. Reached 6.3E+08 new record reached planet 2
+Answered 8 questions (3 new, 3 wrong, 0 mastered) in 98.98859 seconds. Reached 6.971096E+08 new record
+Answered 9 questions (1 new, 2 wrong, 4 mastered) in 97.44069 seconds. Reached 7.954342E+08 new record
+Answered 10 questions (5 new, 1 wrong, 4 mastered) in 143.4883 seconds. Reached 8.621537E+08 new record gotUpgrade 4
+Answered 9 questions (3 new, 3 wrong, 2 mastered) in 115.6052 seconds. Reached 1.233022E+09 new record
+Answered 9 questions (2 new, 3 wrong, 0 mastered) in 116.9547 seconds. Reached 1.103227E+09
+Answered 8 questions (0 new, 1 wrong, 1 mastered) in 51.00326 seconds. Reached 1.287E+09 new record reached planet 3
+Answered 10 questions (0 new, 1 wrong, 3 mastered) in 30.48785 seconds. Reached 2.512697E+09 new record
+Answered 11 questions (0 new, 0 wrong, 2 mastered) in 24.55903 seconds. Reached 2.73E+09 new record reached planet 4
+Answered 11 questions (0 new, 0 wrong, 2 mastered) in 22.47252 seconds. Reached 3.083925E+09 new record
+Answered 10 questions (0 new, 1 wrong, 1 mastered) in 52.55654 seconds. Reached 2.628797E+09 gotUpgrade 5
+Answered 11 questions (0 new, 0 wrong, 0 mastered) in 33.65095 seconds. Reached 4.636177E+09 new record
+Answered 11 questions (0 new, 0 wrong, 0 mastered) in 25.30433 seconds. Reached 4.357E+09 new record reached planet 5
+++++Ok Kid (KidModel( 60, 3, -15.0f, 6.0f)), random questions
++++++First try
+35 days
+New record on days 0, 1, 3, 4, 5, 6, 9, 10, 15, 16, 17, 18, 22, 23, 27, 28, 30, 31, 32, 33, 34, 35
+Upgrade to 1 on day 3
+Reached planet 0 on day 4
+Upgrade 2 and planet 1 on day 9
+Upgrade to 3 on day 16
+Planet 2 on Day 18
+Upgrade to 4 on day 23
+Planet 3 on day 28
+Upgrade to 5 on day 30
+Planet 4 on day 31
+Planet 5 on day 35
+So days 2, 7, 8, 11, 12, 13, 14, 19, 20, 21, 24, 25, 26, 29 sucked.
+++++++Second Try
+33 days
+New record on days 0, 1, 3, 4, 5, 6, 12, 13, 14, 15, 18, 21, 22, 25, 26, 28, 29, 30, 32
+Upgrade 1 and planet 0 on day 5
+Upgrade 2 on day 9
+Planet 1 on day 10
+Upgrade 3 on day 14
+Planet 2 day 18
+Upgrade 4 on day 21
+Planet 3 day 25
+Upgrade 5 on day 28
+Planet 4 on day 29
+Planet 5 on day 33
+Crap days: 2, 7, 8, 11, 16, 17, 19, 20, 23, 24, 27, 31
+++++Bad Kid (KidModel( 30, 1, 30.0f, 3.0f) ), random questions
++++++Try 1
+57 days.
+New record on days 0, 2, 3, 4, 7, 11, 12, 14, 16, 21, 22, 26, 31, 35, 36, 45, 50, 51, 52, 57
+Upgrade to 1 and reach planet 0 on day 11
+Upgrade to 2 and reach planet 1 on day 21
+Upgrade to 3 on day 31
+Upgrade to 4 on day 43
+Planet 2 on day 44
+Planet 3 on day 51
+Upgrade to 5 on day 56
+Planets 4 and 5 on day 57
++++++Try 2
+64 days
+New record on days 0, 1, 2, 3, 10, 11, 12, 13, 14, 22, 23, 32, 38, 41, 45, 46, 51, 52, 54, 55, 57, 58, 59, 60, 61, 63, 64
+Upgrade to 1 on day 9
+Reached Planet 0 on day 10
+Upgrade to 2 and planet 1 on day 21
+Upgrade to 3 on day 32
+Upgrade to 4 on day 43
+Reached planet 2 on day 44
+Planet 3 on day 50
+Upgrade to 5 and reached planet 4 on day 58
+Planet 5 on day 64
 
 ++Approach: Falling
  * Relaunch if you hit Earth again
@@ -157,23 +358,12 @@ But the steady trickle is pedagogically sensible, I think, and prevents asking t
   * After wrong answer, exhaust sputters
   * The rocket engine run from answer through the next question's target time, so if you are on track, they keep firing
 ++++Goals satisfied?
- * OK? Fairly steady progress: 
-  * GOOD Cap is asymptotic.
-  * BAD As you master questions, new ones are mixed in steadily, so no natural progress.
-  * GOOD Upgrade grinding eventually causes leaps in progess.
- * OK drill difficult questions
-  * OK but don't repeat them immediately (you never repeat a question within a quiz, and quizzes are always several questions long)
- * OK don't repeat easy questions
  * OK all questions mastered before reaching pluto
  * OK? intuitive but not too punishing sense of urgency
 +++Question limit, variable height per answer
  * Each quiz consists of N questions (can show as fuel indicator) or reaching the target planet
  * Each correct answer increases rocket height by a generalized logistic function H(t)
-  * H(t) = planetHeight[i]                        M - m
-  *        --------------- * (m + ---------------------------------------------)
-  *               N                        (m - M)^v 
-  *                               ( (1 + ( (-----)    - 1 ) * e^(t-a) ) ^ (1/v)
-  *                                        (m - 1)
+  * H(t) = planetHeight[i] / N * (m + (M - m)/(( (1 + ( ((m - M)/(m - 1))^v - 1 ) * e^(t-a) ) ^ (1/v)))
   * Where M = max height increase from one question = planetHeight[i+1] / planetHeight[i]
   *       m = min height increase from one question, e.g. 0.1
   *       v is a factor which, as it increases, makes slow answers more effective, e.g. 4
@@ -186,10 +376,18 @@ But the steady trickle is pedagogically sensible, I think, and prevents asking t
   * As soon has we have mastered all questions and reached Neptune, we switch to the gauntlet
   * But this could make the upgrade into a downgrade if you reach Neptune first, then get it
    * Well, it has more fuel but less thrust per fuel unit. :-)
- * Or add Moon. Then to reach Neptune, must have mastered all questions.
+ * Or add Moon. Then to reach Neptune, must have mastered all questions
    * At this point, it is just review
    * And in fact review has started before this, as soon as numUnmastered < N
+   * But that's ok. It makes Neptune the only planet we have to reach "honestly", by answering N questions in the allotted time
    * As soon as we reach Neptune, we switch to the Pluto gauntlet
+    * This could be an additional upgrade or change to add a habitation pod for the plant 
+    
+ * Consider limiting the quizzes per day by time or effort instead of number
+
++++Goals satisfied?
+ * OK all questions mastered before reaching pluto
+ * OK? intuitive but not too punishing sense of urgency
 
 +++Variant: Spaced repetition
  * Repeat wrong questions in 5s, right questions in Pimsleur progression
