@@ -54,7 +54,18 @@ Amalia störte es, dass sie so viele Runden um den Jupiter drehen sollte (und ni
 Die App lässt sich nur hochkant bedienen, nicht im Querformat (hab keine Ahnung von Apps... ist wahrscheinlich oft so, weil die Animation sonst viel schwieriger wäre!?)
 Zu Beginn haben wir nicht gleich verstanden, dass die Rakete in der Mitte die Bestätigungstaste ist... obwohl sie dann gelb leuchtet.
 
-Jonathan: 
+>     Habt Ihr versucht, auf den oberen rechten Button zu tippen, was den Fortschritt anzeigt? Wenn ja, fand Amalia (oder Du) das interessant und/oder motivierend?
+Ich fand es gut, aber Amalia hat es von sich aus nicht gleich verstanden, was auf der Abbildung zu sehen ist.
+
+>     Fandet ihr die Grafik ansprechend, oder wäre etwas Bunte, Comichafte (also das, was man bei Kinderapps immer sieht) vorzugswürdig?
+Amalia: „ ich fand die Rakete schon cool!“
+
+>     Hat Amalia im Planetenmodus erlebt, dass die Rakete wieder anfing, nach unten zu fallen? Wenn ja, fand sie das schlimm?
+Ja, das ist passiert. Sie fand es gut, weil sie sich dadurch beeilen musste.
+
+Eine Bitte noch: auch Amalia wünscht sich die Möglichkeit schwerere Aufgaben bis 1000 als Steigerung rechnen zu können.
+
+++Jonathan (Too old)
 Der Zahlengenerator hat am Anfang der Reihenfolge nach 1 mal 2, 1 mal 3, etc. gerechnet, was sehr einfach war. 
 Jonathan wünscht sich ein kurzes Tutorial.
 Er bemängelt, dass die Zeit zwischen den Aufgaben zu lang dauere (liegt wahrscheinlich daran, dass man mit 14 anderes gewohnt ist!)
