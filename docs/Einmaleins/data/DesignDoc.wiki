@@ -71,28 +71,43 @@ Check private schools as market.
 +Orbiting is boring, falling is sad 
 ++Goals
  * Fairly steady progress
+  * So if there is a cap on height, and you reach it, it should ideally give you a bonus afterwards
+  * New questions should come slowly enough that your natural progress towards mastering existing questions is reflected by height records  
  * drill difficult questions
+  * but don't repeat them immediately
  * don't repeat easy questions
   * assume mastery for questions that are answered very fast right away
  * all questions mastered before reaching pluto
- * don't repeat questions right away
-++Approach
+  * this probably means forcing mastering of 11 questions before reaching Mars or at least Jupiter, etc. 
+ * once all questions are mastered, do the pluto gauntlet? 
+ * intuitive but not too punishing sense of urgency
+Try a falling and a non-falling version
+++Musings
+If you don't fall, then either 
+ * the distance travelled depend on the speed with which the question is answered, or 
+ * each correct answer moves you a fixed distance and there is a time limit
+You get smoother progress if there is an advantage to being under the target time. 
+ * In particular, if the distance travelled caps at answering within target time, and you reach a planet by answering the correct number of questions in the target time, then you need to upgrade when you reach the planet at the latest, otherwise you can't improve on that result.
+  * If reaching the planet causes an upgrade, it should be the only way to get an upgrade, which is bad.
+But then you have to cap that advantage to prevent reaching other planets too early.
++++Time Limit vs. Variable Distance
+ * Time limit
+  * is easily visualizable
+  * is easily skinnable
+  * doesn't cap max height naturally (need to limit number of questions as well)
+ * Falling has a natural metaphor and is intuitively unterstandable with no extra UI
++++Boost vs. Upgrade
+Boosts due to mastery provide steady progress, but upgrades are satisfying leaps with cool graphics, so I'd prefer upgrades.
+
+OTOH, without boosts, you get a steady trickle of new questions, which will tend to prevent much progress until the upgrade happens.
+But the steady trickle is pedagogically sensible, I think, and prevents asking the same question many times in a row.
+
+++Approach: General
  * There is only flash mode, so I will refer to mastered instead of flash-mastered 
  * Each day, you get k launches
- * Each launch ends after t = N * 6s (3s answer time plus 3s celebration time), or when you reach a new planet, whichever comes first.
-  * Do you display this to the player? Perhaps as fuel? Or oxygen? That would be high-pressure, but not showing it might feel arbitrary
-  * Answering one question quickly gives you more time for the next! Do you want this? 
-   * Yes: it must be possible to improve without an upgrade
-   * Note that reaching further planets may be possible
-    * That's ok, except maybe for the gauntlet. *???* 
- * Each correct answer increases rocket height by a fixed amount H = planetHeight / N
-  * So if you answer all questions in the allotted time, you reach the planet 
- * Wrong answers tend to take longer, and also only move you up a fraction as high 
- * Mastering a question gives you a rocket part => upgrade after P => planetHeight for H is increased to next planet
-  * Interrupt launch for upgrade *???* 
-  * But then increase number of quizzes per day?
  * initial answer time is 3.0 + epsilon seconds 
   * Thus, if you answer the question on time first try, it is mastered
+ * Being faster than the target time is rewarded, but it is impossible to reach planet n without upgrade n. 
  * Start with frustration = 0. +2 for wrong answer, -1 for right answer, -2 for fast answer, capped at [-2, 3] 
  * Question ordering:
   * First ask all questions that you got wrong during the last launch.
@@ -107,6 +122,70 @@ Check private schools as market.
      * if frustration <= 0, take one at random
      * if frustration > 0, take the first (1x1, 1x2...)
    * If not, take a mastered question -- easiest or hardest depending on frustration
+
+
+++Approach: Falling
+ * Relaunch if you hit Earth again
+++Approach: Nonfalling
++++Time limit, fixed height per answer
+ * Each correct answer increases rocket height by a fixed amount H = planetHeight[i] / M, at upgrade level i
+  * So if you answer each of the first M questions in (on average) the allotted time you reach planet i.
+  * But we want it to be impossible to reach planet i+1 with upgrade level i 
+ * Mastering a question gives you a rocket part => upgrade after 11 parts
+  * We can't just upgrade when reaching a planet, because it is not necessary or sufficient to master questions to reach planets 
+  * *Interrupt launch for upgrade?* 
+   * *But then increase number of quizzes per day?*
+ * So the rhythm should be:
+  * Try to reach planet i
+  * Reach planet i
+  * Get upgrade i+1
+  * Try to reach planet i+i
+   * or
+  * Try to reach planet i
+  * Get upgrade i+1
+  * Reach planet i
+  * Try to reach planet i+i
+   * but it could even happen that
+  * Try to reach planet i
+  * Get upgrade i+1
+  * Get upgrade i+2
+  * Reach planet i
+  * Try to reach planet i+i
+ * Each launch ends after whichever comes first:
+  * you reach a new planet, or
+  * t = M * (allottedTime + celebrationTime) seconds elapse
+   * This gives a natural limit: You can't answer more Q = t / celebrationTime questions, so you can't get heigher than QH.
+    * maxHeight = QH = (M * (allottedTime + celebrationTime) / celebrationTime)) * planetHeight[i] / M = 
+    *           = planetHeight[i] * (allottedTime + celebrationTime) / celebrationTime
+    *           = planetHeight[i] * (1 + allottedTime / celebrationTime)
+    * We want planetHeight[i+1] > maxHeight = planetHeight[i] * (1 + allottedTime / celebrationTime)
+    * planetHeight[i+1] / planetHeight[i] > 1 + allottedTime / celebrationTime
+    * celebrationTime > allottedTime / (planetHeight[i+1] / planetHeight[i] - 1)
+    * So if the new planet is at least twice as high as the old planet, celebrationTime > allottedTime suffices.
+    * For i = 3, celebrationTime > allottedTime / 0.6. So for allottedTime of 3s, celebration must be >= 5s. Or a = 2.5s, c = 4.17
+    * For i = 4, celebrationTime > allottedTime / 0.33. This can't be fudged. 
+     * But if we add the moon, then i=4 becomes i = 5 and you have mastered all questions
+     * So in order to have a shot at reaching Neptune, you must already have mastered all questions
+      * But then Neptune is already review, which is Pluto's role
+      * That might not be so bad, though, because it is a pre-review that prepares you for the gauntlet
+     * Or you only have a shot at Neptune after mastering 44 questions (if there is no moon)
+      * And there are only 11 questions left, which could be a natural limit to stop you from getting to Pluto early
+      * But as you master some of these 11, there will be too few questions to ask
+      * We could fill in with review questions, but then the natural limit is gone
+     * Or you switch to the gauntlet as soon as Neptune is reached
+      * But then you may not have mastered all questions before targeting Pluto
+      * You could switch to the gauntlet with an inadequate engine and offer one more upgrade once you master the last questions
+      * But this wastes the player's time   
+  * you can add a question limit to stop before the natural time-based limit
+   * but this is less transparent for the player
+   * Also, the closer N is to M, the less scope there is for breaking records after reaching the planet, while grinding for the upgrade 
+   * maxQuestions = N s.t. planetHeight[i+i] > NH
+    * => planetHeight[i+i] > N * planetHeight[i] / M 
+    * => M * planetHeight[i+1] / planetHeight[i] > N
+    * => M * 1.6  > N for i = 3
+    * => M * 1.33 > N for i = 4, e.g. M = 11 => N <= 14.
+ * Wrong answers tend to take longer, and also only move you up a fraction as high 
+ * Display is a problem: Do you display this to the player? Perhaps as fuel? Or oxygen? That would be high-pressure, but not showing it might feel arbitrary
    
    
  * After you reach Neptune (which implies that you have 55 questions either mastered or answered fast in this set), do the gauntlet
@@ -122,17 +201,14 @@ Check private schools as market.
   * After wrong answer, exhaust sputters
   * show simple particles when a question is answered in target time and mastery particles on mastery
   * The rocket engine run from answer through the next question's target time, so if you are on track, they keep firing
++++Question limit, variable height per answer
+
 +++Variant: Spaced repetition
  * Repeat wrong questions in 5s, right questions in Pimsleur progression
  * No frustration, difficulty, or mastery: Show the question that has been due longest, then new questions in order
  * This doesn't guarantee that all questions will have been seen by Neptune
  * See if this is helpful after writing a test for the answer-time-based version
-+++Variant: Boost
- * Upgrade comes when you reach a planet
- * mastered questions from for this planet boost 3x as much as a correct answer and reduce N
-  * 3x because that guarantees you need to answer at least 3 post-boost questions to reach the planet (if 3 divides N)
- * Should give smoother progress than upgrade-based 
-++Does Approach Match Goals
++++Does Approach Match Goals
  * P = 11, N = 33
  * Perfect kid (always answers correctly in 1 - 3s):
   * Masters 11 questions (11/55), gets upgrade (Jupiter), reaches height 2.68125E+07
@@ -263,31 +339,7 @@ Check private schools as market.
  * The results seem to depend on P & N in a way I don't like
  * Is there a natural P and / or N?
 
-+++Variant: Allow collecting more parts than you need (don't interrupt to upgrade, do interrupt when planet is reached)
- * Perfect kid (always answers correctly in 1.5s, 4.5 with celebration):
-  * Masters 21 questions (21/55), reaches Mars, gets upgrade to 2x (Jupiter).
-  * Masters 11 questions (32/55), reaches Jupiter, gets upgrade to 4x (Saturn).
-  * Masters 11 questions (43/55), reaches Saturn, gets upgrade to 8x (Uranus)
-  * Masters 11 questions (54/55), reaches Uranus, upgrade to 16x
-  * Masters 1 question, reviews 10, reaches Neptune.
 
-+++Compare to Boost Version
- * Perfect kid:
-  * Masters 21 questions (21/55), reaches Mars, gets upgrade to 2x (Jupiter).
-  * Masters 21 questions (42/55), reaches Jupiter, gets upgrade to 4 (Saturn).
-  * Masters 13 questions (55/55), reviews 8, reaches Saturn, gets upgrade to 8x (Uranus)
-  * Reviews 21 questions, reaches Uranus, upgrade to 16x
-  * Reviews 21 questions, reaches Neptune.
-++++Boost variant
- * mastered questions exceeding the minimum for this planet boost 3x as much as a correct answer and reduce N
- * Need N = 33
- * Perfect kid:
-  * Masters 33 questions (33/55), reaches Mars, gets upgrade to 2x (Jupiter).
-  * Boost straight to Jupiter (33 - 11 = 22 >= 11), gets upgrade to 4x (Saturn).
-  * Boost straight to Saturn (33 - 22 = 11), gets upgrade to 8x (Uranus)
-  * Masters 22 questions (55/55), reviews 11, reaches Uranus, upgrade to 16x
-  * Boost straight to Neptune (22 - 11 = 11).
- 
 +Ideas
  * Even mastered skills need occasional review
  * If a card would be shown twice in a row, and there are still cards left or new cards available, move it one back in the list.
