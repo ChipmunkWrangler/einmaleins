@@ -20,7 +20,6 @@ public class NewPlayerName : MonoBehaviour {
 
 	void Start() {
 		if (PlayerPrefs.HasKey (curPlayerPrefsKey)) {
-			BackStack.Clear ();
 			Destroy(RocketParts.instance);
 			TargetPlanet.Reset ();
 		} // else this is initial start

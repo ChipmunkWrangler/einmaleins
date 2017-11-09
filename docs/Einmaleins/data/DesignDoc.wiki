@@ -7,11 +7,12 @@ Check private schools as market.
 +Todo
 ++v0.2.0
  * Change font to Classic Robot Regular
- * Write test code for various user models. See Does Approach Match Goals
+ * Implement new algorithm
  * Release to Talea & me
  * Ask Amalia and Matthias daughter to retest
  * Release to English kids   
 ++v0.2.1
+ * Check out Dave's crashes
  * Make horizontal version with linear button array 
  * Improve buttons
   * Make center button more obvious -- pulse the first time or something
@@ -20,8 +21,10 @@ Check private schools as market.
   * Buttons states more visible, especially respond more visibly to taps
 
 ++v1.0.0 
+ * Avoid delay after answering first question by creating and saving questions asynch during rocket building
+  * Also QuestionPicker only needs to save one question, not all questions, in OnAnswer 
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
- * Android back button
+ * Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player
  * Store page https://developer.apple.com/app-store/categories/
  * Test that it works with 512 Mb devices (https://hwstats.unity3d.com/mobile/os.html)
  * Change iOS build to Fast but no Exceptions option.
