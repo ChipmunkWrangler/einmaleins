@@ -11,7 +11,6 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	public const float targetAnswerTime = 3.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight
 	[SerializeField] float minSpeedFactor = 0.25f;
 	[SerializeField] KickoffLaunch launch = null;
-	[SerializeField] QuestionPicker questionPicker = null;
 	[SerializeField] Celebrate celebrate = null;
 	[SerializeField] GameObject oldRecord = null;
 	[SerializeField] Params paramObj = null;
@@ -20,7 +19,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] ShowSolarSystem zoomToPlanet = null;
 	[SerializeField] float achievementTextTransitionTime = 3.0f;
 	[SerializeField] float planetAchievementTextDelay = 2.0f;
-	[SerializeField] Questions questions = null;
+	[SerializeField] EffortTracker effortTracker = null;
 	[SerializeField] Goal goal = null;
 	float minSpeed;
 	float maxSpeed = float.MaxValue;
@@ -86,11 +85,11 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	void InitParams() {
-		float targetTimeBetweenAnswers = targetAnswerTime + celebrate.duration;
-		UnityEngine.Assertions.Assert.AreEqual(RocketParts.instance.numUpgrades + 1, TargetPlanet.heights.Length);
-		float newTargetHeight = TargetPlanet.GetTargetPlanetHeight();
-		float maxHeight = newTargetHeight * 2.0f;
-		CalcParams(maxHeight, newTargetHeight, targetTimeBetweenAnswers, questions.GetAskListLength() + 1); // +1 because of the initial launch acceleration
+//		float targetTimeBetweenAnswers = targetAnswerTime + celebrate.duration;
+//		UnityEngine.Assertions.Assert.AreEqual(RocketParts.instance.numUpgrades + 1, TargetPlanet.heights.Length);
+//		float newTargetHeight = TargetPlanet.GetTargetPlanetHeight();
+//		float maxHeight = newTargetHeight * 2.0f;
+//		CalcParams(maxHeight, newTargetHeight, targetTimeBetweenAnswers, questions.GetAskListLength() + 1); // +1 because of the initial launch acceleration
 //		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.instance.UpgradeLevel], FlashQuestions.ASK_LIST_LENGTH);
 //		TestEquations ();
 	}
@@ -123,6 +122,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		if (question == null) {
 			noMoreQuestions = true;
 		} else { // test
+			question.Ask();
 //			StartCoroutine (AutoAnswerQuestion ());
 		}
 
@@ -138,13 +138,13 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	IEnumerator AutoAnswerQuestion() {
 		float tgtTime = 3.0f;//
-		yield return new WaitForSeconds (tgtTime - celebrate.duration);
-		while(numAnswersGiven < questions.GetAskListLength() + 1) { // +1 because the first question has been shown.
-			OnCorrectAnswer(null, false);
-			Debug.Log ("NumAnswersGiven " + numAnswersGiven + " of " + (questions.GetAskListLength()+1));
+//		yield return new WaitForSeconds (tgtTime - celebrate.duration);
+//		while(numAnswersGiven < questions.GetAskListLength() + 1) { // +1 because the first question has been shown.
+//			OnCorrectAnswer(null, false);
+//			Debug.Log ("NumAnswersGiven " + numAnswersGiven + " of " + (questions.GetAskListLength()+1));
 			yield return new WaitForSeconds (tgtTime);
-		}
-		noMoreQuestions = true;
+//		}
+//		noMoreQuestions = true;
 	}
 
 	void Ascend ()
@@ -181,14 +181,13 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	void PrepareNewStart ()
 	{
 		noMoreQuestions = false;
-		questionPicker.Reset ();
 		launch.ShowLaunchButton ();
 	}
 
 	void StopRunning ()
 	{
 		isRunning = false;
-		questionPicker.Abort ();
+		effortTracker.EndQuiz ();
 	}
 
 	public void OnCountdown() {

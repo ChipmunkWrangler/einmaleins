@@ -7,6 +7,8 @@ public class RocketParts : MonoBehaviour {
 // public readonly
 	public static RocketParts instance { get; private set; }
 
+	public bool justUpgraded;
+
 	public int numParts {
 		get {
 			return numParts_;
@@ -105,7 +107,6 @@ public class RocketParts : MonoBehaviour {
 		
 	void Awake() {
 		if (instance == null) {
-			UnityEngine.Assertions.Assert.IsTrue (FlashQuestions.ASK_LIST_LENGTH <= PARTS_TO_BUILD_ROCKET); // having enough rocket parts to run FlashQuestions should imply having enough questions
 			DontDestroyOnLoad (gameObject);
 			instance = this;
 			Load ();
@@ -118,5 +119,6 @@ public class RocketParts : MonoBehaviour {
 	{
 		TargetPlanet.TargetNextPlanet ();
 		++upgradeLevel;
+		justUpgraded = true;
 	}
 }

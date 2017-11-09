@@ -1,58 +1,61 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public abstract class Questions : MonoBehaviour {
-	public Question[] questions { get; private set; }
-	public EffortTracker effortTracker = null;
-
+public class Questions : MonoBehaviour {
 	public const int maxNum = 10;
 
-	protected List<int> toAsk = new List<int>(); // list of indices in questions[]
-	protected const string prefsKey = "questions";
+	public Question[] questions { get; private set; }
+
+	const string prefsKey = "questions";
 
 	void Awake() {
 		CreateQuestions ();
 		Load ();
 	}
-		
+
 	public static int GetNumQuestions() {
 		return maxNum * (maxNum + 1) / 2;
 	}
 		
-	public Question GetNextQuestion() {
-		FillToAsk ();
-		Question retVal = null;
-		if (toAsk.Count > 0) {
-			retVal = questions[toAsk [0]];
-			toAsk.RemoveAt (0);
+	public void ResetForNewQuiz() {
+		foreach (Question question in questions) {
+			question.ResetForNewQuiz ();
 		}
-		return retVal;
 	}
 
-	public int GetAskListLength() {
-		FillToAsk ();
-		return toAsk.Count ();
+	public float GetQuizTime() {
+		return questions.Where (q => q.wasAnsweredInThisQuiz).Sum (q => q.GetLastAnswerTime ());
 	}
 
-	public virtual void Save() {
-		SaveQuestionsList ();
-		effortTracker.Save ();
+	public Question GetQuestion(bool isFrustrated) {
+		IEnumerable<Question> allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.IsMastered ());
+
+		if (!allowed.Any()) {
+			allowed = questions.Where (question => !question.wasAnsweredInThisQuiz);
+			if (!allowed.Any ()) {
+				return null;
+			}
+		}
+		IEnumerable<Question> candidates = allowed.Where (question => question.wasWrong);
+		if (!candidates.Any ()) {
+			candidates = allowed.Where (question => !question.isNew);
+			if (!candidates.Any ()) { // then give a new question
+				return (isFrustrated) ? allowed.First () : allowed.ElementAt(Random.Range(0, allowed.Count()));
+			}
+		}
+		var orderedCandidates = candidates.OrderBy (q => q.GetAverageAnswerTime ());
+		return (isFrustrated) ? orderedCandidates.First () : orderedCandidates.Last ();
 	}
 
-	public abstract void Reset();
-	public abstract void Abort();
-
-	protected virtual void Load() {
-		LoadQuestionsList ();
-		effortTracker.Load ();
+	public void Save() {
+		MDPrefs.SetInt (prefsKey + ":ArrayLen", questions.Length);
+		for (int i = 0; i < questions.Length; ++i) {
+			questions [i].Save ();
+		}
 	}
 
-	protected abstract void FillToAsk ();
-
-	protected void LoadQuestionsList ()
-	{
+	void Load() {
 		UnityEngine.Assertions.Assert.AreEqual (MDPrefs.GetInt (prefsKey + ":ArrayLen", questions.Length), questions.Length);
 		if (MDPrefs.HasKey (prefsKey + ":ArrayLen")) {
 			for (int i = 0; i < questions.Length; ++i) {
@@ -62,14 +65,6 @@ public abstract class Questions : MonoBehaviour {
 			for (int i = 0; i < questions.Length; ++i) {
 				questions [i].Create (prefsKey + ":" + i, i);
 			}
-		}
-	}
-
-	protected void SaveQuestionsList ()
-	{
-		MDPrefs.SetInt (prefsKey + ":ArrayLen", questions.Length);
-		for (int i = 0; i < questions.Length; ++i) {
-			questions [i].Save ();
 		}
 	}
 

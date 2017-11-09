@@ -16,7 +16,7 @@ public class RocketBuilder : MonoBehaviour {
 	[SerializeField] GameObject launchButton = null;
 	[SerializeField] GameObject rocketPartsWidget = null;
 
-	iTween.EaseType[] easeTypes = new iTween.EaseType[] {
+	iTween.EaseType[] easeTypes = { //new iTween.EaseType[]
 		iTween.EaseType.easeInOutCubic,
 		iTween.EaseType.easeOutQuad,
 		iTween.EaseType.easeInOutQuint,

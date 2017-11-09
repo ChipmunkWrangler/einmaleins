@@ -56,8 +56,8 @@ public static class MDPrefs {
 	public static void SetString(string key, string s) {
 		PlayerPrefs.SetString (GetKey(key), s);
 	}
-	public static bool GetBool(string key) {
-		return PlayerPrefsUtility.GetBool (GetKey(key));
+	public static bool GetBool(string key, bool defaultValue = default(bool)) {
+		return PlayerPrefsUtility.GetBool (GetKey(key), defaultValue);
 	}
 	public static void SetBool(string key, bool b) {
 		PlayerPrefsUtility.SetBool (GetKey(key), b);

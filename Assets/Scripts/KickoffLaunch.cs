@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KickoffLaunch : MonoBehaviour {
@@ -13,7 +12,7 @@ public class KickoffLaunch : MonoBehaviour {
 	[SerializeField] GameObject[] uiElementsToDeactivateOnCountdown;
 	[SerializeField] GameObject[] uiElementsToActivateOnPlay;
 	[SerializeField] GameObject[] uiElementsToDeactivateOnPlay;
-	[SerializeField] GoalButtonControler launchButtonController;
+	[SerializeField] GoalButtonControler goalButtonController;
 	[SerializeField] FlashThrust thrust;
 
 	void Start () {
@@ -37,7 +36,7 @@ public class KickoffLaunch : MonoBehaviour {
 			element.SetActive (false);
 		}
 
-		launchButtonController.OnQuestionChanged (null);
+		goalButtonController.OnQuestionChanged (null);
 	}
 
 	IEnumerator Kickoff () {

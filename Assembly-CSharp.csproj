@@ -58,7 +58,6 @@
      <Compile Include="Assets\Scripts\Celebrate.cs" />
      <Compile Include="Assets\Scripts\EffortTracker.cs" />
      <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
-     <Compile Include="Assets\Scripts\FlashQuestions.cs" />
      <Compile Include="Assets\Scripts\FlashThrust.cs" />
      <Compile Include="Assets\Scripts\Goal.cs" />
      <Compile Include="Assets\Scripts\GoalButtonControler.cs" />
@@ -70,7 +69,6 @@
      <Compile Include="Assets\Scripts\HideOnWrong.cs" />
      <Compile Include="Assets\Scripts\InactiveOnAnswer.cs" />
      <Compile Include="Assets\Scripts\KickoffLaunch.cs" />
-     <Compile Include="Assets\Scripts\KickoffMain.cs" />
      <Compile Include="Assets\Scripts\LaunchButtonController.cs" />
      <Compile Include="Assets\Scripts\MDCulture.cs" />
      <Compile Include="Assets\Scripts\MDPrefs.cs" />

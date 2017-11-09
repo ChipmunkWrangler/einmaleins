@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Goal : MonoBehaviour {
-	[SerializeField] Questions questions;
+	[SerializeField] EffortTracker effortTracker;
 
 	public enum CurGoal {
 		UPGRADE_ROCKET,
@@ -16,9 +16,9 @@ public class Goal : MonoBehaviour {
 
 	public CurGoal calcCurGoal() {
 		CurGoal curGoal;
-		if (RocketParts.instance.hasEnoughPartsToUpgrade) {
+		if (RocketParts.instance.hasEnoughPartsToUpgrade && !RocketParts.instance.justUpgraded) {
 			curGoal = CurGoal.UPGRADE_ROCKET;
-		} else if (questions.effortTracker.HasMaxedEffort ()) {
+		} else if (effortTracker.IsDoneForToday() && !RocketParts.instance.justUpgraded) {
 			curGoal = CurGoal.DONE_FOR_TODAY;
 		} else if (TargetPlanet.IsLeavingSolarSystem()) {
 			curGoal = CurGoal.WON;
