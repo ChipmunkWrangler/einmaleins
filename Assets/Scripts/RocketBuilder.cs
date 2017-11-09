@@ -39,7 +39,6 @@ public class RocketBuilder : MonoBehaviour {
 	public void OnUpgrade() {
 		UnityEngine.Assertions.Assert.AreEqual (exhaustParticles.Length, RocketParts.instance.numUpgrades + 1);
 		if (RocketParts.instance.Upgrade ()) {
-			Questions.OnUpgrade ();
 			counter.OnSpend (RocketParts.instance.numParts + RocketParts.instance.numPartsRequired, RocketParts.instance.numParts);
 			StartEngine ();
 		}

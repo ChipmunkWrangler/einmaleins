@@ -41,10 +41,6 @@ public abstract class Questions : MonoBehaviour {
 		effortTracker.Save ();
 	}
 
-	public static void OnUpgrade() {
-		MDPrefs.SetBool (prefsKey + ":wasJustUpgraded", true);
-	}
-
 	public abstract void Reset();
 	public abstract void Abort();
 
@@ -61,9 +57,6 @@ public abstract class Questions : MonoBehaviour {
 		if (MDPrefs.HasKey (prefsKey + ":ArrayLen")) {
 			for (int i = 0; i < questions.Length; ++i) {
 				questions [i].Load (prefsKey + ":" + i, i);
-			}
-			if (MDPrefs.GetBool (prefsKey + ":wasJustUpgraded")) {
-				ConvertMasteredToFlash ();
 			}
 		} else {
 			for (int i = 0; i < questions.Length; ++i) {
@@ -89,13 +82,5 @@ public abstract class Questions : MonoBehaviour {
 				++idx;
 			}
 		}
-	}
-
-	void ConvertMasteredToFlash() {
-		foreach( Question question in questions.Where(q => q.wasMastered && !q.isFlashQuestion)) {
-			question.isFlashQuestion = true;
-		}
-		SaveQuestionsList ();
-		MDPrefs.SetBool (prefsKey + ":wasJustUpgraded", false);
 	}
 }
