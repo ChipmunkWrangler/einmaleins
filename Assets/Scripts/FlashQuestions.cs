@@ -26,7 +26,7 @@ public class FlashQuestions : Questions {
 		}
 //		Debug.Log ("Filling list");
 		Goal.CurGoal curGoal = goal.calcCurGoal();
-		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON || curGoal == Goal.CurGoal.COLLECT_PARTS, "unexpected goal " + curGoal);
+		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
 		int askListLength = (curGoal == Goal.CurGoal.GAUNTLET) ? GAUNTLET_ASK_LIST_LENGTH : ASK_LIST_LENGTH;
 		bool allowFlashMastered = curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON;
 //		if (!allowFlashMastered) {

@@ -67,12 +67,12 @@ public class NewPlayerName : MonoBehaviour {
 	}
 	void Play() {
 		// todo transition
-		LoadMainScene();
+		LoadBuildRocketScene();
 	}
 
-	void LoadMainScene() {
+	void LoadBuildRocketScene() {
 		PlayerPrefs.Save ();
-		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("main");
+		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("rocketBuilding");
 	}
 
 	void SetCurPlayerName(string name) {

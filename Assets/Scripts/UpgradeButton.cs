@@ -8,20 +8,25 @@ public class UpgradeButton : MonoBehaviour {
 	[SerializeField] string engineTermPrefix = "engineNames_";
 
 	void Start () {
-		ShowOrHide (RocketParts.instance.isRocketBuilt);
+		if (RocketParts.instance.isRocketBuilt == true) {
+			Show ();
+		} else {
+			Hide();
+		}
 	}
 
 	public void OnPressed() {
 		button.gameObject.SetActive (false);
 	}
 
-	public void OnDoneBuildOrUpgrade() {
-		ShowOrHide (false);
+	public void Hide() {
+		button.gameObject.SetActive (false);
 	}
 
-	void ShowOrHide(bool enable) {		
+	void Show() {		
 		label.text = I2.Loc.LocalizationManager.GetTermTranslation( engineTermPrefix + RocketParts.instance.upgradeLevel );
-		button.gameObject.SetActive (enable);
-		button.enabled = enable;
+		button.gameObject.SetActive (true);
+		button.enabled = true;
 	}
+
 }

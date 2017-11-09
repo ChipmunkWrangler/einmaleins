@@ -20,7 +20,7 @@ public class RocketParts : MonoBehaviour {
 		get {
 			return isRocketBuilt_;
 		}
-		private set {
+		set {
 			isRocketBuilt_ = value;
 			Save ();
 		}
@@ -38,25 +38,19 @@ public class RocketParts : MonoBehaviour {
 
 	public int numPartsRequired { 
 		get {
-			return isRocketBuilt? PARTS_PER_UPGRADE : PARTS_TO_BUILD_ROCKET;
+			return PARTS_PER_UPGRADE;
 		}
 	}
 
 	public bool hasEnoughPartsToUpgrade {
 		get {
-			return isRocketBuilt && numParts >= PARTS_PER_UPGRADE && upgradeLevel < numUpgrades;
+			return numParts >= PARTS_PER_UPGRADE && upgradeLevel < numUpgrades;
 		}
 	}
 
 	bool hasReachedPlanetToUpgrade {
 		get {
 			return upgradeLevel <= TargetPlanet.GetLastReachedIdx();
-		}
-	}
-		
-	public bool canBuild {
-		get {
-			return !isRocketBuilt && numParts >= PARTS_TO_BUILD_ROCKET;
 		}
 	}
 
@@ -68,13 +62,6 @@ public class RocketParts : MonoBehaviour {
 	}
 
 // public commands
-	public void Build() {
-		if (canBuild) {
-			numParts -= PARTS_TO_BUILD_ROCKET;
-			isRocketBuilt= true;
-		}
-	}
-
 	public void FinalUpgrade() {
 		UnityEngine.Assertions.Assert.IsTrue (hasReachedPlanetToUpgrade);
 		UnityEngine.Assertions.Assert.AreEqual (upgradeLevel, numUpgrades-1);

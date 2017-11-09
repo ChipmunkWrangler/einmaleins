@@ -194,8 +194,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 129064944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 255, y: 383.5, z: 0}
-  m_LocalScale: {x: 0.6375, y: 0.6375, z: 0.6375}
+  m_LocalPosition: {x: 212, y: 383.5, z: 0}
+  m_LocalScale: {x: 0.53, y: 0.53, z: 0.53}
   m_Children:
   - {fileID: 1698820438}
   m_Father: {fileID: 0}
@@ -434,58 +434,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &446911377
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 446911380}
-  - component: {fileID: 446911379}
-  - component: {fileID: 446911378}
-  m_Layer: 0
-  m_Name: xARMProxy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &446911378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 446911377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b007041b7e1f6422aa03eda4dc1ba2d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &446911379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 446911377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d66198e525d924c4885cbba537eb3222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &446911380
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 446911377}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &473273788
 Prefab:
@@ -1154,39 +1102,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!1 &1238403557 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1181225150807356, guid: 2ff712eae9d0f48ee80c09db91679d00,
-    type: 2}
-  m_PrefabInternal: {fileID: 1238403547}
---- !u!114 &1238403558 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114645184778830074, guid: 2ff712eae9d0f48ee80c09db91679d00,
-    type: 2}
-  m_PrefabInternal: {fileID: 1238403547}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!1 &1238403559 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1455256749765940, guid: 2ff712eae9d0f48ee80c09db91679d00,
-    type: 2}
-  m_PrefabInternal: {fileID: 1238403547}
---- !u!114 &1238403560 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114999249861535526, guid: 2ff712eae9d0f48ee80c09db91679d00,
-    type: 2}
-  m_PrefabInternal: {fileID: 1238403547}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!1 &1238403561 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1246891190906060, guid: 2ff712eae9d0f48ee80c09db91679d00,
-    type: 2}
-  m_PrefabInternal: {fileID: 1238403547}
---- !u!114 &1238403562 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114879793796885108, guid: 2ff712eae9d0f48ee80c09db91679d00,
-    type: 2}
-  m_PrefabInternal: {fileID: 1238403547}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &1238403563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1207,105 +1122,6 @@ MonoBehaviour:
   LocalizeOnAwake: 1
   Source: {fileID: 0}
   mTarget: {fileID: 1238403549}
-  IgnoreRTL: 0
-  MaxCharactersInRTL: 0
-  IgnoreNumbersInRTL: 1
-  CorrectAlignmentForRTL: 1
-  AddSpacesToJoinedLanguages: 0
-  TranslatedObjects: []
-  LocalizeCallBack:
-    Target: {fileID: 0}
-    MethodName: 
-  AlwaysForceLocalize: 0
-  mGUI_ShowReferences: 0
-  mGUI_ShowTems: 1
-  mGUI_ShowCallback: 0
---- !u!114 &1238403564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1238403557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mTerm: 'Rekord:'
-  mTermSecondary: 
-  PrimaryTermModifier: 0
-  SecondaryTermModifier: 0
-  TermPrefix: 
-  TermSuffix: 
-  LocalizeOnAwake: 1
-  Source: {fileID: 0}
-  mTarget: {fileID: 1238403558}
-  IgnoreRTL: 0
-  MaxCharactersInRTL: 0
-  IgnoreNumbersInRTL: 1
-  CorrectAlignmentForRTL: 1
-  AddSpacesToJoinedLanguages: 0
-  TranslatedObjects: []
-  LocalizeCallBack:
-    Target: {fileID: 0}
-    MethodName: 
-  AlwaysForceLocalize: 0
-  mGUI_ShowReferences: 0
-  mGUI_ShowTems: 1
-  mGUI_ShowCallback: 0
---- !u!114 &1238403565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1238403559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mTerm: 'Max. Umrundungen:'
-  mTermSecondary: 
-  PrimaryTermModifier: 0
-  SecondaryTermModifier: 0
-  TermPrefix: 
-  TermSuffix: 
-  LocalizeOnAwake: 1
-  Source: {fileID: 0}
-  mTarget: {fileID: 1238403560}
-  IgnoreRTL: 0
-  MaxCharactersInRTL: 0
-  IgnoreNumbersInRTL: 1
-  CorrectAlignmentForRTL: 1
-  AddSpacesToJoinedLanguages: 0
-  TranslatedObjects: []
-  LocalizeCallBack:
-    Target: {fileID: 0}
-    MethodName: 
-  AlwaysForceLocalize: 0
-  mGUI_ShowReferences: 0
-  mGUI_ShowTems: 1
-  mGUI_ShowCallback: 0
---- !u!114 &1238403566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1238403561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mTerm: 'Umrundungen:'
-  mTermSecondary: 
-  PrimaryTermModifier: 0
-  SecondaryTermModifier: 0
-  TermPrefix: 
-  TermSuffix: 
-  LocalizeOnAwake: 1
-  Source: {fileID: 0}
-  mTarget: {fileID: 1238403562}
   IgnoreRTL: 0
   MaxCharactersInRTL: 0
   IgnoreNumbersInRTL: 1
@@ -1454,7 +1270,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1390373063}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -185, z: 0}
+  m_LocalPosition: {x: -0.000030517578, y: -185, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1124641741}
@@ -1622,7 +1438,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1535840360}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 466.56863, z: 0}
+  m_LocalPosition: {x: 0, y: 588.58496, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1566283467}
@@ -1701,7 +1517,6 @@ GameObject:
   - component: {fileID: 1543442573}
   - component: {fileID: 1543442572}
   - component: {fileID: 1543442570}
-  - component: {fileID: 1543442571}
   m_Layer: 5
   m_Name: Launch
   m_TagString: Untagged
@@ -1717,7 +1532,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1543442568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -175, z: 0}
+  m_LocalPosition: {x: -0.000030517578, y: -175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1712192702}
@@ -1749,19 +1564,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &1543442571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1543442568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83e82f07b4b384cdbaf14afbaa1dbf8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  launchButton: {fileID: 1543442568}
-  launchButtonText: {fileID: 1712192703}
 --- !u!114 &1543442572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2170,6 +1972,7 @@ GameObject:
   - component: {fileID: 1712192702}
   - component: {fileID: 1712192704}
   - component: {fileID: 1712192703}
+  - component: {fileID: 1712192705}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2218,18 +2021,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ac5ab3e05fb0c4f6c8a7eb275d74ff88, type: 3}
-    m_FontSize: 80
+    m_FontSize: 65
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 8
+    m_MinSize: 0
     m_MaxSize: 80
     m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
+    m_AlignByGeometry: 1
+    m_RichText: 0
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Auf zum Mond!
+  m_Text: Launch Rocket!
 --- !u!222 &1712192704
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2237,6 +2040,39 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1712192701}
+--- !u!114 &1712192705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1712192701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Rechenrakete starten!
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  Source: {fileID: 0}
+  mTarget: {fileID: 1712192703}
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  TranslatedObjects: []
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  AlwaysForceLocalize: 0
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
 --- !u!1 &1842585746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2333,7 +2169,7 @@ MonoBehaviour:
   upgradeFlightTime: 4
   buildingDelay: 1
   counter: {fileID: 1238403551}
-  button: {fileID: 480844866}
+  upgradeButton: {fileID: 480844866}
   buildParticles: {fileID: 1584475488}
   exhaustParticles:
   - {fileID: 1425585581}
@@ -2342,7 +2178,8 @@ MonoBehaviour:
   - {fileID: 913052535}
   - {fileID: 1580502498}
   - {fileID: 0}
-  launchButton: {fileID: 1543442571}
+  launchButton: {fileID: 1543442568}
+  rocketPartsWidget: {fileID: 1238403552}
 --- !u!1 &1894804566
 GameObject:
   m_ObjectHideFlags: 0

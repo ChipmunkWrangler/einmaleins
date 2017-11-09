@@ -41,7 +41,7 @@ public abstract class Questions : MonoBehaviour {
 		effortTracker.Save ();
 	}
 
-	public static void OnBuildOrUpgrade() {
+	public static void OnUpgrade() {
 		MDPrefs.SetBool (prefsKey + ":wasJustUpgraded", true);
 	}
 

@@ -10,10 +10,11 @@ public class RocketBuilder : MonoBehaviour {
 	[SerializeField] float upgradeFlightTime = 5.0f;
 	[SerializeField] float buildingDelay = 1.0f;
 	[SerializeField] RocketPartCounter counter = null;
-	[SerializeField] UpgradeButton button = null;
+	[SerializeField] UpgradeButton upgradeButton = null;
 	[SerializeField] ParticleSystem buildParticles = null;
 	[SerializeField] ParticleSystem[] exhaustParticles = null;
-	[SerializeField] LaunchButtonController launchButton;
+	[SerializeField] GameObject launchButton = null;
+	[SerializeField] GameObject rocketPartsWidget = null;
 
 	iTween.EaseType[] easeTypes = new iTween.EaseType[] {
 		iTween.EaseType.easeInOutCubic,
@@ -30,6 +31,7 @@ public class RocketBuilder : MonoBehaviour {
 			}
 		} else {
 			SetY (hiddenY);
+			rocketPartsWidget.SetActive (false);
 			Build ();
 		}
 	}
@@ -37,7 +39,7 @@ public class RocketBuilder : MonoBehaviour {
 	public void OnUpgrade() {
 		UnityEngine.Assertions.Assert.AreEqual (exhaustParticles.Length, RocketParts.instance.numUpgrades + 1);
 		if (RocketParts.instance.Upgrade ()) {
-			Questions.OnBuildOrUpgrade ();
+			Questions.OnUpgrade ();
 			counter.OnSpend (RocketParts.instance.numParts + RocketParts.instance.numPartsRequired, RocketParts.instance.numParts);
 			StartEngine ();
 		}
@@ -72,19 +74,17 @@ public class RocketBuilder : MonoBehaviour {
 	{
 		GotoBasePos("DoneBuilding");
 		buildParticles.Play ();
-		counter.OnSpend (RocketParts.instance.numParts, RocketParts.instance.numParts - RocketParts.instance.numPartsRequired);
 	}
 
 	void DoneBuilding() {
-		RocketParts.instance.Build ();
+		RocketParts.instance.isRocketBuilt = true;
 		buildParticles.Stop ();
-		Questions.OnBuildOrUpgrade ();
 		DoneBuildingOrUpgrading ();
 	}
 
 	void DoneBuildingOrUpgrading() {
-		button.OnDoneBuildOrUpgrade ();
-		launchButton.ActivateLaunch ();
+		upgradeButton.Hide ();
+		launchButton.SetActive(true);
 	}
 		
 	void SetY(float y) {

@@ -402,6 +402,16 @@ MonoBehaviour:
     - 
     - 
     Flags: 0000
+  - Term: Rechenrakete starten!
+    TermType: 0
+    Description: 
+    Languages:
+    - "Rechenrakete starten!\t"
+    - Launch Rocket!
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
   mLanguages:
   - Name: German
     Code: de
