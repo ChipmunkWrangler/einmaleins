@@ -125,6 +125,24 @@ public static class MDPrefs {
 		}
 	}
 
+	public static void SetBoolArray( string key, bool[] value ){
+		key += ":BoolArray";
+		SetLength (key, value.Length);
+		for(int i = 0; i < value.Length; ++i){
+			MDPrefs.SetBool(key + ":" + i, value[i]);
+		}
+	}
+
+	public static bool[] GetBoolArray( string key ){
+		key += ":BoolArray";
+		int length = GetLength (key);
+		bool[] returns = new bool[length];
+		for(int i = 0; i < length; ++i) {
+			returns.SetValue(MDPrefs.GetBool(key + ":" + i), i);
+		}
+		return returns;
+	}
+
 	static string GetKey(string key) {
 		UnityEngine.Assertions.Assert.IsTrue (PlayerPrefs.HasKey ("curPlayer") && PlayerPrefs.GetString ("curPlayer").Length != 0);
 		return PlayerPrefs.GetString ("curPlayer") + ":" + key;
