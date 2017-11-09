@@ -86,6 +86,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		maxThrustFactor = CalcMaxThrustFactor ();
 		Q = CalcQ (MIN_THRUST_FACTOR, maxThrustFactor);
 		baseThrust = CalcBaseThrust ();
+		gravity = CalcGravity ();
 	}
 
 	void Update() {
@@ -114,15 +115,13 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	public void Accelerate(float answerTime = ALLOTTED_TIME) {
-//		answerTime = ALLOTTED_TIME;
 		earnedHeight += GetHeightIncrease(answerTime);
 		float deltaHeight = earnedHeight - height;
 		UnityEngine.Assertions.Assert.IsTrue (deltaHeight > 0);
-		float time = celebrate.duration + ALLOTTED_TIME;
-		float avgSpeed = deltaHeight / time;
-		speed = 2 * avgSpeed;
-		gravity = speed * speed / (2f * deltaHeight);
-		Debug.Log ("speed = " + speed + " gravity = " + gravity);
+		float oldSpeed = speed;
+		speed = Mathf.Sqrt (2f * deltaHeight * gravity);
+		UnityEngine.Assertions.Assert.IsTrue (speed > oldSpeed);
+		Debug.Log ("old speed = " + oldSpeed + " speed = " + speed);
 	}
 
 	public float GetMaxSingleQuestionSpeed() {
@@ -141,6 +140,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	void ReachPlanet ()
 	{
+		speed = 0;
 		int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx ();
 		TargetPlanet.SetLastReachedIdx (planetReachedIdx);
 		if (curGoal == Goal.CurGoal.GAUNTLET) {
@@ -249,5 +249,14 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	float CalcBaseThrust() {
 		return GetTargetHeight (RocketParts.instance.upgradeLevel) / (EffortTracker.NUM_ANSWERS_PER_QUIZ+1); // +1 because there is an initial launch thrust
+	}
+
+	float CalcGravity() {
+		float allottedDeltaHeight = GetHeightIncrease (ALLOTTED_TIME);
+		UnityEngine.Assertions.Assert.IsTrue (allottedDeltaHeight > 0);
+		float time = celebrate.duration + ALLOTTED_TIME;
+		float avgSpeed = allottedDeltaHeight / time;
+		float speed = 2 * avgSpeed;
+		return speed * speed / (2f * allottedDeltaHeight);
 	}
 }
