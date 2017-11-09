@@ -7,9 +7,6 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] GameObject heightWidget = null;
 	[SerializeField] Text heightText = null;
 	[SerializeField] Text recordHeightText = null;
-	[SerializeField] Text apogeeText = null;
-	public const float targetAnswerTime = 3.0f; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight
-	[SerializeField] float minSpeedFactor = 0.25f;
 	[SerializeField] KickoffLaunch launch = null;
 	[SerializeField] Celebrate celebrate = null;
 	[SerializeField] GameObject oldRecord = null;
@@ -21,10 +18,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] float planetAchievementTextDelay = 2.0f;
 	[SerializeField] EffortTracker effortTracker = null;
 	[SerializeField] Goal goal = null;
-	float minSpeed;
-	float maxSpeed = float.MaxValue;
 	public float speed { get; private set; } // km per second
-	public float accelerationOnCorrect { get; private set; } // total speed increase per correct answer.
 	public float height { get; private set; } // km
 
 	readonly string[] planetReachedTexts = {
@@ -37,12 +31,17 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		"Ende erreicht!" // should never happen
 	};
 
-	float gravity = 50f;
+	const float ALLOTTED_TIME = Question.FAST_TIME; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight
+	const float MIN_THRUST_FACTOR = 0.1f;
+	const int V = 4;
+	float Q;
+	float maxThrustFactor;
+	float baseThrust;
+	float gravity;
 	float recordHeight;
-	float apogee;
+	float earnedHeight;
 	bool isRunning;
 	System.IFormatProvider formatProvider;
-	int numAnswersGiven;
 	bool noMoreQuestions;
 	bool checkForRecord;
 	Goal.CurGoal curGoal;
@@ -60,7 +59,6 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		formatProvider = MDCulture.GetCulture();
 		heightWidget.SetActive (true);
 		heightText.text = "0";
-		apogeeText.text = "0";
 		InitRecordHeight ();
 		recordHeightText.text = recordHeight.ToString (heightFormat) + unit;
 	}
@@ -78,44 +76,33 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	void InitGoalDependent() {
 		InitRecordHeight ();
-		curGoal = goal.calcCurGoal();
+		curGoal = goal.calcCurGoal ();
 		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
 		checkForRecord = recordHeight > 0;
 		InitOldRecordLine (checkForRecord);
 	}
 
 	void InitParams() {
-//		float targetTimeBetweenAnswers = targetAnswerTime + celebrate.duration;
-//		UnityEngine.Assertions.Assert.AreEqual(RocketParts.instance.numUpgrades + 1, TargetPlanet.heights.Length);
-//		float newTargetHeight = TargetPlanet.GetTargetPlanetHeight();
-//		float maxHeight = newTargetHeight * 2.0f;
-//		CalcParams(maxHeight, newTargetHeight, targetTimeBetweenAnswers, questions.GetAskListLength() + 1); // +1 because of the initial launch acceleration
-//		accelerationOnCorrect = CalcAcceleration(TargetPlanet.heights[RocketParts.instance.UpgradeLevel], FlashQuestions.ASK_LIST_LENGTH);
-//		TestEquations ();
+		maxThrustFactor = CalcMaxThrustFactor ();
+		Q = CalcQ (MIN_THRUST_FACTOR, maxThrustFactor);
+		baseThrust = CalcBaseThrust ();
 	}
 
 	void Update() {
 		if (isRunning) {
-//		if (timeForNextAnswer <= Time.time && numAnswersGiven < FlashQuestions.ASK_LIST_LENGTH) {
-//			Debug.Log ("Actual speed = " + speed + " height = " + height);
-//			OnCorrectAnswer (null);
-//			timeForNextAnswer = Time.time + targetAnswerTime * 2.0f;
-//		}
 			speed -= gravity * Time.deltaTime;
-			if (speed < minSpeed) {
-				speed = minSpeed;
+			if (speed < 0) {
+				speed = 0;
 			}
 			Ascend ();
 			if (speed <= 0 && noMoreQuestions) {
 				OnDone ();
-//				Debug.Log("Coasting time = " + (Time.time - prevTime));
 			}
 		}
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
-		Accelerate ();
-		++numAnswersGiven;
+		Accelerate ((question == null) ? ALLOTTED_TIME : question.GetLastAnswerTime());
 	}
 
 	public void OnQuestionChanged(Question question) {
@@ -123,54 +110,46 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 			noMoreQuestions = true;
 		} else { // test
 			question.Ask();
-//			StartCoroutine (AutoAnswerQuestion ());
 		}
-
 	}
 
-	public void Accelerate() {
-//		Debug.Log ("t = " + Time.time + " oldSpeed = " + speed + " newSpeed = " + (Mathf.Max(0, speed) + accelerationOnCorrect) + " height = " + height);
-		if (speed < 0) {
-			speed = 0; // anything else is too discouraging.
-		}
-		speed += accelerationOnCorrect;
+	public void Accelerate(float answerTime = ALLOTTED_TIME) {
+//		answerTime = ALLOTTED_TIME;
+		earnedHeight += GetHeightIncrease(answerTime);
+		float deltaHeight = earnedHeight - height;
+		UnityEngine.Assertions.Assert.IsTrue (deltaHeight > 0);
+		float time = celebrate.duration + ALLOTTED_TIME;
+		float avgSpeed = deltaHeight / time;
+		speed = 2 * avgSpeed;
+		gravity = speed * speed / (2f * deltaHeight);
+		Debug.Log ("speed = " + speed + " gravity = " + gravity);
 	}
 
-	IEnumerator AutoAnswerQuestion() {
-		float tgtTime = 3.0f;//
-//		yield return new WaitForSeconds (tgtTime - celebrate.duration);
-//		while(numAnswersGiven < questions.GetAskListLength() + 1) { // +1 because the first question has been shown.
-//			OnCorrectAnswer(null, false);
-//			Debug.Log ("NumAnswersGiven " + numAnswersGiven + " of " + (questions.GetAskListLength()+1));
-			yield return new WaitForSeconds (tgtTime);
-//		}
-//		noMoreQuestions = true;
+	public float GetMaxSingleQuestionSpeed() {
+		return GetHeightIncrease (ALLOTTED_TIME) / celebrate.duration;
 	}
 
-	void Ascend ()
-	{
-		height += Mathf.Clamp (speed, minSpeed, maxSpeed) * Time.deltaTime;
-		if (height < 0) {
-			height = 0;
-			speed = 0;
-		}
+	void Ascend () {
+		height += speed * Time.deltaTime;
 		recordHeight = UpdateRecord (height, recordHeight, recordPrefsKey);
-		if (curGoal != Goal.CurGoal.WON && height > TargetPlanet.GetTargetPlanetHeight ()) {
-			int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx ();
-			TargetPlanet.SetLastReachedIdx (planetReachedIdx);
-			if (curGoal == Goal.CurGoal.GAUNTLET) {
-				TargetPlanet.TargetNextPlanet ();
-			} else if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 2) {
-				RocketParts.instance.FinalUpgrade ();
-			}
-			StartCoroutine (CelebrateReachingPlanet (planetReachedIdx));
-		}
-		if (height > apogee) {
-			apogee = height;
+		if (curGoal != Goal.CurGoal.WON && height > TargetPlanet.GetPlanetHeight (TargetPlanet.GetTargetPlanetIdx())) {
+			ReachPlanet ();
 		}
 		heightText.text = height.ToString (heightFormat, formatProvider) + unit;
 		recordHeightText.text = recordHeight.ToString (heightFormat, formatProvider) + unit;
-		apogeeText.text = apogee.ToString (heightFormat, formatProvider) + unit;
+	}
+
+	void ReachPlanet ()
+	{
+		int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx ();
+		TargetPlanet.SetLastReachedIdx (planetReachedIdx);
+		if (curGoal == Goal.CurGoal.GAUNTLET) {
+			TargetPlanet.TargetNextPlanet ();
+		}
+		else if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 2) {
+			RocketParts.instance.FinalUpgrade ();
+		}
+		StartCoroutine (CelebrateReachingPlanet (planetReachedIdx));
 	}
 
 	void OnDone() {
@@ -195,9 +174,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		InitParams ();
 		isRunning = true;
 		height = 0;
-		apogee = 0;
 		speed = 0;
-		numAnswersGiven = 0;
 		noMoreQuestions = false;
 		celebrate.curParticleIdx = RocketParts.instance.upgradeLevel;
 	}
@@ -245,114 +222,32 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		} 
 		return record;
 	}
-
-	// The rocket reaches speed zero at targetAnswerTime. Calculate acceleration and gravity to guarantee given maxHeight
-	void CalcParams(float maxHeight, float targetHeight, float t, int numChancesToAccelerate) {
-		// we want the player to reach v = 0 at t seconds after getting accelerated (1)
-		// Let v = accelerationOnCorrect
-		// Let h = the max height from one acceleration, starting at height = 0 and v = 0
-		// Then h = v * v / 2g (2)
-		// and time to reach h = v / g (3)
-		// But (1) => time to reach h = t, so (3) => t = v / g => g = v / t (4)
-		// (2) & (4) => h = v * v / 2(v/t) = v * t / 2 (5)
-		// Also, if we accelerate each time from a speed of zero, then total height (=: H, which we want to equal targetHeight) is just
-		// H = n * h => h = H / n (6)
-		// (5) & (6) => H / n = vt / 2 => 2H / nt = v
-		//
-		// In addition, we want to cap the max movement rate so that even a God-player can't reach the next planet.
-		// While the movement rate is capped, we keep track of the uncapped rate for deceleration purposes.
-		// Since a God-player would answer all questions instantly, the initial (uncapped) velocity v0 = vn (7).
-		// Since deceleration is based on uncapped velocity, the time to reach speed 0 (and hence max height) will be T = an/g = ant/a (by (4)) = nt (8)
-		// The height is more complex, because we have a segment in which we are travelling at velocity cap m (deceleration tracked internally but doesn't change movement rate)
-		//   and one in which our uncapped speed has diminished to equal m (and movement rate == internal speed)
-		// That is, H' = h1 + h2 = (m * t1) + (m/2 * t2).
-		// t1 = (v0 - m) / g = (vn - m) / g
-		// t2 = m / g
-		// So H' = (m * (vn - m) / g) + (m^2 / 2g)    			 // m^2 / 2g is the usual height formula (2), as expected
-		//       = (2mvn - m^2) / 2g = (2mvn - m^2)t / 2v by (4) => m^2(t) - m (2tvn) + 2vH' = 0 => m = nv +/- sqrt((tnv)^2 - 2tvH) / t  
-		// For the root to be real, we need n > H'/H, which is no problem.
-		// for m >= a, we need H'/H >= 2 - 1/n.
-		// Basically, we need 2H <= H' <= nH.
-		// Unfortunately, Neptune is less than twice as far as Uranus and Pluto less than twice as far as Neptune. 
-		// Even with realistic god (answers instantly after question is displayed), you still go too far if m is set >= a.
-		accelerationOnCorrect = GetAccelerationNewStyle (targetHeight, t, numChancesToAccelerate);
-		gravity = accelerationOnCorrect / t;
-		minSpeed = -accelerationOnCorrect * minSpeedFactor;
-		maxSpeed = Mathf.Max(accelerationOnCorrect, numChancesToAccelerate * accelerationOnCorrect - 
-			Mathf.Sqrt (t * t * numChancesToAccelerate * numChancesToAccelerate * accelerationOnCorrect * accelerationOnCorrect 
-				- 2 * t * accelerationOnCorrect * maxHeight) / t);
-//		UnityEngine.Assertions.Assert.IsTrue (maxSpeed >= accelerationOnCorrect);
+			
+	float GetTargetHeight(int upgradeLevel) { 
+		return TargetPlanet.GetPlanetHeight(RocketParts.instance.upgradeLevel);
 	}
 
-	float GetAccelerationNewStyle(float targetHeight, float t, int numChancesToAccelerate)
-	{
-		return 2 * targetHeight / (numChancesToAccelerate * t);
+	// Each correct answer increases rocket height by a generalized logistic function H(t)
+	float GetHeightIncrease(float timeRequired) {
+		return baseThrust * (MIN_THRUST_FACTOR + (maxThrustFactor - MIN_THRUST_FACTOR) / Mathf.Pow(1.0f + Q * Mathf.Exp(timeRequired-ALLOTTED_TIME), 1.0f/V));
 	}
 
-	// Fixed gravity, acceleration calculated to reach maxHeight
-	// Todo: I guess what we want is to calculate gravity and acceleration based on reaching a velocity of e.g. (initialVelocity + accelerationOnCorrect/2), since slowing significantly in the time it takes to answer a question makes things look more exciting
-	float CalcAcceleration(float h, float t, int n) {
-		float g = gravity;
-		float k = n * (n-1) * t / 2; // or ((n*n * t)/2 - (n * t)/2);
-		// solve h = (n * x * (g * (t - n * t) + n * x)) / (2 * g) for x  // equation is from TestEquations()
-		// x = -(g (sqrt((2 h n^2)/g + ((n^2 t)/2 - (n t)/2)^2) - (n^2 t)/2 + (n t)/2))/n^2
-		//   = -(g (sqrt((2 h n^2)/g + k^2) - k))/n^2
-		//   = -(g * (sqrt      ((2 * h * n^2)  / g + k^2)   - k))/n^2
-		//   = -(g * (sqrt      ( 2 * h * n^2   / g + k^2)   - k))/n^2
-		//   = -(g * (sqrt      ( 2 * h * n^2   / g + k^2)   - k))/n^2
-		float root = Mathf.Sqrt( 2 * h * n * n / g + k * k);
-		float accel = g * (k + root) / (n * n);
-		if (accel < 0) {
-			accel = g * (k - root) / (n * n);
+	float CalcMaxThrustFactor() {
+		float minHeightRatio = float.MaxValue;
+		for (int i = 0; i < TargetPlanet.heights.Length - 1; ++i) {
+			float heightRatio = TargetPlanet.heights [i + 1] / TargetPlanet.heights [i];
+			if (heightRatio < minHeightRatio) {
+				minHeightRatio = heightRatio;
+			}
 		}
-		UnityEngine.Assertions.Assert.IsTrue (accel > 0);
-		minSpeed = 0;
-		return accel;
+		return minHeightRatio;
 	}
-				
-//	void TestEquations() {
-//		Debug.Log("Acceleration = " + accelerationOnCorrect + " gravity = " + gravity);
-//		ShowResultsForT (0); // this simplifies to numQuestions * maxHeight
-//		ShowResultsForT (0.1f);
-//		ShowResultsForT (3.0f); // this should be the practical minimum, because the celebration lasts this long
-//		ShowResultsForT (targetAnswerTime);
-//		ShowResultsForT (targetAnswerTime * 5);
-////		ShowResultsForT (targetAnswerTime * 10);
-//	
-//	}
-//
-//	void ShowResultsForT (float t)
-//	{
-//		float g = gravity;
-//		const int n = FlashQuestions.ASK_LIST_LENGTH;
-//		float decelarationByNextQuestion = Mathf.Min(accelerationOnCorrect, g * t);
-//		for (int i = 0; i < n; ++i) {
-//			// right after you answer the question:
-//			if (speed < 0) {
-//				speed = 0;
-//			}
-//			speed += accelerationOnCorrect;
-//			// by the time you answer the next question in targetAnswerTime:
-//			height += (speed - 0.5f * decelarationByNextQuestion) * t;
-//			speed -= decelarationByNextQuestion;
-//			if (speed < minSpeed) {
-//				speed = minSpeed;
-//			}
-//			Debug.Log ("speed = " + speed + " height = " + height);
-//		}
-//		// height and speed at t = (targetAnswerTime after you answer the last question) = FlashQuestions.ASK_LIST_LENGTH * targetAnswerTime
-//		float totalAnswerTime = n * t;
-//		const int n1 = n + 1;
-//		const int gauss	 = n1 * (n1 + 1) / 2;
-//		height = decelarationByNextQuestion * totalAnswerTime * 0.5f + t * (accelerationOnCorrect - decelarationByNextQuestion) * (n1 * n1 - gauss);
-//		speed = n * accelerationOnCorrect - g * totalAnswerTime; 
-//		Debug.Log ("Closed form speed = " + speed + " height = " + height);
-//		height += speed * speed / (2.0f * g);
-//		float x = accelerationOnCorrect;
-//		float altHeight = (n * x * (g * (t - n * t) + n * x)) / (2 * g);
-//		float timeToStop = speed / g + totalAnswerTime;
-//		Debug.Log ("final height = " + height + " or " + altHeight + " time = " + timeToStop + " of which freefall = " + speed / g);
-//		height = 0;
-//		speed = 0;
-//	}
+
+	float CalcQ(float minThrustFactor, float maxThrustFactor) {
+		return Mathf.Pow((maxThrustFactor - minThrustFactor) / (1f - minThrustFactor), V) - 1f;
+	}
+
+	float CalcBaseThrust() {
+		return GetTargetHeight (RocketParts.instance.upgradeLevel) / (EffortTracker.NUM_ANSWERS_PER_QUIZ+1); // +1 because there is an initial launch thrust
+	}
 }

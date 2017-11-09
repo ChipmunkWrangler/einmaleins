@@ -16,16 +16,28 @@ public class Goal : MonoBehaviour {
 
 	public CurGoal calcCurGoal() {
 		CurGoal curGoal;
-		if (RocketParts.instance.hasEnoughPartsToUpgrade && !RocketParts.instance.justUpgraded) {
+		if (ShouldUpgrade()) {
 			curGoal = CurGoal.UPGRADE_ROCKET;
-		} else if (effortTracker.IsDoneForToday() && !RocketParts.instance.justUpgraded) {
+		} else if (IsDoneForToday()) {
 			curGoal = CurGoal.DONE_FOR_TODAY;
-		} else if (TargetPlanet.IsLeavingSolarSystem()) {
+		} else if (IsLeavingSolarSystem()) {
 			curGoal = CurGoal.WON;
 		} else {
 			curGoal = (TargetPlanet.GetTargetPlanetIdx () == TargetPlanet.GetNumPlanets() - 1) ? CurGoal.GAUNTLET : CurGoal.FLY_TO_PLANET;
 		}
 
 		return curGoal;
+	}
+		
+	bool ShouldUpgrade() {
+		return RocketParts.instance.hasEnoughPartsToUpgrade && !RocketParts.instance.justUpgraded;
+	}
+
+	bool IsDoneForToday() {
+		return effortTracker.IsDoneForToday () && !RocketParts.instance.justUpgraded;
+	}
+
+	bool IsLeavingSolarSystem() {
+		return TargetPlanet.GetTargetPlanetIdx () >= TargetPlanet.GetNumPlanets();
 	}
 }

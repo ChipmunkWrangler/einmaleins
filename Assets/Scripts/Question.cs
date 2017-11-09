@@ -102,7 +102,7 @@ public class Question {
 	}
 
 	public override string ToString() {
-		string s = idx + " is " + a + " * " + b + " : wasMastered = " + wasMastered + " wasWrong = " + wasWrong + " averageTime " + GetAverageAnswerTime () + " times = ";
+		string s = idx + " is " + a + " * " + b + " : wasMastered = " + wasMastered + " wasWrong = " + wasWrong + " isNew = " + isNew + " averageTime " + GetAverageAnswerTime () + " times = ";
 		foreach (var time in answerTimes) {
 			s += time + " ";
 		}

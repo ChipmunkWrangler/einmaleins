@@ -144,7 +144,6 @@ But the steady trickle is pedagogically sensible, I think, and prevents asking t
  * OK drill difficult questions
   * OK but don't repeat them immediately (you never repeat a question within a quiz, and quizzes are always several questions long)
  * OK don't repeat easy questions
- * 780/3.85 = 202.597402597
 +++Test
 ++++Perfect Kid
 +++++Try 1, N = 11, 3 quizzes per day

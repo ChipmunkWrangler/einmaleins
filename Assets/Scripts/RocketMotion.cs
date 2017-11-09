@@ -11,7 +11,7 @@ public class RocketMotion : MonoBehaviour {
 	[SerializeField] GameObject earth;
 	[SerializeField] float earthSpeed;
 
-	float thrustCap; // we can be moving faster than this, but at this speed, we attain maxY and never exceed it.
+	float speedCap; // we can be moving faster than this, but at this speed, we attain maxY and never exceed it.
 	float initialEarthY;
 	float lowestRocketYRelativeToEarth;
 
@@ -26,13 +26,13 @@ public class RocketMotion : MonoBehaviour {
 	}
 
 	void UpdateRocketPos () {
-		if (thrustCap == 0) {
-			thrustCap = thrust.accelerationOnCorrect;
+		if (speedCap == 0) {
+			speedCap = thrust.GetMaxSingleQuestionSpeed();
 		}
 		Vector3 pos = gameObject.transform.position;
-		float effectiveSpeed = Mathf.Clamp (thrust.speed, -thrustCap, thrustCap);
+		float effectiveSpeed = Mathf.Clamp (thrust.speed, -speedCap, speedCap);
 		float yRange = (effectiveSpeed > 0) ? (maxY - baseY) : (baseY - minY);
-		pos.y = Mathf.MoveTowards (pos.y, baseY + yRange * effectiveSpeed / thrustCap, maxSpeed * Time.deltaTime);
+		pos.y = Mathf.MoveTowards (pos.y, baseY + yRange * effectiveSpeed / speedCap, maxSpeed * Time.deltaTime);
 		if (pos.y - earth.transform.position.y < lowestRocketYRelativeToEarth) {
 			pos.y = earth.transform.position.y + lowestRocketYRelativeToEarth;
 		}

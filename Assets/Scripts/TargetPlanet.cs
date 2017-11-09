@@ -10,7 +10,7 @@ public class TargetPlanet {
 	static int lastReachedPlanetIdx = -2;
 
 	public static readonly float[] heights = {
-		3.85e+05f,
+//		3.85e+05f,
 		7.8e+07f,
 		6.3e+08f,
 		1.287e+09f,
@@ -51,12 +51,8 @@ public class TargetPlanet {
 		return heights.Length;
 	}
 
-	public static bool IsLeavingSolarSystem() {
-		return GetTargetPlanetIdx () >= GetNumPlanets();
-	}
-
-	public static float GetTargetPlanetHeight() {
-		return IsLeavingSolarSystem() ? heights [heights.Length - 1] : heights [GetTargetPlanetIdx ()];
+	public static float GetPlanetHeight(int i) {
+		return (i < heights.Length) ? heights [i] : heights [heights.Length - 1] * 2f;
 	}
 
 	static void SetIdx(int newIdx ) {
