@@ -5,10 +5,14 @@ Drill the times tables.
 Check private schools as market.
 
 +Todo
+Make new algorithm feel right
+ Visualize slow answers vs fast answers
+Add rocket parts display to launch screen
+Visualize questions left ("fuel")
+
 ++v0.2.0
- * Change font to Classic Robot Regular
+ * OK Change font to Classic Robot Regular
  * Implement new algorithm
-  * Change your test to use real Questions, to ensure compatibility? 
  * Make it backwards compatible
  * Release to Talea & me
  * Ask Amalia and Matthias daughter to retest
