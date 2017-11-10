@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuestionChanged {
 	public float duration = 3.0f;
-	[SerializeField] ParticleSystem[] particles = null;
+	[SerializeField] ParticleSystem[] exhaustParticles = null;
+	[SerializeField] ParticleSystem fastAnswerParticles = null;
 	[SerializeField] ParticleSystem masteryParticles = null;
 	[SerializeField] QuestionPicker questionPicker = null;
 	[SerializeField] bool continueAfterQuestions = false;
 	bool isCelebrating;
 	Coroutine coroutine;
-	public int curParticleIdx { private get; set; }
 		
 	public void OnQuestionChanged(Question question) {
 		StopTimer ();
 		if (continueAfterQuestions && question == null) {
-			StartCelebrating (false); // indefinitely
+			StartCelebrating (false, false); // indefinitely
 		} else {
 			StopCelebrating ();
 		}
@@ -23,7 +23,7 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		StopTimer ();
-		coroutine = StartCoroutine (DoCelebration (isNewlyMastered));
+		coroutine = StartCoroutine (DoCelebration (question != null && question.GetLastAnswerTime() <= Question.FAST_TIME, isNewlyMastered));
 	}
 
 	public void OnWrongAnswer(bool wasNew) {
@@ -31,31 +31,34 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 		StopCelebrating ();
 	}
 		
-	IEnumerator DoCelebration(bool superSize) {
-		StartCelebrating (superSize);
+	IEnumerator DoCelebration(bool isFastAnswer, bool isNewlyMastered) {
+		StartCelebrating (isFastAnswer, isNewlyMastered);
 		yield return new WaitForSeconds(duration);
 		StopCelebrating ();
 		questionPicker.NextQuestion ();
 	}
 
-	void StartCelebrating(bool isNewlyMastered) {
+	void StartCelebrating(bool isFastAnswer, bool isNewlyMastered) {
 		if (!isCelebrating) {
 			isCelebrating = true;
-			GetParticles ().gameObject.SetActive (true);
-			GetParticles ().Play ();
-			if (isNewlyMastered && GetMasteryParticles()) {
-				GetMasteryParticles().Play ();
+			GetExhaustParticles ().gameObject.SetActive (true);
+			GetExhaustParticles ().Play ();
+			if (isNewlyMastered) {
+				masteryParticles.Play ();
 			}
+			if (isFastAnswer) {
+				fastAnswerParticles.Play ();
+			}
+
 		}
 	}
 
 	void StopCelebrating ()
 	{
 		if (isCelebrating) {
-			GetParticles ().Stop ();
-			if (GetMasteryParticles ()) {
-				GetMasteryParticles ().Stop ();
-			}
+			GetExhaustParticles ().Stop ();
+			masteryParticles.Stop ();
+			fastAnswerParticles.Stop ();
 			isCelebrating = false;
 		}
 	}
@@ -66,12 +69,7 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 		}
 	}
 
-	ParticleSystem GetParticles() {
-		return particles [curParticleIdx];
+	ParticleSystem GetExhaustParticles() {
+		return exhaustParticles [RocketParts.instance.upgradeLevel];
 	}
-
-	ParticleSystem GetMasteryParticles() {
-		return masteryParticles;
-	}
-
 }

@@ -131,9 +131,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	void Ascend () {
 		height += speed * Time.deltaTime;
 		recordHeight = UpdateRecord (height, recordHeight, recordPrefsKey);
-		if (IsTargetPlanetReached()) {
-			ReachPlanet ();
-		}
+//		if (IsTargetPlanetReached()) {
+//			ReachPlanet ();
+//		}
 		heightText.text = height.ToString (heightFormat, formatProvider) + unit;
 		recordHeightText.text = recordHeight.ToString (heightFormat, formatProvider) + unit;
 	}
@@ -180,7 +180,6 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		height = 0;
 		speed = 0;
 		noMoreQuestions = false;
-		celebrate.curParticleIdx = RocketParts.instance.upgradeLevel;
 	}
 
 	IEnumerator CelebrateReachingPlanet(int planetIdx) {

@@ -29,7 +29,7 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	IEnumerator AutoAnswer() {
-		yield return new WaitForSeconds (0f);//Question.FAST_TIME);
+		yield return new WaitForSeconds (Question.FAST_TIME * Random.Range(0.5f, 1f));
 		if (curQuestion != null) {
 			OnAnswer ((curQuestion.a * curQuestion.b).ToString ());
 		}

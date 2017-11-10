@@ -7,14 +7,12 @@ Check private schools as market.
 +Todo
 Make new algorithm feel right
  Visualize slow answers vs fast answers
- * Effects:
-  * Flash mastery causes a "Mastered!" to appear
-  * show simple particles when a question is answered in target time and mastery particles on mastery
- Try gui to show timer running out and changing colour as time passes
+  Try gui to show timer running out and changing colour as time passes
  Add the moon and center it
  Try having nonconstant maxthrustfactor
  Bug: reaching Mars doesn't immediately end the quiz. Conversely, if the quiz ends, the launch button is shown while the planet display is running
  Bug: reaching Mars doesn't change target planet
+ Bug: Choose Player Screen should go to launch screen if rocket is already built
  Test: Getting rocket parts and upgrading
  Test: Reaching all planets
  Test: Gauntlet

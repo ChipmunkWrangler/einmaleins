@@ -21547,13 +21547,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 3
-  particles:
+  exhaustParticles:
   - {fileID: 170}
   - {fileID: 169}
   - {fileID: 168}
   - {fileID: 167}
   - {fileID: 166}
   - {fileID: 166}
+  fastAnswerParticles: {fileID: 684475311}
   masteryParticles: {fileID: 880868567}
   questionPicker: {fileID: 382}
   continueAfterQuestions: 0
@@ -23491,7 +23492,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 150362, guid: b2f1ae1a749f541ffa57d3c9518af20d, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b2f1ae1a749f541ffa57d3c9518af20d, type: 2}
@@ -23499,6 +23500,11 @@ Prefab:
 --- !u!4 &626239470 stripped
 Transform:
   m_PrefabParentObject: {fileID: 468508, guid: b2f1ae1a749f541ffa57d3c9518af20d, type: 2}
+  m_PrefabInternal: {fileID: 626239469}
+--- !u!198 &684475311 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 19820518, guid: b2f1ae1a749f541ffa57d3c9518af20d,
+    type: 2}
   m_PrefabInternal: {fileID: 626239469}
 --- !u!1 &783632917
 GameObject:
