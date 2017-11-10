@@ -98,8 +98,6 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 				if (noMoreQuestions) {
 					OnDone ();
 				}
-			} else {
-				Debug.Log (speed);					
 			}
 		}
 	}

@@ -33,6 +33,7 @@ Visualize questions left ("fuel")
  * Ask Amalia and Matthias daughter to retest
  * Release to English kids   
 ++v0.2.1
+ * Remove unused particle effects and their textures
  * Check out Dave's crashes
  * Make horizontal version with linear button array 
  * Improve buttons
