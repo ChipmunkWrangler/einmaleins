@@ -91,13 +91,15 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	void Update() {
 		if (isRunning) {
-			speed -= gravity * Time.deltaTime;
-			if (speed < 0) {
-				speed = 0;
-			}
 			Ascend ();
-			if (speed <= 0 && noMoreQuestions) {
-				OnDone ();
+			speed -= gravity * Time.deltaTime;
+			if (speed <= 0) {
+				speed = 0;
+				if (noMoreQuestions) {
+					OnDone ();
+				}
+			} else {
+				Debug.Log (speed);					
 			}
 		}
 	}
@@ -131,11 +133,15 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	void Ascend () {
 		height += speed * Time.deltaTime;
 		recordHeight = UpdateRecord (height, recordHeight, recordPrefsKey);
-		if (curGoal != Goal.CurGoal.WON && height > TargetPlanet.GetPlanetHeight (TargetPlanet.GetTargetPlanetIdx())) {
+		if (IsTargetPlanetReached()) {
 			ReachPlanet ();
 		}
 		heightText.text = height.ToString (heightFormat, formatProvider) + unit;
 		recordHeightText.text = recordHeight.ToString (heightFormat, formatProvider) + unit;
+	}
+
+	bool IsTargetPlanetReached() {
+		return curGoal != Goal.CurGoal.WON && height > TargetPlanet.GetPlanetHeight (TargetPlanet.GetTargetPlanetIdx ());
 	}
 
 	void ReachPlanet ()
@@ -223,7 +229,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		return record;
 	}
 			
-	float GetTargetHeight(int upgradeLevel) { 
+	float GetTargetHeight() { 
 		return TargetPlanet.GetPlanetHeight(RocketParts.instance.upgradeLevel);
 	}
 
@@ -233,22 +239,24 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	float CalcMaxThrustFactor() {
-		float minHeightRatio = float.MaxValue;
-		for (int i = 0; i < TargetPlanet.heights.Length - 1; ++i) {
-			float heightRatio = TargetPlanet.heights [i + 1] / TargetPlanet.heights [i];
-			if (heightRatio < minHeightRatio) {
-				minHeightRatio = heightRatio;
-			}
-		}
-		return minHeightRatio;
+//		float minHeightRatio = float.MaxValue;
+		//		for (int i = 0; i < TargetPlanet.GetNumPlanets() - 1; ++i) {
+		//			float heightRatio = TargetPlanet.GetPlanetHeight (i + 1) / TargetPlanet.GetPlanetHeight (i);
+//			if (heightRatio < minHeightRatio) {
+//				minHeightRatio = heightRatio;
+//			}
+//		}
+//		return minHeightRatio;
+		int u = RocketParts.instance.upgradeLevel;
+		return TargetPlanet.GetPlanetHeight(u + 1) / TargetPlanet.GetPlanetHeight (u);
 	}
 
-	float CalcQ(float minThrustFactor, float maxThrustFactor) {
-		return Mathf.Pow((maxThrustFactor - minThrustFactor) / (1f - minThrustFactor), V) - 1f;
+	float CalcQ(float m, float M) {
+		return Mathf.Pow((M - m) / (1f - m), V) - 1f;
 	}
 
 	float CalcBaseThrust() {
-		return GetTargetHeight (RocketParts.instance.upgradeLevel) / (EffortTracker.NUM_ANSWERS_PER_QUIZ+1); // +1 because there is an initial launch thrust
+		return GetTargetHeight () / (EffortTracker.NUM_ANSWERS_PER_QUIZ+1); // +1 because there is an initial launch thrust
 	}
 
 	float CalcGravity() {
@@ -256,7 +264,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		UnityEngine.Assertions.Assert.IsTrue (allottedDeltaHeight > 0);
 		float time = celebrate.duration + ALLOTTED_TIME;
 		float avgSpeed = allottedDeltaHeight / time;
-		float speed = 2 * avgSpeed;
-		return speed * speed / (2f * allottedDeltaHeight);
+		float s = 2f * avgSpeed;
+		return s * s / (2f * allottedDeltaHeight);
 	}
 }

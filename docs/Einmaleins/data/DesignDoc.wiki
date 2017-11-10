@@ -7,6 +7,21 @@ Check private schools as market.
 +Todo
 Make new algorithm feel right
  Visualize slow answers vs fast answers
+ * Effects:
+  * Flash mastery causes a "Mastered!" to appear
+  * show simple particles when a question is answered in target time and mastery particles on mastery
+ Try gui to show timer running out and changing colour as time passes
+ Add the moon and center it
+ Try having nonconstant maxthrustfactor
+ Bug: reaching Mars doesn't immediately end the quiz. Conversely, if the quiz ends, the launch button is shown while the planet display is running
+ Bug: reaching Mars doesn't change target planet
+ Test: Getting rocket parts and upgrading
+ Test: Reaching all planets
+ Test: Gauntlet
+  Upgrade: Extra fuel tanks 
+ Test: Postgauntlet
+ Test: Reaching planet on last question
+ Test: Reaching planet before last question
 Add rocket parts display to launch screen
 Visualize questions left ("fuel")
 
@@ -431,7 +446,7 @@ planet 5, day 52
   * And H(0) < M * planetHeight[i] / N, so max height for one quiz is < N * H(0) = M * planetHeight[i] = planetHeight[i+1] 
  * A wrong answer consumes fuel, i.e. one less question is asked.
  * To reach Pluto, we need to have mastered all questions.
-  * As soon has we have mastered all questions and reached Neptune, we switch to the gauntlet
+  * As soon as we have mastered all questions and reached Neptune, we switch to the gauntlet
   * But this could make the upgrade into a downgrade if you reach Neptune first, then get it
    * Well, it has more fuel but less thrust per fuel unit. :-)
  * Or add Moon. Then to reach Neptune, must have mastered all questions

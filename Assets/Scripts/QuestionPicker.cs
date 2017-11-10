@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestionPicker : MonoBehaviour {
@@ -10,6 +11,7 @@ public class QuestionPicker : MonoBehaviour {
 	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
 	List<OnWrongAnswer> onWrongAnswerSubscribers;
 	float questionTime;
+	const bool autoAnswerQuestions = true;
 
 	void Start () {
 		SplitSubscribers ();
@@ -21,6 +23,16 @@ public class QuestionPicker : MonoBehaviour {
 			subscriber.OnQuestionChanged (curQuestion);
 		}
 		questionTime = Time.time;
+		if (autoAnswerQuestions) {
+			StartCoroutine (AutoAnswer());
+		}
+	}
+
+	IEnumerator AutoAnswer() {
+		yield return new WaitForSeconds (0f);//Question.FAST_TIME);
+		if (curQuestion != null) {
+			OnAnswer ((curQuestion.a * curQuestion.b).ToString ());
+		}
 	}
 
 	public void OnAnswer(string answer) {
