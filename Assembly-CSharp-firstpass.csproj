@@ -52,15 +52,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\I2\Common\CoroutineManager.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Examples\Common\Scripts\CallbackNotification.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Examples\Common\Scripts\Example_ChangeLanguage.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Examples\Common\Scripts\Example_LocalizedString.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Examples\Common\Scripts\GlobalParametersExample.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Examples\Common\Scripts\NGUI_LanguagePopup.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Examples\Common\Scripts\RealTimeTranslation.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Examples\Common\Scripts\RegisterBundlesManager.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Examples\Common\Scripts\SimpleButton.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Examples\Common\Scripts\ToggleLanguage.cs" />
      <Compile Include="Assets\Plugins\I2\Localization\Scripts\EventCallback.cs" />
      <Compile Include="Assets\Plugins\I2\Localization\Scripts\Google\GoogleLanguages.cs" />
      <Compile Include="Assets\Plugins\I2\Localization\Scripts\Google\GoogleTranslation.cs" />
