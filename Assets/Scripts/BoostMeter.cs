@@ -5,21 +5,20 @@ using UnityEngine;
 public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer {
 	[SerializeField] RectTransform mask = null;
 	[SerializeField] Transform meter = null;
-	[SerializeField] float timeToZero = 15f;
+
+	const float timeToZero = Question.FAST_TIME * 5.2f / 0.75f; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
 
 	float originalY;
 
-//	bool isRunning = false;
-
 	void Start() {
 		originalY = mask.localPosition.y;
+		meter.gameObject.SetActive (false);
 	}
 
 	public void OnQuestionChanged(Question question) {
 		ResetMask ();
 		ShowMeter ();
 		StartMeter ();
-//		isRunning = true;
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {

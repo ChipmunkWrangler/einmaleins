@@ -22,7 +22,8 @@ Make new algorithm feel right
  Test: Reaching planet before last question
 Add rocket parts display to launch screen
 Visualize questions left ("fuel")
-
+Maybe prioritize wrong, new, slow, mastered instead of wrong, slow, new, mastered? Then we run through the questions once to find the trickiest, then drill those?
+ Run your test to see what impact that has
 ++v0.2.0
  * OK Change font to Classic Robot Regular
  * Implement new algorithm
