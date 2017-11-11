@@ -21468,6 +21468,7 @@ MonoBehaviour:
   - {fileID: 22}
   - {fileID: 94}
   - {fileID: 124914248}
+  - {fileID: 825374071}
   effortTracker: {fileID: 124914249}
 --- !u!114 &388
 MonoBehaviour:
@@ -23612,7 +23613,7 @@ GameObject:
   - component: {fileID: 756848233}
   - component: {fileID: 756848232}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BoostMeter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23767,6 +23768,7 @@ GameObject:
   - component: {fileID: 825374074}
   - component: {fileID: 825374073}
   - component: {fileID: 825374075}
+  - component: {fileID: 825374076}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -23838,6 +23840,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &825374076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 825374071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a168ab86213466d85ed5351f2d77ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask: {fileID: 825374072}
+  meter: {fileID: 756848231}
+  timeToZero: 15
 --- !u!1 &836998372
 GameObject:
   m_ObjectHideFlags: 0

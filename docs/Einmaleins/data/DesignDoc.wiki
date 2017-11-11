@@ -8,14 +8,8 @@ Check private schools as market.
 Make new algorithm feel right
  Visualize slow answers vs fast answers
   Try gui to show timer running out and changing colour as time passes
-  calibrate to 0 at 12 seconds, or 60.
-Options:
- * Show smooth gradient, green to red. Cut off the top of it (how? scale and offset uv? Mask somehow? https://docs.unity3d.com/Manual/script-Mask.html). 50% is 3s, linear progression, so 0 is reached after 6 seconds
- * As above, but after 3s, progression slows down, so 0 is only reached at 60s
- * As first, but show unequal gradient, so only the top fifth is green. Speed is constant. 
- * Show single-colour bar. Change colour as time passes.
+  exhaust
  Add the moon and center it
- Try having nonconstant maxthrustfactor
  Bug: reaching Mars doesn't immediately end the quiz. Conversely, if the quiz ends, the launch button is shown while the planet display is running
  Bug: reaching Mars doesn't change target planet
  Bug: Choose Player Screen should go to launch screen if rocket is already built
@@ -37,7 +31,6 @@ Visualize questions left ("fuel")
  * Ask Amalia and Matthias daughter to retest
  * Release to English kids   
 ++v0.2.1
- * Remove unused particle effects and their textures
  * Check out Dave's crashes
  * Make horizontal version with linear button array 
  * Improve buttons
@@ -45,7 +38,9 @@ Visualize questions left ("fuel")
    * Replace it with more normal enter button? 
   * Make buttons more 3d or otherwise more obviously buttons, or glow or something
   * Buttons states more visible, especially respond more visibly to taps
-
+++v0.3.0
+ * Music
+ * 
 ++v1.0.0 
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
  * Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player)

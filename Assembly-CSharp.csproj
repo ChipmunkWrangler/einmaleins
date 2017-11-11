@@ -53,6 +53,7 @@
   <ItemGroup>
      <Compile Include="Assets\PreciseLocale\PreciseLocale.cs" />
      <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
+     <Compile Include="Assets\Scripts\BoostMeter.cs" />
      <Compile Include="Assets\Scripts\CCInputField.cs" />
      <Compile Include="Assets\Scripts\CCTime.cs" />
      <Compile Include="Assets\Scripts\Celebrate.cs" />
