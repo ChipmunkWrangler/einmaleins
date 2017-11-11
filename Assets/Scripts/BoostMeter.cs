@@ -7,6 +7,7 @@ public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer {
 	[SerializeField] Transform meter = null;
 
 	const float timeToZero = Question.FAST_TIME * 5.2f / 0.75f; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
+	const float hideTime = 0.3f;
 
 	float originalY;
 
@@ -18,7 +19,7 @@ public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer {
 	public void OnQuestionChanged(Question question) {
 		ResetMask ();
 		ShowMeter ();
-		StartMeter ();
+		StartMeter (timeToZero);
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
@@ -35,11 +36,12 @@ public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer {
 	}
 
 	void HideMeter() {
-		meter.gameObject.SetActive (false);
+//		meter.gameObject.SetActive (false);
+		StartMeter(hideTime);
 	}
 
-	void StartMeter() {
-		iTween.ValueTo(mask.gameObject, iTween.Hash("from", mask.localPosition.y, "to", mask.localPosition.y - mask.rect.height, "time", timeToZero, "onupdate", "SetMaskY"));
+	void StartMeter(float t) {
+		iTween.ValueTo(mask.gameObject, iTween.Hash("from", mask.localPosition.y, "to", mask.localPosition.y - mask.rect.height, "time", t, "onupdate", "SetMaskY"));
 	}
 
 	void StopMeter() {
