@@ -7,8 +7,7 @@ Check private schools as market.
 +Todo
 Make new algorithm feel right
  Visualize slow answers vs fast answers
-  Try gui to show timer running out and changing colour as time passes
-  exhaust
+  exhaust followed by smoke (import)
  Add the moon and center it
  Bug: reaching Mars doesn't immediately end the quiz. Conversely, if the quiz ends, the launch button is shown while the planet display is running
  Bug: reaching Mars doesn't change target planet

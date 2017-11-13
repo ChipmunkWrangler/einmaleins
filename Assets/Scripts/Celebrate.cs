@@ -7,6 +7,7 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 	[SerializeField] ParticleSystem[] exhaustParticles = null;
 	[SerializeField] ParticleSystem fastAnswerParticles = null;
 	[SerializeField] ParticleSystem masteryParticles = null;
+	[SerializeField] ParticleSystem smokeParticles = null;
 	[SerializeField] QuestionPicker questionPicker = null;
 	[SerializeField] bool continueAfterQuestions = false;
 	bool isCelebrating;
@@ -23,7 +24,8 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		StopTimer ();
-		coroutine = StartCoroutine (DoCelebration (question != null && question.GetLastAnswerTime() <= Question.FAST_TIME, isNewlyMastered));
+		float percentOn = (question == null) ? 1f : Mathf.Min( 1f, FlashThrust.GetThrustFactor (question.GetLastAnswerTime()));
+		coroutine = StartCoroutine (DoCelebration (question != null && question.GetLastAnswerTime() <= Question.FAST_TIME, isNewlyMastered, percentOn));
 	}
 
 	public void OnWrongAnswer(bool wasNew) {
@@ -31,10 +33,18 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 		StopCelebrating ();
 	}
 		
-	IEnumerator DoCelebration(bool isFastAnswer, bool isNewlyMastered) {
-		StartCelebrating (isFastAnswer, isNewlyMastered);
-		yield return new WaitForSeconds(duration);
-		StopCelebrating ();
+	IEnumerator DoCelebration(bool isFastAnswer, bool isNewlyMastered, float percentOn) {
+		float exhaustTime = duration * percentOn;
+		if (exhaustTime > 0) {
+			StartCelebrating (isFastAnswer, isNewlyMastered);
+			yield return new WaitForSeconds (exhaustTime);
+			StopCelebrating ();
+		}
+		if (exhaustTime < duration) { 
+			StartSmoke ();
+			yield return new WaitForSeconds (duration - exhaustTime);
+			StopSmoke ();
+		}
 		questionPicker.NextQuestion ();
 	}
 
@@ -61,6 +71,14 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 			fastAnswerParticles.Stop ();
 			isCelebrating = false;
 		}
+	}
+
+	void StartSmoke() {
+		smokeParticles.Play ();
+	}
+
+	void StopSmoke() {
+		smokeParticles.Stop ();
 	}
 
 	void StopTimer() {

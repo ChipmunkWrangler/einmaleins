@@ -34,8 +34,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	const float ALLOTTED_TIME = Question.FAST_TIME; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight
 	const float MIN_THRUST_FACTOR = 0.1f;
 	const int V = 4;
-	float Q;
-	float maxThrustFactor;
+	static float Q;
+	static float maxThrustFactor;
 	float baseThrust;
 	float gravity;
 	float recordHeight;
@@ -226,16 +226,20 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		return record;
 	}
 			
-	float GetTargetHeight() { 
+	static float GetTargetHeight() { 
 		return TargetPlanet.GetPlanetHeight(RocketParts.instance.upgradeLevel);
 	}
 
-	// Each correct answer increases rocket height by a generalized logistic function H(t)
 	float GetHeightIncrease(float timeRequired) {
-		return baseThrust * (MIN_THRUST_FACTOR + (maxThrustFactor - MIN_THRUST_FACTOR) / Mathf.Pow(1.0f + Q * Mathf.Exp(timeRequired-ALLOTTED_TIME), 1.0f/V));
+		return baseThrust * GetThrustFactor(timeRequired);
 	}
 
-	float CalcMaxThrustFactor() {
+	// Each correct answer increases rocket height by a generalized logistic function H(t)
+	public static float GetThrustFactor(float timeRequired) {
+		return MIN_THRUST_FACTOR + (maxThrustFactor - MIN_THRUST_FACTOR) / Mathf.Pow(1.0f + Q * Mathf.Exp(timeRequired-ALLOTTED_TIME), 1.0f/V);
+	}
+
+	static float CalcMaxThrustFactor() {
 //		float minHeightRatio = float.MaxValue;
 		//		for (int i = 0; i < TargetPlanet.GetNumPlanets() - 1; ++i) {
 		//			float heightRatio = TargetPlanet.GetPlanetHeight (i + 1) / TargetPlanet.GetPlanetHeight (i);
@@ -248,11 +252,11 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		return TargetPlanet.GetPlanetHeight(u + 1) / TargetPlanet.GetPlanetHeight (u);
 	}
 
-	float CalcQ(float m, float M) {
+	static float CalcQ(float m, float M) {
 		return Mathf.Pow((M - m) / (1f - m), V) - 1f;
 	}
 
-	float CalcBaseThrust() {
+	static float CalcBaseThrust() {
 		return GetTargetHeight () / (EffortTracker.NUM_ANSWERS_PER_QUIZ+1); // +1 because there is an initial launch thrust
 	}
 
