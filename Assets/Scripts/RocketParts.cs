@@ -107,7 +107,7 @@ public class RocketParts : MonoBehaviour {
 		
 	void Awake() {
 		if (instance == null) {
-			DontDestroyOnLoad (gameObject);
+//			DontDestroyOnLoad (gameObject);
 			instance = this;
 			Load ();
 		} else if (instance != this) {
