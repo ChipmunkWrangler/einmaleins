@@ -6,11 +6,11 @@ Check private schools as market.
 
 +Todo
 Make new algorithm feel right
- Bug: New record not shown
- Test: Getting rocket parts and upgrading
+ Test upgrading
+ Highlight getting a record, keep it yellow
  Test: Reaching all planets
  Test: Gauntlet
-  Upgrade: Extra fuel tanks 
+  Upgrade: Extra fuel tanks
  Test: Postgauntlet
  Test: Reaching planet on last question
  Test: Reaching planet before last question
