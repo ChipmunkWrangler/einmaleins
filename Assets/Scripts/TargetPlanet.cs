@@ -18,6 +18,8 @@ public class TargetPlanet {
 		5.772e+09f
 	};
 
+	const float FINAL_HEIGHT = 9999999999f;
+
 	public static void Reset() {
 		targetPlanetIdx = -1;
 		lastReachedPlanetIdx = -2;
@@ -51,7 +53,7 @@ public class TargetPlanet {
 	}
 
 	public static float GetPlanetHeight(int i) {
-		return (i < heights.Length) ? heights [i] : heights [heights.Length - 1] * 2f;
+		return (i < heights.Length) ? heights [i] : FINAL_HEIGHT;
 	}
 
 	static void SetIdx(int newIdx ) {
