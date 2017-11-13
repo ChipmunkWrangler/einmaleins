@@ -412,6 +412,16 @@ MonoBehaviour:
     - 
     - 
     Flags: 0000
+  - Term: Neuer Rekord!
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - 
+    - 
+    Flags: 0000
   mLanguages:
   - Name: German
     Code: de
