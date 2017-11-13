@@ -17,6 +17,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] float achievementTextTransitionTime = 3.0f;
 	[SerializeField] float planetAchievementTextDelay = 2.0f;
 	[SerializeField] EffortTracker effortTracker = null;
+	[SerializeField] QuestionPicker questionPicker = null;
 	[SerializeField] Goal goal = null;
 	public float speed { get; private set; } // km per second
 	public float height { get; private set; } // km
@@ -91,13 +92,11 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	void Update() {
 		if (isRunning) {
-			Ascend ();
 			speed -= gravity * Time.deltaTime;
-			if (speed <= 0) {
-				speed = 0;
-				if (noMoreQuestions) {
-					OnDone ();
-				}
+			if (speed > 0) {
+				Ascend ();
+			} else if (noMoreQuestions) {
+				OnDone ();
 			}
 		}
 	}
@@ -109,7 +108,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	public void OnQuestionChanged(Question question) {
 		if (question == null) {
 			noMoreQuestions = true;
-		} else { // test
+		} else if (isRunning) { // test
 			question.Ask();
 		}
 	}
@@ -144,15 +143,15 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	void ReachPlanet ()
 	{
-		speed = 0;
 		int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx ();
 		TargetPlanet.SetLastReachedIdx (planetReachedIdx);
-		if (curGoal == Goal.CurGoal.GAUNTLET) {
-			TargetPlanet.TargetNextPlanet ();
-		}
-		else if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 2) {
-			RocketParts.instance.FinalUpgrade ();
-		}
+		TargetPlanet.TargetNextPlanet ();
+//		if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 2) {
+//			RocketParts.instance.FinalUpgrade ();
+//		}
+		StopRunning ();
+		questionPicker.AbortQuiz ();
+		oldRecord.SetActive (false);
 		StartCoroutine (CelebrateReachingPlanet (planetReachedIdx));
 	}
 
@@ -169,6 +168,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	void StopRunning ()
 	{
+		speed = 0;
 		isRunning = false;
 		effortTracker.EndQuiz ();
 	}
@@ -183,8 +183,6 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	IEnumerator CelebrateReachingPlanet(int planetIdx) {
-		StopRunning ();
-		oldRecord.SetActive (false);
 		float zoomTime = zoomToPlanet.ZoomToPlanet (planetIdx, true);
 		UnityEngine.Assertions.Assert.IsTrue (zoomTime - planetAchievementTextDelay >= 0);
 		ClearAchievementText (planetAchievementTextDelay * 0.9f);

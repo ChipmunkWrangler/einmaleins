@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuestionChanged {
+public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuestionChanged, OnQuizAborted {
 	public float duration = 3.0f;
 	[SerializeField] ParticleSystem[] exhaustParticles = null;
 	[SerializeField] ParticleSystem fastAnswerParticles = null;
@@ -12,6 +12,12 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 	[SerializeField] bool continueAfterQuestions = false;
 	bool isCelebrating;
 	Coroutine coroutine;
+
+	public void OnQuizAborted() {
+		StopTimer ();
+		StopCelebrating ();
+		StopSmoke ();
+	}
 		
 	public void OnQuestionChanged(Question question) {
 		StopTimer ();

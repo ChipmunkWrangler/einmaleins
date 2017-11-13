@@ -9,6 +9,7 @@ Make new algorithm feel right
  Bug: reaching Mars doesn't immediately end the quiz. Conversely, if the quiz ends, the launch button is shown while the planet display is running
  Bug: reaching Mars doesn't change target planet
  Bug: Choose Player Screen should go to launch screen if rocket is already built
+ Bug: New record not shown
  Test: Getting rocket parts and upgrading
  Test: Reaching all planets
  Test: Gauntlet

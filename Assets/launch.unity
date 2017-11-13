@@ -21537,6 +21537,7 @@ MonoBehaviour:
   achievementTextTransitionTime: 5
   planetAchievementTextDelay: 2
   effortTracker: {fileID: 124914249}
+  questionPicker: {fileID: 382}
   goal: {fileID: 1045511061}
 --- !u!114 &390
 MonoBehaviour:

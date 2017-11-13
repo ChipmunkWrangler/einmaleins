@@ -10,10 +10,17 @@ public class QuestionPicker : MonoBehaviour {
 	List<OnQuestionChanged> onQuestionChangedSubscribers;
 	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
 	List<OnWrongAnswer> onWrongAnswerSubscribers;
+	List<OnQuizAborted> onQuizAbortedSubscribers;
 	float questionTime;
 
 	void Start () {
 		SplitSubscribers ();
+	}
+
+	public void AbortQuiz() {
+		foreach (OnQuizAborted subscriber in onQuizAbortedSubscribers) {
+			subscriber.OnQuizAborted ();
+		}
 	}
 		
 	public void NextQuestion() {
@@ -47,6 +54,7 @@ public class QuestionPicker : MonoBehaviour {
 		onQuestionChangedSubscribers = new List<OnQuestionChanged> ();
 		onCorrectAnswerSubscribers = new List<OnCorrectAnswer> ();
 		onWrongAnswerSubscribers = new List<OnWrongAnswer> ();
+		onQuizAbortedSubscribers = new List<OnQuizAborted> ();
 		foreach(GameObject subscriber in subscribers) {
 			OnQuestionChanged[] onQuestionChangeds = subscriber.GetComponents<OnQuestionChanged>();
 			foreach(OnQuestionChanged s in onQuestionChangeds) {
@@ -60,6 +68,11 @@ public class QuestionPicker : MonoBehaviour {
 			foreach(OnWrongAnswer s in onWrongAnswers) {
 				onWrongAnswerSubscribers.Add (s);
 			}
+			OnQuizAborted[] onQuizAborteds = subscriber.GetComponents<OnQuizAborted>();
+			foreach(OnQuizAborted s in onQuizAborteds) {
+				onQuizAbortedSubscribers.Add (s);
+			}
+
 		}
 	}
 

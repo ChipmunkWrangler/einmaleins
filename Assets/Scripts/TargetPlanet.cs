@@ -10,7 +10,6 @@ public class TargetPlanet {
 	static int lastReachedPlanetIdx = -2;
 
 	public static readonly float[] heights = {
-//		3.85e+05f,
 		7.8e+07f,
 		6.3e+08f,
 		1.287e+09f,

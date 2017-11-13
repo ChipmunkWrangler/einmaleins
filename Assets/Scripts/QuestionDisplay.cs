@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestionDisplay : TextDisplay, OnQuestionChanged {
+public class QuestionDisplay : TextDisplay, OnQuestionChanged, OnQuizAborted, OnCorrectAnswer {
 	public void OnQuestionChanged(Question question) {
 		string s = "";
 		if (question != null) {			
@@ -12,4 +12,14 @@ public class QuestionDisplay : TextDisplay, OnQuestionChanged {
 		}
 		SetText(s);
 	}
+
+	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
+		SetText ("");
+	}
+
+	public void OnQuizAborted() {
+		SetText("");
+	}
+
+
 }

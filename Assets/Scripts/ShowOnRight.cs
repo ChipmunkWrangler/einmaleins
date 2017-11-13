@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShowOnRight : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, OnWrongAnswer {
+public class ShowOnRight : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, OnWrongAnswer, OnQuizAborted {
 	[SerializeField] float transitionTime;
 	[SerializeField] bool hideOnRight;
 	[SerializeField] bool evenIfWrongFirst;
@@ -16,6 +16,10 @@ public class ShowOnRight : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, On
 		if (evenIfWrongFirst || !wasWrong) {
 			ScaleTo( hideOnRight ? Vector3.zero : Vector3.one );
 		}
+	}
+
+	public void OnQuizAborted() {
+		ScaleTo(Vector3.zero);
 	}
 
 	public void OnQuestionChanged(Question question) {
