@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class LaunchButtonController : MonoBehaviour {
-	[SerializeField] GameObject launchButton = null;
+	[SerializeField] UnityEngine.UI.Button launchButton = null;
 	[SerializeField] UnityEngine.UI.Text launchButtonText = null;
 
 	readonly string[] launchButtonLabels = {
@@ -15,11 +15,13 @@ public class LaunchButtonController : MonoBehaviour {
 	};
 
 	public void Deactivate() {
-		launchButton.SetActive(false);
+		launchButton.enabled = false;
+		launchButton.gameObject.SetActive(false);
 	}
 
 	public void ActivateLaunch() {
 		launchButtonText.text = I2.Loc.LocalizationManager.GetTermTranslation (launchButtonLabels [TargetPlanet.GetTargetPlanetIdx ()]);
-		launchButton.SetActive (true);
+		launchButton.enabled = true;
+		launchButton.gameObject.SetActive (true);
 	}
 }

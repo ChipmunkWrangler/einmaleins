@@ -6,9 +6,6 @@ Check private schools as market.
 
 +Todo
 Make new algorithm feel right
- Visualize slow answers vs fast answers
-  exhaust followed by smoke (import)
- Add the moon and center it
  Bug: reaching Mars doesn't immediately end the quiz. Conversely, if the quiz ends, the launch button is shown while the planet display is running
  Bug: reaching Mars doesn't change target planet
  Bug: Choose Player Screen should go to launch screen if rocket is already built
@@ -40,7 +37,6 @@ Maybe prioritize wrong, new, slow, mastered instead of wrong, slow, new, mastere
   * Buttons states more visible, especially respond more visibly to taps
 ++v0.3.0
  * Music
- * 
 ++v1.0.0 
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
  * Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player)
@@ -449,13 +445,7 @@ planet 5, day 52
   * As soon as we have mastered all questions and reached Neptune, we switch to the gauntlet
   * But this could make the upgrade into a downgrade if you reach Neptune first, then get it
    * Well, it has more fuel but less thrust per fuel unit. :-)
- * Or add Moon. Then to reach Neptune, must have mastered all questions
-   * At this point, it is just review
-   * And in fact review has started before this, as soon as numUnmastered < N
-   * But that's ok. It makes Neptune the only planet we have to reach "honestly", by answering N questions in the allotted time
-   * As soon as we reach Neptune, we switch to the Pluto gauntlet
-    * This could be an additional upgrade or change to add a habitation pod for the plant 
-    
+  
  * Consider limiting the quizzes per day by time or effort instead of number
 
 +++Goals satisfied?
