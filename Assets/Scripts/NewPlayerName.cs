@@ -66,6 +66,7 @@ public class NewPlayerName : MonoBehaviour {
 	}
 	void Play() {
 		// todo transition
+		playButton.enabled = false;
 		PlayerPrefs.Save ();
 		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync (RocketParts.instance.isRocketBuilt ? "launch" : "rocketBuilding");
 	}
