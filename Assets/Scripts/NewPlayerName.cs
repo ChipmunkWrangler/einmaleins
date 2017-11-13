@@ -66,12 +66,8 @@ public class NewPlayerName : MonoBehaviour {
 	}
 	void Play() {
 		// todo transition
-		LoadBuildRocketScene();
-	}
-
-	void LoadBuildRocketScene() {
 		PlayerPrefs.Save ();
-		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("rocketBuilding");
+		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync (RocketParts.instance.isRocketBuilt ? "launch" : "rocketBuilding");
 	}
 
 	void SetCurPlayerName(string name) {
