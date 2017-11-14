@@ -62,7 +62,7 @@ public class KickoffLaunch : MonoBehaviour {
 		yield return null;
 		thrust.Accelerate ();
 		celebrate.OnCorrectAnswer (null, false); // this triggers the question once the flames are done
-		yield return new WaitForSeconds(celebrate.duration);
+		yield return new WaitForSeconds(Celebrate.duration);
 		foreach (var element in uiElementsToActivateOnPlay) {
 			element.SetActive (true);
 		}

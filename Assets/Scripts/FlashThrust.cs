@@ -8,7 +8,6 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] Text heightText = null;
 	[SerializeField] Text recordHeightText = null;
 	[SerializeField] KickoffLaunch launch = null;
-	[SerializeField] Celebrate celebrate = null;
 	[SerializeField] GameObject oldRecord = null;
 	[SerializeField] Params paramObj = null;
 	[SerializeField] Text achievementText = null;
@@ -122,7 +121,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	public float GetMaxSingleQuestionSpeed() {
-		return GetHeightIncrease (ALLOTTED_TIME) / celebrate.duration;
+		return GetHeightIncrease (ALLOTTED_TIME) / Celebrate.duration;
 	}
 
 	void Ascend () {
@@ -261,7 +260,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	float CalcGravity() {
 		float allottedDeltaHeight = GetHeightIncrease (ALLOTTED_TIME);
 		UnityEngine.Assertions.Assert.IsTrue (allottedDeltaHeight > 0);
-		float time = celebrate.duration + ALLOTTED_TIME;
+		float time = Celebrate.duration + ALLOTTED_TIME;
 		float avgSpeed = allottedDeltaHeight / time;
 		float s = 2f * avgSpeed;
 		return s * s / (2f * allottedDeltaHeight);
