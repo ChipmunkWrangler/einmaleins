@@ -111,7 +111,6 @@ public class RocketParts : MonoBehaviour {
 			
 	void DoUpgrade ()
 	{
-		TargetPlanet.TargetNextPlanet ();
 		++upgradeLevel;
 		justUpgraded = true;
 	}
