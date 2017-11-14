@@ -103,7 +103,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	}
 
 	void UpdateText (int numParts) {
-		if (RocketParts.instance.upgradeLevel >= RocketParts.instance.numUpgrades - 1 && numParts == 0) {
+		if (RocketParts.instance.upgradeLevel >= RocketParts.instance.maxUpgradeLevel) {
 			if (numText.text.Length > 0) {
 				numText.text = "";
 				foreach (Text text in textsToFadeOut) {

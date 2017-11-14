@@ -46,11 +46,11 @@ public class RocketParts : MonoBehaviour {
 
 	public bool hasEnoughPartsToUpgrade {
 		get {
-			return numParts >= PARTS_PER_UPGRADE && upgradeLevel < numUpgrades;
+			return numParts >= PARTS_PER_UPGRADE && upgradeLevel < maxUpgradeLevel;
 		}
 	}
 		
-	public int numUpgrades {
+	public int maxUpgradeLevel {
 		get {
 			UnityEngine.Assertions.Assert.AreEqual ((Questions.GetNumQuestions () - PARTS_TO_BUILD_ROCKET) % PARTS_PER_UPGRADE, 0);
 			return 1 + (Questions.GetNumQuestions () - PARTS_TO_BUILD_ROCKET) / PARTS_PER_UPGRADE;
