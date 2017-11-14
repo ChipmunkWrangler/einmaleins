@@ -5,12 +5,7 @@ Drill the times tables.
 Check private schools as market.
 
 +Todo
- Preneptune situation: targetPlanet 4, upgrade level 4 (try it at upgrade level 3 as well?), last reached planet 3, rocket parts 47/55
- Bug? I feel like I'm getting mastery sparks for stuff that was already mastered.
-  * 38 is 5 * 9 : wasMastered = True wasWrong = False isNew = False averageTime 2.966797 times = 2.781616 3.066711 3.052063 
-   * This should have been mastered after the first try!
-  * Currently unmastered: 29, 32, 35, 41, 42, 43, 44, 52 
- Bug: Sometimes, if you reach a planet:
+ Bug: Sometimes, if you reach a planet (seems like a timing issue):
   Question didn't go away
   Celebrate didn't go away
   What should happen is
@@ -21,10 +16,7 @@ Check private schools as market.
    StopRunning
    Celebrate.OnQuizAborted
  Bug: No longer says I am done for the day
- Test: Reaching all planets
- Test: Gauntlet
-  Upgrade: Extra fuel tanks
- Test: Postgauntlet
+ Bug: Stats button doesn't turn yellow
  Test: Reaching planet on last question
  Test: Reaching planet before last question
 Maybe prioritize wrong, new, slow, mastered instead of wrong, slow, new, mastered? Then we run through the questions once to find the trickiest, then drill those?
@@ -74,7 +66,7 @@ Maybe prioritize wrong, new, slow, mastered instead of wrong, slow, new, mastere
   * Kuber (Back button)
 
 +Before deploying
- * Update build and/or version numbers
+ * Update build and/or version numbers (Android & iOS build settings + testflight & google play)
  * use xARM to test the devices with the highest resolution, smallest & largest height & width, and extreme aspect ratios 16:9 and 4:3
  * Ensure that screenshots / video are up to date
   * Add grid button screenshots for small devices
@@ -101,8 +93,8 @@ Maybe prioritize wrong, new, slow, mastered instead of wrong, slow, new, mastere
  * OK Test reaching Mars
  * OK Test upgrading
  * Test stats
- * Test reaching Pluto (all questions should be mastered, all upgrades done, gauntlet. Impossible to reach early)
- * Test post-gauntlet
+ * OK Test reaching Pluto (all questions should be mastered, all upgrades done, gauntlet. Impossible to reach early)
+ * OK Test post-gauntlet
 ++Google
 ~/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_26_x86
  https://support.google.com/googleplay/android-developer/answer/3131213?hl=en
@@ -479,6 +471,7 @@ planet 5, day 52
  * See if this is helpful after writing a test for the answer-time-based version
 
 +Ideas
+ * Add an upgrade with new particles before "In Deep Space"
  * Highlight getting a record, keep it yellow
  * Avoid delay after answering first question by creating and saving questions asynch during rocket building
   * Also QuestionPicker only needs to save one question, not all questions, in OnAnswer 

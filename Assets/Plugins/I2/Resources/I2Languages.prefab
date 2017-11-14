@@ -309,8 +309,8 @@ MonoBehaviour:
     - Antimaterienantrieb einbauen
     - Get Antimatter Drive
     Languages_Touch:
-    - 
-    - 
+    - "Treibstofftanks vergr\xF6\xDFern"
+    - Add extra fuel tanks
     Flags: 0000
   - Term: Mars erreicht!
     TermType: 0
