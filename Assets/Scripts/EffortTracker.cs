@@ -21,15 +21,19 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		get { return _frustration; }
 		set { _frustration = Mathf.Clamp (value, MIN_FRUSTRATION, MAX_FRUSTRATION); }
 	}
-	int quizzesToday;
+	int quizzesToday = -1;
 	float timeToday;
 	const string prefsKey = "effortTracking";
 
 	public bool IsDoneForToday() {
+		if (quizzesToday < 0) {
+			Load ();
+		}
 		return quizzesToday >= MIN_QUIZZES_PER_DAY && timeToday >= MIN_TIME_PER_DAY;
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
+		UnityEngine.Assertions.Assert.IsTrue (isQuizStarted);
 		float answerTime = question.GetLastAnswerTime ();
 		timeToday += answerTime + Celebrate.duration;
 		frustration += (answerTime <= Question.FAST_TIME) ? FRUSTRATION_FAST : FRUSTRATION_RIGHT;
@@ -48,6 +52,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	}
 
 	public void OnWrongAnswer(bool wasNew) {
+		UnityEngine.Assertions.Assert.IsTrue (isQuizStarted);
 		frustration += FRUSTRATION_WRONG;
 		--numAnswersInQuiz;
 	}

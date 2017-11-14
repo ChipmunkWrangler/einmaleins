@@ -17,13 +17,9 @@ Check private schools as market.
    Celebrate.OnQuizAborted
  Bug: No longer says I am done for the day
  Bug: Stats button doesn't turn yellow
- Test: Reaching planet on last question
- Test: Reaching planet before last question
-Maybe prioritize wrong, new, slow, mastered instead of wrong, slow, new, mastered? Then we run through the questions once to find the trickiest, then drill those?
- Run your test to see what impact that has
 ++v0.2.0
  * OK Change font to Classic Robot Regular
- * Implement new algorithm
+ * OK Implement new algorithm
  * Make it backwards compatible?
  * Release to Talea & me
  * Ask Amalia and Matthias daughter to retest
