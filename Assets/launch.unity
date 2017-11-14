@@ -22597,6 +22597,7 @@ GameObject:
   - component: {fileID: 95769377}
   - component: {fileID: 95769376}
   - component: {fileID: 95769375}
+  - component: {fileID: 95769378}
   m_Layer: 5
   m_Name: RocketParts
   m_TagString: Untagged
@@ -22689,6 +22690,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 95769373}
+--- !u!114 &95769378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 95769373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &117313298
 GameObject:
   m_ObjectHideFlags: 0
@@ -23160,6 +23175,7 @@ GameObject:
   - component: {fileID: 232395216}
   - component: {fileID: 232395213}
   - component: {fileID: 232395214}
+  - component: {fileID: 232395217}
   m_Layer: 5
   m_Name: RocketPartsLabel
   m_TagString: Untagged
@@ -23260,6 +23276,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 232395212}
+--- !u!114 &232395217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 232395212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &295745953
 GameObject:
   m_ObjectHideFlags: 0
