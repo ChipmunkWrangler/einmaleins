@@ -75,18 +75,16 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		oldRecord.SetActive (enable);
 	}
 
-	void InitGoalDependent() {
+	void InitRecord() {
 		InitRecordHeight ();
-		curGoal = goal.calcCurGoal ();
-		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
 		checkForRecord = recordHeight > 0;
 		InitOldRecordLine (checkForRecord);
 	}
 
-	void InitParams() {
+	void InitPhysics(bool isGauntlet) {
 		maxThrustFactor = CalcMaxThrustFactor ();
 		Q = CalcQ (MIN_THRUST_FACTOR, maxThrustFactor);
-		baseThrust = CalcBaseThrust ();
+		baseThrust = CalcBaseThrust (isGauntlet);
 		gravity = CalcGravity ();
 	}
 
@@ -174,8 +172,10 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	public void OnCountdown() {
-		InitGoalDependent ();
-		InitParams ();
+		curGoal = goal.calcCurGoal ();
+		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
+		InitRecord ();
+		InitPhysics (curGoal == Goal.CurGoal.GAUNTLET);
 		isRunning = true;
 		height = 0;
 		speed = 0;
@@ -254,8 +254,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		return Mathf.Pow((M - m) / (1f - m), V) - 1f;
 	}
 
-	static float CalcBaseThrust() {
-		return GetTargetHeight () / (EffortTracker.NUM_ANSWERS_PER_QUIZ+1); // +1 because there is an initial launch thrust
+	static float CalcBaseThrust(bool isGauntlet) {
+		return GetTargetHeight () / (EffortTracker.GetNumAnswersInQuiz(isGauntlet)+1); // +1 because there is an initial launch thrust
 	}
 
 	float CalcGravity() {

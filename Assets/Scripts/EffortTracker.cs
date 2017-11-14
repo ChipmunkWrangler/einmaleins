@@ -11,7 +11,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	const int MAX_FRUSTRATION = 3;
 	const int MIN_QUIZZES_PER_DAY = 3;
 	const float MIN_TIME_PER_DAY = 5 * 60.0f;
-	public const int NUM_ANSWERS_PER_QUIZ = 7; // the bigger this is, the more new questions the kid will be confronted with at once
+	const int NUM_ANSWERS_PER_QUIZ = 7; // the bigger this is, the more new questions the kid will be confronted with at once
 	const int GAUNTLET_ASK_LIST_LENGTH = 55;
 
 	int numAnswersInQuiz;
@@ -52,11 +52,15 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		--numAnswersInQuiz;
 	}
 
+	public static int GetNumAnswersInQuiz(bool isGauntlet) {
+		return isGauntlet ? GAUNTLET_ASK_LIST_LENGTH : NUM_ANSWERS_PER_QUIZ;
+	}
+
 	void StartQuiz() {
 		Load ();
 		Goal.CurGoal curGoal = goal.calcCurGoal();
 		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
-		numAnswersInQuiz = (curGoal == Goal.CurGoal.GAUNTLET) ? GAUNTLET_ASK_LIST_LENGTH : NUM_ANSWERS_PER_QUIZ;
+		numAnswersInQuiz = GetNumAnswersInQuiz(curGoal == Goal.CurGoal.GAUNTLET);
 		questions.ResetForNewQuiz();
 		isQuizStarted = true;
 	}
