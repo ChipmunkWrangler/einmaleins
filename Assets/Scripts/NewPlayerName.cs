@@ -17,6 +17,7 @@ public class NewPlayerName : MonoBehaviour {
 	const string curPlayerPrefsKey = "curPlayer";
 	string[] playerNames;
 	string newName;
+	bool buttonsAlreadyPressed;
 
 	void Start() {
 		if (PlayerPrefs.HasKey (curPlayerPrefsKey)) {
@@ -41,19 +42,25 @@ public class NewPlayerName : MonoBehaviour {
 	}
 
 	public void OnPlayerNameChanged(string name) {
-		ActivatePlayButton(IsNameValid(name));
-		newName = name;
+		if (!buttonsAlreadyPressed) {
+			ActivatePlayButton (IsNameValid (name));
+			newName = name;
+		}
 	}
 
 	public void OnPlayerNameButton(int i) {
-		SetCurPlayerName (playerNames[i]);
-		Play ();
+		if (!buttonsAlreadyPressed) {
+			SetCurPlayerName (playerNames [i]);
+			Play ();
+		}
 	}
 
 	public void OnPlay() {
-		AppendToPlayerNames(newName);
-		SetCurPlayerName (newName);
-		Play ();
+		if (!buttonsAlreadyPressed) {
+			AppendToPlayerNames (newName);
+			SetCurPlayerName (newName);
+			Play ();
+		}
 	}
 
 	bool IsNameValid(string playerName) {
@@ -66,9 +73,17 @@ public class NewPlayerName : MonoBehaviour {
 	}
 	void Play() {
 		// todo transition
-		playButton.enabled = false;
+		DisableButtons();
 		PlayerPrefs.Save ();
 		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync (RocketParts.instance.isRocketBuilt ? "launch" : "rocketBuilding");
+	}
+
+	void DisableButtons() {
+		buttonsAlreadyPressed = true;			
+		playButton.enabled = false;
+		foreach(TextButton button in playerButtons) {
+			button.enabled = false;
+		}
 	}
 
 	void SetCurPlayerName(string name) {
