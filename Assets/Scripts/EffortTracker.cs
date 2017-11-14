@@ -31,7 +31,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		float answerTime = question.GetLastAnswerTime ();
-		timeToday += answerTime;
+		timeToday += answerTime + Celebrate.duration;
 		frustration += (answerTime <= Question.FAST_TIME) ? FRUSTRATION_FAST : FRUSTRATION_RIGHT;
 		--numAnswersInQuiz;
 	}
@@ -69,7 +69,6 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		isQuizStarted = false;
 		RocketParts.instance.justUpgraded = false;
 		++quizzesToday;
-		timeToday += questions.GetQuizTime();
 		Save ();
 	}
 

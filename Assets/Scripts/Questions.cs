@@ -24,10 +24,6 @@ public class Questions : MonoBehaviour {
 		}
 	}
 
-	public float GetQuizTime() {
-		return questions.Where (q => q.wasAnsweredInThisQuiz).Sum (q => q.GetLastAnswerTime ());
-	}
-
 	public Question GetQuestion(bool isFrustrated) {
 		IEnumerable<Question> allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.IsMastered ());
 
