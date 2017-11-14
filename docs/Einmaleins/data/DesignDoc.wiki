@@ -5,7 +5,7 @@ Drill the times tables.
 Check private schools as market.
 
 +Todo
- Visualize questions left ("fuel")
+ Test going under zero: Visualize questions left ("fuel")
  Test upgrading
  Test: Reaching all planets
  Test: Gauntlet
