@@ -128,11 +128,11 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	void Ascend () {
 		height += speed * Time.deltaTime;
 		recordHeight = UpdateRecord (height, recordHeight, recordPrefsKey);
+		heightText.text = height.ToString (heightFormat, formatProvider) + unit;
+		recordHeightText.text = recordHeight.ToString (heightFormat, formatProvider) + unit;
 		if (IsTargetPlanetReached()) {
 			ReachPlanet ();
 		}
-		heightText.text = height.ToString (heightFormat, formatProvider) + unit;
-		recordHeightText.text = recordHeight.ToString (heightFormat, formatProvider) + unit;
 	}
 
 	bool IsTargetPlanetReached() {
