@@ -13,6 +13,7 @@ public class NewPlayerName : MonoBehaviour {
 	[SerializeField] InputField inputField = null;
 	[SerializeField] float buttonFadeAlpha = 0.5f;
 	[SerializeField] float buttonFadeDuration = 0.1f;
+	[SerializeField] GameObject rocketPartsGameObj = null;
 	const string playerNamesPrefsKey = "playerNames";
 	const string curPlayerPrefsKey = "curPlayer";
 	string[] playerNames;
@@ -75,7 +76,15 @@ public class NewPlayerName : MonoBehaviour {
 		// todo transition
 		DisableButtons();
 		PlayerPrefs.Save ();
-		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync (RocketParts.instance.isRocketBuilt ? "launch" : "rocketBuilding");
+		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync (IsRocketBuilt() ? "launch" : "rocketBuilding");
+	}
+
+	bool IsRocketBuilt() {
+		if (PlayerPrefs.HasKey (curPlayerPrefsKey)) {
+			rocketPartsGameObj.SetActive (true);
+			return RocketParts.instance.isRocketBuilt;
+		}
+		return false;
 	}
 
 	void DisableButtons() {
