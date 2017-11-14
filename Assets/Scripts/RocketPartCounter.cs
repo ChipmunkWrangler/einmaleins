@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
+public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, OnQuizAborted {
 	[SerializeField] Text numText = null;
 	[SerializeField] Image[] imagesToHighlight = null;
 	[SerializeField] Text[] textsToHighlight = null;
@@ -30,13 +30,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	}
 
 	public void OnQuestionChanged(Question question) {
-		int i = 0;
-		foreach (Text text in textsToHighlight) {
-			StartCoroutine (FadeText (baseColor[i++], highlightFadeTime, text));
-		}
-		foreach (Text text in textsToHighlight) {
-			StartCoroutine (Scale (baseFontSize, highlightFadeTime, text));
-		}
+		Unhighlight ();
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
@@ -55,9 +49,24 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 		}
 	}
 
+	public void OnQuizAborted() {
+		Unhighlight ();
+	}
+
 	public void OnSpend(int oldNumParts, int newNumParts) {
 		StopAllCoroutines ();
 		StartCoroutine(CountTextDown (oldNumParts, newNumParts));
+	}
+
+	void Unhighlight ()
+	{
+		int i = 0;
+		foreach (Text text in textsToHighlight) {
+			StartCoroutine (FadeText (baseColor [i++], highlightFadeTime, text));
+		}
+		foreach (Text text in textsToHighlight) {
+			StartCoroutine (Scale (baseFontSize, highlightFadeTime, text));
+		}
 	}
 
 	IEnumerator FadeText(Color end, float fadeTime, Text text) {
