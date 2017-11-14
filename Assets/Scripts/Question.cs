@@ -13,7 +13,7 @@ public class Question {
 
 	public const float FAST_TIME = 3.0f;
 	const float ANSWER_TIME_MAX = 60.0f;
-	const float ANSWER_TIME_INTIAL = FAST_TIME + 0.1f; 
+	const float ANSWER_TIME_INTIAL = FAST_TIME + 0.01f; 
 	const int ADD_TO_DIFFICULTY_FAST = -3;
 	const int ADD_TO_DIFFICULTY_OK = -1;
 	const int ADD_TO_DIFFICULTY_WRONG = 2;
