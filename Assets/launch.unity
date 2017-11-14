@@ -24767,7 +24767,7 @@ MonoBehaviour:
   - {fileID: 232395213}
   baseFontSize: 30
   highlightColour: {r: 0.9098039, g: 0.9098039, b: 0, a: 1}
-  highlightFontSize: 50
+  highlightFontSize: 49
   highlightFadeTime: 0.5
   scoreCountdownDuration: 5
   scoreCountdownDelay: 0.5
