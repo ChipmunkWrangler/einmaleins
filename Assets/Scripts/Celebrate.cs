@@ -90,6 +90,7 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 	void StopTimer() {
 		if (coroutine != null) {
 			StopCoroutine (coroutine);
+			coroutine = null;
 		}
 	}
 
