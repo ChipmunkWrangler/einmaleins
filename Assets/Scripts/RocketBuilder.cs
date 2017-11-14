@@ -17,6 +17,7 @@ public class RocketBuilder : MonoBehaviour {
 	[SerializeField] GameObject rocketPartsWidget = null;
 
 	iTween.EaseType[] easeTypes = { //new iTween.EaseType[]
+		iTween.EaseType.linear,
 		iTween.EaseType.easeInOutCubic,
 		iTween.EaseType.easeOutQuad,
 		iTween.EaseType.easeInOutQuint,
@@ -41,6 +42,7 @@ public class RocketBuilder : MonoBehaviour {
 		if (RocketParts.instance.Upgrade ()) {
 			counter.OnSpend (RocketParts.instance.numParts + RocketParts.instance.numPartsRequired, RocketParts.instance.numParts);
 			StartEngine ();
+			iTween.MoveTo (gameObject, iTween.Hash ("y", maxY, "time", upgradeFlightTime, "delay", buildingDelay, "easetype", easeTypes[RocketParts.instance.upgradeLevel], "oncomplete", "Descend"));
 		}
 	}
 
@@ -53,7 +55,6 @@ public class RocketBuilder : MonoBehaviour {
 			}
 		}
 		exhaustParticles [upgradeLevel].Play ();
-		iTween.MoveTo (gameObject, iTween.Hash ("y", maxY, "time", upgradeFlightTime, "delay", buildingDelay, "easetype", easeTypes[upgradeLevel-1], "oncomplete", "Descend"));
 	}
 
 	void Descend() {
@@ -61,7 +62,6 @@ public class RocketBuilder : MonoBehaviour {
 	}
 
 	void DoneUpgrading() {
-		exhaustParticles [RocketParts.instance.upgradeLevel].Stop ();
 		DoneBuildingOrUpgrading ();
 	}
 
@@ -73,6 +73,7 @@ public class RocketBuilder : MonoBehaviour {
 	{
 		GotoBasePos("DoneBuilding");
 		buildParticles.Play ();
+		StartEngine ();
 	}
 
 	void DoneBuilding() {
@@ -82,6 +83,7 @@ public class RocketBuilder : MonoBehaviour {
 	}
 
 	void DoneBuildingOrUpgrading() {
+		exhaustParticles [RocketParts.instance.upgradeLevel].Stop ();
 		upgradeButton.Hide ();
 		launchButton.SetActive(true);
 	}
