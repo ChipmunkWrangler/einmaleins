@@ -15,8 +15,6 @@ Check private schools as market.
    Reach Planet
    StopRunning
    Celebrate.OnQuizAborted
- Bug: No longer says I am done for the day
- Bug: Stats button doesn't turn yellow
 ++v0.2.0
  * OK Change font to Classic Robot Regular
  * OK Implement new algorithm
@@ -32,6 +30,7 @@ Check private schools as market.
    * Replace it with more normal enter button? 
   * Make buttons more 3d or otherwise more obviously buttons, or glow or something
   * Buttons states more visible, especially respond more visibly to taps
+ * Add a big "View progress" above "Launch" button instead of little stats screen button 
 ++v0.3.0
  * Music
 ++v1.0.0 
@@ -467,13 +466,11 @@ planet 5, day 52
  * See if this is helpful after writing a test for the answer-time-based version
 
 +Ideas
+ * Fade mastered cards one at a time, show flying "Mastered" text
  * Add an upgrade with new particles before "In Deep Space"
  * Highlight getting a record, keep it yellow
  * Avoid delay after answering first question by creating and saving questions asynch during rocket building
   * Also QuestionPicker only needs to save one question, not all questions, in OnAnswer 
- * Automatically show stats screen after launch if a new card was mastered
-  * Or at least add a big "View progress" above "Launch" button instead of little stats screen button 
-  * Fade mastered cards one at a time, show flying "Mastered" text
  * Even mastered skills need occasional review
  * If a card would be shown twice in a row, and there are still cards left or new cards available, move it one back in the list.
  * Cartoony - low poly: 

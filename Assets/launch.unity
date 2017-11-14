@@ -886,6 +886,7 @@ GameObject:
   - component: {fileID: 388}
   - component: {fileID: 389}
   - component: {fileID: 92}
+  - component: {fileID: 110}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1850,6 +1851,17 @@ Transform:
   m_Father: {fileID: 96}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 58}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d279d978f2c3a45ed84702ddc42a7796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &111
 Transform:
   m_ObjectHideFlags: 0
@@ -21546,7 +21558,6 @@ MonoBehaviour:
   heightText: {fileID: 430}
   recordHeightText: {fileID: 306}
   launch: {fileID: 388}
-  celebrate: {fileID: 390}
   oldRecord: {fileID: 1862998282}
   paramObj: {fileID: 451636923}
   achievementText: {fileID: 379558591}
@@ -21569,7 +21580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2179ecab0be94d81955ef567fdaae51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 3
   exhaustParticles:
   - {fileID: 170}
   - {fileID: 169}
