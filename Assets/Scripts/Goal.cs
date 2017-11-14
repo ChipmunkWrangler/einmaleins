@@ -23,12 +23,17 @@ public class Goal : MonoBehaviour {
 		} else if (IsLeavingSolarSystem()) {
 			curGoal = CurGoal.WON;
 		} else {
-			curGoal = (TargetPlanet.GetTargetPlanetIdx () == TargetPlanet.GetNumPlanets() - 1) ? CurGoal.GAUNTLET : CurGoal.FLY_TO_PLANET;
+			curGoal = IsReadyForGauntlet() ? CurGoal.GAUNTLET : CurGoal.FLY_TO_PLANET;
 		}
 
 		return curGoal;
 	}
 		
+	bool IsReadyForGauntlet() {
+		return (TargetPlanet.GetTargetPlanetIdx () == TargetPlanet.GetMaxPlanetIdx ()) && 
+			RocketParts.instance.upgradeLevel == RocketParts.instance.maxUpgradeLevel;
+	}
+
 	bool ShouldUpgrade() {
 		return RocketParts.instance.hasEnoughPartsToUpgrade && !RocketParts.instance.justUpgraded;
 	}
@@ -38,6 +43,6 @@ public class Goal : MonoBehaviour {
 	}
 
 	bool IsLeavingSolarSystem() {
-		return TargetPlanet.GetTargetPlanetIdx () >= TargetPlanet.GetNumPlanets();
+		return TargetPlanet.GetTargetPlanetIdx () > TargetPlanet.GetMaxPlanetIdx();
 	}
 }

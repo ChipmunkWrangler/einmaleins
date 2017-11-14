@@ -21,6 +21,7 @@ public class RocketBuilder : MonoBehaviour {
 		iTween.EaseType.easeInOutCubic,
 		iTween.EaseType.easeOutQuad,
 		iTween.EaseType.easeInOutQuint,
+		iTween.EaseType.easeOutExpo,
 		iTween.EaseType.easeOutExpo
 	};
 

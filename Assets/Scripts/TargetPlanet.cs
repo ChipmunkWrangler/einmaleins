@@ -48,8 +48,8 @@ public class TargetPlanet {
 		return targetPlanetIdx; 
 	}
 
-	public static int GetNumPlanets() {
-		return heights.Length;
+	public static int GetMaxPlanetIdx() {
+		return heights.Length - 1;
 	}
 
 	public static float GetPlanetHeight(int i) {

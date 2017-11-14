@@ -52,18 +52,12 @@ public class RocketParts : MonoBehaviour {
 		
 	public int maxUpgradeLevel {
 		get {
-			UnityEngine.Assertions.Assert.AreEqual ((Questions.GetNumQuestions () - PARTS_TO_BUILD_ROCKET) % PARTS_PER_UPGRADE, 0);
-			return 1 + (Questions.GetNumQuestions () - PARTS_TO_BUILD_ROCKET) / PARTS_PER_UPGRADE;
+			UnityEngine.Assertions.Assert.AreEqual (Questions.GetNumQuestions () % PARTS_PER_UPGRADE, 0);
+			return Questions.GetNumQuestions () / PARTS_PER_UPGRADE;
 		}
 	}
 
 // public commands
-	public void FinalUpgrade() {
-		UnityEngine.Assertions.Assert.IsTrue (upgradeLevel <= TargetPlanet.GetLastReachedIdx());
-		UnityEngine.Assertions.Assert.AreEqual (upgradeLevel, numUpgrades-1);
-		DoUpgrade ();
-	}
-
 	public bool Upgrade() {
 		if (hasEnoughPartsToUpgrade) {
 			numParts -= PARTS_PER_UPGRADE;
@@ -79,7 +73,7 @@ public class RocketParts : MonoBehaviour {
 
 // private
 	const string prefsKey = "rocketParts";
-	const int PARTS_TO_BUILD_ROCKET = 11;
+	const int PARTS_TO_BUILD_ROCKET = 0;
 	const int PARTS_PER_UPGRADE = 11;
 
 	int numParts_;
