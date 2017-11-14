@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\EffortTracker.cs" />
      <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
      <Compile Include="Assets\Scripts\FlashThrust.cs" />
+     <Compile Include="Assets\Scripts\Fuel.cs" />
      <Compile Include="Assets\Scripts\Goal.cs" />
      <Compile Include="Assets\Scripts\GoalButtonControler.cs" />
      <Compile Include="Assets\Scripts\GotoBuildRocket.cs" />

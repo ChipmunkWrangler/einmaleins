@@ -5,23 +5,20 @@ Drill the times tables.
 Check private schools as market.
 
 +Todo
-Make new algorithm feel right
+ Visualize questions left ("fuel")
  Test upgrading
- Highlight getting a record, keep it yellow
  Test: Reaching all planets
  Test: Gauntlet
   Upgrade: Extra fuel tanks
  Test: Postgauntlet
  Test: Reaching planet on last question
  Test: Reaching planet before last question
-Add rocket parts display to launch screen
-Visualize questions left ("fuel")
 Maybe prioritize wrong, new, slow, mastered instead of wrong, slow, new, mastered? Then we run through the questions once to find the trickiest, then drill those?
  Run your test to see what impact that has
 ++v0.2.0
  * OK Change font to Classic Robot Regular
  * Implement new algorithm
- * Make it backwards compatible
+ * Make it backwards compatible?
  * Release to Talea & me
  * Ask Amalia and Matthias daughter to retest
  * Release to English kids   
@@ -457,6 +454,7 @@ planet 5, day 52
  * See if this is helpful after writing a test for the answer-time-based version
 
 +Ideas
+ * Highlight getting a record, keep it yellow
  * Avoid delay after answering first question by creating and saving questions asynch during rocket building
   * Also QuestionPicker only needs to save one question, not all questions, in OnAnswer 
  * Automatically show stats screen after launch if a new card was mastered

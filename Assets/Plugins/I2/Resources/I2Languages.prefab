@@ -416,8 +416,18 @@ MonoBehaviour:
     TermType: 0
     Description: 
     Languages:
+    - Neuer Rekord!
+    - New Record!
+    Languages_Touch:
     - 
     - 
+    Flags: 0000
+  - Term: 'Treibstoff:'
+    TermType: 0
+    Description: 
+    Languages:
+    - 'Treibstoff:'
+    - 'Fuel:'
     Languages_Touch:
     - 
     - 
