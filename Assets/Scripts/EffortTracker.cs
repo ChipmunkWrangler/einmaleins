@@ -70,6 +70,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		RocketParts.instance.justUpgraded = false;
 		++quizzesToday;
 		timeToday += questions.GetQuizTime();
+		Save ();
 	}
 
 	public void Save() {
