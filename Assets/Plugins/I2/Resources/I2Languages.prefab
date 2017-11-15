@@ -432,6 +432,16 @@ MonoBehaviour:
     - 
     - 
     Flags: 0000
+  - Term: App wird aktualisiert...
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - App wird aktualisiert...
+    - Updating...
+    Flags: 0000
   mLanguages:
   - Name: German
     Code: de
