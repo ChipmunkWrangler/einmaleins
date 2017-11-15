@@ -21,6 +21,7 @@ public class QuestionPicker : MonoBehaviour {
 		foreach (OnQuizAborted subscriber in onQuizAbortedSubscribers) {
 			subscriber.OnQuizAborted ();
 		}
+		StopAllCoroutines ();
 	}
 		
 	public void NextQuestion() {
