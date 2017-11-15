@@ -2,3 +2,4 @@
 
 TestReports
 DesignDoc
+StoreStuff
