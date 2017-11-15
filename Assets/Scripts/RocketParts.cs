@@ -7,7 +7,15 @@ public class RocketParts : MonoBehaviour {
 // public readonly
 	public static RocketParts instance { get; private set; }
 
-	public bool justUpgraded;
+	public bool justUpgraded {
+		get {
+			return justUpgraded_;
+		}
+		set {
+			justUpgraded_ = value;
+			Save ();
+		}
+	}
 
 	public int numParts {
 		get {
@@ -76,6 +84,7 @@ public class RocketParts : MonoBehaviour {
 	const int PARTS_TO_BUILD_ROCKET = 0;
 	const int PARTS_PER_UPGRADE = 11;
 
+	bool justUpgraded_;
 	int numParts_;
 	bool isRocketBuilt_;
 	int upgradeLevel_;
@@ -83,6 +92,7 @@ public class RocketParts : MonoBehaviour {
 	void Save() {
 		MDPrefs.SetBool (prefsKey + ":isBuilt", isRocketBuilt);
 		MDPrefs.SetInt (prefsKey + ":upgradeLevel", upgradeLevel);
+		MDPrefs.SetBool (prefsKey + ":justUpgraded", justUpgraded);
 		MDPrefs.SetInt (prefsKey, numParts);
 	}
 
@@ -91,6 +101,7 @@ public class RocketParts : MonoBehaviour {
 		numParts_ = MDPrefs.GetInt (prefsKey, 0);
 		isRocketBuilt_ = MDPrefs.GetBool (prefsKey + ":isBuilt");
 		upgradeLevel_ = MDPrefs.GetInt (prefsKey + ":upgradeLevel", 0);
+		justUpgraded_ = MDPrefs.GetBool (prefsKey + ":justUpgraded");
 	}
 		
 	void Awake() {
@@ -105,7 +116,8 @@ public class RocketParts : MonoBehaviour {
 			
 	void DoUpgrade ()
 	{
-		++upgradeLevel;
-		justUpgraded = true;
+		justUpgraded_ = true;
+		++upgradeLevel_;
+		Save ();
 	}
 }
