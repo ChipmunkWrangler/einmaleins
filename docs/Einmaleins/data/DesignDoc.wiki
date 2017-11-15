@@ -70,6 +70,7 @@ Check private schools as market.
  * Ensure that screenshots / video are up to date
   * Add grid button screenshots for small devices
  * Update Noun Project credits 
+ * Tag version in git
 ++Apple
  * Upload
   * 1) choose "generic iOS device" (don't choose Ipad or any other devices connected or a simulator) 

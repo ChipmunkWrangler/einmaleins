@@ -8,12 +8,29 @@ public class Questions : MonoBehaviour {
 	public Question[] questions { get; private set; }
 
 	const string prefsKey = "questions";
-
-	void Awake() {
-		CreateQuestions ();
-		Load ();
+		
+	public static bool WereQuestionsCreated ()
+	{
+		return MDPrefs.HasKey (prefsKey + ":ArrayLen");
 	}
 
+	public static Question[] CreateQuestions() {
+		Question[] questions = new Question[maxNum * (maxNum+1) /2];
+		int idx = 0;
+		for (int a = 1; a <= maxNum; ++a) {
+			for (int b = a; b <= maxNum; ++b) {
+				questions [idx] = new Question (a, b);
+				++idx;
+			}
+		}
+		return questions;
+	}
+
+	public static string GetQuestionKey (int i)
+	{
+		return prefsKey + ":" + i;
+	}
+		
 	public static int GetNumQuestions() {
 		return maxNum * (maxNum + 1) / 2;
 	}
@@ -53,25 +70,19 @@ public class Questions : MonoBehaviour {
 
 	void Load() {
 		UnityEngine.Assertions.Assert.AreEqual (MDPrefs.GetInt (prefsKey + ":ArrayLen", questions.Length), questions.Length);
-		if (MDPrefs.HasKey (prefsKey + ":ArrayLen")) {
+		if (WereQuestionsCreated ()) {
 			for (int i = 0; i < questions.Length; ++i) {
-				questions [i].Load (prefsKey + ":" + i, i);
+				questions [i].Load (GetQuestionKey (i), i);
 			}
 		} else {
 			for (int i = 0; i < questions.Length; ++i) {
-				questions [i].Create (prefsKey + ":" + i, i);
+				questions [i].Create (GetQuestionKey(i), i);
 			}
 		}
 	}
 
-	void CreateQuestions() {
-		questions = new Question[maxNum * (maxNum+1) /2];
-		int idx = 0;
-		for (int a = 1; a <= maxNum; ++a) {
-			for (int b = a; b <= maxNum; ++b) {
-				questions [idx] = new Question (a, b);
-				++idx;
-			}
-		}
+	void Awake() {
+		questions = CreateQuestions ();
+		Load ();
 	}
 }

@@ -27,7 +27,7 @@ public class NewPlayerName : MonoBehaviour {
 		} // else this is initial start
 		ActivatePlayButton (false);
 //		PlayerPrefs.SetInt (playerNamesPrefsKey + ":StringArray:ArrayLen", 2);
-		playerNames = PlayerPrefsArray.GetStringArray (playerNamesPrefsKey);
+		playerNames = GetPlayerNames();
 		int numPlayers = playerNames.Length;
 		enterNamePanel.SetActive (numPlayers < playerButtons.Length);
 		if (numPlayers == 0) {
@@ -40,6 +40,10 @@ public class NewPlayerName : MonoBehaviour {
 		for(int i = numPlayers; i < playerButtons.Length; ++i) {
 			playerButtons [i].SetActive (false);
 		}
+	}
+
+	public static string[] GetPlayerNames() {
+		return PlayerPrefsArray.GetStringArray (playerNamesPrefsKey);
 	}
 
 	public void OnPlayerNameChanged(string name) {
@@ -95,7 +99,7 @@ public class NewPlayerName : MonoBehaviour {
 		}
 	}
 
-	void SetCurPlayerName(string name) {
+	static public void SetCurPlayerName(string name) {
 		PlayerPrefs.SetString (curPlayerPrefsKey, name);
 	}
 

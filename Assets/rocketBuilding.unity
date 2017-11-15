@@ -1867,7 +1867,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Launch Rocket!
+  m_Text: Launch!
 --- !u!222 &1712192704
 CanvasRenderer:
   m_ObjectHideFlags: 0

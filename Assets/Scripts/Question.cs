@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Question {
+public class Question { 
 	public int a {  get; private set; }
 	public int b { get; private set; }
 	public int idx { get; private set; }
@@ -13,7 +13,7 @@ public class Question {
 
 	public const float FAST_TIME = 3.0f;
 	const float ANSWER_TIME_MAX = 60.0f;
-	const float ANSWER_TIME_INTIAL = FAST_TIME + 0.01f; 
+	public const float ANSWER_TIME_INTIAL = FAST_TIME + 0.01f; 
 	const int ADD_TO_DIFFICULTY_FAST = -3;
 	const int ADD_TO_DIFFICULTY_OK = -1;
 	const int ADD_TO_DIFFICULTY_WRONG = 2;
@@ -79,7 +79,7 @@ public class Question {
 	public void Load(string _prefsKey, int _idx) {
 		prefsKey = _prefsKey;
 		idx = _idx;
-		answerTimes = MDPrefs.GetFloatArray (prefsKey + ":times").ToList();
+		answerTimes = GetAnswerTimes (prefsKey);
 		wasMastered = MDPrefs.GetBool (prefsKey + ":wasMastered");
 		wasWrong = MDPrefs.GetBool (prefsKey + ":wasWrong");
 		isNew = MDPrefs.GetBool (prefsKey + ":isNew", true);
@@ -88,15 +88,12 @@ public class Question {
 	public void Create(string _prefsKey, int _idx) {
 		prefsKey = _prefsKey;
 		idx = _idx;
-		answerTimes = new List<float>();
-		for (int i = 0; i < NUM_ANSWER_TIMES_TO_RECORD; ++i) {
-			answerTimes.Add (ANSWER_TIME_INTIAL);
-		}
+		answerTimes = GetNewAnswerTimes ();
 	}
 
 	public void Save() {
 		UnityEngine.Assertions.Assert.AreNotEqual (prefsKey.Length, 0);
-		MDPrefs.SetFloatArray (prefsKey + ":times", answerTimes.ToArray());
+		SetAnswerTimes (prefsKey, answerTimes);
 		MDPrefs.SetBool (prefsKey + ":wasMastered", wasMastered);
 		MDPrefs.SetBool (prefsKey + ":wasWrong", wasWrong);
 	}
@@ -107,6 +104,25 @@ public class Question {
 			s += time + " ";
 		}
 		return s;
+	}
+
+	public static List<float> GetAnswerTimes (string prefsKey)
+	{
+		return MDPrefs.GetFloatArray (prefsKey + ":times").ToList ();
+	}
+
+	public static void SetAnswerTimes (string prefsKey, List<float> answerTimes)
+	{
+		MDPrefs.SetFloatArray (prefsKey + ":times", answerTimes.ToArray ());
+	}
+
+	public static List<float> GetNewAnswerTimes ()
+	{
+		List<float> answerTimes = new List<float> ();
+		for (int i = 0; i < NUM_ANSWER_TIMES_TO_RECORD; ++i) {
+			answerTimes.Add (ANSWER_TIME_INTIAL);
+		}
+		return answerTimes;
 	}
 
 	void RecordAnswerTime (float timeRequired)
