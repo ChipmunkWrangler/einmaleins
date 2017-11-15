@@ -17,9 +17,11 @@ public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer {
 	}
 
 	public void OnQuestionChanged(Question question) {
-		ResetMask ();
-		ShowMeter ();
-		StartMeter (timeToZero);
+		if (question != null) {
+			ResetMask ();
+			ShowMeter ();
+			StartMeter (timeToZero);
+		}
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
