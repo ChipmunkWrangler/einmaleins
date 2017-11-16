@@ -23,12 +23,13 @@ Check private schools as market.
  * OK Ask Amalia and Matthias daughter to retest
  * OK Release to English kids   
 ++v0.1.10
- * Check that English is now the fallback language
+ * OK More readable font
+ * TEST English is now the fallback language
  * Check out Dave's crashes
  * Improve buttons
   * Make center button more obvious -- pulse the first time or something
    * Replace it with more normal enter button? 
-  * Make buttons more 3d or otherwise more obviously buttons, or glow or something
+  * OK Make buttons more 3d or otherwise more obviously buttons, or glow or something
   * Buttons states more visible, especially respond more visibly to taps
   * Try using a simple font for the numbers and a tricky one for text
 ++v0.2.0
