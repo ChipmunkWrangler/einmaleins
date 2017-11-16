@@ -30,7 +30,7 @@ Check private schools as market.
   * Make center button more obvious -- pulse the first time or something
    * Replace it with more normal enter button? 
   * OK Make buttons more 3d or otherwise more obviously buttons, or glow or something
-  * Buttons states more visible, especially respond more visibly to taps
+  * OK Buttons states more visible, especially respond more visibly to taps
 ++v0.2.0
  * Music
 ++v1.0.0 
