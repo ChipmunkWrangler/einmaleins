@@ -23,6 +23,7 @@ Check private schools as market.
  * OK Ask Amalia and Matthias daughter to retest
  * OK Release to English kids   
 ++v0.1.10
+ * Check that English is now the fallback language
  * Check out Dave's crashes
  * Improve buttons
   * Make center button more obvious -- pulse the first time or something
