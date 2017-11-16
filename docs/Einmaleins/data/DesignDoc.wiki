@@ -18,26 +18,27 @@ Check private schools as market.
 ++v0.1.8/9 (8 in testflight, 9 in-game label)
  * OK Change font to Classic Robot Regular
  * OK Implement new algorithm
- * NO Make it backwards compatible?
- * Release to Talea & me
- * Ask Amalia and Matthias daughter to retest
- * Release to English kids   
+ * OK Make it backwards compatible?
+ * OK Release to Talea & me
+ * OK Ask Amalia and Matthias daughter to retest
+ * OK Release to English kids   
 ++v0.1.10
  * Check out Dave's crashes
- * Make horizontal version with linear button array 
  * Improve buttons
   * Make center button more obvious -- pulse the first time or something
    * Replace it with more normal enter button? 
   * Make buttons more 3d or otherwise more obviously buttons, or glow or something
   * Buttons states more visible, especially respond more visibly to taps
- * Add a big "View progress" above "Launch" button instead of little stats screen button 
+  * Try using a simple font for the numbers and a tricky one for text
 ++v0.2.0
  * Music
 ++v1.0.0 
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
  * Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player)
  * Android home button (choose player)
- * Store page https://developer.apple.com/app-store/categories/
+ * Store page https://developer.apple.com/app-store/categories/ and on android
+  * Localized, up to date screen shots  
+ * Remove unnecessary permissions, e.g. Android.Internet
  * Test that it works with 512 Mb devices (https://hwstats.unity3d.com/mobile/os.html)
  * Change iOS build to Fast but no Exceptions option.
  * Remove or disable Debug.Log
@@ -71,6 +72,28 @@ Check private schools as market.
   * Add grid button screenshots for small devices
  * Update Noun Project credits 
  * Tag version in git
+
+++On major changes
+ * Check Beta App Description, etc. in Testflight...Test Informationhttps://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=testinformation
+ * Ensure that Datenschutzerklärung is still true (e.g. if you add tracking or cross-branding). Model is https://www.carlsen.de/datenschutzerklaerung-apps 
++++Test
+ * Test starting with no players
+ * Test leaving and reentering the character
+ * Test getting answers wrong and ending quiz early
+ * Test instamastery
+ * Test fast answer that isn't instamastery
+ * Test slow mastery
+ * Test reaching Mars
+ * Test upgrading
+ * Test stats
+ * Test reaching Pluto (all questions should be mastered, all upgrades done, gauntlet. Impossible to reach early)
+ * Test post-gauntlet
+++Google
+ * Simulator: ~/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_26_x86
+ * New test: https://support.google.com/googleplay/android-developer/answer/3131213?hl=en
+ * New release: https://support.google.com/googleplay/android-developer/answer/7159011
+  * Enter passwords (build settings... publishing settings...keystore password) before building in Unity
+  * Play Console...Release Management... New Release...Browse Files
 ++Apple
  * Upload
   * 1) choose "generic iOS device" (don't choose Ipad or any other devices connected or a simulator) 
@@ -80,25 +103,6 @@ Check private schools as market.
   * update compliance info at iTunesConnect
   * Check "Test Information" under IOSBuilds...Test Details in testflight, in the right language -- see Texts below (https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=build&subsection=testdetails&id=24416006)
   * Add groups to the build
-++On major changes
- * Check Beta App Description, etc. in Testflight...Test Informationhttps://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=testinformation
- * Ensure that Datenschutzerklärung is still true (e.g. if you add tracking or cross-branding). Model is https://www.carlsen.de/datenschutzerklaerung-apps 
-+++Test
- * OK Test starting with no players
- * OK Test leaving and reentering the character
- * OK Test getting answers wrong and ending quiz early
- * OK Test instamastery
- * OK Test fast answer that isn't instamastery
- * Test slow mastery
- * OK Test reaching Mars
- * OK Test upgrading
- * Test stats
- * OK Test reaching Pluto (all questions should be mastered, all upgrades done, gauntlet. Impossible to reach early)
- * OK Test post-gauntlet
-++Google
-~/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_26_x86
- https://support.google.com/googleplay/android-developer/answer/3131213?hl=en
-
 +Orbiting is boring, falling is sad 
 ++Goals
  * Fairly steady progress
@@ -471,25 +475,33 @@ planet 5, day 52
  * See if this is helpful after writing a test for the answer-time-based version
 
 +Ideas
- * Fade mastered cards one at a time, show flying "Mastered" text
- * Add an upgrade with new particles before "In Deep Space"
+ * Shrink height numbers
+  * Highlight the first few digits
+  * Change unit (maybe write "Millionen km", or AU, or Mm, 
+ * Make horizontal version with linear button array 
+ * Use red bubble notifications
+ * Add an upgrade with new particles before "In Deep Space" with new colour of flame
+ * Remove stats screen or make it more prominent
+  * Add a big "View progress" above "Launch" button instead of little stats screen button 
+  * Fade mastered cards one at a time, show flying "Mastered" text
  * Highlight getting a record, keep it yellow
  * Avoid delay after answering first question by creating and saving questions asynch during rocket building
   * Also QuestionPicker only needs to save one question, not all questions, in OnAnswer 
  * Even mastered skills need occasional review
- * If a card would be shown twice in a row, and there are still cards left or new cards available, move it one back in the list.
  * Cartoony - low poly: 
   * https://www.pinterest.de/pin/464081936581196391/
   * http://www.freeiconspng.com/img/40799
   * https://www.assetstore.unity3d.com/#!/content/72089
   * https://www.assetstore.unity3d.com/#!/content/34894
   * btw. könntest Du auch die Grafiken in Magica Voxel machen. Kannst Du dann auch sehr simple in Einzelteile zerlegen und Stück für Stück zusammenbauen
-  * Then you can set the distances each to 2x prev distance and avoid the math complications and the orbiting 
- * Use red bubble notifications
+ * More collectibles
+  * Planet gallery 
+  * Final congratulation with magic tree
+  * "Stickers" for the rocket
  * Nicer delete icon
- * particles come out of the stars to make the connection to multipliers (could also move stars under score) 
  * Use a rocket as rocket parts progress bar instead of a number
   * And an engine for upgrades? 
+ * Fuel is a bar rather than a number? 
  * Matthias wünscht sich Schrifteingabe
  * Ich wünsche mir Stimmeingabe
  * x3 and x2 resolutions for backgrounds
@@ -502,9 +514,8 @@ planet 5, day 52
    * With option to reset flash progress and upgrades, reimbursing rocket parts 
  * bigger rocket on icon (use xcf in unusedassets as base)
  * If you want to make it free and sell it after you have reached Mars: https://developer.apple.com/app-store/parental-gates/
- * Final congratulation with magic tree.
  * Explain the slow last round based on it being a cargo ship for the tree
- * Flash Stats screen with "collected" planets an orbit records?
+ * Flash Stats screen with "collected" planets?
  * Split saturn into two layers (front of rings & (planet + back of rings) so you can go through the rings
   * Ensure that shadowed, missing part of ring is black, not transparent 
  * More education: See Hints
@@ -514,7 +525,6 @@ planet 5, day 52
   * Scene transition in OnPlay (rocket with name on the side?)
   * Celebrate the instant the record is broken in Launch mode: special flames?
   * Screen shake on launch, or on every thrust
- * Show progress bar towards building or upgrading the rocket
  * More involvement with rocket building
   * Kid chooses rocket design and color
   * Choose differently coloured rockets
@@ -523,15 +533,14 @@ planet 5, day 52
   * Use Inkscape to split your rockets into pieces that you can build.
   * Rocket building screen shows the rocket under construction for the first 10 pieces. You can build it piece by piece
   * Colouring book for rocket
- * Main screen: highlight stats button if there are any unseen improvements (anything that would be yellow)
+ * Fuel tank upgrade changes the shape of the rocket 
  * Switch from PlayerPrefs to another system https://unity3d.com/learn/tutorials/topics/scripting/persistence-saving-and-loading-data
  * Optimize graphics:
    * https://gamedev.stackexchange.com/questions/75376/why-does-unity-in-2d-mode-employ-scaling-and-the-default-othographic-size-the-wa 
    * https://docs.unity3d.com/Manual/Profiler.html
    * http://answers.unity3d.com/questions/1009179/why-a-texture-always-consume-twice-ram-when-runnin.html
    * http://answers.unity3d.com/questions/401716/determining-texture-memory-usage.html
- * Make the timed parts a reward. So you are struggling through stuff, and then comes something you know well and have to do fast. The music changes, cool shit happens if you succeed, maybe there's action (have a plane flying that goes up every time you get it within the time limit, for example)
-  * Matthias B says: consider visual flow: ATM it starts at the question, then down to the buttons, then up to the answer, down to the rocket, up to the result... he thinks it would be better to go from top to bottom or vice versa
+ * Matthias B says: consider visual flow: ATM it starts at the question, then down to the buttons, then up to the answer, down to the rocket, up to the result... he thinks it would be better to go from top to bottom or vice versa
 
 ++Collectibles
  * Get a new alien for each planet reached

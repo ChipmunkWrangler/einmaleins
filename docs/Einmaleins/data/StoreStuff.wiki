@@ -9,6 +9,8 @@ must find an angle.
 ++Names
  * einmaleins meistern
  * Einmaleins Rakete 
+ * Times Table Rocket
+ * Einmaleins-Rakete: Schnell Multiplikation meistern
 ++Subtitles
  * Schnell Mathe meistern
  * Der kurze Weg zum Blitzrechner
@@ -26,6 +28,7 @@ must find an angle.
 Hakt das Einmaleins bei Ihrem Kind noch? Es wird zum Blitzrechner!
 Bringt Ihr Kind von "Ist es 55? 67? Warte kurz..." zu "das ist Babyleicht!"
 Hakt das kleine Einmaleins bei Ihrem Kind noch? Nicht mehr lange!
+The fastest way for your child to perfect the times tables
 ++Long Descriptions
 
 Schnell, was macht acht mal sieben? Die Einmaleins-Rakete hilft Ihrem Kind, solche Fragen blitzschnell und mühelos zu beantworten. 
@@ -64,25 +67,31 @@ I am also grateful for any other feedback! Please be harsh now so I am not embar
 Sincerely,
 Rafael
 +++Parents
-Vielen Dank, dass Du und Dein Kind mir helfen!
+Hat Dein Kind schon eine ältere Version getestet? Dann sag mir bitte, ob diese Version ihm besser, oder schlechter gefällt.
 
-Schnell, was macht acht mal sieben? Die Einmaleins-Rakete hilft Deinem Kind, solche Fragen blitzschnell und mühelos zu beantworten... mit einer täglichen Übungszeit von nur wenigen Minuten.
-
-Die Rakete verschwendet die Zeit Deines Kindes nicht: Sie merkt, welche Aufgaben ihm leicht und schwer fallen, und stellt gezielt die Fragen, die ihm weiterbringen.
-
-Allerdings ist die App (noch) nicht dafür geeignet, Deinem Kind das Konzept der Multiplikation von Null auf beizubringen: Sie bringt es vielmehr effizient von "wackelig" auf "Meister".
-
-Bitte sag mir Bescheid, ob die App:
+Ansonsten bitte sag mir Bescheid, ob die App:
 a) auf Deinem Gerät gut läuft
 b) sich bequem bedienen lässt
 c) ohne weitere Anweisungen verständlich ist
-d) Deinem Kind interessieret
-e) Deinem Kind weiterhilft
+d) Deinem Kind interessiert und weiterhilft
 
-Beliebiges anderes Feedback ist auch wilkommen. Sei bitte brutal ehrlich: Wenn die App Dir oder Deinem Kind nicht gefällt, oder wenn ein für Euch wichtiges Feature fehlt, will ich das wissen, damit ich sie verbessern kann.
+Anderes Feedback ist auch willkommen. Sei bitte brutal ehrlich: Wenn die App Dir oder Deinem Kind nicht gefällt, will ich das wissen, damit ich sie verbessern kann.
 
-Liebe Grüße
+Vielen Dank!
 
+Rafael
+
+Please tell me whether the app:
+
+a) runs smoothly on your device
+b) is understandable without a tutorial
+c) has pressably large buttons
+d) interests your child
+e) helps your child improve
+
+I am also grateful for any other feedback. Be harsh now so I am not embarrassed later!
+
+Thank you very much,
 Rafael
 +++Emails
 Hallo Siri,

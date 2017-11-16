@@ -1,7 +1,22 @@
 ﻿+Questions for testers:
   * Ask testers if they would prefer other graphics, show them a screenshot
   * Hat es Dein Kind demotiviert, wenn die Rakete wieder herunterfiel?
++Test Reports v0.1.10
+++Till
+++Mom / Co-op kids
+++Carrie
 
+++Matthias Bauchinger plus gerade 5 yo Tochter
+ * Nur positiver Stress
+ * Der Fokus lag auf den Planeten, Partikel usw.
+ * "Wo ist die Sonne?"
+ * Zehn Minuten lang hinterfragt "Nicht weiter spielen"
+ * Curious about what kinds of fire they are (maybe more colours)
+ * Stats screen ignored and mysterious
+  * He thinks I should focus on the planets 
+ * km numbers too long, maybe highlight the beginning numbers (or other unit)
+ * Fuel mysterious
+ * Suggests combi-learning app: "Themen-basiertes lernen" z.B. Planets + multiplication
 +Test Reports v0.1.x
 ++Talea
 First time played 15 minutes. Second time not interested but played 10 without complaint. Third time played 15 minutes until done, but not very happily. Fourth time: new stats display with revealed picture is motivating, at least for someone who can alreadz do it: she played 10 minutes voluntarily and would have continued had I not stopped her to fix a bug. Later, she asked whether it was fixed. And when it said "Fertig", she actually started a new player just to keep going.
@@ -84,28 +99,7 @@ Irgendwann hat das Programm für uns entschieden, dass Schluss für heute ist. W
 
 Eine mögliche Erweiterung wäre, dass man zum Beispiel nur die Multiplikationen mit 7 (7x1, 7x2 etc) oder einer anderen Zahl, die man wählen kann, macht.
  
-+Test Reports v0.2.0
-++Till
-Need to ask first
-++Evie
-++Talea
-++Matthias B & Daughter
-++Olivia
-++Linda
-++Mom / Co-op kids
-+Test Reports v0.2.1
-++Eddie
-++Joachim
-++Amalia
-++Joerg
-++Robert
-Need to ask first
-++Carrie
-Need to ask first
-++Marilisa
-Need to ask first
 +Future Testers
- * Jascha
  * Rafael Morlock (asked, but can't run ios8 and hence no test flight)
  * andrea_egner@web.de
  * klaas@flaregames.com
