@@ -26,11 +26,10 @@ Check private schools as market.
  * OK More readable font
  * TEST English is now the fallback language
  * Check out Dave's crashes
- * Improve buttons
-  * Make center button more obvious -- pulse the first time or something
-   * Replace it with more normal enter button? 
+ * OK Improve buttons
   * OK Make buttons more 3d or otherwise more obviously buttons, or glow or something
   * OK Buttons states more visible, especially respond more visibly to taps
+  * OK Nicer delete icon
 ++v0.2.0
  * Music
 ++v1.0.0 
@@ -476,12 +475,12 @@ planet 5, day 52
  * See if this is helpful after writing a test for the answer-time-based version
 
 +Ideas
+ * Use red bubble notifications
+ * Add an upgrade with new particles before "In Deep Space" with new colour of flame
+ * Make horizontal version with linear button array 
  * Shrink height numbers
   * Highlight the first few digits
   * Change unit (maybe write "Millionen km", or AU, or Mm, 
- * Make horizontal version with linear button array 
- * Use red bubble notifications
- * Add an upgrade with new particles before "In Deep Space" with new colour of flame
  * Remove stats screen or make it more prominent
   * Add a big "View progress" above "Launch" button instead of little stats screen button 
   * Fade mastered cards one at a time, show flying "Mastered" text
@@ -499,7 +498,6 @@ planet 5, day 52
   * Planet gallery 
   * Final congratulation with magic tree
   * "Stickers" for the rocket
- * Nicer delete icon
  * Use a rocket as rocket parts progress bar instead of a number
   * And an engine for upgrades? 
  * Fuel is a bar rather than a number? 
@@ -507,7 +505,8 @@ planet 5, day 52
  * Ich wünsche mir Stimmeingabe
  * x3 and x2 resolutions for backgrounds
  * Add tracking of questions posed & answered to see how people play it
- * tutorial with rocket instead of finger? Decide with Talea and other parents what needs a tutorial
+ * tutorial? Decide with Talea and other parents what needs a tutorial
+  * Make center button more obvious -- pulse the first time or something, or use finger 
  * Parent mode
   * Delete account
   * Reset account
