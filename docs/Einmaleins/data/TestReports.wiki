@@ -1,11 +1,26 @@
 ﻿+Questions for testers:
   * Ask testers if they would prefer other graphics, show them a screenshot
-  * Hat es Dein Kind demotiviert, wenn die Rakete wieder herunterfiel?
+  * Ask them for suggestions for new features
+  * Ask them to pick their favourite of music, rocket customization, planet gallery, voice recognition, ufos
 +Test Reports v0.1.10
 ++Till
 ++Mom / Co-op kids
 ++Carrie
-
+++Olivia
+ * Would like to continue after the end of the day
+ * Stutters when flames come on Android Samsung GT-I9100 Galaxy S2?) android 4.1.2, 1Gb RAM Dual-core 1.2 GHz Cortex-A9, 4.3" 480x800
+  * But Olivia didn't notice  
+ * Would like extension to 856 - 23 etc.
+ * Font is very small
+ * She understood it herself
+ * While she didn't complain, I noticed that after twice in a row of not getting a new record, she wanted Talea to do it
+ * would like to craft her own rocket. Colour first, then add a new piece with every upgrade
+  * Show what is coming and make it clear that you must unlock it
+  * Maybe in a separate cycle to the planet  
+ * hadn't found the stats screen but found it motivating when I showed her
+ * Her favourite part was when she could really see the planets and the launch sequence because the buttons (which cover most of her screen= disappeared
+ * Voice recognition and Music neither popular with Olivia nor with Sabine
+ * Upon my suggestion, also liked planet gallery but basteln even better
 ++Matthias Bauchinger plus gerade 5 yo Tochter
  * Nur positiver Stress
  * Der Fokus lag auf den Planeten, Partikel usw.

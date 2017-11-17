@@ -5,6 +5,7 @@ Drill the times tables.
 Check private schools as market.
 
 +Todo
+ Ask Talea if she asked Karolina etc. then write to parents (Nina Brust)
  Bug: Sometimes, if you reach a planet (seems like a timing issue):
   Question didn't go away
   Celebrate didn't go away
@@ -30,15 +31,34 @@ Check private schools as market.
   * OK Make buttons more 3d or otherwise more obviously buttons, or glow or something
   * OK Buttons states more visible, especially respond more visibly to taps
   * OK Nicer delete icon
-++v0.2.0
- * Music
+ * Use red bubble notifications
+  * https://docs.unity3d.com/ScriptReference/iOS.LocalNotification.html
+  * LocalNotification().applicationIconBadgeNumber=-1; to remove
+ * Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player)
+  *  if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }  
+  * Test in simulator, then ask Robert to test 
+ * Add an upgrade with new particles before "In Deep Space" with new colour of flame
+ * More involvement with rocket building
+  * At least design this so that if you implement it in 1.0.1 you can award upgrade parts, etc. retroactively 
+   * OTOH, if the currency is spend only on aesthetic stuff, it would be ok if old players started from scratch, since they were already motivated enough to reach their current point
+  * Kid chooses rocket design and color
+  * Choose differently coloured rockets
+   * Maybe limit it to a few per day 
+  * Choose a new rocket design with every upgrade (or as a separate kind of upgrade that happens at a different pace)
+  * Use Inkscape to split your rockets into pieces that you can build.
+  * Rocket building screen shows the rocket under construction for the first 10 pieces. You can build it piece by piece
+  * Colouring book for rocket
+  * Fuel tank upgrade changes the shape of the rocket 
+  * Make this a motivation for slower kids:
+   * Every first try correct question gets currency
+   * Currency is spend on visual upgrades, changing colours, switching rocket designs
+   * Upgrades are shown in advance for motivational reasons
+
 ++v1.0.0 
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
- * Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player)
- * Android home button (choose player)
  * Store page https://developer.apple.com/app-store/categories/ and on android
   * Localized, up to date screen shots  
- * Remove unnecessary permissions, e.g. Android.Internet
+ * Remove unnecessary permissions, e.g. Android.Internet aka "Other: full network access"
  * Test that it works with 512 Mb devices (https://hwstats.unity3d.com/mobile/os.html)
  * Change iOS build to Fast but no Exceptions option.
  * Remove or disable Debug.Log
@@ -52,7 +72,9 @@ Check private schools as market.
   * Left & right insets (accounts for the notch and curved corners, plus a margin) 132 pixels each
   * Bottom inset (accounts for the bottom nav bar) 63 pixels
   * Top inset zero pixels
- * Classic Robot Font $20 http://www.pixelsagas.com/?download=classic-robot
+++v1.0.1
+ * random events to keep things interesting if there hasn't been a record or rocket part for a while
+
 +++Credits
  * Creative commons attribution 
   * spaceship by Jonathan Li from the Noun Project
@@ -475,9 +497,18 @@ planet 5, day 52
  * See if this is helpful after writing a test for the answer-time-based version
 
 +Ideas
- * Use red bubble notifications
- * Add an upgrade with new particles before "In Deep Space" with new colour of flame
+ * Music
+ * Ich wünsche mir Stimmeingabe
  * Make horizontal version with linear button array 
+  * Not yet. Amalia is the only person to want horizontal so far, and Bert the only linear
+  * Plus, linear arrangement of more than six buttons makes them too small. 
+ * tutorial? Decide with Talea and other parents what needs a tutorial
+  * Make center button more obvious -- pulse the first time or something, or use finger 
+ * More collectibles
+  * Planet gallery 
+  * Final congratulation with magic tree
+  * "Stickers" for the rocket
+ * "Keep going anyway" button at end of day?
  * Shrink height numbers
   * Highlight the first few digits
   * Change unit (maybe write "Millionen km", or AU, or Mm, 
@@ -487,26 +518,20 @@ planet 5, day 52
  * Highlight getting a record, keep it yellow
  * Avoid delay after answering first question by creating and saving questions asynch during rocket building
   * Also QuestionPicker only needs to save one question, not all questions, in OnAnswer 
- * Even mastered skills need occasional review
  * Cartoony - low poly: 
   * https://www.pinterest.de/pin/464081936581196391/
   * http://www.freeiconspng.com/img/40799
   * https://www.assetstore.unity3d.com/#!/content/72089
   * https://www.assetstore.unity3d.com/#!/content/34894
   * btw. könntest Du auch die Grafiken in Magica Voxel machen. Kannst Du dann auch sehr simple in Einzelteile zerlegen und Stück für Stück zusammenbauen
- * More collectibles
-  * Planet gallery 
-  * Final congratulation with magic tree
-  * "Stickers" for the rocket
- * Use a rocket as rocket parts progress bar instead of a number
-  * And an engine for upgrades? 
- * Fuel is a bar rather than a number? 
+ * Score header more visual 
+  * Use a rocket as rocket parts progress bar instead of a number
+   * And an engine for upgrades? 
+  * Fuel is a bar rather than a number? 
+  * But the images may visually dominate the height and record lines
  * Matthias wünscht sich Schrifteingabe
- * Ich wünsche mir Stimmeingabe
  * x3 and x2 resolutions for backgrounds
  * Add tracking of questions posed & answered to see how people play it
- * tutorial? Decide with Talea and other parents what needs a tutorial
-  * Make center button more obvious -- pulse the first time or something, or use finger 
  * Parent mode
   * Delete account
   * Reset account
@@ -515,7 +540,6 @@ planet 5, day 52
  * bigger rocket on icon (use xcf in unusedassets as base)
  * If you want to make it free and sell it after you have reached Mars: https://developer.apple.com/app-store/parental-gates/
  * Explain the slow last round based on it being a cargo ship for the tree
- * Flash Stats screen with "collected" planets?
  * Split saturn into two layers (front of rings & (planet + back of rings) so you can go through the rings
   * Ensure that shadowed, missing part of ring is black, not transparent 
  * More education: See Hints
@@ -525,15 +549,6 @@ planet 5, day 52
   * Scene transition in OnPlay (rocket with name on the side?)
   * Celebrate the instant the record is broken in Launch mode: special flames?
   * Screen shake on launch, or on every thrust
- * More involvement with rocket building
-  * Kid chooses rocket design and color
-  * Choose differently coloured rockets
-   * Maybe limit it to a few per day 
-  * Choose a new rocket design with every upgrade (or as a separate kind of upgrade that happens at a different pace)
-  * Use Inkscape to split your rockets into pieces that you can build.
-  * Rocket building screen shows the rocket under construction for the first 10 pieces. You can build it piece by piece
-  * Colouring book for rocket
- * Fuel tank upgrade changes the shape of the rocket 
  * Switch from PlayerPrefs to another system https://unity3d.com/learn/tutorials/topics/scripting/persistence-saving-and-loading-data
  * Optimize graphics:
    * https://gamedev.stackexchange.com/questions/75376/why-does-unity-in-2d-mode-employ-scaling-and-the-default-othographic-size-the-wa 
