@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CCVersion : MonoBehaviour {
+public class MDVersion : MonoBehaviour {
 	const int majorVersion = 0;
 	const int minorVersion = 1;
 	const int buildNumber = 10;

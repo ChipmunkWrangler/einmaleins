@@ -5,6 +5,6 @@ using UnityEngine;
 public class VersionDisplay : MonoBehaviour {
 	[SerializeField] UnityEngine.UI.Text text;
 	void Start () {
-		text.text = CCVersion.GetCurrentVersion ();
+		text.text = MDVersion.GetCurrentVersion ();
 	}
 }

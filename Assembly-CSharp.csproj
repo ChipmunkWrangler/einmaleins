@@ -88,7 +88,6 @@
      <Compile Include="Assets\Scripts\BoostMeter.cs" />
      <Compile Include="Assets\Scripts\CCInputField.cs" />
      <Compile Include="Assets\Scripts\CCTime.cs" />
-     <Compile Include="Assets\Scripts\CCVersion.cs" />
      <Compile Include="Assets\Scripts\Celebrate.cs" />
      <Compile Include="Assets\Scripts\EffortTracker.cs" />
      <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
@@ -187,6 +186,7 @@
  <Reference Include="UnityEngine.Purchasing">
  <HintPath>/Users/rafael/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
+    <Compile Include="Assets\Scripts\MDVersion.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
