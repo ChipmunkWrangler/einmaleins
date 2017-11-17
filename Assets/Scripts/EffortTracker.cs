@@ -9,7 +9,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	const int FRUSTRATION_FAST = -2;
 	const int MIN_FRUSTRATION = -2;
 	const int MAX_FRUSTRATION = 3;
-	public const int MIN_QUIZZES_PER_DAY = 3;
+	const int MIN_QUIZZES_PER_DAY = 3;
 	const float MIN_TIME_PER_DAY = 5 * 60.0f;
 	const int NUM_ANSWERS_PER_QUIZ = 7; // the bigger this is, the more new questions the kid will be confronted with at once
 	const int GAUNTLET_ASK_LIST_LENGTH = 55;
@@ -25,13 +25,11 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	float timeToday;
 	const string prefsKey = "effortTracking";
 
-	public int GetNumQuizzesLeftForToday() {
+	public bool IsDoneForToday() {
 		if (quizzesToday < 0) {
 			Load ();
 		}
-		int numLeft = MIN_QUIZZES_PER_DAY - quizzesToday;
-		int minNumLeft = (timeToday >= MIN_TIME_PER_DAY) ? 0 : 1;
-		return Mathf.Max (numLeft, minNumLeft);
+		return quizzesToday >= MIN_QUIZZES_PER_DAY && timeToday >= MIN_TIME_PER_DAY;
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
