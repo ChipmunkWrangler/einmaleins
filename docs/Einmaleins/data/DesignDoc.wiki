@@ -16,9 +16,22 @@ Check private schools as market.
    Reach Planet
    StopRunning
    Celebrate.OnQuizAborted
+   
+   Normal Flames
+   Arcjet ThinGradiant
+   Ion Drive Greenish flame or flame colum in green
+   Get Fusion Reactor Huge flames
+   Get Antimatter Drive Blue wide
+   Antigravity Drive    Plasma Explosion
+   Big flames
+   
+   Or 
+   Normal
+   Arcjet
+   Plasma (explosions)
 ++v0.1.10
  * OK More readable font
- * TEST English is now the fallback language
+ * OK English is now the fallback language
  * Check out Dave's crashes
  * OK Improve buttons
   * OK Make buttons more 3d or otherwise more obviously buttons, or glow or something
@@ -36,6 +49,7 @@ Check private schools as market.
   * Use Inkscape to split your rockets into pieces that you can build.
   * Rocket building screen shows the rocket under construction for the first 10 pieces. You can build it piece by piece
   * Colouring book for rocket
+  * Change flame colour
   * Fuel tank upgrade changes the shape of the rocket 
   * Make this a motivation for slower kids:
    * Every first try correct question gets currency
@@ -486,7 +500,7 @@ planet 5, day 52
 
 +Ideas
  * Music
- * Ich wünsche mir Stimmeingabe
+ * Ich wünsche mir Stimmeingabe, but others are opposed
  * Make horizontal version with linear button array 
   * Not yet. Amalia is the only person to want horizontal so far, and Bert the only linear
   * Plus, linear arrangement of more than six buttons makes them too small. 

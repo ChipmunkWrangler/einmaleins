@@ -279,8 +279,8 @@ MonoBehaviour:
     - Get Ion Drive
     - Ionenantrieb einbauen
     Languages_Touch:
-    - 
-    - 
+    - Get Fusion Reactor
+    - Fusionsreaktor einbauen
     Flags: 0000
   - Term: engineNames_2
     TermType: 0
@@ -289,8 +289,8 @@ MonoBehaviour:
     - Get Fusion Reactor
     - Fusionsreaktor einbauen
     Languages_Touch:
-    - 
-    - 
+    - Get Plasma Chamber
+    - Plasmakammer einbauen
     Flags: 0000
   - Term: engineNames_3
     TermType: 0
@@ -299,8 +299,8 @@ MonoBehaviour:
     - Get Antimatter Drive
     - Antimaterienantrieb einbauen
     Languages_Touch:
-    - 
-    - 
+    - Get Ion Drive
+    - Ionenantrieb einbauen
     Flags: 0000
   - Term: engineNames_4
     TermType: 0
@@ -451,6 +451,16 @@ MonoBehaviour:
     Languages_Touch:
     - Times Tables
     - Einmaleins
+    Flags: 0000
+  - Term: engineNames_5
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Get Antimatter Drive
+    - Antimaterienantrieb einbauen
     Flags: 0000
   mLanguages:
   - Name: English

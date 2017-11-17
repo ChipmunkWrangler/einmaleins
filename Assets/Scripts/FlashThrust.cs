@@ -143,9 +143,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx ();
 		TargetPlanet.SetLastReachedIdx (planetReachedIdx);
 		TargetPlanet.TargetNextPlanet ();
-//		if (planetReachedIdx == TargetPlanet.GetNumPlanets () - 2) {
-//			RocketParts.instance.FinalUpgrade ();
-//		}
+		if (planetReachedIdx == TargetPlanet.GetMaxPlanetIdx ()) {
+			RocketParts.instance.UnlockFinalUpgrade ();
+		}
 		StopRunning ();
 		questionPicker.AbortQuiz ();
 		oldRecord.SetActive (false);
@@ -153,6 +153,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	void OnDone() {
+		Debug.Log ("OnDone");
 		StopRunning ();
 		PrepareNewStart ();
 	}
@@ -165,6 +166,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	void StopRunning ()
 	{
+		Debug.Log ("StopRunning");
 		speed = 0;
 		isRunning = false;
 		effortTracker.EndQuiz ();

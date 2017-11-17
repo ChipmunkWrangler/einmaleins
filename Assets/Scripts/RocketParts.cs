@@ -61,7 +61,7 @@ public class RocketParts : MonoBehaviour {
 	public int maxUpgradeLevel {
 		get {
 			UnityEngine.Assertions.Assert.AreEqual (Questions.GetNumQuestions () % PARTS_PER_UPGRADE, 0);
-			return Questions.GetNumQuestions () / PARTS_PER_UPGRADE;
+			return 1 + Questions.GetNumQuestions () / PARTS_PER_UPGRADE; // +1 for final bonus upgrade
 		}
 	}
 
@@ -77,6 +77,10 @@ public class RocketParts : MonoBehaviour {
 
 	public void Inc() {
 		++numParts;
+	}
+
+	public void UnlockFinalUpgrade() {
+		numParts += numPartsRequired;
 	}
 
 // private

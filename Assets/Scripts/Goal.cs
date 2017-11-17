@@ -31,7 +31,7 @@ public class Goal : MonoBehaviour {
 		
 	bool IsReadyForGauntlet() {
 		return (TargetPlanet.GetTargetPlanetIdx () == TargetPlanet.GetMaxPlanetIdx ()) && 
-			RocketParts.instance.upgradeLevel == RocketParts.instance.maxUpgradeLevel;
+			RocketParts.instance.upgradeLevel == RocketParts.instance.maxUpgradeLevel - 1;
 	}
 
 	bool ShouldUpgrade() {

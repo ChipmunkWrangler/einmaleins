@@ -55,7 +55,9 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 
 	public void OnSpend(int oldNumParts, int newNumParts) {
 		StopAllCoroutines ();
-		StartCoroutine(CountTextDown (oldNumParts, newNumParts));
+		if (gameObject.activeInHierarchy) {
+			StartCoroutine (CountTextDown (oldNumParts, newNumParts));
+		}
 	}
 
 	void Unhighlight ()
@@ -103,7 +105,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	}
 
 	void UpdateText (int numParts) {
-		if (RocketParts.instance.upgradeLevel >= RocketParts.instance.maxUpgradeLevel && numParts <= 0) { // the numParts check is for counting down following the final upgrade
+		if (RocketParts.instance.upgradeLevel >= RocketParts.instance.maxUpgradeLevel - 1 && numParts <= 0) { // the numParts check is for counting down following the final upgrade. -1 is because the final upgrade had hidden rocket parts
 			if (numText.text.Length > 0) {
 				numText.text = "";
 				foreach (Text text in textsToFadeOut) {

@@ -22,12 +22,14 @@ public class RocketBuilder : MonoBehaviour {
 		iTween.EaseType.easeOutQuad,
 		iTween.EaseType.easeInOutQuint,
 		iTween.EaseType.easeOutExpo,
-		iTween.EaseType.easeOutExpo
+		iTween.EaseType.linear,
+		iTween.EaseType.easeOutExpo,
 	};
 
 	void Start () {
 		if (RocketParts.instance.isRocketBuilt) {
 			SetY (builtY);
+			rocketPartsWidget.SetActive (RocketParts.instance.upgradeLevel < RocketParts.instance.maxUpgradeLevel - 1);
 			if (!RocketParts.instance.hasEnoughPartsToUpgrade) {
 				DoneBuildingOrUpgrading ();
 			}
@@ -49,12 +51,13 @@ public class RocketBuilder : MonoBehaviour {
 
 	void StartEngine ()
 	{
-		int upgradeLevel = RocketParts.instance.upgradeLevel;
 		for (int i = 0; i < exhaustParticles.Length; ++i) {
 			if (exhaustParticles [i] != null) {
-				exhaustParticles [i].gameObject.SetActive (i == upgradeLevel);
+				exhaustParticles [i].gameObject.SetActive (false);
 			}
 		}
+		int upgradeLevel = RocketParts.instance.upgradeLevel;
+		exhaustParticles [upgradeLevel].gameObject.SetActive (true);
 		exhaustParticles [upgradeLevel].Play ();
 	}
 
