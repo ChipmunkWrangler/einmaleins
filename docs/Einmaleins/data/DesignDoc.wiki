@@ -16,13 +16,6 @@ Check private schools as market.
    Reach Planet
    StopRunning
    Celebrate.OnQuizAborted
-++v0.1.8/9 (8 in testflight, 9 in-game label)
- * OK Change font to Classic Robot Regular
- * OK Implement new algorithm
- * OK Make it backwards compatible?
- * OK Release to Talea & me
- * OK Ask Amalia and Matthias daughter to retest
- * OK Release to English kids   
 ++v0.1.10
  * OK More readable font
  * TEST English is now the fallback language
@@ -31,9 +24,7 @@ Check private schools as market.
   * OK Make buttons more 3d or otherwise more obviously buttons, or glow or something
   * OK Buttons states more visible, especially respond more visibly to taps
   * OK Nicer delete icon
- * Use red bubble notifications
-  * https://docs.unity3d.com/ScriptReference/iOS.LocalNotification.html
-  * LocalNotification().applicationIconBadgeNumber=-1; to remove
+ * OK Use red bubble notifications
  * Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player)
   *  if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }  
   * Test in simulator, then ask Robert to test 

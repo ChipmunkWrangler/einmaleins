@@ -85,6 +85,7 @@
      <Compile Include="Assets\I2\Localization\Scripts\Utils\StringObfuscator.cs" />
      <Compile Include="Assets\PreciseLocale\PreciseLocale.cs" />
      <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
+     <Compile Include="Assets\Scripts\BadgeController.cs" />
      <Compile Include="Assets\Scripts\BoostMeter.cs" />
      <Compile Include="Assets\Scripts\CCInputField.cs" />
      <Compile Include="Assets\Scripts\CCTime.cs" />
@@ -106,6 +107,7 @@
      <Compile Include="Assets\Scripts\LaunchButtonController.cs" />
      <Compile Include="Assets\Scripts\MDCulture.cs" />
      <Compile Include="Assets\Scripts\MDPrefs.cs" />
+     <Compile Include="Assets\Scripts\MDVersion.cs" />
      <Compile Include="Assets\Scripts\NewPlayerName.cs" />
      <Compile Include="Assets\Scripts\NumberButtonLayoutController.cs" />
      <Compile Include="Assets\Scripts\OnAnswerChanged.cs" />
@@ -186,7 +188,6 @@
  <Reference Include="UnityEngine.Purchasing">
  <HintPath>/Users/rafael/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
-    <Compile Include="Assets\Scripts\MDVersion.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">

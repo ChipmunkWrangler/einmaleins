@@ -39,7 +39,7 @@ public class Goal : MonoBehaviour {
 	}
 
 	bool IsDoneForToday() {
-		return effortTracker.IsDoneForToday () && !RocketParts.instance.justUpgraded;
+		return (effortTracker.GetNumQuizzesLeftForToday () > 0) && !RocketParts.instance.justUpgraded;
 	}
 
 	bool IsLeavingSolarSystem() {
