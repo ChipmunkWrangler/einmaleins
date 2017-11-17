@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
+﻿using System.Linq;
 
 public class MDCulture {
 	static System.Globalization.CultureInfo ci;

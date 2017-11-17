@@ -51,38 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Plugins\I2\Common\CoroutineManager.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\EventCallback.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Google\GoogleLanguages.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Google\GoogleTranslation.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Google\LanguageSource_Export_CSV.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Google\LanguageSource_Export_Google.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Google\LanguageSource_Import_CSV.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Google\LanguageSource_Import_Google.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Google\LanguageSource_Misc.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Google\SimpleJSON.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\LanguageSource.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\LocalizationManager.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\LocalizationReader.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Localize.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\LocalizeDropdown.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Targets\ILocalizeTarget.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Targets\LocalizeTarget_2DToolKit.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Targets\LocalizeTarget_NGUI.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Targets\LocalizeTarget_SVG.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Targets\LocalizeTarget_TextMeshPro.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Targets\LocalizeTarget_UnityStandard.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Targets\LocalizeTarget_UnityUI.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Utils\AutoChangeCultureInfo.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Utils\LocalizationParamsManager.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Utils\LocalizedString.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Utils\PersistentStorage.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Utils\RegisterGlobalParameters.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Utils\ResourceManager.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Utils\RTLFixer.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Utils\SetLanguage.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Utils\SetLanguageDropdown.cs" />
-     <Compile Include="Assets\Plugins\I2\Localization\Scripts\Utils\StringObfuscator.cs" />
      <Compile Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Scripts\randomParticleRotation.cs" />
      <Compile Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Scripts\ReverseNormals.cs" />
      <Compile Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Scripts\rotation.cs" />
@@ -99,9 +67,8 @@
      <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
      <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />
-     <None Include="Assets\Plugins\I2\Localization\Scripts\Editor\Unity XCode\Xcode.txt" />
+     <None Include="Assets\I2\Localization\Scripts\Editor\Unity XCode\Xcode.txt" />
      <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
-     <None Include="Assets\Plugins\I2\Localization\readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
