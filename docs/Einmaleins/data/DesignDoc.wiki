@@ -16,19 +16,6 @@ Check private schools as market.
    Reach Planet
    StopRunning
    Celebrate.OnQuizAborted
-   
-   Normal Flames
-   Arcjet ThinGradiant
-   Ion Drive Greenish flame or flame colum in green
-   Get Fusion Reactor Huge flames
-   Get Antimatter Drive Blue wide
-   Antigravity Drive    Plasma Explosion
-   Big flames
-   
-   Or 
-   Normal
-   Arcjet
-   Plasma (explosions)
 ++v0.1.10
  * OK More readable font
  * OK English is now the fallback language
@@ -38,7 +25,7 @@ Check private schools as market.
   * OK Buttons states more visible, especially respond more visibly to taps
   * OK Nicer delete icon
  * ROBERT TEST Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player)
- * Add an upgrade with new particles before "In Deep Space" with new colour of flame
+ * OK Add an upgrade with new particles before "In Deep Space" with new colour of flame
  * More involvement with rocket building
   * At least design this so that if you implement it in 1.0.1 you can award upgrade parts, etc. retroactively 
    * OTOH, if the currency is spend only on aesthetic stuff, it would be ok if old players started from scratch, since they were already motivated enough to reach their current point
