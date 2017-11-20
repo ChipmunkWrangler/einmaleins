@@ -11,7 +11,7 @@ public class Question {
 
 	public float Debug_chanceOfCorrectAnswer;
 
-	public const float FAST_TIME = 3.0f;
+	public const float FAST_TIME = 4.0f;
 	const float ANSWER_TIME_MAX = 60.0f;
 	public const float ANSWER_TIME_INTIAL = FAST_TIME + 0.01f; 
 	const int ADD_TO_DIFFICULTY_FAST = -3;
@@ -106,14 +106,22 @@ public class Question {
 		return s;
 	}
 
-	public static List<float> GetAnswerTimes (string prefsKey)
+	static List<float> GetAnswerTimes (string prefsKey)
 	{
 		return MDPrefs.GetFloatArray (prefsKey + ":times").ToList ();
 	}
 
-	public static void SetAnswerTimes (string prefsKey, List<float> answerTimes)
-	{
+	static void SetAnswerTimes (string prefsKey, List<float> answerTimes) {
 		MDPrefs.SetFloatArray (prefsKey + ":times", answerTimes.ToArray ());
+	}
+
+	public void UpdateInitialAnswerTime (float oldAnswerTimeInitial)
+	{
+		List<float> newAnswerTimes = new List<float>();
+		foreach(var time in answerTimes) {
+			newAnswerTimes.Add(time == oldAnswerTimeInitial ? ANSWER_TIME_INTIAL : time);
+		}
+		answerTimes = newAnswerTimes;	
 	}
 
 	public static List<float> GetNewAnswerTimes ()

@@ -5,9 +5,6 @@ Drill the times tables.
 Check private schools as market.
 
 +Todo
-Bug: Green flames go behind planets
-
-
  Ask Talea if she asked Karolina etc. then write to parents (Nina Brust)
 
  Bug: Sometimes, if you reach a planet (seems like a timing issue):
@@ -30,7 +27,7 @@ Bug: Green flames go behind planets
   * OK Nicer delete icon
  * ROBERT TEST Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player)
  * OK Add an upgrade with new particles before "In Deep Space" with new colour of flame
- * Increase target time by 0.5s and initial time correspondingly. On first start for people using v0.8 or .9, change all 3.01s to 3.51s
+ * OK Increase target time by 0.5s and initial time correspondingly. On first start for people using v0.8 or .9, change all 3.01s to 3.51s
  * More involvement with rocket building
   * At least design this so that if you implement it in 1.0.1 you can award upgrade parts, etc. retroactively 
    * OTOH, if the currency is spend only on aesthetic stuff, it would be ok if old players started from scratch, since they were already motivated enough to reach their current point

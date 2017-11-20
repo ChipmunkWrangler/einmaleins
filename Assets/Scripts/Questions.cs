@@ -81,7 +81,7 @@ public class Questions : MonoBehaviour {
 		}
 	}
 
-	void Awake() {
+	void OnEnable() {
 		questions = CreateQuestions ();
 		Load ();
 	}

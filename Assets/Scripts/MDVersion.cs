@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MDVersion : MonoBehaviour {
+	[SerializeField] Questions questions;
+
 	const int majorVersion = 0;
 	const int minorVersion = 1;
 	const int buildNumber = 10;
@@ -23,15 +25,21 @@ public class MDVersion : MonoBehaviour {
 		if (oldVersion == GetCurrentVersion ()) {
 			return;
 		}
-		switch( oldVersion ) {
+		if (SceneManager.GetActiveScene ().name != "updateVersion") {
+			SceneManager.LoadScene ("updateVersion");
+			return;
+		} 
+		switch (oldVersion) {
 		case "0.1.9":
 		case "0.1.8":
-			WriteNewVersion ();
+			UpdateFrom_0_1_8_To_0_1_10 ();
 			break;
 		default:
 			RestartWithNewVersion ();
 			break;
 		}
+		WriteNewVersion ();
+		SceneManager.LoadScene ("choosePlayer");
 	}
 
 	void Start() {
@@ -45,18 +53,26 @@ public class MDVersion : MonoBehaviour {
 	}
 
 	void RestartWithNewVersion() {
-		if (SceneManager.GetActiveScene ().name == "updateVersion") {
-			PlayerPrefs.DeleteAll ();
-			WriteNewVersion ();
-			SceneManager.LoadScene ("choosePlayer");
-		} else {
-			SceneManager.LoadScene ("updateVersion");
-		}
+		PlayerPrefs.DeleteAll ();
 	}
 
 	void WriteNewVersion() {
 		PlayerPrefs.SetString ("version", GetCurrentVersion ());
 		PlayerPrefs.Save ();
 		isChecking = false;
+	}
+
+	void UpdateFrom_0_1_8_To_0_1_10() {
+		const float oldAnswerTimeInitial = 3f + 0.01f;
+		foreach (string playerName in NewPlayerName.GetPlayerNames()) {
+			NewPlayerName.SetCurPlayerName (playerName);
+			Debug.Log ("Updating question for " + playerName);
+			questions.gameObject.SetActive (true); // load question list
+			foreach(Question question in questions.questions) {
+				question.UpdateInitialAnswerTime (oldAnswerTimeInitial);
+			}
+			questions.Save ();
+			questions.gameObject.SetActive (false);
+		}
 	}
 }
