@@ -641,12 +641,6 @@ MonoBehaviour:
   button: {fileID: 1566283461}
   label: {fileID: 480844863}
   engineTermPrefix: engineNames_
---- !u!114 &727629137 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000013784935286, guid: f24822f355d009d409e4bfb5c585f135,
-    type: 2}
-  m_PrefabInternal: {fileID: 1028933255}
-  m_Script: {fileID: 11500000, guid: 4c91b060f1bff4743b6a9402733e13b2, type: 3}
 --- !u!1 &929832777
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,20 +686,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 929832777}
---- !u!1001 &1028933255
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4000011043178730, guid: f24822f355d009d409e4bfb5c585f135, type: 2}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: f24822f355d009d409e4bfb5c585f135, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1077023824
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rocketMesh: {fileID: 1842585747}
-  colourPicker: {fileID: 727629137}
+  colourPicker: {fileID: 1263629864}
 --- !u!4 &1077023826
 Transform:
   m_ObjectHideFlags: 0
@@ -743,8 +723,9 @@ Transform:
   m_GameObject: {fileID: 1077023824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1253955656}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1135,6 +1116,59 @@ MonoBehaviour:
   mGUI_ShowReferences: 0
   mGUI_ShowTems: 1
   mGUI_ShowCallback: 0
+--- !u!1001 &1253955654
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1077023826}
+    m_Modifications:
+    - target: {fileID: 4000011043178730, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011043178730, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011043178730, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011043178730, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011043178730, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011043178730, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011043178730, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011043178730, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1253955656 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000011043178730, guid: a7a68ecaab4c649aa9c49c12f5d4921f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1253955654}
+--- !u!114 &1263629864 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114556644107204194, guid: a7a68ecaab4c649aa9c49c12f5d4921f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1253955654}
+  m_Script: {fileID: 11500000, guid: d9333ab18687447c3a9f8bcee00ce05f, type: 3}
 --- !u!1001 &1282249712
 Prefab:
   m_ObjectHideFlags: 0

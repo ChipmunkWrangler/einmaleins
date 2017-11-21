@@ -91,6 +91,7 @@
      <Compile Include="Assets\Scripts\BoostMeter.cs" />
      <Compile Include="Assets\Scripts\CCInputField.cs" />
      <Compile Include="Assets\Scripts\Celebrate.cs" />
+     <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
      <Compile Include="Assets\Scripts\EffortTracker.cs" />
      <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
      <Compile Include="Assets\Scripts\FlashThrust.cs" />

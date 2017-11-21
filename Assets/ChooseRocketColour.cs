@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChooseRocketColour : MonoBehaviour {
 	[SerializeField] MeshRenderer rocketMesh = null;
-	[SerializeField] ColorPickerTriangle colourPicker = null;
+	[SerializeField] ColorPickerCircle colourPicker = null;
 	bool isPaint;
 
 	void Start() {
