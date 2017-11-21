@@ -69,7 +69,22 @@ public static class MDPrefs {
 	public static void SetDateTime(string key, System.DateTime dateTime) {
 		PlayerPrefsUtility.SetDateTime (GetKey(key), dateTime);
 	}
-
+	public static Color GetColor(string key, Color defaultValue = default(Color)) {
+		key = GetKey (key);
+		Color color;
+		color.r = PlayerPrefs.GetFloat (key + ".r", defaultValue.r);
+		color.g = PlayerPrefs.GetFloat (key + ".g", defaultValue.g);
+		color.b = PlayerPrefs.GetFloat (key + ".b", defaultValue.b);
+		color.a = PlayerPrefs.GetFloat (key + ".a", defaultValue.a);
+		return color;
+	}
+	public static void SetColor(string key, Color color) {
+		key = GetKey (key);
+		PlayerPrefs.SetFloat (key + ".r", color.r);
+		PlayerPrefs.SetFloat (key + ".g", color.g);
+		PlayerPrefs.SetFloat (key + ".b", color.b);
+		PlayerPrefs.SetFloat (key + ".a", color.a);
+	}
 	public static void SetIntArray( string key, int[] value ){
 		key += ":IntArray";
 		SetLength (key, value.Length);
