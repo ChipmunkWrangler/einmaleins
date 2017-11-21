@@ -26,7 +26,7 @@ public class ChooseRocketColour : MonoBehaviour {
 		isPaint = true;
 	}
 
-	private void StopPaint()
+	public void StopPaint()
 	{
 		isPaint = false;
 	}

@@ -462,6 +462,16 @@ MonoBehaviour:
     - Get Antimatter Drive
     - Antimaterienantrieb einbauen
     Flags: 0000
+  - Term: Change Rocket Colour
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Change Rocket Colour
+    - "Raketenfarbe \xE4ndern"
+    Flags: 0000
   mLanguages:
   - Name: English
     Code: en
