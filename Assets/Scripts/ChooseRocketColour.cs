@@ -6,6 +6,7 @@ public class ChooseRocketColour : MonoBehaviour {
 	[SerializeField] MeshRenderer rocketMesh = null;
 	[SerializeField] ColorPickerCircle colourPicker = null;
 	bool isPaint;
+	public const string prefsKey = "rocketColour";
 
 	void Start() {
 		colourPicker.gameObject.SetActive(false);
@@ -29,5 +30,6 @@ public class ChooseRocketColour : MonoBehaviour {
 	public void StopPaint()
 	{
 		isPaint = false;
+		MDPrefs.SetColor (prefsKey, colourPicker.TheColor);
 	}
 }
