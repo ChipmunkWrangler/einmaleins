@@ -107,6 +107,7 @@
      <Compile Include="Assets\Scripts\KeyHandler.cs" />
      <Compile Include="Assets\Scripts\KickoffLaunch.cs" />
      <Compile Include="Assets\Scripts\LaunchButtonController.cs" />
+     <Compile Include="Assets\Scripts\MatchPositionAndSize.cs" />
      <Compile Include="Assets\Scripts\MDCulture.cs" />
      <Compile Include="Assets\Scripts\MDPrefs.cs" />
      <Compile Include="Assets\Scripts\MDVersion.cs" />
