@@ -51,6 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ChooseRocketColour.cs" />
+     <Compile Include="Assets\ColorPickerTriangle\Example\example.cs" />
+     <Compile Include="Assets\ColorPickerTriangle\Scripts\ColorPickerTriangle.cs" />
      <Compile Include="Assets\I2\Common\CoroutineManager.cs" />
      <Compile Include="Assets\I2\Localization\Scripts\EventCallback.cs" />
      <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleLanguages.cs" />
@@ -148,12 +151,13 @@
      <Compile Include="Assets\xARM\Windows\xARMOptionsWindow.cs" />
      <Compile Include="Assets\xARM\Windows\xARMPreviewWindow.cs" />
      <None Include="Assets\xARM\_Changelog.txt" />
-     <None Include="Assets\Shaders\AlphaProgress.shader" />
      <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
      <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />
      <None Include="Assets\I2\Localization\Scripts\Editor\Unity XCode\Xcode.txt" />
      <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
+     <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />
+     <None Include="Assets\Shaders\TintWithAlphaMask.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

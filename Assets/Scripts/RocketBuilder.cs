@@ -15,6 +15,7 @@ public class RocketBuilder : MonoBehaviour {
 	[SerializeField] ParticleSystem[] exhaustParticles = null;
 	[SerializeField] GameObject launchButton = null;
 	[SerializeField] GameObject rocketPartsWidget = null;
+	[SerializeField] ChooseRocketColour chooseColour = null;
 
 	iTween.EaseType[] easeTypes = { //new iTween.EaseType[]
 		iTween.EaseType.linear,
@@ -84,6 +85,7 @@ public class RocketBuilder : MonoBehaviour {
 		RocketParts.instance.isRocketBuilt = true;
 		buildParticles.Stop ();
 		DoneBuildingOrUpgrading ();
+		chooseColour.StartPaint ();
 	}
 
 	void DoneBuildingOrUpgrading() {

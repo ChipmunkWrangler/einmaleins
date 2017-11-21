@@ -82,12 +82,13 @@
      <Compile Include="Assets\I2\Localization\Scripts\Editor\Tools_NGUI_to_I2.cs" />
      <Compile Include="Assets\I2\Localization\Scripts\Editor\UpgradeManager.cs" />
      <None Include="Assets\xARM\_Changelog.txt" />
-     <None Include="Assets\Shaders\AlphaProgress.shader" />
      <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
      <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />
      <None Include="Assets\I2\Localization\Scripts\Editor\Unity XCode\Xcode.txt" />
      <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
+     <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />
+     <None Include="Assets\Shaders\TintWithAlphaMask.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
