@@ -28,9 +28,10 @@ Check private schools as market.
  * ROBERT TEST Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player)
  * OK Add an upgrade with new particles before "In Deep Space" with new colour of flame
  * OK Increase target time by 1s and initial time correspondingly. On first start for people using v0.8 or .9, change all 3.01s to 3.51s
- * Pick rocket colour
-  * Make mask one square at a time to understand texture. Take screenshots for memory 
+ * OK Pick rocket colour
  * If there is no answer yet, the rocket button is a ?  If you press that, or answer wrong three times, the question is flagged, you see the answer, you don't accelerate, you use no fuel for that answer, no time is recorded,the game waits for you to press ok. Flagging a question counts as wrong for frustration purposes. Before the next quiz, one flagged question is chosen for the quiz list, placed in a random position (not first or second), and unflagged. Before the quiz starts, the question is displayed with no time limit, as a launch code, or just shown with the answer. If there aren't enough nonmastered nonflagged, mastered questions may be shown (should already happen) -- maybe you reach a planet more easily, but long term progress still depends on mastery. You shouldn't be able to start the gauntlet or reach pluto until all are mastered. If frustration is high, the hardest already mastered question is asked, or the easiest nonmastered if none are mastered.
+  * Test with grid buttons
+  * Test: delete answer and type it in rapid succession to mess up question button 
 ++v1.0.0 
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
  * Store page https://developer.apple.com/app-store/categories/ and on android
