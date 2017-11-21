@@ -51,9 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ChooseRocketColour.cs" />
-     <Compile Include="Assets\ColorPickerTriangle\Example\example.cs" />
-     <Compile Include="Assets\ColorPickerTriangle\Scripts\ColorPickerTriangle.cs" />
      <Compile Include="Assets\I2\Common\CoroutineManager.cs" />
      <Compile Include="Assets\I2\Localization\Scripts\EventCallback.cs" />
      <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleLanguages.cs" />
@@ -91,11 +88,13 @@
      <Compile Include="Assets\Scripts\BoostMeter.cs" />
      <Compile Include="Assets\Scripts\CCInputField.cs" />
      <Compile Include="Assets\Scripts\Celebrate.cs" />
+     <Compile Include="Assets\Scripts\ChooseRocketColour.cs" />
      <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
      <Compile Include="Assets\Scripts\EffortTracker.cs" />
      <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
      <Compile Include="Assets\Scripts\FlashThrust.cs" />
      <Compile Include="Assets\Scripts\Fuel.cs" />
+     <Compile Include="Assets\Scripts\GetRocketColour.cs" />
      <Compile Include="Assets\Scripts\Goal.cs" />
      <Compile Include="Assets\Scripts\GoalButtonControler.cs" />
      <Compile Include="Assets\Scripts\GotoBuildRocket.cs" />
