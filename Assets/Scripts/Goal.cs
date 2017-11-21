@@ -35,7 +35,7 @@ public class Goal : MonoBehaviour {
 	}
 
 	bool ShouldUpgrade() {
-		return RocketParts.instance.hasEnoughPartsToUpgrade && !RocketParts.instance.justUpgraded;
+		return (RocketParts.instance.hasEnoughPartsToUpgrade || !ChooseRocketColour.HasChosenColour()) && !RocketParts.instance.justUpgraded;
 	}
 
 	bool IsDoneForToday() {

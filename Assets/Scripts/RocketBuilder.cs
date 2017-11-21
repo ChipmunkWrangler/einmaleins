@@ -28,6 +28,7 @@ public class RocketBuilder : MonoBehaviour {
 	};
 
 	void Start () {
+		chooseColourButton.SetActive (false);
 		if (RocketParts.instance.isRocketBuilt) {
 			SetY (builtY);
 			rocketPartsWidget.SetActive (RocketParts.instance.upgradeLevel < RocketParts.instance.maxUpgradeLevel - 1);
@@ -85,13 +86,13 @@ public class RocketBuilder : MonoBehaviour {
 		RocketParts.instance.isRocketBuilt = true;
 		buildParticles.Stop ();
 		DoneBuildingOrUpgrading ();
-		chooseColourButton.SetActive (true);
 	}
 
 	void DoneBuildingOrUpgrading() {
 		exhaustParticles [RocketParts.instance.upgradeLevel].Stop ();
 		upgradeButton.Hide ();
 		launchButton.SetActive(true);
+		chooseColourButton.SetActive (!ChooseRocketColour.HasChosenColour());
 	}
 		
 	void SetY(float y) {

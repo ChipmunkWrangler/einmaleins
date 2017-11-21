@@ -20,6 +20,10 @@ public class ChooseRocketColour : MonoBehaviour {
 		}
 	}
 
+	public static bool HasChosenColour() {
+		return MDPrefs.HasKey(prefsKey + ".r");
+	}
+
 	public void StartPaint()
 	{
 		colourPicker.gameObject.SetActive(true);
