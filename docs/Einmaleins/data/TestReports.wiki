@@ -2,10 +2,10 @@
   * Ask testers if they would prefer other graphics, show them a screenshot
   * Ask them for suggestions for new features
   * Ask them to pick their favourite of music, rocket customization, planet gallery, voice recognition, ufos
-+Test Reports v0.1.10
-++Till
-++Mom / Co-op kids
-++Carrie
++Test Reports v0.1.8
+++Jenny Anton
+Ach die APP finde ich cool. Also Spass macht sie auf jeden Fall. Linda.kam.leider noch nicht dazu ...aber ich 😊
+ Ja das wäre meine Idee gewesen verschiedene Raketen Modelle... Oder so... Eben.wie bei.Autorennen...
 ++Olivia
  * Would like to continue after the end of the day
  * Stutters when flames come on Android Samsung GT-I9100 Galaxy S2?) android 4.1.2, 1Gb RAM Dual-core 1.2 GHz Cortex-A9, 4.3" 480x800
@@ -32,6 +32,21 @@
  * km numbers too long, maybe highlight the beginning numbers (or other unit)
  * Fuel mysterious
  * Suggests combi-learning app: "Themen-basiertes lernen" z.B. Planets + multiplication
+++Joachim / Bert
+(1) Der Anfang ist unverständlich für mich:
+* Für Joachim waren die zwei allerersten Fragen 6 * 6 und 8 * 9 . Hilfe! Da das Dinge waren, die er noch nicht kannte, (er kann nur die Multiplikationen wo einer der beiden Faktoren <= 5 ist), war er sofort frustriert.
+* Aline hingegen hatte am Anfang lange Zeit nur sehr einfache Fragen!?
+
+(2) Für Joachim wäre es gut, ein bisschen seine Schwierigkeits-Stufe wählen zu können. Oder wählen zu können, dass man bestimmte Multiplikationen nicht will. Auf jeden Fall, bekommt er immer wieder Fragen über Multiplikationen, die er noch nicht gelernt hat. Darauf antwortet er mit Unsinnigen Antworten (Zufallszahlen), um dem Spiel zu verstehen zu geben, dass er das noch nicht weiss. Er bleibt völlig blockiert. 
+
+(3) Bisher hilft das Spiel, bereits gelernte Multiplikationen zu beschleunigen. Wenn man eine Aufgabe aber immer wieder falsch macht, hilft das Spiel nicht, sie richtig zu lernen - es wird nur frustrierend, weil es die nicht gekannte Aufgabe einfach immer wieder fragt, und man den Eindruck hat, immer schlechter zu werden. Das blockiert das Lernen. Du könntest z.B. das Folgende einführen: wenn eine Aufgabe in einer Spielrunde zwei oder drei mal falsch war, dann sagt das Spiel in der Pause vor der nächsten Spielrunde "Wiederhole noch einmal bevor Du weiterspielst: 9*7=63"
+
+(4) Ich selber schaffe es nicht bis zum Mars! Is it serious, doctor? (Genauer gesagt, hat mir das Spiel drei mal "Auf zum Mars" gesagt, und daraus habe ich geschlossen, dass ich drei gescheiterte Versuche hatte. Ich habe es vielleicht falsch interpretiert. Vielleicht habe ich bei jedem Versuch Fortschritt in Richtung Mars gemacht?)
+
+Aline hat es bis zum Mars geschafft.
+
+(5) Ich verstehe immer noch nicht, nach welchen Regeln man Distanz, "Raketenteile" und "Treibstoff" gewinnt, und was Konsequenzen für das weitere Spiel diese Zahlen haben.
+
 +Test Reports v0.1.x
 ++Talea
 First time played 15 minutes. Second time not interested but played 10 without complaint. Third time played 15 minutes until done, but not very happily. Fourth time: new stats display with revealed picture is motivating, at least for someone who can alreadz do it: she played 10 minutes voluntarily and would have continued had I not stopped her to fix a bug. Later, she asked whether it was fixed. And when it said "Fertig", she actually started a new player just to keep going.
@@ -129,3 +144,4 @@ Eine mögliche Erweiterung wäre, dass man zum Beispiel nur die Multiplikationen
  * Jonas Harm (hates math)
  * Linda's friend Nathalie
  * Tarek
+ * Till

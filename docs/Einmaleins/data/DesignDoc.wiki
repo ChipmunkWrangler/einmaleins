@@ -27,24 +27,10 @@ Check private schools as market.
   * OK Nicer delete icon
  * ROBERT TEST Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player)
  * OK Add an upgrade with new particles before "In Deep Space" with new colour of flame
- * OK Increase target time by 0.5s and initial time correspondingly. On first start for people using v0.8 or .9, change all 3.01s to 3.51s
- * More involvement with rocket building
-  * At least design this so that if you implement it in 1.0.1 you can award upgrade parts, etc. retroactively 
-   * OTOH, if the currency is spend only on aesthetic stuff, it would be ok if old players started from scratch, since they were already motivated enough to reach their current point
-  * Kid chooses rocket design and color
-  * Choose differently coloured rockets
-   * Maybe limit it to a few per day 
-  * Choose a new rocket design with every upgrade (or as a separate kind of upgrade that happens at a different pace)
-  * Use Inkscape to split your rockets into pieces that you can build.
-  * Rocket building screen shows the rocket under construction for the first 10 pieces. You can build it piece by piece
-  * Colouring book for rocket
-  * Change flame colour
-  * Fuel tank upgrade changes the shape of the rocket 
-  * Make this a motivation for slower kids:
-   * Every first try correct question gets currency
-   * Currency is spend on visual upgrades, changing colours, switching rocket designs
-   * Upgrades are shown in advance for motivational reasons
-
+ * OK Increase target time by 1s and initial time correspondingly. On first start for people using v0.8 or .9, change all 3.01s to 3.51s
+ * Pick rocket colour
+  * Make mask one square at a time to understand texture. Take screenshots for memory 
+ * If there is no answer yet, the rocket button is a ?  If you press that, or answer wrong three times, the question is flagged, you see the answer, you don't accelerate, you use no fuel for that answer, no time is recorded,the game waits for you to press ok. Flagging a question counts as wrong for frustration purposes. Before the next quiz, one flagged question is chosen for the quiz list, placed in a random position (not first or second), and unflagged. Before the quiz starts, the question is displayed with no time limit, as a launch code, or just shown with the answer. If there aren't enough nonmastered nonflagged, mastered questions may be shown (should already happen) -- maybe you reach a planet more easily, but long term progress still depends on mastery. You shouldn't be able to start the gauntlet or reach pluto until all are mastered. If frustration is high, the hardest already mastered question is asked, or the easiest nonmastered if none are mastered.
 ++v1.0.0 
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
  * Store page https://developer.apple.com/app-store/categories/ and on android
@@ -65,8 +51,22 @@ Check private schools as market.
   * Top inset zero pixels
 ++v1.0.1
  * random events to keep things interesting if there hasn't been a record or rocket part for a while
- * Add 0. That gives 65 questions, which is divisible by 5 and 13
- * Add division. How many problems is that?
+ * Add 0 and division.
+  * That gives 55 + 90 + 10 = 155 questions, which is divisible by 5 and 31
+  * We could add the sun, venus, mercury, the iss and the moon. However, that still means we average 15 questions per upgrade.
+  * Add Ceres, Salacia (https://en.wikipedia.org/wiki/120347_Salacia), https://en.wikipedia.org/wiki/Eris_(dwarf_planet), https://en.wikipedia.org/wiki/Haumea , https://en.wikipedia.org/wiki/(225088)_2007_OR10, https://en.wikipedia.org/wiki/Makemake, https://en.wikipedia.org/wiki/50000_Quaoar, https://en.wikipedia.org/wiki/90377_Sedna, https://en.wikipedia.org/wiki/90482_Orcus. Some of these have no decent pictures, but there is https://en.wikipedia.org/wiki/File:EightTNOs.png . Then we have 19, for an average of 155/19 = 8.2 questions per upgrade. That sounds good.
+++v1.0.2
+ * More involvement with rocket building
+  * Collect currency for every correct question, regardless of speed
+  * spend currency to:
+   * Change rocket color again
+   * Unlock and change flame color
+   * Unlock and switch between alternate flame effects 
+   * Unlock and switch between different rocket designs
+    * Use Inkscape to split your rockets into pieces that you can build.
+    * Colouring book for rocket
+  * Existing players still start from 0 currency 
+  * Upgrades are shown in advance for motivational reasons
 
 +++Credits
  * Creative commons attribution 
@@ -491,6 +491,12 @@ planet 5, day 52
 
 +Ideas
  * Music
+ * Info-screen or overlay that explains fuel, etc.
+ * Start with 1xN, the go to 2xN if two 1xNs in a row are answered quickly, etc. This may make progress steadier, and / or the beginning more rewarding (not too hard for beginners, not too boring for advanced)
+ * Reduce Save() calls or find an alternative
+  * On Android PlayerPrefs are stored in the app's private data folder. This folder gets deleted when the user uninstalls the app. They are stored as an XML file. Using PlayerPrefs.Save() to ensure they are commited to storage is a blocking call on the main thread. If you save more than a few bytes of data with that you'll get a noticable hang. You can't call this method from a different thread to avoid that. Apart from that, they are super reliable. 
+ * Rotate rocket are it rises
+ * Fuel tank upgrade changes the shape of the rocket 
  * Ich wünsche mir Stimmeingabe, but others are opposed
  * Make horizontal version with linear button array 
   * Not yet. Amalia is the only person to want horizontal so far, and Bert the only linear
