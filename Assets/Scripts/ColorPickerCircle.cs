@@ -4,12 +4,9 @@ using System.Collections;
 public class ColorPickerCircle : MonoBehaviour {
 
     public Color TheColor = Color.cyan;
-
-    const float MainRadius = .8f;
-
 	[SerializeField] GameObject PointerMain = null;
+	[SerializeField] Collider raycastTarget = null;
 
-    private Plane MyPlane;
     private Vector3[] RPoints;
     private Vector3 CurLocalPos;
     private Vector3 CurBary = Vector3.up;
@@ -20,32 +17,25 @@ public class ColorPickerCircle : MonoBehaviour {
         float h, s, v;
         Color.RGBToHSV(TheColor, out h, out s, out v);
 //        Debug.Log("HSV = " + v.ToString() + "," + h.ToString() + "," + v.ToString() + ", color = " + TheColor.ToString());
-        MyPlane = new Plane(transform.TransformDirection(Vector3.forward), transform.position);
         RPoints = new Vector3[3];
         SetNewColor(TheColor);
     }
 	
 	void Update () {
-		if (Input.GetMouseButtonDown(0) && HasIntersection()) {
+		if (Input.GetMouseButtonDown (0)) {
+			CurLocalPos = GetIntersection ();
             CheckCirclePosition();
         }
     }
 
-    private bool HasIntersection()
+	private Vector3 GetIntersection()
     {
-        MyPlane = new Plane(transform.TransformDirection(Vector3.forward), transform.position);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float rayDistance;
-        if (MyPlane.Raycast(ray, out rayDistance))
-        {
-            Vector3 p = ray.GetPoint(rayDistance);
-            if (Vector3.Distance(p, transform.position) > MainRadius)
-                return false;
-            CurLocalPos = transform.worldToLocalMatrix.MultiplyPoint(p);
-            return true;
-        }
-
-        return false;
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit) && hit.collider == raycastTarget) {
+			return transform.worldToLocalMatrix.MultiplyPoint (hit.point);
+		}
+		return CurLocalPos;
     }
 
     public void SetNewColor(Color NewColor)

@@ -1292,26 +1292,16 @@ MonoBehaviour:
   mGUI_ShowReferences: 0
   mGUI_ShowTems: 1
   mGUI_ShowCallback: 0
---- !u!1001 &1253955654
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1077023826}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
-  m_IsPrefabParent: 0
 --- !u!4 &1253955656 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011043178730, guid: a7a68ecaab4c649aa9c49c12f5d4921f,
     type: 2}
-  m_PrefabInternal: {fileID: 1253955654}
+  m_PrefabInternal: {fileID: 1418089430}
 --- !u!114 &1263629864 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114556644107204194, guid: a7a68ecaab4c649aa9c49c12f5d4921f,
     type: 2}
-  m_PrefabInternal: {fileID: 1253955654}
+  m_PrefabInternal: {fileID: 1418089430}
   m_Script: {fileID: 11500000, guid: d9333ab18687447c3a9f8bcee00ce05f, type: 3}
 --- !u!1001 &1282249712
 Prefab:
@@ -1530,6 +1520,16 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1390373063}
+--- !u!1001 &1418089430
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1077023826}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1535840360
 GameObject:
   m_ObjectHideFlags: 0
