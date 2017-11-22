@@ -7,7 +7,15 @@ public class HideOnWrong : MonoBehaviour, OnWrongAnswer {
 	[SerializeField] float timeToHide = 0;
 
 	public void OnWrongAnswer(bool wasNew) {
-		iTween.ScaleTo(gameObject, iTween.Hash( "scale", Vector3.zero, "easeType", iTween.EaseType.easeInSine, "time", transitionTime));
-		iTween.ScaleTo(gameObject, iTween.Hash( "scale", Vector3.one, "easeType", iTween.EaseType.easeInSine, "time", transitionTime, "delay", timeToHide + transitionTime));
+		ScaleDown ();
+		ScaleUpAfterDelay ();
+	}
+
+	void ScaleDown() {
+		iTween.ScaleTo (gameObject, iTween.Hash ("scale", Vector3.zero, "easeType", iTween.EaseType.easeInSine, "time", transitionTime));
+	}
+
+	void ScaleUpAfterDelay() {
+		iTween.ScaleTo (gameObject, iTween.Hash ("scale", Vector3.one, "easeType", iTween.EaseType.easeInSine, "time", transitionTime, "delay", timeToHide + transitionTime));
 	}
 }
