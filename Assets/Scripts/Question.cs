@@ -8,21 +8,16 @@ public class Question {
 	public int b { get; private set; }
 	public int idx { get; private set; }
 	public bool wasMastered { get; private set; } // even if it is no longer mastered. This is for awarding rocket parts
-
-	public float Debug_chanceOfCorrectAnswer;
+	public bool wasWrong { get; private set; } // if a question is answered wrong, then wasWrong is true until it is next asked
+	public bool isNew { get; private set; }
+	public bool wasAnsweredInThisQuiz {get; private set; } // not saved
 
 	public const float FAST_TIME = 4.0f;
 	const float ANSWER_TIME_MAX = 60.0f;
 	public const float ANSWER_TIME_INTIAL = FAST_TIME + 0.01f; 
-	const int ADD_TO_DIFFICULTY_FAST = -3;
-	const int ADD_TO_DIFFICULTY_OK = -1;
-	const int ADD_TO_DIFFICULTY_WRONG = 2;
 	const int NUM_ANSWER_TIMES_TO_RECORD = 3;
 	string prefsKey;
 	List<float> answerTimes;
-	public bool wasWrong { get; private set; } // if a question is answered wrong, then wasWrong is true until it is next asked
-	public bool isNew { get; private set; }
-	public bool wasAnsweredInThisQuiz {get; private set; } // not saved
 
 	public Question(int _a, int _b) {
 		a = _a;
