@@ -25,11 +25,14 @@ public class Question {
 		isNew = true;
 	}
 
+	public int GetAnswer() {
+		return a * b;
+	}
+
 	public bool IsAnswerCorrect(string answer) {
 		int result;
-		int correctAnswer = a * b;
 		if (int.TryParse (answer, out result)) {
-			return result == correctAnswer;
+			return result == GetAnswer();
 		}
 		return false;
 	}
