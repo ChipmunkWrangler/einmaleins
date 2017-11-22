@@ -29,7 +29,7 @@ public class Goal : MonoBehaviour {
 		return curGoal;
 	}
 		
-	bool IsReadyForGauntlet() {
+	public static bool IsReadyForGauntlet() {
 		return (TargetPlanet.GetTargetPlanetIdx () == TargetPlanet.GetMaxPlanetIdx ()) && 
 			RocketParts.instance.upgradeLevel == RocketParts.instance.maxUpgradeLevel - 1;
 	}

@@ -6,6 +6,8 @@ public class QuestionPicker : MonoBehaviour {
 	[SerializeField] GameObject[] subscribers = null;
 	[SerializeField] EffortTracker effortTracker = null;
 
+	public bool isPublishPaused { private get; set; }
+
 	Question curQuestion;
 	List<OnQuestionChanged> onQuestionChangedSubscribers;
 	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
@@ -19,6 +21,9 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	public void AbortQuiz() {
+		if (isPublishPaused) {
+			return;
+		}
 		foreach (OnQuizAborted subscriber in onQuizAbortedSubscribers) {
 			subscriber.OnQuizAborted ();
 		}
@@ -26,11 +31,7 @@ public class QuestionPicker : MonoBehaviour {
 	}
 		
 	public void NextQuestion() {
-		curQuestion = effortTracker.GetQuestion ();
-		foreach (OnQuestionChanged subscriber in onQuestionChangedSubscribers) {
-			subscriber.OnQuestionChanged (curQuestion);
-		}
-		questionTime = Time.time;
+		ShowQuestion (effortTracker.GetQuestion ());
 //			StartCoroutine (AutoAnswer());
 	}
 
@@ -42,7 +43,7 @@ public class QuestionPicker : MonoBehaviour {
 //	}
 
 	public void OnAnswer(string answer) {
-		if (curQuestion == null || answer.Length == 0) {
+		if (curQuestion == null || answer.Length == 0 || isPublishPaused) {
 			return;
 		}
 		bool isCorrect = curQuestion.IsAnswerCorrect (answer);
@@ -52,10 +53,25 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	public void OnGiveUp() {
+		if (isPublishPaused) {
+			return;
+		}
 		foreach (OnGiveUp subscriber in onGiveUpSubscribers) {
 			subscriber.OnGiveUp (curQuestion);
 		}
 		curQuestion.GiveUp ();
+	}
+
+	public void ShowQuestion (Question newQuestion)
+	{
+		if (isPublishPaused) {
+			return;
+		}
+		curQuestion = newQuestion;
+		foreach (OnQuestionChanged subscriber in onQuestionChangedSubscribers) {
+			subscriber.OnQuestionChanged (curQuestion);
+		}
+		questionTime = Time.time;
 	}
 		
 	// I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...

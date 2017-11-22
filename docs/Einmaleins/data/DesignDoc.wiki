@@ -30,22 +30,10 @@ Check private schools as market.
  * OK Increase target time by 1s and initial time correspondingly. On first start for people using v0.8 or .9, change all 3.01s to 3.51s
  * OK Pick rocket colour
  * Give up
-  * OK If there is no answer yet, the rocket button is a ?  
-  * OK If you press that, 
-   * OK the question is flagged
-   * OK you see the answer
-   * OK you don't accelerate
-   * OK Grid mode
-   * OK you use no fuel for that answer
-   * OK no time is recorded
-   * OK the game waits for you to press ok. Call QuestionPicker.NextQuestion from OK button
-   * OK Flagging a question counts as wrong for frustration purposes. 
-   * OK The last question (only) of the next quiz is a flagged question
-   * Before the next quiz, this question is displayed with no time limit, as a launch code, or just shown with the answer. 
+   * Before the next quiz, this question is displayed with no time limit, as a launch code, or just shown with the answer.
+    * Need to implement giveup and ok buttons in a special way 
    * You shouldn't be able to start the gauntlet or reach pluto until all are mastered. 
    * No giving up during the gauntlet. 
-   * Hide boost bar on giveup
-  * OK Test with grid buttons
   * Test: delete answer and type it in rapid succession to mess up question button 
 ++v1.0.0 
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)

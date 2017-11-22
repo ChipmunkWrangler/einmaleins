@@ -3,6 +3,7 @@
 public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGiveUp {
 	[SerializeField] Goal goal = null;
 	[SerializeField] Questions questions = null;
+	[SerializeField] Fuel fuel = null;
 
 	const int FRUSTRATION_WRONG = 2; // N.B. Since the question is repeated until it is correct, the net effect will be FRUSTRATION_WRONG * n - FRUSTRATION_RIGHT (or _FAST)
 	const int FRUSTRATION_GIVE_UP = 2;
@@ -15,7 +16,16 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 	const int NUM_ANSWERS_PER_QUIZ = 7; // the bigger this is, the more new questions the kid will be confronted with at once
 	const int GAUNTLET_ASK_LIST_LENGTH = 55;
 
-	int numAnswersInQuiz;
+	int _numAnswersLeftInQuiz;
+	int numAnswersLeftInQuiz { 
+		get {
+			return _numAnswersLeftInQuiz;
+		}
+		set {
+			_numAnswersLeftInQuiz = value;
+			fuel.UpdateFuelDisplay (_numAnswersLeftInQuiz);
+		}
+	}
 	bool isQuizStarted;
 	int _frustration;
 	int frustration {
@@ -34,29 +44,31 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
-		UnityEngine.Assertions.Assert.IsTrue (isQuizStarted);
 		float answerTime = question.GetLastAnswerTime ();
 		timeToday += answerTime + Celebrate.duration;
 		frustration += (answerTime <= Question.FAST_TIME) ? FRUSTRATION_FAST : FRUSTRATION_RIGHT;
-		--numAnswersInQuiz;
+		if (isQuizStarted) {
+			--numAnswersLeftInQuiz;
+		}
 	}
 
 	public Question GetQuestion() {
 		if (!isQuizStarted) {
 			StartQuiz ();
 		}
-		Debug.Log ("frustration = " + frustration + " numAnswersInQuiz " + numAnswersInQuiz);
-		if (numAnswersInQuiz <= 0) {
+		Debug.Log ("frustration = " + frustration + " numAnswersInQuiz " + numAnswersLeftInQuiz);
+		if (numAnswersLeftInQuiz <= 0) {
 			return null;
 		}
 		bool isFrustrated = frustration > 0;
-		return questions.GetQuestion (isFrustrated, numAnswersInQuiz == 1 && !isFrustrated);
+		return questions.GetQuestion (isFrustrated, numAnswersLeftInQuiz == 1 && !isFrustrated);
 	}
 
 	public void OnWrongAnswer(bool wasNew) {
-		UnityEngine.Assertions.Assert.IsTrue (isQuizStarted);
 		frustration += FRUSTRATION_WRONG;
-		--numAnswersInQuiz;
+		if (isQuizStarted) {
+			--numAnswersLeftInQuiz;
+		}
 	}
 
 	public void OnGiveUp(Question question) {
@@ -71,7 +83,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 		Load ();
 		Goal.CurGoal curGoal = goal.calcCurGoal();
 		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
-		numAnswersInQuiz = GetNumAnswersInQuiz(curGoal == Goal.CurGoal.GAUNTLET);
+		numAnswersLeftInQuiz = GetNumAnswersInQuiz(curGoal == Goal.CurGoal.GAUNTLET);
 		questions.ResetForNewQuiz();
 		isQuizStarted = true;
 	}

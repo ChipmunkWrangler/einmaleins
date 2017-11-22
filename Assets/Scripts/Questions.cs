@@ -70,6 +70,11 @@ public class Questions : MonoBehaviour {
 		return (isFrustrated) ? orderedCandidates.First () : orderedCandidates.Last ();
 	}
 
+	public Question GetGaveUpQuestion() {
+		Question gaveUpQuestion = GetQuestion (false, true);
+		return gaveUpQuestion.gaveUp ? gaveUpQuestion : null;
+	}
+
 	public void Save() {
 		MDPrefs.SetInt (prefsKey + ":ArrayLen", questions.Length);
 		for (int i = 0; i < questions.Length; ++i) {
