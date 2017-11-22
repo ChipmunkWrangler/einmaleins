@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCorrectAnswer, OnQuizAborted {
+public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCorrectAnswer, OnQuizAborted, OnGiveUp {
 	[SerializeField] QuestionPicker answerHandler;
 	[SerializeField] float fadeTime;
 	[SerializeField] int maxDigits;
@@ -34,6 +34,10 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		SetText ("");
+	}
+
+	public void OnGiveUp(Question question) {
+		SetText (question.GetAnswer ().ToString());
 	}
 
 	IEnumerator Fade() {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnAnswerChanged, OnQuizAborted, OnQuestionChanged {
+public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnAnswerChanged, OnQuizAborted, OnQuestionChanged, OnGiveUp {
 	[SerializeField] UnityEngine.UI.Button button = null;
 	[SerializeField] bool showOnEmptyAnswer;
 	[SerializeField] float transitionTime = 0.5f;
@@ -25,6 +25,10 @@ public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, O
 
 	public void OnAnswerChanged(bool isAnswerEmpty) {
 		SetInteractibility( isAnswerEmpty == showOnEmptyAnswer );
+	}
+
+	public void OnGiveUp(Question question) {
+		SetInteractibility (false);
 	}
 		
 	void SetInteractibility(bool b) {

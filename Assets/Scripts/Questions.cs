@@ -41,20 +41,29 @@ public class Questions : MonoBehaviour {
 		}
 	}
 
-	public Question GetQuestion(bool isFrustrated) {
-		IEnumerable<Question> allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.IsMastered ());
+	public Question GetQuestion(bool isFrustrated, bool allowGaveUp) {
+		IEnumerable<Question> allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.IsMastered () && (allowGaveUp || !question.gaveUp));
 
 		if (!allowed.Any()) {
-			allowed = questions.Where (question => !question.wasAnsweredInThisQuiz);
+			allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && (allowGaveUp || !question.gaveUp));
 			if (!allowed.Any ()) {
-				return null;
+				allowed = questions.Where (question => !question.wasAnsweredInThisQuiz);
+				if (!allowed.Any ()) {
+					return null; // should never happen
+				}
 			}
 		}
-		IEnumerable<Question> candidates = allowed.Where (question => question.wasWrong);
-		if (!candidates.Any ()) {
-			candidates = allowed.Where (question => !question.isNew);
-			if (!candidates.Any ()) { // then give a new question
-				return (isFrustrated) ? allowed.First () : allowed.ElementAt(Random.Range(0, allowed.Count()));
+		IEnumerable<Question> candidates = null;
+		if (allowGaveUp) { // then prefer gaveUp
+			candidates = allowed.Where (question => question.gaveUp);
+		}
+		if (candidates == null || !candidates.Any ()) {
+			candidates = allowed.Where (question => question.wasWrong);
+			if (!candidates.Any ()) {
+				candidates = allowed.Where (question => !question.isNew);
+				if (!candidates.Any ()) { // then give a new question
+					return (isFrustrated) ? allowed.First () : allowed.ElementAt (Random.Range (0, allowed.Count ()));
+				}
 			}
 		}
 		var orderedCandidates = candidates.OrderBy (q => q.GetAverageAnswerTime ());

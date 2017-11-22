@@ -11,6 +11,7 @@ public class Question {
 	public bool wasWrong { get; private set; } // if a question is answered wrong, then wasWrong is true until it is next asked
 	public bool isNew { get; private set; }
 	public bool wasAnsweredInThisQuiz {get; private set; } // not saved
+	public bool gaveUp { get; private set; }
 
 	public const float FAST_TIME = 4.0f;
 	const float ANSWER_TIME_MAX = 60.0f;
@@ -49,8 +50,9 @@ public class Question {
 		return answerTimes.Average ();
 	}
 
-	public void Ask() {
+	public void Ask() {		
 		wasWrong = false;
+		gaveUp = false;
 	}
 
 	public void ResetForNewQuiz() {
@@ -73,6 +75,13 @@ public class Question {
 		Debug.Log(ToString());
 		return isNewlyMastered;
 	}
+
+	public void GiveUp() {
+		isNew = false;
+		gaveUp = true;
+		wasAnsweredInThisQuiz = true;
+		Save ();
+	}
 		
 	public void Load(string _prefsKey, int _idx) {
 		prefsKey = _prefsKey;
@@ -81,6 +90,7 @@ public class Question {
 		wasMastered = MDPrefs.GetBool (prefsKey + ":wasMastered");
 		wasWrong = MDPrefs.GetBool (prefsKey + ":wasWrong");
 		isNew = MDPrefs.GetBool (prefsKey + ":isNew", true);
+		gaveUp = MDPrefs.GetBool (prefsKey + ":gaveUp");
 	}
 		
 	public void Create(string _prefsKey, int _idx) {
@@ -94,10 +104,12 @@ public class Question {
 		SetAnswerTimes (prefsKey, answerTimes);
 		MDPrefs.SetBool (prefsKey + ":wasMastered", wasMastered);
 		MDPrefs.SetBool (prefsKey + ":wasWrong", wasWrong);
+		MDPrefs.SetBool (prefsKey + ":isNew", isNew);
+		MDPrefs.SetBool (prefsKey + ":gaveUp", gaveUp);
 	}
 
 	public override string ToString() {
-		string s = idx + " is " + a + " * " + b + " : wasMastered = " + wasMastered + " wasWrong = " + wasWrong + " isNew = " + isNew + " averageTime " + GetAverageAnswerTime () + " times = ";
+		string s = idx + " is " + a + " * " + b + " : wasMastered = " + wasMastered + " wasWrong = " + wasWrong + " isNew = " + isNew + " gaveUp " + gaveUp + " averageTime " + GetAverageAnswerTime () + " times = ";
 		foreach (var time in answerTimes) {
 			s += time + " ";
 		}

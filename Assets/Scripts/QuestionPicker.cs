@@ -11,6 +11,7 @@ public class QuestionPicker : MonoBehaviour {
 	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
 	List<OnWrongAnswer> onWrongAnswerSubscribers;
 	List<OnQuizAborted> onQuizAbortedSubscribers;
+	List<OnGiveUp> onGiveUpSubscribers;
 	float questionTime;
 
 	void Start () {
@@ -49,6 +50,13 @@ public class QuestionPicker : MonoBehaviour {
 		HandleAnswer (isCorrect, answerTime);
 		effortTracker.Save ();
 	}
+
+	public void OnGiveUp() {
+		foreach (OnGiveUp subscriber in onGiveUpSubscribers) {
+			subscriber.OnGiveUp (curQuestion);
+		}
+		curQuestion.GiveUp ();
+	}
 		
 	// I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
 	private void SplitSubscribers() {
@@ -56,6 +64,7 @@ public class QuestionPicker : MonoBehaviour {
 		onCorrectAnswerSubscribers = new List<OnCorrectAnswer> ();
 		onWrongAnswerSubscribers = new List<OnWrongAnswer> ();
 		onQuizAbortedSubscribers = new List<OnQuizAborted> ();
+		onGiveUpSubscribers = new List<OnGiveUp> ();
 		foreach(GameObject subscriber in subscribers) {
 			OnQuestionChanged[] onQuestionChangeds = subscriber.GetComponents<OnQuestionChanged>();
 			foreach(OnQuestionChanged s in onQuestionChangeds) {
@@ -73,7 +82,10 @@ public class QuestionPicker : MonoBehaviour {
 			foreach(OnQuizAborted s in onQuizAborteds) {
 				onQuizAbortedSubscribers.Add (s);
 			}
-
+			OnGiveUp[] onGiveUps = subscriber.GetComponents<OnGiveUp>();
+			foreach(OnGiveUp s in onGiveUps) {
+				onGiveUpSubscribers.Add (s);
+			}
 		}
 	}
 

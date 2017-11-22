@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
+public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGiveUp {
 	[SerializeField] Goal goal = null;
 	[SerializeField] Questions questions = null;
 
 	const int FRUSTRATION_WRONG = 2; // N.B. Since the question is repeated until it is correct, the net effect will be FRUSTRATION_WRONG * n - FRUSTRATION_RIGHT (or _FAST)
+	const int FRUSTRATION_GIVE_UP = 2;
 	const int FRUSTRATION_RIGHT = -1;
 	const int FRUSTRATION_FAST = -2;
 	const int MIN_FRUSTRATION = -2;
@@ -48,13 +49,18 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		if (numAnswersInQuiz <= 0) {
 			return null;
 		}
-		return questions.GetQuestion (frustration > 0);
+		bool isFrustrated = frustration > 0;
+		return questions.GetQuestion (isFrustrated, numAnswersInQuiz == 1 && !isFrustrated);
 	}
 
 	public void OnWrongAnswer(bool wasNew) {
 		UnityEngine.Assertions.Assert.IsTrue (isQuizStarted);
 		frustration += FRUSTRATION_WRONG;
 		--numAnswersInQuiz;
+	}
+
+	public void OnGiveUp(Question question) {
+		frustration += FRUSTRATION_GIVE_UP;
 	}
 
 	public static int GetNumAnswersInQuiz(bool isGauntlet) {

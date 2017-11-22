@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HideOnWrong : MonoBehaviour, OnWrongAnswer {
+public class HideOnWrong : MonoBehaviour, OnWrongAnswer, OnGiveUp {
 	[SerializeField] float transitionTime = 0.5f;
 	[SerializeField] float timeToHide = 0;
 
 	public void OnWrongAnswer(bool wasNew) {
 		ScaleDown ();
 		ScaleUpAfterDelay ();
+	}
+
+	public void OnGiveUp(Question question) {
+		ScaleDown ();
 	}
 
 	void ScaleDown() {
