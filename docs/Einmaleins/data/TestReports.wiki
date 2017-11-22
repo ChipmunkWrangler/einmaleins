@@ -3,6 +3,16 @@
   * Ask them for suggestions for new features
   * Ask them to pick their favourite of music, rocket customization, planet gallery, voice recognition, ufos
 +Test Reports v0.1.8
+++Simo & Aki
+ * They both ask to play it
+ * Simo didn't figure out that questions needed to be answered fast
+  * But once Robert told him, he was positively stressed
+ * Dot is not understandable for Canadians, use cross instead
+ * Disappointed at being cut off for the day
+  * Robert liked it
+ * Was unhappy that he couldn't change users because he made an account, then simo made two
+ * Upgrade: Antimatter drive didn't show flames. Should be fixed already.
+ * Never pressed stats button
 ++Jenny Anton
 Ach die APP finde ich cool. Also Spass macht sie auf jeden Fall. Linda.kam.leider noch nicht dazu ...aber ich 😊
  Ja das wäre meine Idee gewesen verschiedene Raketen Modelle... Oder so... Eben.wie bei.Autorennen...

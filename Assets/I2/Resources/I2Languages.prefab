@@ -482,6 +482,16 @@ MonoBehaviour:
     - Enter Launch Code
     - Startcode eingeben
     Flags: 0000
+  - Term: multiplicationDot
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - " \xD7 "
+    - " \xB7 "
+    Flags: 0000
   mLanguages:
   - Name: English
     Code: en
