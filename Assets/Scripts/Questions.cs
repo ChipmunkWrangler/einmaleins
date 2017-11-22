@@ -41,11 +41,11 @@ public class Questions : MonoBehaviour {
 		}
 	}
 
-	public Question GetQuestion(bool isFrustrated, bool allowGaveUp) {
-		IEnumerable<Question> allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.IsMastered () && (allowGaveUp || !question.gaveUp));
+	public Question GetQuestion(bool isFrustrated) {
+		IEnumerable<Question> allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.IsMastered () && !question.gaveUp);
 
 		if (!allowed.Any()) {
-			allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && (allowGaveUp || !question.gaveUp));
+			allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.gaveUp);
 			if (!allowed.Any ()) {
 				allowed = questions.Where (question => !question.wasAnsweredInThisQuiz);
 				if (!allowed.Any ()) {
@@ -53,17 +53,11 @@ public class Questions : MonoBehaviour {
 				}
 			}
 		}
-		IEnumerable<Question> candidates = null;
-		if (allowGaveUp) { // then prefer gaveUp
-			candidates = allowed.Where (question => question.gaveUp);
-		}
-		if (candidates == null || !candidates.Any ()) {
-			candidates = allowed.Where (question => question.wasWrong);
-			if (!candidates.Any ()) {
-				candidates = allowed.Where (question => !question.isNew);
-				if (!candidates.Any ()) { // then give a new question
-					return (isFrustrated) ? allowed.First () : allowed.ElementAt (Random.Range (0, allowed.Count ()));
-				}
+		IEnumerable<Question> candidates = allowed.Where (question => question.wasWrong);
+		if (!candidates.Any ()) {
+			candidates = allowed.Where (question => !question.isNew);
+			if (!candidates.Any ()) { // then give a new question
+				return (isFrustrated) ? allowed.First () : allowed.ElementAt (Random.Range (0, allowed.Count ()));
 			}
 		}
 		var orderedCandidates = candidates.OrderBy (q => q.GetAverageAnswerTime ());
@@ -71,8 +65,11 @@ public class Questions : MonoBehaviour {
 	}
 
 	public Question GetGaveUpQuestion() {
-		Question gaveUpQuestion = GetQuestion (false, true);
-		return gaveUpQuestion.gaveUp ? gaveUpQuestion : null;
+		return questions.FirstOrDefault (question => question.gaveUp);
+	}
+
+	public Question GetLaunchCodeQuestion() {
+		return questions.FirstOrDefault (question => question.isLaunchCode);
 	}
 
 	public void Save() {

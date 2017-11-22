@@ -6,8 +6,6 @@ public class QuestionPicker : MonoBehaviour {
 	[SerializeField] GameObject[] subscribers = null;
 	[SerializeField] EffortTracker effortTracker = null;
 
-	public bool isPublishPaused { private get; set; }
-
 	Question curQuestion;
 	List<OnQuestionChanged> onQuestionChangedSubscribers;
 	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
@@ -21,9 +19,6 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	public void AbortQuiz() {
-		if (isPublishPaused) {
-			return;
-		}
 		foreach (OnQuizAborted subscriber in onQuizAbortedSubscribers) {
 			subscriber.OnQuizAborted ();
 		}
@@ -31,7 +26,7 @@ public class QuestionPicker : MonoBehaviour {
 	}
 		
 	public void NextQuestion() {
-		ShowQuestion (effortTracker.GetQuestion ());
+		ShowQuestion ((curQuestion != null && curQuestion.isLaunchCode) ? curQuestion : effortTracker.GetQuestion ()); // if NextQuestion is called with curQuestion.isLaunchCode, the player gave up on the launch code, which means we should show it again
 //			StartCoroutine (AutoAnswer());
 	}
 
@@ -43,7 +38,7 @@ public class QuestionPicker : MonoBehaviour {
 //	}
 
 	public void OnAnswer(string answer) {
-		if (curQuestion == null || answer.Length == 0 || isPublishPaused) {
+		if (curQuestion == null || answer.Length == 0) {
 			return;
 		}
 		bool isCorrect = curQuestion.IsAnswerCorrect (answer);
@@ -53,9 +48,6 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	public void OnGiveUp() {
-		if (isPublishPaused) {
-			return;
-		}
 		foreach (OnGiveUp subscriber in onGiveUpSubscribers) {
 			subscriber.OnGiveUp (curQuestion);
 		}
@@ -64,9 +56,6 @@ public class QuestionPicker : MonoBehaviour {
 
 	public void ShowQuestion (Question newQuestion)
 	{
-		if (isPublishPaused) {
-			return;
-		}
 		curQuestion = newQuestion;
 		foreach (OnQuestionChanged subscriber in onQuestionChangedSubscribers) {
 			subscriber.OnQuestionChanged (curQuestion);
@@ -113,6 +102,7 @@ public class QuestionPicker : MonoBehaviour {
 			foreach (OnCorrectAnswer subscriber in onCorrectAnswerSubscribers) {
 				subscriber.OnCorrectAnswer (curQuestion, isNewlyMastered);
 			}
+			curQuestion = null;
 		}
 		else {
 			foreach (OnWrongAnswer subscriber in onWrongAnswerSubscribers) {

@@ -30,8 +30,10 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		StopTimer ();
-		float percentOn = (question == null) ? 1f : Mathf.Min( 1f, FlashThrust.GetThrustFactor (question.GetLastAnswerTime()));
-		coroutine = StartCoroutine (DoCelebration (question != null && question.GetLastAnswerTime() <= Question.FAST_TIME, isNewlyMastered, percentOn));
+		if (question == null || !question.isLaunchCode) {
+			float percentOn = (question == null) ? 1f : Mathf.Min (1f, FlashThrust.GetThrustFactor (question.GetLastAnswerTime ()));
+			coroutine = StartCoroutine (DoCelebration (question != null && question.GetLastAnswerTime () <= Question.FAST_TIME, isNewlyMastered, percentOn));
+		}
 	}
 
 	public void OnWrongAnswer(bool wasNew) {

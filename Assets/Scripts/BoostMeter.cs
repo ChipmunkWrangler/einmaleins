@@ -17,7 +17,7 @@ public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer {
 	}
 
 	public void OnQuestionChanged(Question question) {
-		if (question != null) {
+		if (question != null && !question.isLaunchCode) {
 			ResetMask ();
 			ShowMeter ();
 			StartMeter (timeToZero);

@@ -38,6 +38,9 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
+		if (question == null || question.isLaunchCode) {
+			return;
+		}
 		IncrementMultiplier ();
 		IncreaseScoreBy (1 + multiplier * question.a * question.b); // 1+ to avoid only awarding one point and having to unpluralize "Punkte" :p
 		Save (score);

@@ -12,6 +12,7 @@ public class Question {
 	public bool isNew { get; private set; }
 	public bool wasAnsweredInThisQuiz {get; private set; } // not saved
 	public bool gaveUp { get; private set; }
+	public bool isLaunchCode; // not saved
 
 	public const float FAST_TIME = 4.0f;
 	const float ANSWER_TIME_MAX = 60.0f;
@@ -53,6 +54,7 @@ public class Question {
 	public void Ask() {		
 		wasWrong = false;
 		gaveUp = false;
+		isLaunchCode = false;
 	}
 
 	public void ResetForNewQuiz() {
@@ -62,7 +64,7 @@ public class Question {
 	public bool Answer(bool isCorrect, float timeRequired) {
 		bool isNewlyMastered = false;
 		if (isCorrect) {
-			RecordAnswerTime (timeRequired);
+			RecordAnswerTime (isLaunchCode ? ANSWER_TIME_MAX : timeRequired);
 			isNew = false;
 			wasAnsweredInThisQuiz = true;
 			if (!wasMastered && IsMastered()) {

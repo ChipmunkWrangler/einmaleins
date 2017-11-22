@@ -15,6 +15,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 	const float MIN_TIME_PER_DAY = 5 * 60.0f;
 	const int NUM_ANSWERS_PER_QUIZ = 7; // the bigger this is, the more new questions the kid will be confronted with at once
 	const int GAUNTLET_ASK_LIST_LENGTH = 55;
+	const int NUM_ANSWERS_LEFT_WHEN_LAUNCH_CODE_ASKED = 3;
 
 	int _numAnswersLeftInQuiz;
 	int numAnswersLeftInQuiz { 
@@ -61,7 +62,13 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 			return null;
 		}
 		bool isFrustrated = frustration > 0;
-		return questions.GetQuestion (isFrustrated, numAnswersLeftInQuiz == 1 && !isFrustrated);
+		if (numAnswersLeftInQuiz <= NUM_ANSWERS_LEFT_WHEN_LAUNCH_CODE_ASKED && !isFrustrated) {
+			Question q = questions.GetLaunchCodeQuestion ();
+			if (q != null) {
+				return q;
+			}
+		}
+		return questions.GetQuestion (isFrustrated);
 	}
 
 	public void OnWrongAnswer(bool wasNew) {

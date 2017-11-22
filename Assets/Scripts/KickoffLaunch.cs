@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class KickoffLaunch : MonoBehaviour {
+public class KickoffLaunch : MonoBehaviour, OnCorrectAnswer {
 	[SerializeField] Celebrate celebrate = null;
 	[SerializeField] float delay = 1.0f;
 	[SerializeField] int countdownTime = 3;
@@ -18,9 +18,6 @@ public class KickoffLaunch : MonoBehaviour {
 	[SerializeField] FlashThrust thrust;
 	[SerializeField] Questions questions;
 	[SerializeField] QuestionPicker questionPicker;
-	[SerializeField] UnityEngine.UI.Text answer = null;
-
-	Question launchCodeQuestion;
 
 	void Start () {
 		if (MDPrefs.GetBool ("autolaunch")) {
@@ -32,11 +29,11 @@ public class KickoffLaunch : MonoBehaviour {
 	}
 
 	public void PreLaunch() {
-		Question gaveUpQuestion = GetGaveUpQuestion ();
-		if (gaveUpQuestion == null) {
+		Question launchCodeQuestion = questions.GetGaveUpQuestion ();
+		if (launchCodeQuestion == null) {
 			Launch ();
 		} else {
-			RequestLaunchCode (gaveUpQuestion);
+			RequestLaunchCode (launchCodeQuestion);
 		}
 	}
 
@@ -84,8 +81,7 @@ public class KickoffLaunch : MonoBehaviour {
 		}
 	}
 
-	void RequestLaunchCode(Question _launchCodeQuestion) {
-		launchCodeQuestion = _launchCodeQuestion;
+	void RequestLaunchCode(Question launchCodeQuestion) {
 		foreach (var element in uiElementsToActivateOnLaunchCode) {
 			element.SetActive (true);
 		}
@@ -93,44 +89,12 @@ public class KickoffLaunch : MonoBehaviour {
 			element.SetActive (false);
 		}
 		questionPicker.ShowQuestion (launchCodeQuestion);
-		questionPicker.isPublishPaused = true;
+		launchCodeQuestion.isLaunchCode = true;
 	}
 
-	public void LaunchCodeEntered() {
-		if (launchCodeQuestion == null) { 
-			return;
+	public void OnCorrectAnswer(Question question, bool isNewlyMastered ) {
+		if (question.isLaunchCode) { 
+			Launch ();
 		}
-		string answerText = answer.text;
-		if (answerText == "") {
-			LaunchCodeGiveUp ();
-		} else if (launchCodeQuestion.IsAnswerCorrect(answerText)) {
-			LaunchCodeCorrect ();
-		} else {
-			LaunchCodeWrong ();
-		}
-	}
-
-	Question GetGaveUpQuestion() {
-		return questions.GetGaveUpQuestion ();
-	}
-
-	void LaunchCodeGiveUp() {
-		// todo
-		// if this works without pausing publishing, then just remove the publishing pausing entirely
-	}
-
-	void LaunchCodeCorrect(){
-		questionPicker.isPublishPaused = false;
-		questionPicker.OnAnswer (answer.text);
-		celebrate.OnQuizAborted ();
-//		questionPicker.isPublishPaused = false;
-		launchCodeQuestion = null;
-		Launch ();
-	}
-
-	void LaunchCodeWrong() {		
-		questionPicker.isPublishPaused = false;
-		questionPicker.OnAnswer (answer.text);
-		questionPicker.isPublishPaused = true;
 	}
 }

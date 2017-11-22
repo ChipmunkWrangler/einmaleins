@@ -99,7 +99,9 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
-		Accelerate ((question == null) ? ALLOTTED_TIME : question.GetLastAnswerTime());
+		if (question == null || !question.isLaunchCode) {
+			Accelerate ((question == null) ? ALLOTTED_TIME : question.GetLastAnswerTime ());
+		}
 	}
 
 	public void OnQuestionChanged(Question question) {
