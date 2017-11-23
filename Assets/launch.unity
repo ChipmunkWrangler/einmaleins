@@ -2753,8 +2753,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 7}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 215.5, y: 383.5, z: 0}
-  m_LocalScale: {x: 0.53875, y: 0.53875, z: 0.53875}
+  m_LocalPosition: {x: 245.5, y: 383.5, z: 0}
+  m_LocalScale: {x: 0.61375, y: 0.61375, z: 0.61375}
   m_Children:
   - {fileID: 293}
   m_Father: {fileID: 0}
@@ -2952,7 +2952,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 70}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 526.83295, z: 0}
+  m_LocalPosition: {x: 0, y: 439.8473, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 267}
@@ -3151,7 +3151,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 18}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 696.83295, z: 0}
+  m_LocalPosition: {x: 0, y: 609.8473, z: 0}
   m_LocalScale: {x: 1.0416667, y: 1.0416667, z: 1.0416667}
   m_Children:
   - {fileID: 62}
@@ -3370,7 +3370,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 67}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -696.83295, z: 0}
+  m_LocalPosition: {x: 0, y: -609.8473, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 249}
@@ -3513,7 +3513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   timeToHide: 0
 --- !u!114 &308
 MonoBehaviour:
@@ -3527,7 +3527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   hideOnRight: 1
   evenIfWrongFirst: 1
 --- !u!114 &309
@@ -3623,7 +3623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   timeToHide: 0
 --- !u!114 &312
 MonoBehaviour:
@@ -3637,7 +3637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   hideOnRight: 1
   evenIfWrongFirst: 1
 --- !u!114 &313
@@ -4049,7 +4049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   timeToHide: 0
 --- !u!114 &333
 MonoBehaviour:
@@ -4063,7 +4063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   hideOnRight: 1
   evenIfWrongFirst: 1
 --- !u!114 &334
@@ -4161,7 +4161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 339}
   showOnEmptyAnswer: 0
-  transitionTime: 0.5
+  transitionTime: 0.25
 --- !u!114 &339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4268,7 +4268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   timeToHide: 0
 --- !u!114 &343
 MonoBehaviour:
@@ -4282,7 +4282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   hideOnRight: 1
   evenIfWrongFirst: 1
 --- !u!114 &344
@@ -4378,7 +4378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   timeToHide: 0
 --- !u!114 &347
 MonoBehaviour:
@@ -4392,7 +4392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   hideOnRight: 1
   evenIfWrongFirst: 1
 --- !u!114 &348
@@ -4885,7 +4885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   timeToHide: 0
 --- !u!114 &369
 MonoBehaviour:
@@ -4899,7 +4899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   hideOnRight: 1
   evenIfWrongFirst: 1
 --- !u!114 &370
@@ -5238,7 +5238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   timeToHide: 0
 --- !u!114 &397
 MonoBehaviour:
@@ -5252,7 +5252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   hideOnRight: 1
   evenIfWrongFirst: 1
 --- !u!114 &398
@@ -5410,7 +5410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   timeToHide: 0
 --- !u!114 &405
 MonoBehaviour:
@@ -5424,7 +5424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   hideOnRight: 1
   evenIfWrongFirst: 1
 --- !u!114 &406
@@ -5699,7 +5699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   timeToHide: 0
 --- !u!114 &415
 MonoBehaviour:
@@ -5713,7 +5713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   hideOnRight: 1
   evenIfWrongFirst: 1
 --- !u!114 &416
@@ -5809,7 +5809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   timeToHide: 0
 --- !u!114 &420
 MonoBehaviour:
@@ -5823,7 +5823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   hideOnRight: 1
   evenIfWrongFirst: 1
 --- !u!114 &421
@@ -6021,7 +6021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10762569c8a7944418d34b3c0f137dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   timeToHide: 0
 --- !u!114 &434
 MonoBehaviour:
@@ -6035,7 +6035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   hideOnRight: 1
   evenIfWrongFirst: 1
 --- !u!114 &435
@@ -7369,7 +7369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 482485706}
   showOnEmptyAnswer: 1
-  transitionTime: 0.5
+  transitionTime: 0.25
 --- !u!114 &482485704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7874,7 +7874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e5baa801c514f87b4f5c2568e5772c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   button: {fileID: 811033121}
 --- !u!114 &811033119
 MonoBehaviour:
@@ -8772,7 +8772,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1535142616}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -696.83295, z: 0}
+  m_LocalPosition: {x: 0, y: -609.8473, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 293}

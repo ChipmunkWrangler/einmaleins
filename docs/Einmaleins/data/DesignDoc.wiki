@@ -20,8 +20,7 @@ Check private schools as market.
 ++v0.1.11
   * Test: delete answer and type it in rapid succession to mess up question button 
 ++v0.1.12
- * Rotate rocket in build screen so the texture error is less obvious
- * Allow dragging the colour wheel
+ * TEST Allow dragging the colour wheel
  * Make center button grow/shrink faster. Maybe the delay is also wrong?
  * BUGFIX Give up should hide the boost meter
 ++v1.0.0 
