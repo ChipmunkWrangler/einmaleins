@@ -43,6 +43,45 @@ The Rocket doesn't waste your kid's time: it notices which questions your child 
 
 What the Rocket doesn't do (yet) is teach multiplication from scratch. What is will do is take your kid from "I get it... I guess" to "this is easy!"
 ++Testflight
++++v0.1.11
+++++German
+Neu:
+ - Freie Wahl der Raketenfarbe
+ - Hilfefunktion, falls Du eine Antwort einfach nicht kennst
+ - Spiel ist etwas leichter
+ - Lesbare Schrift
+ - Verbesserte Raketenantriebeffekte
+
+Bitte sag mir Bescheid, ob die App:
+a) auf Deinem Gerät gut läuft
+b) ohne weitere Anweisungen verständlich ist
+c) Deinem Kind interessiert und weiterhilft
+
+Anderes Feedback ist auch willkommen. Sei bitte brutal ehrlich: Wenn die App Dir oder Deinem Kind nicht gefällt, will ich das wissen, damit ich sie verbessern kann.
+
+Vielen Dank!
+
+Rafael
+++++English
+New:
+ - Your choice of rocket colours
+ - Help with questions you just can't answer
+ - Game is slightly easier
+ - More readable font
+ - Improved thruster effects
+
+Please tell me whether the app:
+
+a) runs smoothly on your device
+b) is understandable without a tutorial
+c) interests your child
+d) helps your child improve
+
+I am also grateful for any other feedback. Be harsh now so I am not embarrassed later!
+
+Thank you very much,
+Rafael
+
 +++Techies
 Vielen Dank für Deine Hilfe! Bitte sag mir Bescheid, ob die App:
 

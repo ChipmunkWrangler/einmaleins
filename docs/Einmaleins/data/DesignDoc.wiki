@@ -18,22 +18,14 @@ Check private schools as market.
    StopRunning
    Celebrate.OnQuizAborted
 ++v0.1.11
- * OK More readable font
- * OK English is now the fallback language
- * Check out Dave's crashes
- * OK Improve buttons
-  * OK Make buttons more 3d or otherwise more obviously buttons, or glow or something
-  * OK Buttons states more visible, especially respond more visibly to taps
-  * OK Nicer delete icon
- * ROBERT TEST Android back button (in stats screen, goes to launch. In build screen, goes to launch. In launch screen, goes to choose player)
- * OK Add an upgrade with new particles before "In Deep Space" with new colour of flame
- * OK Increase target time by 1s and initial time correspondingly. On first start for people using v0.8 or .9, change all 3.01s to 3.51s
- * OK Pick rocket colour
- * OK Give up
   * Test: delete answer and type it in rapid succession to mess up question button 
- * OK Replace dot with cross in English 
- * TEST Hesitation before first question?
+++v0.1.12
+ * Rotate rocket in build screen so the texture error is less obvious
+ * Allow dragging the colour wheel
+ * Make center button grow/shrink faster. Maybe the delay is also wrong?
+ * BUGFIX Give up should hide the boost meter
 ++v1.0.0 
+ * Check out Dave's crashes
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
  * Check where you call Save. Should happen at end of each quiz and on scene change, probably nowhere else.
  * Store page https://developer.apple.com/app-store/categories/ and on android
@@ -108,13 +100,18 @@ Check private schools as market.
  * Test reaching Pluto (all questions should be mastered, all upgrades done, gauntlet. Impossible to reach early)
  * Test post-gauntlet
 ++Google
- * Simulator: ~/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_26_x86
+ * Enter passwords (build settings... publishing settings...keystore password) before building in Unity
+ * Test in Simulator:
+  * Start Simulator: ~/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_26_x86
+  * Drag apk onto simulator window
+  * You might need to delete old version (Settings...App Info...einmaleins...uninstall)
  * New test: https://support.google.com/googleplay/android-developer/answer/3131213?hl=en
+
  * New release: https://support.google.com/googleplay/android-developer/answer/7159011
-  * Enter passwords (build settings... publishing settings...keystore password) before building in Unity
   * Play Console...Release Management... New Release...Browse Files
 ++Apple
- * Upload
+ * Build in unity
+ * Upload in XCode
   * 1) choose "generic iOS device" (don't choose Ipad or any other devices connected or a simulator) 
   * 2) Go to Product --> Archive
   * 3) If everything is fine, it should open the archive in the Organizer. Click "validate" and then "Submit to App Store". 
