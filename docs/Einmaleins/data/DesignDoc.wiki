@@ -21,8 +21,8 @@ Check private schools as market.
   * Test: delete answer and type it in rapid succession to mess up question button 
 ++v0.1.12
  * TEST Allow dragging the colour wheel
- * Make center button grow/shrink faster. Maybe the delay is also wrong?
- * BUGFIX Give up should hide the boost meter
+ * TEST Make center button grow/shrink faster.
+ * TEST Give up should hide the boost meter
 ++v1.0.0 
  * Check out Dave's crashes
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)

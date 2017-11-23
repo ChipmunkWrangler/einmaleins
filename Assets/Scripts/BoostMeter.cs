@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer {
+public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer, OnGiveUp {
 	[SerializeField] RectTransform mask = null;
 	[SerializeField] Transform meter = null;
 
@@ -29,6 +29,11 @@ public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer {
 		HideMeter ();
 	}
 
+	public void OnGiveUp(Question question) {
+		StopMeter ();
+		meter.gameObject.SetActive (false);
+	}
+
 	void ResetMask() {
 		SetMaskY (originalY);
 	}
@@ -38,7 +43,6 @@ public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer {
 	}
 
 	void HideMeter() {
-//		meter.gameObject.SetActive (false);
 		StartMeter(hideTime);
 	}
 
