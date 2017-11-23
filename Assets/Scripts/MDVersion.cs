@@ -8,7 +8,7 @@ public class MDVersion : MonoBehaviour {
 
 	const int majorVersion = 0;
 	const int minorVersion = 1;
-	const int buildNumber = 10;
+	const int buildNumber = 11;
 
 	bool isChecking;
 
@@ -30,9 +30,10 @@ public class MDVersion : MonoBehaviour {
 			return;
 		} 
 		switch (oldVersion) {
+		case "0.1.10":
 		case "0.1.9":
 		case "0.1.8":
-			UpdateFrom_0_1_8_To_0_1_10 ();
+			UpdateFrom_0_1_8_To_0_1_11 ();
 			break;
 		default:
 			RestartWithNewVersion ();
@@ -62,7 +63,7 @@ public class MDVersion : MonoBehaviour {
 		isChecking = false;
 	}
 
-	void UpdateFrom_0_1_8_To_0_1_10() {
+	void UpdateFrom_0_1_8_To_0_1_11() {
 		const float oldAnswerTimeInitial = 3f + 0.01f;
 		foreach (string playerName in NewPlayerName.GetPlayerNames()) {
 			NewPlayerName.SetCurPlayerName (playerName);
