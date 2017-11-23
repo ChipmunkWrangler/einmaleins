@@ -14,10 +14,12 @@ public class KickoffLaunch : MonoBehaviour, OnCorrectAnswer {
 	[SerializeField] GameObject[] uiElementsToDeactivateOnCountdown;
 	[SerializeField] GameObject[] uiElementsToActivateOnPlay;
 	[SerializeField] GameObject[] uiElementsToDeactivateOnPlay;
+	[SerializeField] GameObject[] uiElementsToDeactivateIfGivingUpIsForbidden;
 	[SerializeField] GoalButtonControler goalButtonController;
 	[SerializeField] FlashThrust thrust;
 	[SerializeField] Questions questions;
 	[SerializeField] QuestionPicker questionPicker;
+	[SerializeField] Goal goal;
 
 	void Start () {
 		if (MDPrefs.GetBool ("autolaunch")) {
@@ -78,6 +80,11 @@ public class KickoffLaunch : MonoBehaviour, OnCorrectAnswer {
 		yield return new WaitForSeconds(Celebrate.duration);
 		foreach (var element in uiElementsToActivateOnPlay) {
 			element.SetActive (true);
+		}
+		if (!Goal.IsGivingUpAllowed(goal.CalcCurGoal())) {
+			foreach (var element in uiElementsToDeactivateIfGivingUpIsForbidden) {
+				element.SetActive (false);
+			}
 		}
 	}
 

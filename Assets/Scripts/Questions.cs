@@ -41,8 +41,8 @@ public class Questions : MonoBehaviour {
 		}
 	}
 
-	public Question GetQuestion(bool isFrustrated) {
-		IEnumerable<Question> allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.IsMastered () && !question.gaveUp);
+	public Question GetQuestion(bool isFrustrated, bool allowGaveUpQuestions) {
+		IEnumerable<Question> allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.IsMastered () && (allowGaveUpQuestions || !question.gaveUp));
 
 		if (!allowed.Any()) {
 			allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.gaveUp);

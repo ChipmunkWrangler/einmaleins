@@ -35,6 +35,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 	}
 	int quizzesToday = -1;
 	float timeToday;
+	bool allowGivingUp;
 	const string prefsKey = "effortTracking";
 
 	public bool IsDoneForToday() {
@@ -68,7 +69,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 				return q;
 			}
 		}
-		return questions.GetQuestion (isFrustrated);
+		return questions.GetQuestion (isFrustrated, !allowGivingUp);
 	}
 
 	public void OnWrongAnswer(bool wasNew) {
@@ -90,6 +91,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 		Load ();
 		Goal.CurGoal curGoal = goal.CalcCurGoal();
 		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
+		allowGivingUp = Goal.IsGivingUpAllowed(curGoal);
 		numAnswersLeftInQuiz = GetNumAnswersInQuiz(curGoal == Goal.CurGoal.GAUNTLET);
 		questions.ResetForNewQuiz();
 		isQuizStarted = true;

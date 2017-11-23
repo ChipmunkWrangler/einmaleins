@@ -29,18 +29,10 @@ Check private schools as market.
  * OK Add an upgrade with new particles before "In Deep Space" with new colour of flame
  * OK Increase target time by 1s and initial time correspondingly. On first start for people using v0.8 or .9, change all 3.01s to 3.51s
  * OK Pick rocket colour
- * Give up
-   * OK Before the next quiz, this question is displayed with no time limit, as a launch code, or just shown with the answer.
-    * OK Test with launch code give up
-    * OK Test with launch code immediately right
-    * OK Test without launch code
-    * OK Test with launch code from upgrade
-    * OK Test without launch code from upgrade
-   * You shouldn't be able to start the gauntlet or reach pluto until all are mastered. 
-   * No giving up during the gauntlet. 
+ * OK Give up
   * Test: delete answer and type it in rapid succession to mess up question button 
- * Replace dot with cross in English 
-
+ * OK Replace dot with cross in English 
+ * TEST Hesitation before first question?
 ++v1.0.0 
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
  * Check where you call Save. Should happen at end of each quiz and on scene change, probably nowhere else.

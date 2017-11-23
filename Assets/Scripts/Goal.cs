@@ -29,12 +29,16 @@ public class Goal : MonoBehaviour {
 		return curGoal;
 	}
 		
+	public static bool IsGivingUpAllowed(CurGoal curGoal) {
+		return curGoal == Goal.CurGoal.FLY_TO_PLANET;
+	}
+
 	public static bool IsReadyForGauntlet() {
 		return (TargetPlanet.GetTargetPlanetIdx () == TargetPlanet.GetMaxPlanetIdx ()) && 
 			RocketParts.instance.upgradeLevel == RocketParts.instance.maxUpgradeLevel - 1;
 	}
 
-	bool ShouldUpgrade() {
+	static bool ShouldUpgrade() {
 		return (RocketParts.instance.hasEnoughPartsToUpgrade || !ChooseRocketColour.HasChosenColour()) && !RocketParts.instance.justUpgraded;
 	}
 
@@ -42,7 +46,7 @@ public class Goal : MonoBehaviour {
 		return effortTracker.IsDoneForToday () && !RocketParts.instance.justUpgraded;
 	}
 
-	bool IsLeavingSolarSystem() {
+	static bool IsLeavingSolarSystem() {
 		return TargetPlanet.GetTargetPlanetIdx () > TargetPlanet.GetMaxPlanetIdx();
 	}
 }
