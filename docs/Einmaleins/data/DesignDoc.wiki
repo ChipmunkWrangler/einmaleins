@@ -20,11 +20,12 @@ Check private schools as market.
 ++v0.1.12
  * TEST BUGFIX Pressing the numbers too soon after a wrong answer either doesn't react or the answer is erased again
  * TEST Allow dragging the colour wheel
+ * TEST BUGFIX Rocket returned to default colour after first upgrade
  * Can't hit answer button fast enough -- should be available immediately after your type something
+  * Turn off raycast collision for inactive buttons 
   * Keep it behind ? button?
   * Make an invisible click area and just show the animation slowly? 
   * Test: delete answer and type it in rapid succession to mess up question button 
- * TEST Give up should hide the boost meter
 ++v1.0.0 
  * Check out Dave's crashes
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
