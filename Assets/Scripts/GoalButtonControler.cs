@@ -21,7 +21,7 @@ public class GoalButtonControler : MonoBehaviour, OnQuestionChanged {
 		youWinText.SetActive (false);
 		doneText.SetActive(false);
 		if (noMoreQuestions) {
-			switch (goal.calcCurGoal()) {
+			switch (goal.CalcCurGoal()) {
 			case Goal.CurGoal.UPGRADE_ROCKET:
 				upgradeButton.SetActive (true);
 				break;

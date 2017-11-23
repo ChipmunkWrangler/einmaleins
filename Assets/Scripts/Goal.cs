@@ -14,7 +14,7 @@ public class Goal : MonoBehaviour {
 		WON // try to get high score
 	}
 
-	public CurGoal calcCurGoal() {
+	public CurGoal CalcCurGoal() {
 		CurGoal curGoal;
 		if (ShouldUpgrade()) {
 			curGoal = CurGoal.UPGRADE_ROCKET;

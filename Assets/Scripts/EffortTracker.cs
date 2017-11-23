@@ -88,7 +88,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 
 	void StartQuiz() {
 		Load ();
-		Goal.CurGoal curGoal = goal.calcCurGoal();
+		Goal.CurGoal curGoal = goal.CalcCurGoal();
 		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
 		numAnswersLeftInQuiz = GetNumAnswersInQuiz(curGoal == Goal.CurGoal.GAUNTLET);
 		questions.ResetForNewQuiz();

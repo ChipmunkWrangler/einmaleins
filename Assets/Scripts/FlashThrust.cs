@@ -175,7 +175,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	}
 
 	public void OnCountdown() {
-		curGoal = goal.calcCurGoal ();
+		curGoal = goal.CalcCurGoal ();
 		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
 		InitRecord ();
 		InitPhysics (curGoal == Goal.CurGoal.GAUNTLET);
