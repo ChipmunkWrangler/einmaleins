@@ -9,6 +9,8 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 	[SerializeField] GameObject[] subscribers;
 	List<OnAnswerChanged> onAnswerChangedSubscribers;
 	string answerTxt;
+	string queuedTxt;
+	bool isFading;
 	Color oldColor;
 
 	void Start() {
@@ -41,20 +43,28 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 	}
 
 	IEnumerator Fade() {
+		isFading = true;
+		queuedTxt = "";
 		GetTextField ().CrossFadeColor (Color.clear, fadeTime, false, true);
 		yield return new WaitForSeconds (fadeTime);
-		answerTxt = "";
+		answerTxt = queuedTxt;
 		UpdateText ();
 		GetTextField ().CrossFadeColor (oldColor, 0, false, true);
+		isFading = false;
 	}
 		
 	public void OnAnswerChanged(string nextDigit) {
-		answerTxt += nextDigit;
-		if (answerTxt.Length > maxDigits) {
-			answerTxt = answerTxt.Substring (1, answerTxt.Length-1);
+		string s = isFading ? queuedTxt : answerTxt;
+		s += nextDigit;
+		if (s.Length > maxDigits) {
+			s = s.Substring (1, s.Length-1);
 		}
-
-		UpdateText ();
+		if (isFading) {
+			queuedTxt = s;
+		} else {
+			answerTxt = s;
+			UpdateText ();
+		}
 	}
 
 	public void OnBackspace() {

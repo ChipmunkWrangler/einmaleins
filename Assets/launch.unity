@@ -4566,7 +4566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   answerHandler: {fileID: 382}
-  fadeTime: 1
+  fadeTime: 0.25
   maxDigits: 3
   subscribers:
   - {fileID: 20}
