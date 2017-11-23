@@ -2389,7 +2389,7 @@ Transform:
   - {fileID: 319503657}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -90, y: 270, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 250, z: 0}
 --- !u!114 &1842585750
 MonoBehaviour:
   m_ObjectHideFlags: 0
