@@ -18,14 +18,13 @@ Check private schools as market.
    StopRunning
    Celebrate.OnQuizAborted
 ++v0.1.12
- * TEST BUGFIX Pressing the numbers too soon after a wrong answer either doesn't react or the answer is erased again
- * TEST Allow dragging the colour wheel
- * TEST BUGFIX Rocket returned to default colour after first upgrade
  * Can't hit answer button fast enough -- should be available immediately after your type something
-  * Turn off raycast collision for inactive buttons 
-  * Keep it behind ? button?
-  * Make an invisible click area and just show the animation slowly? 
-  * Test: delete answer and type it in rapid succession to mess up question button 
+ *   Make an invisible click area and just show the animation slowly? 
+ * BUGFIX can master a question that was wrong if you are fast
+  * if wasWrong, min time = default time
+  * but what if it was wrong, but the previous times were 50, 1, 1? Then you will still master it!
+  * Either you don't record the time, or you flag it as a wrong time, or you live with it
+  * living with it might be ok. If someone really corrects their mistake that fast, they probably just made a typo 
 ++v1.0.0 
  * Check out Dave's crashes
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
@@ -76,7 +75,7 @@ Check private schools as market.
 
 
 +Before deploying
- * Update CCVersion to handle previous version
+ * Update MDVersion to handle previous version
  * Update build and/or version numbers (Android & iOS build settings + testflight & google play)
   * Changing the version number to something other than 0.1.x seems to cause an Invalid Signature complaint when uploaded
    * It complains that it is not a distribution certificate, which is true -- it is a developer certificate
@@ -87,6 +86,7 @@ Check private schools as market.
  * Update Noun Project credits 
  * Test on device by changing bundle id to einmaleins2
  * Tag version in git
+ * Change bundle id back to einmaleins
 
 ++On major changes
  * Check Beta App Description, etc. in Testflight...Test Informationhttps://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=testinformation

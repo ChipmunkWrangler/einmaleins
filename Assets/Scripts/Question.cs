@@ -17,6 +17,7 @@ public class Question {
 	public const float FAST_TIME = 4.0f;
 	const float ANSWER_TIME_MAX = 60.0f;
 	public const float ANSWER_TIME_INTIAL = FAST_TIME + 0.01f; 
+	const float WRONG_ANSWER_TIME_PENALTY = 1f;
 	const int NUM_ANSWER_TIMES_TO_RECORD = 3;
 	string prefsKey;
 	List<float> answerTimes;
@@ -64,7 +65,7 @@ public class Question {
 	public bool Answer(bool isCorrect, float timeRequired) {
 		bool isNewlyMastered = false;
 		if (isCorrect) {
-			RecordAnswerTime (isLaunchCode ? ANSWER_TIME_MAX : timeRequired);
+			RecordAnswerTime (GetAdjustedTime(timeRequired));
 			isNew = false;
 			wasAnsweredInThisQuiz = true;
 			if (!wasMastered && IsMastered()) {
@@ -147,9 +148,21 @@ public class Question {
 
 	void RecordAnswerTime (float timeRequired)
 	{
-		answerTimes.Add (Mathf.Min(timeRequired,ANSWER_TIME_MAX));
+		answerTimes.Add (timeRequired);
 		if (answerTimes.Count > NUM_ANSWER_TIMES_TO_RECORD) {
 			answerTimes.RemoveRange (0, answerTimes.Count - NUM_ANSWER_TIMES_TO_RECORD);
 		}
+	}
+
+	float GetAdjustedTime(float timeRequired) {
+		if (isLaunchCode) {
+			timeRequired = ANSWER_TIME_MAX;
+		} else if (wasWrong) {
+			timeRequired += WRONG_ANSWER_TIME_PENALTY;
+		}
+		if (timeRequired > ANSWER_TIME_MAX) {
+			timeRequired = ANSWER_TIME_MAX;
+		}
+		return timeRequired;
 	}
 }
