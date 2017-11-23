@@ -8,7 +8,8 @@ public class QuestionDisplay : TextDisplay, OnQuestionChanged, OnQuizAborted, On
 		string s = "";
 		if (question != null) {			
 			int x = Random.Range (0, 2);
-			s = (x == 0) ? question.a + I2.Loc.LocalizationManager.GetTermTranslation( "multiplicationDot" ) + question.b : question.b + " · " + question.a;
+			string dot = I2.Loc.LocalizationManager.GetTermTranslation ("multiplicationDot");
+			s = (x == 0) ? question.a + dot + question.b : question.b + dot + question.a;
 			s += " = ";
 		}
 		SetText(s);
