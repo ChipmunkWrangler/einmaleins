@@ -5149,7 +5149,6 @@ MonoBehaviour:
   thrust: {fileID: 389}
   questions: {fileID: 124914251}
   questionPicker: {fileID: 382}
-  answer: {fileID: 362}
 --- !u!114 &389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7716,7 +7715,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.4, y: 5.2}
+  m_SizeDelta: {x: 0.4, y: 5.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &756848232
 MonoBehaviour:
@@ -8041,7 +8040,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 825374071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.099999905, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1500001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 756848231}
@@ -8050,8 +8049,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.1}
-  m_SizeDelta: {x: 2, y: 5.2}
+  m_AnchoredPosition: {x: 0, y: 0.15}
+  m_SizeDelta: {x: 2, y: 5.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &825374073
 MonoBehaviour:
