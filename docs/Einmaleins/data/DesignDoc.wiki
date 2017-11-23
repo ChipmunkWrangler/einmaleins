@@ -17,11 +17,13 @@ Check private schools as market.
    Reach Planet
    StopRunning
    Celebrate.OnQuizAborted
-++v0.1.11
-  * Test: delete answer and type it in rapid succession to mess up question button 
 ++v0.1.12
+ * TEST BUGFIX Pressing the numbers too soon after a wrong answer either doesn't react or the answer is erased again
  * TEST Allow dragging the colour wheel
- * TEST Make center button grow/shrink faster.
+ * Can't hit answer button fast enough -- should be available immediately after your type something
+  * Keep it behind ? button?
+  * Make an invisible click area and just show the animation slowly? 
+  * Test: delete answer and type it in rapid succession to mess up question button 
  * TEST Give up should hide the boost meter
 ++v1.0.0 
  * Check out Dave's crashes
@@ -30,6 +32,7 @@ Check private schools as market.
  * Store page https://developer.apple.com/app-store/categories/ and on android
   * Localized, up to date screen shots  
  * Remove unnecessary permissions, e.g. Android.Internet aka "Other: full network access"
+  * Note that in the .csproj files, there are defines like ENABLE_CLOUD_SERVICES_ADS 
  * Test that it works with 512 Mb devices (https://hwstats.unity3d.com/mobile/os.html)
  * Change iOS build to Fast but no Exceptions option.
  * Remove or disable Debug.Log
@@ -81,6 +84,7 @@ Check private schools as market.
  * Ensure that screenshots / video are up to date
   * Add grid button screenshots for small devices
  * Update Noun Project credits 
+ * Test on device by changing bundle id to einmaleins2
  * Tag version in git
 
 ++On major changes
@@ -120,6 +124,7 @@ Check private schools as market.
   * Add groups to the build
 +Ideas
  * Music
+ * Use blender to fix texture or try 2d rocket
  * Add unlimited accounts, or the ability to erase an account with parent mode
  * Show "the faster you answer, the higher you go", e.g. if players fail to break their record for three times, or perhaps answer no questions fast after the first quiz.
  * If frustration is high, the hardest already mastered question is asked, or the easiest nonmastered if none are mastered.

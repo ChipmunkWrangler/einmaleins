@@ -10,6 +10,7 @@ public class ChooseRocketColour : MonoBehaviour {
 
 	void Start() {
 		colourPicker.gameObject.SetActive(false);
+		colourPicker.SetNewColor(rocketMesh.material.color);
 	}
 
 	void Update()
@@ -27,13 +28,14 @@ public class ChooseRocketColour : MonoBehaviour {
 	public void StartPaint()
 	{
 		colourPicker.gameObject.SetActive(true);
-		colourPicker.SetNewColor(rocketMesh.material.color);
 		isPaint = true;
 	}
 
 	public void StopPaint()
 	{
+		if (isPaint) {
+			MDPrefs.SetColor (prefsKey, colourPicker.TheColor);
+		}
 		isPaint = false;
-		MDPrefs.SetColor (prefsKey, colourPicker.TheColor);
 	}
 }
