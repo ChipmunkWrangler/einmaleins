@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HideOnWrong : MonoBehaviour, OnWrongAnswer, OnGiveUp {
-	[SerializeField] float transitionTime = 0.5f;
 	[SerializeField] float timeToHide = 0;
+
+	const float transitionTime = InactiveOnAnswer.transitionTime;
 
 	public void OnWrongAnswer(bool wasNew) {
 		ScaleDown ();

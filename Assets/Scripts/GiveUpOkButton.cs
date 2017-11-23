@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GiveUpOkButton : MonoBehaviour, OnGiveUp {
-	[SerializeField] float transitionTime = 0.5f;
 	[SerializeField] UnityEngine.UI.Button button;
+
+	const float transitionTime = InactiveOnAnswer.transitionTime;
 
 	void Start() {
 		Hide ();

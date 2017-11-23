@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCorrectAnswer, OnQuizAborted, OnGiveUp {
 	[SerializeField] QuestionPicker answerHandler;
-	[SerializeField] float fadeTime;
 	[SerializeField] int maxDigits;
 	[SerializeField] GameObject[] subscribers;
 	List<OnAnswerChanged> onAnswerChangedSubscribers;
@@ -12,6 +11,8 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 	string queuedTxt;
 	bool isFading;
 	Color oldColor;
+
+	const float fadeTime = InactiveOnAnswer.transitionTime;
 
 	void Start() {
 		oldColor = GetTextField ().color;

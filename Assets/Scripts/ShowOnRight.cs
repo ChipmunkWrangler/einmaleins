@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowOnRight : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, OnWrongAnswer, OnQuizAborted {
-	[SerializeField] float transitionTime;
 	[SerializeField] bool hideOnRight;
 	[SerializeField] bool evenIfWrongFirst;
+
+	const float transitionTime = InactiveOnAnswer.transitionTime;
+
 	bool wasWrong;
 
 	void Start() {

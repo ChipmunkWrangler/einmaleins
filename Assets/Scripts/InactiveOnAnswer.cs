@@ -5,7 +5,8 @@ using UnityEngine;
 public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnAnswerChanged, OnQuizAborted, OnQuestionChanged, OnGiveUp {
 	[SerializeField] UnityEngine.UI.Button button = null;
 	[SerializeField] bool showOnEmptyAnswer;
-	[SerializeField] float transitionTime = 0.5f;
+
+	public const float transitionTime = 0.25f;
 
 	public void OnQuizAborted() {
 		SetInteractibility (false);
