@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer, OnGiveUp {
+public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer, OnGiveUp, OnQuizAborted {
 	[SerializeField] RectTransform mask = null;
 	[SerializeField] Transform meter = null;
 
@@ -13,6 +13,11 @@ public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer, OnG
 
 	void Start() {
 		originalY = mask.localPosition.y;
+		meter.gameObject.SetActive (false);
+	}
+
+	public void OnQuizAborted() {
+		StopMeter ();
 		meter.gameObject.SetActive (false);
 	}
 
