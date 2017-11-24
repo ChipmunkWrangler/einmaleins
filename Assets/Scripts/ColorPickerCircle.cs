@@ -22,20 +22,20 @@ public class ColorPickerCircle : MonoBehaviour {
     }
 	
 	void Update () {
-		if (Input.GetMouseButton (0)) {
-			CurLocalPos = GetIntersection ();
-            CheckCirclePosition();
+		if (Input.GetMouseButton (0) && UpdateCurLocalPos()) {
+			CheckCirclePosition ();
         }
     }
 
-	private Vector3 GetIntersection()
+	private bool UpdateCurLocalPos()
     {
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit) && hit.collider == raycastTarget) {
-			return transform.worldToLocalMatrix.MultiplyPoint (hit.point);
+			CurLocalPos = transform.worldToLocalMatrix.MultiplyPoint (hit.point);
+			return true;
 		}
-		return CurLocalPos;
+		return false;
     }
 
     public void SetNewColor(Color NewColor)
