@@ -91,8 +91,12 @@ public class RocketBuilder : MonoBehaviour {
 	void DoneBuildingOrUpgrading() {
 		exhaustParticles [RocketParts.instance.upgradeLevel].Stop ();
 		upgradeButton.Hide ();
-		launchButton.SetActive(true);
-		chooseColourButton.SetActive (!ChooseRocketColour.HasChosenColour());
+		if (ChooseRocketColour.HasChosenColour ()) {
+			launchButton.SetActive (true);
+		} else {
+			launchButton.SetActive (false);
+			chooseColourButton.SetActive (true);
+		}
 	}
 		
 	void SetY(float y) {

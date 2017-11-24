@@ -469,8 +469,8 @@ MonoBehaviour:
     - 
     - 
     Languages_Touch:
-    - Change Rocket Colour
-    - "Raketenfarbe \xE4ndern"
+    - Choose Rocket Colour
+    - "Raketenfarbe w\xE4hlen"
     Flags: 0000
   - Term: Enter Launch Code
     TermType: 0
