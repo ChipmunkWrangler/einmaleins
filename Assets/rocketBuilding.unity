@@ -902,7 +902,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketMesh: {fileID: 1842585747}
   colourPicker: {fileID: 1263629864}
-  chooseColourLabel: {fileID: 0}
 --- !u!4 &1077023826
 Transform:
   m_ObjectHideFlags: 0
@@ -1538,7 +1537,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 1077023826}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 1652313706039084, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
   m_IsPrefabParent: 0
