@@ -91,10 +91,11 @@
      <Compile Include="Assets\Scripts\ChooseRocketColour.cs" />
      <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
      <Compile Include="Assets\Scripts\EffortTracker.cs" />
-     <Compile Include="Assets\Scripts\FadeOnInactive.cs" />
+     <Compile Include="Assets\Scripts\EnterAnswerButtonController.cs" />
      <Compile Include="Assets\Scripts\FlashThrust.cs" />
      <Compile Include="Assets\Scripts\Fuel.cs" />
      <Compile Include="Assets\Scripts\GetRocketColour.cs" />
+     <Compile Include="Assets\Scripts\GiveUpButtonController.cs" />
      <Compile Include="Assets\Scripts\GiveUpOkButton.cs" />
      <Compile Include="Assets\Scripts\Goal.cs" />
      <Compile Include="Assets\Scripts\GoalButtonControler.cs" />
@@ -104,7 +105,6 @@
      <Compile Include="Assets\Scripts\GotoMain.cs" />
      <Compile Include="Assets\Scripts\GotoStats.cs" />
      <Compile Include="Assets\Scripts\HideOnWrong.cs" />
-     <Compile Include="Assets\Scripts\InactiveOnAnswer.cs" />
      <Compile Include="Assets\Scripts\KeyHandler.cs" />
      <Compile Include="Assets\Scripts\KickoffLaunch.cs" />
      <Compile Include="Assets\Scripts\LaunchButtonController.cs" />

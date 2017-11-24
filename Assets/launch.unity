@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 200}
   - component: {fileID: 340}
   - component: {fileID: 339}
-  - component: {fileID: 338}
+  - component: {fileID: 32}
   m_Layer: 5
   m_Name: NumberButton Ok
   m_TagString: Untagged
@@ -491,6 +491,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &32
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 20}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4617bb2708044ad99cc7299f82ac7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 339}
 --- !u!222 &33
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2852,11 +2864,11 @@ RectTransform:
   m_GameObject: {fileID: 20}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 359.45947, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 286}
   m_Father: {fileID: 299}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3385,8 +3397,8 @@ RectTransform:
   - {fileID: 303}
   - {fileID: 259}
   - {fileID: 811033117}
-  - {fileID: 482485702}
   - {fileID: 258}
+  - {fileID: 482485702}
   m_Father: {fileID: 293}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4141,20 +4153,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114840159937084838, guid: 27c41da2c26ad4fddba1fa70d7b1d623,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 20}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbf335c7998cf410789e7857d96a39a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 339}
-  showOnEmptyAnswer: 0
 --- !u!114 &339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4190,7 +4188,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 340}
   m_OnClick:
     m_PersistentCalls:
@@ -4558,7 +4556,6 @@ MonoBehaviour:
   maxDigits: 3
   subscribers:
   - {fileID: 20}
-  - {fileID: 66}
   - {fileID: 482485701}
 --- !u!114 &355
 MonoBehaviour:
@@ -5332,7 +5329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17da31c06ee9a4952b0581634e6d1f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.5
+  transitionTime: 0.25
   fadedAlpha: 0.25
 --- !u!114 &402
 MonoBehaviour:
@@ -7302,9 +7299,9 @@ GameObject:
   - component: {fileID: 482485708}
   - component: {fileID: 482485707}
   - component: {fileID: 482485706}
-  - component: {fileID: 482485703}
   - component: {fileID: 482485704}
   - component: {fileID: 482485705}
+  - component: {fileID: 482485703}
   m_Layer: 5
   m_Name: NumberButton Give Up
   m_TagString: Untagged
@@ -7325,7 +7322,7 @@ RectTransform:
   m_Children:
   - {fileID: 906087777}
   m_Father: {fileID: 299}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7340,11 +7337,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 482485701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbf335c7998cf410789e7857d96a39a6, type: 3}
+  m_Script: {fileID: 11500000, guid: a1131660e27f944d09f4defef1328676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 482485706}
-  showOnEmptyAnswer: 1
+  image: {fileID: 482485707}
 --- !u!114 &482485704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7400,7 +7397,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.2509804}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.5
   m_SpriteState:

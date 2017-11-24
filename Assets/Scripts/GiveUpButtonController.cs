@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnAnswerChanged, OnQuizAborted, OnQuestionChanged, OnGiveUp {
+public class GiveUpButtonController : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnAnswerChanged, OnQuizAborted, OnQuestionChanged, OnGiveUp {
 	[SerializeField] UnityEngine.UI.Button button = null;
-	[SerializeField] bool showOnEmptyAnswer;
+	[SerializeField] UnityEngine.UI.Image image = null;
 
-	public const float transitionTime = 0.25f;
+	const float transitionTime = EnterAnswerButtonController.transitionTime;
 
 	public void OnQuizAborted() {
 		SetInteractibility (false);
@@ -17,24 +17,25 @@ public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, O
 	}
 
 	public void OnWrongAnswer (bool wasNew) {
-		SetInteractibility (showOnEmptyAnswer);
+		SetInteractibility (true);
 	}
 
 	public void OnQuestionChanged(Question question) {
-		SetInteractibility (question != null && showOnEmptyAnswer);
+		SetInteractibility (question != null);
 	}
 
 	public void OnAnswerChanged(bool isAnswerEmpty) {
-		SetInteractibility( isAnswerEmpty == showOnEmptyAnswer );
+		SetInteractibility (isAnswerEmpty);
 	}
 
 	public void OnGiveUp(Question question) {
 		SetInteractibility (false);
 	}
-		
+
 	void SetInteractibility(bool b) {
 		if (button.interactable != b) {
 			button.interactable = b;
+			image.raycastTarget = b; // want to be able to tap the ok button, which is behind this one, immediately
 			ScaleTo (b ? Vector3.one : Vector3.zero);
 		}
 	}
@@ -42,4 +43,5 @@ public class InactiveOnAnswer : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, O
 	void ScaleTo(Vector3 tgtScale) {
 		iTween.ScaleTo(gameObject, iTween.Hash( "scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", transitionTime));
 	}
+
 }

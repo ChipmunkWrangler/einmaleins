@@ -7,12 +7,11 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 	[SerializeField] int maxDigits;
 	[SerializeField] GameObject[] subscribers;
 	List<OnAnswerChanged> onAnswerChangedSubscribers;
-	string answerTxt;
 	string queuedTxt;
 	bool isFading;
 	Color oldColor;
 
-	const float fadeTime = InactiveOnAnswer.transitionTime;
+	const float fadeTime = EnterAnswerButtonController.transitionTime;
 
 	void Start() {
 		oldColor = GetTextField ().color;
@@ -25,8 +24,7 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 	}
 
 	public void OnQuestionChanged(Question question) {
-		answerTxt = "";
-		UpdateText ();
+		SetText ("");
 	}
 
 	public void OnWrongAnswer(bool wasNew) {
@@ -48,14 +46,14 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 		queuedTxt = "";
 		GetTextField ().CrossFadeColor (Color.clear, fadeTime, false, true);
 		yield return new WaitForSeconds (fadeTime);
-		answerTxt = queuedTxt;
-		UpdateText ();
+		SetText(queuedTxt);
+		queuedTxt = "";
 		GetTextField ().CrossFadeColor (oldColor, 0, false, true);
 		isFading = false;
 	}
 		
 	public void OnAnswerChanged(string nextDigit) {
-		string s = isFading ? queuedTxt : answerTxt;
+		string s = isFading ? queuedTxt : GetText();
 		s += nextDigit;
 		if (s.Length > maxDigits) {
 			s = s.Substring (1, s.Length-1);
@@ -63,26 +61,27 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 		if (isFading) {
 			queuedTxt = s;
 		} else {
-			answerTxt = s;
-			UpdateText ();
+			SetText(s);
+			NotifySubscribers ();
 		}
 	}
 
 	public void OnBackspace() {
+		string answerTxt = GetText ();
 		if (answerTxt.Length > 0) {
-			answerTxt = answerTxt.Substring (0, answerTxt.Length - 1);
-			UpdateText ();
+			SetText( answerTxt.Substring (0, answerTxt.Length - 1) );
+			NotifySubscribers ();
 		}
 	}
 		
 	public void OnSubmitAnswer() {
-		answerHandler.OnAnswer (answerTxt);
+		answerHandler.OnAnswer (GetText());
 	}
 
-	void UpdateText() {
-		SetText (answerTxt);
+	void NotifySubscribers() {
+		bool isEmpty = GetText ().Length == 0;
 		foreach (OnAnswerChanged subscriber in onAnswerChangedSubscribers) {
-			subscriber.OnAnswerChanged (answerTxt.Length == 0);
+			subscriber.OnAnswerChanged (isEmpty);
 		}
 	}
 

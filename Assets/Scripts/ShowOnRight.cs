@@ -6,7 +6,7 @@ public class ShowOnRight : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, On
 	[SerializeField] bool hideOnRight;
 	[SerializeField] bool evenIfWrongFirst;
 
-	const float transitionTime = InactiveOnAnswer.transitionTime;
+	const float transitionTime = EnterAnswerButtonController.transitionTime;
 
 	bool wasWrong;
 

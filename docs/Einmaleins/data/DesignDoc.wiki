@@ -17,14 +17,6 @@ Check private schools as market.
    Reach Planet
    StopRunning
    Celebrate.OnQuizAborted
-++v0.1.12
- * Can't hit answer button fast enough -- should be available immediately after your type something
- *   Make an invisible click area and just show the animation slowly? 
- * BUGFIX can master a question that was wrong if you are fast
-  * if wasWrong, min time = default time
-  * but what if it was wrong, but the previous times were 50, 1, 1? Then you will still master it!
-  * Either you don't record the time, or you flag it as a wrong time, or you live with it
-  * living with it might be ok. If someone really corrects their mistake that fast, they probably just made a typo 
 ++v1.0.0 
  * Check out Dave's crashes
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
@@ -125,6 +117,7 @@ Check private schools as market.
   * Add groups to the build
 +Ideas
  * Music
+  * Classical? 
  * Use blender to fix texture or try 2d rocket
  * Add unlimited accounts, or the ability to erase an account with parent mode
  * Show "the faster you answer, the higher you go", e.g. if players fail to break their record for three times, or perhaps answer no questions fast after the first quiz.

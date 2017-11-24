@@ -5,7 +5,7 @@ using UnityEngine;
 public class GiveUpOkButton : MonoBehaviour, OnGiveUp {
 	[SerializeField] UnityEngine.UI.Button button;
 
-	const float transitionTime = InactiveOnAnswer.transitionTime;
+	const float transitionTime = EnterAnswerButtonController.transitionTime;
 
 	void Start() {
 		Hide ();

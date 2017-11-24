@@ -5,7 +5,7 @@ using UnityEngine;
 public class HideOnWrong : MonoBehaviour, OnWrongAnswer, OnGiveUp {
 	[SerializeField] float timeToHide = 0;
 
-	const float transitionTime = InactiveOnAnswer.transitionTime;
+	const float transitionTime = EnterAnswerButtonController.transitionTime;
 
 	public void OnWrongAnswer(bool wasNew) {
 		ScaleDown ();
