@@ -2,7 +2,23 @@
   * Ask testers if they would prefer other graphics, show them a screenshot
   * Ask them for suggestions for new features
   * Ask them to pick their favourite of music, rocket customization, planet gallery, voice recognition, ufos
++Test Reports v0.1.12
+++Jascha
+Just played the new version: we like the old font better!
+
+Also: there doesn’t seem to be anything cool that happens when you reach Mars, or when you get something wrong.  BUT, I haven’t tried it out on any kids yet.
+++Amalia
+Doesn't play it spontaneously
+
 +Test Reports v0.1.8
+++Jascha
+Lainie and I just played a few rounds of your multiplication game, and here’s our report:
+
+We think the font is great - what trouble do kids have with the sci-fi font?  The 9 doesn’t look like 4, the 3 and 8 are pretty different, ditto for 1 and 7.
+
+Lainie says that Saint Ann’s kids didn’t reliably know the dot until Algebra, but she also thinks that the “x” sucks.  
+
+IF there was another font for the whole game, we’re both into Optima.  It’s like friendly future font, or could be believable as such...
 ++Simo & Aki
  * They both ask to play it
  * Simo didn't figure out that questions needed to be answered fast
@@ -155,3 +171,4 @@ Eine mögliche Erweiterung wäre, dass man zum Beispiel nur die Multiplikationen
  * Linda's friend Nathalie
  * Tarek
  * Till
+ * Bob

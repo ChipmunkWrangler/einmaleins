@@ -18,8 +18,12 @@ Check private schools as market.
    StopRunning
    Celebrate.OnQuizAborted
 ++v1.0.0 
+ * Bug: ion stream flickers between in front of and behind the planets. But it is also kind of cool.
  * Check out Dave's crashes
  * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
+  * Generate links for app store buttons
+   * https://play.google.com/intl/en_us/badges/
+   * https://developer.apple.com/library/content/qa/qa1633/_index.html 
  * Check where you call Save. Should happen at end of each quiz and on scene change, probably nowhere else.
  * Store page https://developer.apple.com/app-store/categories/ and on android
   * Localized, up to date screen shots  
@@ -119,6 +123,7 @@ Check private schools as market.
  * Music
   * Classical? 
  * Use blender to fix texture or try 2d rocket
+ * Launch code also for normal wrong answers if there weren't any give ups
  * Add unlimited accounts, or the ability to erase an account with parent mode
  * Show "the faster you answer, the higher you go", e.g. if players fail to break their record for three times, or perhaps answer no questions fast after the first quiz.
  * If frustration is high, the hardest already mastered question is asked, or the easiest nonmastered if none are mastered.

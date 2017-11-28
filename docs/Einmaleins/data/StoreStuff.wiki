@@ -54,7 +54,7 @@ The Rocket doesn't waste your kid's time: it notices which questions your child 
 
 What the Rocket doesn't do (yet) is teach multiplication from scratch. What is will do is take your kid from "I get it... I guess" to "this is easy!"
 ++Testflight
-+++v0.1.11
++++v0.1.11 & 12
 ++++German
 Neu:
  - Freie Wahl der Raketenfarbe
