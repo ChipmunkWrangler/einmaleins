@@ -132,7 +132,6 @@
      <Compile Include="Assets\Scripts\RocketMotionSolarSystem.cs" />
      <Compile Include="Assets\Scripts\RocketPartCounter.cs" />
      <Compile Include="Assets\Scripts\RocketParts.cs" />
-     <Compile Include="Assets\Scripts\SaveToFile.cs" />
      <Compile Include="Assets\Scripts\Score.cs" />
      <Compile Include="Assets\Scripts\ScrollBackground.cs" />
      <Compile Include="Assets\Scripts\SendSaveDataByMail.cs" />
@@ -146,6 +145,7 @@
      <Compile Include="Assets\Scripts\TextDisplay.cs" />
      <Compile Include="Assets\Scripts\UpgradeButton.cs" />
      <Compile Include="Assets\Scripts\VersionDisplay.cs" />
+     <Compile Include="Assets\Scripts\XMLSerializer.cs" />
      <Compile Include="Assets\xARM\Classes\xARMClasses.cs" />
      <Compile Include="Assets\xARM\Components\xARMDelegatesExample.cs" />
      <Compile Include="Assets\xARM\Components\xARMDelegateUGUI.cs" />

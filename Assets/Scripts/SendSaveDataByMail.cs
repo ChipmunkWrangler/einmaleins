@@ -9,6 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 public class SendSaveDataByMail : MonoBehaviour {
 	[SerializeField] UnityEngine.UI.Text statusLine = null;
 	[SerializeField] UnityEngine.UI.Button button = null;
+	XMLSerializer serializer = new XMLSerializer();
 
 	const string sender = "einmaleinsreport@crazy-chipmunk.com";
 	const string receiver = "testers@crazy-chipmunk.com";
@@ -18,7 +19,8 @@ public class SendSaveDataByMail : MonoBehaviour {
 
 	public void SendReport() {
 		button.interactable = false;
-		Send ("title", "body");
+//		Send ("title", "body");
+		serializer.SerializeToFile();
 		button.interactable = true;
 	}
 
