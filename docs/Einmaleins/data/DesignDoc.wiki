@@ -7,7 +7,7 @@ Make screenshots for shop, perhaps add them to web pages,
 
  Ask Talea if she asked Karolina etc. then write to parents (Nina Brust)
 
- Set info@ to a real address
+ MAke write atomic by writing to temp and swapping
 
  Bug: Sometimes, if you reach a planet (seems like a timing issue):
   Question didn't go away

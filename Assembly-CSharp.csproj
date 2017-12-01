@@ -145,7 +145,7 @@
      <Compile Include="Assets\Scripts\TextDisplay.cs" />
      <Compile Include="Assets\Scripts\UpgradeButton.cs" />
      <Compile Include="Assets\Scripts\VersionDisplay.cs" />
-     <Compile Include="Assets\Scripts\XMLSerializer.cs" />
+     <Compile Include="Assets\Scripts\XMLSerializationHandler.cs" />
      <Compile Include="Assets\xARM\Classes\xARMClasses.cs" />
      <Compile Include="Assets\xARM\Components\xARMDelegatesExample.cs" />
      <Compile Include="Assets\xARM\Components\xARMDelegateUGUI.cs" />
@@ -159,6 +159,7 @@
      <None Include="Assets\xARM\_Changelog.txt" />
      <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
+     <None Include="Assets\StreamingAssets\XML\gamedata.xml" />
      <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />
      <None Include="Assets\I2\Localization\Scripts\Editor\Unity XCode\Xcode.txt" />
      <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
