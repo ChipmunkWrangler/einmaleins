@@ -19,7 +19,9 @@ public class SendSaveDataByMail : MonoBehaviour {
 	public void SendReport() {
 		button.interactable = false;
 //		Send ("title", "body");
-		XMLSerializationHandler.SerializeToFile();
+//		XMLSerializationHandler.SaveToFile();
+		SerializableGameData data = XMLSerializationHandler.LoadFromFile();
+		Debug.Log (data.testInt);
 		button.interactable = true;
 	}
 

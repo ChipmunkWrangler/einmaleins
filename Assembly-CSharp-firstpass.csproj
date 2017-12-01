@@ -65,7 +65,6 @@
      <None Include="Assets\xARM\_Changelog.txt" />
      <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
      <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
-     <None Include="Assets\StreamingAssets\XML\gamedata.xml" />
      <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />
      <None Include="Assets\I2\Localization\Scripts\Editor\Unity XCode\Xcode.txt" />
      <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
