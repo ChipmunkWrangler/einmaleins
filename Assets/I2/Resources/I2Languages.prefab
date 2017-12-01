@@ -492,6 +492,67 @@ MonoBehaviour:
     - " \xD7 "
     - " \xB7 "
     Flags: 0000
+  - Term: Employees Only
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Employees Only
+    - "Nur f\xFCr Mitarbeiter"
+    Flags: 0000
+  - Term: Daten Exportieren
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Send Game State to Rafael
+    - Spielstand an Rafael verschicken
+    Flags: 0000
+  - Term: Connecting to Smtp Server...
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Connecting to Smtp Server...
+    - Verbindung zum Server wird aufgebaut...
+    Flags: 0000
+  - Term: Sending message...
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Sending message...
+    - Nachricht wird verschickt...
+    Flags: 0000
+  - Term: Message sent. Thanks!
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Game state sent. Thanks!
+    - Daten wurden verschickt. Danke!
+    Flags: 0000
+  - Term: Error! Please email the following to
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Message could not be sent. Please email the following to testers@crazy-chipmunk.com
+    - Nachricht konnte nicht verschickt werden. Bitte Folgendes an testers@crazy-chipmunk.com
+      schicken
+    Flags: 0000
   mLanguages:
   - Name: English
     Code: en

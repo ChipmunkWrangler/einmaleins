@@ -103,6 +103,7 @@
      <Compile Include="Assets\Scripts\GotoChoosePlayer.cs" />
      <Compile Include="Assets\Scripts\GotoLaunch.cs" />
      <Compile Include="Assets\Scripts\GotoMain.cs" />
+     <Compile Include="Assets\Scripts\GotoScene.cs" />
      <Compile Include="Assets\Scripts\GotoStats.cs" />
      <Compile Include="Assets\Scripts\HideOnWrong.cs" />
      <Compile Include="Assets\Scripts\KeyHandler.cs" />
@@ -131,8 +132,10 @@
      <Compile Include="Assets\Scripts\RocketMotionSolarSystem.cs" />
      <Compile Include="Assets\Scripts\RocketPartCounter.cs" />
      <Compile Include="Assets\Scripts\RocketParts.cs" />
+     <Compile Include="Assets\Scripts\SaveToFile.cs" />
      <Compile Include="Assets\Scripts\Score.cs" />
      <Compile Include="Assets\Scripts\ScrollBackground.cs" />
+     <Compile Include="Assets\Scripts\SendSaveDataByMail.cs" />
      <Compile Include="Assets\Scripts\ShowOnRight.cs" />
      <Compile Include="Assets\Scripts\ShowSolarSystem.cs" />
      <Compile Include="Assets\Scripts\StatsColumnController.cs" />
