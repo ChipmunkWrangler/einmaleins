@@ -2,10 +2,12 @@
 
 Drill the times tables.
 
-Check private schools as market.
-
 +Todo
+Make screenshots for shop, perhaps add them to web pages,
+
  Ask Talea if she asked Karolina etc. then write to parents (Nina Brust)
+
+ Set info@ to a real address
 
  Bug: Sometimes, if you reach a planet (seems like a timing issue):
   Question didn't go away
@@ -20,11 +22,13 @@ Check private schools as market.
 ++v1.0.0 
  * Bug: ion stream flickers between in front of and behind the planets. But it is also kind of cool.
  * Check out Dave's crashes
- * Update website minimally (math drill page with link to appstore, About Us, Impressum...)
-  * Generate links for app store buttons
-   * https://play.google.com/intl/en_us/badges/
-   * https://developer.apple.com/library/content/qa/qa1633/_index.html 
- * Check where you call Save. Should happen at end of each quiz and on scene change, probably nowhere else.
+ *  Matthias B.s wife keeps getting the same questions in a row
+  * He thinks she isn't at Pluto yet
+  * Get him to download playerprefs
+ * Mars Ho! is confusing
+ * Generate links for app store buttons
+  * https://play.google.com/intl/en_us/badges/
+  * https://developer.apple.com/library/content/qa/qa1633/_index.html 
  * Store page https://developer.apple.com/app-store/categories/ and on android
   * Localized, up to date screen shots  
  * Remove unnecessary permissions, e.g. Android.Internet aka "Other: full network access"
@@ -42,7 +46,7 @@ Check private schools as market.
   * Left & right insets (accounts for the notch and curved corners, plus a margin) 132 pixels each
   * Bottom inset (accounts for the bottom nav bar) 63 pixels
   * Top inset zero pixels
-
+ * Talk to Matthias S. again
 +++Credits
  * Creative commons attribution 
   * spaceship by Jonathan Li from the Noun Project
@@ -51,23 +55,7 @@ Check private schools as market.
   * Gauge By Roberto Chiaveri
   * Kuber (Back button)
 ++v1.0.1
- * random events to keep things interesting if there hasn't been a record or rocket part for a while
- * Add 0 and division.
-  * That gives 55 + 90 + 10 = 155 questions, which is divisible by 5 and 31
-  * We could add the sun, venus, mercury, the iss and the moon. However, that still means we average 15 questions per upgrade.
-  * Add Ceres, Salacia (https://en.wikipedia.org/wiki/120347_Salacia), https://en.wikipedia.org/wiki/Eris_(dwarf_planet), https://en.wikipedia.org/wiki/Haumea , https://en.wikipedia.org/wiki/(225088)_2007_OR10, https://en.wikipedia.org/wiki/Makemake, https://en.wikipedia.org/wiki/50000_Quaoar, https://en.wikipedia.org/wiki/90377_Sedna, https://en.wikipedia.org/wiki/90482_Orcus. Some of these have no decent pictures, but there is https://en.wikipedia.org/wiki/File:EightTNOs.png . Then we have 19, for an average of 155/19 = 8.2 questions per upgrade. That sounds good.
 ++v1.0.2
- * More involvement with rocket building
-  * Collect currency for every correct question, regardless of speed
-  * spend currency to:
-   * Change rocket color again
-   * Unlock and change flame color
-   * Unlock and switch between alternate flame effects 
-   * Unlock and switch between different rocket designs
-    * Use Inkscape to split your rockets into pieces that you can build.
-    * Colouring book for rocket
-  * Existing players still start from 0 currency 
-  * Upgrades are shown in advance for motivational reasons
 
 
 +Before deploying
@@ -109,6 +97,9 @@ Check private schools as market.
 
  * New release: https://support.google.com/googleplay/android-developer/answer/7159011
   * Play Console...Release Management... New Release...Browse Files
+
+ * Publish
+  * https://play.google.com/about/families/designed-for-families/program-requirements/  
 ++Apple
  * Build in unity
  * Upload in XCode
@@ -117,33 +108,65 @@ Check private schools as market.
   * 3) If everything is fine, it should open the archive in the Organizer. Click "validate" and then "Submit to App Store". 
  * When you get the first email ("processed"), go to iTunesConnect and
   * update compliance info at iTunesConnect
+   * YOU USE CRYPTO NOW! 
   * Check "Test Information" under IOSBuilds...Test Details in testflight, in the right language -- see Texts below (https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=build&subsection=testdetails&id=24416006)
   * Add groups to the build
-+Ideas
++Ideas 
+ * Longer-term motivation
+  * More involvement with rocket building
+   * Collect currency for every correct question, regardless of speed
+   * spend currency to:
+    * Change rocket color again
+    * Unlock and change flame color
+    * Unlock and switch between alternate flame effects 
+    * Unlock and switch between different rocket designs
+     * Use Inkscape to split your rockets into pieces that you can build.
+     * Colouring book for rocket
+   * Existing players still start from 0 currency 
+   * Upgrades are shown in advance for motivational reasons
+  * random events to keep things interesting if there hasn't been a record or rocket part for a while
+  * More collectibles
+   * Introduce new elements gradually
+   * Planet gallery 
+   * Final congratulation with magic tree
+   * "Stickers" for the rocket
+ * Add 0 and division.
+  * That gives 55 + 90 + 10 = 155 questions, which is divisible by 5 and 31
+  * We could add the sun, venus, mercury, the iss and the moon. However, that still means we average 15 questions per upgrade.
+  * Add Ceres, Salacia (https://en.wikipedia.org/wiki/120347_Salacia), https://en.wikipedia.org/wiki/Eris_(dwarf_planet), https://en.wikipedia.org/wiki/Haumea , https://en.wikipedia.org/wiki/(225088)_2007_OR10, https://en.wikipedia.org/wiki/Makemake, https://en.wikipedia.org/wiki/50000_Quaoar, https://en.wikipedia.org/wiki/90377_Sedna, https://en.wikipedia.org/wiki/90482_Orcus. Some of these have no decent pictures, but there is https://en.wikipedia.org/wiki/File:EightTNOs.png . Then we have 19, for an average of 155/19 = 8.2 questions per upgrade. That sounds good.
+ * Competitive aspects
+  * Show record lines of other players
+  * Average answer speed 
+  * Ghost of other player, either their last run, or how they did with your question set
  * Music
   * Classical? 
  * Use blender to fix texture or try 2d rocket
- * Launch code also for normal wrong answers if there weren't any give ups
+ * Tutorial Tips
+  * The first time that a player gets a question wrong twice, explain the give up ("hint") button
+  * Show "the faster you answer, the higher you go", e.g. if players fail to break their record for three times, or perhaps answer no questions fast after the first quiz.
+  * If the right answer is entered and OK isn't pressed in 5s, pulse it or show finger
+ * Algorithm 
+  * Launch code also for normal wrong answers if there weren't any give ups
+  * A new question each day
+  * If frustration is high, the hardest already mastered question is asked, or the easiest nonmastered if none are mastered.
+   * If the easiest nonmastered has avg time > 15, ask the easiest new question instead. 
+    * The current version tends to ask the same questions over and over, which may be sensible but is dull. This tweak might add a little more variety, as might decaying old answers (see below) 
+  * Start with 1xN, the go to 2xN if two 1xNs in a row are answered quickly, etc. This may make progress steadier, and / or the beginning more rewarding (not too hard for beginners, not too boring for advanced)
+  * Timestamp answers in the answer list and decay them 
+   * This can cause a mastered question to become unmastered
+   * But try not to make it frustrating
+  * Add randomness to deep space question choice, since otherwise people may repeatedly get the same questions in a row
  * Add unlimited accounts, or the ability to erase an account with parent mode
- * Show "the faster you answer, the higher you go", e.g. if players fail to break their record for three times, or perhaps answer no questions fast after the first quiz.
- * If frustration is high, the hardest already mastered question is asked, or the easiest nonmastered if none are mastered.
- * Add savegame per-player checksum, replace savegame with old copy if checksum fails because save was corrupted
  * Info-screen or overlay that explains fuel, etc.
- * Start with 1xN, the go to 2xN if two 1xNs in a row are answered quickly, etc. This may make progress steadier, and / or the beginning more rewarding (not too hard for beginners, not too boring for advanced)
- * Reduce Save() calls or find an alternative
+ * Serialization 
+  * Add savegame per-player checksum, replace savegame with old copy if checksum fails because save was corrupted
+  * Check where you call Save. Should happen at end of each quiz and on scene change, probably nowhere else.
+  * Reduce Save() calls or find an alternative
   * On Android PlayerPrefs are stored in the app's private data folder. This folder gets deleted when the user uninstalls the app. They are stored as an XML file. Using PlayerPrefs.Save() to ensure they are commited to storage is a blocking call on the main thread. If you save more than a few bytes of data with that you'll get a noticable hang. You can't call this method from a different thread to avoid that. Apart from that, they are super reliable. 
- * Rotate rocket are it rises
- * Fuel tank upgrade changes the shape of the rocket 
  * Ich wünsche mir Stimmeingabe, but others are opposed
  * Make horizontal version with linear button array 
   * Not yet. Amalia is the only person to want horizontal so far, and Bert the only linear
   * Plus, linear arrangement of more than six buttons makes them too small. 
- * tutorial? Decide with Talea and other parents what needs a tutorial
-  * Make center button more obvious -- pulse the first time or something, or use finger 
- * More collectibles
-  * Planet gallery 
-  * Final congratulation with magic tree
-  * "Stickers" for the rocket
  * "Keep going anyway" button at end of day?
  * Shrink height numbers
   * Highlight the first few digits
@@ -151,7 +174,6 @@ Check private schools as market.
  * Remove stats screen or make it more prominent
   * Add a big "View progress" above "Launch" button instead of little stats screen button 
   * Fade mastered cards one at a time, show flying "Mastered" text
- * Highlight getting a record, keep it yellow
  * Avoid delay after answering first question by creating and saving questions asynch during rocket building
   * Also QuestionPicker only needs to save one question, not all questions, in OnAnswer 
  * Cartoony - low poly: 
@@ -160,11 +182,6 @@ Check private schools as market.
   * https://www.assetstore.unity3d.com/#!/content/72089
   * https://www.assetstore.unity3d.com/#!/content/34894
   * btw. könntest Du auch die Grafiken in Magica Voxel machen. Kannst Du dann auch sehr simple in Einzelteile zerlegen und Stück für Stück zusammenbauen
- * Score header more visual 
-  * Use a rocket as rocket parts progress bar instead of a number
-   * And an engine for upgrades? 
-  * Fuel is a bar rather than a number? 
-  * But the images may visually dominate the height and record lines
  * Matthias wünscht sich Schrifteingabe
  * x3 and x2 resolutions for backgrounds
  * Add tracking of questions posed & answered to see how people play it
@@ -173,18 +190,27 @@ Check private schools as market.
   * Reset account
   * Change difficulty level
    * With option to reset flash progress and upgrades, reimbursing rocket parts 
+ * Teach math, don't just drill (see Hints, Tricks and Number Sense) 
  * bigger rocket on icon (use xcf in unusedassets as base)
  * If you want to make it free and sell it after you have reached Mars: https://developer.apple.com/app-store/parental-gates/
  * Explain the slow last round based on it being a cargo ship for the tree
- * Split saturn into two layers (front of rings & (planet + back of rings) so you can go through the rings
-  * Ensure that shadowed, missing part of ring is black, not transparent 
  * More education: See Hints
  * More juice
   * https://www.reddit.com/r/Unity3D/comments/2i1281/adding_juice_a_question_about_squishing_and/
+  * Highlight getting a record, keep it yellow
+  * Split saturn into two layers (front of rings & (planet + back of rings) so you can go through the rings
+   * Ensure that shadowed, missing part of ring is black, not transparent 
+  * Rotate rocket as it rises
+  * Fuel tank upgrade changes the shape of the rocket 
   * https://forum.unity.com/threads/juicebox-add-some-juice-to-your-game.267081/
   * Scene transition in OnPlay (rocket with name on the side?)
   * Celebrate the instant the record is broken in Launch mode: special flames?
   * Screen shake on launch, or on every thrust
+  * Score header more visual 
+   * Use a rocket as rocket parts progress bar instead of a number
+    * And an engine for upgrades? 
+   * Fuel is a bar rather than a number? 
+   * But the images may visually dominate the height and record lines
  * Switch from PlayerPrefs to another system https://unity3d.com/learn/tutorials/topics/scripting/persistence-saving-and-loading-data
  * Optimize graphics:
    * https://gamedev.stackexchange.com/questions/75376/why-does-unity-in-2d-mode-employ-scaling-and-the-default-othographic-size-the-wa 
@@ -266,6 +292,8 @@ Doodle jump / cube racer thing where the powerups are digits. Maybe write the qu
  * Rhymes http://www.teacherweb.com/NY/Quogue/MrsLevy/MULTIPLICATION-RHYMES.pdf
 
 ++Number Sense
+ Montessori Bretter aus Kuegelchen, "Angeregt von Montessori"
+
 https://bhi61nm2cr3mkdgk1dtaov18-wpengine.netdna-ssl.com/wp-content/uploads/2017/03/FluencyWithoutFear-2015.pdf
 https://www.mathsolutions.com/documents/NumberTalks_SParrish.pdf (for 2 digit multiplications)
 ++Skinning (Talea Ideas)
