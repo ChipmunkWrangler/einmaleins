@@ -10,12 +10,14 @@ public class XMLSerializationHandler  {
 
 	static public void SaveToFile() {
 		try {
+			var data = new SerializableGameData();
+			data.testInt = 3;
+			var serializer = new XmlSerializer(typeof(SerializableGameData));
+			System.Text.Encoding encoding = System.Text.Encoding.GetEncoding("UTF-8");
 			using (FileStream file = File.Open (GetPath(), FileMode.Create, FileAccess.Write, FileShare.None)) {
-				SerializableGameData data = new SerializableGameData();
-				data.testInt = 3;
-				XmlSerializer serializer = new XmlSerializer(typeof(SerializableGameData));
-				serializer.Serialize(file, data);
-
+				using(var sw = new StreamWriter(file, encoding)) {
+					serializer.Serialize(sw, data);
+				}
 			}
 		} catch (System.Exception ex) {
 			Debug.Log (ex.ToString());
@@ -30,6 +32,8 @@ public class XMLSerializationHandler  {
 			if (File.Exists(path)) {
 				using (FileStream file = File.OpenRead (GetPath())) {
 					XmlSerializer serializer = new XmlSerializer(typeof(SerializableGameData));
+
+
 					data = serializer.Deserialize(file) as SerializableGameData;
 				}
 			}
@@ -42,9 +46,7 @@ public class XMLSerializationHandler  {
 
 
 	static string GetPath() {
-//		string[] pathComponents = { Application.dataPath, "StreamingAssets", "XML", fName };
-		string[] pathComponents = { Application.persistentDataPath, fName };
-		return string.Join (Path.DirectorySeparatorChar.ToString(), pathComponents);
+		return Path.Combine(Application.persistentDataPath, fName);
 	}
 }
 
