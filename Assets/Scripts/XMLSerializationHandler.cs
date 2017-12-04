@@ -10,18 +10,24 @@ public class XMLSerializationHandler  {
 
 	static public void SaveToFile() {
 		try {
-			var data = new SerializableGameData();
-			data.testInt = 3;
 			var serializer = new XmlSerializer(typeof(SerializableGameData));
 			System.Text.Encoding encoding = System.Text.Encoding.GetEncoding("UTF-8");
 			using (FileStream file = File.Open (GetPath(), FileMode.Create, FileAccess.Write, FileShare.None)) {
 				using(var sw = new StreamWriter(file, encoding)) {
-					serializer.Serialize(sw, data);
+					serializer.Serialize(sw, GetData());
 				}
 			}
 		} catch (System.Exception ex) {
 			Debug.Log (ex.ToString());
 			throw(ex);
+		}
+	}
+
+	static public string GetAsString() {
+		var serializer = new XmlSerializer(typeof(SerializableGameData));
+		using(var sw = new StringWriter()) {
+			serializer.Serialize(sw, GetData());
+			return sw.ToString ();
 		}
 	}
 
@@ -47,6 +53,12 @@ public class XMLSerializationHandler  {
 
 	static string GetPath() {
 		return Path.Combine(Application.persistentDataPath, fName);
+	}
+
+	static SerializableGameData GetData() {
+		var data = new SerializableGameData();
+		data.testInt = 3;
+		return data;
 	}
 }
 
