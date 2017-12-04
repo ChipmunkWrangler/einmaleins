@@ -22,6 +22,8 @@ namespace I2.Loc
         public bool mInitializeAlignment = true;
 
         public override string GetName() { return "TextMeshPro Label"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Text; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Font; }
         public override bool CanUseSecondaryTerm() { return true; }
         public override bool AllowMainTermToBeRTL() { return true; }
         public override bool AllowSecondTermToBeRTL() { return false; }
@@ -196,6 +198,8 @@ namespace I2.Loc
         public bool mInitializeAlignment = true;
 
         public override string GetName() { return "TextMeshPro UGUI"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Text; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.TextMeshPFont; }
         public override bool CanUseSecondaryTerm() { return true; }
         public override bool AllowMainTermToBeRTL() { return true; }
         public override bool AllowSecondTermToBeRTL() { return false; }

@@ -14,6 +14,8 @@ namespace I2.Loc
             LocalizationManager.RegisterTarget(new LocalizeTarget_SVGImporter_Image());
         }
         public override string GetName() { return "SVG Image"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.SVGAsset; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Material; }
         public override bool CanUseSecondaryTerm() { return true; }
         public override bool AllowMainTermToBeRTL() { return false; }
         public override bool AllowSecondTermToBeRTL() { return false; }
@@ -53,6 +55,8 @@ namespace I2.Loc
             LocalizationManager.RegisterTarget(new LocalizeTarget_SVGImporter_Renderer());
         }
         public override string GetName() { return "SVG Renderer"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.SVGAsset; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Material; }
         public override bool CanUseSecondaryTerm() { return true; }
         public override bool AllowMainTermToBeRTL() { return false; }
         public override bool AllowSecondTermToBeRTL() { return false; }

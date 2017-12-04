@@ -17,7 +17,9 @@ namespace I2.Loc
         }
 
 		public override string GetName () { return "NGUI UISprite"; }
-		public override bool CanUseSecondaryTerm () { return true; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Sprite; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.UIAtlas; }
+        public override bool CanUseSecondaryTerm () { return true; }
 		public override bool AllowMainTermToBeRTL () { return false; }
 		public override bool AllowSecondTermToBeRTL () { return false; }
 
@@ -67,6 +69,8 @@ namespace I2.Loc
             LocalizationManager.RegisterTarget(new LocalizeTarget_NGUI_Texture());
         }
         public override string GetName() { return "NGUI UITexture"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Texture; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Text; }
         public override bool CanUseSecondaryTerm() { return false; }
         public override bool AllowMainTermToBeRTL() { return false; }
         public override bool AllowSecondTermToBeRTL() { return false; }
@@ -107,6 +111,8 @@ namespace I2.Loc
         public bool mInitializeAlignment = true;
 
         public override string GetName() { return "UILabel"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Text; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.UIFont; }
         public override bool CanUseSecondaryTerm() { return true; }
         public override bool AllowMainTermToBeRTL() { return true; }
         public override bool AllowSecondTermToBeRTL() { return false; }

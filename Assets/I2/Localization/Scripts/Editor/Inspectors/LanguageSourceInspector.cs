@@ -11,7 +11,7 @@ namespace I2.Loc
 		SerializedProperty 	mProp_Assets, mProp_Languages, 
 							mProp_Google_WebServiceURL, mProp_GoogleUpdateFrequency, mProp_GoogleUpdateDelay, mProp_Google_SpreadsheetKey, mProp_Google_SpreadsheetName, 
 							mProp_Spreadsheet_LocalFileName, mProp_Spreadsheet_LocalCSVSeparator, mProp_CaseInsensitiveTerms, mProp_Spreadsheet_LocalCSVEncoding,
-                            mProp_OnMissingTranslation, mProp_AppNameTerm;
+							mProp_OnMissingTranslation, mProp_AppNameTerm, mProp_IgnoreDeviceLanguage;
 
 		public static LanguageSource mLanguageSource;
 
@@ -70,6 +70,7 @@ namespace I2.Loc
             mProp_Spreadsheet_LocalCSVEncoding  = serializedObject.FindProperty("Spreadsheet_LocalCSVEncoding");
             mProp_OnMissingTranslation          = serializedObject.FindProperty("OnMissingTranslation");
 			mProp_AppNameTerm					= serializedObject.FindProperty("mTerm_AppName");
+			mProp_IgnoreDeviceLanguage			= serializedObject.FindProperty("IgnoreDeviceLanguage");
 
             if (!mIsParsing)
 			{
@@ -89,8 +90,16 @@ namespace I2.Loc
                 }
 			}
             ScheduleUpdateTermsToShowInList();
+			LoadSelectedCategories();
             //UpgradeManager.EnablePlugins();
         }
+
+		void OnDisable()
+		{
+			//LocalizationManager.LocalizeAll();
+			SaveSelectedCategories();
+		}
+
 
         void UpdateSelectedKeys()
 		{
@@ -153,18 +162,12 @@ namespace I2.Loc
 			GUILayout.Space (10);
 			GUILayout.FlexibleSpace();
 
-            I2AboutWindow.OnGUI_Footer("I2 Localization", LocalizationManager.GetVersion(), LocalizeInspector.HelpURL_forum, LocalizeInspector.HelpURL_Documentation);
+			GUITools.OnGUI_Footer("I2 Localization", LocalizationManager.GetVersion(), LocalizeInspector.HelpURL_forum, LocalizeInspector.HelpURL_Documentation, LocalizeInspector.HelpURL_AssetStore);
 
 			GUILayout.EndVertical();
 
 			serializedObject.ApplyModifiedProperties();
 		}
-
-		/*void OnDisable()
-		{
-			LocalizationManager.LocalizeAll();
-		}*/
-
 
 		#endregion
 	}

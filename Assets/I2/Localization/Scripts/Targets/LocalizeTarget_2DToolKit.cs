@@ -18,6 +18,10 @@ namespace I2.Loc
         }
 
         public override string GetName() { return "2DToolKit Sprite"; }
+
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.TK2dCollection; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.TK2dCollection; }
+
         public override bool CanUseSecondaryTerm() { return true; }
         public override bool AllowMainTermToBeRTL() { return false; }
         public override bool AllowSecondTermToBeRTL() { return false; }
@@ -67,6 +71,9 @@ namespace I2.Loc
         bool mInitializeAlignment = true;
 
         public override string GetName() { return "2DToolKit Label"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Text; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.TK2dFont; }
+
         public override bool CanUseSecondaryTerm() { return true; }
         public override bool AllowMainTermToBeRTL() { return true; }
         public override bool AllowSecondTermToBeRTL() { return false; }

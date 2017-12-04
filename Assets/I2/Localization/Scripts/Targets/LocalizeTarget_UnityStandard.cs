@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+#pragma warning disable 618
 
 namespace I2.Loc
 {
@@ -15,6 +16,8 @@ namespace I2.Loc
             LocalizationManager.RegisterTarget(new LocalizeTarget_UnityStd_Texture());
         }
         public override string GetName() { return "GUITexture"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Texture; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Text; }
         public override bool CanUseSecondaryTerm() { return false; }
         public override bool AllowMainTermToBeRTL() { return false; }
         public override bool AllowSecondTermToBeRTL() { return false; }
@@ -53,6 +56,8 @@ namespace I2.Loc
             LocalizationManager.RegisterTarget(new LocalizeTarget_UnityStd_AudioSource());
         }
         public override string GetName() { return "AudioSource"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.AudioClip; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Text; }
         public override bool CanUseSecondaryTerm() { return false; }
         public override bool AllowMainTermToBeRTL() { return false; }
         public override bool AllowSecondTermToBeRTL() { return false; }
@@ -96,6 +101,8 @@ namespace I2.Loc
             LocalizationManager.RegisterTarget(new LocalizeTarget_UnityStd_SpriteRenderer());
         }
         public override string GetName() { return "SpriteRenderer"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Sprite; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Text; }
         public override bool CanUseSecondaryTerm() { return false; }
         public override bool AllowMainTermToBeRTL() { return false; }
         public override bool AllowSecondTermToBeRTL() { return false; }
@@ -133,9 +140,25 @@ namespace I2.Loc
             LocalizationManager.RegisterTarget(new LocalizeTarget_UnityStd_Prefab());
         }
         public override string GetName() { return "Prefab"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.GameObject; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Text; }
         public override bool CanUseSecondaryTerm() { return false; }
         public override bool AllowMainTermToBeRTL() { return false; }
         public override bool AllowSecondTermToBeRTL() { return false; }
+
+        public override bool FindTarget(Localize cmp)
+        {
+            if ((cmp.mTarget as GameObject) != null)
+                return true;
+
+            var termData = LocalizationManager.GetTermData(cmp.Term);
+            return (termData != null && termData.TermType == eTermType.GameObject);
+        }
+
+        public override bool HasTarget(Localize cmp)
+        {
+            return true;
+        }
 
         public override void GetFinalTerms ( Localize cmp, string Main, string Secondary, out string primaryTerm, out string secondaryTerm)
         {
@@ -150,30 +173,116 @@ namespace I2.Loc
             if (mTarget && mTarget.name == mainTranslation)
                 return;
 
-            GameObject current = mTarget;
-            GameObject NewPrefab = cmp.FindTranslatedObject<GameObject>(mainTranslation);
-            if (NewPrefab)
-            {
-                cmp.mTarget = Object.Instantiate(NewPrefab);
-                Transform mNew = mTarget.transform;
-                Transform bBase = (current ? current.transform : NewPrefab.transform);
+            Transform locTr = cmp.transform;
 
-                mNew.SetParent(cmp.transform);
-                mNew.localScale = bBase.localScale;
-                mNew.localRotation = bBase.localRotation;
-                mNew.localPosition = bBase.localPosition;
+            var objName = mainTranslation;
+            var idx = mainTranslation.LastIndexOfAny(LanguageSource.CategorySeparators);
+            if (idx >= 0)
+                objName = objName.Substring(idx + 1);
+
+            Transform mNew = InstantiateNewPrefab(cmp, mainTranslation);
+            if (mNew == null)
+                return;
+            mNew.name = objName;
+
+            for (int i = locTr.childCount - 1; i >= 0; --i)
+            {
+                var child = locTr.GetChild(i);
+                if (child!=mNew)
+                {
+                    #if UNITY_EDITOR
+                        if (Application.isPlaying)
+                            Object.Destroy(child.gameObject);
+                        else
+                            Object.DestroyImmediate(child.gameObject);
+                    #else
+				        Object.Destroy (child.gameObject);
+                    #endif
+                }
+
             }
+        }
 
-            if (current)
-            {
+        Transform InstantiateNewPrefab(Localize cmp, string mainTranslation)
+        {
+            GameObject NewPrefab = cmp.FindTranslatedObject<GameObject>(mainTranslation);
+            if (NewPrefab == null)
+                return null;
+
+            GameObject current = cmp.mTarget as GameObject;
+
+            cmp.mTarget = Object.Instantiate(NewPrefab);
+            if (cmp.mTarget == null)
+                return null;
+
+            Transform locTr = cmp.transform;
+            Transform mNew = (cmp.mTarget as GameObject).transform;
+            mNew.SetParent(locTr);
+
+            Transform bBase = (current ? current.transform : locTr);
+            //mNew.localScale = bBase.localScale;
+            mNew.rotation = bBase.rotation;
+            mNew.position = bBase.position;
+
+            return mNew;
+        }
+
+        public override bool CanLocalize(Localize cmp)
+        {
+            return cmp.transform.childCount > 0;
+        }
+    }
+
 #if UNITY_EDITOR
-                if (Application.isPlaying)
-                    Object.Destroy(current);
-                else
-                    Object.DestroyImmediate(current);
-#else
-					Object.Destroy (current);
+    [UnityEditor.InitializeOnLoad]
 #endif
+    public class LocalizeTarget_UnityStd_Child : LocalizeTarget<GameObject>
+    {
+        static LocalizeTarget_UnityStd_Child() { AutoRegister(); }
+
+        [I2RuntimeInitialize]
+        static void AutoRegister()
+        {
+            LocalizationManager.RegisterTarget(new LocalizeTarget_UnityStd_Child());
+        }
+        public override string GetName() { return "Child"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.GameObject; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Text; }
+        public override bool CanUseSecondaryTerm() { return false; }
+        public override bool AllowMainTermToBeRTL() { return false; }
+        public override bool AllowSecondTermToBeRTL() { return false; }
+
+        public override bool FindTarget(Localize cmp)
+        {
+            var termData = LocalizationManager.GetTermData(cmp.Term);
+            return (termData != null && termData.TermType == eTermType.Child);
+        }
+
+        public override bool HasTarget(Localize cmp)
+        {
+            return true;
+        }
+
+        public override void GetFinalTerms(Localize cmp, string Main, string Secondary, out string primaryTerm, out string secondaryTerm)
+        {
+            var mTarget = GetTarget(cmp);
+            primaryTerm = mTarget.name;
+            secondaryTerm = null;
+        }
+
+        public override void DoLocalize(Localize cmp, string mainTranslation, string secondaryTranslation)
+        {
+            Transform locTr = cmp.transform;
+
+            var objName = mainTranslation;
+            var idx = mainTranslation.LastIndexOfAny(LanguageSource.CategorySeparators);
+            if (idx >= 0)
+                objName = objName.Substring(idx + 1);
+
+            for (int i = 0; i < locTr.childCount; ++i)
+            {
+                var child = locTr.GetChild(i);
+                child.gameObject.SetActive(child.name == objName);
             }
         }
 
@@ -183,7 +292,7 @@ namespace I2.Loc
         }
     }
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     [UnityEditor.InitializeOnLoad]
 #endif
 
@@ -201,6 +310,8 @@ namespace I2.Loc
         public bool mInitializeAlignment = true;
         
         public override string GetName() { return "GUIText"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Text; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Font; }
         public override bool CanUseSecondaryTerm() { return true; }
         public override bool AllowMainTermToBeRTL() { return true; }
         public override bool AllowSecondTermToBeRTL() { return false; }
@@ -262,6 +373,8 @@ namespace I2.Loc
         public bool mInitializeAlignment = true;
 
         public override string GetName() { return "TextMesh"; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Text; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Font; }
         public override bool CanUseSecondaryTerm() { return true; }
         public override bool AllowMainTermToBeRTL() { return true; }
         public override bool AllowSecondTermToBeRTL() { return false; }
@@ -300,6 +413,7 @@ namespace I2.Loc
                 if (cmp.CorrectAlignmentForRTL && mTarget.alignment != TextAlignment.Center)
                     mTarget.alignment = (LocalizationManager.IsRight2Left ? mAlignment_RTL : mAlignment_LTR);
 
+                mTarget.font.RequestCharactersInTexture(mainTranslation);
                 mTarget.text = mainTranslation;
             }
         }

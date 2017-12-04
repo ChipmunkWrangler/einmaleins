@@ -1,13 +1,15 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace I2.Loc
 {
 	public partial class LocalizationEditor
 	{
 		#region Variables
-		private List<TranslationRequest> mTranslationRequests = new List<TranslationRequest> ();
+		private List<string> mTranslationTerms = new List<string>();
+		private Dictionary<string, TranslationQuery> mTranslationRequests = new Dictionary<string, TranslationQuery> ();
         private bool mAppNameTerm_Expanded;
 
         private List<string> mLanguageCodePopupList = null;
@@ -31,6 +33,20 @@ namespace I2.Loc
                     EditorGUILayout.PropertyField(mProp_OnMissingTranslation, GUITools.EmptyContent, GUILayout.Width(165));
                 GUILayout.EndVertical();
             GUILayout.EndHorizontal();
+
+
+			string firstLanguage = "";
+			if (mLanguageSource.mLanguages.Count > 0)
+				firstLanguage = " (" + mLanguageSource.mLanguages [0].Name + ")";
+			
+			GUILayout.BeginHorizontal();
+				GUILayout.Label(new GUIContent("Default Language:", "When the game starts this is the language that will be used until the player manually selects a language"), EditorStyles.boldLabel, GUILayout.Width(160));
+				GUILayout.BeginVertical();
+					GUILayout.Space(7);
+
+					EditorGUILayout.Popup(mProp_IgnoreDeviceLanguage.boolValue?1:0, new string[]{"Device Language", "First in List"+firstLanguage}, GUILayout.ExpandWidth(true));
+				GUILayout.EndVertical();
+			GUILayout.EndHorizontal();
         }
 
         #region GUI Languages
@@ -130,7 +146,11 @@ namespace I2.Loc
                 GUI.color = Color.white;
 
                 EditorGUI.BeginChangeCheck();
-                isLanguageEnabled = EditorGUILayout.Toggle(isLanguageEnabled, GUILayout.Width(15));
+				isLanguageEnabled = EditorGUILayout.Toggle(isLanguageEnabled, GUILayout.Width(15));
+
+				var r = GUILayoutUtility.GetLastRect();
+				GUI.Label(r, new GUIContent("", "Enable/Disable the language.\nDisabled languages can be used to store data values or to avoid showing Languages that are stil under development"));
+
                 if (EditorGUI.EndChangeCheck())
                 {
                     Prop_Flags.intValue = (Prop_Flags.intValue & ~(int)eLanguageDataFlags.DISABLED) | (isLanguageEnabled ? 0 : (int)eLanguageDataFlags.DISABLED);
@@ -154,7 +174,7 @@ namespace I2.Loc
 				GUI.color = Color.white;
                 if (GUILayout.Button("Cancel", EditorStyles.toolbarButton, GUILayout.ExpandWidth(false)))
                 {
-                    EditorApplication.update -= DelayedStartTranslation;
+					GoogleTranslation.CancelCurrentGoogleTranslations ();
                     StopConnectionWWW();
                 }
 				GUILayout.EndHorizontal();
@@ -163,9 +183,12 @@ namespace I2.Loc
 			
 			if (IndexLanguageToDelete>=0)
 			{
-				mLanguageSource.RemoveLanguage( mLanguageSource.mLanguages[IndexLanguageToDelete].Name );
-				serializedObject.Update();
-                ParseTerms(true, false);
+				if (EditorUtility.DisplayDialog ("Confirm delete", "Are you sure you want to delete the selected language", "Yes", "Cancel")) 
+				{
+					mLanguageSource.RemoveLanguage (mLanguageSource.mLanguages [IndexLanguageToDelete].Name);
+					serializedObject.Update ();
+					ParseTerms (true, false);
+				}
 			}
 
 			if (LanguageToMoveUp>=0)   SwapLanguages( LanguageToMoveUp, LanguageToMoveUp-1 );
@@ -276,10 +299,17 @@ namespace I2.Loc
 				ShowError ("WebService is not set correctly or needs to be reinstalled");
 				return;
 			}
-
+            ClearErrors();
 			int LanIndex = mLanguageSource.GetLanguageIndex (lanName);
 			string code = mLanguageSource.mLanguages [LanIndex].Code;
+            string googleCode = GoogleLanguages.GetGoogleLanguageCode(code);
+            if (string.IsNullOrEmpty(googleCode))
+            {
+                ShowError("Language '" + code + "' is not supported by google translate");
+                return;
+            }
 
+            mTranslationTerms.Clear ();
 			mTranslationRequests.Clear ();
 			foreach (var termData in mLanguageSource.mTerms) 
 			{
@@ -289,100 +319,80 @@ namespace I2.Loc
 				string sourceCode, sourceText;
 				FindTranslationSource( LanguageSource.GetKeyFromFullTerm(termData.Term), termData, code, out sourceText, out sourceCode );
 
-				mTranslationRequests.Add( new TranslationRequest(){
-					Term = termData.Term,
-					Text=sourceText,
-					LanguageCode=sourceCode,
-					TargetLanguagesCode=new string[]{code}
-				} );
+				mTranslationTerms.Add (termData.Term);
+
+				GoogleTranslation.CreateQueries(sourceText, sourceCode, googleCode, mTranslationRequests);   // can split plurals into several queries
 			}
 
-			mConnection_WWW = GoogleTranslation.GetTranslationWWW (mTranslationRequests);
+			if (mTranslationRequests.Count == 0) 
+			{
+				StopConnectionWWW ();
+				return;
+			}
+
+			mConnection_WWW = null;
             mConnection_Text = "Translating"; if (mTranslationRequests.Count > 1) mConnection_Text += " (" + mTranslationRequests.Count + ")";
-			mConnection_Callback = OnLanguageTranslated;
-			EditorApplication.update += CheckForConnection;
+			mConnection_Callback = null;
+			//EditorApplication.update += CheckForConnection;
+
+			GoogleTranslation.Translate (mTranslationRequests, OnLanguageTranslated);
 		}
 
-		void OnLanguageTranslated( string Result, string Error )
+		void OnLanguageTranslated( Dictionary<string, TranslationQuery> requests, string Error )
 		{
 			//Debug.Log (Result);
 
-            if (Result.Contains("Service invoked too many times"))
-            {
-                TimeStartTranslation = EditorApplication.timeSinceStartup + 1;
-                EditorApplication.update += DelayedStartTranslation;
-                mConnection_Text = "Translating (" + mTranslationRequests.Count + ")";
-                return;
-            }
+            //if (Result.Contains("Service invoked too many times"))
+            //{
+            //    TimeStartTranslation = EditorApplication.timeSinceStartup + 1;
+            //    EditorApplication.update += DelayedStartTranslation;
+            //    mConnection_Text = "Translating (" + mTranslationRequests.Count + ")";
+            //    return;
+            //}
 
-			if (!string.IsNullOrEmpty(Error))/* || !Result.Contains("<i2>")*/
-		    {
-                Debug.LogError("WEB ERROR: " + Error);
-				ShowError ("Unable to access Google or not valid request");
-				return;
-			}
+			//if (!string.IsNullOrEmpty(Error))/* || !Result.Contains("<i2>")*/
+		    //{
+            //    Debug.LogError("WEB ERROR: " + Error);
+			//	ShowError ("Unable to access Google or not valid request");
+			//	return;
+			//}
 
 			ClearErrors();
-			Error = GoogleTranslation.ParseTranslationResult (Result, mTranslationRequests);
-			if (!string.IsNullOrEmpty(Error))
+            StopConnectionWWW();
+
+            if (!string.IsNullOrEmpty(Error))
 			{
 				ShowError (Error);
-				return;
+                return;
 			}
 
+			if (requests.Values.Count == 0)
+				return;
+			
+			var langCode = requests.Values.First().TargetLanguagesCode [0];
+			int langIndex = mLanguageSource.GetLanguageIndexFromCode (langCode);
 
-			foreach (var request in mTranslationRequests)
+			foreach (var term in mTranslationTerms)
 			{
-				if (request.Results == null)	// Handle cases where not all translations were valid
-						continue;
-								
-				var termData = mLanguageSource.GetTermData(request.Term);
+				var termData = mLanguageSource.GetTermData(term);
 				if (termData==null)
 					continue;
 
-				string lastCode="";
-				int lastcodeIdx= 0;
+				string sourceCode, sourceText;
+				FindTranslationSource( LanguageSource.GetKeyFromFullTerm(termData.Term), termData, langCode, out sourceText, out sourceCode );
 
-				for (int i=0; i<request.Results.Length; ++i)
-				{
-					//--[ most of the time is a single code, so this works as a cache
-					if (lastCode!=request.TargetLanguagesCode[i])
-					{
-						lastCode = request.TargetLanguagesCode[i];
-						lastcodeIdx = mLanguageSource.GetLanguageIndexFromCode( lastCode );
-					}
+				string result = GoogleTranslation.RebuildTranslation( sourceText, mTranslationRequests, langCode);				// gets the result from google and rebuilds the text from multiple queries if its is plurals
 
-					if (GUI_SelectedInputType==0)
-						termData.Languages[lastcodeIdx] = request.Results[i];
-					else
-						termData.Languages_Touch[lastcodeIdx] = request.Results[i];
-				}
+				if (GUI_SelectedInputType==0)
+					termData.Languages[langIndex] = result;
+				else
+					termData.Languages_Touch[langIndex] = result;
 			}
-            mTranslationRequests.RemoveAll(x=>x.Results!=null && x.Results.Length>0);
 
-            if (mTranslationRequests.Count>0)
-            {
-                TimeStartTranslation = EditorApplication.timeSinceStartup + 1;
-                EditorApplication.update += DelayedStartTranslation;
-                mConnection_Text = "Translating (" + mTranslationRequests.Count + ")";
-            }
+			mTranslationTerms.Clear ();
+			mTranslationRequests.Clear ();
+			StopConnectionWWW ();
 		}
-
-        double TimeStartTranslation = 0;
-        void DelayedStartTranslation()
-        {
-            if (EditorApplication.timeSinceStartup < TimeStartTranslation)
-                return;
-            EditorApplication.update -= DelayedStartTranslation;
-
-            if (mTranslationRequests.Count <= 0)
-                return;
-
-            mConnection_WWW = GoogleTranslation.GetTranslationWWW(mTranslationRequests);
-            mConnection_Text = "Translating (" + mTranslationRequests.Count + ")";
-            mConnection_Callback = OnLanguageTranslated;
-            EditorApplication.update += CheckForConnection;
-        }
 
 		#endregion
 

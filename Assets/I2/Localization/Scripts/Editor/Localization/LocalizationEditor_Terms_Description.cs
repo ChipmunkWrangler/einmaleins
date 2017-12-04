@@ -16,18 +16,19 @@ namespace I2.Loc
 		internal static int GUI_SelectedInputType
 		{
 			get{ if (mGUI_SelectedInputType<0) 
-					mGUI_SelectedInputType = PlayerPrefs.GetInt ("I2 InputType", TermData.IsTouchType()?1:0);
+					mGUI_SelectedInputType = EditorPrefs.GetInt ("I2 InputType", TermData.IsTouchType()?1:0);
 				return mGUI_SelectedInputType; 
 			}
 			set{ if (value!=mGUI_SelectedInputType) 
-					PlayerPrefs.SetInt ("I2 InputType", value);
+					EditorPrefs.SetInt ("I2 InputType", value);
 				 mGUI_SelectedInputType = value;
 			}
 		}
 		internal static int mGUI_SelectedInputType = -1;
 
-		internal static int GUI_SelectedPluralType = 0;
 		internal static bool GUI_ShowDisabledLanguagesTranslation = true;
+
+		internal static int mShowPlural = -1;
 		#endregion
 		
 		#region Key Description
@@ -74,6 +75,13 @@ namespace I2.Loc
 				EditorUtility.SetDirty(mLanguageSource);
 				ScheduleUpdateTermsToShowInList();
 			}
+			EditorApplication.update += RepaintScene;
+		}
+
+		void RepaintScene()
+		{
+			EditorApplication.update -= RepaintScene;
+			Repaint();
 		}
 		
 		void DeleteCurrentKey()
@@ -97,14 +105,14 @@ namespace I2.Loc
 			return data;
 		}
 
-		static TermData AddTerm(string Term, bool AutoSelect = true)
+		static TermData AddTerm(string Term, bool AutoSelect = true, eTermType termType = eTermType.Text)
 		{
 			if (Term == "-" || string.IsNullOrEmpty(Term))
 				return null;
 
 			Term = LocalizationManager.RemoveNonASCII(Term, true);
 
-			TermData data = mLanguageSource.AddTerm(Term, eTermType.Text);
+			TermData data = mLanguageSource.AddTerm(Term, termType);
 			GetParsedTerm(Term);
 			string sCategory = LanguageSource.GetCategoryFromFullTerm(Term);
 			mParsedCategories.Add(sCategory);
@@ -123,7 +131,7 @@ namespace I2.Loc
 		}
 
 		// this method shows the key description and the localization to each language
-		public static void OnGUI_Keys_Languages( string Key, Localize localizeCmp, bool IsPrimaryKey=true )
+		public static TermData OnGUI_Keys_Languages( string Key, Localize localizeCmp, bool IsPrimaryKey=true )
 		{
 			if (Key==null)
 				Key = string.Empty;
@@ -146,7 +154,7 @@ namespace I2.Loc
 			if (string.IsNullOrEmpty(Key))
 			{
 				EditorGUILayout.HelpBox( "Select a Term to Localize", MessageType.Info );
-				return;
+				return null;
 			}
 			else
 			{
@@ -163,18 +171,25 @@ namespace I2.Loc
 				if (termdata==null)
 				{
 					if (Key == "-")
-						return;
+						return null;
 					EditorGUILayout.HelpBox( string.Format("Key '{0}' is not Localized or it is in a different Language Source", Key), MessageType.Error );
 					GUILayout.BeginHorizontal();
 					GUILayout.FlexibleSpace();
 					if (GUILayout.Button("Add Term to Source"))
 					{
-						AddTerm(Key);
+                        var termType = eTermType.Text;
+                        if (localizeCmp.mLocalizeTarget != null)
+                        {
+                            termType = IsPrimaryKey ? localizeCmp.mLocalizeTarget.GetPrimaryTermType(localizeCmp)
+                                                    : localizeCmp.mLocalizeTarget.GetSecondaryTermType(localizeCmp);
+                        }
+
+                        AddTerm(Key, true, termType);
 					}
 					GUILayout.FlexibleSpace();
 					GUILayout.EndHorizontal();
 					
-					return;
+					return null;
 				}
 			}
 
@@ -209,6 +224,7 @@ namespace I2.Loc
 			OnGUI_Keys_Language_SpecializationsBar ();
 
 			OnGUI_Keys_Languages(Key, ref termdata, localizeCmp, IsPrimaryKey, source);
+            return termdata;
 		}
 
 		static void OnGUI_Keys_Languages( string Key, ref TermData termdata, Localize localizeCmp, bool IsPrimaryKey, LanguageSource source )
@@ -224,6 +240,7 @@ namespace I2.Loc
 				GUILayout.FlexibleSpace();
 				if (GUILayout.Button("Translate All", GUILayout.Width(85)))
 				{
+                    ClearErrors();
 					string mainText = localizeCmp == null ? LanguageSource.GetKeyFromFullTerm(Key) : localizeCmp.GetMainTargetsText();
 
 					for (int i = 0; i < source.mLanguages.Count; ++i)
@@ -231,7 +248,15 @@ namespace I2.Loc
 						{
 							var languages = (GUI_SelectedInputType == 0 ? termdata.Languages : termdata.Languages_Touch);
 							var langIdx = i;
-							Translate(mainText, ref termdata, source.mLanguages[i].Code, (translation) => { languages[langIdx] = translation; } );
+							Translate(mainText, ref termdata, source.mLanguages[i].Code, 
+                                        (translation, error) => 
+                                        {
+                                            if (error != null)
+                                                ShowError(error);
+                                            else
+                                            if (translation!=null)
+                                                languages[langIdx] = translation;
+                                        } );
 						}
 					GUI.FocusControl(string.Empty);
 				}
@@ -243,7 +268,7 @@ namespace I2.Loc
 
         static void OnGUI_TranslatingMessage()
         {
-            if (GoogleTranslation.mTranslationRequests.Count>0)
+			if (GoogleTranslation.IsTranslating())
             {
                 // Connection Status Bar
                 int time = (int)((Time.realtimeSinceStartup % 2) * 2.5);
@@ -257,19 +282,22 @@ namespace I2.Loc
                     GoogleTranslation.CancelCurrentGoogleTranslations();
                 }
                 GUILayout.EndHorizontal();
-                //Repaint();
+				HandleUtility.Repaint ();
             }
         }
 
 		static void OnGUI_Keys_Language_SpecializationsBar()
 		{
 			GUILayout.BeginHorizontal();
-				GUI_SelectedInputType = GUITools.DrawTabs(GUI_SelectedInputType, new string[]{"Normal|Transation for Non Touch devices.\nThis allows using 'click' instead of 'tap', etc", "Touch|Normal|Transation for Touch devices.\nThis allows using 'tap' instead of 'click', etc"}, null);
-				GUI.enabled = false;
-					GUI_SelectedPluralType = GUITools.DrawShadowedTabs(GUI_SelectedPluralType, new string[]{"Zero", "One", "Two", "Few", "Many", "Other"}, 18, false);
-				GUI.enabled = true;
-				GUI.Label( GUILayoutUtility.GetLastRect(), new GUIContent("",null,"Plurals are not enabled in this version.\nIt will be one of the new features for version 3"));
-
+				GUI_SelectedInputType = GUITools.DrawTabs(GUI_SelectedInputType, new string[]{"Normal|Transation for Non Touch devices.\nThis allows using 'click' instead of 'tap', etc", 
+																							  "Touch|Transation for Touch devices.\nThis allows using 'tap' instead of 'click', etc",
+																							  "VR|Transation for VR devices.\nThis allows using 'look at' instead of 'click', etc",
+																							  "XBox|Transation for XBox Controller.\nThis allows using 'press' instead of 'click', etc",
+																							  "PS4|Transation for PS4 Controller.\nThis allows using 'press' instead of 'click', etc",
+																							  "Controller|Transation for general Controllers.\nThis allows using 'press' instead of 'click', etc"}, null);
+				if (GUI_SelectedInputType > 1)  // TEMPORAL
+					GUI_SelectedInputType = 0;
+			
 				GUI_ShowDisabledLanguagesTranslation = GUILayout.Toggle(GUI_ShowDisabledLanguagesTranslation, new GUIContent("L", "Show Disabled Languages"), "Button", GUILayout.ExpandWidth(false));
 			GUILayout.EndHorizontal();
 			GUILayout.Space(-1);
@@ -335,28 +363,20 @@ namespace I2.Loc
 				if (termdata.Languages[i] != termdata.Languages_Touch[i] && !string.IsNullOrEmpty(termdata.Languages[i]) && !string.IsNullOrEmpty(termdata.Languages_Touch[i]))
 					GUI.contentColor = GUITools.LightYellow;
 
-				if (termdata.TermType == eTermType.Text)
+				if (termdata.TermType == eTermType.Text || termdata.TermType==eTermType.Child)
 				{
-					GUI.changed = false;
+					EditorGUI.BeginChangeCheck ();
 					string CtrName = "TranslatedText"+i;
 					GUI.SetNextControlName(CtrName);
 
-					//bool autoTranslated = false;// termdata.IsAutoTranslated(i, GUI_SelectedInputType == 1);
-
-                    Translation = EditorGUILayout.TextArea(Translation, Style_WrapTextField);
+					EditPluralTranslations (ref Translation, i, source.mLanguages[i].Code);
                     //Translation = EditorGUILayout.TextArea(Translation, Style_WrapTextField, GUILayout.Width(Screen.width - 260 - (autoTranslated ? 20 : 0)));
-                    if (GUI.changed)
+					if (EditorGUI.EndChangeCheck ())
 					{
 						if (GUI_SelectedInputType==0)
-						{
 							termdata.Languages[i] = Translation;
-							//termdata.Flags[i] &= byte.MaxValue ^ (byte)TranslationFlag.AutoTranslated_Normal;
-						}
 						else
-						{
 							termdata.Languages_Touch[i] = Translation;
-							//termdata.Flags[i] &= byte.MaxValue ^ (byte)TranslationFlag.AutoTranslated_Touch;
-						}
 						EditorUtility.SetDirty(source);
 					}
 
@@ -384,22 +404,25 @@ namespace I2.Loc
 					}
 					GUI.contentColor = Color.white;
 
-					//if (autoTranslated)
-					//{
-					//    if (GUILayout.Button(new GUIContent("\u2713"/*"A"*/,"Translated by Google Translator\nClick the button to approve the translation"), EditorStyles.toolbarButton, GUILayout.Width(autoTranslated ? 20 : 0)))
-					//    {
-					//        termdata.Flags[i] &= (byte)(byte.MaxValue ^ (byte)(GUI_SelectedInputType==0 ? TranslationFlag.AutoTranslated_Normal : TranslationFlag.AutoTranslated_Touch));
-					//    }
-					//}
+                    //if (autoTranslated)
+                    //{
+                    //    if (GUILayout.Button(new GUIContent("\u2713"/*"A"*/,"Translated by Google Translator\nClick the button to approve the translation"), EditorStyles.toolbarButton, GUILayout.Width(autoTranslated ? 20 : 0)))
+                    //    {
+                    //        termdata.Flags[i] &= (byte)(byte.MaxValue ^ (byte)(GUI_SelectedInputType==0 ? TranslationFlag.AutoTranslated_Normal : TranslationFlag.AutoTranslated_Touch));
+                    //    }
+                    //}
 
-					if (GUILayout.Button("Translate", EditorStyles.toolbarButton, GUILayout.Width(80)))
-					{
-						string mainText = localizeCmp == null ? LanguageSource.GetKeyFromFullTerm(Key) : localizeCmp.GetMainTargetsText();
-						var languages = (GUI_SelectedInputType == 0 ? termdata.Languages : termdata.Languages_Touch);
-						var langIdx = i;
-						Translate(mainText, ref termdata, source.mLanguages[i].Code, (translation) => {languages[langIdx]= translation; });
-						GUI.FocusControl(string.Empty);
-					}
+                    /*if (termdata.TermType == eTermType.Text)
+                    {
+                        if (GUILayout.Button("Translate", EditorStyles.toolbarButton, GUILayout.Width(80)))
+                        {
+                            string mainText = localizeCmp == null ? LanguageSource.GetKeyFromFullTerm(Key) : localizeCmp.GetMainTargetsText();
+                            var languages = (GUI_SelectedInputType == 0 ? termdata.Languages : termdata.Languages_Touch);
+                            var langIdx = i;
+                            Translate(mainText, ref termdata, source.mLanguages[i].Code, (translation) => { languages[langIdx] = translation; });
+                            GUI.FocusControl(string.Empty);
+                        }
+                    }*/
 				}
 				else
 				{
@@ -513,6 +536,100 @@ namespace I2.Loc
 			}
 		}
 
+		static void EditPluralTranslations( ref string translation, int langIdx, string langCode )
+		{
+			bool hasParameters = false;
+			int paramStart = translation.IndexOf("{[");
+			hasParameters = (paramStart >= 0 && translation.IndexOf ("]}", paramStart) > 0);
+
+			if (mShowPlural == langIdx && string.IsNullOrEmpty (translation))
+				mShowPlural = -1;
+				
+			bool allowPlural = hasParameters || translation.Contains("[i2p_");
+
+			if (allowPlural) 
+			{
+				if (GUILayout.Toggle (mShowPlural == langIdx, "", EditorStyles.foldout, GUILayout.Width (13)))
+					mShowPlural = langIdx;
+				else if (mShowPlural == langIdx)
+					mShowPlural = -1;
+
+				GUILayout.Space (-5);
+			}
+
+			string finalTranslation = "";
+			bool unfolded = mShowPlural == langIdx;
+			bool isPlural = allowPlural && translation.Contains("[i2p_");
+			if (unfolded) 
+				GUILayout.BeginVertical ("Box");
+
+                ShowPluralTranslation("Plural", langCode,  translation, ref finalTranslation, true, unfolded, unfolded|isPlural );
+				ShowPluralTranslation("Zero", langCode, translation, ref finalTranslation, unfolded, true, true );
+				ShowPluralTranslation("One", langCode, translation, ref finalTranslation, unfolded, true, true );
+				ShowPluralTranslation("Two", langCode, translation, ref finalTranslation, unfolded, true, true );
+				ShowPluralTranslation("Few", langCode, translation, ref finalTranslation, unfolded, true, true );
+				ShowPluralTranslation("Many", langCode, translation, ref finalTranslation, unfolded, true, true );
+
+			if (unfolded) 
+				GUILayout.EndVertical ();
+
+			translation = finalTranslation;
+		}
+
+		static void ShowPluralTranslation(string pluralType, string langCode, string translation, ref string finalTranslation, bool show, bool allowDelete, bool showTag )
+		{
+			string tag = "[i2p_" + pluralType + "]";
+			int idx0 = translation.IndexOf (tag, System.StringComparison.OrdinalIgnoreCase);
+			bool hasTranslation = idx0 >= 0 || pluralType=="Plural";
+			if (idx0 < 0) idx0 = 0;
+					 else idx0 += tag.Length;
+
+			int idx1 = translation.IndexOf ("[i2p_", idx0, System.StringComparison.OrdinalIgnoreCase);
+			if (idx1 < 0) idx1 = translation.Length;
+
+			var pluralTranslation = translation.Substring(idx0, idx1-idx0);
+			var newTrans = pluralTranslation;
+
+			bool allowPluralForm = GoogleLanguages.LanguageHasPluralType (langCode, pluralType);
+
+			if (hasTranslation && !allowPluralForm) {
+				newTrans = "";
+				GUI.changed = true;
+			}
+
+			if (show && allowPluralForm)
+			{
+				if (!hasTranslation)
+					GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, 0.35f);
+				
+				GUILayout.BeginHorizontal ();
+					if (showTag)
+						GUILayout.Label (pluralType, EditorStyles.miniLabel, GUILayout.Width(35));
+					newTrans = EditorGUILayout.TextArea (pluralTranslation, Style_WrapTextField);
+
+					if (allowDelete  && GUILayout.Button("X", EditorStyles.toolbarButton, GUILayout.Width(15)))
+					{
+						newTrans = string.Empty;
+						GUI.changed = true;
+						GUIUtility.keyboardControl = 0;
+					}
+					
+				GUILayout.EndHorizontal ();
+				if (!hasTranslation)
+					GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, 1);
+			}
+
+			if (!string.IsNullOrEmpty (newTrans)) 
+			{
+				if (hasTranslation || newTrans != pluralTranslation) 
+				{
+					if (pluralType != "Plural")
+						finalTranslation += tag;
+					finalTranslation += newTrans;
+				}
+			}
+		}
+
 		/*static public int DrawTranslationTabs( int Index )
 		{
 			GUIStyle MyStyle = new GUIStyle(GUI.skin.FindStyle("dragtab"));
@@ -566,7 +683,7 @@ namespace I2.Loc
 			}
 		}
 		
-		static void Translate ( string Key, ref TermData termdata, string TargetLanguageCode, Action<string> onTranslated )
+		static void Translate ( string Key, ref TermData termdata, string TargetLanguageCode, Action<string, string> onTranslated )
 		{
 			#if UNITY_WEBPLAYER
 			ShowError ("Contacting google translation is not yet supported on WebPlayer" );

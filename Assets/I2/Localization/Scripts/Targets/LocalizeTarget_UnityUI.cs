@@ -17,12 +17,22 @@ namespace I2.Loc
 		public override bool CanUseSecondaryTerm () { return false; }
 		public override bool AllowMainTermToBeRTL () { return false; }
 		public override bool AllowSecondTermToBeRTL () { return false; }
+        public override eTermType GetPrimaryTermType(Localize cmp)
+        {
+            var mTarget = GetTarget(cmp);
+            return mTarget.sprite == null ? eTermType.Texture : eTermType.Sprite;
+        }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Text; }
 
-		public override void GetFinalTerms ( Localize cmp, string Main, string Secondary, out string primaryTerm, out string secondaryTerm )
+
+        public override void GetFinalTerms ( Localize cmp, string Main, string Secondary, out string primaryTerm, out string secondaryTerm )
 		{
             var mTarget = GetTarget(cmp);
 
             primaryTerm = mTarget.mainTexture ? mTarget.mainTexture.name : "";
+            if (mTarget.sprite!=null && mTarget.sprite.name!=primaryTerm)
+                primaryTerm += "." + mTarget.sprite.name;
+
 			secondaryTerm = null;
 		}
 
@@ -62,7 +72,9 @@ namespace I2.Loc
 
 
         public override string GetName () { return "RawImage"; }
-		public override bool CanUseSecondaryTerm () { return false; }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Texture; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Text; }
+        public override bool CanUseSecondaryTerm () { return false; }
 		public override bool AllowMainTermToBeRTL () { return false; }
 		public override bool AllowSecondTermToBeRTL () { return false; }
 
@@ -114,7 +126,9 @@ namespace I2.Loc
 		bool mInitializeAlignment = true;
 
 		public override string GetName ()				{ return "Text"; }
-		public override bool CanUseSecondaryTerm ()		{ return true;   }
+        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Text; }
+        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Font; }
+        public override bool CanUseSecondaryTerm ()		{ return true;   }
 		public override bool AllowMainTermToBeRTL ()	{ return true;   }
 		public override bool AllowSecondTermToBeRTL ()	{ return false;  }
 

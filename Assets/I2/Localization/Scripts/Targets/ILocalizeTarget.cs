@@ -17,6 +17,8 @@ namespace I2.Loc
         public abstract bool AllowMainTermToBeRTL();
         public abstract bool AllowSecondTermToBeRTL();
         public abstract bool HasTarget(Localize cmp);
+        public abstract eTermType GetPrimaryTermType(Localize cmp);
+        public abstract eTermType GetSecondaryTermType(Localize cmp);
     }
 
     public abstract class LocalizeTarget<T> : ILocalizeTarget where T : Object

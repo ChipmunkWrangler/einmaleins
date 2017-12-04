@@ -167,6 +167,9 @@ namespace I2.Loc
 
         static void SelectStartupLanguage()
         {
+			if (Sources.Count == 0)
+				return;
+			
             // Use the system language if there is a source with that language, 
             // or pick any of the languages provided by the sources
 
@@ -178,20 +181,22 @@ namespace I2.Loc
             // Try selecting the System Language
             // But fallback to the first language found  if the System Language is not available in any source
 
-            if (HasLanguage(SavedLanguage, Initialize: false))
+			if (!string.IsNullOrEmpty(SavedLanguage) && HasLanguage(SavedLanguage, Initialize: false))
             {
                 SetLanguageAndCode(SavedLanguage, GetLanguageCode(SavedLanguage));
                 return;
             }
 
-            // Check if the device language is supported. 
-            // Also recognize when not region is set ("English (United State") will be used if sysLanguage is "English")
-            string ValidLanguage = GetSupportedLanguage(SysLanguage);
-            if (!string.IsNullOrEmpty(ValidLanguage))
-            {
-                SetLanguageAndCode(ValidLanguage, GetLanguageCode(ValidLanguage), false);
-                return;
-            }
+			if (!Sources [0].IgnoreDeviceLanguage) 
+			{
+				// Check if the device language is supported. 
+				// Also recognize when not region is set ("English (United State") will be used if sysLanguage is "English")
+				string ValidLanguage = GetSupportedLanguage (SysLanguage);
+				if (!string.IsNullOrEmpty (ValidLanguage)) {
+					SetLanguageAndCode (ValidLanguage, GetLanguageCode (ValidLanguage), false);
+					return;
+				}
+			}
 
             //--[ Use first language that its not disabled ]-----------
             for (int i = 0, imax = Sources.Count; i < imax; ++i)
@@ -501,16 +506,17 @@ public static string FixRTL_IfNeeded(string text, int maxCharacters = 0, bool ig
 			mLocalizeIsScheduledWithForcedValue |= Force;
 			if (mLocalizeIsScheduled)
 				return;
-			I2.CoroutineManager.Start(Coroutine_LocalizeAll());
+			I2.Loc.CoroutineManager.Start(Coroutine_LocalizeAll());
 		}
 
 		static IEnumerator Coroutine_LocalizeAll()
 		{
 			mLocalizeIsScheduled = true;
-			yield return null;
-			mLocalizeIsScheduled = false;
-			DoLocalizeAll(mLocalizeIsScheduledWithForcedValue);
+            yield return null;
+            mLocalizeIsScheduled = false;
+			var force = mLocalizeIsScheduledWithForcedValue;
 			mLocalizeIsScheduledWithForcedValue = false;
+			DoLocalizeAll(force);
 		}
 
 		static void DoLocalizeAll(bool Force = false)
@@ -528,25 +534,87 @@ public static string FixRTL_IfNeeded(string text, int maxCharacters = 0, bool ig
 		}
 
 
+        delegate object _GetParam(string param);
 
-		internal static void ApplyLocalizationParams( ref string translation, GameObject root )
+        public static void ApplyLocalizationParams(ref string translation)
+        {
+            ApplyLocalizationParamsInternal(ref translation, (p) => GetLocalizationParam(p, null));
+        }
+
+
+        public static void ApplyLocalizationParams(ref string translation, GameObject root)
+        {
+            ApplyLocalizationParamsInternal(ref translation, (p) => GetLocalizationParam(p, root));
+        }
+
+        public static void ApplyLocalizationParams(ref string translation, Dictionary<string, object> parameters)
+        {
+            ApplyLocalizationParamsInternal(ref translation, (p) => {
+                    object o = null;
+                    if (parameters.TryGetValue(p, out o))
+                        return o;
+                    return null;
+                });
+        }
+
+
+        private static void ApplyLocalizationParamsInternal( ref string translation, _GetParam getParam )
 		{
 			if (translation == null)
 				return;
 
 			var regex = new Regex(@"{\[(.*?)\]}");
 			var regexMatches = regex.Matches(translation);
+			var pluralType = GetPluralType (regexMatches, CurrentLanguageCode, getParam);
+			int idx0 = 0;
+			int idx1 = translation.Length;
+
+			if (pluralType != null) 
+			{
+				var tag = "[i2p_" + pluralType + "]";
+				idx0 = translation.IndexOf (tag, System.StringComparison.OrdinalIgnoreCase);
+				if (idx0 < 0) idx0 = 0;
+						 else idx0 += tag.Length;
+
+				idx1 = translation.IndexOf ("[i2p_", idx0+1, System.StringComparison.OrdinalIgnoreCase);
+				if (idx1 < 0) idx1 = translation.Length;
+
+				translation = translation.Substring(idx0, idx1-idx0);
+			}
+
+
 			for (int i = 0, nMatches = regexMatches.Count; i < nMatches; ++i)
 			{
 				var match = regexMatches[i];
+
 				var param = match.Groups[match.Groups.Count - 1].Value;
-				var result = GetLocalizationParam(param, root);
-				if (result!=null)
-					translation = translation.Replace(match.Value, result);
+				var result = (string)getParam(param);
+				if (result != null) 
+					translation = translation.Replace (match.Value, result);
 			}
 		}
 
-		internal static string GetLocalizationParam(string ParamName, GameObject root)
+        private static string GetPluralType( MatchCollection matches, string langCode, _GetParam getParam)
+		{
+			for (int i = 0, nMatches = matches.Count; i < nMatches; ++i)
+			{
+				var match = matches[i];
+				var param = match.Groups[match.Groups.Count - 1].Value;
+				var result = (string)getParam(param);
+				if (result == null)
+					continue;
+				
+				int amount = 0;
+				if (!int.TryParse (result, out amount))
+					continue;
+
+				var pluralType = GoogleLanguages.GetPluralType(langCode, amount);
+				return pluralType.ToString ();
+			}
+			return null;
+		}
+
+        internal static string GetLocalizationParam(string ParamName, GameObject root)
 		{
 			string result = null;
 			if (root)
@@ -574,11 +642,11 @@ public static string FixRTL_IfNeeded(string text, int maxCharacters = 0, bool ig
 			return null;
 		}
 
-#endregion
+        #endregion
 
-		#region Sources
+        #region Sources
 
-		public static bool UpdateSources()
+        public static bool UpdateSources()
 		{
 			UnregisterDeletededSources();
 			RegisterSourceInResources();
@@ -628,7 +696,7 @@ public static string FixRTL_IfNeeded(string text, int maxCharacters = 0, bool ig
 			{
 				Source.Import_Google_FromCache();
 				if (Source.GoogleUpdateDelay > 0)
-						CoroutineManager.pInstance.StartCoroutine( Delayed_Import_Google(Source, Source.GoogleUpdateDelay) );
+						CoroutineManager.Start( Delayed_Import_Google(Source, Source.GoogleUpdateDelay) );
 				else
 					Source.Import_Google();
 			}
@@ -825,12 +893,12 @@ public static string FixRTL_IfNeeded(string text, int maxCharacters = 0, bool ig
 
 		public static string GetVersion()
 		{
-			return "2.8.0 f3";
+			return "2.8.1 f1";
 		}
 
 		public static int GetRequiredWebServiceVersion()
 		{
-			return 4;
+			return 5;
 		}
 
 		public static string GetWebServiceURL( LanguageSource source = null )

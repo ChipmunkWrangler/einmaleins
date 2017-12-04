@@ -29,7 +29,7 @@ namespace I2.Loc
 
 	public enum eTermType 
 	{ 
-		Text, Font, Texture, AudioClip, GameObject, Sprite, Material,
+		Text, Font, Texture, AudioClip, GameObject, Sprite, Material, Child,
 		#if NGUI
 			UIAtlas, UIFont,
 		#endif
@@ -52,8 +52,7 @@ namespace I2.Loc
 		AutoTranslated_All = 255
 	}
 
-	public enum eTransTag_Plural { Any, Zero, One, Many };
-	public enum eTransTag_Input { Any, PC, Touch,  };
+	public enum eTransTag_Input { Any, PC, Touch, VR, XBox, PS4, Controller  };
 
 
 	[Serializable]
@@ -66,7 +65,7 @@ namespace I2.Loc
 		public string[]			Languages_Touch = new string[0];
 		public byte[]			Flags 			= new byte[0];	// flags for each translation
 
-		public string GetTranslation ( int idx, eTransTag_Input input=eTransTag_Input.Any, eTransTag_Plural plural=eTransTag_Plural.Any )
+		public string GetTranslation ( int idx, eTransTag_Input input=eTransTag_Input.Any )
 		{
 			if (IsTouchType())
 			{
@@ -176,6 +175,7 @@ namespace I2.Loc
 		public MissingTranslationAction OnMissingTranslation = MissingTranslationAction.Fallback;
 
 		public string mTerm_AppName;
+		public bool IgnoreDeviceLanguage; // If false, it will use the Device's language as the initial Language, otherwise it will use the first language in the source.
 
 		#endregion
 
@@ -350,7 +350,7 @@ namespace I2.Loc
 
 		public void RemoveLanguage( string LanguageName )
 		{
-			int LangIndex = GetLanguageIndex(LanguageName);
+			int LangIndex = GetLanguageIndex(LanguageName, false, false);
 			if (LangIndex<0)
 				return;
 

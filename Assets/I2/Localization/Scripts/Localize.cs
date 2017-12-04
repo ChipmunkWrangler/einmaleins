@@ -149,7 +149,7 @@ namespace I2.Loc
 				return;
 
 			CurrentLocalizeComponent = this;
-			if (LocalizationManager.IsPlaying()) 
+			//if (LocalizationManager.IsPlaying()) 
 			{
 				LocalizeCallBack.Execute (this);  // This allows scripts to modify the translations :  e.g. "Player {0} wins"  ->  "Player Red wins"
 				LocalizationManager.ApplyLocalizationParams (ref MainTranslation, gameObject);
@@ -201,7 +201,7 @@ namespace I2.Loc
 
                 MainTranslation = sb.ToString();
             }
-			mLocalizeTarget.DoLocalize( this, MainTranslation, SecondaryTranslation );
+    	    mLocalizeTarget.DoLocalize( this, MainTranslation, SecondaryTranslation );
 
 			CurrentLocalizeComponent = null;
 		}
@@ -229,7 +229,12 @@ namespace I2.Loc
 			return HasTargetCache();
 		}
 
-		bool HasTargetCache() { return (mLocalizeTarget!=null && mLocalizeTarget.HasTarget(this)); }
+        public void ReleaseTarget()
+        {
+            mTarget = null;
+        }
+
+        bool HasTargetCache() { return (mLocalizeTarget!=null && mLocalizeTarget.HasTarget(this)); }
 
 		#endregion
 

@@ -135,7 +135,7 @@ namespace I2.Loc
 			PlayerPrefs.SetString("LastGoogleUpdate_"+PlayerPrefName, DateTime.Now.ToString());
 
 			//--[ Checking google for updated data ]-----------------
-			CoroutineManager.pInstance.StartCoroutine(Import_Google_Coroutine());
+			CoroutineManager.Start(Import_Google_Coroutine());
 		}
 
 		string GetSourcePlayerPrefName()

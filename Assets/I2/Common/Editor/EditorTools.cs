@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 
-namespace I2
+namespace I2.Loc
 {	
 	public class GUITools
 	{
@@ -87,6 +87,41 @@ namespace I2
 		static public void CloseHeader()
 		{
 			GUILayout.EndHorizontal();
+		}
+
+		public static void OnGUI_Footer(string pluginName, string pluginVersion, string helpURL, string documentationURL, string assetStoreURL)
+		{
+			GUILayout.BeginHorizontal();
+			string versionTip = "";
+			/*if (I2Analytics.HasNewVersion(pluginName))
+			{
+				versionTip = "There is a new version of " + pluginName + ".\nClick here for more details";
+				if (GUILayout.Button(new GUIContent("", versionTip), EditorStyles.label, GUILayout.Width(25)))
+					I2AboutWindow.DoShowScreen();
+
+				var rect = GUILayoutUtility.GetLastRect();
+				rect.yMin = rect.yMax - 25;
+				rect.xMax = rect.xMin + 25;
+				rect.y += 3;
+				GUI.DrawTexture(rect, GUI.skin.GetStyle("CN EntryWarn").normal.background);
+			}*/
+
+			if (GUILayout.Button(new GUIContent("v" + pluginVersion, versionTip), EditorStyles.miniLabel))
+			{
+				Application.OpenURL(assetStoreURL);
+				//I2AboutWindow.DoShowScreen();
+			}
+
+			GUILayout.FlexibleSpace();
+
+			if (GUILayout.Button("Ask a Question", EditorStyles.miniLabel))
+				Application.OpenURL(helpURL);
+
+			GUILayout.Space(10);
+
+			if (GUILayout.Button("Documentation", EditorStyles.miniLabel))
+				Application.OpenURL(documentationURL);
+			GUILayout.EndHorizontal();            
 		}
 
 

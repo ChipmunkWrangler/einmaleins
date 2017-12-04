@@ -150,7 +150,7 @@ namespace I2.Loc
 						rect.xMin = rect.xMax+1;
 						rect.xMax = rect.xMin + rect.height;
 						GUI.DrawTexture( rect, GUI.skin.GetStyle("CN EntryWarn").normal.background);
-						GUI.Label(rect, new GUIContent("", "The current Google WebService is not supported.\nPlease, delete the WebService from the Google Drive and Install the latest version."));
+						GUI.Label(rect, new GUIContent("\u2717", "The current Google WebService is not supported.\nPlease, delete the WebService from the Google Drive and Install the latest version."));
 						GUILayout.Space (Width);
 					}
 				}
@@ -160,11 +160,12 @@ namespace I2.Loc
 				GUILayout.Space (118);
 				if (GUILayout.Button(new GUIContent("Install", "This opens the Web Service Script and shows you steps to install and authorize it on your Google Drive"), EditorStyles.toolbarButton))
 				{
-					ClearErrors();
-					Application.OpenURL("https://goo.gl/RBCO0o");  // V4:https://script.google.com/d/1T7e5_40NcgRyind-yeg4PAkHz9TNZJ22F4RcbOvCpAs03JNf1vKNNTZB/newcopy
-					//Application.OpenURL("https://goo.gl/wFSbv2");// V3:https://script.google.com/d/1CxQDSXflsXRaH3M7xGfrIDrFwOIHWPsYTWi4mRZ_k77nyIInTgIk63Kd/newcopy");
-				}
-				if (GUILayout.Button("Verify", EditorStyles.toolbarButton))
+    					ClearErrors();
+                        Application.OpenURL("https://script.google.com/d/1zcsLSmq3Oddd8AsLuoKNDG1Y0eYBOHzyvGT7v94u1oN6igmsZb_PJzEm/newcopy");  // V5
+                        //Application.OpenURL("https://goo.gl/RBCO0o");  // V4:https://script.google.com/d/1T7e5_40NcgRyind-yeg4PAkHz9TNZJ22F4RcbOvCpAs03JNf1vKNNTZB/newcopy
+                        //Application.OpenURL("https://goo.gl/wFSbv2");// V3:https://script.google.com/d/1CxQDSXflsXRaH3M7xGfrIDrFwOIHWPsYTWi4mRZ_k77nyIInTgIk63Kd/newcopy");
+                }
+                if (GUILayout.Button("Verify", EditorStyles.toolbarButton))
 				{
 					ClearErrors();
 					VerifyGoogleService(mProp_Google_WebServiceURL.stringValue);
@@ -355,19 +356,28 @@ namespace I2.Loc
 				return;
 			}
 
-			try
-			{
-				var data = SimpleJSON.JSON.Parse(Result).AsObject;
-				int version = int.Parse (data["script_version"]);
-				int requiredVersion = LocalizationManager.GetRequiredWebServiceVersion();
-				mWebService_Status = (requiredVersion<=version ? "Online" : "UnsupportedVersion");
-				ClearErrors();
-			}
-			catch(Exception)
-			{
-				ShowError ("Unable to access the WebService");
-				mWebService_Status = "Offline";
-			}
+            try
+            {
+                var data = SimpleJSON.JSON.Parse(Result).AsObject;
+                int version = int.Parse(data["script_version"]);
+                int requiredVersion = LocalizationManager.GetRequiredWebServiceVersion();
+
+                if (requiredVersion == version)
+                {
+                    mWebService_Status = "Online";
+                    ClearErrors();
+                }
+                else
+                {
+                    mWebService_Status = "UnsupportedVersion";
+                    ShowError("The current Google WebService is not supported.\nPlease, delete the WebService from the Google Drive and Install the latest version.");
+                }
+            }
+            catch (Exception)
+            {
+                ShowError("Unable to access the WebService");
+                mWebService_Status = "Offline";
+            }
 		}
 
 

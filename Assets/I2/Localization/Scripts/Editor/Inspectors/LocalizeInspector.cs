@@ -28,10 +28,10 @@ namespace I2.Loc
 
 
 		public static string HelpURL_forum 			= "http://goo.gl/Uiyu8C";//http://www.inter-illusion.com/forum/i2-localization";
-		public static string HelpURL_Documentation 	= "\thttp://www.inter-illusion.com/assets/I2LocalizationManual/I2LocalizationManual.html";
+		public static string HelpURL_Documentation 	= "http://www.inter-illusion.com/assets/I2LocalizationManual/I2LocalizationManual.html";
 		public static string HelpURL_Tutorials		= "http://inter-illusion.com/tools/i2-localization";
 		public static string HelpURL_ReleaseNotes	= "http://inter-illusion.com/forum/i2-localization/26-release-notes";
-
+		public static string HelpURL_AssetStore		= "https://www.assetstore.unity3d.com/#!/content/14884";
 
 		#endregion
 		
@@ -60,7 +60,7 @@ namespace I2.Loc
 				if (cmp != null && cmp.gameObject != mLocalize.gameObject)
 				{
 					serializedObject.ApplyModifiedProperties();
-					mLocalize.mTarget = null;
+					mLocalize.ReleaseTarget();
 					serializedObject.Update();
 				}
 			}
@@ -171,7 +171,7 @@ namespace I2.Loc
 
 			GUILayout.Space (10);
 
-			I2AboutWindow.OnGUI_Footer("I2 Localization", LocalizationManager.GetVersion(), HelpURL_forum, HelpURL_Documentation);
+			GUITools.OnGUI_Footer("I2 Localization", LocalizationManager.GetVersion(), HelpURL_forum, HelpURL_Documentation, LocalizeInspector.HelpURL_AssetStore);
 
 			GUILayout.EndVertical();
 
@@ -216,13 +216,15 @@ namespace I2.Loc
 
 				GUITools.BeginContents();
 
-					if (GUI_SelectedTerm==0) OnGUI_PrimaryTerm( oldTab!=GUI_SelectedTerm );
-										else OnGUI_SecondaryTerm(oldTab!=GUI_SelectedTerm);
+                TermData termData = null;
+
+					if (GUI_SelectedTerm==0) termData = OnGUI_PrimaryTerm( oldTab!=GUI_SelectedTerm );
+										else termData = OnGUI_SecondaryTerm(oldTab!=GUI_SelectedTerm);
 
 				GUITools.EndContents();
 
 				//--[ Modifier ]-------------
-				if (mLocalize.Term != "-")
+				if (mLocalize.Term != "-" && termData!=null && termData.TermType==eTermType.Text)
 				{
 					EditorGUI.BeginChangeCheck();
 					int val = EditorGUILayout.Popup("Modifier", GUI_SelectedTerm == 0 ? (int)mLocalize.PrimaryTermModifier : (int)mLocalize.SecondaryTermModifier, System.Enum.GetNames(typeof(Localize.TermModification)));
@@ -271,7 +273,7 @@ namespace I2.Loc
 				GUILayout.EndHorizontal ();
 	
 				//--[ Right To Left ]-------------
-				if (mLocalize.Term!="-")
+				if (mLocalize.Term!="-" &&  termData != null && termData.TermType == eTermType.Text)
 				{ 
 					GUILayout.BeginVertical("Box");
                         GUILayout.BeginHorizontal();
@@ -297,7 +299,7 @@ namespace I2.Loc
 			}
 		}
 
-		void OnGUI_PrimaryTerm( bool OnOpen )
+		TermData OnGUI_PrimaryTerm( bool OnOpen )
 		{
 			string Key = mLocalize.mTerm;
 			if (string.IsNullOrEmpty(Key))
@@ -309,10 +311,10 @@ namespace I2.Loc
 			if (OnOpen) mNewKeyName = Key;
 			if ( OnGUI_SelectKey( ref Key, string.IsNullOrEmpty(mLocalize.mTerm)))
 				mProp_mTerm.stringValue = Key;
-			LocalizationEditor.OnGUI_Keys_Languages( Key, mLocalize, true );
+			return LocalizationEditor.OnGUI_Keys_Languages( Key, mLocalize, true );
 		}
 
-		void OnGUI_SecondaryTerm( bool OnOpen )
+        TermData OnGUI_SecondaryTerm( bool OnOpen )
 		{
 			string Key = mLocalize.mTermSecondary;
 
@@ -325,7 +327,7 @@ namespace I2.Loc
 			if (OnOpen) mNewKeyName = Key;
 			if ( OnGUI_SelectKey( ref Key, string.IsNullOrEmpty(mLocalize.mTermSecondary)))
 				mProp_mTermSecondary.stringValue = Key;
-			LocalizationEditor.OnGUI_Keys_Languages( Key, mLocalize, false );
+			return LocalizationEditor.OnGUI_Keys_Languages( Key, mLocalize, false );
 		}
 
 		bool OnGUI_SelectKey( ref string Term, bool Inherited )  // Inherited==true means that the mTerm is empty and we are using the Label.text instead
@@ -585,7 +587,7 @@ namespace I2.Loc
 			if (GUI.changed)
 			{
 				serializedObject.ApplyModifiedProperties();
-                mLocalize.mTarget = null;
+                mLocalize.ReleaseTarget();
 
                 foreach (var locTarget in LocalizationManager.mLocalizeTargets)
                 {

@@ -12,8 +12,6 @@ namespace I2.Loc
 
 		static UpgradeManager()
 		{
-			I2Analytics.PluginsVersion["I2 Localization"] = LocalizationManager.GetVersion();
-			I2Analytics.SendAnalytics("I2 Localization", LocalizationManager.GetVersion()); // Tracks Unity version usage to know when is safe to discontinue support to old unity versions (this allows me to focus more where is more useful to you)
 			EditorApplication.update += AutoCheckPlugins;
 		}
 

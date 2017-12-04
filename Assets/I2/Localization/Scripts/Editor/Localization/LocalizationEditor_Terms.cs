@@ -135,7 +135,15 @@ namespace I2.Loc
 				}
 			}
 			SkipSize += (mShowableTerms.Count - nDraw-nSkip) * mRowSize;
-			GUILayout.Space(SkipSize);
+			GUILayout.Space(SkipSize+2);
+			if (mSelectedCategories.Count != mParsedCategories.Count) 
+			{
+				if (GUILayout.Button ("...", EditorStyles.label)) 
+				{
+					mSelectedCategories.Clear ();
+					mSelectedCategories.AddRange (mParsedCategories);
+				}
+			}
 			OnGUI_KeysList_AddKey();
 
 			GUILayout.Label("", GUILayout.Width(mTermList_MaxWidth+10+30), GUILayout.Height(1));
@@ -200,9 +208,9 @@ namespace I2.Loc
 					mShowableTerms.Add(parsedTerm);
 			}
             EditorApplication.RepaintHierarchyWindow();
-		}
+        }
 
-		void OnGUI_KeyHeader (string sKey, string sCategory, string FullKey, int nUses, float YPosMin)
+        void OnGUI_KeyHeader (string sKey, string sCategory, string FullKey, int nUses, float YPosMin)
 		{
 			//--[ Toggle ]---------------------
 			GUI.Box(new Rect(2, YPosMin+2, 18, mRowSize), "", "Toolbar");
@@ -394,23 +402,49 @@ namespace I2.Loc
 
 			//--[ Compress Mask ]-------------------
 			int Mask = 0;
-			for (int i=0, imax=mCategories.Count; i<imax; ++i)
-				if (mSelectedCategories.Contains( mCategories[i] ))
-					Mask |= (1<<i);
+			if (mSelectedCategories.Count == mCategories.Count) 
+			{
+				Mask = -1;
+			}
+			else
+			{
+				for (int i = 0, imax = mCategories.Count; i < imax; ++i)
+					if (mSelectedCategories.Contains (mCategories [i]))
+						Mask |= (1 << i);
+			}
 			
 			//--[ GUI ]-----------------------------
-			GUI.changed = false;
+			EditorGUI.BeginChangeCheck();
 			Mask = EditorGUILayout.MaskField(Mask, mCategories.ToArray(), EditorStyles.toolbarDropDown, GUILayout.Width(100));
 
 			//--[ Decompress Mask ]-------------------
-			if (GUI.changed)
+			if (EditorGUI.EndChangeCheck())
 			{
-				GUI.changed = false;
 				mSelectedCategories.Clear();
 				mShowableTerms.Clear ();
 				for (int i=0, imax=mCategories.Count; i<imax; ++i)
 					if ( (Mask & (1<<i)) > 0 )
 						mSelectedCategories.Add (mCategories[i]);
+			}
+		}
+
+		void SaveSelectedCategories()
+		{
+			if (mSelectedCategories.Count == 0) {
+				EditorPrefs.DeleteKey ("I2 CategoryFilter");
+			} else {
+				var data = string.Join(",", mSelectedCategories.ToArray());
+				EditorPrefs.SetString ("I2 CategoryFilter", data);
+			}
+		}
+
+		void LoadSelectedCategories()
+		{
+			var data = EditorPrefs.GetString ("I2 CategoryFilter", null);
+			if (!string.IsNullOrEmpty(data))
+			{
+				mSelectedCategories.Clear ();
+				mSelectedCategories.AddRange( data.Split(",".ToCharArray(), System.StringSplitOptions.RemoveEmptyEntries));
 			}
 		}
 
@@ -473,6 +507,7 @@ namespace I2.Loc
 			if (GUILayout.Button( string.Empty, string.IsNullOrEmpty( KeyList_Filter ) ? "ToolbarSeachCancelButtonEmpty" : "ToolbarSeachCancelButton", GUILayout.ExpandWidth( false ) ))
 			{
 				KeyList_Filter = string.Empty;
+				EditorApplication.update += RepaintScene;
 				GUI.FocusControl( "" );
 			}
 
@@ -595,6 +630,7 @@ namespace I2.Loc
             EditorUtility.SetDirty(mLanguageSource);
 
             EditorApplication.update += DoParseTermsInCurrentScene;
+			EditorApplication.update += RepaintScene;
 		}
 
 		#endregion

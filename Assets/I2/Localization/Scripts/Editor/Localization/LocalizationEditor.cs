@@ -183,7 +183,17 @@ namespace I2.Loc
 		{
 			if (!string.IsNullOrEmpty(mLocalizationMsg))
 			{
-				EditorGUILayout.HelpBox(mLocalizationMsg, mLocalizationMessageType);
+                GUILayout.BeginHorizontal();
+				    EditorGUILayout.HelpBox(mLocalizationMsg, mLocalizationMessageType);
+
+                    GUILayout.Space(-5);
+                    GUILayout.BeginVertical(GUILayout.Width(15), GUILayout.ExpandHeight(false));
+                        GUILayout.Space(15);
+                        if (GUILayout.Button("X", "ToolbarSeachCancelButton", GUILayout.ExpandWidth(false)))
+                            ClearErrors();
+                    GUILayout.EndVertical();
+                GUILayout.EndHorizontal();
+                GUILayout.Space(8);
 			}
 		}
 		

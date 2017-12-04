@@ -24,7 +24,7 @@ namespace I2.Loc
         public override string ToString()
         {
             var translation = LocalizationManager.GetTranslation(mTerm, !mRTL_IgnoreArabicFix, mRTL_MaxLineLength, !mRTL_ConvertNumbers);
-            LocalizationManager.ApplyLocalizationParams(ref translation, null);
+            LocalizationManager.ApplyLocalizationParams(ref translation);
             return translation;
         }
     }

@@ -3,19 +3,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace I2.Loc
 {
-	public struct TranslationRequest
-	{
-		public string Term;
-		public string Text;
-		public string LanguageCode;
-		public string[] TargetLanguagesCode;
-		public string[] Results;			// This is filled google returns the translations
-	}
+	using TranslationDictionary = Dictionary<string, TranslationQuery>;
 
-	public static class GoogleTranslation
+	public static partial class GoogleTranslation
 	{
 		public static bool CanTranslate ()
 		{
@@ -23,150 +18,198 @@ namespace I2.Loc
 					!string.IsNullOrEmpty (LocalizationManager.GetWebServiceURL()));
 		}
 
-		#region Single Translation
+        #region Single Translation
 
-		// LanguageCodeFrom can be "auto"
-		// After the translation is returned from Google, it will call OnTranslationReady(TranslationResult)
-		// TranslationResult will be null if translation failed
-		public static void Translate( string text, string LanguageCodeFrom, string LanguageCodeTo, Action<string> OnTranslationReady )
+        // LanguageCodeFrom can be "auto"
+        // After the translation is returned from Google, it will call OnTranslationReady(TranslationResult, ErrorMsg)
+        // TranslationResult will be null if translation failed
+        public static void Translate( string text, string LanguageCodeFrom, string LanguageCodeTo, Action<string, string> OnTranslationReady )
 		{
-			WWW _www = GetTranslationWWW( text, LanguageCodeFrom, LanguageCodeTo );
+			TranslationDictionary queries = new TranslationDictionary ();
 
-			// Simulate a coroutine when in-editor
-			#if UNITY_EDITOR
-				if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
-				{
-                    mTranslationRequests.Add( new GoogleTranslationRequest()
-                    {
-                        www = _www,
-                        OnTranslationReady = OnTranslationReady,
-                        OriginalText = text
-                    });
-					UnityEditor.EditorApplication.update += EditorCoroutine_WaitForTranslation;
-					return;
-				}
-			#endif
-			I2.CoroutineManager.pInstance.StartCoroutine(WaitForTranslation(_www, OnTranslationReady, text));
-		}
+            LanguageCodeTo = GoogleLanguages.GetGoogleLanguageCode(LanguageCodeTo);
 
-		#if UNITY_EDITOR
-            public class GoogleTranslationRequest
+            if (LanguageCodeTo==LanguageCodeFrom)
             {
-                public WWW www;
-                public Action<string> OnTranslationReady;
-                public string OriginalText;
+                OnTranslationReady(text, null);
+                return;
             }
 
-            public static List<GoogleTranslationRequest> mTranslationRequests = new List<GoogleTranslationRequest>();
-
-            public static void CancelCurrentGoogleTranslations()
+            // Unsupported language
+            if (string.IsNullOrEmpty(LanguageCodeTo))
             {
-                mTranslationRequests.Clear();
-                UnityEditor.EditorApplication.update -= EditorCoroutine_WaitForTranslation;
+                OnTranslationReady(string.Empty, null);
+                return;
             }
 
-        static void EditorCoroutine_WaitForTranslation()
+
+            CreateQueries(text, LanguageCodeFrom, LanguageCodeTo, queries);   // can split plurals into several queries
+
+			Translate(queries, (results,error)=>
 			{
-                foreach (var request in mTranslationRequests)
-                {
-                    if (request.www.isDone)
-                        UseTranslation(request.www, request.OnTranslationReady, request.OriginalText);
-                }
-                mTranslationRequests.RemoveAll(x => x.www.isDone);
+					if (!string.IsNullOrEmpty(error) || results.Count==0)
+					{
+						OnTranslationReady(null, error);
+						return;
+					}
 
-				if (mTranslationRequests.Count==0)
-					UnityEditor.EditorApplication.update -= EditorCoroutine_WaitForTranslation;
-				else 
-					UnityEditor.SceneView.RepaintAll(); // This is needed to make the editor call the EditorApplication.update in the next frame 
-		    }
-        #endif
-
-
-		static IEnumerator WaitForTranslation(WWW www, Action<string> OnTranslationReady, string OriginalText)
-		{
-			yield return www;
-			UseTranslation(www, OnTranslationReady, OriginalText);
+					string result = RebuildTranslation( text, queries, LanguageCodeTo);				// gets the result from google and rebuilds the text from multiple queries if its is plurals
+					OnTranslationReady( result, null );
+			});
 		}
 
-		static void UseTranslation(WWW www, Action<string> OnTranslationReady, string OriginalText)
+        // Query google for the translation and waits until google returns
+        // On some Unity versions (e.g. 2017.1f1) unity doesn't handle well waiting for WWW in the main thread, so this call can fail
+        // In those cases, its advisable to use the Async version  (GoogleTranslation.Translate(....))
+        public static string ForceTranslate ( string text, string LanguageCodeFrom, string LanguageCodeTo )
+        {
+            TranslationDictionary dict = new TranslationDictionary();
+            AddQuery(text, LanguageCodeFrom, LanguageCodeTo, dict);
+
+            WWW www = GetTranslationWWW(dict);
+        	while (!www.isDone);
+
+        	if (!string.IsNullOrEmpty(www.error))
+        	{
+        		//Debug.LogError ("-- " + www.error);
+        		return string.Empty;
+        	}
+        	else
+        	{
+                var bytes = www.bytes;
+                var wwwText = Encoding.UTF8.GetString(bytes, 0, bytes.Length); //www.text
+                if (wwwText.StartsWith("<!DOCTYPE html>") || wwwText.StartsWith("<HTML>"))
+                    return string.Empty;
+                return wwwText;
+        	}
+        }
+
+        public static void CreateQueries( string text, string LanguageCodeFrom, string LanguageCodeTo, TranslationDictionary dict )
 		{
-			if (!string.IsNullOrEmpty(www.error))
+			if (!text.Contains ("[i2p_")) 
 			{
-				Debug.LogError (www.error);
-				OnTranslationReady(string.Empty);
+				AddQuery (text, LanguageCodeFrom, LanguageCodeTo, dict);
+				return;
+			}
+
+			// Get pluralType 'Plural'
+			int idx0 = 0;
+			int idx1 = text.IndexOf ("[i2p_");
+			if (idx1 == 0)  // Handle case where the text starts with a plural tag
+			{
+				idx0 = text.IndexOf ("]", idx1)+1;
+				idx1 = text.IndexOf ("[i2p_");
+				if (idx1 < 0) idx1 = text.Length;
+			}
+
+			var pluralText = text.Substring (idx0, idx1 - idx0);
+
+			var regex = new Regex(@"{\[(.*?)\]}");
+
+			for (var i = (ePluralType)0; i <= ePluralType.Plural; ++i) 
+			{
+				if (!GoogleLanguages.LanguageHasPluralType(LanguageCodeTo, i.ToString()))
+					continue;
+
+				var newText = pluralText;
+				int testNumber = GoogleLanguages.GetPluralTestNumber (LanguageCodeTo, i);
+				newText = regex.Replace(newText, testNumber.ToString());
+
+				AddQuery (newText, LanguageCodeFrom, LanguageCodeTo, dict);
+			}
+		}
+
+		static void AddQuery( string text, string LanguageCodeFrom, string LanguageCodeTo, TranslationDictionary dict )
+		{
+			if (string.IsNullOrEmpty (text))
+				return;
+			
+			if (!dict.ContainsKey (text)) 
+			{
+				dict[text] = new TranslationQuery (){ Text=text, LanguageCode=LanguageCodeFrom, TargetLanguagesCode=new string[]{LanguageCodeTo} };
 			}
 			else
 			{
-                var bytes = www.bytes;
-                var wwwText = Encoding.UTF8.GetString(bytes, 0, bytes.Length); //www.text
-                string Translation = ParseTranslationResult(wwwText, OriginalText);
-				OnTranslationReady( Translation );
+				var query = dict [text];
+				if (System.Array.IndexOf (query.TargetLanguagesCode, LanguageCodeTo) < 0) {
+					query.TargetLanguagesCode = query.TargetLanguagesCode.Concat (new string[]{ LanguageCodeTo }).Distinct ().ToArray ();
+				}
+				dict [text] = query;
 			}
 		}
 
-		// Querry google for the translation and waits until google returns
-		//public static string ForceTranslate ( string text, string LanguageCodeFrom, string LanguageCodeTo )
-		//{
-		//	WWW www = GetTranslationWWW( text, LanguageCodeFrom, LanguageCodeTo );
-		//	while (!www.isDone);
-			
-		//	if (!string.IsNullOrEmpty(www.error))
-		//	{
-		//		Debug.LogError ("-- " + www.error);
-		//		//foreach(KeyValuePair<string, string> entry in www.responseHeaders) 
-		//		//	Debug.Log(entry.Value + "=" + entry.Key);
-				
-		//		return string.Empty;
-		//	}
-		//	else
-		//	{
-  //              var bytes = www.bytes;
-  //              var wwwText = Encoding.UTF8.GetString(bytes, 0, bytes.Length); //www.text
-  //              return ParseTranslationResult(wwwText, text);
-		//	}
-		//}
-
-		public static WWW GetTranslationWWW(  string text, string LanguageCodeFrom, string LanguageCodeTo )
+		public static string RebuildTranslation( string text, TranslationDictionary dict, string LanguageCodeTo )
 		{
-			LanguageCodeFrom = GoogleLanguages.GetGoogleLanguageCode(LanguageCodeFrom);
-			LanguageCodeTo = GoogleLanguages.GetGoogleLanguageCode(LanguageCodeTo);
-
-			// Google has problem translating this "This Is An Example"  but not this "this is an example"
-			// so I'm asking google with the lowercase version and then reverting back
-			if (TitleCase(text)==text && text.ToUpper()!=text)
-				text = text.ToLower();
-
-			string url = string.Format("{0}?action=Translate&list={1}:{2}={3}", LocalizationManager.GetWebServiceURL(), LanguageCodeFrom, LanguageCodeTo, Uri.EscapeDataString( text ));
-			//Debug.Log (url);
-			WWW www = new WWW(url);
-			return www;
-		}
-
-		public static string ParseTranslationResult( string html, string OriginalText )
-		{
-			try
+			if (!text.Contains ("[i2p_")) 
 			{
-				//var iStart = html.IndexOf("<i2>");
-				//var Translation = html.Substring(iStart+"<i2>".Length);
-				var Translation = html;
-				
-				//if (OriginalText.ToUpper()==OriginalText)
-					//Translation = Translation.ToUpper();
-				//else
-				//	if (UppercaseFirst(OriginalText)==OriginalText)
-				//		Translation = UppercaseFirst(Translation);
-				//else
-					if (TitleCase(OriginalText)== OriginalText && OriginalText.ToUpper() != OriginalText)   // Google has problem translating this "This Is An Example"  but not this "this is an example"
-						Translation = TitleCase(Translation);
+				return GetTranslation (text, LanguageCodeTo, dict);
+			}
 
-				return Translation;
+			// Get pluralType 'Plural'
+			int idx0 = 0;
+			int idx1 = text.IndexOf ("[i2p_");
+			if (idx1 == 0)  // Handle case where the text starts with a plural tag
+			{
+				idx0 = text.IndexOf ("]", idx1)+1;
+				idx1 = text.IndexOf ("[i2p_");
+				if (idx1 < 0) idx1 = text.Length;
 			}
-			catch (Exception ex) 
-			{ 
-				Debug.LogError(ex.Message); 
-				return string.Empty;
+			var pluralText = text.Substring (idx0, idx1 - idx0);
+			var match = Regex.Match(pluralText, @"{\[(.*?)\]}");
+			var param = (match == null ? string.Empty : match.Value);
+						
+
+			var sb = new System.Text.StringBuilder ();
+
+			var newText = pluralText;
+			int testNumber = GoogleLanguages.GetPluralTestNumber (LanguageCodeTo, ePluralType.Plural);
+			newText = newText.Replace(param, testNumber.ToString());
+			var translation = GetTranslation (newText, LanguageCodeTo, dict);
+			string pluralTranslation = translation.Replace (testNumber.ToString (), param);
+			sb.Append ( pluralTranslation );
+
+			for (var i = (ePluralType)0; i < ePluralType.Plural; ++i)
+			{
+				if (!GoogleLanguages.LanguageHasPluralType(LanguageCodeTo, i.ToString()))
+					continue;
+
+				newText = pluralText;
+				testNumber = GoogleLanguages.GetPluralTestNumber (LanguageCodeTo, i);
+				newText = newText.Replace(param, testNumber.ToString());
+
+				translation = GetTranslation (newText, LanguageCodeTo, dict);
+
+				translation = translation.Replace (testNumber.ToString (), param);
+
+
+				if (!string.IsNullOrEmpty (translation) && translation!=pluralTranslation) 
+				{
+					sb.Append ("[i2p_");
+					sb.Append (i.ToString ());
+					sb.Append (']');
+					sb.Append (translation);
+				}
 			}
+
+			return sb.ToString ();
 		}
+
+		static string GetTranslation( string text, string LanguageCodeTo, TranslationDictionary dict )
+		{
+			if (!dict.ContainsKey (text))
+				return null;
+			var query = dict [text];
+
+			int langIdx = System.Array.IndexOf (query.TargetLanguagesCode, LanguageCodeTo);
+			if (langIdx < 0)
+				return "";
+
+            if (query.Results == null)
+                return "";
+			return query.Results [langIdx];
+		}
+
+
 		/*static string ParseTranslationResult( string html, string OriginalText )
 		{
 			try
@@ -208,102 +251,6 @@ namespace I2.Loc
 		}*/
 
 #endregion
-
-#region Multiple Translations
-
-		public static void Translate( List<TranslationRequest> requests, Action<List<TranslationRequest>> OnTranslationReady )
-		{
-			WWW www = GetTranslationWWW( requests );
-			I2.CoroutineManager.pInstance.StartCoroutine(WaitForTranslation(www, OnTranslationReady, requests));
-		}
-
-		public static WWW GetTranslationWWW(  List<TranslationRequest> requests )
-		{
-			var sb = new StringBuilder ();
-
-			bool first = true;
-			foreach (var request in requests)
-			{
-				if (!first)
-					sb.Append("<I2Loc>");
-				sb.Append(request.LanguageCode);
-				sb.Append(":");
-				for (int i=0; i<request.TargetLanguagesCode.Length; ++i)
-				{
-					if (i!=0) sb.Append(",");
-					sb.Append(request.TargetLanguagesCode[i]);
-				}
-				sb.Append("=");
-
-                var text = (TitleCase(request.Text) == request.Text) ? request.Text.ToLowerInvariant() : request.Text;
-
-                //sb.Append(text);
-                sb.Append(Uri.EscapeUriString(text));
-                first = false;
-                if (sb.Length>4000)
-                    break;
-			}
-
-            return new WWW(string.Format("{0}?action=Translate&list={1}", LocalizationManager.GetWebServiceURL(), sb.ToString()));
-            //WWWForm form = new WWWForm();
-            //form.AddField("action", "MultiTranslate");
-            //form.AddField("data", sb.ToString());
-				
-            //WWW www = new WWW(LocalizationManager.GetWebServiceURL(), form);
-            //return www;
-		}
-		
-		static IEnumerator WaitForTranslation(WWW www, Action<List<TranslationRequest>> OnTranslationReady, List<TranslationRequest> requests)
-		{
-			yield return www;
-			
-			if (!string.IsNullOrEmpty(www.error))
-			{
-				Debug.LogError (www.error);
-				OnTranslationReady(requests);
-			}
-			else
-			{
-                var bytes = www.bytes;
-                var wwwText = Encoding.UTF8.GetString(bytes, 0, bytes.Length); //www.text
-                ParseTranslationResult(wwwText, requests);
-				OnTranslationReady( requests );
-			}
-		}
-
-		public static string ParseTranslationResult( string html, List<TranslationRequest> requests )
-		{
-			//Debug.Log(html);
-			// Handle google restricting the webservice to run
-			if (html.StartsWith("<!DOCTYPE html>") || html.StartsWith("<HTML>"))
-			{
-                if (html.Contains("Service invoked too many times in a short time"))
-                    return ""; // ignore and try again
-                else
-				    return "There was a problem contacting the WebService. Please try again later";
-			}
-
-			string[] texts = html.Split (new string[]{"<I2Loc>"}, StringSplitOptions.None);
-			string[] splitter = new string[]{"<i2>"};
-			for (int i=0; i<Mathf.Min (requests.Count, texts.Length); ++i)
-			{
-				var temp = requests[i];
-				temp.Results = texts[i].Split (splitter, StringSplitOptions.None);
-
-				// Google has problem translating this "This Is An Example"  but not this "this is an example"
-				if (TitleCase(temp.Text)==temp.Text)
-				{
-					for (int j=0; j<temp.Results.Length; ++j)
-						temp.Results[j] = TitleCase(temp.Results[j]);
-				}
-				requests[i] = temp;
-			}
-			return "";
-		}
-
-#endregion
-
-		
 
 		public static string UppercaseFirst(string s)
 		{
