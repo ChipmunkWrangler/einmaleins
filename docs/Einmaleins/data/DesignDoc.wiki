@@ -3,25 +3,17 @@
 Drill the times tables.
 
 +Todo
-Make screenshots for shop, perhaps add them to web pages,
+ Make screenshots for shop, perhaps add them to web pages,
 
- Ask Talea if she asked Karolina etc. then write to parents (Nina Brust)
+Serialization
+ Write
+ Make write atomic by writing to temp and swapping
+ Send email
+ 
+There is a pause on the first quiz question
 
- MAke write atomic by writing to temp and swapping
-
- Bug: Sometimes, if you reach a planet (seems like a timing issue):
-  Question didn't go away
-  Celebrate didn't go away
-  What should happen is
-   Celebrate.OnQuestionChanged
-   OnQuestionChanged 
-   OnCorrectAnswer
-   Reach Planet
-   StopRunning
-   Celebrate.OnQuizAborted
 ++v1.0.0 
  * Bug: ion stream flickers between in front of and behind the planets. But it is also kind of cool.
- * Check out Dave's crashes
  *  Matthias B.s wife keeps getting the same questions in a row
   * He thinks she isn't at Pluto yet
   * Get him to download playerprefs
@@ -111,7 +103,13 @@ Make screenshots for shop, perhaps add them to web pages,
    * YOU USE CRYPTO NOW! 
   * Check "Test Information" under IOSBuilds...Test Details in testflight, in the right language -- see Texts below (https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=build&subsection=testdetails&id=24416006)
   * Add groups to the build
++Bugs
+ * Reach mars without answering any questions after upgrade 1 : maybe tweak the planet heights?
+ * if a wrong question is shown but not answered (because you reach the planet), it is still no longer marked as wrong, hence in the next quiz is doesn't appear first
 +Ideas 
+ * No one understands fuel
+ * Difficulty levels and or voice control due to motor control issues
+ * Make first rocket upgrade really fast
  * Longer-term motivation
   * More involvement with rocket building
    * Collect currency for every correct question, regardless of speed
@@ -143,11 +141,16 @@ Make screenshots for shop, perhaps add them to web pages,
  * Use blender to fix texture or try 2d rocket
  * Tutorial Tips
   * The first time that a player gets a question wrong twice, explain the give up ("hint") button
+  * Show feedback on a wrong answer so the player knows it was wrong
+   * Text
+   * red flash
+   * Tutorial tip initially, then nothing later on 
   * Show "the faster you answer, the higher you go", e.g. if players fail to break their record for three times, or perhaps answer no questions fast after the first quiz.
   * If the right answer is entered and OK isn't pressed in 5s, pulse it or show finger
  * Algorithm 
   * Launch code also for normal wrong answers if there weren't any give ups
   * A new question each day
+  * If a question is answered within allotted time, don't ask it again until tomorrow
   * If frustration is high, the hardest already mastered question is asked, or the easiest nonmastered if none are mastered.
    * If the easiest nonmastered has avg time > 15, ask the easiest new question instead. 
     * The current version tends to ask the same questions over and over, which may be sensible but is dull. This tweak might add a little more variety, as might decaying old answers (see below) 
@@ -158,6 +161,7 @@ Make screenshots for shop, perhaps add them to web pages,
   * Add randomness to deep space question choice, since otherwise people may repeatedly get the same questions in a row
  * Add unlimited accounts, or the ability to erase an account with parent mode
  * Info-screen or overlay that explains fuel, etc.
+  * Remove fuel and height indicators? 
  * Serialization 
   * Add savegame per-player checksum, replace savegame with old copy if checksum fails because save was corrupted
   * Check where you call Save. Should happen at end of each quiz and on scene change, probably nowhere else.
@@ -170,7 +174,8 @@ Make screenshots for shop, perhaps add them to web pages,
  * "Keep going anyway" button at end of day?
  * Shrink height numbers
   * Highlight the first few digits
-  * Change unit (maybe write "Millionen km", or AU, or Mm, 
+  * Change unit (maybe write "Millionen km", or AU, or Mm
+  * Or remove it entirely, since the height and record are also visible on the playfield
  * Remove stats screen or make it more prominent
   * Add a big "View progress" above "Launch" button instead of little stats screen button 
   * Fade mastered cards one at a time, show flying "Mastered" text
