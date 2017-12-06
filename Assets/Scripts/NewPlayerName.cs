@@ -26,7 +26,6 @@ public class NewPlayerName : MonoBehaviour {
 			TargetPlanet.Reset ();
 		} // else this is initial start
 		ActivatePlayButton (false);
-//		PlayerPrefs.SetInt (playerNamesPrefsKey + ":StringArray:ArrayLen", 2);
 		playerNames = GetPlayerNames();
 		int numPlayers = playerNames.Length;
 		enterNamePanel.SetActive (numPlayers < playerButtons.Length);

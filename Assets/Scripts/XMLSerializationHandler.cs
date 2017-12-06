@@ -10,7 +10,7 @@ public class XMLSerializationHandler  {
 
 	static public void SaveToFile() {
 		try {
-			var serializer = new XmlSerializer(typeof(SerializableGameData));
+			var serializer = new XmlSerializer(typeof(GameData));
 			System.Text.Encoding encoding = System.Text.Encoding.GetEncoding("UTF-8");
 			using (FileStream file = File.Open (GetPath(), FileMode.Create, FileAccess.Write, FileShare.None)) {
 				using(var sw = new StreamWriter(file, encoding)) {
@@ -24,23 +24,23 @@ public class XMLSerializationHandler  {
 	}
 
 	static public string GetAsString() {
-		var serializer = new XmlSerializer(typeof(SerializableGameData));
+		var serializer = new XmlSerializer(typeof(GameData));
 		using(var sw = new StringWriter()) {
 			serializer.Serialize(sw, GetData());
 			return sw.ToString ();
 		}
 	}
 
-	static public SerializableGameData LoadFromFile() {
-		SerializableGameData data = null;
+	static public GameData LoadFromFile() {
+		GameData data = null;
 		try {
 			string path = GetPath();
 			if (File.Exists(path)) {
 				using (FileStream file = File.OpenRead (GetPath())) {
-					XmlSerializer serializer = new XmlSerializer(typeof(SerializableGameData));
+					XmlSerializer serializer = new XmlSerializer(typeof(GameData));
 
 
-					data = serializer.Deserialize(file) as SerializableGameData;
+					data = serializer.Deserialize(file) as GameData;
 				}
 			}
 		} catch (System.Exception ex) {
@@ -55,15 +55,10 @@ public class XMLSerializationHandler  {
 		return Path.Combine(Application.persistentDataPath, fName);
 	}
 
-	static SerializableGameData GetData() {
-		var data = new SerializableGameData();
+	static GameData GetData() {
+		var data = new GameData();
 		data.testInt = 3;
 		return data;
 	}
 }
 
-[System.Serializable]
-public class SerializableGameData {
-//	[XmlArray("YourReadableName")]
-	public int testInt = 2;
-}

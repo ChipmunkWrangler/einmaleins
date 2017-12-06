@@ -6,14 +6,19 @@ Drill the times tables.
  Make screenshots for shop, perhaps add them to web pages,
 
 Serialization
- Write
  Make write atomic by writing to temp and swapping
- Send email
- 
+
+ * You can make a static class that has all the data, and make everyone access it for persistent data
+  * Easy to serialize & deserialize
+  * Not easy to serialize or deserialize a subset
+  * singleton
+  * Not obvious how each e.g. question accesses the corresponding persistent question (parallel hierarchy)
+ * You can call Save and Load as you do now, but pass a string for it to build
 There is a pause on the first quiz question
 
 ++v1.0.0 
  * Bug: ion stream flickers between in front of and behind the planets. But it is also kind of cool.
+ * Ion stream doesn't look impressive
  *  Matthias B.s wife keeps getting the same questions in a row
   * He thinks she isn't at Pluto yet
   * Get him to download playerprefs
