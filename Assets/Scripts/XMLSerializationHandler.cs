@@ -57,8 +57,10 @@ public class XMLSerializationHandler  {
 
 	static GameData GetData() {
 		var data = new GameData();
-		data.testInt = 3;
 		return data;
 	}
+}
+
+public class GameData {
 }
 
