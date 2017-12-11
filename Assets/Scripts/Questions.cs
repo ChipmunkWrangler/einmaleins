@@ -56,10 +56,10 @@ public class Questions : MonoBehaviour {
 		
 	void OnEnable() {
 		data.Load ();
-		CreateQuestions ();
+		questions = CreateQuestions ();
 	}
 		
-	public void CreateQuestions() {
+	public Question[] CreateQuestions() {
 		Question[] questions = new Question[GetNumQuestions()];
 		int idx = 0;
 		for (int a = 1; a <= maxNum; ++a) {
@@ -68,6 +68,7 @@ public class Questions : MonoBehaviour {
 				++idx;
 			}
 		}
+		return questions;
 	}
 }
 
