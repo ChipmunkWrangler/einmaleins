@@ -9,13 +9,11 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 	const int FRUSTRATION_GIVE_UP = 2;
 	const int FRUSTRATION_RIGHT = -1;
 	const int FRUSTRATION_FAST = -2;
-	const int MIN_FRUSTRATION = -2;
-	const int MAX_FRUSTRATION = 3;
-	const int MIN_QUIZZES_PER_DAY = 3;
-	const float MIN_TIME_PER_DAY = 5 * 60.0f;
 	const int NUM_ANSWERS_PER_QUIZ = 7; // the bigger this is, the more new questions the kid will be confronted with at once
 	const int GAUNTLET_ASK_LIST_LENGTH = 55;
 	const int NUM_ANSWERS_LEFT_WHEN_LAUNCH_CODE_ASKED = 3;
+
+	EffortTrackerPersistantData data = new EffortTrackerPersistantData();
 
 	int _numAnswersLeftInQuiz;
 	int numAnswersLeftInQuiz { 
@@ -28,27 +26,16 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 		}
 	}
 	bool isQuizStarted;
-	int _frustration;
-	int frustration {
-		get { return _frustration; }
-		set { _frustration = Mathf.Clamp (value, MIN_FRUSTRATION, MAX_FRUSTRATION); }
-	}
-	int quizzesToday = -1;
-	float timeToday;
 	bool allowGivingUp;
-	const string prefsKey = "effortTracking";
 
 	public bool IsDoneForToday() {
-		if (quizzesToday < 0) {
-			Load ();
-		}
-		return quizzesToday >= MIN_QUIZZES_PER_DAY && timeToday >= MIN_TIME_PER_DAY;
+		return data.IsDoneForToday ();
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		float answerTime = question.GetLastAnswerTime ();
-		timeToday += answerTime + Celebrate.duration;
-		frustration += (answerTime <= Question.FAST_TIME) ? FRUSTRATION_FAST : FRUSTRATION_RIGHT;
+		data.timeToday += answerTime + Celebrate.duration;
+		data.frustration += (answerTime <= Question.FAST_TIME) ? FRUSTRATION_FAST : FRUSTRATION_RIGHT;
 		if (isQuizStarted) {
 			--numAnswersLeftInQuiz;
 		}
@@ -58,11 +45,12 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 		if (!isQuizStarted) {
 			StartQuiz ();
 		}
-		Debug.Log ("frustration = " + frustration + " numAnswersInQuiz " + numAnswersLeftInQuiz);
+		Debug.Log ("frustration = " + data.frustration + " numAnswersInQuiz " + numAnswersLeftInQuiz);
 		if (numAnswersLeftInQuiz <= 0) {
 			return null;
 		}
-		bool isFrustrated = frustration > 0;
+		bool isFrustrated = data.frustration > 0;
+
 		if (numAnswersLeftInQuiz <= NUM_ANSWERS_LEFT_WHEN_LAUNCH_CODE_ASKED && !isFrustrated) {
 			Question q = questions.GetLaunchCodeQuestion ();
 			if (q != null) {
@@ -73,14 +61,14 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 	}
 
 	public void OnWrongAnswer(bool wasNew) {
-		frustration += FRUSTRATION_WRONG;
+		data.frustration += FRUSTRATION_WRONG;
 		if (isQuizStarted) {
 			--numAnswersLeftInQuiz;
 		}
 	}
 
 	public void OnGiveUp(Question question) {
-		frustration += FRUSTRATION_GIVE_UP;
+		data.frustration += FRUSTRATION_GIVE_UP;
 	}
 
 	public static int GetNumAnswersInQuiz(bool isGauntlet) {
@@ -88,7 +76,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 	}
 
 	void StartQuiz() {
-		Load ();
+		data.Load ();
 		Goal.CurGoal curGoal = goal.CalcCurGoal();
 		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
 		allowGivingUp = Goal.IsGivingUpAllowed(curGoal);
@@ -100,8 +88,37 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 	public void EndQuiz() {
 		isQuizStarted = false;
 		RocketParts.instance.justUpgraded = false;
-		++quizzesToday;
+		++data.quizzesToday;
 		Save ();
+	}
+
+	public void Save() {
+		data.Save ();
+		questions.Save ();
+	}
+}
+
+public class EffortTrackerPersistantData {
+	public int quizzesToday = -1;
+	public float timeToday;
+	public int frustration {
+		get { return _frustration; }
+		set { _frustration = Mathf.Clamp (value, MIN_FRUSTRATION, MAX_FRUSTRATION); }
+	}
+
+	const string prefsKey = "effortTracking";
+	const int MIN_FRUSTRATION = -2;
+	const int MAX_FRUSTRATION = 3;
+	const int MIN_QUIZZES_PER_DAY = 3;
+	const float MIN_TIME_PER_DAY = 5 * 60.0f;
+
+	int _frustration;
+
+	public bool IsDoneForToday() {
+		if (quizzesToday < 0) {
+			Load ();
+		}
+		return quizzesToday >= MIN_QUIZZES_PER_DAY && timeToday >= MIN_TIME_PER_DAY;
 	}
 
 	public void Save() {
@@ -109,7 +126,6 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 		MDPrefs.SetInt (prefsKey + ":frustration", frustration);
 		MDPrefs.SetInt (prefsKey + ":quizzesToday", quizzesToday);
 		MDPrefs.SetFloat (prefsKey + ":timeToday", timeToday);
-		questions.Save ();
 	}
 
 	public void Load() {

@@ -6,8 +6,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{CF434FDF-F472-6099-0934-8E9F9BEF8244}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -38,175 +39,173 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.XML" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\Managed\UnityEngine.dll</HintPath>
+      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\Managed\UnityEditor.dll</HintPath>
+      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\I2\Common\CoroutineManager.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\EventCallback.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleLanguages.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleTranslation.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleTranslation_Post.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Export_CSV.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Export_Google.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Import_CSV.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Import_Google.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Misc.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Google\SimpleJSON.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\LanguageSource.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\LocalizationManager.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\LocalizationReader.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Localize.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\LocalizeDropdown.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\ILocalizeTarget.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_2DToolKit.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_NGUI.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_SVG.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_TextMeshPro.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_UnityStandard.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_UnityUI.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\AutoChangeCultureInfo.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\LocalizationParamsManager.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\LocalizedString.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\PersistentStorage.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\RegisterGlobalParameters.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\ResourceManager.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\RTLFixer.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\SetLanguage.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\SetLanguageDropdown.cs" />
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\StringObfuscator.cs" />
-    <Compile Include="Assets\PreciseLocale\PreciseLocale.cs" />
-    <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
-    <Compile Include="Assets\Scripts\BoostMeter.cs" />
-    <Compile Include="Assets\Scripts\CCInputField.cs" />
-    <Compile Include="Assets\Scripts\Celebrate.cs" />
-    <Compile Include="Assets\Scripts\ChooseRocketColour.cs" />
-    <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
-    <Compile Include="Assets\Scripts\EffortTracker.cs" />
-    <Compile Include="Assets\Scripts\EnterAnswerButtonController.cs" />
-    <Compile Include="Assets\Scripts\FlashThrust.cs" />
-    <Compile Include="Assets\Scripts\Fuel.cs" />
-    <Compile Include="Assets\Scripts\GameData.cs" />
-    <Compile Include="Assets\Scripts\GetRocketColour.cs" />
-    <Compile Include="Assets\Scripts\GiveUpButtonController.cs" />
-    <Compile Include="Assets\Scripts\GiveUpOkButton.cs" />
-    <Compile Include="Assets\Scripts\Goal.cs" />
-    <Compile Include="Assets\Scripts\GoalButtonControler.cs" />
-    <Compile Include="Assets\Scripts\GotoBuildRocket.cs" />
-    <Compile Include="Assets\Scripts\GotoChoosePlayer.cs" />
-    <Compile Include="Assets\Scripts\GotoLaunch.cs" />
-    <Compile Include="Assets\Scripts\GotoMain.cs" />
-    <Compile Include="Assets\Scripts\GotoScene.cs" />
-    <Compile Include="Assets\Scripts\GotoStats.cs" />
-    <Compile Include="Assets\Scripts\HideOnWrong.cs" />
-    <Compile Include="Assets\Scripts\KeyHandler.cs" />
-    <Compile Include="Assets\Scripts\KickoffLaunch.cs" />
-    <Compile Include="Assets\Scripts\LaunchButtonController.cs" />
-    <Compile Include="Assets\Scripts\MatchPositionAndSize.cs" />
-    <Compile Include="Assets\Scripts\MDCulture.cs" />
-    <Compile Include="Assets\Scripts\MDPrefs.cs" />
-    <Compile Include="Assets\Scripts\MDVersion.cs" />
-    <Compile Include="Assets\Scripts\NewPlayerName.cs" />
-    <Compile Include="Assets\Scripts\NumberButtonLayoutController.cs" />
-    <Compile Include="Assets\Scripts\OnAnswerChanged.cs" />
-    <Compile Include="Assets\Scripts\OnCorrectAnswer.cs" />
-    <Compile Include="Assets\Scripts\OnGiveUp.cs" />
-    <Compile Include="Assets\Scripts\OnQuestionChanged.cs" />
-    <Compile Include="Assets\Scripts\OnQuizAborted.cs" />
-    <Compile Include="Assets\Scripts\OnWrongAnswer.cs" />
-    <Compile Include="Assets\Scripts\Params.cs" />
-    <Compile Include="Assets\Scripts\PlayerData.cs" />
-    <Compile Include="Assets\Scripts\PlayerNameController.cs" />
-    <Compile Include="Assets\Scripts\PositionFx.cs" />
-    <Compile Include="Assets\Scripts\Question.cs" />
-    <Compile Include="Assets\Scripts\QuestionDisplay.cs" />
-    <Compile Include="Assets\Scripts\QuestionPicker.cs" />
-    <Compile Include="Assets\Scripts\Questions.cs" />
-    <Compile Include="Assets\Scripts\RocketBuilder.cs" />
-    <Compile Include="Assets\Scripts\RocketMotion.cs" />
-    <Compile Include="Assets\Scripts\RocketMotionSolarSystem.cs" />
-    <Compile Include="Assets\Scripts\RocketPartCounter.cs" />
-    <Compile Include="Assets\Scripts\RocketParts.cs" />
-    <Compile Include="Assets\Scripts\Score.cs" />
-    <Compile Include="Assets\Scripts\ScrollBackground.cs" />
-    <Compile Include="Assets\Scripts\SendSaveDataByMail.cs" />
-    <Compile Include="Assets\Scripts\ShowOnRight.cs" />
-    <Compile Include="Assets\Scripts\ShowSolarSystem.cs" />
-    <Compile Include="Assets\Scripts\StatsColumnController.cs" />
-    <Compile Include="Assets\Scripts\StatsController.cs" />
-    <Compile Include="Assets\Scripts\TargetPlanet.cs" />
-    <Compile Include="Assets\Scripts\TestAlgorithm.cs" />
-    <Compile Include="Assets\Scripts\TextButton.cs" />
-    <Compile Include="Assets\Scripts\TextDisplay.cs" />
-    <Compile Include="Assets\Scripts\UpgradeButton.cs" />
-    <Compile Include="Assets\Scripts\VersionDisplay.cs" />
-    <Compile Include="Assets\Scripts\XMLSerializationHandler.cs" />
-    <Compile Include="Assets\xARM\Classes\xARMClasses.cs" />
-    <Compile Include="Assets\xARM\Components\xARMDelegatesExample.cs" />
-    <Compile Include="Assets\xARM\Components\xARMDelegateUGUI.cs" />
-    <Compile Include="Assets\xARM\Components\xARMProxy.cs" />
-    <Compile Include="Assets\xARM\Managers\xARMConfig.cs" />
-    <Compile Include="Assets\xARM\Managers\xARMManager.cs" />
-    <Compile Include="Assets\xARM\Windows\xARMGalleryWindow.cs" />
-    <Compile Include="Assets\xARM\Windows\xARMHotkeys.cs" />
-    <Compile Include="Assets\xARM\Windows\xARMOptionsWindow.cs" />
-    <Compile Include="Assets\xARM\Windows\xARMPreviewWindow.cs" />
-    <None Include="Assets\xARM\_Changelog.txt" />
-    <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
-    <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
-    <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />
-    <None Include="Assets\I2\Localization\Scripts\Editor\Unity XCode\Xcode.txt" />
-    <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
-    <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />
-    <None Include="Assets\Shaders\TintWithAlphaMask.shader" />
-    <Reference Include="UnityEngine.UIAutomation">
-      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\UIAutomation\UnityEngine.UIAutomation.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\TestRunner\UnityEngine.TestRunner.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\TestRunner\net35\unity-custom\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\Networking\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\GUISystem\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Timeline">
-      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\Timeline\RuntimeEditor\UnityEngine.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.GoogleAudioSpatializer">
-      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\UnityGoogleAudioSpatializer\RuntimeEditor\UnityEngine.GoogleAudioSpatializer.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.HoloLens">
-      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\UnityHoloLens\RuntimeEditor\UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\UnitySpatialTracking\RuntimeEditor\UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>..\..\..\..\Library\Unity\cache\packages\packages.unity.com\com.unity.analytics%401.0.1\UnityEngine.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>..\..\..\..\Library\Unity\cache\packages\packages.unity.com\com.unity.purchasing%401.0.1\UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
-    <Compile Include="Assets\Scripts\MailPassword.cs" />
+     <Compile Include="Assets\I2\Common\CoroutineManager.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\EventCallback.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleLanguages.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleTranslation.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleTranslation_Post.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Export_CSV.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Export_Google.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Import_CSV.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Import_Google.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Misc.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Google\SimpleJSON.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\LanguageSource.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\LocalizationManager.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\LocalizationReader.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Localize.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\LocalizeDropdown.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Targets\ILocalizeTarget.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_2DToolKit.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_NGUI.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_SVG.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_TextMeshPro.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_UnityStandard.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_UnityUI.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Utils\AutoChangeCultureInfo.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Utils\LocalizationParamsManager.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Utils\LocalizedString.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Utils\PersistentStorage.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Utils\RegisterGlobalParameters.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Utils\ResourceManager.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Utils\RTLFixer.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Utils\SetLanguage.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Utils\SetLanguageDropdown.cs" />
+     <Compile Include="Assets\I2\Localization\Scripts\Utils\StringObfuscator.cs" />
+     <Compile Include="Assets\PreciseLocale\PreciseLocale.cs" />
+     <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
+     <Compile Include="Assets\Scripts\BoostMeter.cs" />
+     <Compile Include="Assets\Scripts\CCInputField.cs" />
+     <Compile Include="Assets\Scripts\Celebrate.cs" />
+     <Compile Include="Assets\Scripts\ChooseRocketColour.cs" />
+     <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
+     <Compile Include="Assets\Scripts\EffortTracker.cs" />
+     <Compile Include="Assets\Scripts\EnterAnswerButtonController.cs" />
+     <Compile Include="Assets\Scripts\FlashThrust.cs" />
+     <Compile Include="Assets\Scripts\Fuel.cs" />
+     <Compile Include="Assets\Scripts\GameData.cs" />
+     <Compile Include="Assets\Scripts\GetRocketColour.cs" />
+     <Compile Include="Assets\Scripts\GiveUpButtonController.cs" />
+     <Compile Include="Assets\Scripts\GiveUpOkButton.cs" />
+     <Compile Include="Assets\Scripts\Goal.cs" />
+     <Compile Include="Assets\Scripts\GoalButtonControler.cs" />
+     <Compile Include="Assets\Scripts\GotoBuildRocket.cs" />
+     <Compile Include="Assets\Scripts\GotoChoosePlayer.cs" />
+     <Compile Include="Assets\Scripts\GotoLaunch.cs" />
+     <Compile Include="Assets\Scripts\GotoMain.cs" />
+     <Compile Include="Assets\Scripts\GotoScene.cs" />
+     <Compile Include="Assets\Scripts\GotoStats.cs" />
+     <Compile Include="Assets\Scripts\HideOnWrong.cs" />
+     <Compile Include="Assets\Scripts\KeyHandler.cs" />
+     <Compile Include="Assets\Scripts\KickoffLaunch.cs" />
+     <Compile Include="Assets\Scripts\LaunchButtonController.cs" />
+     <Compile Include="Assets\Scripts\MailPassword.cs" />
+     <Compile Include="Assets\Scripts\MatchPositionAndSize.cs" />
+     <Compile Include="Assets\Scripts\MDCulture.cs" />
+     <Compile Include="Assets\Scripts\MDPrefs.cs" />
+     <Compile Include="Assets\Scripts\MDVersion.cs" />
+     <Compile Include="Assets\Scripts\NewPlayerName.cs" />
+     <Compile Include="Assets\Scripts\NumberButtonLayoutController.cs" />
+     <Compile Include="Assets\Scripts\OnAnswerChanged.cs" />
+     <Compile Include="Assets\Scripts\OnCorrectAnswer.cs" />
+     <Compile Include="Assets\Scripts\OnGiveUp.cs" />
+     <Compile Include="Assets\Scripts\OnQuestionChanged.cs" />
+     <Compile Include="Assets\Scripts\OnQuizAborted.cs" />
+     <Compile Include="Assets\Scripts\OnWrongAnswer.cs" />
+     <Compile Include="Assets\Scripts\Params.cs" />
+     <Compile Include="Assets\Scripts\PlayerData.cs" />
+     <Compile Include="Assets\Scripts\PlayerNameController.cs" />
+     <Compile Include="Assets\Scripts\PositionFx.cs" />
+     <Compile Include="Assets\Scripts\Question.cs" />
+     <Compile Include="Assets\Scripts\QuestionDisplay.cs" />
+     <Compile Include="Assets\Scripts\QuestionPicker.cs" />
+     <Compile Include="Assets\Scripts\Questions.cs" />
+     <Compile Include="Assets\Scripts\RocketBuilder.cs" />
+     <Compile Include="Assets\Scripts\RocketMotion.cs" />
+     <Compile Include="Assets\Scripts\RocketMotionSolarSystem.cs" />
+     <Compile Include="Assets\Scripts\RocketPartCounter.cs" />
+     <Compile Include="Assets\Scripts\RocketParts.cs" />
+     <Compile Include="Assets\Scripts\Score.cs" />
+     <Compile Include="Assets\Scripts\ScrollBackground.cs" />
+     <Compile Include="Assets\Scripts\SendSaveDataByMail.cs" />
+     <Compile Include="Assets\Scripts\ShowOnRight.cs" />
+     <Compile Include="Assets\Scripts\ShowSolarSystem.cs" />
+     <Compile Include="Assets\Scripts\StatsColumnController.cs" />
+     <Compile Include="Assets\Scripts\StatsController.cs" />
+     <Compile Include="Assets\Scripts\TargetPlanet.cs" />
+     <Compile Include="Assets\Scripts\TestAlgorithm.cs" />
+     <Compile Include="Assets\Scripts\TextButton.cs" />
+     <Compile Include="Assets\Scripts\TextDisplay.cs" />
+     <Compile Include="Assets\Scripts\UpgradeButton.cs" />
+     <Compile Include="Assets\Scripts\VersionDisplay.cs" />
+     <Compile Include="Assets\Scripts\XMLSerializationHandler.cs" />
+     <Compile Include="Assets\xARM\Classes\xARMClasses.cs" />
+     <Compile Include="Assets\xARM\Components\xARMDelegatesExample.cs" />
+     <Compile Include="Assets\xARM\Components\xARMDelegateUGUI.cs" />
+     <Compile Include="Assets\xARM\Components\xARMProxy.cs" />
+     <Compile Include="Assets\xARM\Managers\xARMConfig.cs" />
+     <Compile Include="Assets\xARM\Managers\xARMManager.cs" />
+     <Compile Include="Assets\xARM\Windows\xARMGalleryWindow.cs" />
+     <Compile Include="Assets\xARM\Windows\xARMHotkeys.cs" />
+     <Compile Include="Assets\xARM\Windows\xARMOptionsWindow.cs" />
+     <Compile Include="Assets\xARM\Windows\xARMPreviewWindow.cs" />
+     <None Include="Assets\xARM\_Changelog.txt" />
+     <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
+     <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
+     <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />
+     <None Include="Assets\I2\Localization\Scripts\Editor\Unity XCode\Xcode.txt" />
+     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
+     <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />
+     <None Include="Assets\Shaders\TintWithAlphaMask.shader" />
+ <Reference Include="UnityEngine.UIAutomation">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Timeline">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.GoogleAudioSpatializer">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.SpatialTracking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/Users/rafael/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing">
+ <HintPath>/Users/rafael/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{B63D1931-18BD-B0CF-B1ED-FFAC59688F0A}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
+      <Project>{B63D1931-18BD-B0CF-B1ED-FFAC59688F0A}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -216,4 +215,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>
