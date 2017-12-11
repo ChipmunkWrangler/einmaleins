@@ -16,7 +16,7 @@ public class Question {
 	const float WRONG_ANSWER_TIME_PENALTY = 1f;
 	const int NUM_ANSWER_TIMES_TO_RECORD = 3;
 
-	QuestionPersistantData data = new QuestionPersistantData ();
+	QuestionPersistentData data = new QuestionPersistentData ();
 
 	public Question(int _a, int _b) {
 		a = _a;
@@ -157,7 +157,7 @@ public class Question {
 
 }
 
-public class QuestionPersistantData {
+public class QuestionPersistentData {
 	public bool wasMastered;  // even if it is no longer mastered. This is for awarding rocket parts
 	public bool wasWrong; // if a question is answered wrong, then wasWrong is true until it is next asked
 	public bool isNew;
