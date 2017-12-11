@@ -16,7 +16,7 @@ public class Question {
 
 	public const float FAST_TIME = 4.0f;
 	const float ANSWER_TIME_MAX = 60.0f;
-	public const float ANSWER_TIME_INTIAL = FAST_TIME + 0.01f; 
+	const float ANSWER_TIME_INTIAL = FAST_TIME + 0.01f; 
 	const float WRONG_ANSWER_TIME_PENALTY = 1f;
 	const int NUM_ANSWER_TIMES_TO_RECORD = 3;
 	string prefsKey;
@@ -136,8 +136,8 @@ public class Question {
 		}
 		answerTimes = newAnswerTimes;	
 	}
-
-	public static List<float> GetNewAnswerTimes ()
+		
+	static List<float> GetNewAnswerTimes ()
 	{
 		List<float> answerTimes = new List<float> ();
 		for (int i = 0; i < NUM_ANSWER_TIMES_TO_RECORD; ++i) {
