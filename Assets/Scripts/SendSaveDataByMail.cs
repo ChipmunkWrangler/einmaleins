@@ -14,7 +14,7 @@ public class SendSaveDataByMail : MonoBehaviour {
 	const string receiver = "testers@crazy-chipmunk.com";
 	const string server = "v078528.kasserver.com";
 	const int port = 25;
-	const string password = "egRN2nqphQSf6pBN";
+	const string password = MailPassword.password;
 
 	public void SendReport() {
 		button.interactable = false;
