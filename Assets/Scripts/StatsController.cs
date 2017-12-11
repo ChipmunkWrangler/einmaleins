@@ -5,38 +5,44 @@ using UnityEngine;
 public class StatsController : MonoBehaviour {
 	[SerializeField] StatsColumnController[] columns = null;
 	[SerializeField] Questions questions;
-	const string prefsKey = "seenMastered";
-	bool[][] seenMastered;
+
+	StatsControllerPersistentData data = new StatsControllerPersistentData();
 
 	void Start () {
-		Load ();
+		data.Load (columns.Length);
 		foreach (Question question in questions.questions) {
 			int i = question.a - 1;
 			int j = question.b - 1;
-			seenMastered[i][j] = columns [i].SetMasteryLevel (j, question, seenMastered[i][j]);
+			data.seenMastered[i][j] = columns [i].SetMasteryLevel (j, question, data.seenMastered[i][j]);
 			if (i != j) {
-				seenMastered [j] [i] = columns [j].SetMasteryLevel (i, question, seenMastered [j] [i]);
+				data.seenMastered [j] [i] = columns [j].SetMasteryLevel (i, question, data.seenMastered [j] [i]);
 			}
 		}
 		foreach (StatsColumnController column in columns) {
 			column.DoneSettingMasteryLevels ();
 		}
-		Save ();
+		data.Save (columns.Length);
 	}
+}
 
-	void Load() {
-		seenMastered = new bool[columns.Length] [];
-		for (int i = 0; i < columns.Length; ++i) {
+public class StatsControllerPersistentData {
+	public bool[][] seenMastered;
+
+	const string prefsKey = "seenMastered";
+
+	public void Load(int numMax) {
+		seenMastered = new bool[numMax] [];
+		for (int i = 0; i < numMax; ++i) {
 			string key = prefsKey + ":" + i;
 			seenMastered [i] = MDPrefs.GetBoolArray (key);
 			if (seenMastered [i].Length == 0) {
-				seenMastered [i] = new bool[columns.Length];
+				seenMastered [i] = new bool[numMax];
 			}
 		}
 	}
 
-	void Save() {
-		for (int i = 0; i < columns.Length; ++i) {
+	public void Save(int numMax) {
+		for (int i = 0; i < numMax; ++i) {
 			MDPrefs.SetBoolArray (prefsKey + ":" + i, seenMastered [i]);
 		}
 	}
