@@ -42,10 +42,10 @@ public class Questions : MonoBehaviour {
 	}
 
 	public Question GetQuestion(bool isFrustrated, bool allowGaveUpQuestions) {
-		IEnumerable<Question> allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.IsMastered () && (allowGaveUpQuestions || !question.gaveUp));
+		IEnumerable<Question> allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.IsMastered () && (allowGaveUpQuestions || !question.GaveUp()));
 
 		if (!allowed.Any()) {
-			allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.gaveUp);
+			allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.GaveUp());
 			if (!allowed.Any ()) {
 				allowed = questions.Where (question => !question.wasAnsweredInThisQuiz);
 				if (!allowed.Any ()) {
@@ -53,9 +53,9 @@ public class Questions : MonoBehaviour {
 				}
 			}
 		}
-		IEnumerable<Question> candidates = allowed.Where (question => question.wasWrong);
+		IEnumerable<Question> candidates = allowed.Where (question => question.WasWrong());
 		if (!candidates.Any ()) {
-			candidates = allowed.Where (question => !question.isNew);
+			candidates = allowed.Where (question => !question.IsNew());
 			if (!candidates.Any ()) { // then give a new question
 				return (isFrustrated) ? allowed.First () : allowed.ElementAt (Random.Range (0, allowed.Count ()));
 			}
@@ -65,7 +65,7 @@ public class Questions : MonoBehaviour {
 	}
 
 	public Question GetGaveUpQuestion() {
-		return questions.FirstOrDefault (question => question.gaveUp);
+		return questions.FirstOrDefault (question => question.GaveUp());
 	}
 
 	public Question GetLaunchCodeQuestion() {

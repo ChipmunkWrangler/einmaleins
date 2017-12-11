@@ -96,7 +96,7 @@ public class QuestionPicker : MonoBehaviour {
 
 	void HandleAnswer (bool isCorrect, float answerTime)
 	{
-		bool wasNew = curQuestion.isNew;
+		bool wasNew = curQuestion.IsNew();
 		bool isNewlyMastered = curQuestion.Answer (isCorrect, answerTime);
 		if (isCorrect) {
 			foreach (OnCorrectAnswer subscriber in onCorrectAnswerSubscribers) {
