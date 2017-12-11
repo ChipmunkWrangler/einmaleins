@@ -3,6 +3,7 @@ public class PlayerData {
 	public string playerName;
 	public RocketPartsPersistantData rocketPartsData = new RocketPartsPersistantData ();
 	public EffortTrackerPersistantData effortTrackerData = new EffortTrackerPersistantData ();
+	public Questions questions;
 
 	public void Load(string name) {
 		playerName = name;
