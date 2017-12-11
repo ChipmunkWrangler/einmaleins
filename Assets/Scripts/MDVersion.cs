@@ -8,7 +8,7 @@ public class MDVersion : MonoBehaviour {
 
 	const int majorVersion = 0;
 	const int minorVersion = 1;
-	const int buildNumber = 12;
+	const int buildNumber = 13;
 
 	bool isChecking;
 
@@ -30,6 +30,7 @@ public class MDVersion : MonoBehaviour {
 			return;
 		} 
 		switch (oldVersion) {
+		case "0.1.12":
 		case "0.1.11":
 			break;
 		case "0.1.10":
