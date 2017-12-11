@@ -9,40 +9,40 @@ public class RocketParts : MonoBehaviour {
 
 	public bool justUpgraded {
 		get {
-			return justUpgraded_;
+			return data.justUpgraded;
 		}
 		set {
-			justUpgraded_ = value;
-			Save ();
+			data.justUpgraded = value;
+			data.Save ();
 		}
 	}
 
 	public int numParts {
 		get {
-			return numParts_;
+			return data.numParts;
 		}
 		private set {
-			numParts_ = value;
-			Save ();
+			data.numParts = value;
+			data.Save ();
 		}
 	}
 	public bool isRocketBuilt {
 		get {
-			return isRocketBuilt_;
+			return data.isRocketBuilt;
 		}
 		set {
-			isRocketBuilt_ = value;
-			Save ();
+			data.isRocketBuilt = value;
+			data.Save ();
 		}
 	}
 
 	public int upgradeLevel {
 		get {
-			return upgradeLevel_;
+			return data.upgradeLevel;
 		}
 		private set {
-			upgradeLevel_ = value;
-			Save ();
+			data.upgradeLevel = value;
+			data.Save ();
 		}
 	}
 
@@ -84,35 +84,16 @@ public class RocketParts : MonoBehaviour {
 	}
 
 // private
-	const string prefsKey = "rocketParts";
 	const int PARTS_TO_BUILD_ROCKET = 0;
 	const int PARTS_PER_UPGRADE = 11;
 
-	bool justUpgraded_;
-	int numParts_;
-	bool isRocketBuilt_;
-	int upgradeLevel_;
+	RocketPartsData data;
 
-	void Save() {
-		MDPrefs.SetBool (prefsKey + ":isBuilt", isRocketBuilt);
-		MDPrefs.SetInt (prefsKey + ":upgradeLevel", upgradeLevel);
-		MDPrefs.SetBool (prefsKey + ":justUpgraded", justUpgraded);
-		MDPrefs.SetInt (prefsKey, numParts);
-	}
-
-	void Load ()
-	{
-		numParts_ = MDPrefs.GetInt (prefsKey, 0);
-		isRocketBuilt_ = MDPrefs.GetBool (prefsKey + ":isBuilt");
-		upgradeLevel_ = MDPrefs.GetInt (prefsKey + ":upgradeLevel", 0);
-		justUpgraded_ = MDPrefs.GetBool (prefsKey + ":justUpgraded");
-	}
-		
 	void Awake() {
 		if (instance == null) {
 //			DontDestroyOnLoad (gameObject);
 			instance = this;
-			Load ();
+			data.Load ();
 		} else if (instance != this) {
 			Destroy (gameObject); // there can be only one!
 		}
@@ -120,8 +101,31 @@ public class RocketParts : MonoBehaviour {
 			
 	void DoUpgrade ()
 	{
-		justUpgraded_ = true;
-		++upgradeLevel_;
-		Save ();
+		data.justUpgraded = true;
+		++data.upgradeLevel;
+		data.Save ();
+	}
+}
+
+public class RocketPartsData {
+	const string prefsKey = "rocketParts";
+
+	public bool justUpgraded;
+	public int numParts;
+	public bool isRocketBuilt;
+	public int upgradeLevel;
+
+	public void Save() {
+		MDPrefs.SetBool (prefsKey + ":isBuilt", isRocketBuilt);
+		MDPrefs.SetInt (prefsKey + ":upgradeLevel", upgradeLevel);
+		MDPrefs.SetBool (prefsKey + ":justUpgraded", justUpgraded);
+		MDPrefs.SetInt (prefsKey, numParts);
+	}
+
+	public void Load() {
+		numParts = MDPrefs.GetInt (prefsKey, 0);
+		isRocketBuilt = MDPrefs.GetBool (prefsKey + ":isBuilt");
+		upgradeLevel = MDPrefs.GetInt (prefsKey + ":upgradeLevel", 0);
+		justUpgraded = MDPrefs.GetBool (prefsKey + ":justUpgraded");
 	}
 }
