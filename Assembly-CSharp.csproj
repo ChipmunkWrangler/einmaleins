@@ -95,6 +95,7 @@
      <Compile Include="Assets\Scripts\EnterAnswerButtonController.cs" />
      <Compile Include="Assets\Scripts\FlashThrust.cs" />
      <Compile Include="Assets\Scripts\Fuel.cs" />
+     <Compile Include="Assets\Scripts\GameData.cs" />
      <Compile Include="Assets\Scripts\GetRocketColour.cs" />
      <Compile Include="Assets\Scripts\GiveUpButtonController.cs" />
      <Compile Include="Assets\Scripts\GiveUpOkButton.cs" />
@@ -123,6 +124,8 @@
      <Compile Include="Assets\Scripts\OnQuizAborted.cs" />
      <Compile Include="Assets\Scripts\OnWrongAnswer.cs" />
      <Compile Include="Assets\Scripts\Params.cs" />
+     <Compile Include="Assets\Scripts\PlayerData.cs" />
+     <Compile Include="Assets\Scripts\PlayerNameController.cs" />
      <Compile Include="Assets\Scripts\PositionFx.cs" />
      <Compile Include="Assets\Scripts\Question.cs" />
      <Compile Include="Assets\Scripts\QuestionDisplay.cs" />

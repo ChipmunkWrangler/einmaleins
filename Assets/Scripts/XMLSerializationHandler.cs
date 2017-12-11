@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -38,8 +36,6 @@ public class XMLSerializationHandler  {
 			if (File.Exists(path)) {
 				using (FileStream file = File.OpenRead (GetPath())) {
 					XmlSerializer serializer = new XmlSerializer(typeof(GameData));
-
-
 					data = serializer.Deserialize(file) as GameData;
 				}
 			}
@@ -57,10 +53,8 @@ public class XMLSerializationHandler  {
 
 	static GameData GetData() {
 		var data = new GameData();
+		data.Load ();
 		return data;
 	}
-}
-
-public class GameData {
 }
 

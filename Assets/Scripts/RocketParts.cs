@@ -93,6 +93,7 @@ public class RocketParts : MonoBehaviour {
 		if (instance == null) {
 //			DontDestroyOnLoad (gameObject);
 			instance = this;
+			data = new RocketPartsData ();
 			data.Load ();
 		} else if (instance != this) {
 			Destroy (gameObject); // there can be only one!
@@ -107,6 +108,7 @@ public class RocketParts : MonoBehaviour {
 	}
 }
 
+[System.Serializable]
 public class RocketPartsData {
 	const string prefsKey = "rocketParts";
 

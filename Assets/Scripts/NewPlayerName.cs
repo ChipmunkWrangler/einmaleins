@@ -1,9 +1,7 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 
 public class NewPlayerName : MonoBehaviour {
 	[SerializeField] GameObject enterNamePanel = null;
@@ -14,26 +12,26 @@ public class NewPlayerName : MonoBehaviour {
 	[SerializeField] float buttonFadeAlpha = 0.5f;
 	[SerializeField] float buttonFadeDuration = 0.1f;
 	[SerializeField] GameObject rocketPartsGameObj = null;
-	const string playerNamesPrefsKey = "playerNames";
-	const string curPlayerPrefsKey = "curPlayer";
-	string[] playerNames;
+
 	string newName;
 	bool buttonsAlreadyPressed;
+	PlayerNameController playerNameController;
 
 	void Start() {
-		if (PlayerPrefs.HasKey (curPlayerPrefsKey)) {
+		playerNameController = new PlayerNameController ();
+		playerNameController.Load ();
+		if (PlayerNameController.IsPlayerSet()) {
 			Destroy(RocketParts.instance);
 			TargetPlanet.Reset ();
 		} // else this is initial start
 		ActivatePlayButton (false);
-		playerNames = GetPlayerNames();
-		int numPlayers = playerNames.Length;
+		int numPlayers = playerNameController.names.Length;
 		enterNamePanel.SetActive (numPlayers < playerButtons.Length);
 		if (numPlayers == 0) {
 			inputField.Select ();
 		}
 		for(int i = 0; i < numPlayers; ++i) {
-			playerButtons [i].SetText (playerNames [i]);
+			playerButtons [i].SetText (playerNameController.names [i]);
 			playerButtons [i].SetActive (true);
 		}
 		for(int i = numPlayers; i < playerButtons.Length; ++i) {
@@ -41,34 +39,27 @@ public class NewPlayerName : MonoBehaviour {
 		}
 	}
 
-	public static string[] GetPlayerNames() {
-		return PlayerPrefsArray.GetStringArray (playerNamesPrefsKey);
-	}
 
 	public void OnPlayerNameChanged(string name) {
 		if (!buttonsAlreadyPressed) {
-			ActivatePlayButton (IsNameValid (name));
+			ActivatePlayButton (playerNameController.IsNameValid (name));
 			newName = name;
 		}
 	}
 
 	public void OnPlayerNameButton(int i) {
 		if (!buttonsAlreadyPressed) {
-			SetCurPlayerName (playerNames [i]);
+			playerNameController.curName = playerNameController.names [i];
 			Play ();
 		}
 	}
 
 	public void OnPlay() {
 		if (!buttonsAlreadyPressed) {
-			AppendToPlayerNames (newName);
-			SetCurPlayerName (newName);
+			playerNameController.AppendName (newName);
+			playerNameController.curName = newName;
 			Play ();
 		}
-	}
-
-	bool IsNameValid(string playerName) {
-		return playerName.Length > 0 && !playerNames.Contains (playerName);
 	}
 
 	void ActivatePlayButton(bool b) {
@@ -78,14 +69,15 @@ public class NewPlayerName : MonoBehaviour {
 	void Play() {
 		// todo transition
 		DisableButtons();
+		playerNameController.Save ();
 		PlayerPrefs.Save ();
 		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync (IsRocketBuilt() ? "launch" : "rocketBuilding");
 	}
 
 	bool IsRocketBuilt() {
-		if (PlayerPrefs.HasKey (curPlayerPrefsKey)) {
+		if (PlayerNameController.IsPlayerSet()) {
 			rocketPartsGameObj.SetActive (true);
-			return RocketParts.instance.isRocketBuilt;
+			return RocketParts.instance.isRocketBuilt && ChooseRocketColour.HasChosenColour ();
 		}
 		return false;
 	}
@@ -96,20 +88,6 @@ public class NewPlayerName : MonoBehaviour {
 		foreach(TextButton button in playerButtons) {
 			button.enabled = false;
 		}
-	}
-
-	static public void SetCurPlayerName(string name) {
-		PlayerPrefs.SetString (curPlayerPrefsKey, name);
-	}
-
-	void AppendToPlayerNames(string name) {
-		string[] newPlayerNames = new string[playerNames.Length + 1];
-		for (int i = 0; i < playerNames.Length; ++i) {
-			newPlayerNames [i] = playerNames [i];
-		}
-		newPlayerNames [playerNames.Length] = name;
-		playerNames = newPlayerNames;
-		PlayerPrefsArray.SetStringArray (playerNamesPrefsKey, playerNames);
 	}
 }
 

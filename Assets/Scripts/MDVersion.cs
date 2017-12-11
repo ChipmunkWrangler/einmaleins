@@ -67,8 +67,12 @@ public class MDVersion : MonoBehaviour {
 
 	void UpdateFrom_0_1_8_To_0_1_11() {
 		const float oldAnswerTimeInitial = 3f + 0.01f;
-		foreach (string playerName in NewPlayerName.GetPlayerNames()) {
-			NewPlayerName.SetCurPlayerName (playerName);
+		PlayerNameController playerNameController = new PlayerNameController();
+		playerNameController.Load ();
+		string oldName = playerNameController.curName;
+		foreach (string playerName in playerNameController.names) {
+			playerNameController.curName = playerName;
+			playerNameController.Save ();
 			Debug.Log ("Updating question for " + playerName);
 			questions.gameObject.SetActive (true); // load question list
 			foreach(Question question in questions.questions) {
@@ -77,5 +81,7 @@ public class MDVersion : MonoBehaviour {
 			questions.Save ();
 			questions.gameObject.SetActive (false);
 		}
+		playerNameController.curName = oldName;
+		playerNameController.Save ();
 	}
 }
