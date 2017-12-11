@@ -2,6 +2,7 @@
 
 [System.Serializable]
 public class GameData {
+	public string version = MDVersion.GetCurrentVersion();
 	public List<PlayerData> playerList = new List<PlayerData> ();
 
 	PlayerNameController playerNameController = new PlayerNameController ();
