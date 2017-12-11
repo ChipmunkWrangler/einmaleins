@@ -87,13 +87,13 @@ public class RocketParts : MonoBehaviour {
 	const int PARTS_TO_BUILD_ROCKET = 0;
 	const int PARTS_PER_UPGRADE = 11;
 
-	RocketPartsData data;
+	RocketPartsPersistantData data;
 
 	void Awake() {
 		if (instance == null) {
 //			DontDestroyOnLoad (gameObject);
 			instance = this;
-			data = new RocketPartsData ();
+			data = new RocketPartsPersistantData ();
 			data.Load ();
 		} else if (instance != this) {
 			Destroy (gameObject); // there can be only one!
@@ -109,7 +109,7 @@ public class RocketParts : MonoBehaviour {
 }
 
 [System.Serializable]
-public class RocketPartsData {
+public class RocketPartsPersistantData {
 	const string prefsKey = "rocketParts";
 
 	public bool justUpgraded;
