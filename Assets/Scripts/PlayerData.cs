@@ -5,12 +5,14 @@ public class PlayerData {
 	public EffortTrackerPersistantData effortTrackerData = new EffortTrackerPersistantData ();
 	public QuestionsPersistentData questionsData = new QuestionsPersistentData();
 	public StatsControllerPersistentData statsControllerData = new StatsControllerPersistentData();
+	public TargetPlanetPersistentData targetPlanetData = new TargetPlanetPersistentData ();
 
 	public void Load(string name) {
 		playerName = name;
 		rocketPartsData.Load ();
 		effortTrackerData.Load ();
-		questionsData.Load ();
 		statsControllerData.Load (Questions.maxNum);
+		targetPlanetData.Load ();
+		questionsData.Load ();
 	}
 }

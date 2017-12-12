@@ -62,3 +62,14 @@ public class TargetPlanet {
 	}
 
 }
+
+[System.Serializable]
+public class TargetPlanetPersistentData {
+	public int targetPlanetIdx;
+	public int lastReachedPlanetIdx;
+
+	public void Load() {
+		targetPlanetIdx = TargetPlanet.GetTargetPlanetIdx ();
+		lastReachedPlanetIdx = TargetPlanet.GetLastReachedIdx ();
+	}
+}
