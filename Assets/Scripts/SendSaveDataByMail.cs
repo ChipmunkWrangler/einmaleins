@@ -42,16 +42,10 @@ public class SendSaveDataByMail : MonoBehaviour {
 			};
 			try {
 				smtpServer.Send (mail);
-				statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation("Message sent. Thanks!");
-			} catch(System.Exception ex) {
-				string s = I2.Loc.LocalizationManager.GetTermTranslation("Error! Please email the following to") + ": \"" + ex.Message;
-				while (ex.InnerException != null) {
-					ex = ex.InnerException;
-					s += " " + ex.Message;
-				}
-				s += "\"";
-				statusLine.text = s;
-				Debug.Log ("Exception " + ex);
+				statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation ("Message sent. Thanks!");
+			} catch (System.Exception ex) {
+				string s = I2.Loc.LocalizationManager.GetTermTranslation ("Error! Please email the following to") + ": \"";
+				statusLine.text = s + AssemblyCSharp.ExceptionPrettyPrint.Msg (ex) + "\"";
 			}
 		}
 	}
