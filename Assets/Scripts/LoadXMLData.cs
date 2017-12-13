@@ -18,9 +18,9 @@ public class LoadXMLData : MonoBehaviour {
 	public void LoadFromFile () {
 		try {
 			XMLSerializationHandler.LoadFromFile();
+			statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation( "Data loaded." );
 		} catch (System.Exception ex) {
 			statusLine.text = AssemblyCSharp.ExceptionPrettyPrint.Msg( ex );
 		}	
-		statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation ("Data loaded.");
 	}
 }
