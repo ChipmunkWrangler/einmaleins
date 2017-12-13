@@ -6,7 +6,8 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
-public class SendSaveDataByMail : MonoBehaviour {
+public class SendSaveDataByMail : MonoBehaviour
+{
 	[SerializeField] UnityEngine.UI.Text statusLine = null;
 	[SerializeField] UnityEngine.UI.Button button = null;
 
@@ -16,28 +17,29 @@ public class SendSaveDataByMail : MonoBehaviour {
 	const int port = 25;
 	const string password = MailPassword.password;
 
-	public void SendReport() {
+	public void SendReport ()
+	{
 		button.interactable = false;
-		Send ( "Dump", XMLSerializationHandler.GetAsString());
+		Send ("Dump", XMLSerializationHandler.GetAsString ());
 		button.interactable = true;
 	}
 
-	void Send(string title, string body)
+	void Send (string title, string body)
 	{
-		using (MailMessage mail = new MailMessage()) {
+		using (MailMessage mail = new MailMessage ()) {
 			mail.From = new MailAddress (sender);
 			mail.To.Add (receiver);
 			mail.Subject = title;
 			mail.Body = body;
 			mail.Priority = MailPriority.Normal;
 
-			statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation("Connecting to Smtp Server...");
+			statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation ("Connecting to Smtp Server...");
 
 			SmtpClient smtpServer = new SmtpClient (server, port);
 			smtpServer.Credentials = new NetworkCredential (sender, password) as ICredentialsByHost;
 			smtpServer.EnableSsl = true;
-			statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation("Sending message...");
-			ServicePointManager.ServerCertificateValidationCallback = delegate(object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors){
+			statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation ("Sending message...");
+			ServicePointManager.ServerCertificateValidationCallback = delegate(object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) {
 				return true;
 			};
 			try {
