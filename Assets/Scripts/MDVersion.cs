@@ -43,6 +43,7 @@ public class MDVersion : MonoBehaviour {
 			break;
 		}
 		WriteNewVersion();
+		isChecking = false;
 		SceneManager.LoadScene( "choosePlayer" );
 	}
 
@@ -60,7 +61,6 @@ public class MDVersion : MonoBehaviour {
 		PlayerPrefs.DeleteAll();
 	}
 
-		isChecking = false;
 	public static void WriteNewVersion () {
 		PlayerPrefs.SetString( "version", GetCurrentVersion() );
 		PlayerPrefs.Save();

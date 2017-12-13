@@ -41,9 +41,9 @@ public class TargetPlanet
 		lastReachedPlanetIdx = planetIdx;
 	}
 
-		SetIdx (GetTargetPlanetIdx() + 1);
 	public static void TargetNextPlanet ()
 	{
+		SetTargetPlanetIdx (GetTargetPlanetIdx () + 1);
 	}
 
 	public static int GetTargetPlanetIdx ()
@@ -64,7 +64,8 @@ public class TargetPlanet
 		return (i < heights.Length) ? heights [i] : FINAL_HEIGHT;
 	}
 
-	static void SetIdx(int newIdx ) {
+	public static void SetTargetPlanetIdx (int newIdx)
+	{
 		MDPrefs.SetInt (targetKey, newIdx);
 		targetPlanetIdx = newIdx;
 	}
@@ -81,5 +82,11 @@ public class TargetPlanetPersistentData
 	{
 		targetPlanetIdx = TargetPlanet.GetTargetPlanetIdx ();
 		lastReachedPlanetIdx = TargetPlanet.GetLastReachedIdx ();
+	}
+
+	public void Save ()
+	{
+		TargetPlanet.SetTargetPlanetIdx (targetPlanetIdx);
+		TargetPlanet.SetLastReachedIdx (lastReachedPlanetIdx);
 	}
 }

@@ -11,10 +11,19 @@ public class LoadXMLData : MonoBehaviour
 	public void LoadFromInputField ()
 	{
 		try {
-			string s = inputField.text;
-			XMLSerializationHandler.LoadFromString (s);
+			XMLSerializationHandler.LoadFromString (inputField.text);
 		} catch (System.Exception ex) {
 			statusLine.text = AssemblyCSharp.ExceptionPrettyPrint.Msg (ex);
 		}	
+	}
+
+	public void LoadFromFile ()
+	{
+		try {
+			XMLSerializationHandler.LoadFromFile ();
+		} catch (System.Exception ex) {
+			statusLine.text = AssemblyCSharp.ExceptionPrettyPrint.Msg (ex);
+		}	
+		statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation ("Data loaded.");
 	}
 }

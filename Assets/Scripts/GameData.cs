@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
-	public string version = MDVersion.GetCurrentVersion();
 public class GameData
 {
+	public string version = "";
 	public List<PlayerData> playerList = new List<PlayerData> ();
 
 	PlayerNameController playerNameController = new PlayerNameController ();
 
 	public void Load ()
 	{
+		version = MDVersion.GetCurrentVersion ();
 		playerNameController.Load ();
 		string oldName = playerNameController.curName;
 		foreach (string playerName in playerNameController.names) {
@@ -25,5 +26,20 @@ public class GameData
 
 	public void Save ()
 	{
+		if (version != MDVersion.GetCurrentVersion ()) {
+			throw new System.NotSupportedException ("File version " + version + " doesn't match current version " + MDVersion.GetCurrentVersion ());
+		}
+		UnityEngine.PlayerPrefs.DeleteAll ();
+		MDVersion.WriteNewVersion ();
+		playerNameController.Clear ();
+		foreach (PlayerData playerData in playerList) {
+			playerNameController.AppendName (playerData.playerName);
+			playerNameController.curName = playerData.playerName;
+			playerNameController.Save ();
+			playerData.Save ();
+		}
+		playerNameController.curName = "";
+		playerNameController.Save ();
+		UnityEngine.PlayerPrefs.Save ();
 	}
 }

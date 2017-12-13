@@ -17,4 +17,13 @@ public class PlayerData
 		targetPlanetData.Load ();
 		questionsData.Load ();
 	}
+
+	public void Save ()
+	{
+		rocketPartsData.Save ();
+		effortTrackerData.Save ();
+		statsControllerData.Save (Questions.maxNum);
+		targetPlanetData.Save ();
+		questionsData.Save ();
+	}
 }

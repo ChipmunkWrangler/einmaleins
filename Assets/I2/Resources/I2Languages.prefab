@@ -573,6 +573,26 @@ MonoBehaviour:
     - Load This Data (overwrites existing accounts!)
     - "Diese Daten Laden  (\xFCberschreibt vorhandene Konten!)"
     Flags: 0000
+  - Term: Spielstand von Datei Laden
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Load Game State From File
+    - Spielstand von Datei Laden
+    Flags: 0000
+  - Term: Data loaded.
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Data loaded.
+    - Daten geladen.
+    Flags: 0000
   mLanguages:
   - Name: English
     Code: en

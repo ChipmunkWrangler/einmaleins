@@ -41,4 +41,14 @@ public class PlayerNameController
 	{
 		return playerName.Length > 0 && !names.Contains (playerName);
 	}
+
+	public void Clear ()
+	{
+		if (names != null) {
+			System.Array.Clear (names, 0, names.Length);
+		} else {
+			names = new string[0];
+		}
+		curName = "";
+	}
 }

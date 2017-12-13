@@ -163,13 +163,16 @@ public class QuestionPersistentData {
 		answerTimes = GetNewAnswerTimes();
 	}
 
-	public void Save() {
-		UnityEngine.Assertions.Assert.AreNotEqual (prefsKey.Length, 0);
-		SetAnswerTimes (prefsKey, answerTimes);
-		MDPrefs.SetBool (prefsKey + ":wasMastered", wasMastered);
-		MDPrefs.SetBool (prefsKey + ":wasWrong", wasWrong);
-		MDPrefs.SetBool (prefsKey + ":isNew", isNew);
-		MDPrefs.SetBool (prefsKey + ":gaveUp", gaveUp);
+	public void Save (string _prefsKey = "") {
+		if (_prefsKey == "") {
+			_prefsKey = prefsKey;
+		}
+		UnityEngine.Assertions.Assert.AreNotEqual( _prefsKey.Length, 0 );
+		SetAnswerTimes( _prefsKey, answerTimes );
+		MDPrefs.SetBool( _prefsKey + ":wasMastered", wasMastered );
+		MDPrefs.SetBool( _prefsKey + ":wasWrong", wasWrong );
+		MDPrefs.SetBool( _prefsKey + ":isNew", isNew );
+		MDPrefs.SetBool( _prefsKey + ":gaveUp", gaveUp );
 	}
 
 	static List<float> GetAnswerTimes (string prefsKey) {

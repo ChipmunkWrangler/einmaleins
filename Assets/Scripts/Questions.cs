@@ -74,7 +74,7 @@ public class Questions : MonoBehaviour {
 
 [System.Serializable]
 public class QuestionsPersistentData {
-	public QuestionPersistentData[] questionData;
+	public QuestionPersistentData[] questionData = new QuestionPersistentData[Questions.GetNumQuestions()];
 
 	const string prefsKey = "questions";
 
@@ -85,12 +85,11 @@ public class QuestionsPersistentData {
 	public void Save () {
 		MDPrefs.SetInt( prefsKey + ":ArrayLen", questionData.Length );
 		for (int i = 0; i < questionData.Length; ++i) {
-			questionData [i].Save ();
+			questionData[ i ].Save( GetQuestionKey( i ) ); // GetQuestionKey is needed for loading data from XML
 		}
 	}
 
 	public void Load () {
-		questionData = new QuestionPersistentData[Questions.GetNumQuestions()];
 		UnityEngine.Assertions.Assert.AreEqual( MDPrefs.GetInt( prefsKey + ":ArrayLen", questionData.Length ), questionData.Length );
 		bool shouldCreate = !WereQuestionsCreated();
 		for (int i = 0; i < questionData.Length; ++i) {
