@@ -553,6 +553,26 @@ MonoBehaviour:
     - Nachricht konnte nicht verschickt werden. Bitte Folgendes an testers@crazy-chipmunk.com
       schicken
     Flags: 0000
+  - Term: Spielstand Laden
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Load Game State
+    - Spielstand Laden
+    Flags: 0000
+  - Term: Diese Daten Laden
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - Load This Data (overwrites existing accounts!)
+    - "Diese Daten Laden  (\xFCberschreibt vorhandene Konten!)"
+    Flags: 0000
   mLanguages:
   - Name: English
     Code: en
@@ -567,6 +587,7 @@ MonoBehaviour:
   UserAgreesToHaveItInsideThePluginsFolder: 0
   OnMissingTranslation: 1
   mTerm_AppName: App_Name
+  IgnoreDeviceLanguage: 0
   Spreadsheet_LocalFileName: 
   Spreadsheet_LocalCSVSeparator: ','
   Spreadsheet_LocalCSVEncoding: utf-8

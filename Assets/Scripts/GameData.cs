@@ -20,4 +20,6 @@ public class GameData {
 		playerNameController.curName = oldName;
 		playerNameController.Save ();
 	}
+	public void Save() {
+	}
 }

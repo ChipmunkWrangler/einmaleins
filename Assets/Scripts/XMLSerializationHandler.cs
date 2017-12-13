@@ -46,6 +46,18 @@ public class XMLSerializationHandler  {
 		return data;
 	}
 
+	static public void LoadFromString(string xml) {
+		try {
+			var reader = new StringReader(xml);
+			var serializer = new XmlSerializer(typeof(GameData));
+			GameData data = serializer.Deserialize(reader) as GameData;
+			data.Save();
+		} catch (System.Exception ex) {
+			Debug.Log (ex.ToString());
+			throw(ex);
+		}	
+	}
+
 
 	static string GetPath() {
 		return Path.Combine(Application.persistentDataPath, fName);

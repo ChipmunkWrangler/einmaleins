@@ -93,6 +93,7 @@
      <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
      <Compile Include="Assets\Scripts\EffortTracker.cs" />
      <Compile Include="Assets\Scripts\EnterAnswerButtonController.cs" />
+     <Compile Include="Assets\Scripts\ExceptionPrettyPrint.cs" />
      <Compile Include="Assets\Scripts\FlashThrust.cs" />
      <Compile Include="Assets\Scripts\Fuel.cs" />
      <Compile Include="Assets\Scripts\GameData.cs" />
@@ -111,6 +112,7 @@
      <Compile Include="Assets\Scripts\KeyHandler.cs" />
      <Compile Include="Assets\Scripts\KickoffLaunch.cs" />
      <Compile Include="Assets\Scripts\LaunchButtonController.cs" />
+     <Compile Include="Assets\Scripts\LoadXMLData.cs" />
      <Compile Include="Assets\Scripts\MailPassword.cs" />
      <Compile Include="Assets\Scripts\MatchPositionAndSize.cs" />
      <Compile Include="Assets\Scripts\MDCulture.cs" />
