@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class RocketParts : MonoBehaviour {
-// public readonly
+	// public readonly
 	public static RocketParts instance { get; private set; }
 
 	public bool justUpgraded {
@@ -13,7 +13,7 @@ public class RocketParts : MonoBehaviour {
 		}
 		set {
 			data.justUpgraded = value;
-			data.Save ();
+			data.Save();
 		}
 	}
 
@@ -23,16 +23,17 @@ public class RocketParts : MonoBehaviour {
 		}
 		private set {
 			data.numParts = value;
-			data.Save ();
+			data.Save();
 		}
 	}
+
 	public bool isRocketBuilt {
 		get {
 			return data.isRocketBuilt;
 		}
 		set {
 			data.isRocketBuilt = value;
-			data.Save ();
+			data.Save();
 		}
 	}
 
@@ -42,7 +43,7 @@ public class RocketParts : MonoBehaviour {
 		}
 		private set {
 			data.upgradeLevel = value;
-			data.Save ();
+			data.Save();
 		}
 	}
 
@@ -57,54 +58,57 @@ public class RocketParts : MonoBehaviour {
 			return numParts >= PARTS_PER_UPGRADE && upgradeLevel < maxUpgradeLevel;
 		}
 	}
-		
+
 	public int maxUpgradeLevel {
 		get {
-			UnityEngine.Assertions.Assert.AreEqual (Questions.GetNumQuestions () % PARTS_PER_UPGRADE, 0);
-			return 1 + Questions.GetNumQuestions () / PARTS_PER_UPGRADE; // +1 for final bonus upgrade
+			UnityEngine.Assertions.Assert.AreEqual( Questions.GetNumQuestions() % PARTS_PER_UPGRADE, 0 );
+			return 1 + Questions.GetNumQuestions() / PARTS_PER_UPGRADE; // +1 for final bonus upgrade
 		}
 	}
 
-// public commands
-	public bool Upgrade() {
+	// public commands
+	public bool Upgrade () {
 		if (hasEnoughPartsToUpgrade) {
 			numParts -= PARTS_PER_UPGRADE;
-			DoUpgrade ();
+			DoUpgrade();
 			return true;
 		}
 		return false;
 	}
 
-	public void Inc() {
+	public void Inc () {
 		++numParts;
 	}
 
-	public void UnlockFinalUpgrade() {
+	public void UnlockFinalUpgrade () {
 		numParts += numPartsRequired;
 	}
 
-// private
+	public void Reset () {
+		Destroy( RocketParts.instance );	
+	}
+
+	// private
 	const int PARTS_TO_BUILD_ROCKET = 0;
 	const int PARTS_PER_UPGRADE = 11;
 
 	RocketPartsPersistantData data;
 
-	void Awake() {
+	void Awake () {
 		if (instance == null) {
 //			DontDestroyOnLoad (gameObject);
 			instance = this;
-			data = new RocketPartsPersistantData ();
-			data.Load ();
+			data = new RocketPartsPersistantData();
+			data.Load();
 		} else if (instance != this) {
-			Destroy (gameObject); // there can be only one!
+			Destroy( gameObject ); // there can be only one!
 		}
 	}
-			
-	void DoUpgrade ()
-	{
+
+	void DoUpgrade () {
 		data.justUpgraded = true;
 		++data.upgradeLevel;
-		data.Save ();
+		data.Save();
 	}
 }
 
@@ -117,17 +121,17 @@ public class RocketPartsPersistantData {
 	public bool isRocketBuilt;
 	public int upgradeLevel;
 
-	public void Save() {
-		MDPrefs.SetBool (prefsKey + ":isBuilt", isRocketBuilt);
-		MDPrefs.SetInt (prefsKey + ":upgradeLevel", upgradeLevel);
-		MDPrefs.SetBool (prefsKey + ":justUpgraded", justUpgraded);
-		MDPrefs.SetInt (prefsKey, numParts);
+	public void Save () {
+		MDPrefs.SetBool( prefsKey + ":isBuilt", isRocketBuilt );
+		MDPrefs.SetInt( prefsKey + ":upgradeLevel", upgradeLevel );
+		MDPrefs.SetBool( prefsKey + ":justUpgraded", justUpgraded );
+		MDPrefs.SetInt( prefsKey, numParts );
 	}
 
-	public void Load() {
-		numParts = MDPrefs.GetInt (prefsKey, 0);
-		isRocketBuilt = MDPrefs.GetBool (prefsKey + ":isBuilt");
-		upgradeLevel = MDPrefs.GetInt (prefsKey + ":upgradeLevel", 0);
-		justUpgraded = MDPrefs.GetBool (prefsKey + ":justUpgraded");
+	public void Load () {
+		numParts = MDPrefs.GetInt( prefsKey, 0 );
+		isRocketBuilt = MDPrefs.GetBool( prefsKey + ":isBuilt" );
+		upgradeLevel = MDPrefs.GetInt( prefsKey + ":upgradeLevel", 0 );
+		justUpgraded = MDPrefs.GetBool( prefsKey + ":justUpgraded" );
 	}
 }
