@@ -12,21 +12,21 @@ public class MDVersion : MonoBehaviour {
 
 	bool isChecking;
 
-	static public string GetCurrentVersion() {
+	static public string GetCurrentVersion () {
 		return majorVersion + "." + minorVersion + "." + buildNumber;
 	}
-		
-	public void CheckVersion() {
+
+	public void CheckVersion () {
 		if (isChecking) {
 			return;
 		}
 		isChecking = true;
-		string oldVersion = PlayerPrefs.GetString ("version");
-		if (oldVersion == GetCurrentVersion ()) {
+		string oldVersion = PlayerPrefs.GetString( "version" );
+		if (oldVersion == GetCurrentVersion()) {
 			return;
 		}
-		if (SceneManager.GetActiveScene ().name != "updateVersion") {
-			SceneManager.LoadScene ("updateVersion");
+		if (SceneManager.GetActiveScene().name != "updateVersion") {
+			SceneManager.LoadScene( "updateVersion" );
 			return;
 		} 
 		switch (oldVersion) {
@@ -36,53 +36,53 @@ public class MDVersion : MonoBehaviour {
 		case "0.1.10":
 		case "0.1.9":
 		case "0.1.8":
-			UpdateFrom_0_1_8_To_0_1_11 ();
+			UpdateFrom_0_1_8_To_0_1_11();
 			break;
 		default:
-			RestartWithNewVersion ();
+			RestartWithNewVersion();
 			break;
 		}
-		WriteNewVersion ();
-		SceneManager.LoadScene ("choosePlayer");
+		WriteNewVersion();
+		SceneManager.LoadScene( "choosePlayer" );
 	}
 
-	void Start() {
+	void Start () {
 		CheckVersion();
 	}
 
-	void OnApplicationPause(bool pauseStatus) {
+	void OnApplicationPause (bool pauseStatus) {
 		if (!pauseStatus) {
-			CheckVersion ();
+			CheckVersion();
 		}
 	}
 
-	void RestartWithNewVersion() {
-		PlayerPrefs.DeleteAll ();
+	void RestartWithNewVersion () {
+		PlayerPrefs.DeleteAll();
 	}
 
-	void WriteNewVersion() {
-		PlayerPrefs.SetString ("version", GetCurrentVersion ());
-		PlayerPrefs.Save ();
 		isChecking = false;
+	public static void WriteNewVersion () {
+		PlayerPrefs.SetString( "version", GetCurrentVersion() );
+		PlayerPrefs.Save();
 	}
 
-	void UpdateFrom_0_1_8_To_0_1_11() {
+	void UpdateFrom_0_1_8_To_0_1_11 () {
 		const float oldAnswerTimeInitial = 3f + 0.01f;
 		PlayerNameController playerNameController = new PlayerNameController();
-		playerNameController.Load ();
+		playerNameController.Load();
 		string oldName = playerNameController.curName;
 		foreach (string playerName in playerNameController.names) {
 			playerNameController.curName = playerName;
-			playerNameController.Save ();
-			Debug.Log ("Updating question for " + playerName);
-			questions.gameObject.SetActive (true); // load question list
-			foreach(Question question in questions.questions) {
-				question.UpdateInitialAnswerTime (oldAnswerTimeInitial);
+			playerNameController.Save();
+			Debug.Log( "Updating question for " + playerName );
+			questions.gameObject.SetActive( true ); // load question list
+			foreach (Question question in questions.questions) {
+				question.UpdateInitialAnswerTime( oldAnswerTimeInitial );
 			}
-			questions.Save ();
-			questions.gameObject.SetActive (false);
+			questions.Save();
+			questions.gameObject.SetActive( false );
 		}
 		playerNameController.curName = oldName;
-		playerNameController.Save ();
+		playerNameController.Save();
 	}
 }

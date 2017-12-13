@@ -8,63 +8,63 @@ public class Questions : MonoBehaviour {
 	public Question[] questions { get; private set; }
 
 	QuestionsPersistentData data = new QuestionsPersistentData();
-		
-	public static int GetNumQuestions() {
+
+	public static int GetNumQuestions () {
 		return maxNum * (maxNum + 1) / 2;
 	}
-		
-	public void ResetForNewQuiz() {
+
+	public void ResetForNewQuiz () {
 		foreach (Question question in questions) {
-			question.ResetForNewQuiz ();
+			question.ResetForNewQuiz();
 		}
 	}
 
-	public Question GetQuestion(bool isFrustrated, bool allowGaveUpQuestions) {
-		IEnumerable<Question> allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.IsMastered () && (allowGaveUpQuestions || !question.GaveUp()));
+	public Question GetQuestion (bool isFrustrated, bool allowGaveUpQuestions) {
+		IEnumerable<Question> allowed = questions.Where( question => !question.wasAnsweredInThisQuiz && !question.IsMastered() && (allowGaveUpQuestions || !question.GaveUp()) );
 
 		if (!allowed.Any()) {
-			allowed = questions.Where (question => !question.wasAnsweredInThisQuiz && !question.GaveUp());
-			if (!allowed.Any ()) {
-				allowed = questions.Where (question => !question.wasAnsweredInThisQuiz);
-				if (!allowed.Any ()) {
+			allowed = questions.Where( question => !question.wasAnsweredInThisQuiz && !question.GaveUp() );
+			if (!allowed.Any()) {
+				allowed = questions.Where( question => !question.wasAnsweredInThisQuiz );
+				if (!allowed.Any()) {
 					return null; // should never happen
 				}
 			}
 		}
-		IEnumerable<Question> candidates = allowed.Where (question => question.WasWrong());
-		if (!candidates.Any ()) {
-			candidates = allowed.Where (question => !question.IsNew());
-			if (!candidates.Any ()) { // then give a new question
-				return (isFrustrated) ? allowed.First () : allowed.ElementAt (Random.Range (0, allowed.Count ()));
+		IEnumerable<Question> candidates = allowed.Where( question => question.WasWrong() );
+		if (!candidates.Any()) {
+			candidates = allowed.Where( question => !question.IsNew() );
+			if (!candidates.Any()) { // then give a new question
+				return (isFrustrated) ? allowed.First() : allowed.ElementAt( Random.Range( 0, allowed.Count() ) );
 			}
 		}
-		var orderedCandidates = candidates.OrderBy (q => q.GetAverageAnswerTime ());
-		return (isFrustrated) ? orderedCandidates.First () : orderedCandidates.Last ();
+		var orderedCandidates = candidates.OrderBy( q => q.GetAverageAnswerTime() );
+		return (isFrustrated) ? orderedCandidates.First() : orderedCandidates.Last();
 	}
 
-	public Question GetGaveUpQuestion() {
-		return questions.FirstOrDefault (question => question.GaveUp());
+	public Question GetGaveUpQuestion () {
+		return questions.FirstOrDefault( question => question.GaveUp() );
 	}
 
-	public Question GetLaunchCodeQuestion() {
-		return questions.FirstOrDefault (question => question.isLaunchCode);
+	public Question GetLaunchCodeQuestion () {
+		return questions.FirstOrDefault( question => question.isLaunchCode );
 	}
 
-	public void Save() {
-		data.Save ();
+	public void Save () {
+		data.Save();
 	}
-		
-	void OnEnable() {
-		data.Load ();
-		questions = CreateQuestions ();
+
+	void OnEnable () {
+		data.Load();
+		questions = CreateQuestions();
 	}
-		
-	public Question[] CreateQuestions() {
+
+	public Question[] CreateQuestions () {
 		Question[] questions = new Question[GetNumQuestions()];
 		int idx = 0;
 		for (int a = 1; a <= maxNum; ++a) {
 			for (int b = a; b <= maxNum; ++b) {
-				questions [idx] = new Question (a, b, data.questionData[idx]);
+				questions[ idx ] = new Question( a, b, data.questionData[ idx ] );
 				++idx;
 			}
 		}
@@ -78,34 +78,32 @@ public class QuestionsPersistentData {
 
 	const string prefsKey = "questions";
 
-	public static string GetQuestionKey (int i)
-	{
+	public static string GetQuestionKey (int i) {
 		return prefsKey + ":" + i;
 	}
 
-	public void Save() {
-		MDPrefs.SetInt (prefsKey + ":ArrayLen", questionData.Length);
+	public void Save () {
+		MDPrefs.SetInt( prefsKey + ":ArrayLen", questionData.Length );
 		for (int i = 0; i < questionData.Length; ++i) {
 			questionData [i].Save ();
 		}
 	}
 
-	public void Load() {
+	public void Load () {
 		questionData = new QuestionPersistentData[Questions.GetNumQuestions()];
-		UnityEngine.Assertions.Assert.AreEqual (MDPrefs.GetInt (prefsKey + ":ArrayLen", questionData.Length), questionData.Length);
-		bool shouldCreate = !WereQuestionsCreated ();
+		UnityEngine.Assertions.Assert.AreEqual( MDPrefs.GetInt( prefsKey + ":ArrayLen", questionData.Length ), questionData.Length );
+		bool shouldCreate = !WereQuestionsCreated();
 		for (int i = 0; i < questionData.Length; ++i) {
-			questionData [i] = new QuestionPersistentData ();
+			questionData[ i ] = new QuestionPersistentData();
 			if (shouldCreate) {
-				questionData [i].Create (GetQuestionKey(i), i);
+				questionData[ i ].Create( GetQuestionKey( i ), i );
 			} else {
-				questionData [i].Load (GetQuestionKey (i), i);
+				questionData[ i ].Load( GetQuestionKey( i ), i );
 			}
 		}
 	}
 
-	public static bool WereQuestionsCreated ()
-	{
-		return MDPrefs.HasKey (prefsKey + ":ArrayLen");
+	public static bool WereQuestionsCreated () {
+		return MDPrefs.HasKey( prefsKey + ":ArrayLen" );
 	}
 }
