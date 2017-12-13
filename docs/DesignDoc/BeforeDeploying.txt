@@ -16,8 +16,8 @@ Creation-Date: 2017-12-11T22:36:44+01:00
 	* Add grid button screenshots for small devices
 * Update Noun Project credits 
 * Test on device by changing bundle id to einmaleins2
-* Tag version in git
 * Change bundle id back to einmaleins
+* Tag version in git
 
 ===== On major changes =====
 
