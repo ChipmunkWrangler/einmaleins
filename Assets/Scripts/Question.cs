@@ -36,6 +36,17 @@ public class Question {
 		return data.isNew;
 	}
 
+	public void SetNewFromAnswerTime () {
+		bool isNew = true;
+		foreach (float answerTime in data.answerTimes) {
+			if (answerTime != QuestionPersistentData.ANSWER_TIME_INITIAL) {
+				isNew = false;
+				break;
+			}
+		}
+		data.isNew = isNew;
+	}
+
 	public bool GaveUp () {
 		return data.gaveUp;
 	}

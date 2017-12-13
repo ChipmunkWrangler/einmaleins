@@ -8,7 +8,7 @@ public class MDVersion : MonoBehaviour {
 
 	const int majorVersion = 0;
 	const int minorVersion = 1;
-	const int buildNumber = 13;
+	const int buildNumber = 14;
 
 	bool isChecking;
 
@@ -30,8 +30,10 @@ public class MDVersion : MonoBehaviour {
 			return;
 		} 
 		switch (oldVersion) {
+		case "0.1.13":
 		case "0.1.12":
 		case "0.1.11":
+			UpdateFrom_0_1_11_To_0_1_14();
 			break;
 		case "0.1.10":
 		case "0.1.9":
@@ -64,6 +66,25 @@ public class MDVersion : MonoBehaviour {
 	public static void WriteNewVersion () {
 		PlayerPrefs.SetString( "version", GetCurrentVersion() );
 		PlayerPrefs.Save();
+	}
+
+	void UpdateFrom_0_1_11_To_0_1_14 () {
+		PlayerNameController playerNameController = new PlayerNameController();
+		playerNameController.Load();
+		string oldName = playerNameController.curName;
+		foreach (string playerName in playerNameController.names) {
+			playerNameController.curName = playerName;
+			playerNameController.Save();
+			Debug.Log( "Updating question for " + playerName );
+			questions.gameObject.SetActive( true ); // load question list
+			foreach (Question question in questions.questions) {
+				question.SetNewFromAnswerTime();
+			}
+			questions.Save();
+			questions.gameObject.SetActive( false );
+		}
+		playerNameController.curName = oldName;
+		playerNameController.Save();
 	}
 
 	void UpdateFrom_0_1_8_To_0_1_11 () {

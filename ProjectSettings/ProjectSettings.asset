@@ -153,8 +153,8 @@ PlayerSettings:
     Android: com.crazy_chipmunk.einmaleins
     iOS: com.crazy-chipmunk.einmaleins
   buildNumber:
-    iOS: 13
-  AndroidBundleVersionCode: 13
+    iOS: 14
+  AndroidBundleVersionCode: 14
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -528,7 +528,8 @@ PlayerSettings:
   webGLUseEmbeddedResources: 0
   webGLUseWasm: 0
   webGLCompressionFormat: 1
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    4: 
   platformArchitecture: {}
   scriptingBackend: {}
   incrementalIl2cppBuild: {}
