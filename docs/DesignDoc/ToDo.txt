@@ -7,7 +7,7 @@ Creation-Date: 2017-12-11T22:35:42+01:00
 
 * Matthias B.s wife keeps getting the same questions in a row
 	* He thinks she isn't at Pluto yet
-	* Get him to download playerprefs
+	* Look at her prefs. If nothing is obviously wrong, load them into the game and test directly.
 
 
 
