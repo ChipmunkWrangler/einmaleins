@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetPlanet {
+public class TargetPlanet
+{
 	const string targetKey = "targetPlanet";
 	const string lastReachedKey = "lastReachedPlanet";
 
@@ -20,39 +21,46 @@ public class TargetPlanet {
 
 	const float FINAL_HEIGHT = 9999999999f;
 
-	public static void Reset() {
+	public static void Reset ()
+	{
 		targetPlanetIdx = -1;
 		lastReachedPlanetIdx = -2;
 	}
 
-	public static int GetLastReachedIdx() {
+	public static int GetLastReachedIdx ()
+	{
 		if (lastReachedPlanetIdx < -1) {
 			lastReachedPlanetIdx = MDPrefs.GetInt (lastReachedKey, -1);
 		}
 		return lastReachedPlanetIdx; 
 	}
 
-	public static void SetLastReachedIdx(int planetIdx) {
+	public static void SetLastReachedIdx (int planetIdx)
+	{
 		MDPrefs.SetInt (lastReachedKey, planetIdx);
 		lastReachedPlanetIdx = planetIdx;
 	}
 
-	public static void TargetNextPlanet() {
 		SetIdx (GetTargetPlanetIdx() + 1);
+	public static void TargetNextPlanet ()
+	{
 	}
 
-	public static int GetTargetPlanetIdx() {
+	public static int GetTargetPlanetIdx ()
+	{
 		if (targetPlanetIdx < 0) {
 			targetPlanetIdx = MDPrefs.GetInt (targetKey, 0);
 		}
 		return targetPlanetIdx; 
 	}
 
-	public static int GetMaxPlanetIdx() {
+	public static int GetMaxPlanetIdx ()
+	{
 		return heights.Length - 1;
 	}
 
-	public static float GetPlanetHeight(int i) {
+	public static float GetPlanetHeight (int i)
+	{
 		return (i < heights.Length) ? heights [i] : FINAL_HEIGHT;
 	}
 
@@ -64,11 +72,13 @@ public class TargetPlanet {
 }
 
 [System.Serializable]
-public class TargetPlanetPersistentData {
+public class TargetPlanetPersistentData
+{
 	public int targetPlanetIdx;
 	public int lastReachedPlanetIdx;
 
-	public void Load() {
+	public void Load ()
+	{
 		targetPlanetIdx = TargetPlanet.GetTargetPlanetIdx ();
 		lastReachedPlanetIdx = TargetPlanet.GetLastReachedIdx ();
 	}
