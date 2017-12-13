@@ -1,29 +1,30 @@
 ﻿[System.Serializable]
-public class PlayerData
-{
+public class PlayerData {
 	public string playerName;
-	public RocketPartsPersistantData rocketPartsData = new RocketPartsPersistantData ();
-	public TargetPlanetPersistentData targetPlanetData = new TargetPlanetPersistentData ();
-	public EffortTrackerPersistantData effortTrackerData = new EffortTrackerPersistantData ();
-	public StatsControllerPersistentData statsControllerData = new StatsControllerPersistentData ();
-	public QuestionsPersistentData questionsData = new QuestionsPersistentData ();
+	public RocketPartsPersistantData rocketPartsData = new RocketPartsPersistantData();
+	public TargetPlanetPersistentData targetPlanetData = new TargetPlanetPersistentData();
+	public EffortTrackerPersistantData effortTrackerData = new EffortTrackerPersistantData();
+	public StatsControllerPersistentData statsControllerData = new StatsControllerPersistentData();
+	public QuestionsPersistentData questionsData = new QuestionsPersistentData();
 
-	public void Load (string name)
-	{
+	public void Load (string name) {
+		if (PlayerNameController.IsPlayerSet()) {
+			RocketParts.Reset();
+			TargetPlanet.Reset();
+		}
 		playerName = name;
-		rocketPartsData.Load ();
-		effortTrackerData.Load ();
-		statsControllerData.Load (Questions.maxNum);
-		targetPlanetData.Load ();
-		questionsData.Load ();
+		rocketPartsData.Load();
+		effortTrackerData.Load();
+		statsControllerData.Load( Questions.maxNum );
+		targetPlanetData.Load();
+		questionsData.Load();
 	}
 
-	public void Save ()
-	{
-		rocketPartsData.Save ();
-		effortTrackerData.Save ();
-		statsControllerData.Save (Questions.maxNum);
-		targetPlanetData.Save ();
-		questionsData.Save ();
+	public void Save () {
+		rocketPartsData.Save();
+		effortTrackerData.Save();
+		statsControllerData.Save( Questions.maxNum );
+		targetPlanetData.Save();
+		questionsData.Save();
 	}
 }

@@ -84,8 +84,10 @@ public class RocketParts : MonoBehaviour {
 		numParts += numPartsRequired;
 	}
 
-	public void Reset () {
-		Destroy( RocketParts.instance );	
+	public static void Reset () {
+		if (instance != null) {
+			Destroy( RocketParts.instance );	
+		}
 	}
 
 	// private
