@@ -105,7 +105,7 @@ public class Question {
 	public void UpdateInitialAnswerTime (float oldAnswerTimeInitial) {
 		List<float> newAnswerTimes = new List<float>();
 		foreach (var time in data.answerTimes) {
-			newAnswerTimes.Add( time == oldAnswerTimeInitial ? QuestionPersistentData.ANSWER_TIME_INTIAL : time );
+			newAnswerTimes.Add( time == oldAnswerTimeInitial ? QuestionPersistentData.ANSWER_TIME_INITIAL : time );
 		}
 		data.answerTimes = newAnswerTimes;	
 	}
@@ -143,7 +143,7 @@ public class QuestionPersistentData {
 	public List<float> answerTimes;
 
 	[System.NonSerialized] public const int NUM_ANSWER_TIMES_TO_RECORD = 3;
-	[System.NonSerialized] public const float ANSWER_TIME_INTIAL = Question.FAST_TIME + 0.01f;
+	[System.NonSerialized] public const float ANSWER_TIME_INITIAL = Question.FAST_TIME + 0.01f;
 
 	string prefsKey;
 
@@ -186,7 +186,7 @@ public class QuestionPersistentData {
 	static List<float> GetNewAnswerTimes () {
 		List<float> answerTimes = new List<float>();
 		for (int i = 0; i < NUM_ANSWER_TIMES_TO_RECORD; ++i) {
-			answerTimes.Add( ANSWER_TIME_INTIAL );
+			answerTimes.Add( ANSWER_TIME_INITIAL );
 		}
 		return answerTimes;
 	}
