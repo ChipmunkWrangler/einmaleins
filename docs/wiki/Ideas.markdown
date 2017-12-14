@@ -1,9 +1,5 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-11T17:40:22+01:00
 
-====== Ideas ======
-
+#Ideas 
  * No one understands fuel
  * Difficulty levels and or voice control due to motor control issues
  * Make first rocket upgrade really fast
@@ -11,12 +7,12 @@ Creation-Date: 2017-12-11T17:40:22+01:00
   * More involvement with rocket building
    * Collect currency for every correct question, regardless of speed
    * spend currency to:
-	* Change rocket color again
-	* Unlock and change flame color
-	* Unlock and switch between alternate flame effects 
-	* Unlock and switch between different rocket designs
-	 * Use Inkscape to split your rockets into pieces that you can build.
-	 * Colouring book for rocket
+    * Change rocket color again
+    * Unlock and change flame color
+    * Unlock and switch between alternate flame effects 
+    * Unlock and switch between different rocket designs
+     * Use Inkscape to split your rockets into pieces that you can build.
+     * Colouring book for rocket
    * Existing players still start from 0 currency 
    * Upgrades are shown in advance for motivational reasons
   * random events to keep things interesting if there hasn't been a record or rocket part for a while
@@ -50,7 +46,7 @@ Creation-Date: 2017-12-11T17:40:22+01:00
   * If a question is answered within allotted time, don't ask it again until tomorrow
   * If frustration is high, the hardest already mastered question is asked, or the easiest nonmastered if none are mastered.
    * If the easiest nonmastered has avg time > 15, ask the easiest new question instead. 
-	* The current version tends to ask the same questions over and over, which may be sensible but is dull. This tweak might add a little more variety, as might decaying old answers (see below) 
+    * The current version tends to ask the same questions over and over, which may be sensible but is dull. This tweak might add a little more variety, as might decaying old answers (see below) 
   * Start with 1xN, the go to 2xN if two 1xNs in a row are answered quickly, etc. This may make progress steadier, and / or the beginning more rewarding (not too hard for beginners, not too boring for advanced)
   * Timestamp answers in the answer list and decay them 
    * This can cause a mastered question to become unmastered
@@ -110,7 +106,7 @@ Creation-Date: 2017-12-11T17:40:22+01:00
   * Screen shake on launch, or on every thrust
   * Score header more visual 
    * Use a rocket as rocket parts progress bar instead of a number
-	* And an engine for upgrades? 
+    * And an engine for upgrades? 
    * Fuel is a bar rather than a number? 
    * But the images may visually dominate the height and record lines
  * Switch from PlayerPrefs to another system https://unity3d.com/learn/tutorials/topics/scripting/persistence-saving-and-loading-data
@@ -121,103 +117,90 @@ Creation-Date: 2017-12-11T17:40:22+01:00
    * http://answers.unity3d.com/questions/401716/determining-texture-memory-usage.html
  * Matthias B says: consider visual flow: ATM it starts at the question, then down to the buttons, then up to the answer, down to the rocket, up to the result... he thinks it would be better to go from top to bottom or vice versa
 
-
-
-=== Collectibles ===
-* Get a new alien for each planet reached
-	* Or a plant
-	* Or at least have a collection screen for the planets themselves 
-* Award a collectible animal when a skill is mastered
-* Upgrade the animal or award another when a skill is flash mastered
-* That is 100 - 400 animals (double if 6x8 is not 8x6 -- maybe cheat by adding the same animal in a different color)!
-	* That is too many to appreciate anyway.
-	* Maybe an animal for mastering all the x1s, all the x2s, etc. That would be 10 - 20.
-	* And for each skill, it just lights up gold in the bingo card?
-* After they get the animal, they have to feed the animal:
-	* It starts to get hungry when they need to review its skills
-	* They can't force the right exercise to come, but they know it will come soon after the animal gets hungry if they play. 
-
-===== Algorithm =====
-* Consider adding a 15 minute cutoff regardless of number of errors
-* Have the option to do extra review in LRU order.
-* The intervals published in Pimsleur's paper were: 5 seconds, 25 seconds, 2 minutes, 10 minutes, 1 hour, 5 hours, 1 day, 5 days, 25 days, 4 months, and 2 years.
-* If there are no cards left to drill, and there is a new card available, and (you have spent less than 5 minutes in the app or have fewer than three mistakes), add a new card.
-
-===== Presentation =====
-* Present the questions both visually and orally
-* Show untimed multiplication as a square of dots (or animals), maybe initially marching out in rows
-	* http://www.mathplayground.com/tb_multiplication/thinking_blocks_multiplication_division.html
-	* These blocks can be arranged on a 10x10 square, trying to fill it as much as possible 
-	* Or pizzas with pepperonis
-* Present the questions and answers in different formats and get children to say which are equivalent, e.g.
-	* 6x7, 7x6, 56, a 7 by 6 square, 7 pizzas with six pepperonies each
-	* maybe even 3x2x7, 7x7-7, 6x6+6, 5x6+2x6, 5x7+1x7 (and their visual equivalents) 
-	* and 7 x ? = 42
-	* for Nx8, also Nx10 - Nx2
-* Clock solitaire http://www.timestableclock.com/index.html
-* Show a bunch of numbers and say "which of these are multiples of N"
-* Mnemonic stories: http://www.multiplication.com/student-manager/premium/video-player/84
-
-===== Games =====
-* Maybe a minigame to play with the collected animals?
-* Most math drill games are a game (some simple, some complex, like Tower Math) interrupted by a math question. Sometimes this feels more plausible than others (e.g. tower defense works better than shooter). Maybe you could have something where buying is a main mechanic, and the price is always given as N x M.
-* The alternative is a freely playable game for which you win tickets by solving problems
-* Is there anything better? 
-	* A geometry game where knowing N x M is intrinsically important?
-	* A lockpicking or safecracking game where the combination is the result
-	* A hacking game where you have to disable drones before they hit your city. The sooner you do it, the less destruction.
-	* Launch code for rocket
-	* Coordinates of moon or stargate (could even offer a choice of problems (all due) to go different places or directions)
-	* Alas, the best endless runners are based on flow, which you would interrupt with your questions. So maybe separate it: Play cube race or doodle jump for earned ticket; otherwise play booster rockets which is just solving the math (a glorified progress meter) for high scores. 
-* General problem: You can only sensibly allow the game to be played when at least one fact is due. But then the game might be very short, or if you show all facts, encourage wasting time by reviewing things already known, probably at the expense of the other modes. 
-
-=== Battleship ===
+##Collectibles
+ * Get a new alien for each planet reached
+  * Or a plant
+  * Or at least have a collection screen for the planets themselves 
+ * Award a collectible animal when a skill is mastered
+ * Upgrade the animal or award another when a skill is flash mastered
+ * That is 100 - 400 animals (double if 6x8 is not 8x6 -- maybe cheat by adding the same animal in a different color)!
+  * That is too many to appreciate anyway.
+  * Maybe an animal for mastering all the x1s, all the x2s, etc. That would be 10 - 20.
+  * And for each skill, it just lights up gold in the bingo card?
+ * After they get the animal, they have to feed the animal:
+  * It starts to get hungry when they need to review its skills
+  * They can't force the right exercise to come, but they know it will come soon after the animal gets hungry if they play. 
+##Algorithm
+ * Consider adding a 15 minute cutoff regardless of number of errors
+ * Have the option to do extra review in LRU order.
+ * The intervals published in Pimsleur's paper were: 5 seconds, 25 seconds, 2 minutes, 10 minutes, 1 hour, 5 hours, 1 day, 5 days, 25 days, 4 months, and 2 years.
+ * If there are no cards left to drill, and there is a new card available, and (you have spent less than 5 minutes in the app or have fewer than three mistakes), add a new card.
+##Presentation
+ * Present the questions both visually and orally
+ * Show untimed multiplication as a square of dots (or animals), maybe initially marching out in rows
+  * http://www.mathplayground.com/tb_multiplication/thinking_blocks_multiplication_division.html
+  * These blocks can be arranged on a 10x10 square, trying to fill it as much as possible 
+  * Or pizzas with pepperonis
+ * Present the questions and answers in different formats and get children to say which are equivalent, e.g.
+  * 6x7, 7x6, 56, a 7 by 6 square, 7 pizzas with six pepperonies each
+  * maybe even 3x2x7, 7x7-7, 6x6+6, 5x6+2x6, 5x7+1x7 (and their visual equivalents) 
+  * and 7 x ? = 42
+  * for Nx8, also Nx10 - Nx2
+ * Clock solitaire http://www.timestableclock.com/index.html
+ * Show a bunch of numbers and say "which of these are multiples of N"
+ * Mnemonic stories: http://www.multiplication.com/student-manager/premium/video-player/84
+##Games
+ * Maybe a minigame to play with the collected animals?
+ * Most math drill games are a game (some simple, some complex, like Tower Math) interrupted by a math question. Sometimes this feels more plausible than others (e.g. tower defense works better than shooter). Maybe you could have something where buying is a main mechanic, and the price is always given as N x M.
+ * The alternative is a freely playable game for which you win tickets by solving problems
+ * Is there anything better? 
+  * A geometry game where knowing N x M is intrinsically important?
+  * A lockpicking or safecracking game where the combination is the result
+  * A hacking game where you have to disable drones before they hit your city. The sooner you do it, the less destruction.
+  * Launch code for rocket
+  * Coordinates of moon or stargate (could even offer a choice of problems (all due) to go different places or directions)
+  * Alas, the best endless runners are based on flow, which you would interrupt with your questions. So maybe separate it: Play cube race or doodle jump for earned ticket; otherwise play booster rockets which is just solving the math (a glorified progress meter) for high scores. 
+ * General problem: You can only sensibly allow the game to be played when at least one fact is due. But then the game might be very short, or if you show all facts, encourage wasting time by reviewing things already known, probably at the expense of the other modes. 
+###Battleship
 Battleship where the grid has numbers for x and y and you make your attack by entering x times y and receive a shot by decording x times y.
 agar.io where you can eat any equation smaller than you and run from those who are larger
 
-=== Doodle Jump ===
+###Doodle Jump
 Doodle jump / cube racer thing where the powerups are digits. Maybe write the question on your ship. Make it easy to hit the digit you want (make it lane-based, slow ship down when digits come) -- if you want, you can include normal obstacles at normal speeds as well.
+####Musings
+ * However, this means that the right answer must be repeated, making it recognizable unless all answers are repeated
+   * Also, I don't really like multiple choice
+    * Could make them fly through individual digits -- that would solve both problems 
+   * And the player could hit the wrong answer through lack of coordination
+    * Maybe instead of "this number or that" it could be "number or not", and it is easy to control, e.g. only two lanes and plenty of time to switch 
+##Hints
+ * Always show 5x8 and ask for 40, but if the kid gets it wrong or takes too long, walk them through some tricks (or ask them how they did it)
+ * Base hints on player mastery -- if we know they know 6x6, use things based on 6x6.
+##Tricks
+ * 5s end in 5 or 0
+ * 10s end in 0
+ * 9s digits add up to 9, and the first digit is one less than the multiplier (3x9 = {(3-1),(10-3)})
+ * 3s digits add up to 3, 6 or 9 (but this is more useful for other stuff)
+ * Songs or jingles?
+ * Focus on 1, 2, 3, 4, 9, 10. Then you only really have to memorize 6, 7, 8 by 6, 7, 8
+ * Hand trick 
+ * Take the nearest 5x and add
+ * Take the nearest 10x and subtract
+ * Remembering squares is useful because whenever you multiply numbers that are separated by two you can simply square the middle number and then subtract one to get the answer.  5x7=6x6-1
+ * Rhymes http://www.teacherweb.com/NY/Quogue/MrsLevy/MULTIPLICATION-RHYMES.pdf
 
-== Musings ==
-* However, this means that the right answer must be repeated, making it recognizable unless all answers are repeated
-		* Also, I don't really like multiple choice
-	* Could make them fly through individual digits -- that would solve both problems 
-		* And the player could hit the wrong answer through lack of coordination
-	* Maybe instead of "this number or that" it could be "number or not", and it is easy to control, e.g. only two lanes and plenty of time to switch 
-
-==== Hints ====
-* Always show 5x8 and ask for 40, but if the kid gets it wrong or takes too long, walk them through some tricks (or ask them how they did it)
-* Base hints on player mastery -- if we know they know 6x6, use things based on 6x6.
-
-==== Tricks ====
-* 5s end in 5 or 0
-* 10s end in 0
-* 9s digits add up to 9, and the first digit is one less than the multiplier (3x9 = {(3-1),(10-3)})
-* 3s digits add up to 3, 6 or 9 (but this is more useful for other stuff)
-* Songs or jingles?
-* Focus on 1, 2, 3, 4, 9, 10. Then you only really have to memorize 6, 7, 8 by 6, 7, 8
-* Hand trick 
-* Take the nearest 5x and add
-* Take the nearest 10x and subtract
-* Remembering squares is useful because whenever you multiply numbers that are separated by two you can simply square the middle number and then subtract one to get the answer.  5x7=6x6-1
-* Rhymes http://www.teacherweb.com/NY/Quogue/MrsLevy/MULTIPLICATION-RHYMES.pdf
-
-==== Number Sense ====
+##Number Sense
  Montessori Bretter aus Kuegelchen, "Angeregt von Montessori"
 
 https://bhi61nm2cr3mkdgk1dtaov18-wpengine.netdna-ssl.com/wp-content/uploads/2017/03/FluencyWithoutFear-2015.pdf
 https://www.mathsolutions.com/documents/NumberTalks_SParrish.pdf (for 2 digit multiplications)
-
-==== Skinning (Talea Ideas) ====
-
-=== Dinosaur ===
+##Skinning (Talea Ideas)
+###Dinosaur
 You are one of the mighty dinosaurs -- King Dinosaur -- and you have to travel across Pangea to get to a big volcano before it explodes, because if it explodes all the dinosaurs will die.
-
-=== Fairies & Unicorns ===
-
-=== Plants ===
+###Fairies & Unicorns
+###Plants
 When you reach Pluto, there should be a tree with a golden trunk and multicoloured leaves. You have to dig it out carefully to take it somewhere warmer where it can survive. It has magical powers that can save your grandmother or the king or someone.
 
 
-===== Competitors =====
+#Competitors
 https://www.youtube.com/watch?v=tDkn9bxr31U Allows lots of parental configuration (timer or not, lock stuff that is too easy, different modes (in order, got wrong, random, fill in the gaps, ...)

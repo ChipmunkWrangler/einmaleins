@@ -1,18 +1,10 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-11T22:35:42+01:00
-
-====== ToDo ======
-
-
-* Matthias B.s wife keeps getting the same questions in a row
-	* He thinks she isn't at Pluto yet
-	* Look at her prefs. If nothing is obviously wrong, load them into the game and test directly.
-	* Retest Save
+# ToDo 
 
 
 
-===== v1.0.0 =====
+
+
+## v1.0.0 
 
 * Make screenshots for shop, perhaps add them to web pages,
 * Bug: ion stream flickers between in front of and behind the planets. But it is also kind of cool.
@@ -40,7 +32,7 @@ Creation-Date: 2017-12-11T22:35:42+01:00
 	* Top inset zero pixels
 * Talk to Matthias S. again
 
-==== Credits ====
+### Credits
 
 * Creative commons attribution 
 	* spaceship by Jonathan Li from the Noun Project
@@ -49,10 +41,8 @@ Creation-Date: 2017-12-11T22:35:42+01:00
 	* Gauge By Roberto Chiaveri
 	* Kuber (Back button)
 
-====== Bugs ======
+# Bugs
 * There is a pause on the first quiz question
 * Reach mars without answering any questions after upgrade 1 : maybe tweak the planet heights?
 * if a wrong question is shown but not answered (because you reach the planet), it is still no longer marked as wrong, hence in the next quiz is doesn't appear first
-
-
 
