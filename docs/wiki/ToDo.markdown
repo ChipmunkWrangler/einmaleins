@@ -1,30 +1,26 @@
 # ToDo 
 
 
-
-
-
 ## v1.0.0 
-
-* Make screenshots for shop, perhaps add them to web pages,
-* Bug: ion stream flickers between in front of and behind the planets. But it is also kind of cool.
-* Ion stream doesn't look impressive
-* Mars Ho! is confusing
-* Generate links for app store buttons
-	* https://play.google.com/intl/en_us/badges/
-	* https://developer.apple.com/library/content/qa/qa1633/_index.html 
-* Store page https://developer.apple.com/app-store/categories/ and on android
-	* Localized, up to date screen shots  
-* Remove unnecessary permissions, e.g. Android.Internet aka "Other: full network access"
-	* Note that in the .csproj files, there are defines like ENABLE_CLOUD_SERVICES_ADS 
-* Test that it works with 512 Mb devices (https://hwstats.unity3d.com/mobile/os.html)
-* Change iOS build to Fast but no Exceptions option.
-* Remove or disable Debug.Log
-* Turn off logging
-* Optimize: don't save all questions every time a question changes -- just the relevant question
-* update OSX and XCode to be iPhoneX compatible
-	* show status bar? 
-	* Ensure that iPhone X divot at the top of screen doesn't mess up my layout https://forum.unity.com/threads/iphone-x-notch-in-screen.495028/
+* [ ] Make screenshots for shop, perhaps add them to web pages,
+* [ ] Bug: ion stream flickers between in front of and behind the planets. But it is also kind of cool.
+* [ ] Ion stream doesn't look impressive
+* [ ] Mars Ho! is confusing
+* [ ] Generate links for app store buttons
+	* [ ] https://play.google.com/intl/en_us/badges/
+	* [ ] https://developer.apple.com/library/content/qa/qa1633/_index.html 
+* [ ] Store page https://developer.apple.com/app-store/categories/ and on android
+	* [ ] Localized, up to date screen shots  
+* [ ] Remove unnecessary permissions, e.g. Android.Internet aka "Other: full network access"
+	* [ ] Note that in the .csproj files, there are defines like ENABLE_CLOUD_SERVICES_ADS 
+* [ ] Test that it works with 512 Mb devices (https://hwstats.unity3d.com/mobile/os.html)
+* [ ] Change iOS build to Fast but no Exceptions option.
+* [ ] Remove or disable Debug.Log
+* [ ] Turn off logging
+* [ ] Optimize: don't save all questions every time a question changes -- just the relevant question
+* [ ] update OSX and XCode to be iPhoneX compatible
+	* [ ] show status bar? 
+	* [ ] Ensure that iPhone X divot at the top of screen doesn't mess up my layout https://forum.unity.com/threads/iphone-x-notch-in-screen.495028/
 	* iPhone X overall dimensions 2436 x 1125 pixels
 	* Overall safe area 2172 x 1062 pixels
 	* Left & right insets (accounts for the notch and curved corners, plus a margin) 132 pixels each
