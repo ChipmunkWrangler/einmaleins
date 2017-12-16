@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class MDVersion : MonoBehaviour {
 	[SerializeField] Questions questions;
 
-	const int majorVersion = 0;
-	const int minorVersion = 1;
-	const int buildNumber = 14;
+	const int majorVersion = 1;
+	const int minorVersion = 0;
+	const int buildNumber = 0;
 
 	bool isChecking;
 
@@ -31,6 +31,8 @@ public class MDVersion : MonoBehaviour {
 			return;
 		} 
 		switch (oldVersion) {
+		case "0.1.14":
+			break;
 		case "0.1.13":
 		case "0.1.12":
 		case "0.1.11":
@@ -76,7 +78,7 @@ public class MDVersion : MonoBehaviour {
 		foreach (string playerName in playerNameController.names) {
 			playerNameController.curName = playerName;
 			playerNameController.Save();
-			Debug.Log( "Updating question for " + playerName );
+//			Debug.Log( "Updating question for " + playerName );
 			questions.gameObject.SetActive( true ); // load question list
 			foreach (Question question in questions.questions) {
 				question.SetNewFromAnswerTime();
