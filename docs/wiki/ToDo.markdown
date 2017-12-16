@@ -3,6 +3,15 @@
 # ToDo 
 
 ## v1.0.0 
+* [o] update OSX and XCode to be iPhoneX compatible
+	* [o] Ensure that iPhone X divot at the top of screen doesn't mess up my layout https://forum.unity.com/threads/iphone-x-notch-in-screen.495028/
+		* [X] Test in simulator 
+		* [ ] Test on my ipad
+	* iPhone X overall dimensions 2436 x 1125 pixels
+	* Overall safe area 2172 x 1062 pixels
+	* Left & right insets (accounts for the notch and curved corners, plus a margin) 132 pixels each => 600*132/1125=70
+	* Bottom inset (accounts for the bottom nav bar) 63 pixels => 33
+	* Top inset zero pixels => 55 
 * [ ] Make screenshots for shop, perhaps add them to web pages,
 * [X] Mars Ho! is confusing
 * [ ] Generate links for app store buttons
@@ -15,14 +24,6 @@
 * [ ] Test that it works with 512 Mb devices (https://hwstats.unity3d.com/mobile/os.html)
 * [X] Change iOS build to Fast but no Exceptions option.
 * [ ] Test: Turn off logging
-* [ ] update OSX and XCode to be iPhoneX compatible
-	* [ ] show status bar? 
-	* [ ] Ensure that iPhone X divot at the top of screen doesn't mess up my layout https://forum.unity.com/threads/iphone-x-notch-in-screen.495028/
-	* iPhone X overall dimensions 2436 x 1125 pixels
-	* Overall safe area 2172 x 1062 pixels
-	* Left & right insets (accounts for the notch and curved corners, plus a margin) 132 pixels each
-	* Bottom inset (accounts for the bottom nav bar) 63 pixels
-	* Top inset zero pixels
 * Talk to Matthias S. again
 
 ### Credits
@@ -38,4 +39,5 @@
 * There is a pause on the first quiz question
 * Reach mars without answering any questions after upgrade 1 : maybe tweak the planet heights?
 * if a wrong question is shown but not answered (because you reach the planet), it is still no longer marked as wrong, hence in the next quiz is doesn't appear first
-* [ ] ion stream flickers between in front of and behind the planets. But it is also kind of cool.
+* ion stream flickers between in front of and behind the planets. But it is also kind of cool.
+* rocket parts size and colour not reset on quiz end / abort, so if you reach a planet while getting a rocket part, it stays enlarged.

@@ -20,6 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/updateVersion.unity
     guid: 469c29610f2a64d18bf5a3e66cb9d9fb
-  - enabled: 1
+  - enabled: 0
     path: Assets/employeesOnly.unity
     guid: 0f48378b89bf541f3b94e1c8dcc3ab9b

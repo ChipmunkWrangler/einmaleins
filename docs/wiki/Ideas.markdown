@@ -1,8 +1,12 @@
 [ToDo](ToDo)
 
 #Ideas 
-* [ ] Ion stream doesn't look impressive
-* [ ] Optimize: don't save all questions every time a question changes -- just the relevant question
+* Ion stream doesn't look impressive
+* Optimize: don't save all questions every time a question changes -- just the relevant question
+* Make it free and charge for everything above Jupiter.
+* Readd multiplier stars or some other kind of combo bonus
+ * Maybe with new currency
+ * Or just escalating particle effects
 * Stop the quiz if the player accumulates 11 rocket parts
 * At first, show "Press rocket button to launch" instead of Mars ho.
 * Handle kids that only know 5x tables
@@ -210,3 +214,4 @@ When you reach Pluto, there should be a tree with a golden trunk and multicolour
 
 #Competitors
 https://www.youtube.com/watch?v=tDkn9bxr31U Allows lots of parental configuration (timer or not, lock stuff that is too easy, different modes (in order, got wrong, random, fill in the gaps, ...)
+https://itunes.apple.com/us/app/rocket-math-multiplication-home/id1048024368?mt=8
