@@ -20,6 +20,7 @@ public class MDVersion : MonoBehaviour {
 		if (isChecking) {
 			return;
 		}
+		Debug.unityLogger.logEnabled = Debug.isDebugBuild;	
 		isChecking = true;
 		string oldVersion = PlayerPrefs.GetString( "version" );
 		if (oldVersion == GetCurrentVersion()) {

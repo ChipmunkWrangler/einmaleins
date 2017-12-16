@@ -50,7 +50,7 @@ PlayerSettings:
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 0
   m_MTRendering: 1
-  m_StackTraceTypes: 010000000100000001000000010000000100000001000000
+  m_StackTraceTypes: 000000000000000000000000000000000000000001000000
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
   tizenShowActivityIndicatorOnLoading: -1
@@ -161,7 +161,7 @@ PlayerSettings:
   aotOptions: 
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
-  iPhoneScriptCallOptimization: 0
+  iPhoneScriptCallOptimization: 1
   ForceInternetPermission: 0
   ForceSDCardPermission: 0
   CreateWallpaper: 0
@@ -281,9 +281,9 @@ PlayerSettings:
   wiiUDrcBufferDisabled: 0
   wiiUProfilerLibPath: 
   playModeTestRunnerEnabled: 0
-  actionOnDotNetUnhandledException: 1
+  actionOnDotNetUnhandledException: 0
   enableInternalProfiler: 0
-  logObjCUncaughtExceptions: 1
+  logObjCUncaughtExceptions: 0
   enableCrashReportAPI: 0
   cameraUsageDescription: 
   locationUsageDescription: 
