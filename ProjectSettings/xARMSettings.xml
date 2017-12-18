@@ -345,7 +345,7 @@
       <IsLandscape>true</IsLandscape>
       <IsPortrait>false</IsPortrait>
       <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
+      <Enabled>false</Enabled>
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>iPhone</Name>
@@ -755,7 +755,7 @@
       <IsLandscape>true</IsLandscape>
       <IsPortrait>false</IsPortrait>
       <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
+      <Enabled>false</Enabled>
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>iPhone</Name>
@@ -4314,7 +4314,7 @@
     <y>35</y>
   </HiddenGameViewPosition>
   <HideGameView>true</HideGameView>
-  <PreviewSelectedScreenCapIndex>12</PreviewSelectedScreenCapIndex>
+  <PreviewSelectedScreenCapIndex>0</PreviewSelectedScreenCapIndex>
   <PreviewAutoUpdateInEditorMode>false</PreviewAutoUpdateInEditorMode>
   <PreviewAutoUpdateInPauseMode>true</PreviewAutoUpdateInPauseMode>
   <PreviewAutoUpdateInPlayMode>false</PreviewAutoUpdateInPlayMode>
