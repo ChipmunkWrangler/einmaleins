@@ -36,6 +36,8 @@
 	* Kuber (Back button)
 
 # Bugs
+* If you get a question wrong, but then right quickly, you can instamaster
+ * And if you get it wrong, and get it right fast in the next quiz, you can instamaster? WTF? Does this happen because the first answer was nearly fast enough, so the average is low? Maybe increase time penalty for wrong answers? 
 * There is a pause on the first quiz question
 * Reach mars without answering any questions after upgrade 1 : maybe tweak the planet heights?
 * if a wrong question is shown but not answered (because you reach the planet), it is still no longer marked as wrong, hence in the next quiz is doesn't appear first
