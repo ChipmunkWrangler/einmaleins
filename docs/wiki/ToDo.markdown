@@ -3,16 +3,16 @@
 # ToDo 
 
 ## v1.0.0 
-* [o] update OSX and XCode to be iPhoneX compatible
-	* [o] Ensure that iPhone X divot at the top of screen doesn't mess up my layout https://forum.unity.com/threads/iphone-x-notch-in-screen.495028/
+* [X] update OSX and XCode to be iPhoneX compatible
+	* [X] Ensure that iPhone X divot at the top of screen doesn't mess up my layout https://forum.unity.com/threads/iphone-x-notch-in-screen.495028/
 		* [X] Test in simulator 
-		* [ ] Test on my ipad
+		* [X] Test on my ipad
 	* iPhone X overall dimensions 2436 x 1125 pixels
 	* Overall safe area 2172 x 1062 pixels
 	* Left & right insets (accounts for the notch and curved corners, plus a margin) 132 pixels each => 600*132/1125=70
 	* Bottom inset (accounts for the bottom nav bar) 63 pixels => 33
 	* Top inset zero pixels => 55 
-* [ ] Make screenshots for shop, perhaps add them to web pages,
+* [ ] Make screenshots for shop, perhaps add them to web pages
 * [X] Mars Ho! is confusing
 * [ ] Generate links for app store buttons
 	* [ ] https://play.google.com/intl/en_us/badges/
@@ -21,9 +21,9 @@
 	* [ ] Localized, up to date screen shots  
 * [ ] Remove unnecessary permissions, e.g. Android.Internet aka "Other: full network access"
 	* [ ] Note that in the .csproj files, there are defines like ENABLE_CLOUD_SERVICES_ADS 
-* [ ] Test that it works with 512 Mb devices (https://hwstats.unity3d.com/mobile/os.html)
+* [ ] Test that it works with 512 Mb devices https://hwstats.unity3d.com/mobile/
 * [X] Change iOS build to Fast but no Exceptions option.
-* [ ] Test: Turn off logging
+* [X] Test: Turn off logging
 * Talk to Matthias S. again
 
 ### Credits
