@@ -3104,7 +3104,7 @@
       <IsLandscape>false</IsLandscape>
       <IsPortrait>true</IsPortrait>
       <IsBaseRes>true</IsBaseRes>
-      <Enabled>false</Enabled>
+      <Enabled>true</Enabled>
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>Standalone</Name>

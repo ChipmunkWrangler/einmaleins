@@ -12,8 +12,12 @@
 	* Left & right insets (accounts for the notch and curved corners, plus a margin) 132 pixels each => 600*132/1125=70
 	* Bottom inset (accounts for the bottom nav bar) 63 pixels => 33
 	* Top inset zero pixels => 55 
-* [ ] Make screenshots for shop, perhaps add them to web pages
+* [X] Make screenshots for shop
+* [X] Grid mode screenshots!
+* [ ] perhaps add them to web pages
+* [ ] Make video for app stores
 * [X] Mars Ho! is confusing
+* [ ] E proofread web page
 * [ ] Generate links for app store buttons
 	* [ ] https://play.google.com/intl/en_us/badges/
 	* [ ] https://developer.apple.com/library/content/qa/qa1633/_index.html 
@@ -43,3 +47,5 @@
 * if a wrong question is shown but not answered (because you reach the planet), it is still no longer marked as wrong, hence in the next quiz is doesn't appear first
 * ion stream flickers between in front of and behind the planets. But it is also kind of cool.
 * rocket parts size and colour not reset on quiz end / abort, so if you reach a planet while getting a rocket part, it stays enlarged.
+* Answer is not cleared when you abort the quiz, so if you type at just the right moment, the answer appears over the planet, and then the "Auf zum Pluto" button appears on top of the answer
+* rocket button in gauntlet looks odd because the button is faded, but not the rocket image
