@@ -2,3 +2,4 @@
 * [ToDo](ToDo)
 * [BeforeDeploying](BeforeDeploying)
 * [Ideas](Ideas)
+* [Texts](Texts)

@@ -33,11 +33,11 @@
 ### Credits
 
 * Creative commons attribution 
-	* spaceship by Jonathan Li from the Noun Project
-	* Olga Prikhodko (exit arrow)
-	* Numero Uno (Play Button)
-	* Gauge By Roberto Chiaveri
-	* Kuber (Back button)
+	* example: "Tree” icon by Edward Boatman, from thenounproject.com.
+	* "Rocket Ship" by Jonathan Li from the Noun Project
+	* "Login" by LAFS, RU
+	* "Play" by Numero Uno
+	* "Gauge" by Roberto Chiaveri
 
 # Bugs
 * If you get a question wrong, but then right quickly, you can instamaster

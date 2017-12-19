@@ -119,29 +119,6 @@
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>Android</Name>
-      <LongName>Android 3.2″ mdpi (3:2) 320x480px (HVGA)</LongName>
-      <Description>Galaxy, ...</Description>
-      <Resolution>
-        <x>320</x>
-        <y>480</y>
-      </Resolution>
-      <ResolutionLabel>HVGA</ResolutionLabel>
-      <Aspect>0.6666667</Aspect>
-      <AspectLabel>3:2</AspectLabel>
-      <Diagonal>3.2</Diagonal>
-      <DPI>180</DPI>
-      <DPILabel>mdpi</DPILabel>
-      <DPIFactor>1</DPIFactor>
-      <Group>Android</Group>
-      <StatisticsPositioning>9</StatisticsPositioning>
-      <StatisticsUsedPercent>1.2</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
-      <Name>Android</Name>
       <LongName>Android 3.2″ mdpi (3:2) 432x320px (HVGA~)</LongName>
       <Description>Galaxy, ... (navigation bar version)</Description>
       <Resolution>
@@ -348,29 +325,6 @@
       <Enabled>false</Enabled>
     </xARMScreenCap>
     <xARMScreenCap>
-      <Name>iPhone</Name>
-      <LongName>iPhone 3.5″ @2x (3:2) 640x960px (DVGA)</LongName>
-      <Description>iPhone 4S, 4 &amp; iPod touch 4.</Description>
-      <Resolution>
-        <x>640</x>
-        <y>960</y>
-      </Resolution>
-      <ResolutionLabel>DVGA</ResolutionLabel>
-      <Aspect>0.6666667</Aspect>
-      <AspectLabel>3:2</AspectLabel>
-      <Diagonal>3.5</Diagonal>
-      <DPI>326</DPI>
-      <DPILabel>@2x</DPILabel>
-      <DPIFactor>0</DPIFactor>
-      <Group>iOS</Group>
-      <StatisticsPositioning>6</StatisticsPositioning>
-      <StatisticsUsedPercent>5.3</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
       <Name>Android</Name>
       <LongName>Android 3.7″ hdpi (5:3) 800x480px (WVGA)</LongName>
       <Description>Nexus S (4), Nexus One (3.7), Galaxy S2 (4.3), ...</Description>
@@ -392,29 +346,6 @@
       <IsPortrait>false</IsPortrait>
       <IsBaseRes>true</IsBaseRes>
       <Enabled>false</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
-      <Name>Android</Name>
-      <LongName>Android 3.7″ hdpi (5:3) 480x800px (WVGA)</LongName>
-      <Description>Nexus S (4), Nexus One (3.7), Galaxy S2 (4.3), ...</Description>
-      <Resolution>
-        <x>480</x>
-        <y>800</y>
-      </Resolution>
-      <ResolutionLabel>WVGA</ResolutionLabel>
-      <Aspect>0.6</Aspect>
-      <AspectLabel>5:3</AspectLabel>
-      <Diagonal>3.7</Diagonal>
-      <DPI>252</DPI>
-      <DPILabel>hdpi</DPILabel>
-      <DPIFactor>1.5</DPIFactor>
-      <Group>Android</Group>
-      <StatisticsPositioning>3</StatisticsPositioning>
-      <StatisticsUsedPercent>10.3</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>Android</Name>
@@ -623,29 +554,6 @@
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>Android</Name>
-      <LongName>Android 4″ hdpi (16:9~) 480x854px (FWVGA)</LongName>
-      <Description>Xperia Play, ...</Description>
-      <Resolution>
-        <x>480</x>
-        <y>854</y>
-      </Resolution>
-      <ResolutionLabel>FWVGA</ResolutionLabel>
-      <Aspect>0.5620609</Aspect>
-      <AspectLabel>16:9~</AspectLabel>
-      <Diagonal>4</Diagonal>
-      <DPI>245</DPI>
-      <DPILabel>hdpi</DPILabel>
-      <DPIFactor>1.5</DPIFactor>
-      <Group>Android</Group>
-      <StatisticsPositioning>4</StatisticsPositioning>
-      <StatisticsUsedPercent>9.7</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
-      <Name>Android</Name>
       <LongName>Android 4″ hdpi (16:9~) 782x480px (FWVGA~)</LongName>
       <Description>Xperia Play, ... (navigation bar version)</Description>
       <Resolution>
@@ -756,29 +664,6 @@
       <IsPortrait>false</IsPortrait>
       <IsBaseRes>true</IsBaseRes>
       <Enabled>false</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
-      <Name>iPhone</Name>
-      <LongName>iPhone 4″ @2x (16:9~) 640x1136px (WDVGA)</LongName>
-      <Description>iPhone SE, 5S, 5C, 5 &amp; iPod touch 6., 5.</Description>
-      <Resolution>
-        <x>640</x>
-        <y>1136</y>
-      </Resolution>
-      <ResolutionLabel>WDVGA</ResolutionLabel>
-      <Aspect>0.5633803</Aspect>
-      <AspectLabel>16:9~</AspectLabel>
-      <Diagonal>4</Diagonal>
-      <DPI>326</DPI>
-      <DPILabel>@2x</DPILabel>
-      <DPIFactor>0</DPIFactor>
-      <Group>iOS</Group>
-      <StatisticsPositioning>1</StatisticsPositioning>
-      <StatisticsUsedPercent>29.6</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>WinPhone8</Name>
@@ -1120,29 +1005,6 @@
       <Enabled>false</Enabled>
     </xARMScreenCap>
     <xARMScreenCap>
-      <Name>iPhone</Name>
-      <LongName>iPhone 4.7″ @2x (16:9~) 750x1334px (custom)</LongName>
-      <Description>iPhone 7, 6S, 6</Description>
-      <Resolution>
-        <x>750</x>
-        <y>1334</y>
-      </Resolution>
-      <ResolutionLabel>custom</ResolutionLabel>
-      <Aspect>0.5622189</Aspect>
-      <AspectLabel>16:9~</AspectLabel>
-      <Diagonal>4.7</Diagonal>
-      <DPI>326</DPI>
-      <DPILabel>@2x</DPILabel>
-      <DPIFactor>0</DPIFactor>
-      <Group>iOS</Group>
-      <StatisticsPositioning>3</StatisticsPositioning>
-      <StatisticsUsedPercent>20.1</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
       <Name>Android</Name>
       <LongName>Android 4.7″ xhdpi (16:9) 1280x720px (HD)</LongName>
       <Description>Galaxy Nexus, Fire Phone, Galaxy Note 2 (5.5), ...</Description>
@@ -1164,29 +1026,6 @@
       <IsPortrait>false</IsPortrait>
       <IsBaseRes>true</IsBaseRes>
       <Enabled>false</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
-      <Name>Android</Name>
-      <LongName>Android 4.7″ xhdpi (16:9) 720x1280px (HD)</LongName>
-      <Description>Galaxy Nexus, Fire Phone, Galaxy Note 2 (5.5), ...</Description>
-      <Resolution>
-        <x>720</x>
-        <y>1280</y>
-      </Resolution>
-      <ResolutionLabel>HD</ResolutionLabel>
-      <Aspect>0.5625</Aspect>
-      <AspectLabel>16:9</AspectLabel>
-      <Diagonal>4.7</Diagonal>
-      <DPI>312</DPI>
-      <DPILabel>xhdpi</DPILabel>
-      <DPIFactor>2</DPIFactor>
-      <Group>Android</Group>
-      <StatisticsPositioning>1</StatisticsPositioning>
-      <StatisticsUsedPercent>28.9</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>Android</Name>
@@ -1479,29 +1318,6 @@
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>Android</Name>
-      <LongName>Android 5″ xxhdpi (16:9) 1080x1920px (FHD)</LongName>
-      <Description>Nexus 5X (5.2), 5 (4.96), Galaxy S5 (5.1), S4 (5), ...</Description>
-      <Resolution>
-        <x>1080</x>
-        <y>1920</y>
-      </Resolution>
-      <ResolutionLabel>FHD</ResolutionLabel>
-      <Aspect>0.5625</Aspect>
-      <AspectLabel>16:9</AspectLabel>
-      <Diagonal>5</Diagonal>
-      <DPI>441</DPI>
-      <DPILabel>xxhdpi</DPILabel>
-      <DPIFactor>3</DPIFactor>
-      <Group>Android</Group>
-      <StatisticsPositioning>2</StatisticsPositioning>
-      <StatisticsUsedPercent>21.4</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
-      <Name>Android</Name>
       <LongName>Android 5″ xxhdpi (16:9) 1776x1080px (FHD~)</LongName>
       <Description>Nexus 5X (5.2), 5 (4.96), Galaxy S5 (5.1), S4 (5), ... (navigation bar version)</Description>
       <Resolution>
@@ -1571,29 +1387,6 @@
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>Android</Name>
-      <LongName>Android 5.1″ xxhdpi (5:3) 1080x1800px (custom)</LongName>
-      <Description>...</Description>
-      <Resolution>
-        <x>1080</x>
-        <y>1800</y>
-      </Resolution>
-      <ResolutionLabel>custom</ResolutionLabel>
-      <Aspect>0.6</Aspect>
-      <AspectLabel>5:3</AspectLabel>
-      <Diagonal>5.1</Diagonal>
-      <DPI>412</DPI>
-      <DPILabel>xxhdpi</DPILabel>
-      <DPIFactor>3</DPIFactor>
-      <Group>Android</Group>
-      <StatisticsPositioning>20</StatisticsPositioning>
-      <StatisticsUsedPercent>0</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
-      <Name>Android</Name>
       <LongName>Android 5.1″ xxhdpi (5:3) 1656x1080px (custom~)</LongName>
       <Description>... (navigation bar version)</Description>
       <Resolution>
@@ -1660,29 +1453,6 @@
       <IsPortrait>false</IsPortrait>
       <IsBaseRes>true</IsBaseRes>
       <Enabled>false</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
-      <Name>iPhone</Name>
-      <LongName>iPhone 5.5″ @3x (16:9) 1242x2208px (custom)</LongName>
-      <Description>Probable future iPhone resolution</Description>
-      <Resolution>
-        <x>1242</x>
-        <y>2208</y>
-      </Resolution>
-      <ResolutionLabel>custom</ResolutionLabel>
-      <Aspect>0.5625</Aspect>
-      <AspectLabel>16:9</AspectLabel>
-      <Diagonal>5.5</Diagonal>
-      <DPI>461</DPI>
-      <DPILabel>@3x</DPILabel>
-      <DPIFactor>0</DPIFactor>
-      <Group>iOS</Group>
-      <StatisticsPositioning>999</StatisticsPositioning>
-      <StatisticsUsedPercent>-1</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>iPhone</Name>
@@ -2487,29 +2257,6 @@
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>iPad mini</Name>
-      <LongName>iPad mini 7.9″ @1x (4:3) 768x1024px (XGA)</LongName>
-      <Description>iPad mini</Description>
-      <Resolution>
-        <x>768</x>
-        <y>1024</y>
-      </Resolution>
-      <ResolutionLabel>XGA</ResolutionLabel>
-      <Aspect>0.75</Aspect>
-      <AspectLabel>4:3</AspectLabel>
-      <Diagonal>7.9</Diagonal>
-      <DPI>163</DPI>
-      <DPILabel>@1x</DPILabel>
-      <DPIFactor>0</DPIFactor>
-      <Group>iOS</Group>
-      <StatisticsPositioning>4</StatisticsPositioning>
-      <StatisticsUsedPercent>11.4</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
-      <Name>iPad mini</Name>
       <LongName>iPad mini 7.9″ @2x (4:3) 2048x1536px (QXGA)</LongName>
       <Description>iPad mini 4, mini 3, mini 2</Description>
       <Resolution>
@@ -3084,29 +2831,6 @@
       <Enabled>false</Enabled>
     </xARMScreenCap>
     <xARMScreenCap>
-      <Name>iPad</Name>
-      <LongName>iPad 9.7″ @2x (4:3) 1536x2048px (QXGA)</LongName>
-      <Description>iPad 4., 3., Pro (9.7), Air 2, Air</Description>
-      <Resolution>
-        <x>1536</x>
-        <y>2048</y>
-      </Resolution>
-      <ResolutionLabel>QXGA</ResolutionLabel>
-      <Aspect>0.75</Aspect>
-      <AspectLabel>4:3</AspectLabel>
-      <Diagonal>9.7</Diagonal>
-      <DPI>264</DPI>
-      <DPILabel>@2x</DPILabel>
-      <DPIFactor>0</DPIFactor>
-      <Group>iOS</Group>
-      <StatisticsPositioning>2</StatisticsPositioning>
-      <StatisticsUsedPercent>20.7</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
       <Name>Standalone</Name>
       <LongName>Standalone 10″  (16:9~) 1024x600px (WSVGA)</LongName>
       <Description>Netbooks, ...</Description>
@@ -3650,29 +3374,6 @@
       <IsPortrait>false</IsPortrait>
       <IsBaseRes>true</IsBaseRes>
       <Enabled>false</Enabled>
-    </xARMScreenCap>
-    <xARMScreenCap>
-      <Name>iPad Pro</Name>
-      <LongName>iPad Pro 12.9″ @2x (4:3~) 2048x2732px (custom)</LongName>
-      <Description>iPad Pro (12.9)</Description>
-      <Resolution>
-        <x>2048</x>
-        <y>2732</y>
-      </Resolution>
-      <ResolutionLabel>custom</ResolutionLabel>
-      <Aspect>0.749633968</Aspect>
-      <AspectLabel>4:3~</AspectLabel>
-      <Diagonal>12.9</Diagonal>
-      <DPI>264</DPI>
-      <DPILabel>@2x</DPILabel>
-      <DPIFactor>0</DPIFactor>
-      <Group>iOS</Group>
-      <StatisticsPositioning>7</StatisticsPositioning>
-      <StatisticsUsedPercent>0.1</StatisticsUsedPercent>
-      <IsLandscape>false</IsLandscape>
-      <IsPortrait>true</IsPortrait>
-      <IsBaseRes>true</IsBaseRes>
-      <Enabled>true</Enabled>
     </xARMScreenCap>
     <xARMScreenCap>
       <Name>Android</Name>
@@ -4272,6 +3973,305 @@
       <IsBaseRes>true</IsBaseRes>
       <Enabled>false</Enabled>
     </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>Android</Name>
+      <LongName>Android 3.2″ mdpi (3:2) 320x480px (HVGA)</LongName>
+      <Description>Galaxy, ...</Description>
+      <Resolution>
+        <x>320</x>
+        <y>480</y>
+      </Resolution>
+      <ResolutionLabel>HVGA</ResolutionLabel>
+      <Aspect>0.6666667</Aspect>
+      <AspectLabel>3:2</AspectLabel>
+      <Diagonal>3.2</Diagonal>
+      <DPI>180</DPI>
+      <DPILabel>mdpi</DPILabel>
+      <DPIFactor>1</DPIFactor>
+      <Group>Android</Group>
+      <StatisticsPositioning>9</StatisticsPositioning>
+      <StatisticsUsedPercent>1.2</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>iPhone</Name>
+      <LongName>iPhone 3.5″ @2x (3:2) 640x960px (DVGA)</LongName>
+      <Description>iPhone 4S, 4 &amp; iPod touch 4.</Description>
+      <Resolution>
+        <x>640</x>
+        <y>960</y>
+      </Resolution>
+      <ResolutionLabel>DVGA</ResolutionLabel>
+      <Aspect>0.6666667</Aspect>
+      <AspectLabel>3:2</AspectLabel>
+      <Diagonal>3.5</Diagonal>
+      <DPI>326</DPI>
+      <DPILabel>@2x</DPILabel>
+      <DPIFactor>0</DPIFactor>
+      <Group>iOS</Group>
+      <StatisticsPositioning>6</StatisticsPositioning>
+      <StatisticsUsedPercent>5.3</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>Android</Name>
+      <LongName>Android 3.7″ hdpi (5:3) 480x800px (WVGA)</LongName>
+      <Description>Nexus S (4), Nexus One (3.7), Galaxy S2 (4.3), ...</Description>
+      <Resolution>
+        <x>480</x>
+        <y>800</y>
+      </Resolution>
+      <ResolutionLabel>WVGA</ResolutionLabel>
+      <Aspect>0.6</Aspect>
+      <AspectLabel>5:3</AspectLabel>
+      <Diagonal>3.7</Diagonal>
+      <DPI>252</DPI>
+      <DPILabel>hdpi</DPILabel>
+      <DPIFactor>1.5</DPIFactor>
+      <Group>Android</Group>
+      <StatisticsPositioning>3</StatisticsPositioning>
+      <StatisticsUsedPercent>10.3</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>Android</Name>
+      <LongName>Android 4″ hdpi (16:9~) 480x854px (FWVGA)</LongName>
+      <Description>Xperia Play, ...</Description>
+      <Resolution>
+        <x>480</x>
+        <y>854</y>
+      </Resolution>
+      <ResolutionLabel>FWVGA</ResolutionLabel>
+      <Aspect>0.5620609</Aspect>
+      <AspectLabel>16:9~</AspectLabel>
+      <Diagonal>4</Diagonal>
+      <DPI>245</DPI>
+      <DPILabel>hdpi</DPILabel>
+      <DPIFactor>1.5</DPIFactor>
+      <Group>Android</Group>
+      <StatisticsPositioning>4</StatisticsPositioning>
+      <StatisticsUsedPercent>9.7</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>iPhone</Name>
+      <LongName>iPhone 4″ @2x (16:9~) 640x1136px (WDVGA)</LongName>
+      <Description>iPhone SE, 5S, 5C, 5 &amp; iPod touch 6., 5.</Description>
+      <Resolution>
+        <x>640</x>
+        <y>1136</y>
+      </Resolution>
+      <ResolutionLabel>WDVGA</ResolutionLabel>
+      <Aspect>0.5633803</Aspect>
+      <AspectLabel>16:9~</AspectLabel>
+      <Diagonal>4</Diagonal>
+      <DPI>326</DPI>
+      <DPILabel>@2x</DPILabel>
+      <DPIFactor>0</DPIFactor>
+      <Group>iOS</Group>
+      <StatisticsPositioning>1</StatisticsPositioning>
+      <StatisticsUsedPercent>29.6</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>iPhone</Name>
+      <LongName>iPhone 4.7″ @2x (16:9~) 750x1334px (custom)</LongName>
+      <Description>iPhone 7, 6S, 6</Description>
+      <Resolution>
+        <x>750</x>
+        <y>1334</y>
+      </Resolution>
+      <ResolutionLabel>custom</ResolutionLabel>
+      <Aspect>0.5622189</Aspect>
+      <AspectLabel>16:9~</AspectLabel>
+      <Diagonal>4.7</Diagonal>
+      <DPI>326</DPI>
+      <DPILabel>@2x</DPILabel>
+      <DPIFactor>0</DPIFactor>
+      <Group>iOS</Group>
+      <StatisticsPositioning>3</StatisticsPositioning>
+      <StatisticsUsedPercent>20.1</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>Android</Name>
+      <LongName>Android 4.7″ xhdpi (16:9) 720x1280px (HD)</LongName>
+      <Description>Galaxy Nexus, Fire Phone, Galaxy Note 2 (5.5), ...</Description>
+      <Resolution>
+        <x>720</x>
+        <y>1280</y>
+      </Resolution>
+      <ResolutionLabel>HD</ResolutionLabel>
+      <Aspect>0.5625</Aspect>
+      <AspectLabel>16:9</AspectLabel>
+      <Diagonal>4.7</Diagonal>
+      <DPI>312</DPI>
+      <DPILabel>xhdpi</DPILabel>
+      <DPIFactor>2</DPIFactor>
+      <Group>Android</Group>
+      <StatisticsPositioning>1</StatisticsPositioning>
+      <StatisticsUsedPercent>28.9</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>Android</Name>
+      <LongName>Android 5″ xxhdpi (16:9) 1080x1920px (FHD)</LongName>
+      <Description>Nexus 5X (5.2), 5 (4.96), Galaxy S5 (5.1), S4 (5), ...</Description>
+      <Resolution>
+        <x>1080</x>
+        <y>1920</y>
+      </Resolution>
+      <ResolutionLabel>FHD</ResolutionLabel>
+      <Aspect>0.5625</Aspect>
+      <AspectLabel>16:9</AspectLabel>
+      <Diagonal>5</Diagonal>
+      <DPI>441</DPI>
+      <DPILabel>xxhdpi</DPILabel>
+      <DPIFactor>3</DPIFactor>
+      <Group>Android</Group>
+      <StatisticsPositioning>2</StatisticsPositioning>
+      <StatisticsUsedPercent>21.4</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>Android</Name>
+      <LongName>Android 5.1″ xxhdpi (5:3) 1080x1800px (custom)</LongName>
+      <Description>...</Description>
+      <Resolution>
+        <x>1080</x>
+        <y>1800</y>
+      </Resolution>
+      <ResolutionLabel>custom</ResolutionLabel>
+      <Aspect>0.6</Aspect>
+      <AspectLabel>5:3</AspectLabel>
+      <Diagonal>5.1</Diagonal>
+      <DPI>412</DPI>
+      <DPILabel>xxhdpi</DPILabel>
+      <DPIFactor>3</DPIFactor>
+      <Group>Android</Group>
+      <StatisticsPositioning>20</StatisticsPositioning>
+      <StatisticsUsedPercent>0</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>iPhone</Name>
+      <LongName>iPhone 5.5″ @3x (16:9) 1242x2208px (custom)</LongName>
+      <Description>Probable future iPhone resolution</Description>
+      <Resolution>
+        <x>1242</x>
+        <y>2208</y>
+      </Resolution>
+      <ResolutionLabel>custom</ResolutionLabel>
+      <Aspect>0.5625</Aspect>
+      <AspectLabel>16:9</AspectLabel>
+      <Diagonal>5.5</Diagonal>
+      <DPI>461</DPI>
+      <DPILabel>@3x</DPILabel>
+      <DPIFactor>0</DPIFactor>
+      <Group>iOS</Group>
+      <StatisticsPositioning>999</StatisticsPositioning>
+      <StatisticsUsedPercent>-1</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>iPad mini</Name>
+      <LongName>iPad mini 7.9″ @1x (4:3) 768x1024px (XGA)</LongName>
+      <Description>iPad mini</Description>
+      <Resolution>
+        <x>768</x>
+        <y>1024</y>
+      </Resolution>
+      <ResolutionLabel>XGA</ResolutionLabel>
+      <Aspect>0.75</Aspect>
+      <AspectLabel>4:3</AspectLabel>
+      <Diagonal>7.9</Diagonal>
+      <DPI>163</DPI>
+      <DPILabel>@1x</DPILabel>
+      <DPIFactor>0</DPIFactor>
+      <Group>iOS</Group>
+      <StatisticsPositioning>4</StatisticsPositioning>
+      <StatisticsUsedPercent>11.4</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>iPad</Name>
+      <LongName>iPad 9.7″ @2x (4:3) 1536x2048px (QXGA)</LongName>
+      <Description>iPad 4., 3., Pro (9.7), Air 2, Air</Description>
+      <Resolution>
+        <x>1536</x>
+        <y>2048</y>
+      </Resolution>
+      <ResolutionLabel>QXGA</ResolutionLabel>
+      <Aspect>0.75</Aspect>
+      <AspectLabel>4:3</AspectLabel>
+      <Diagonal>9.7</Diagonal>
+      <DPI>264</DPI>
+      <DPILabel>@2x</DPILabel>
+      <DPIFactor>0</DPIFactor>
+      <Group>iOS</Group>
+      <StatisticsPositioning>2</StatisticsPositioning>
+      <StatisticsUsedPercent>20.7</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>iPad Pro</Name>
+      <LongName>iPad Pro 12.9″ @2x (4:3~) 2048x2732px (custom)</LongName>
+      <Description>iPad Pro (12.9)</Description>
+      <Resolution>
+        <x>2048</x>
+        <y>2732</y>
+      </Resolution>
+      <ResolutionLabel>custom</ResolutionLabel>
+      <Aspect>0.749633968</Aspect>
+      <AspectLabel>4:3~</AspectLabel>
+      <Diagonal>12.9</Diagonal>
+      <DPI>264</DPI>
+      <DPILabel>@2x</DPILabel>
+      <DPIFactor>0</DPIFactor>
+      <Group>iOS</Group>
+      <StatisticsPositioning>7</StatisticsPositioning>
+      <StatisticsUsedPercent>0.1</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>true</Enabled>
+    </xARMScreenCap>
   </AvailScreenCaps>
   <FoldoutContact>true</FoldoutContact>
   <FoldoutOptions>true</FoldoutOptions>
@@ -4282,8 +4282,8 @@
   <FoldoutWinPhone8>false</FoldoutWinPhone8>
   <FoldoutWinRT>false</FoldoutWinRT>
   <FoldoutStandalone>false</FoldoutStandalone>
-  <FoldoutCustom>false</FoldoutCustom>
-  <ShowLandscape>true</ShowLandscape>
+  <FoldoutCustom>true</FoldoutCustom>
+  <ShowLandscape>false</ShowLandscape>
   <ShowPortrait>true</ShowPortrait>
   <ShowNavigationBar>false</ShowNavigationBar>
   <UseFixedScreenCapSize>false</UseFixedScreenCapSize>
@@ -4314,7 +4314,7 @@
     <y>35</y>
   </HiddenGameViewPosition>
   <HideGameView>true</HideGameView>
-  <PreviewSelectedScreenCapIndex>0</PreviewSelectedScreenCapIndex>
+  <PreviewSelectedScreenCapIndex>6</PreviewSelectedScreenCapIndex>
   <PreviewAutoUpdateInEditorMode>false</PreviewAutoUpdateInEditorMode>
   <PreviewAutoUpdateInPauseMode>true</PreviewAutoUpdateInPauseMode>
   <PreviewAutoUpdateInPlayMode>false</PreviewAutoUpdateInPlayMode>
