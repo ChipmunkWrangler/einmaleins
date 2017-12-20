@@ -1,4 +1,4 @@
-* [O] Deploy
+* [X] Deploy
  * [X] Update MDVersion to handle previous version
  * [X] Update build and/or version numbers in Android & iOS build settings
  * [X] use xARM to test the devices with the highest resolution, smallest & largest height & width, and extreme aspect ratios 16:9 and 4:3
@@ -32,7 +32,7 @@
   * [X] Check Beta App Description, etc. in Testflight...Test Information
    * https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=testinformation
   * [X] Update Noun Project credits on store page 
- * [o] Android Build
+ * [X] Android Build
   * [X] Enter passwords (build settings... publishing settings...keystore password) before building in Unity
   * [X] Test in Simulator:
    * Start Simulator: ~/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_26_x86
@@ -41,9 +41,9 @@
    * Click on the little up arrow at the bottom of the screen
    * Click on Times Tables
   * [X] New test: https://support.google.com/googleplay/android-developer/answer/3131213?hl=en
-  * [ ] New release: https://support.google.com/googleplay/android-developer/answer/7159011
+  * [X] New release: https://support.google.com/googleplay/android-developer/answer/7159011
    * Play Console...Release Management... New Release...Browse Files
-  * [ ] https://play.google.com/about/families/designed-for-families/program-requirements/  
-  * [ ] update version number (?)
-  * [ ] Update Noun Project credits on store page 
+  * [X] https://play.google.com/about/families/designed-for-families/program-requirements/  
+  * [X] update version number (?)
+  * [X] Update Noun Project credits on store page 
  * [X] Tag version in git
