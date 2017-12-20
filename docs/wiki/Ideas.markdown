@@ -1,6 +1,7 @@
 [ToDo](ToDo)
 
 #Ideas 
+* Check texts with Pete or John & Angie
 * Count three wrong answers as hitting the question mark button, maybe flash the button
  * Second time an answer is wrong twice, tutorial for question mark
 * Ion stream doesn't look impressive

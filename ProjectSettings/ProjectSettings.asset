@@ -154,8 +154,8 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.crazy_chipmunk.einmaleins
-    iOS: com.crazy-chipmunk.einmaleins
+    Android: com.crazy_chipmunk.einmaleinspaid
+    iOS: com.crazy-chipmunk.einmaleins2
   buildNumber:
     iOS: 0
   AndroidBundleVersionCode: 1

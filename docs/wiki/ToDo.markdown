@@ -14,17 +14,24 @@
 	* Top inset zero pixels => 55 
 * [X] Make screenshots for shop
 * [X] Grid mode screenshots!
-* [ ] perhaps add them to web pages
-* [ ] Make video for app stores
-* [X] Mars Ho! is confusing
-* [ ] E proofread web page
-* [ ] Generate links for app store buttons
+* [X] Consider using web page text for app store. Rich text?
+* [ ] Update web page
+ * [ ] add screenshots
+ * [ ] Check in and upload new pages
+ * [ ] Generate links for app store buttons
 	* [ ] https://play.google.com/intl/en_us/badges/
 	* [ ] https://developer.apple.com/library/content/qa/qa1633/_index.html 
-* [ ] Store page https://developer.apple.com/app-store/categories/ and on android
-	* [ ] Localized, up to date screen shots  
+* [ ] Make video for app stores
+ * [ ] Apple
+ * [ ] Google
 * [ ] Remove unnecessary permissions, e.g. Android.Internet aka "Other: full network access"
 	* [ ] Note that in the .csproj files, there are defines like ENABLE_CLOUD_SERVICES_ADS 
+* [ ] Publish
+* [ ] "Managed Google Play" after publishing
+* [X] Mars Ho! is confusing
+* [X] E proofread web page
+* [X] Store page https://developer.apple.com/app-store/categories/ and on android
+	* [X] Localized, up to date screen shots  
 * [ ] Test that it works with 512 Mb devices https://hwstats.unity3d.com/mobile/
 * [X] Change iOS build to Fast but no Exceptions option.
 * [X] Test: Turn off logging
