@@ -13,20 +13,30 @@
 	* Bottom inset (accounts for the bottom nav bar) 63 pixels => 33
 	* Top inset zero pixels => 55 
 * [X] Make screenshots for shop
-* [X] Grid mode screenshots!
+* [X] Grid mode screenshots
 * [X] Consider using web page text for app store. Rich text?
-* [ ] Update web page
- * [ ] add screenshots
- * [ ] Check in and upload new pages
- * [ ] Generate links for app store buttons
+* [.] Update web page
+    * [X] Proofread German
+    * [ ] add screenshots
+	* [ ] English
+	* [ ] German
+    * [ ] Generate links for app store buttons and add them to web pages
 	* [ ] https://play.google.com/intl/en_us/badges/
 	* [ ] https://developer.apple.com/library/content/qa/qa1633/_index.html 
-* [ ] Make video for app stores
- * [ ] Apple
- * [ ] Google
-* [ ] Remove unnecessary permissions, e.g. Android.Internet aka "Other: full network access"
-	* [ ] Note that in the .csproj files, there are defines like ENABLE_CLOUD_SERVICES_ADS 
+    * [ ] check in and upload
+* [.] Make video for app stores
+    * [o] English
+	* [X] iPad
+	* [X] Android
+    * [ ] German
+	* [ ] iPad
+	* [ ] Android
+* [o] Add Screenshot captions
+    * [X] English
+    * [ ] German
 * [ ] Publish
+    * [ ] iOS
+    * [ ] Android
 * [ ] "Managed Google Play" after publishing
 * [X] Mars Ho! is confusing
 * [X] E proofread web page
@@ -35,7 +45,7 @@
 * [ ] Test that it works with 512 Mb devices https://hwstats.unity3d.com/mobile/
 * [X] Change iOS build to Fast but no Exceptions option.
 * [X] Test: Turn off logging
-* Talk to Matthias S. again
+* [ ] Talk to Matthias S. again
 
 ### Credits
 

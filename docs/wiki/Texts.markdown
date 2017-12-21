@@ -13,7 +13,15 @@ Short Description: The fastest way for your child to perfect the times tables
 Title: Rocket Arithmetic: Times Table
 Subtitle: Master the times tables fast
 ###Website
-
+###Screenshot captions
+E8E800
+Font sizes: 48pt iPad12" Android 10", iphone 5.5" 34 pt, Android 5.1" 40pt, iPad Mini / Android 7" 48pt
+Siblings each progress at their own pace
+Master math facts to upgrade your rocket
+The faster you answer, the farther you go
+Track progress and reveal the image
+Answer right to
+rocket into space
 
 #German
 Schnell, was macht 8 mal 7? Fünf Minuten pro Tag reichen, damit ihr Kind lernt, solche Fragen mühelos zu beantworten.
@@ -30,7 +38,23 @@ Short Description: Hakt das Einmaleins bei Ihrem Kind noch? Nicht mehr lange!
 Title: Die Rechenrakete (Einmaleins)
 Subtitle: Multiplikation meistern!
 
+###Screenshot captions
+Der Fortschritt und die Schwierigkeiten jedes ihrer Kinder wird separat gemessen.
+Mehrere Kinder? Jedes Kind 
+
 #Old
+Rocket higher with each correct answer
+Answer right to rocket into space
+Every correct answer rockets you higher
+Rocket into space with the right answer
+Siblings each progress at their own pace.
+Siblings progress separately.
+The Rocket tracks progress and problem questions separately for each sibling.
+Each sibling can progress at his own pace.
+Each sibling gets her own account.
+Siblings progress at their own pace.
+Each sibling progresses at their own pace.
+
 Title: Die Rechenrakete: Schnell das Einmaleins meistern
 Short Description: Hakt das Einmaleins bei Ihrem Kind noch? Nicht mehr lange!
 Android Title: Einmaleins-Rakete: Schnell Multiplikation meistern

@@ -2,6 +2,9 @@
 
 #Ideas 
 * Check texts with Pete or John & Angie
+* Remove unnecessary permissions, e.g. Android.Internet aka "Other: full network access"
+    * Note that in the .csproj files, there are defines like ENABLE_CLOUD_SERVICES_ADS 
+* iPhone ad video https://stackoverflow.com/questions/25797990/capture-ios-simulator-video-for-app-preview
 * Count three wrong answers as hitting the question mark button, maybe flash the button
  * Second time an answer is wrong twice, tutorial for question mark
 * Ion stream doesn't look impressive
