@@ -24,19 +24,20 @@
 	* [ ] https://play.google.com/intl/en_us/badges/
 	* [ ] https://developer.apple.com/library/content/qa/qa1633/_index.html 
     * [ ] check in and upload
-* [.] Make video for app stores
-    * [o] English
+* [X] Make video for app stores
+    * [X] English
 	* [X] iPad
 	* [X] Android
-    * [ ] German
-	* [ ] iPad
-	* [ ] Android
+    * [X] German
+	* [X] iPad
+	* [X] Android
 * [X] Add Screenshot captions
     * [X] English
     * [X] German
-* [ ] Publish
+* [o] Publish
     * [ ] iOS
-    * [ ] Android
+	* [ ] Fix errors
+    * [X] Android
 * [ ] "Managed Google Play" after publishing
 * [X] Mars Ho! is confusing
 * [X] E proofread web page
