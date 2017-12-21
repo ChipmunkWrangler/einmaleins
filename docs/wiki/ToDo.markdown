@@ -31,9 +31,9 @@
     * [ ] German
 	* [ ] iPad
 	* [ ] Android
-* [o] Add Screenshot captions
+* [X] Add Screenshot captions
     * [X] English
-    * [ ] German
+    * [X] German
 * [ ] Publish
     * [ ] iOS
     * [ ] Android
