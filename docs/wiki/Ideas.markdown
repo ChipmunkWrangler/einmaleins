@@ -1,6 +1,8 @@
 [ToDo](ToDo)
 
 #Ideas 
+* Make free version so that flaregamers and filkers can rate it
+* Add "Rate this app" popup
 * Check texts with Pete or John & Angie
 * Remove unnecessary permissions, e.g. Android.Internet aka "Other: full network access"
     * Note that in the .csproj files, there are defines like ENABLE_CLOUD_SERVICES_ADS 

@@ -15,13 +15,13 @@
 * [X] Make screenshots for shop
 * [X] Grid mode screenshots
 * [X] Consider using web page text for app store. Rich text?
-* [.] Update web page
+* [o] Update web page
     * [X] Proofread German
-    * [ ] add screenshots
-	* [ ] English
-	* [ ] German
-    * [ ] Generate links for app store buttons and add them to web pages
-	* [ ] https://play.google.com/intl/en_us/badges/
+    * [X] add screenshots
+	* [X] English
+	* [X] German
+    * [o] Generate links for app store buttons and add them to web pages
+	* [X] https://play.google.com/intl/en_us/badges/
 	* [ ] https://developer.apple.com/library/content/qa/qa1633/_index.html 
     * [ ] check in and upload
 * [X] Make video for app stores
@@ -34,12 +34,15 @@
 * [X] Add Screenshot captions
     * [X] English
     * [X] German
-* [o] Publish
-    * [ ] iOS
-	* [ ] Fix errors
+* [X] Publish
+    * [X] iOS
+	* [X] Fix errors
+	    * [X] Add contact page
+	    * [X] Apple reqs
     * [X] Android
 * [ ] "Managed Google Play" after publishing
 * [X] Mars Ho! is confusing
+* [X] Promo codes and reviews from filkers and flaregamers
 * [X] E proofread web page
 * [X] Store page https://developer.apple.com/app-store/categories/ and on android
 	* [X] Localized, up to date screen shots  
