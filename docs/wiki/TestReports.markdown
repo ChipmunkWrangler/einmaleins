@@ -3,6 +3,15 @@
   * Ask them for suggestions for new features
   * Ask them to pick their favourite of music, rocket customization, planet gallery, voice recognition, ufos
 #Test Reports v0.1.12
+##Till
+Liked it
+Asked for it the following day
+Repeatedly mixed up 16 and 61
+Couldn't remember 7 x 5 even after several tries
+
+##Mom
+Didn't draw a connection between upgrading the rocket and going faster
+
 ##Mich
 Very attractive game! It runs smoothly on my iphone 6. 
 

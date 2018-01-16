@@ -3,18 +3,6 @@
 # ToDo 
 
 ## v1.0.0 
-* [X] update OSX and XCode to be iPhoneX compatible
-	* [X] Ensure that iPhone X divot at the top of screen doesn't mess up my layout https://forum.unity.com/threads/iphone-x-notch-in-screen.495028/
-		* [X] Test in simulator 
-		* [X] Test on my ipad
-	* iPhone X overall dimensions 2436 x 1125 pixels
-	* Overall safe area 2172 x 1062 pixels
-	* Left & right insets (accounts for the notch and curved corners, plus a margin) 132 pixels each => 600*132/1125=70
-	* Bottom inset (accounts for the bottom nav bar) 63 pixels => 33
-	* Top inset zero pixels => 55 
-* [X] Make screenshots for shop
-* [X] Grid mode screenshots
-* [X] Consider using web page text for app store. Rich text?
 * [o] Update web page
     * [X] Proofread German
     * [X] add screenshots
@@ -24,31 +12,9 @@
 	* [X] https://play.google.com/intl/en_us/badges/
 	* [ ] https://developer.apple.com/library/content/qa/qa1633/_index.html 
     * [ ] check in and upload
-* [X] Make video for app stores
-    * [X] English
-	* [X] iPad
-	* [X] Android
-    * [X] German
-	* [X] iPad
-	* [X] Android
-* [X] Add Screenshot captions
-    * [X] English
-    * [X] German
-* [X] Publish
-    * [X] iOS
-	* [X] Fix errors
-	    * [X] Add contact page
-	    * [X] Apple reqs
-    * [X] Android
-* [ ] "Managed Google Play" after publishing
-* [X] Mars Ho! is confusing
-* [X] Promo codes and reviews from filkers and flaregamers
-* [X] E proofread web page
-* [X] Store page https://developer.apple.com/app-store/categories/ and on android
-	* [X] Localized, up to date screen shots  
+* [ ] Fix Apple complaint (waiting for them to reply)
+* [ ] Get filkers and facebookers and ios testers to review once iOS is released (you have a draft email)
 * [ ] Test that it works with 512 Mb devices https://hwstats.unity3d.com/mobile/
-* [X] Change iOS build to Fast but no Exceptions option.
-* [X] Test: Turn off logging
 * [ ] Talk to Matthias S. again
 
 ### Credits

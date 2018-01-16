@@ -1,13 +1,17 @@
-+Marketing Ideas
+#Marketing Ideas
+* Tell Bob where to get it on iOS and Android
+* Ravensburger or other partnerships: I give them a finished product, they stamp it and get 20%
+* Nasa partnership: from toddler to astronaut
+* Space-related license
  * Bundle chocolate with apps: email us with your address and we will mail you a ritter sport of your choice.
  * Check private schools as market.
- * When you reach deep space, show an ad for the next game
-+Advice
+* * When you reach deep space, show an ad for the next game
+#Advice
  * The WIIFM (What’s In It For Me) principle generally yields the best headlines. Articulate a clear benefit to the prospect. 
  * Specificity usually wins over generality (specific numbers, items). Gun vs. Weapon. 63% vs. Over 50%. There is a headline writing technique known as 4Us (Unique, Ultra Specific, Utilility)
  * In a mature/saturated market it is not enough to simply talk about benefits. You 
 must find an angle. 
-+Mom Testimonials
+#Mom Testimonials
 https://alextumanov.com/
 
 “Wow, great app, 11/10!
@@ -18,13 +22,13 @@ Also my mom
 Mom
 “This is getting ridiculous, how long does it take to make an alarm clock app? Why can't you be more like your sister?
 Still my mom
-+Texts
-++Names
+#Texts
+##Names
  * einmaleins meistern
  * Einmaleins Rakete 
  * Times Table Rocket
  * Einmaleins-Rakete: Schnell Multiplikation meistern
-++Subtitles
+##Subtitles
  * Schnell Mathe meistern
  * Der kurze Weg zum Blitzrechner
  * Blitzrechnen leicht gemacht 
@@ -37,12 +41,12 @@ Still my mom
  * Werde schnell zum Blitzrechner
  * Ihr Kind wird zum Blitzrechner
  * Ihr Kind wird zur Rechenrakete
-++Short Descriptions
+##Short Descriptions
 Hakt das Einmaleins bei Ihrem Kind noch? Es wird zum Blitzrechner!
 Bringt Ihr Kind von "Ist es 55? 67? Warte kurz..." zu "das ist Babyleicht!"
 Hakt das kleine Einmaleins bei Ihrem Kind noch? Nicht mehr lange!
 The fastest way for your child to perfect the times tables
-++Long Descriptions
+##Long Descriptions
 
 Schnell, was macht acht mal sieben? Die Einmaleins-Rakete hilft Ihrem Kind, solche Fragen blitzschnell und mühelos zu beantworten. 
 
@@ -55,9 +59,9 @@ Quick, what is eight times seven? The Times Table Rocket helps your kid to answe
 The Rocket doesn't waste your kid's time: it notices which questions your child finds hard or easy, and only drills the tricky ones... unless the kid is getting frustrated from too many wrong answers, in which cases the Rocket tosses a few softballs before getting back to business.
 
 What the Rocket doesn't do (yet) is teach multiplication from scratch. What is will do is take your kid from "I get it... I guess" to "this is easy!"
-++Testflight
-+++v0.1.11 & 12
-++++German
+##Testflight
+###v0.1.11 & 12
+###+German
 Neu:
  - Freie Wahl der Raketenfarbe
  - Hilfefunktion, falls Du eine Antwort einfach nicht kennst
@@ -75,7 +79,7 @@ Anderes Feedback ist auch willkommen. Sei bitte brutal ehrlich: Wenn die App Dir
 Vielen Dank!
 
 Rafael
-++++English
+###+English
 New:
  - Your choice of rocket colours
  - Help with questions you just can't answer
@@ -95,7 +99,7 @@ I am also grateful for any other feedback. Be harsh now so I am not embarrassed 
 Thank you very much,
 Rafael
 
-+++Techies
+###Techies
 Vielen Dank für Deine Hilfe! Bitte sag mir Bescheid, ob die App:
 
 a) auf Deinem Gerät gut läuft
@@ -118,7 +122,7 @@ I am also grateful for any other feedback! Please be harsh now so I am not embar
 
 Sincerely,
 Rafael
-+++Parents
+###Parents
 Hat Dein Kind schon eine ältere Version getestet? Dann sag mir bitte, ob diese Version ihm besser, oder schlechter gefällt.
 
 Ansonsten bitte sag mir Bescheid, ob die App:
@@ -145,7 +149,7 @@ I am also grateful for any other feedback. Be harsh now so I am not embarrassed 
 
 Thank you very much,
 Rafael
-+++Emails
+###Emails
 Hallo Siri,
 
 als die Kinder in diesem Jahr die Aufgabe bekamen, das kleine Einmaleins aus dem Effeff zu können, hat es mich gestört, dass Talea bei den Hausaufgaben viel Zeit mit Fragen verbringen musste, die sich eigentlich schon konnte. Ich habe deswegen eine kleine Übungsapp geschrieben, die sich die Antworten des Kindes merkt und gezielt die schwierigen Fragen in den Vordergrund stellt.

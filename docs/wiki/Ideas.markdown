@@ -1,6 +1,12 @@
 [ToDo](ToDo)
+[StoreStuff](StoreStuff)
+
 
 #Ideas 
+* If a player enters e.g. 61 instead of 16, animate transposing the numbers instead of normal failure
+* Keep track of longer-term question difficulty after all; if a question keeps getting answered wrong, show it several times in a row until it is answered right, then several times in the same quiz until it is answered right
+* Play button is pixely in player selection screen
+* Add bullet point list of cool things to your app store presence
 * Make free version so that flaregamers and filkers can rate it
 * Add "Rate this app" popup
 * Check texts with Pete or John & Angie
