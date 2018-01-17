@@ -50,7 +50,7 @@ PlayerSettings:
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 0
   m_MTRendering: 1
-  m_StackTraceTypes: 000000000000000000000000000000000000000001000000
+  m_StackTraceTypes: 020000000200000002000000020000000200000001000000
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
   tizenShowActivityIndicatorOnLoading: -1
@@ -157,7 +157,7 @@ PlayerSettings:
     Android: com.crazy_chipmunk.einmaleinspaid
     iOS: com.crazy-chipmunk.einmaleins
   buildNumber:
-    iOS: 0
+    iOS: 1
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
@@ -165,7 +165,7 @@ PlayerSettings:
   aotOptions: 
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
-  iPhoneScriptCallOptimization: 1
+  iPhoneScriptCallOptimization: 0
   ForceInternetPermission: 0
   ForceSDCardPermission: 0
   CreateWallpaper: 0
@@ -398,10 +398,10 @@ PlayerSettings:
   wiiUDrcBufferDisabled: 0
   wiiUProfilerLibPath: 
   playModeTestRunnerEnabled: 0
-  actionOnDotNetUnhandledException: 0
+  actionOnDotNetUnhandledException: 1
   enableInternalProfiler: 0
-  logObjCUncaughtExceptions: 0
-  enableCrashReportAPI: 0
+  logObjCUncaughtExceptions: 1
+  enableCrashReportAPI: 1
   cameraUsageDescription: 
   locationUsageDescription: 
   microphoneUsageDescription: 
