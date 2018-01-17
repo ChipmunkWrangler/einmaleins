@@ -745,7 +745,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -30, y: -62}
+  m_AnchoredPosition: {x: 50, y: -62}
   m_SizeDelta: {x: 770, y: 64}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &57
@@ -794,11 +794,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &59 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1599538779730132, guid: ad97a59183a954d0ca3d84cfbe8f4d20,
-    type: 2}
-  m_PrefabInternal: {fileID: 1063146366}
 --- !u!1 &60
 GameObject:
   m_ObjectHideFlags: 0
@@ -4941,9 +4936,8 @@ MonoBehaviour:
   - {fileID: 37}
   - {fileID: 18}
   uiElementsToActivateOnLaunchButton:
-  - {fileID: 59}
-  - {fileID: 81}
   - {fileID: 18}
+  - {fileID: 81}
   uiElementsToDeactivateOnLaunchButton:
   - {fileID: 67}
   - {fileID: 1535142616}
@@ -4963,9 +4957,8 @@ MonoBehaviour:
   - {fileID: 18}
   - {fileID: 1535142616}
   uiElementsToDeactivateOnPlay:
-  - {fileID: 59}
-  - {fileID: 15}
   - {fileID: 81}
+  - {fileID: 15}
   uiElementsToDeactivateIfGivingUpIsForbidden:
   - {fileID: 811033116}
   - {fileID: 482485701}
