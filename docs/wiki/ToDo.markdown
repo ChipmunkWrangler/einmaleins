@@ -12,11 +12,12 @@
 	* [X] https://play.google.com/intl/en_us/badges/
 	* [ ] https://developer.apple.com/library/content/qa/qa1633/_index.html 
     * [ ] check in and upload
-* [ ] Fix Apple complaint (waiting for them to reply)
+* [X] Fix Apple complaint (waiting for them to reply)
 * [ ] Get filkers and facebookers and ios testers to review once iOS is released (you have a draft email)
-* [ ] Test that it works with 512 Mb devices https://hwstats.unity3d.com/mobile/
-* [ ] Talk to Matthias S. again
-
+* [ ] Improve funnel in Play Store: 
+ * [ ] *We are running a sale from 17.1. through 24.1. See if that makes a difference relative to other weeks.*
+ * [ ] Split test icons in Play Store (this can work parallel to free test)
+ * [ ] [MarketingExperiments](MarketingExperiments)
 ### Credits
 
 * Creative commons attribution 

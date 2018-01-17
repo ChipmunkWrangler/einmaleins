@@ -24,7 +24,7 @@
   * [X] Upload in XCode
    * [X] 1) choose "generic iOS device" (don't choose Ipad or any other devices connected or a simulator) 
    * [X] 2) Go to Product --> Archive
-   * [X] 3) If everything is fine, it should open the archive in the Organizer. Click "validate" and then "Submit to App Store". 
+   * [X] 3) it should open the archive in the Organizer. Click "validate" and then "Upload to App Store". 
   * [X] When you get the first email ("processed"), go to iTunesConnect and
    * [X] update compliance info at iTunesConnect
    * [X] Check "Test Information" under IOSBuilds...Test Details in testflight, in the right language -- see Texts below (https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=build&subsection=testdetails&id=24416006)

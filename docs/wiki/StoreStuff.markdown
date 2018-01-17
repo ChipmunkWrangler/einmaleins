@@ -1,11 +1,15 @@
+[MarketingExperiments](MarketingExperiments)
 #Marketing Ideas
-* Tell Bob where to get it on iOS and Android
+* Tell Bob & Filkers where to get it on iOS and Android (see email draft)
+ * Make free version so that flaregamers and filkers can rate it
 * Ravensburger or other partnerships: I give them a finished product, they stamp it and get 20%
+* Friendly art
+* Copy F2P best practises, since they are not overdone in the kid / edugame space
 * Nasa partnership: from toddler to astronaut
 * Space-related license
- * Bundle chocolate with apps: email us with your address and we will mail you a ritter sport of your choice.
- * Check private schools as market.
-* * When you reach deep space, show an ad for the next game
+* Bundle chocolate with apps: email us with your address and we will mail you a ritter sport of your choice.
+* Check private schools as market.
+* When you reach deep space, show an ad for the next game
 #Advice
  * The WIIFM (What’s In It For Me) principle generally yields the best headlines. Articulate a clear benefit to the prospect. 
  * Specificity usually wins over generality (specific numbers, items). Gun vs. Weapon. 63% vs. Over 50%. There is a headline writing technique known as 4Us (Unique, Ultra Specific, Utilility)
