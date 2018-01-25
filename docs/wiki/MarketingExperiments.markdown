@@ -33,6 +33,7 @@ which shows visitors, which is Discoverability * Clickability.
   * Rounded background (see other play store icons)
   * Show 1x1 on the icon itself
 * Price
+ * At €2,89 you got two downloads between Dec 26th and Jan 16th. At free, you got two between Jan 17th and Jan 24th. 
  * Try 0.99$
 * Star rating
  * Ask Bob and Filklist 
