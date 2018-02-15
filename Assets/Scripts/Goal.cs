@@ -14,6 +14,14 @@ public class Goal : MonoBehaviour {
 		WON // try to get high score
 	}
 
+    public static bool IsGivingUpAllowed(CurGoal curGoal) => curGoal == Goal.CurGoal.FLY_TO_PLANET;
+
+    public static bool IsReadyForGauntlet()
+    {
+        return (TargetPlanet.GetTargetPlanetIdx() == TargetPlanet.GetMaxPlanetIdx()) &&
+            RocketParts.instance.upgradeLevel == RocketParts.instance.maxUpgradeLevel - 1;
+    }
+
 	public CurGoal CalcCurGoal() {
 		CurGoal curGoal;
 		if (ShouldUpgrade()) {
@@ -29,24 +37,8 @@ public class Goal : MonoBehaviour {
 		return curGoal;
 	}
 		
-	public static bool IsGivingUpAllowed(CurGoal curGoal) {
-		return curGoal == Goal.CurGoal.FLY_TO_PLANET;
-	}
+    static bool ShouldUpgrade() => (RocketParts.instance.hasEnoughPartsToUpgrade || !ChooseRocketColour.HasChosenColour()) && !RocketParts.instance.justUpgraded;
+    static bool IsLeavingSolarSystem() => TargetPlanet.GetTargetPlanetIdx() > TargetPlanet.GetMaxPlanetIdx();
 
-	public static bool IsReadyForGauntlet() {
-		return (TargetPlanet.GetTargetPlanetIdx () == TargetPlanet.GetMaxPlanetIdx ()) && 
-			RocketParts.instance.upgradeLevel == RocketParts.instance.maxUpgradeLevel - 1;
-	}
-
-	static bool ShouldUpgrade() {
-		return (RocketParts.instance.hasEnoughPartsToUpgrade || !ChooseRocketColour.HasChosenColour()) && !RocketParts.instance.justUpgraded;
-	}
-
-	bool IsDoneForToday() {
-		return effortTracker.IsDoneForToday () && !RocketParts.instance.justUpgraded;
-	}
-
-	static bool IsLeavingSolarSystem() {
-		return TargetPlanet.GetTargetPlanetIdx () > TargetPlanet.GetMaxPlanetIdx();
-	}
+    bool IsDoneForToday() => effortTracker.IsDoneForToday() && !RocketParts.instance.justUpgraded;
 }

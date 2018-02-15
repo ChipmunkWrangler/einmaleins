@@ -9,9 +9,9 @@ public class Questions : MonoBehaviour {
 
 	QuestionsPersistentData data = new QuestionsPersistentData();
 
-	public static int GetNumQuestions () {
-		return maxNum * (maxNum + 1) / 2;
-	}
+	public static int GetNumQuestions () => maxNum * (maxNum + 1) / 2;
+    public Question GetGaveUpQuestion() => questions.FirstOrDefault(question => question.GaveUp());
+    public Question GetLaunchCodeQuestion() => questions.FirstOrDefault(question => question.isLaunchCode);
 
 	public void ResetForNewQuiz () {
 		foreach (Question question in questions) {
@@ -42,14 +42,6 @@ public class Questions : MonoBehaviour {
 		return (isFrustrated) ? orderedCandidates.First() : orderedCandidates.Last();
 	}
 
-	public Question GetGaveUpQuestion () {
-		return questions.FirstOrDefault( question => question.GaveUp() );
-	}
-
-	public Question GetLaunchCodeQuestion () {
-		return questions.FirstOrDefault( question => question.isLaunchCode );
-	}
-
 	public void Save () {
 		data.Save();
 	}
@@ -78,9 +70,8 @@ public class QuestionsPersistentData {
 
 	const string prefsKey = "questions";
 
-	public static string GetQuestionKey (int i) {
-		return prefsKey + ":" + i;
-	}
+	public static string GetQuestionKey (int i) => prefsKey + ":" + i;
+    public static bool WereQuestionsCreated() => MDPrefs.HasKey(prefsKey + ":ArrayLen");
 
 	public void Save () {
 		MDPrefs.SetInt( prefsKey + ":ArrayLen", questionData.Length );
@@ -100,9 +91,5 @@ public class QuestionsPersistentData {
 				questionData[ i ].Load( GetQuestionKey( i ), i );
 			}
 		}
-	}
-
-	public static bool WereQuestionsCreated () {
-		return MDPrefs.HasKey( prefsKey + ":ArrayLen" );
 	}
 }

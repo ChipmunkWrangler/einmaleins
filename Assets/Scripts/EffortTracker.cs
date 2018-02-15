@@ -28,9 +28,7 @@ public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGi
 	bool isQuizStarted;
 	bool allowGivingUp;
 
-	public bool IsDoneForToday() {
-		return data.IsDoneForToday ();
-	}
+	public bool IsDoneForToday() => data.IsDoneForToday ();
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		float answerTime = question.GetLastAnswerTime ();

@@ -96,7 +96,5 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 		}
 	}
 
-	ParticleSystem GetExhaustParticles() {
-		return exhaustParticles [RocketParts.instance.upgradeLevel];
-	}
+	ParticleSystem GetExhaustParticles() => exhaustParticles [RocketParts.instance.upgradeLevel];
 }

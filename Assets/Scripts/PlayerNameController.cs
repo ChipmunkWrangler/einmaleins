@@ -10,6 +10,10 @@ public class PlayerNameController
 
 	public string curName;
 
+    static public bool IsPlayerSet() => PlayerPrefs.HasKey(curPlayerPrefsKey) && PlayerPrefs.GetString(curPlayerPrefsKey).Length > 0;
+
+    public bool IsNameValid(string playerName) => playerName.Length > 0 && !names.Contains(playerName);
+
 	public void Load ()
 	{
 		names = PlayerPrefsArray.GetStringArray (namesPrefsKey);
@@ -22,11 +26,6 @@ public class PlayerNameController
 		PlayerPrefs.SetString (curPlayerPrefsKey, curName);
 	}
 
-	static public bool IsPlayerSet ()
-	{
-		return PlayerPrefs.HasKey (curPlayerPrefsKey) && PlayerPrefs.GetString (curPlayerPrefsKey).Length > 0;
-	}
-
 	public void AppendName (string name)
 	{
 		string[] newPlayerNames = new string[names.Length + 1];
@@ -35,11 +34,6 @@ public class PlayerNameController
 		}
 		newPlayerNames [names.Length] = name;
 		names = newPlayerNames;
-	}
-
-	public bool IsNameValid (string playerName)
-	{
-		return playerName.Length > 0 && !names.Contains (playerName);
 	}
 
 	public void Clear ()

@@ -66,9 +66,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		MDPrefs.SetInt (prefsKey + ":mult", multiplier);
 	}
 
-	Coroutine UpdateScoreDisplay(UnityEngine.UI.Text text, int newScore) {
-		return StartCoroutine (CountTextUp (text, newScore));
-	}
+	Coroutine UpdateScoreDisplay(UnityEngine.UI.Text text, int newScore) => StartCoroutine (CountTextUp (text, newScore));
 
 	IEnumerator CountTextUp(UnityEngine.UI.Text text, int newScore) {
 		if (newScore > shownScore) {

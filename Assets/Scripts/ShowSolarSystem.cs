@@ -40,9 +40,7 @@ public class ShowSolarSystem : MonoBehaviour {
 		return duration;
 	}
 
-	public Renderer GetPlanet(int i) {
-		return planets [i];
-	}
+	public Renderer GetPlanet(int i) => planets [i];
 
 	void Start() {
 		originalScale = transform.localScale;

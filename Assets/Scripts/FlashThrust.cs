@@ -50,220 +50,205 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	const string heightFormat = "N0";
 	const string unit = " km";
 
-	void Start() {
-		InitScoreWidget ();
-		oldRecord.SetActive (checkForRecord);
+    public static float GetThrustFactor(float timeRequired) => MIN_THRUST_FACTOR + (maxThrustFactor - MIN_THRUST_FACTOR) / Mathf.Pow(1.0f + Q * Mathf.Exp(timeRequired - ALLOTTED_TIME), 1.0f / V);
+
+    public float GetMaxSingleQuestionSpeed() => GetHeightIncrease(ALLOTTED_TIME) / Celebrate.duration;
+
+    public void OnCorrectAnswer(Question question, bool isNewlyMastered)
+    {
+        if (question == null || !question.isLaunchCode)
+        {
+            Accelerate(question?.GetLastAnswerTime() ?? ALLOTTED_TIME);
+        }
+    }
+
+    public void OnQuestionChanged(Question question)
+    {
+        if (question == null)
+        {
+            noMoreQuestions = true;
+        }
+        else if (isRunning)
+        { // test
+            question.Ask();
+        }
+    }
+
+    public void Accelerate(float answerTime = ALLOTTED_TIME)
+    {
+        earnedHeight += GetHeightIncrease(answerTime);
+        float deltaHeight = earnedHeight - height;
+        UnityEngine.Assertions.Assert.IsTrue(deltaHeight > 0);
+        float oldSpeed = speed;
+        speed = Mathf.Sqrt(2f * deltaHeight * gravity);
+        UnityEngine.Assertions.Assert.IsTrue(speed > oldSpeed);
+        Debug.Log("old speed = " + oldSpeed + " speed = " + speed);
+    }
+
+    static float GetTargetHeight() => TargetPlanet.GetPlanetHeight(RocketParts.instance.upgradeLevel);
+    static float CalcQ(float m, float M) => Mathf.Pow((M - m) / (1f - m), V) - 1f;
+    static float CalcBaseThrust(bool isGauntlet) => GetTargetHeight() / (EffortTracker.GetNumAnswersInQuiz(isGauntlet) + 1); // +1 because there is an initial launch thrust
+    static float CalcMaxThrustFactor()
+    {
+        //      float minHeightRatio = float.MaxValue;
+        //      for (int i = 0; i < TargetPlanet.GetNumPlanets() - 1; ++i) {
+        //          float heightRatio = TargetPlanet.GetPlanetHeight (i + 1) / TargetPlanet.GetPlanetHeight (i);
+        //          if (heightRatio < minHeightRatio) {
+        //              minHeightRatio = heightRatio;
+        //          }
+        //      }
+        //      return minHeightRatio;
+        int u = RocketParts.instance.upgradeLevel;
+        return TargetPlanet.GetPlanetHeight(u + 1) / TargetPlanet.GetPlanetHeight(u);
+    }
+
+    bool IsTargetPlanetReached() => curGoal != Goal.CurGoal.WON && height > TargetPlanet.GetPlanetHeight(TargetPlanet.GetTargetPlanetIdx());
+    float GetHeightIncrease(float timeRequired) => baseThrust * GetThrustFactor(timeRequired);
+
+	void Start () {
+		InitScoreWidget();
+		oldRecord.SetActive( checkForRecord );
 	}
 
-	void InitScoreWidget() {
+	void InitScoreWidget () {
 		formatProvider = MDCulture.GetCulture();
-		heightWidget.SetActive (true);
+		heightWidget.SetActive( true );
 		heightText.text = "0";
-		InitRecordHeight ();
-		recordHeightText.text = recordHeight.ToString (heightFormat) + unit;
+		InitRecordHeight();
+		recordHeightText.text = recordHeight.ToString( heightFormat ) + unit;
 	}
 
-	void InitRecordHeight() {
-		recordHeight = MDPrefs.GetFloat (recordPrefsKey, 0);
+	void InitRecordHeight () {
+		recordHeight = MDPrefs.GetFloat( recordPrefsKey, 0 );
 	}
 
-	void InitOldRecordLine(bool enable) {
+	void InitOldRecordLine (bool enable) {
 		var recordPos = oldRecord.transform.position;
 		recordPos.y += recordHeight * paramObj.heightScale * oldRecord.transform.parent.localScale.y;
 		oldRecord.transform.position = recordPos;
-		oldRecord.SetActive (enable);
+		oldRecord.SetActive( enable );
 	}
 
-	void InitRecord() {
-		InitRecordHeight ();
+	void InitRecord () {
+		InitRecordHeight();
 		checkForRecord = recordHeight > 0;
-		InitOldRecordLine (checkForRecord);
+		InitOldRecordLine( checkForRecord );
 	}
 
-	void InitPhysics(bool isGauntlet) {
-		maxThrustFactor = CalcMaxThrustFactor ();
-		Q = CalcQ (MIN_THRUST_FACTOR, maxThrustFactor);
-		baseThrust = CalcBaseThrust (isGauntlet);
-		gravity = CalcGravity ();
+	void InitPhysics (bool isGauntlet) {
+		maxThrustFactor = CalcMaxThrustFactor();
+		Q = CalcQ( MIN_THRUST_FACTOR, maxThrustFactor );
+		baseThrust = CalcBaseThrust( isGauntlet );
+		gravity = CalcGravity();
 	}
 
-	void Update() {
+	void Update () {
 		if (isRunning) {
 			speed -= gravity * Time.deltaTime;
 			if (speed > 0) {
-				Ascend ();
+				Ascend();
 			} else if (noMoreQuestions) {
-				OnDone ();
+				OnDone();
 			}
 		}
 	}
 
-	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
-		if (question == null || !question.isLaunchCode) {
-			Accelerate ((question == null) ? ALLOTTED_TIME : question.GetLastAnswerTime ());
-		}
-	}
-
-	public void OnQuestionChanged(Question question) {
-		if (question == null) {
-			noMoreQuestions = true;
-		} else if (isRunning) { // test
-			question.Ask();
-		}
-	}
-
-	public void Accelerate(float answerTime = ALLOTTED_TIME) {
-		earnedHeight += GetHeightIncrease(answerTime);
-		float deltaHeight = earnedHeight - height;
-		UnityEngine.Assertions.Assert.IsTrue (deltaHeight > 0);
-		float oldSpeed = speed;
-		speed = Mathf.Sqrt (2f * deltaHeight * gravity);
-		UnityEngine.Assertions.Assert.IsTrue (speed > oldSpeed);
-		Debug.Log ("old speed = " + oldSpeed + " speed = " + speed);
-	}
-
-	public float GetMaxSingleQuestionSpeed() {
-		return GetHeightIncrease (ALLOTTED_TIME) / Celebrate.duration;
-	}
-
 	void Ascend () {
 		height += speed * Time.deltaTime;
-		recordHeight = UpdateRecord (height, recordHeight, recordPrefsKey);
-		heightText.text = height.ToString (heightFormat, formatProvider) + unit;
-		recordHeightText.text = recordHeight.ToString (heightFormat, formatProvider) + unit;
+		recordHeight = UpdateRecord( height, recordHeight, recordPrefsKey );
+		heightText.text = height.ToString( heightFormat, formatProvider ) + unit;
+		recordHeightText.text = recordHeight.ToString( heightFormat, formatProvider ) + unit;
 		if (IsTargetPlanetReached()) {
-			ReachPlanet ();
+			ReachPlanet();
 		}
 	}
 
-	bool IsTargetPlanetReached() {
-		return curGoal != Goal.CurGoal.WON && height > TargetPlanet.GetPlanetHeight (TargetPlanet.GetTargetPlanetIdx ());
-	}
-
-	void ReachPlanet ()
-	{
-		int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx ();
-		TargetPlanet.SetLastReachedIdx (planetReachedIdx);
-		TargetPlanet.TargetNextPlanet ();
-		if (planetReachedIdx == TargetPlanet.GetMaxPlanetIdx ()) {
-			RocketParts.instance.UnlockFinalUpgrade ();
+	void ReachPlanet () {
+		int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx();
+		TargetPlanet.SetLastReachedIdx( planetReachedIdx );
+		TargetPlanet.TargetNextPlanet();
+		if (planetReachedIdx == TargetPlanet.GetMaxPlanetIdx()) {
+			RocketParts.instance.UnlockFinalUpgrade();
 		}
-		StopRunning ();
-		questionPicker.AbortQuiz ();
-		oldRecord.SetActive (false);
-		StartCoroutine (CelebrateReachingPlanet (planetReachedIdx));
+		StopRunning();
+		questionPicker.AbortQuiz();
+		oldRecord.SetActive( false );
+		StartCoroutine( CelebrateReachingPlanet( planetReachedIdx ) );
 	}
 
-	void OnDone() {
-		Debug.Log ("OnDone");
-		StopRunning ();
-		PrepareNewStart ();
+	void OnDone () {
+		Debug.Log( "OnDone" );
+		StopRunning();
+		PrepareNewStart();
 	}
 
-	void PrepareNewStart ()
-	{
+	void PrepareNewStart () {
 		noMoreQuestions = false;
-		launch.ShowLaunchButton ();
+		launch.ShowLaunchButton();
 	}
 
-	void StopRunning ()
-	{
-		Debug.Log ("StopRunning");
+	void StopRunning () {
+		Debug.Log( "StopRunning" );
 		speed = 0;
 		isRunning = false;
-		effortTracker.EndQuiz ();
+		effortTracker.EndQuiz();
 	}
 
-	public void OnCountdown() {
-		curGoal = goal.CalcCurGoal ();
-		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
-		InitRecord ();
-		InitPhysics (curGoal == Goal.CurGoal.GAUNTLET);
+	public void OnCountdown () {
+		curGoal = goal.CalcCurGoal();
+		UnityEngine.Assertions.Assert.IsTrue( curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal );
+		InitRecord();
+		InitPhysics( curGoal == Goal.CurGoal.GAUNTLET );
 		isRunning = true;
 		height = 0;
 		speed = 0;
 		noMoreQuestions = false;
 	}
 
-	IEnumerator CelebrateReachingPlanet(int planetIdx) {
-		float zoomTime = zoomToPlanet.ZoomToPlanet (planetIdx, true);
-		UnityEngine.Assertions.Assert.IsTrue (zoomTime - planetAchievementTextDelay >= 0);
-		ClearAchievementText (planetAchievementTextDelay * 0.9f);
-		yield return new WaitForSeconds (planetAchievementTextDelay);
-		ActivateAchievementText (planetReachedTexts [planetIdx]);
-		yield return new WaitForSeconds (zoomTime - planetAchievementTextDelay);
-		PrepareNewStart ();
+	IEnumerator CelebrateReachingPlanet (int planetIdx) {
+		float zoomTime = zoomToPlanet.ZoomToPlanet( planetIdx, true );
+		UnityEngine.Assertions.Assert.IsTrue( zoomTime - planetAchievementTextDelay >= 0 );
+		ClearAchievementText( planetAchievementTextDelay * 0.9f );
+		yield return new WaitForSeconds( planetAchievementTextDelay );
+		ActivateAchievementText( planetReachedTexts[ planetIdx ] );
+		yield return new WaitForSeconds( zoomTime - planetAchievementTextDelay );
+		PrepareNewStart();
 		yield return null;
 	}
 
-	void ClearAchievementText(float transitionTime) {
+	void ClearAchievementText (float transitionTime) {
 		if (achievementText.text.Length > 0) {
-			iTween.ScaleTo (achievementText.gameObject, iTween.Hash ("scale", Vector3.zero, "time", transitionTime));
+			iTween.ScaleTo( achievementText.gameObject, iTween.Hash( "scale", Vector3.zero, "time", transitionTime ) );
 		}
 	}
 
-	void ActivateAchievementText (string term)
-	{
+	void ActivateAchievementText (string term) {
 		achievementText.text = I2.Loc.LocalizationManager.GetTermTranslation( term );
-		achievementText.CrossFadeAlpha (1.0f, 0, false);
-		achievementText.CrossFadeAlpha (0, achievementTextTransitionTime, false);
+		achievementText.CrossFadeAlpha( 1.0f, 0, false );
+		achievementText.CrossFadeAlpha( 0, achievementTextTransitionTime, false );
 		achievementText.transform.localScale = Vector3.zero;
-		iTween.ScaleTo (achievementText.gameObject, iTween.Hash ("scale", Vector3.one, "time", achievementTextTransitionTime, "easeType", iTween.EaseType.easeOutQuad));
+		iTween.ScaleTo( achievementText.gameObject, iTween.Hash( "scale", Vector3.one, "time", achievementTextTransitionTime, "easeType", iTween.EaseType.easeOutQuad ) );
 	}
 
-	void CelebrateBreakingRecord() {
+	void CelebrateBreakingRecord () {
 		ActivateAchievementText( recordBrokenMsg );
 	}
 
-	float UpdateRecord(float dist, float record, string key) {
+	float UpdateRecord (float dist, float record, string key) {
 		if (dist > record) {
 			record = dist;
-			MDPrefs.SetFloat (key, record);
+			MDPrefs.SetFloat( key, record );
 			if (checkForRecord) {
 				checkForRecord = false;
-				CelebrateBreakingRecord ();
+				CelebrateBreakingRecord();
 			}
 		} 
 		return record;
 	}
-			
-	static float GetTargetHeight() { 
-		return TargetPlanet.GetPlanetHeight(RocketParts.instance.upgradeLevel);
-	}
 
-	float GetHeightIncrease(float timeRequired) {
-		return baseThrust * GetThrustFactor(timeRequired);
-	}
-
-	// Each correct answer increases rocket height by a generalized logistic function H(t)
-	public static float GetThrustFactor(float timeRequired) {
-		return MIN_THRUST_FACTOR + (maxThrustFactor - MIN_THRUST_FACTOR) / Mathf.Pow(1.0f + Q * Mathf.Exp(timeRequired-ALLOTTED_TIME), 1.0f/V);
-	}
-
-	static float CalcMaxThrustFactor() {
-//		float minHeightRatio = float.MaxValue;
-		//		for (int i = 0; i < TargetPlanet.GetNumPlanets() - 1; ++i) {
-		//			float heightRatio = TargetPlanet.GetPlanetHeight (i + 1) / TargetPlanet.GetPlanetHeight (i);
-//			if (heightRatio < minHeightRatio) {
-//				minHeightRatio = heightRatio;
-//			}
-//		}
-//		return minHeightRatio;
-		int u = RocketParts.instance.upgradeLevel;
-		return TargetPlanet.GetPlanetHeight(u + 1) / TargetPlanet.GetPlanetHeight (u);
-	}
-
-	static float CalcQ(float m, float M) {
-		return Mathf.Pow((M - m) / (1f - m), V) - 1f;
-	}
-
-	static float CalcBaseThrust(bool isGauntlet) {
-		return GetTargetHeight () / (EffortTracker.GetNumAnswersInQuiz(isGauntlet)+1); // +1 because there is an initial launch thrust
-	}
-
-	float CalcGravity() {
-		float allottedDeltaHeight = GetHeightIncrease (ALLOTTED_TIME);
-		UnityEngine.Assertions.Assert.IsTrue (allottedDeltaHeight > 0);
+	float CalcGravity () {
+		float allottedDeltaHeight = GetHeightIncrease( ALLOTTED_TIME );
+		UnityEngine.Assertions.Assert.IsTrue( allottedDeltaHeight > 0 );
 		float time = Celebrate.duration + ALLOTTED_TIME;
 		float avgSpeed = allottedDeltaHeight / time;
 		float s = 2f * avgSpeed;

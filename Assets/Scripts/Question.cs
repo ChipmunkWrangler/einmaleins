@@ -24,17 +24,19 @@ public class Question {
 		data = _data;
 	}
 
-	public int GetAnswer () {
-		return a * b;
-	}
+	public int GetAnswer () => a * b;
 
-	public bool WasWrong () {
-		return data.wasWrong;
-	}
+	public bool WasWrong () => data.wasWrong;
 
-	public bool IsNew () {
-		return data.isNew;
-	}
+	public bool IsNew () => data.isNew;
+
+	public bool GaveUp () => data.gaveUp;
+
+	public bool IsMastered () => GetAverageAnswerTime() <= FAST_TIME;
+
+	public float GetLastAnswerTime () => data.answerTimes[ data.answerTimes.Count - 1 ];
+
+	public float GetAverageAnswerTime () => data.answerTimes.Average();
 
 	public void SetNewFromAnswerTime () {
 		bool isNew = true;
@@ -47,28 +49,12 @@ public class Question {
 		data.isNew = isNew;
 	}
 
-	public bool GaveUp () {
-		return data.gaveUp;
-	}
-
 	public bool IsAnswerCorrect (string answer) {
 		int result;
 		if (int.TryParse( answer, out result )) {
 			return result == GetAnswer();
 		}
 		return false;
-	}
-
-	public bool IsMastered () {
-		return GetAverageAnswerTime() <= FAST_TIME;
-	}
-
-	public float GetLastAnswerTime () {
-		return data.answerTimes[ data.answerTimes.Count - 1 ];
-	}
-
-	public float GetAverageAnswerTime () {
-		return data.answerTimes.Average();
 	}
 
 	public void Ask () {		
@@ -186,9 +172,7 @@ public class QuestionPersistentData {
 		MDPrefs.SetBool( _prefsKey + ":gaveUp", gaveUp );
 	}
 
-	static List<float> GetAnswerTimes (string prefsKey) {
-		return MDPrefs.GetFloatArray( prefsKey + ":times" ).ToList();
-	}
+	static List<float> GetAnswerTimes (string prefsKey) => MDPrefs.GetFloatArray( prefsKey + ":times" ).ToList();
 
 	static void SetAnswerTimes (string prefsKey, List<float> answerTimes) {
 		MDPrefs.SetFloatArray( prefsKey + ":times", answerTimes.ToArray() );

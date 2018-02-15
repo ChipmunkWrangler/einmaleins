@@ -13,9 +13,7 @@ public class TextDisplay : MonoBehaviour {
 		GetTextField ().text = text;
 	}
 
-	protected string GetText() {
-		return GetTextField ().text;
-	}
+	protected string GetText() => GetTextField ().text;
 
 	protected UnityEngine.UI.Text GetTextField() {
 		if (textField == null) {

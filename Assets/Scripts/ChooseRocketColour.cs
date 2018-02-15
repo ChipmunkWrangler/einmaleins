@@ -21,9 +21,7 @@ public class ChooseRocketColour : MonoBehaviour {
 		}
 	}
 
-	public static bool HasChosenColour() {
-		return MDPrefs.HasKey(prefsKey + ".r");
-	}
+	public static bool HasChosenColour() => MDPrefs.HasKey(prefsKey + ".r");
 
 	public void StartPaint()
 	{

@@ -70,9 +70,8 @@ public class TestAlgorithm : MonoBehaviour {
 			InitAnswerTimes ();
 		}
 
-		public bool IsMastered() {
-			return GetAverageAnswerTime () < TARGET_TIME;
-		}
+		public bool IsMastered() => GetAverageAnswerTime () < TARGET_TIME;
+        public float GetAverageAnswerTime() => answerTimes.Average();
 
 		public void ResetForNewQuiz() {
 			wasAsked = false;
@@ -103,10 +102,6 @@ public class TestAlgorithm : MonoBehaviour {
 		public void AnswerWrong() {
 			++timesAnsweredWrong;
 			wasWrong = true;
-		}
-
-		public float GetAverageAnswerTime() {
-			return answerTimes.Average ();
 		}
 
 		override public string ToString() {
@@ -251,10 +246,7 @@ public class TestAlgorithm : MonoBehaviour {
 		return time;
 	}
 
-	static bool IsReadyForGauntlet (int targetPlanet)
-	{
-		return targetPlanet >= PLANET_HEIGHTS.Length - 1;
-	}
+	static bool IsReadyForGauntlet (int targetPlanet) => targetPlanet >= PLANET_HEIGHTS.Length - 1;
 
 	TestQuestion GetNextQuestion(int frustration) {
 		var allowed = questions.Where (IsAllowed);
@@ -282,17 +274,9 @@ public class TestAlgorithm : MonoBehaviour {
 		}
 	}
 
-	bool IsAllowed(TestQuestion question) {
-		return !question.wasAsked && !question.IsMastered ();
-	}
-
-	float GetTargetHeight(int upgradeLevel) {
-		return (upgradeLevel < PLANET_HEIGHTS.Length) ? PLANET_HEIGHTS [upgradeLevel] : PLANET_HEIGHTS [PLANET_HEIGHTS.Length - 1] * 2.0f;
-	}
-
-	float GetHeightIncrease(float baseThrust, float minThrustFactor, float maxThrustFactor, float Q, float timeRequired, float allottedTime, int v) {
-		return baseThrust * (minThrustFactor + (maxThrustFactor - minThrustFactor) / Mathf.Pow(1.0f + Q * Mathf.Exp(timeRequired-allottedTime), 1.0f/v));
-	}
+	bool IsAllowed(TestQuestion question) => !question.wasAsked && !question.IsMastered ();
+    float GetTargetHeight(int upgradeLevel) => (upgradeLevel < PLANET_HEIGHTS.Length) ? PLANET_HEIGHTS [upgradeLevel] : PLANET_HEIGHTS [PLANET_HEIGHTS.Length - 1] * 2.0f;
+	float GetHeightIncrease(float baseThrust, float minThrustFactor, float maxThrustFactor, float Q, float timeRequired, float allottedTime, int v) => baseThrust * (minThrustFactor + (maxThrustFactor - minThrustFactor) / Mathf.Pow(1.0f + Q * Mathf.Exp(timeRequired-allottedTime), 1.0f/v));
 
 	float CalcMaxThrustFactor() {
 		float minHeightRatio = float.MaxValue;

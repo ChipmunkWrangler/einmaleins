@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class MDPrefs {
-	public static bool HasKey(string key) {
-		return PlayerPrefs.HasKey (GetKey (key));
-	}
+	public static bool HasKey(string key) => PlayerPrefs.HasKey (GetKey (key));
 
 	public static void DeleteKey(string key) { 
 		string arrayKey = GetArrayKey (key);
@@ -38,34 +36,24 @@ public static class MDPrefs {
 		return "";
 	}
 
-	public static int GetInt(string key, int defaultValue) {
-		return PlayerPrefs.GetInt (GetKey(key), defaultValue);
-	}
+	public static int GetInt(string key, int defaultValue) => PlayerPrefs.GetInt (GetKey(key), defaultValue);
 	public static void SetInt(string key, int i) {
 		PlayerPrefs.SetInt (GetKey(key), i);
 	}
-	public static float GetFloat(string key, float defaultValue) {
-		return PlayerPrefs.GetFloat (GetKey(key), defaultValue);
-	}
+	public static float GetFloat(string key, float defaultValue) => PlayerPrefs.GetFloat (GetKey(key), defaultValue);
 	public static void SetFloat(string key, float f) {
 		PlayerPrefs.SetFloat (GetKey(key), f);
 	}
-	public static string GetString(string key, string defaultValue = default(string)) {
-		return PlayerPrefs.GetString (GetKey(key), defaultValue);
-	}
+	public static string GetString(string key, string defaultValue = default(string)) => PlayerPrefs.GetString (GetKey(key), defaultValue);
 	public static void SetString(string key, string s) {
 		PlayerPrefs.SetString (GetKey(key), s);
 	}
-	public static bool GetBool(string key, bool defaultValue = default(bool)) {
-		return PlayerPrefsUtility.GetBool (GetKey(key), defaultValue);
-	}
+	public static bool GetBool(string key, bool defaultValue = default(bool)) => PlayerPrefsUtility.GetBool (GetKey(key), defaultValue);
 	public static void SetBool(string key, bool b) {
 		PlayerPrefsUtility.SetBool (GetKey(key), b);
 	}
 
-	public static System.DateTime GetDateTime(string key, System.DateTime defaultValue) {
-		return PlayerPrefsUtility.GetDateTime (GetKey(key), defaultValue);
-	}
+	public static System.DateTime GetDateTime(string key, System.DateTime defaultValue) => PlayerPrefsUtility.GetDateTime (GetKey(key), defaultValue);
 	public static void SetDateTime(string key, System.DateTime dateTime) {
 		PlayerPrefsUtility.SetDateTime (GetKey(key), dateTime);
 	}
@@ -167,9 +155,7 @@ public static class MDPrefs {
 		return GetKey(key) + ":ArrayLen";
 	}
 
-	static int GetLength(string key) {
-		return PlayerPrefs.GetInt (GetLengthKey(key));
-	}
+	static int GetLength(string key) => PlayerPrefs.GetInt (GetLengthKey(key));
 
 	static void SetLength (string key, int len)
 	{

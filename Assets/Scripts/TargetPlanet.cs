@@ -54,15 +54,8 @@ public class TargetPlanet
 		return targetPlanetIdx; 
 	}
 
-	public static int GetMaxPlanetIdx ()
-	{
-		return heights.Length - 1;
-	}
-
-	public static float GetPlanetHeight (int i)
-	{
-		return (i < heights.Length) ? heights [i] : FINAL_HEIGHT;
-	}
+	public static int GetMaxPlanetIdx () => heights.Length - 1;
+	public static float GetPlanetHeight (int i)	=> (i < heights.Length) ? heights [i] : FINAL_HEIGHT;
 
 	public static void SetTargetPlanetIdx (int newIdx)
 	{
