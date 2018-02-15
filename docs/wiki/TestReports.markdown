@@ -3,6 +3,27 @@
   * Ask them for suggestions for new features
   * Ask them to pick their favourite of music, rocket customization, planet gallery, voice recognition, ufos
 #Test Reports v0.1.12
+##Marian
+- Sound hat's keinen? :nachdenklich:
+- Animationen können "more snappy" sein, die Tweens sind bissl träge, insbesondere wenn man sie öfter gesehen hat. Ich meine alles, ja. Die Planeten, wie sie nach vorne und wieder zurück tweenen, die Texteinblendungen etc. (bearbeitet)
+Das sieht mir sehr linear aus.
+- Der "Lösungseingabe"-Button rechts flippt nicht schnell genug um auf "Rakete". Zwar kann man den Knopf schon drücken, aber er suggeriert es nicht
+- Generell denke ich, ein cartoony-lowpoly-Look würde dem Spiel besser tun als die "Photo-Optik"
+- Das AppIcon ist auch zu "Begräbnis". Schön knallbunt machen, bissl verspielter.  Immerhin geht es darum, den Kiddies (und Eltern) ein echt dröges Thema nahezubringen und mit Spass zu versehen.
+- Aus Elternsicht: die Upgrades der Raketen sollten evtl. noch erklären, was sie eigentlich machen. Mehr Antrieb == Potenzrechnung mit dazu? Multiplikation? n-dimensionale L-Modulräume?
+- Vielleicht will man das ja tatsächlich "moderieren" als Elternteil und dem schulischen Fortschritt anpassen? Also, das man bestimmte Raketentypen oder Planeten/andere Ziele als Zusatzpacks verkauft?  "Auf zu Alpha Centauri! (Multiplikation 4. Klasse)"
+- Wenn es 2D bleiben soll - frag doch mal Lisa ob sie Lust hat für Dich Grafiken zu machen.
+- Im Zweifel übrigens: wenn die Antwort stimmt, direkt ohne Antwortbutton annehmen
+##Joerg
+- die gesamte grafische Gestaltung ist überhaupt nicht "kinderfreundlich". Es werden viele dunkle Farbtöne verwendet, und auch die Schrift ist eher zu dunkel. Eine Mathe App muss nicht quietsch-bunt sein, aber ich finde sie momentan viel zu "düster"
+- Die Angaben, wie weit der nächste Planet entfernt ist, sind mmn völlig überfüssig für die App. Mir ist klar, dass das motivieren soll, weiterzuspielen. Aber Ich denke, die Kinder, für die diese App gedacht ist, können mit den Entfernungen nicht wirklich was anfangen, und "Weltraum" ist auch meiner Erfahrung nach in diesem Alter noch fast ausschliesslich ein "Jungs"-Thema.
+- Ich habe anfangs nicht kapiert, dass ich noch den Button in der Mitte drücken muss, wenn ich die richtige Antwort eingetippt habe. Warum muss ich überhaupt noch etwas drücken, wenn die Antwort schon stimmt?
+- Die App steigt gleich mit einem hohen Schwierigkeitsgrad ein. Man bekommt nicht etwa eine Auswahlmöglichkeit für die Antworten, sondern muss eigentlich das komplette 1x1 schon kennen. Hier wäre es mmn hilfreich, wenn man bei den ersten durchläufen nur z.B. 3-4 mögliche Antworten präsentiert bekommt und erst später (oder in einem separaten "modus") frei die Zahlen eintippen kann. Genaugenommen ist das 1x1 ja eigentlich nur "Auswendiglernen". Und wenn man mit weniger "Vokabeln" anfängt, ist das einfacher.
+- wenn man eine Aufgabe löst, fliegt die Rakete weiter. Soweit, sogut. Das dauert mir aber etwas zu lange. Ich will schnell neue Aufgaben bekommen. Bei "Dr Kawashimas Gehirnjogging" auf dem DS kamen immer sofort neue Aufgaben. Wenn man da schnell war, hat sich das ziemlich gut angefühlt. Ich weiss aber nicht, ob Kinder das auch so empfinden :)
+- Eine klassische "3x3" Tastatur für die Zahlen fände ich besser. Ich muss bei dem Rad immer richtig "suchen". Ich bin einfach das 3x3 Feld gewöhnt.
+- Warum verschwinden die Zahlen und tauchen wieder auf, wenn ich eine falsche Antwort angebe? Das hält irgendwie nur auf.
+- Die Treibstoffanzeige als "Zahl" ist viel zu leicht zu übersehen. Mir ist sie erst nach mehrmaligem Spielen aufgefallen
+- Ich habe noch nicht wirklich kapiert, was es mit dem balken, der abläuft, auf sich hat. Der ist sehr unauffällig und es gibt keine Hinweise, dass er gleich leer ist (Rakete oder screen wackeln zb). 
 ##Till
 Liked it
 Asked for it the following day

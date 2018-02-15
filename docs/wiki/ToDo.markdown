@@ -1,22 +1,24 @@
 [Ideas](Ideas)
 
 # ToDo 
-
+An account corresponding to your name/address and/or Taxpayer Identification Number has already been created. If you believe you are reaching this message in error, you may Contact Us.
 ## v1.0.0 
 * [o] Update web page
-    * [X] Proofread German
-    * [X] add screenshots
-	* [X] English
-	* [X] German
     * [o] Generate links for app store buttons and add them to web pages
 	* [X] https://play.google.com/intl/en_us/badges/
 	* [ ] https://developer.apple.com/library/content/qa/qa1633/_index.html 
     * [ ] check in and upload
-* [X] Fix Apple complaint (waiting for them to reply)
-* [ ] Get filkers and facebookers and ios testers to review once iOS is released (you have a draft email)
-* [ ] Improve funnel in Play Store: 
- * [ ] *We are running a sale from 17.1. through 24.1. See if that makes a difference relative to other weeks.*
+* [ ] Do Apple legal stuff
+ * [ ] Waiting for their reply to my enquiry of 19.1. They replied on 25.1. to say it has been noted and please wait.
+* [ ] Do Google legal stuff
+ * [ ] Waiting for them to transfer test money to my account
+* [ ] Once iOS is Released:
+ * [ ] Inform Alexander that it is available in the store, possibly meet with him after Buehne Frei
+ * [ ] Get filkers and facebookers and ios testers to review once iOS is released (you have a draft email)
+* [.] Improve funnel in Play Store: 
+ * [X] We are running a sale from 17.1. through 24.1. See (on 26.1.) if that makes a difference relative to other weeks. Check visitors, not just downloads (download report from User Acquisition). Result: No more visitors due to sale (but higher conversion rate). Action: End sale, observe icon variants.
  * [ ] Split test icons in Play Store (this can work parallel to free test)
+  * [ ] Wait for results of first test
  * [ ] [MarketingExperiments](MarketingExperiments)
 ### Credits
 
