@@ -8,9 +8,9 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	[SerializeField] Image[] imagesToHighlight = null;
 	[SerializeField] Text[] textsToHighlight = null;
 	[SerializeField] Text[] textsToFadeOut = null;
-	[SerializeField] int baseFontSize;
-	[SerializeField] Color highlightColour;
-	[SerializeField] int highlightFontSize;
+	[SerializeField] int baseFontSize = 0;
+    [SerializeField] Color highlightColour = Color.yellow;
+	[SerializeField] int highlightFontSize = 0;
 	[SerializeField] float highlightFadeTime = 0.5f;
 	[SerializeField] float scoreCountdownDuration = 5.0f;
 	[SerializeField] float scoreCountdownDelay = 0.5f;

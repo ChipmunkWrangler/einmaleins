@@ -6,20 +6,20 @@ public class KickoffLaunch : MonoBehaviour, OnCorrectAnswer {
 	[SerializeField] float delay = 1.0f;
 	[SerializeField] int countdownTime = 3;
 	[SerializeField] UnityEngine.UI.Text countdownText = null;
-	[SerializeField] GameObject[] uiElementsToActivateOnLaunchCode;
-	[SerializeField] GameObject[] uiElementsToDeactivateOnLaunchCode;
-	[SerializeField] GameObject[] uiElementsToActivateOnLaunchButton;
-	[SerializeField] GameObject[] uiElementsToDeactivateOnLaunchButton;
-	[SerializeField] GameObject[] uiElementsToActivateOnCountdown;
-	[SerializeField] GameObject[] uiElementsToDeactivateOnCountdown;
-	[SerializeField] GameObject[] uiElementsToActivateOnPlay;
-	[SerializeField] GameObject[] uiElementsToDeactivateOnPlay;
-	[SerializeField] GameObject[] uiElementsToDeactivateIfGivingUpIsForbidden;
-	[SerializeField] GoalButtonControler goalButtonController;
-	[SerializeField] FlashThrust thrust;
-	[SerializeField] Questions questions;
-	[SerializeField] QuestionPicker questionPicker;
-	[SerializeField] Goal goal;
+	[SerializeField] GameObject[] uiElementsToActivateOnLaunchCode = null;
+    [SerializeField] GameObject[] uiElementsToDeactivateOnLaunchCode = null;
+    [SerializeField] GameObject[] uiElementsToActivateOnLaunchButton = null;
+    [SerializeField] GameObject[] uiElementsToDeactivateOnLaunchButton = null;
+    [SerializeField] GameObject[] uiElementsToActivateOnCountdown = null;
+    [SerializeField] GameObject[] uiElementsToDeactivateOnCountdown = null;
+    [SerializeField] GameObject[] uiElementsToActivateOnPlay = null;
+    [SerializeField] GameObject[] uiElementsToDeactivateOnPlay = null;
+    [SerializeField] GameObject[] uiElementsToDeactivateIfGivingUpIsForbidden = null;
+    [SerializeField] GoalButtonControler goalButtonController = null;
+    [SerializeField] FlashThrust thrust = null;
+    [SerializeField] Questions questions = null;
+    [SerializeField] QuestionPicker questionPicker = null;
+    [SerializeField] Goal goal = null;
 
 	void Start () {
 		if (MDPrefs.GetBool ("autolaunch")) {

@@ -32,7 +32,6 @@ public class xARMGalleryWindow : EditorWindow {
 	// GUI look
 	public static bool RepaintNextUpdate = false;
 	private static Vector2 scrollPos;
-	private static Rect scaleRatioRectLayout;
 	private static GUIStyle labelStyle = new GUIStyle();
 	
 	private static int screenCapMinWidth = 160;

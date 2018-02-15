@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowOnRight : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, OnWrongAnswer, OnQuizAborted {
-	[SerializeField] bool hideOnRight;
-	[SerializeField] bool evenIfWrongFirst;
+	[SerializeField] bool hideOnRight = false;
+	[SerializeField] bool evenIfWrongFirst = false;
 
 	const float transitionTime = EnterAnswerButtonController.transitionTime;
 

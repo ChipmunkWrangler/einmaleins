@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Goal : MonoBehaviour {
-	[SerializeField] EffortTracker effortTracker;
+    [SerializeField] EffortTracker effortTracker = null;
 
 	public enum CurGoal {
 		UPGRADE_ROCKET,

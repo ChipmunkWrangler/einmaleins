@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StatsController : MonoBehaviour {
 	[SerializeField] StatsColumnController[] columns = null;
-	[SerializeField] Questions questions;
+    [SerializeField] Questions questions = null;
 
 	StatsControllerPersistentData data = new StatsControllerPersistentData();
 

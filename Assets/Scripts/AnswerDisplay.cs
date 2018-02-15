@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCorrectAnswer, OnQuizAborted, OnGiveUp {
-	[SerializeField] QuestionPicker answerHandler;
-	[SerializeField] int maxDigits;
-	[SerializeField] GameObject[] subscribers;
+	[SerializeField] QuestionPicker answerHandler = null;
+	[SerializeField] int maxDigits = 0;
+	[SerializeField] GameObject[] subscribers = null;
 	List<OnAnswerChanged> onAnswerChangedSubscribers;
 	string queuedTxt;
 	bool isFading;

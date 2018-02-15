@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MDVersion : MonoBehaviour {
-	[SerializeField] Questions questions;
+    [SerializeField] Questions questions = null;
 
 	const int majorVersion = 1;
 	const int minorVersion = 0;

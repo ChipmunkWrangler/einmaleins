@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LoadXMLData : MonoBehaviour {
-	[SerializeField] Text inputField;
+    [SerializeField] Text inputField = null;
 	[SerializeField] UnityEngine.UI.Text statusLine = null;
 
 	public void LoadFromInputField () {

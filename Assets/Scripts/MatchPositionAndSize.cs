@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MatchPositionAndSize : MonoBehaviour {
-	[SerializeField] RectTransform target;
-	[SerializeField] RectTransform source;
+    [SerializeField] RectTransform target = null;
+    [SerializeField] RectTransform source = null;
 
 	void Update () {
 		source.position = target.position;

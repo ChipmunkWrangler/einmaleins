@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PositionFx : MonoBehaviour {
-	[SerializeField] Transform referencePoint;
+    [SerializeField] Transform referencePoint = null;
 
 	void Start () {
 		StartCoroutine (InitFxPos ());

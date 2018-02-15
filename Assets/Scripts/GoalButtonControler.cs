@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Linq;
 
 public class GoalButtonControler : MonoBehaviour, OnQuestionChanged {
-	[SerializeField] LaunchButtonController launchButton;
+    [SerializeField] LaunchButtonController launchButton = null;
 	[SerializeField] GameObject upgradeButton = null;
 	[SerializeField] GameObject doneText = null;
 	[SerializeField] GameObject youWinText = null;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GiveUpOkButton : MonoBehaviour, OnGiveUp {
-	[SerializeField] UnityEngine.UI.Button button;
+    [SerializeField] UnityEngine.UI.Button button = null;
 
 	const float transitionTime = EnterAnswerButtonController.transitionTime;
 

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class RocketMotion : MonoBehaviour {
 	[SerializeField] FlashThrust thrust = null;
-	[SerializeField] float minY;
-	[SerializeField] float maxY;
-	[SerializeField] float baseY; // position when speed is zero
-	[SerializeField] float maxSpeed; // movement speed of the rocket object, not thrust speed
-	[SerializeField] GameObject earth;
-	[SerializeField] float earthSpeed;
+	[SerializeField] float minY = 0;
+    [SerializeField] float maxY = 0;
+    [SerializeField] float baseY = 0; // position when speed is zero
+    [SerializeField] float maxSpeed = 0; // movement speed of the rocket object, not thrust speed
+	[SerializeField] GameObject earth = null;
+	[SerializeField] float earthSpeed = 0;
 
 	float speedCap; // we can be moving faster than this, but at this speed, we attain maxY and never exceed it.
 	float initialEarthY;
