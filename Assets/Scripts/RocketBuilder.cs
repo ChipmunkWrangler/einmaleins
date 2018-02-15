@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class RocketBuilder : MonoBehaviour {
 	[SerializeField] float builtY = 0;
-	[SerializeField] float hiddenY = -2.0f;
-	[SerializeField] float maxY = 1.0f;
-	[SerializeField] float buildingTime = 5.0f;
-	[SerializeField] float upgradeFlightTime = 5.0f;
-	[SerializeField] float buildingDelay = 1.0f;
+	[SerializeField] float hiddenY = -2.0F;
+	[SerializeField] float maxY = 1.0F;
+	[SerializeField] float buildingTime = 5.0F;
+	[SerializeField] float upgradeFlightTime = 5.0F;
+	[SerializeField] float buildingDelay = 1.0F;
 	[SerializeField] RocketPartCounter counter = null;
 	[SerializeField] UpgradeButton upgradeButton = null;
 	[SerializeField] ParticleSystem buildParticles = null;

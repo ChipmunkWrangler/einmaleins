@@ -11,15 +11,15 @@ public class TargetPlanet
 	static int lastReachedPlanetIdx = -2;
 
 	public static readonly float[] heights = {
-		7.8e+07f,
-		6.3e+08f,
-		1.287e+09f,
-		2.73e+09f,
-		4.357e+09f,
-		5.772e+09f
+		7.8e+07F,
+		6.3e+08F,
+		1.287e+09F,
+		2.73e+09F,
+		4.357e+09F,
+		5.772e+09F
 	};
 
-	const float FINAL_HEIGHT = 9999999999f;
+	const float FINAL_HEIGHT = 9999999999F;
 
 	public static void Reset ()
 	{

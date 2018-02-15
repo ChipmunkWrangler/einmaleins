@@ -44,10 +44,10 @@ public class ColorPickerCircle : MonoBehaviour {
         float h, s, v;
         Color.RGBToHSV(TheColor, out h, out s, out v);
         CircleColor = Color.HSVToRGB(h, 1, 1);
-        PointerMain.transform.localEulerAngles = Vector3.back * (h * 360f);
-        CurBary.y = 1f - v;
+        PointerMain.transform.localEulerAngles = Vector3.back * (h * 360F);
+        CurBary.y = 1F - v;
         CurBary.x = v * s;
-        CurBary.z = 1f - CurBary.y - CurBary.x;
+        CurBary.z = 1F - CurBary.y - CurBary.x;
         CurLocalPos = RPoints[0] * CurBary.x + RPoints[1] * CurBary.y + RPoints[2] * CurBary.z;
     }
 
@@ -55,9 +55,9 @@ public class ColorPickerCircle : MonoBehaviour {
     {
         float a = Vector3.Angle(Vector3.left, CurLocalPos);
         if (CurLocalPos.y < 0)
-            a = 360f - a;
+            a = 360F - a;
 
-        CircleColor = Color.HSVToRGB(a / 360f, 1f, 1f); 
+        CircleColor = Color.HSVToRGB(a / 360F, 1F, 1F); 
         PointerMain.transform.localEulerAngles = Vector3.back * a;
         SetColor();
     }
@@ -66,9 +66,9 @@ public class ColorPickerCircle : MonoBehaviour {
     {
         float h, v, s;
         Color.RGBToHSV(CircleColor, out h, out v, out s);
-        Color c = (CurBary.y > .9999) ? Color.black : Color.HSVToRGB(h, CurBary.x / (1f - CurBary.y), 1f - CurBary.y);
+        Color c = (CurBary.y > .9999) ? Color.black : Color.HSVToRGB(h, CurBary.x / (1F - CurBary.y), 1F - CurBary.y);
         TheColor = c;
-        TheColor.a = 1f;
+        TheColor.a = 1F;
     }
 
     private Vector3 Barycentric(Vector3 p, Vector3 a, Vector3 b, Vector3 c)
@@ -85,7 +85,7 @@ public class ColorPickerCircle : MonoBehaviour {
         float denom = d00 * d11 - d01 * d01;
         bary.y = (d11 * d20 - d01 * d21) / denom;
         bary.z = (d00 * d21 - d01 * d20) / denom;
-        bary.x = 1.0f - bary.y - bary.z;
+        bary.x = 1.0F - bary.y - bary.z;
         return bary;
     }
 }

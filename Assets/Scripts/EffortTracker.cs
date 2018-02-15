@@ -108,7 +108,7 @@ public class EffortTrackerPersistantData {
 	const int MIN_FRUSTRATION = -2;
 	const int MAX_FRUSTRATION = 3;
 	const int MIN_QUIZZES_PER_DAY = 3;
-	const float MIN_TIME_PER_DAY = 5 * 60.0f;
+	const float MIN_TIME_PER_DAY = 5 * 60.0F;
 
 	int _frustration;
 

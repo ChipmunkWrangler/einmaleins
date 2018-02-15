@@ -13,8 +13,8 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	[SerializeField] Text achievementText = null;
 	[SerializeField] string recordBrokenMsg = "Neuer Rekord!";
 	[SerializeField] ShowSolarSystem zoomToPlanet = null;
-	[SerializeField] float achievementTextTransitionTime = 3.0f;
-	[SerializeField] float planetAchievementTextDelay = 2.0f;
+	[SerializeField] float achievementTextTransitionTime = 3.0F;
+	[SerializeField] float planetAchievementTextDelay = 2.0F;
 	[SerializeField] EffortTracker effortTracker = null;
 	[SerializeField] QuestionPicker questionPicker = null;
 	[SerializeField] Goal goal = null;
@@ -32,7 +32,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	};
 
 	const float ALLOTTED_TIME = Question.FAST_TIME; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight
-	const float MIN_THRUST_FACTOR = 0.1f;
+	const float MIN_THRUST_FACTOR = 0.1F;
 	const int V = 4;
 	static float Q;
 	static float maxThrustFactor;
@@ -50,7 +50,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	const string heightFormat = "N0";
 	const string unit = " km";
 
-    public static float GetThrustFactor(float timeRequired) => MIN_THRUST_FACTOR + (maxThrustFactor - MIN_THRUST_FACTOR) / Mathf.Pow(1.0f + Q * Mathf.Exp(timeRequired - ALLOTTED_TIME), 1.0f / V);
+    public static float GetThrustFactor(float timeRequired) => MIN_THRUST_FACTOR + (maxThrustFactor - MIN_THRUST_FACTOR) / Mathf.Pow(1.0F + Q * Mathf.Exp(timeRequired - ALLOTTED_TIME), 1.0F / V);
 
     public float GetMaxSingleQuestionSpeed() => GetHeightIncrease(ALLOTTED_TIME) / Celebrate.duration;
 
@@ -80,13 +80,13 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
         float deltaHeight = earnedHeight - height;
         UnityEngine.Assertions.Assert.IsTrue(deltaHeight > 0);
         float oldSpeed = speed;
-        speed = Mathf.Sqrt(2f * deltaHeight * gravity);
+        speed = Mathf.Sqrt(2F * deltaHeight * gravity);
         UnityEngine.Assertions.Assert.IsTrue(speed > oldSpeed);
         Debug.Log("old speed = " + oldSpeed + " speed = " + speed);
     }
 
     static float GetTargetHeight() => TargetPlanet.GetPlanetHeight(RocketParts.instance.upgradeLevel);
-    static float CalcQ(float m, float M) => Mathf.Pow((M - m) / (1f - m), V) - 1f;
+    static float CalcQ(float m, float M) => Mathf.Pow((M - m) / (1F - m), V) - 1F;
     static float CalcBaseThrust(bool isGauntlet) => GetTargetHeight() / (EffortTracker.GetNumAnswersInQuiz(isGauntlet) + 1); // +1 because there is an initial launch thrust
     static float CalcMaxThrustFactor()
     {
@@ -208,7 +208,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 	IEnumerator CelebrateReachingPlanet (int planetIdx) {
 		float zoomTime = zoomToPlanet.ZoomToPlanet( planetIdx, true );
 		UnityEngine.Assertions.Assert.IsTrue( zoomTime - planetAchievementTextDelay >= 0 );
-		ClearAchievementText( planetAchievementTextDelay * 0.9f );
+		ClearAchievementText( planetAchievementTextDelay * 0.9F );
 		yield return new WaitForSeconds( planetAchievementTextDelay );
 		ActivateAchievementText( planetReachedTexts[ planetIdx ] );
 		yield return new WaitForSeconds( zoomTime - planetAchievementTextDelay );
@@ -224,7 +224,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 
 	void ActivateAchievementText (string term) {
 		achievementText.text = I2.Loc.LocalizationManager.GetTermTranslation( term );
-		achievementText.CrossFadeAlpha( 1.0f, 0, false );
+		achievementText.CrossFadeAlpha( 1.0F, 0, false );
 		achievementText.CrossFadeAlpha( 0, achievementTextTransitionTime, false );
 		achievementText.transform.localScale = Vector3.zero;
 		iTween.ScaleTo( achievementText.gameObject, iTween.Hash( "scale", Vector3.one, "time", achievementTextTransitionTime, "easeType", iTween.EaseType.easeOutQuad ) );
@@ -251,7 +251,7 @@ public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged {
 		UnityEngine.Assertions.Assert.IsTrue( allottedDeltaHeight > 0 );
 		float time = Celebrate.duration + ALLOTTED_TIME;
 		float avgSpeed = allottedDeltaHeight / time;
-		float s = 2f * avgSpeed;
-		return s * s / (2f * allottedDeltaHeight);
+		float s = 2F * avgSpeed;
+		return s * s / (2F * allottedDeltaHeight);
 	}
 }

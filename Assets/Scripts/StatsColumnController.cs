@@ -6,7 +6,7 @@ public class StatsColumnController : MonoBehaviour {
 	[SerializeField] UnityEngine.UI.Image[] cells = null;
 	[SerializeField] UnityEngine.UI.Image header = null;
 	[SerializeField] UnityEngine.UI.Image rowHeader = null;
-	[SerializeField] float fadeTime = 0.5f;
+	[SerializeField] float fadeTime = 0.5F;
 	[SerializeField] Color highlightColor = Color.yellow;
 
 	int numMastered;

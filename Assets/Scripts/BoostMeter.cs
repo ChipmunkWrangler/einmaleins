@@ -6,8 +6,8 @@ public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer, OnG
 	[SerializeField] RectTransform mask = null;
 	[SerializeField] Transform meter = null;
 
-	const float timeToZero = Question.FAST_TIME * 5.2f / 0.75f; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
-	const float hideTime = 0.3f;
+	const float timeToZero = Question.FAST_TIME * 5.2F / 0.75F; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
+	const float hideTime = 0.3F;
 
 	float originalY;
 

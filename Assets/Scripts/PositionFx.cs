@@ -10,7 +10,7 @@ public class PositionFx : MonoBehaviour {
 	}
 
 	IEnumerator InitFxPos() {
-		yield return new WaitForSeconds(0.5f); // Grid or Clock buttons need to be established first HACK
+		yield return new WaitForSeconds(0.5F); // Grid or Clock buttons need to be established first HACK
 		Vector3 newPos = Camera.main.ScreenToWorldPoint (referencePoint.position);
 		newPos.z = gameObject.transform.position.z;
 		gameObject.transform.position = newPos;

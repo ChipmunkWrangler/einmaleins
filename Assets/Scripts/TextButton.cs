@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class TextButton : MonoBehaviour {
 	[SerializeField] Button button = null;
-	[SerializeField] float fadedAlpha = 0.5f;
-	[SerializeField] float transitionTime = 0.1f;
+	[SerializeField] float fadedAlpha = 0.5F;
+	[SerializeField] float transitionTime = 0.1F;
 	[SerializeField] Text text = null;
 	bool wasInteractable = true;
 
@@ -21,7 +21,7 @@ public class TextButton : MonoBehaviour {
 	void Update() {
 		if (wasInteractable != button.interactable) {
 			wasInteractable = button.interactable;
-			FadeTo (wasInteractable ? 1.0f : fadedAlpha);
+			FadeTo (wasInteractable ? 1.0F : fadedAlpha);
 		}
 	}
 

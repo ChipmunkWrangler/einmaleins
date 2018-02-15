@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ScrollBackground : MonoBehaviour {
 	[SerializeField] float[] scrollSpeedMultiplier = null;
-	[SerializeField] float maxScrollSpeed = 0.0001f;
-	[SerializeField] float tileSizeY = 80.0f;
+	[SerializeField] float maxScrollSpeed = 0.0001F;
+	[SerializeField] float tileSizeY = 80.0F;
 
 	Vector3 startPosition;
 	float baseOffset;

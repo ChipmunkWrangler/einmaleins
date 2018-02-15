@@ -11,9 +11,9 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 	[SerializeField] int baseFontSize = 0;
     [SerializeField] Color highlightColour = Color.yellow;
 	[SerializeField] int highlightFontSize = 0;
-	[SerializeField] float highlightFadeTime = 0.5f;
-	[SerializeField] float scoreCountdownDuration = 5.0f;
-	[SerializeField] float scoreCountdownDelay = 0.5f;
+	[SerializeField] float highlightFadeTime = 0.5F;
+	[SerializeField] float scoreCountdownDuration = 5.0F;
+	[SerializeField] float scoreCountdownDelay = 0.5F;
 
 	Color[] baseColor = null;
 
@@ -75,7 +75,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 		Color startColor = text.color;
 		float startTime = Time.time;
 		float t = 0;
-		while (t <= 1.0f) {
+		while (t <= 1.0F) {
 			text.color = Color.Lerp (startColor, end, t);
 			t = (Time.time - startTime) / fadeTime;
 			yield return null;
@@ -86,7 +86,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 		int startFontSize = text.fontSize;
 		float startTime = Time.time;
 		float t = 0;
-		while (t <= 1.0f) {
+		while (t <= 1.0F) {
 			text.fontSize = Mathf.RoundToInt(Mathf.Lerp (startFontSize, endFontSize, t));
 			t = (Time.time - startTime) / tweenTime;
 			yield return null;
@@ -97,7 +97,7 @@ public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChang
 		Color startColor = image.color;
 		float startTime = Time.time;
 		float t = 0;
-		while (t <= 1.0f) {
+		while (t <= 1.0F) {
 			image.color = Color.Lerp (startColor, end, t);
 			t = (Time.time - startTime) / fadeTime;
 			yield return null;

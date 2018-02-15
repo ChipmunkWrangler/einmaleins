@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	[SerializeField] UnityEngine.UI.Text scoreText = null;
-	[SerializeField] float delay = 0.5f;
-	[SerializeField] float scoreCountUpDuration = 2.5f;
+	[SerializeField] float delay = 0.5F;
+	[SerializeField] float scoreCountUpDuration = 2.5F;
 	[SerializeField] UnityEngine.UI.Image[] multiplierIcons = null;
-	[SerializeField] float multiplierFadeDuration = 0.5f;
+	[SerializeField] float multiplierFadeDuration = 0.5F;
 	const string numFormat = "N0";
 	int score;
 	int shownScore;
@@ -20,7 +20,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		scoreText.text = "0";
 		IncreaseScoreBy (MDPrefs.GetInt (prefsKey, 0));
 		foreach (var multiplierIcon in multiplierIcons) {
-			multiplierIcon.CrossFadeAlpha (0f, 0, false);
+			multiplierIcon.CrossFadeAlpha (0F, 0, false);
 		}
 		int newMult = MDPrefs.GetInt (prefsKey + ":mult", 0);
 		for (int i = 0; i < newMult; ++i) {
@@ -32,7 +32,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 	public void OnWrongAnswer(bool wasNew) {
 		multiplier = 0;
 		foreach (var multiplierIcon in multiplierIcons) {
-			multiplierIcon.CrossFadeAlpha (0.0f, multiplierFadeDuration, false);
+			multiplierIcon.CrossFadeAlpha (0.0F, multiplierFadeDuration, false);
 		}
 		Save (score);
 	}
@@ -50,7 +50,7 @@ public class Score : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer {
 		if (multiplier < multiplierIcons.Length) {
 			++multiplier;
 		}
-		multiplierIcons [multiplier - 1].CrossFadeAlpha (1.0f, multiplierFadeDuration, false);
+		multiplierIcons [multiplier - 1].CrossFadeAlpha (1.0F, multiplierFadeDuration, false);
 	}
 
 	void IncreaseScoreBy( int amt) {

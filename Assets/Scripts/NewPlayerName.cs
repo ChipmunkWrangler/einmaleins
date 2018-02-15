@@ -9,8 +9,8 @@ public class NewPlayerName : MonoBehaviour {
 	[SerializeField] Button playButton = null;
 	[SerializeField] Image playButtonImage = null;
 	[SerializeField] InputField inputField = null;
-	[SerializeField] float buttonFadeAlpha = 0.5f;
-	[SerializeField] float buttonFadeDuration = 0.1f;
+	[SerializeField] float buttonFadeAlpha = 0.5F;
+	[SerializeField] float buttonFadeDuration = 0.1F;
 	[SerializeField] GameObject rocketPartsGameObj = null;
 
 	string newName;
@@ -64,7 +64,7 @@ public class NewPlayerName : MonoBehaviour {
 
 	void ActivatePlayButton (bool b) {
 		playButton.interactable = b;
-		playButtonImage.CrossFadeAlpha( b ? 1.0f : buttonFadeAlpha, buttonFadeDuration, false );
+		playButtonImage.CrossFadeAlpha( b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false );
 	}
 
 	void Play () {

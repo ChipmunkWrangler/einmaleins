@@ -12,9 +12,9 @@ public class Question {
 
 	public bool isLaunchCode;
 
-	public const float FAST_TIME = 4.0f;
-	const float ANSWER_TIME_MAX = 60.0f;
-	const float WRONG_ANSWER_TIME_PENALTY = 1f;
+	public const float FAST_TIME = 4.0F;
+	const float ANSWER_TIME_MAX = 60.0F;
+	const float WRONG_ANSWER_TIME_PENALTY = 1F;
 
 	QuestionPersistentData data;
 
@@ -140,7 +140,7 @@ public class QuestionPersistentData {
 	public List<float> answerTimes;
 
 	[System.NonSerialized] public const int NUM_ANSWER_TIMES_TO_RECORD = 3;
-	[System.NonSerialized] public const float ANSWER_TIME_INITIAL = Question.FAST_TIME + 0.01f;
+	[System.NonSerialized] public const float ANSWER_TIME_INITIAL = Question.FAST_TIME + 0.01F;
 
 	string prefsKey;
 

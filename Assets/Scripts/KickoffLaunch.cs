@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class KickoffLaunch : MonoBehaviour, OnCorrectAnswer {
 	[SerializeField] Celebrate celebrate = null;
-	[SerializeField] float delay = 1.0f;
+	[SerializeField] float delay = 1.0F;
 	[SerializeField] int countdownTime = 3;
 	[SerializeField] UnityEngine.UI.Text countdownText = null;
 	[SerializeField] GameObject[] uiElementsToActivateOnLaunchCode = null;
@@ -67,7 +67,7 @@ public class KickoffLaunch : MonoBehaviour, OnCorrectAnswer {
 		yield return new WaitForSeconds (delay);
 		for (int i = countdownTime; i > 0; --i) {
 			countdownText.text = i.ToString ();
-			yield return new WaitForSeconds (1.0f);
+			yield return new WaitForSeconds (1.0F);
 		}
 		countdownText.text = "";
 		countdownText.gameObject.SetActive (false);

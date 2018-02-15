@@ -4,19 +4,19 @@ using UnityEngine;
 using System.Linq;
 
 public class TestAlgorithm : MonoBehaviour {
-	const float TARGET_TIME = 3.0f;
+	const float TARGET_TIME = 3.0F;
 	const int MIN_QUIZZES_PER_DAY = 3;
 	const int MIN_TIME_PER_DAY = 5 * 60;
 	const int MAX_QUESTIONS_PER_QUIZ = 7; // because that's enough to get previous questions out of short term memory, I guess
 	public static readonly float[] PLANET_HEIGHTS = TargetPlanet.heights;
-	const float MIN_ANSWER_TIME = 1.0f;
+	const float MIN_ANSWER_TIME = 1.0F;
 	const int FRUSTRATION_WRONG = 2; // N.B. Since the question is repeated until it is correct, the net effect will be FRUSTRATION_WRONG * n - FRUSTRATION_RIGHT (or _FAST)
 	const int FRUSTRATION_RIGHT = -1;
 	const int FRUSTRATION_FAST = -2;
 	const int MIN_FRUSTRATION = -2;
 	const int MAX_FRUSTRATION = 3;
 	const int PARTS_PER_UPGRADE = 11;
-	const float MIN_THRUST_FACTOR = 0.1f;
+	const float MIN_THRUST_FACTOR = 0.1F;
 	const int V_FACTOR = 4;
 	class KidModel {
 		int initialChanceOfCorrect; // lowered by difficulty
@@ -57,8 +57,8 @@ public class TestAlgorithm : MonoBehaviour {
 		int timesAnsweredFast = 0;
 
 		public const int NUM_ANSWER_TIMES_TO_RECORD = 3;
-		const float ANSWER_TIME_MAX = 60.0f;
-		const float INITIAL_ANSWER_TIME = TARGET_TIME + 0.01f;
+		const float ANSWER_TIME_MAX = 60.0F;
+		const float INITIAL_ANSWER_TIME = TARGET_TIME + 0.01F;
 
 		public TestQuestion(int _baseDifficulty) {
 			baseDifficulty = _baseDifficulty;
@@ -135,10 +135,10 @@ public class TestAlgorithm : MonoBehaviour {
 	const int NUM_QUESTIONS = 55;
 
 	void Start () {
-		Test (new KidModel( 1000, 5, -999.0f, 10.0f) );
-		Test (new KidModel( 110, 5, -7.0f, 10.0f) );
-		Test (new KidModel( 60, 3, 15.0f, 6.0f) );
-		Test (new KidModel( 30, 1, 30.0f, 3.0f) );
+		Test (new KidModel( 1000, 5, -999.0F, 10.0F) );
+		Test (new KidModel( 110, 5, -7.0F, 10.0F) );
+		Test (new KidModel( 60, 3, 15.0F, 6.0F) );
+		Test (new KidModel( 30, 1, 30.0F, 3.0F) );
 	}
 
 	void InitQuestions() {
@@ -210,15 +210,15 @@ public class TestAlgorithm : MonoBehaviour {
 			}
 			Debug.Log("Answered " + nextQuestion);
 			time += questionTime;
-//			Debug.Log(GetHeightIncrease(1.0f, MIN_THRUST_FACTOR, maxThrustFactor, q, 0, TARGET_TIME, V_FACTOR));
-//			Debug.Log(GetHeightIncrease(1.0f, MIN_THRUST_FACTOR, maxThrustFactor, q, TARGET_TIME, TARGET_TIME, V_FACTOR));
-//			Debug.Log(GetHeightIncrease(1.0f, MIN_THRUST_FACTOR, maxThrustFactor, q, 11.8f, TARGET_TIME, V_FACTOR));
-//			Debug.Log(GetHeightIncrease(1.0f, MIN_THRUST_FACTOR, maxThrustFactor, q, 60.0f, TARGET_TIME, V_FACTOR));
-//			q = CalcQ (MIN_THRUST_FACTOR, 2.0f, V_FACTOR);
-//			Debug.Log(GetHeightIncrease(1.0f, MIN_THRUST_FACTOR, 2.0f, q, 0, TARGET_TIME, V_FACTOR));
-//			Debug.Log(GetHeightIncrease(1.0f, MIN_THRUST_FACTOR, 2.0f, q, TARGET_TIME, TARGET_TIME, V_FACTOR));
-//			Debug.Log(GetHeightIncrease(1.0f, MIN_THRUST_FACTOR, 2.0f, q, 11.8f, TARGET_TIME, V_FACTOR));
-//			Debug.Log(GetHeightIncrease(1.0f, MIN_THRUST_FACTOR, 2.0f, q, 60.0f, TARGET_TIME, V_FACTOR));
+//			Debug.Log(GetHeightIncrease(1.0F, MIN_THRUST_FACTOR, maxThrustFactor, q, 0, TARGET_TIME, V_FACTOR));
+//			Debug.Log(GetHeightIncrease(1.0F, MIN_THRUST_FACTOR, maxThrustFactor, q, TARGET_TIME, TARGET_TIME, V_FACTOR));
+//			Debug.Log(GetHeightIncrease(1.0F, MIN_THRUST_FACTOR, maxThrustFactor, q, 11.8F, TARGET_TIME, V_FACTOR));
+//			Debug.Log(GetHeightIncrease(1.0F, MIN_THRUST_FACTOR, maxThrustFactor, q, 60.0F, TARGET_TIME, V_FACTOR));
+//			q = CalcQ (MIN_THRUST_FACTOR, 2.0F, V_FACTOR);
+//			Debug.Log(GetHeightIncrease(1.0F, MIN_THRUST_FACTOR, 2.0F, q, 0, TARGET_TIME, V_FACTOR));
+//			Debug.Log(GetHeightIncrease(1.0F, MIN_THRUST_FACTOR, 2.0F, q, TARGET_TIME, TARGET_TIME, V_FACTOR));
+//			Debug.Log(GetHeightIncrease(1.0F, MIN_THRUST_FACTOR, 2.0F, q, 11.8F, TARGET_TIME, V_FACTOR));
+//			Debug.Log(GetHeightIncrease(1.0F, MIN_THRUST_FACTOR, 2.0F, q, 60.0F, TARGET_TIME, V_FACTOR));
 			height += GetHeightIncrease(baseThrust, MIN_THRUST_FACTOR, maxThrustFactor, q, questionTime, TARGET_TIME, V_FACTOR);
 			if (isNewlyMastered) {
 				++rocketParts;
@@ -275,8 +275,8 @@ public class TestAlgorithm : MonoBehaviour {
 	}
 
 	bool IsAllowed(TestQuestion question) => !question.wasAsked && !question.IsMastered ();
-    float GetTargetHeight(int upgradeLevel) => (upgradeLevel < PLANET_HEIGHTS.Length) ? PLANET_HEIGHTS [upgradeLevel] : PLANET_HEIGHTS [PLANET_HEIGHTS.Length - 1] * 2.0f;
-	float GetHeightIncrease(float baseThrust, float minThrustFactor, float maxThrustFactor, float Q, float timeRequired, float allottedTime, int v) => baseThrust * (minThrustFactor + (maxThrustFactor - minThrustFactor) / Mathf.Pow(1.0f + Q * Mathf.Exp(timeRequired-allottedTime), 1.0f/v));
+    float GetTargetHeight(int upgradeLevel) => (upgradeLevel < PLANET_HEIGHTS.Length) ? PLANET_HEIGHTS [upgradeLevel] : PLANET_HEIGHTS [PLANET_HEIGHTS.Length - 1] * 2.0F;
+	float GetHeightIncrease(float baseThrust, float minThrustFactor, float maxThrustFactor, float Q, float timeRequired, float allottedTime, int v) => baseThrust * (minThrustFactor + (maxThrustFactor - minThrustFactor) / Mathf.Pow(1.0F + Q * Mathf.Exp(timeRequired-allottedTime), 1.0F/v));
 
 	float CalcMaxThrustFactor() {
 		float minHeightRatio = float.MaxValue;
@@ -292,6 +292,6 @@ public class TestAlgorithm : MonoBehaviour {
 	float CalcQ(float minThrustFactor, float maxThrustFactor, int v) {
 		float m = minThrustFactor;
 		float M = maxThrustFactor;
-		return Mathf.Pow((M - m) / (1.0f - m), v) - 1.0f;
+		return Mathf.Pow((M - m) / (1.0F - m), v) - 1.0F;
 	}
 }

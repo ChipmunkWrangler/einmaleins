@@ -91,7 +91,7 @@ public class MDVersion : MonoBehaviour {
 	}
 
 	void UpdateFrom_0_1_8_To_0_1_11 () {
-		const float oldAnswerTimeInitial = 3f + 0.01f;
+		const float oldAnswerTimeInitial = 3F + 0.01F;
 		PlayerNameController playerNameController = new PlayerNameController();
 		playerNameController.Load();
 		string oldName = playerNameController.curName;

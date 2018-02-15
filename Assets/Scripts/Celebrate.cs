@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuestionChanged, OnQuizAborted {
-	public const float duration = 3.0f;
+	public const float duration = 3.0F;
 	[SerializeField] ParticleSystem[] exhaustParticles = null;
 	[SerializeField] ParticleSystem fastAnswerParticles = null;
 	[SerializeField] ParticleSystem masteryParticles = null;
@@ -31,7 +31,7 @@ public class Celebrate : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuesti
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		StopTimer ();
 		if (question == null || !question.isLaunchCode) {
-			float percentOn = (question == null) ? 1f : Mathf.Min (1f, FlashThrust.GetThrustFactor (question.GetLastAnswerTime ()));
+			float percentOn = (question == null) ? 1F : Mathf.Min (1F, FlashThrust.GetThrustFactor (question.GetLastAnswerTime ()));
 			coroutine = StartCoroutine (DoCelebration (question != null && question.GetLastAnswerTime () <= Question.FAST_TIME, isNewlyMastered, percentOn));
 		}
 	}

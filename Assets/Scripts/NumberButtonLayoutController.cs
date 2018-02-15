@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NumberButtonLayoutController : MonoBehaviour {
 	[SerializeField] Transform smallScreenParent = null;
-	[SerializeField] float maxSmallScreenInches = 2.5f;
+	[SerializeField] float maxSmallScreenInches = 2.5F;
 	[SerializeField] Transform multiplierStars = null;
 	void Start () {
 		if (IsSmallScreen()) {
@@ -29,7 +29,7 @@ public class NumberButtonLayoutController : MonoBehaviour {
 			transform.GetChild (0).SetParent (smallScreenParent);
 		}
 		if (multiplierStars) {
-			multiplierStars.localRotation = Quaternion.Euler (0, 0, -90.0f);
+			multiplierStars.localRotation = Quaternion.Euler (0, 0, -90.0F);
 		}
 	}
 }
