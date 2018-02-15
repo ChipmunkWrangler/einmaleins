@@ -43,6 +43,7 @@ which shows visitors, which is Discoverability * Clickability.
   * Show 1x1 on the icon itself
 * Price
  * Setting it to free did not increase number of visitors (but there may be confounding factors; e.g. perhaps I was higher up the list when not free). We are currently back to original price, so we can compare that to earlier original price weeks to try to extract counfounding issues. 
+ * At €2,89 you got two downloads between Dec 26th and Jan 16th. At free, you got two between Jan 17th and Jan 24th. 
  * Try 0.99$
 * Star rating
  * Ask Bob and Filklist 
