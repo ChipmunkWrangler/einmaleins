@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Text;
 
 namespace AssemblyCSharp
 {
@@ -8,12 +9,12 @@ namespace AssemblyCSharp
 		public static string Msg (Exception ex)
 		{
 			Debug.Log ("Exception " + ex);
-			string s = ex.Message;
+            var msg = new StringBuilder(ex.Message);
 			while (ex.InnerException != null) {
 				ex = ex.InnerException;
-				s += " " + ex.Message;
+                msg.Append(" " + ex.Message);
 			}
-			return s;
+			return msg.ToString();
 		}
 	}
 }
