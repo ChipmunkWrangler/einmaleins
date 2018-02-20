@@ -161,12 +161,13 @@ public class PlayerPrefsPlus : MonoBehaviour {
 	}
 	
 	public static Color32 GetColour32(string key, Color32 defaultValue){
-		Color32 returnValue;
-		returnValue.r = (byte)PlayerPrefs.GetInt("PlayerPrefsPlus:Colour32:"+key+"-r",defaultValue.r);
-		returnValue.g = (byte)PlayerPrefs.GetInt("PlayerPrefsPlus:Colour32:"+key+"-g",defaultValue.g);
-		returnValue.b = (byte)PlayerPrefs.GetInt("PlayerPrefsPlus:Colour32:"+key+"-b",defaultValue.b);
-		returnValue.a = (byte)PlayerPrefs.GetInt("PlayerPrefsPlus:Colour32:"+key+"-a",defaultValue.a);
-		return returnValue;
+        return new Color32
+        {
+            r = (byte)PlayerPrefs.GetInt("PlayerPrefsPlus:Colour32:" + key + "-r", defaultValue.r),
+            g = (byte)PlayerPrefs.GetInt("PlayerPrefsPlus:Colour32:" + key + "-g", defaultValue.g),
+            b = (byte)PlayerPrefs.GetInt("PlayerPrefsPlus:Colour32:" + key + "-b", defaultValue.b),
+            a = (byte)PlayerPrefs.GetInt("PlayerPrefsPlus:Colour32:" + key + "-a", defaultValue.a)
+        };
 	}
 	//############################################# Vector2 #############################################
 	
