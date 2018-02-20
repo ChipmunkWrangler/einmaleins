@@ -52,7 +52,7 @@ public class Questions : MonoBehaviour {
 	}
 
 	public Question[] CreateQuestions () {
-		Question[] questions = new Question[GetNumQuestions()];
+		var questions = new Question[GetNumQuestions()];
 		int idx = 0;
 		for (int a = 1; a <= maxNum; ++a) {
 			for (int b = a; b <= maxNum; ++b) {

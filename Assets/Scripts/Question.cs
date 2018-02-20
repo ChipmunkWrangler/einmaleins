@@ -118,7 +118,7 @@ public class Question
 
     public void UpdateInitialAnswerTime(float oldAnswerTimeInitial)
     {
-        List<float> newAnswerTimes = new List<float>();
+        var newAnswerTimes = new List<float>();
         foreach (var time in data.answerTimes)
         {
             newAnswerTimes.Add(time == oldAnswerTimeInitial ? QuestionPersistentData.ANSWER_TIME_INITIAL : time);

@@ -26,7 +26,7 @@ public class SendSaveDataByMail : MonoBehaviour
 
 	void Send (string title, string body)
 	{
-		using (MailMessage mail = new MailMessage ()) {
+		using (var mail = new MailMessage ()) {
 			mail.From = new MailAddress (sender);
 			mail.To.Add (receiver);
 			mail.Subject = title;
@@ -35,7 +35,7 @@ public class SendSaveDataByMail : MonoBehaviour
 
 			statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation ("Connecting to Smtp Server...");
 
-			SmtpClient smtpServer = new SmtpClient (server, port);
+			var smtpServer = new SmtpClient (server, port);
 			smtpServer.Credentials = new NetworkCredential (sender, password) as ICredentialsByHost;
 			smtpServer.EnableSsl = true;
 			statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation ("Sending message...");

@@ -16,7 +16,7 @@ public class GameData
 		foreach (string playerName in playerNameController.names) {
 			playerNameController.curName = playerName;
 			playerNameController.Save ();
-			PlayerData playerData = new PlayerData ();
+			var playerData = new PlayerData ();
 			playerData.Load (playerName);
 			playerList.Add (playerData);
 		}

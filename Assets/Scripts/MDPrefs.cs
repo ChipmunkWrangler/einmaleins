@@ -84,7 +84,7 @@ public static class MDPrefs {
 	public static int[] GetIntArray( string key, int dfault = default(int) ){
 		key += ":IntArray";
 		int length = GetLength (key);
-		int[] returns = new int[length];
+		var returns = new int[length];
 		for(int i = 0; i < length; ++i) {
 			returns.SetValue(MDPrefs.GetInt(key + ":" + i, dfault), i);
 		}
@@ -103,7 +103,7 @@ public static class MDPrefs {
 	public static float[] GetFloatArray( string key ){
 		key += ":FloatArray";
 		int length = GetLength (key);
-		float[] returns = new float[length];
+		var returns = new float[length];
 		for(int i = 0; i < length; ++i) {
 			returns.SetValue(MDPrefs.GetFloat(key + ":" + i, default(float)), i);
 		}
@@ -113,7 +113,7 @@ public static class MDPrefs {
 	public static string[] GetStringArray( string key ){
 		key += ":StringArray";
 		int length = GetLength (key);
-		string[] returns = new string[length];
+		var returns = new string[length];
 		for(int i = 0; i < length; ++i) {
 			returns.SetValue(MDPrefs.GetString(key + ":" + i), i);
 		}
@@ -139,7 +139,7 @@ public static class MDPrefs {
 	public static bool[] GetBoolArray( string key ){
 		key += ":BoolArray";
 		int length = GetLength (key);
-		bool[] returns = new bool[length];
+		var returns = new bool[length];
 		for(int i = 0; i < length; ++i) {
 			returns.SetValue(MDPrefs.GetBool(key + ":" + i), i);
 		}

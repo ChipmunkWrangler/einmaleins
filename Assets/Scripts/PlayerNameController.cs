@@ -28,7 +28,7 @@ public class PlayerNameController
 
 	public void AppendName (string name)
 	{
-		string[] newPlayerNames = new string[names.Length + 1];
+		var newPlayerNames = new string[names.Length + 1];
 		for (int i = 0; i < names.Length; ++i) {
 			newPlayerNames [i] = names [i];
 		}

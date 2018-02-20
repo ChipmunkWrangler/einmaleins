@@ -72,7 +72,7 @@ public class MDVersion : MonoBehaviour {
 	}
 
 	void UpdateFrom_0_1_11_To_0_1_14 () {
-		PlayerNameController playerNameController = new PlayerNameController();
+		var playerNameController = new PlayerNameController();
 		playerNameController.Load();
 		string oldName = playerNameController.curName;
 		foreach (string playerName in playerNameController.names) {
@@ -92,7 +92,7 @@ public class MDVersion : MonoBehaviour {
 
 	void UpdateFrom_0_1_8_To_0_1_11 () {
 		const float oldAnswerTimeInitial = 3F + 0.01F;
-		PlayerNameController playerNameController = new PlayerNameController();
+		var playerNameController = new PlayerNameController();
 		playerNameController.Load();
 		string oldName = playerNameController.curName;
 		foreach (string playerName in playerNameController.names) {
