@@ -32,7 +32,7 @@ which shows visitors, which is Discoverability * Clickability.
 #Clickability
 * Name: Solarithmetic: Times Tables Math Learning Game
 * Icon
- * Google lets you split-test this
+ * Google lets you split-test this *In progress*
  * But you haven't enough users, so just try submitting another app with a different icon? But no reviews then
  * Test with market research company? More expensive, faster. Demographic?
  * Brainstorming:
@@ -41,13 +41,11 @@ which shows visitors, which is Discoverability * Clickability.
   * Cheery colours
   * Rounded background (see other play store icons)
   * Show 1x1 on the icon itself
-* Price
- * Setting it to free did not increase number of visitors (but there may be confounding factors; e.g. perhaps I was higher up the list when not free). We are currently back to original price, so we can compare that to earlier original price weeks to try to extract counfounding issues. 
- * At €2,89 you got two downloads between Dec 26th and Jan 16th. At free, you got two between Jan 17th and Jan 24th. 
- * Try 0.99$
 * Star rating
  * Ask Bob and Filklist 
 * License
+##Rejected 
+* Price: Setting it to free only increased the number of visitors by 25%, although it did have 5x the conversion rate.
 
 #Downloadability
 * Description
