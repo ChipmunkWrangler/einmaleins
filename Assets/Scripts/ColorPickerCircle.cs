@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ColorPickerCircle : MonoBehaviour {
 
-    public Color TheColor = Color.cyan;
+    public Color TheColor { get; private set; } = Color.cyan;
 	[SerializeField] GameObject PointerMain = null;
 	[SerializeField] Collider raycastTarget = null;
 
@@ -67,8 +67,8 @@ public class ColorPickerCircle : MonoBehaviour {
         float h, v, s;
         Color.RGBToHSV(CircleColor, out h, out v, out s);
         Color c = (CurBary.y > .9999) ? Color.black : Color.HSVToRGB(h, CurBary.x / (1F - CurBary.y), 1F - CurBary.y);
+        c.a = 1F;
         TheColor = c;
-        TheColor.a = 1F;
     }
 
     private Vector3 Barycentric(Vector3 p, Vector3 a, Vector3 b, Vector3 c)
