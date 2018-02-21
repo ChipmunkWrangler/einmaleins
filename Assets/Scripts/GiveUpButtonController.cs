@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GiveUpButtonController : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuizAborted, OnQuestionChanged, OnGiveUp {
+public class GiveUpButtonController : MonoBehaviour, OnWrongAnswer, OnQuizAborted, OnQuestionChanged, OnGiveUp {
 	[SerializeField] UnityEngine.UI.Button button = null;
 	[SerializeField] UnityEngine.UI.Image image = null;
 

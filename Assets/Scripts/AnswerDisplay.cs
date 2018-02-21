@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCorrectAnswer, OnQuizAborted, OnGiveUp {
+public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnQuizAborted, OnGiveUp {
 	[SerializeField] QuestionPicker answerHandler = null;
 	[SerializeField] int maxDigits = 0;
     [SerializeField] BoolEvent answerChanged = new BoolEvent();

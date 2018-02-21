@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnCorrectAnswer, OnGiveUp {
+public class EffortTracker : MonoBehaviour, OnWrongAnswer, OnGiveUp {
 	[SerializeField] Goal goal = null;
 	[SerializeField] Questions questions = null;
 	[SerializeField] Fuel fuel = null;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShowOnRight : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, OnWrongAnswer, OnQuizAborted {
+public class ShowOnRight : MonoBehaviour, OnQuestionChanged, OnWrongAnswer, OnQuizAborted {
 	[SerializeField] bool hideOnRight = false;
 	[SerializeField] bool evenIfWrongFirst = false;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FlashThrust : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged
+public class FlashThrust : MonoBehaviour, OnQuestionChanged
 {
     [SerializeField] GameObject heightWidget = null;
     [SerializeField] Text heightText = null;

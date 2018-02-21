@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RocketPartCounter : MonoBehaviour, OnCorrectAnswer, OnQuestionChanged, OnQuizAborted {
+public class RocketPartCounter : MonoBehaviour, OnQuestionChanged, OnQuizAborted {
 	[SerializeField] Text numText = null;
 	[SerializeField] Image[] imagesToHighlight = null;
 	[SerializeField] Text[] textsToHighlight = null;

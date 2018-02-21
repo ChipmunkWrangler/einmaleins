@@ -1,14 +1,18 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+[Serializable]
+public class CorrectAnswerEvent : UnityEvent<Question, bool /*isNewlyMastered*/> { }
 
 public class QuestionPicker : MonoBehaviour {
 	[SerializeField] GameObject[] subscribers = null;
 	[SerializeField] EffortTracker effortTracker = null;
+    [SerializeField] CorrectAnswerEvent correctAnswer = new CorrectAnswerEvent();
 
 	Question curQuestion;
 	List<OnQuestionChanged> onQuestionChangedSubscribers;
-	List<OnCorrectAnswer> onCorrectAnswerSubscribers;
 	List<OnWrongAnswer> onWrongAnswerSubscribers;
 	List<OnQuizAborted> onQuizAbortedSubscribers;
 	List<OnGiveUp> onGiveUpSubscribers;
@@ -66,7 +70,6 @@ public class QuestionPicker : MonoBehaviour {
 	// I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
 	private void SplitSubscribers() {
 		onQuestionChangedSubscribers = new List<OnQuestionChanged> ();
-		onCorrectAnswerSubscribers = new List<OnCorrectAnswer> ();
 		onWrongAnswerSubscribers = new List<OnWrongAnswer> ();
 		onQuizAbortedSubscribers = new List<OnQuizAborted> ();
 		onGiveUpSubscribers = new List<OnGiveUp> ();
@@ -74,10 +77,6 @@ public class QuestionPicker : MonoBehaviour {
 			OnQuestionChanged[] onQuestionChangeds = subscriber.GetComponents<OnQuestionChanged>();
 			foreach(OnQuestionChanged s in onQuestionChangeds) {
 				onQuestionChangedSubscribers.Add (s);
-			}
-			OnCorrectAnswer[] onCorrectAnswers = subscriber.GetComponents<OnCorrectAnswer>();
-			foreach(OnCorrectAnswer s in onCorrectAnswers) {
-				onCorrectAnswerSubscribers.Add (s);
 			}
 			OnWrongAnswer[] onWrongAnswers = subscriber.GetComponents<OnWrongAnswer>();
 			foreach(OnWrongAnswer s in onWrongAnswers) {
@@ -99,9 +98,7 @@ public class QuestionPicker : MonoBehaviour {
 		bool wasNew = curQuestion.IsNew();
 		bool isNewlyMastered = curQuestion.Answer (isCorrect, answerTime);
 		if (isCorrect) {
-			foreach (OnCorrectAnswer subscriber in onCorrectAnswerSubscribers) {
-				subscriber.OnCorrectAnswer (curQuestion, isNewlyMastered);
-			}
+            correctAnswer.Invoke(curQuestion, isNewlyMastered);
 			curQuestion = null;
 		}
 		else {

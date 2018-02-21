@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnCorrectAnswer, OnGiveUp, OnQuizAborted {
+public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnGiveUp, OnQuizAborted {
 	[SerializeField] RectTransform mask = null;
 	[SerializeField] Transform meter = null;
 

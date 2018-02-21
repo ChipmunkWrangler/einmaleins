@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using I2;
 
-public class QuestionDisplay : TextDisplay, OnQuestionChanged, OnQuizAborted, OnCorrectAnswer {
+public class QuestionDisplay : TextDisplay, OnQuestionChanged, OnQuizAborted {
 	public void OnQuestionChanged(Question question) {
 		string s = "";
 		if (question != null) {			

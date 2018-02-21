@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class KickoffLaunch : MonoBehaviour, OnCorrectAnswer {
+public class KickoffLaunch : MonoBehaviour {
 	[SerializeField] Celebrate celebrate = null;
 	[SerializeField] float delay = 1.0F;
 	[SerializeField] int countdownTime = 3;
