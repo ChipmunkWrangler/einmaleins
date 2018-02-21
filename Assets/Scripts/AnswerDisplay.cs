@@ -30,7 +30,7 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnQu
 		StartCoroutine(Fade());
 	}
 
-	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
+	public void OnCorrectAnswer() {
 		SetText ("");
 	}
 

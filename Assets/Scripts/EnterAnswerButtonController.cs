@@ -12,7 +12,7 @@ public class EnterAnswerButtonController : MonoBehaviour, OnWrongAnswer, OnQuizA
 		Hide ();
 	}
 
-	public void OnCorrectAnswer (Question question, bool isNewlyMastered) {
+	public void OnCorrectAnswer () {
 		Hide ();
 	}
 

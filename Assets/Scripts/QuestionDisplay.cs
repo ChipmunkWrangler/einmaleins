@@ -15,7 +15,7 @@ public class QuestionDisplay : TextDisplay, OnQuestionChanged, OnQuizAborted {
 		SetText(s);
 	}
 
-	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
+	public void OnCorrectAnswer() {
 		SetText ("");
 	}
 

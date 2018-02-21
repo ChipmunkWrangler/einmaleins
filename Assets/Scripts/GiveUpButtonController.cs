@@ -12,7 +12,7 @@ public class GiveUpButtonController : MonoBehaviour, OnWrongAnswer, OnQuizAborte
 		SetInteractibility (false);
 	}
 
-	public void OnCorrectAnswer (Question question, bool isNewlyMastered) {
+	public void OnCorrectAnswer () {
 		SetInteractibility (false);
 	}
 

@@ -29,7 +29,7 @@ public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnGiveUp, OnQuizAbor
 		}
 	}
 
-	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
+	public void OnCorrectAnswer() {
 		StopMeter ();
 		HideMeter ();
 	}
