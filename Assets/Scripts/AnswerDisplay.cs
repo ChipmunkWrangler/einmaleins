@@ -2,98 +2,116 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCorrectAnswer, OnQuizAborted, OnGiveUp {
-	[SerializeField] QuestionPicker answerHandler = null;
-	[SerializeField] int maxDigits = 0;
-	[SerializeField] GameObject[] subscribers = null;
-	List<OnAnswerChanged> onAnswerChangedSubscribers;
-	string queuedTxt;
-	bool isFading;
-	Color oldColor;
+public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCorrectAnswer, OnQuizAborted, OnGiveUp
+{
+    [SerializeField] QuestionPicker answerHandler = null;
+    [SerializeField] int maxDigits = 0;
+    [SerializeField] GameObject[] subscribers = null;
 
-	const float fadeTime = EnterAnswerButtonController.transitionTime;
+    Color oldColor;
+    string queuedTxt;
+    bool isFading;
 
-	void Start() {
-		oldColor = GetTextField ().color;
-		SplitSubscribers ();
-		SetText ("");
-	}
+    private OnAswerChangedNotifier controller = new OnAswerChangedNotifier();
 
-	public void OnQuizAborted() {
-		SetText("");
-	}
+    const float fadeTime = EnterAnswerButtonController.transitionTime;
 
-	public void OnQuestionChanged(Question question) {
-		SetText ("");
-	}
+    void Start()
+    {
+        oldColor = GetTextField().color;
+        SplitSubscribers();
+        SetText("");
+    }
 
-	public void OnWrongAnswer(bool wasNew) {
-		GetTextField().color = oldColor;
-		StopAllCoroutines();
-		StartCoroutine(Fade());
-	}
+    public void OnQuizAborted()
+    {
+        SetText("");
+    }
 
-	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
-		SetText ("");
-	}
+    public void OnQuestionChanged(Question question)
+    {
+        SetText("");
+    }
 
-	public void OnGiveUp(Question question) {
-		SetText (question.GetAnswer ().ToString());
-	}
+    public void OnWrongAnswer(bool wasNew)
+    {
+        GetTextField().color = oldColor;
+        StopAllCoroutines();
+        StartCoroutine(Fade());
+    }
 
-	IEnumerator Fade() {
-		isFading = true;
-		queuedTxt = "";
-		GetTextField ().CrossFadeColor (Color.clear, fadeTime, false, true);
-		yield return new WaitForSeconds (fadeTime);
-		SetText(queuedTxt);
-		queuedTxt = "";
-		GetTextField ().CrossFadeColor (oldColor, 0, false, true);
-		isFading = false;
-	}
-		
-	public void OnAnswerChanged(string nextDigit) {
-		string s = isFading ? queuedTxt : GetText();
-		s += nextDigit;
-		if (s.Length > maxDigits) {
-			s = s.Substring (1, s.Length-1);
-		}
-		if (isFading) {
-			queuedTxt = s;
-		} else {
-			SetText(s);
-			NotifySubscribers ();
-		}
-	}
+    public void OnCorrectAnswer(Question question, bool isNewlyMastered)
+    {
+        SetText("");
+    }
 
-	public void OnBackspace() {
-		string answerTxt = GetText ();
-		if (answerTxt.Length > 0) {
-			SetText( answerTxt.Substring (0, answerTxt.Length - 1) );
-			NotifySubscribers ();
-		}
-	}
-		
-	public void OnSubmitAnswer() {
-		answerHandler.OnAnswer (GetText());
-	}
+    public void OnGiveUp(Question question)
+    {
+        SetText(question.GetAnswer().ToString());
+    }
 
-	void NotifySubscribers() {
-		bool isEmpty = GetText ().Length == 0;
-		foreach (OnAnswerChanged subscriber in onAnswerChangedSubscribers) {
-			subscriber.OnAnswerChanged (isEmpty);
-		}
-	}
+    IEnumerator Fade()
+    {
+        isFading = true;
+        queuedTxt = "";
+        GetTextField().CrossFadeColor(Color.clear, fadeTime, false, true);
+        yield return new WaitForSeconds(fadeTime);
+        SetText(queuedTxt);
+        queuedTxt = "";
+        GetTextField().CrossFadeColor(oldColor, 0, false, true);
+        isFading = false;
+    }
 
-	// I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
-	private void SplitSubscribers() {
-		onAnswerChangedSubscribers = new List<OnAnswerChanged> ();
-		foreach(GameObject subscriber in subscribers) {
-			OnAnswerChanged[] onAnswerChangeds = subscriber.GetComponents<OnAnswerChanged>();
-			UnityEngine.Assertions.Assert.AreNotEqual (onAnswerChangeds.Length, 0);				
-			foreach(OnAnswerChanged s in onAnswerChangeds) {
-				onAnswerChangedSubscribers.Add (s);
-			}
-		}
-	}
+    public void OnAnswerChanged(string nextDigit)
+    {
+        string s = isFading ? queuedTxt : GetText();
+        s += nextDigit;
+        if (s.Length > maxDigits)
+        {
+            s = s.Substring(1, s.Length - 1);
+        }
+        if (isFading)
+        {
+            queuedTxt = s;
+        }
+        else
+        {
+            SetText(s);
+            NotifySubscribers();
+        }
+    }
+
+    public void OnBackspace()
+    {
+        string answerTxt = GetText();
+        if (answerTxt.Length > 0)
+        {
+            SetText(answerTxt.Substring(0, answerTxt.Length - 1));
+            NotifySubscribers();
+        }
+    }
+
+    public void OnSubmitAnswer()
+    {
+        answerHandler.OnAnswer(GetText());
+    }
+
+    private void NotifySubscribers()
+    {
+        controller.NotifySubscribers(GetText().Length == 0);
+    }
+
+    // I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
+    private void SplitSubscribers()
+    {
+        foreach (GameObject subscriber in subscribers)
+        {
+            OnAnswerChanged[] onAnswerChangeds = subscriber.GetComponents<OnAnswerChanged>();
+            UnityEngine.Assertions.Assert.AreNotEqual(onAnswerChangeds.Length, 0);
+            foreach (OnAnswerChanged s in onAnswerChangeds)
+            {
+                controller.Subscribe(s);
+            }
+        }
+    }
 }
