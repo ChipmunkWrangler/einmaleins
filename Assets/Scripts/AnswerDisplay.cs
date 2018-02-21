@@ -49,7 +49,7 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 		isFading = false;
 	}
 		
-	public void OnAnswerChanged(string nextDigit) {
+    public void OnAddDigit(string nextDigit) {
 		string s = isFading ? queuedTxt : GetText();
 		s += nextDigit;
 		if (s.Length > maxDigits) {
