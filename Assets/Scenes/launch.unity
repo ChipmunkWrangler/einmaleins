@@ -4399,9 +4399,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answerHandler: {fileID: 382}
   maxDigits: 3
-  subscribers:
-  - {fileID: 20}
-  - {fileID: 482485701}
   notifyOnAnswerChanged:
     m_PersistentCalls:
       m_Calls:

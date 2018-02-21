@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EnterAnswerButtonController : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnAnswerChanged, OnQuizAborted, OnQuestionChanged, OnGiveUp {
+public class EnterAnswerButtonController : MonoBehaviour, OnCorrectAnswer, OnWrongAnswer, OnQuizAborted, OnQuestionChanged, OnGiveUp {
 	[SerializeField] UnityEngine.UI.Button button = null;
 
 	bool isHiding;
