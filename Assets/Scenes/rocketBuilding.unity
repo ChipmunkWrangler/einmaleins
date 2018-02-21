@@ -322,10 +322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e6e815623d34dcf94034538b51a4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 205790332}
-  fadedAlpha: 0.5
-  transitionTime: 0.1
-  text: {fileID: 1823107533}
+  Button: {fileID: 205790332}
+  FadedAlpha: 0.5
+  TransitionTime: 0.1
+  Text: {fileID: 1823107533}
 --- !u!114 &205790332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,9 +826,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c0aa6cf592c48e0a0fbd6a0b90f22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1566283461}
-  label: {fileID: 480844863}
-  engineTermPrefix: engineNames_
+  Button: {fileID: 1566283461}
+  Label: {fileID: 480844863}
+  EngineTermPrefix: engineNames_
 --- !u!1 &929832777
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,8 +901,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0653b8a1d20f344539783e15d2062631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketMesh: {fileID: 1842585747}
-  colourPicker: {fileID: 1263629864}
+  RocketMesh: {fileID: 1842585747}
+  ColourPicker: {fileID: 1263629864}
 --- !u!4 &1077023826
 Transform:
   m_ObjectHideFlags: 0
@@ -1095,17 +1095,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724261f2c3195438e92bf894f0b8e891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numText: {fileID: 1238403550}
-  imagesToHighlight: []
-  textsToHighlight: []
-  textsToFadeOut:
+  NumText: {fileID: 1238403550}
+  ImagesToHighlight: []
+  TextsToHighlight: []
+  TextsToFadeOut:
   - {fileID: 1238403549}
-  baseFontSize: 0
-  highlightColour: {r: 0.9098039, g: 0.9098039, b: 0, a: 1}
-  highlightFontSize: 0
-  highlightFadeTime: 0.5
-  scoreCountdownDuration: 5
-  scoreCountdownDelay: 0.5
+  BaseFontSize: 0
+  HighlightColour: {r: 0.9098039, g: 0.9098039, b: 0, a: 1}
+  HighlightFontSize: 0
+  HighlightFadeTime: 0.5
+  ScoreCountdownDuration: 5
+  ScoreCountdownDelay: 0.5
 --- !u!1 &1238403552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,10 +1440,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e6e815623d34dcf94034538b51a4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1390373069}
-  fadedAlpha: 0.5
-  transitionTime: 0.1
-  text: {fileID: 1124641742}
+  Button: {fileID: 1390373069}
+  FadedAlpha: 0.5
+  TransitionTime: 0.1
+  Text: {fileID: 1124641742}
 --- !u!114 &1390373069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1725,10 +1725,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e6e815623d34dcf94034538b51a4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1543442574}
-  fadedAlpha: 0.5
-  transitionTime: 0.1
-  text: {fileID: 1712192703}
+  Button: {fileID: 1543442574}
+  FadedAlpha: 0.5
+  TransitionTime: 0.1
+  Text: {fileID: 1712192703}
 --- !u!114 &1543442574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1973,10 +1973,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e6e815623d34dcf94034538b51a4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1566283461}
-  fadedAlpha: 0.5
-  transitionTime: 0.1
-  text: {fileID: 480844863}
+  Button: {fileID: 1566283461}
+  FadedAlpha: 0.5
+  TransitionTime: 0.1
+  Text: {fileID: 480844863}
 --- !u!222 &1566283466
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2062,7 +2062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66af34da429114161b307023ec74d7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questions: {fileID: 0}
+  QuestionContainer: {fileID: 0}
 --- !u!1 &1698820437
 GameObject:
   m_ObjectHideFlags: 0
@@ -2419,16 +2419,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144d05eca1b9445dc85f08fa71ab70df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  builtY: -1.25
-  hiddenY: -10
-  maxY: 5
-  buildingTime: 5
-  upgradeFlightTime: 4
-  buildingDelay: 1
-  counter: {fileID: 1238403551}
-  upgradeButton: {fileID: 480844866}
-  buildParticles: {fileID: 1282249713}
-  exhaustParticles:
+  BuiltY: -1.25
+  HiddenY: -10
+  MaxY: 5
+  BuildingTime: 5
+  UpgradeFlightTime: 4
+  BuildingDelay: 1
+  Counter: {fileID: 1238403551}
+  UpgradeButton: {fileID: 480844866}
+  BuildParticles: {fileID: 1282249713}
+  ExhaustParticles:
   - {fileID: 319503663}
   - {fileID: 319503662}
   - {fileID: 319503661}
@@ -2436,9 +2436,9 @@ MonoBehaviour:
   - {fileID: 319503659}
   - {fileID: 319503659}
   - {fileID: 319503658}
-  launchButton: {fileID: 1543442568}
-  rocketPartsWidget: {fileID: 1238403552}
-  chooseColourButton: {fileID: 205790327}
+  LaunchButton: {fileID: 1543442568}
+  RocketPartsWidget: {fileID: 1238403552}
+  ChooseColourButton: {fileID: 205790327}
 --- !u!114 &1842585751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2450,7 +2450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556e7b4b4515b466eb9026f8ee3f0acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketRenderer: {fileID: 1842585747}
+  RocketRenderer: {fileID: 1842585747}
 --- !u!1 &1894804566
 GameObject:
   m_ObjectHideFlags: 0

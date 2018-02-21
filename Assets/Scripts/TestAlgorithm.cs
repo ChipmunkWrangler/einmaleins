@@ -4,108 +4,108 @@ using UnityEngine;
 using System.Linq;
 
 public class TestAlgorithm : MonoBehaviour {
-	const float TARGET_TIME = 3.0F;
-	const int MIN_QUIZZES_PER_DAY = 3;
-	const int MIN_TIME_PER_DAY = 5 * 60;
-	const int MAX_QUESTIONS_PER_QUIZ = 7; // because that's enough to get previous questions out of short term memory, I guess
-	public static readonly float[] PLANET_HEIGHTS = TargetPlanet.heights;
-	const float MIN_ANSWER_TIME = 1.0F;
-	const int FRUSTRATION_WRONG = 2; // N.B. Since the question is repeated until it is correct, the net effect will be FRUSTRATION_WRONG * n - FRUSTRATION_RIGHT (or _FAST)
-	const int FRUSTRATION_RIGHT = -1;
-	const int FRUSTRATION_FAST = -2;
-	const int MIN_FRUSTRATION = -2;
-	const int MAX_FRUSTRATION = 3;
-	const int PARTS_PER_UPGRADE = 11;
-	const float MIN_THRUST_FACTOR = 0.1F;
-	const int V_FACTOR = 4;
+    const float TargetTime = 3.0F;
+    const int MinQuizzesPerDay = 3;
+    const int MinTimePerDay = 5 * 60;
+    const int MaxQuestionsPerQuiz = 7; // because that's enough to get previous questions out of short term memory, I guess
+    public static readonly float[] PlanetHeights = TargetPlanet.heights;
+    const float MinAnswerTime = 1.0F;
+    const int FrustrationWrong = 2; // N.B. Since the question is repeated until it is correct, the net effect will be FRUSTRATION_WRONG * n - FRUSTRATION_RIGHT (or _FAST)
+    const int FrustrationRight = -1;
+    const int FrustrationFast = -2;
+    const int MinFrustration = -2;
+    const int MaxFrustration = 3;
+    const int PartsPerUpgrade = 11;
+    const float MinThrustFactor = 0.1F;
+    const int V = 4;
 	class KidModel {
-		int initialChanceOfCorrect; // lowered by difficulty
-		int improvementRate;
-		float initialAnswerTimeMax; // increased by difficulty
-		float answerTimeImprovementRate;
+        int InitialChanceOfCorrect; // lowered by difficulty
+        int ImprovementRate;
+        readonly float InitialAnswerTimeMax; // increased by difficulty
+        readonly float AnswerTimeImprovementRate;
 
-		public KidModel(int _initialChanceOfCorrect, int _improvementRate, float _initialAnswerTimeMax, float _answerTimeImprovementRate) {
-			initialChanceOfCorrect = _initialChanceOfCorrect;
-			improvementRate = _improvementRate;
-			initialAnswerTimeMax  = _initialAnswerTimeMax;
-			answerTimeImprovementRate = _answerTimeImprovementRate;
+        public KidModel(int initialChanceOfCorrect, int improvementRate, float initialAnswerTimeMax, float answerTimeImprovementRate) {
+			InitialChanceOfCorrect = initialChanceOfCorrect;
+			ImprovementRate = improvementRate;
+			InitialAnswerTimeMax  = initialAnswerTimeMax;
+			AnswerTimeImprovementRate = answerTimeImprovementRate;
 		}
 
 		public bool AnswersCorrectly(TestQuestion question) {
-			int chance = initialChanceOfCorrect + improvementRate * (question.timesAnsweredCorrectly + question.timesAnsweredWrong) - question.baseDifficulty;
+			int chance = InitialChanceOfCorrect + ImprovementRate * (question.TimesAnsweredCorrectly + question.TimesAnsweredWrong) - question.BaseDifficulty;
 //			Debug.Log ("Chance of correctness = " + chance);
 			return Random.Range(0, 100) < chance;
 		}
 
 		public float AnswerTime(TestQuestion question) {
-			float maxTime = Mathf.Max (TARGET_TIME, initialAnswerTimeMax - answerTimeImprovementRate * question.timesAnsweredCorrectly + question.baseDifficulty);
+			float maxTime = Mathf.Max (TargetTime, InitialAnswerTimeMax - AnswerTimeImprovementRate * question.TimesAnsweredCorrectly + question.BaseDifficulty);
 //			Debug.Log ("maxTime of correctness = " + maxTime);
-			return Random.Range (MIN_ANSWER_TIME, maxTime);
+			return Random.Range (MinAnswerTime, maxTime);
 		}
 	}
 
 	class TestQuestion {
-		public int baseDifficulty  { get; private set; }
-		public int timesAnsweredCorrectly { get; private set; }
-		public int timesAnsweredWrong { get; private set; }
-		public bool wasWrong { get; private set; }
-		public bool wasAsked { get; private set; }
-		public bool isNew { get; private set; }
-		public bool wasMastered { get; private set; }
+        public int BaseDifficulty  { get; private set; }
+        public int TimesAnsweredCorrectly { get; private set; }
+        public int TimesAnsweredWrong { get; private set; }
+        public bool WasWrong { get; private set; }
+        public bool WasAsked { get; private set; }
+        public bool IsNew { get; private set; }
+        public bool WasMastered { get; private set; }
 
 		List<float> answerTimes;
-		int timesAnsweredFast = 0;
+		int timesAnsweredFast;
 
 		const int NUM_ANSWER_TIMES_TO_RECORD = 3;
 		const float ANSWER_TIME_MAX = 60.0F;
-		const float INITIAL_ANSWER_TIME = TARGET_TIME + 0.01F;
+		const float INITIAL_ANSWER_TIME = TargetTime + 0.01F;
 
 		public TestQuestion(int _baseDifficulty) {
-			baseDifficulty = _baseDifficulty;
-			timesAnsweredCorrectly = 0;
-			timesAnsweredWrong = 0;
-			wasWrong = false;
-			wasAsked = false;
-			isNew = true;
+			BaseDifficulty = _baseDifficulty;
+			TimesAnsweredCorrectly = 0;
+			TimesAnsweredWrong = 0;
+			WasWrong = false;
+			WasAsked = false;
+			IsNew = true;
 			InitAnswerTimes ();
 		}
 
-		public bool IsMastered() => GetAverageAnswerTime () < TARGET_TIME;
+		public bool IsMastered() => GetAverageAnswerTime () < TargetTime;
         public float GetAverageAnswerTime() => answerTimes.Average();
 
 		public void ResetForNewQuiz() {
-			wasAsked = false;
+			WasAsked = false;
 		}
 			
 		public void Ask() {
-			wasWrong = false;
-			wasAsked = true;
-			isNew = false;
+			WasWrong = false;
+			WasAsked = true;
+			IsNew = false;
 		}
 
 		public bool AnswerRight(float time) {
-			++timesAnsweredCorrectly;
+			++TimesAnsweredCorrectly;
 			RecordAnswerTime (time);
-			if (time <= TARGET_TIME) {
+			if (time <= TargetTime) {
 				++timesAnsweredFast;
 			}
 			bool newlyMastered = false;
-			if (!wasMastered) {
+			if (!WasMastered) {
 				if (IsMastered ()) {
 					newlyMastered = true;
-					wasMastered = true;
+					WasMastered = true;
 				}
 			}
 			return newlyMastered;
 		}
 
 		public void AnswerWrong() {
-			++timesAnsweredWrong;
-			wasWrong = true;
+			++TimesAnsweredWrong;
+			WasWrong = true;
 		}
 
 		override public string ToString() {
-			string s = "Q" + baseDifficulty + " Answered wrong " + timesAnsweredWrong + " correct " + timesAnsweredCorrectly + " fast " + timesAnsweredFast + " averageTime = " + GetAverageAnswerTime() + " times ";
+			string s = "Q" + BaseDifficulty + " Answered wrong " + TimesAnsweredWrong + " correct " + TimesAnsweredCorrectly + " fast " + timesAnsweredFast + " averageTime = " + GetAverageAnswerTime() + " times ";
 			foreach (var time in answerTimes) {
 				s += time + " ";
 			}
@@ -130,7 +130,7 @@ public class TestAlgorithm : MonoBehaviour {
 
 	}
 
-	TestQuestion[] questions;
+    TestQuestion[] TestQs;
 
 	const int NUM_QUESTIONS = 55;
 
@@ -142,9 +142,9 @@ public class TestAlgorithm : MonoBehaviour {
 	}
 
 	void InitQuestions() {
-		questions = new TestQuestion[NUM_QUESTIONS];
+		TestQs = new TestQuestion[NUM_QUESTIONS];
 		for (int i = 0; i < NUM_QUESTIONS; ++i) {
-			questions[i] = new TestQuestion(i);
+			TestQs[i] = new TestQuestion(i);
 		}
 	}	
 
@@ -156,20 +156,20 @@ public class TestAlgorithm : MonoBehaviour {
 		int frustration = 0;
 		float recordHeight = 0;
 		float maxThrustFactor = CalcMaxThrustFactor ();
-		float q = CalcQ (MIN_THRUST_FACTOR, maxThrustFactor, V_FACTOR);
+		float q = CalcQ (MinThrustFactor, maxThrustFactor, V);
 		for (int day = 0; !IsReadyForGauntlet(targetPlanet); ++day) {
 			Debug.Log ("Day = " + day);
 			TestDay(kid, maxThrustFactor, q, ref targetPlanet, ref upgradeLevel, ref rocketParts, ref frustration, ref recordHeight);
 		}
-		Debug.Log ("Ready for gauntlet. Num mastered = " + questions.Count (question => question.wasMastered) + " total right = " + questions.Sum(question => question.timesAnsweredCorrectly) + " total wrong = " + questions.Sum(question => question.timesAnsweredWrong)  );
-		foreach (var question in questions) {
+		Debug.Log ("Ready for gauntlet. Num mastered = " + TestQs.Count (question => question.WasMastered) + " total right = " + TestQs.Sum(question => question.TimesAnsweredCorrectly) + " total wrong = " + TestQs.Sum(question => question.TimesAnsweredWrong)  );
+		foreach (var question in TestQs) {
 			Debug.Log (question);
 		}
 	}
 
 	void TestDay (KidModel kid, float maxThrustFactor, float q, ref int targetPlanet, ref int upgradeLevel, ref int rocketParts, ref int frustration, ref float recordHeight) {
 		float timeToday = 0;
-		for (int i = 0; ( i < MIN_QUIZZES_PER_DAY || timeToday < MIN_TIME_PER_DAY ) && !IsReadyForGauntlet (targetPlanet); ++i ) {
+		for (int i = 0; ( i < MinQuizzesPerDay || timeToday < MinTimePerDay ) && !IsReadyForGauntlet (targetPlanet); ++i ) {
 			Debug.Log ("Quiz " + i + " upgradeLevel = " + upgradeLevel + " targetPlanet " + targetPlanet + " rocketparts = " + rocketParts + " frustration = " + frustration);
 			timeToday += TestQuiz (kid, maxThrustFactor, q, ref targetPlanet, ref upgradeLevel, ref rocketParts, ref frustration, ref recordHeight);
 		}
@@ -185,27 +185,27 @@ public class TestAlgorithm : MonoBehaviour {
 		int numWrong = 0;
 		bool reachedNewPlanet = false;
 		bool gotUpgrade = false;
-		float baseThrust = GetTargetHeight (upgradeLevel) / MAX_QUESTIONS_PER_QUIZ;
+		float baseThrust = GetTargetHeight (upgradeLevel) / MaxQuestionsPerQuiz;
 
 		ResetQuestionsForNewQuiz ();
-		for (int i = 0; i < MAX_QUESTIONS_PER_QUIZ - numWrong && !reachedNewPlanet; ++i) {
+		for (int i = 0; i < MaxQuestionsPerQuiz - numWrong && !reachedNewPlanet; ++i) {
 			TestQuestion nextQuestion = GetNextQuestion (frustration);
-			if (nextQuestion.isNew) {
+			if (nextQuestion.IsNew) {
 				++numNew;
 			}
 			nextQuestion.Ask ();
 			Debug.Log("Frustration = " + frustration + " " + nextQuestion);
 			float questionTime = kid.AnswerTime (nextQuestion);
 			while( !kid.AnswersCorrectly (nextQuestion)) {
-				frustration += FRUSTRATION_WRONG;
+				frustration += FrustrationWrong;
 				nextQuestion.AnswerWrong ();
 				questionTime += kid.AnswerTime (nextQuestion);
 			}
 			++questionsAnswered;
-			frustration += (questionTime <= TARGET_TIME) ? FRUSTRATION_FAST : FRUSTRATION_RIGHT;
-			frustration = Mathf.Clamp (frustration, MIN_FRUSTRATION, MAX_FRUSTRATION);
+			frustration += (questionTime <= TargetTime) ? FrustrationFast : FrustrationRight;
+			frustration = Mathf.Clamp (frustration, MinFrustration, MaxFrustration);
 			bool isNewlyMastered = nextQuestion.AnswerRight (questionTime);
-			if (nextQuestion.wasWrong) {
+			if (nextQuestion.WasWrong) {
 				++numWrong;
 			}
 			Debug.Log("Answered " + nextQuestion);
@@ -219,14 +219,14 @@ public class TestAlgorithm : MonoBehaviour {
 //			Debug.Log(GetHeightIncrease(1.0F, MIN_THRUST_FACTOR, 2.0F, q, TARGET_TIME, TARGET_TIME, V_FACTOR));
 //			Debug.Log(GetHeightIncrease(1.0F, MIN_THRUST_FACTOR, 2.0F, q, 11.8F, TARGET_TIME, V_FACTOR));
 //			Debug.Log(GetHeightIncrease(1.0F, MIN_THRUST_FACTOR, 2.0F, q, 60.0F, TARGET_TIME, V_FACTOR));
-			height += GetHeightIncrease(baseThrust, MIN_THRUST_FACTOR, maxThrustFactor, q, questionTime, TARGET_TIME, V_FACTOR);
+			height += GetHeightIncrease(baseThrust, MinThrustFactor, maxThrustFactor, q, questionTime, TargetTime, V);
 			if (isNewlyMastered) {
 				++rocketParts;
 				++numMastered;
 			}
 			if (height > recordHeight) {
-				if (targetPlanet < PLANET_HEIGHTS.Length && recordHeight >= PLANET_HEIGHTS [targetPlanet]) {
-					height = PLANET_HEIGHTS [targetPlanet];
+				if (targetPlanet < PlanetHeights.Length && recordHeight >= PlanetHeights [targetPlanet]) {
+					height = PlanetHeights [targetPlanet];
 					++targetPlanet;
 					reachedNewPlanet = true;
 				}
@@ -235,8 +235,8 @@ public class TestAlgorithm : MonoBehaviour {
 			}
 
 		}
-		while (rocketParts >= PARTS_PER_UPGRADE) {
-			rocketParts -= PARTS_PER_UPGRADE;
+		while (rocketParts >= PartsPerUpgrade) {
+			rocketParts -= PartsPerUpgrade;
 			++upgradeLevel;
 			gotUpgrade = true;
 		}
@@ -246,20 +246,20 @@ public class TestAlgorithm : MonoBehaviour {
 		return time;
 	}
 
-	static bool IsReadyForGauntlet (int targetPlanet) => targetPlanet >= PLANET_HEIGHTS.Length - 1;
+	static bool IsReadyForGauntlet (int targetPlanet) => targetPlanet >= PlanetHeights.Length - 1;
 
 	TestQuestion GetNextQuestion(int frustration) {
-		var allowed = questions.Where (IsAllowed);
+		var allowed = TestQs.Where (IsAllowed);
 
 		if (!allowed.Any()) {
-			allowed = questions.Where (question => !question.wasAsked);
+			allowed = TestQs.Where (question => !question.WasAsked);
 			if (!allowed.Any ()) {
 				return null;
 			}
 		}
-		var candidates = allowed.Where (question => question.wasWrong);
+		var candidates = allowed.Where (question => question.WasWrong);
 		if (!candidates.Any ()) {
-			candidates = allowed.Where (question => !question.isNew);
+			candidates = allowed.Where (question => !question.IsNew);
 			if (!candidates.Any ()) {
 				return (frustration > 0) ? allowed.First () : allowed.ElementAt(Random.Range(0, allowed.Count()));
 			}
@@ -269,19 +269,19 @@ public class TestAlgorithm : MonoBehaviour {
 	}
 
 	void ResetQuestionsForNewQuiz() {
-		foreach (TestQuestion question in questions) {
+		foreach (TestQuestion question in TestQs) {
 			question.ResetForNewQuiz ();
 		}
 	}
 
-	bool IsAllowed(TestQuestion question) => !question.wasAsked && !question.IsMastered ();
-    float GetTargetHeight(int upgradeLevel) => (upgradeLevel < PLANET_HEIGHTS.Length) ? PLANET_HEIGHTS [upgradeLevel] : PLANET_HEIGHTS [PLANET_HEIGHTS.Length - 1] * 2.0F;
+	bool IsAllowed(TestQuestion question) => !question.WasAsked && !question.IsMastered ();
+    float GetTargetHeight(int upgradeLevel) => (upgradeLevel < PlanetHeights.Length) ? PlanetHeights [upgradeLevel] : PlanetHeights [PlanetHeights.Length - 1] * 2.0F;
 	float GetHeightIncrease(float baseThrust, float minThrustFactor, float maxThrustFactor, float Q, float timeRequired, float allottedTime, int v) => baseThrust * (minThrustFactor + (maxThrustFactor - minThrustFactor) / Mathf.Pow(1.0F + Q * Mathf.Exp(timeRequired-allottedTime), 1.0F/v));
 
 	float CalcMaxThrustFactor() {
 		float minHeightRatio = float.MaxValue;
-		for (int i = 0; i < PLANET_HEIGHTS.Length - 1; ++i) {
-			float heightRatio = PLANET_HEIGHTS [i + 1] / PLANET_HEIGHTS [i];
+		for (int i = 0; i < PlanetHeights.Length - 1; ++i) {
+			float heightRatio = PlanetHeights [i + 1] / PlanetHeights [i];
 			if (heightRatio < minHeightRatio) {
 				minHeightRatio = heightRatio;
 			}

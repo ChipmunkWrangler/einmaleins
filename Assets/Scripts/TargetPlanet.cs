@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetPlanet
+public static class TargetPlanet
 {
 	const string targetKey = "targetPlanet";
 	const string lastReachedKey = "lastReachedPlanet";
@@ -68,18 +68,18 @@ public class TargetPlanet
 [System.Serializable]
 public class TargetPlanetPersistentData
 {
-	public int targetPlanetIdx;
-	public int lastReachedPlanetIdx;
+    public int TargetPlanetIdx;
+    public int LastReachedPlanetIdx;
 
 	public void Load ()
 	{
-		targetPlanetIdx = TargetPlanet.GetTargetPlanetIdx ();
-		lastReachedPlanetIdx = TargetPlanet.GetLastReachedIdx ();
+		TargetPlanetIdx = TargetPlanet.GetTargetPlanetIdx ();
+		LastReachedPlanetIdx = TargetPlanet.GetLastReachedIdx ();
 	}
 
 	public void Save ()
 	{
-		TargetPlanet.SetTargetPlanetIdx (targetPlanetIdx);
-		TargetPlanet.SetLastReachedIdx (lastReachedPlanetIdx);
+		TargetPlanet.SetTargetPlanetIdx (TargetPlanetIdx);
+		TargetPlanet.SetLastReachedIdx (LastReachedPlanetIdx);
 	}
 }

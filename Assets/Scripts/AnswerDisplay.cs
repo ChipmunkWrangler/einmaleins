@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnQuizAborted, OnGiveUp {
-	[SerializeField] QuestionPicker answerHandler = null;
-	[SerializeField] int maxDigits = 0;
-    [SerializeField] BoolEvent answerChanged = new BoolEvent();
-	string queuedTxt;
-	bool isFading;
-	Color oldColor;
+public class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted, IOnGiveUp {
+    [SerializeField] QuestionPicker AnswerHandler = null;
+    [SerializeField] int MaxDigits = 0;
+    [SerializeField] BoolEvent AnswerChanged = new BoolEvent();
+    string QueuedTxt;
+    bool IsFading;
+    Color OldColor;
 
-	const float fadeTime = EnterAnswerButtonController.transitionTime;
+	const float fadeTime = EnterAnswerButtonController.TransitionTime;
 
 	void Start() {
-		oldColor = GetTextField ().color;
+		OldColor = GetTextField ().color;
 		SetText ("");
 	}
 
@@ -25,7 +25,7 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnQu
 	}
 
 	public void OnWrongAnswer(bool wasNew) {
-		GetTextField().color = oldColor;
+		GetTextField().color = OldColor;
 		StopAllCoroutines();
 		StartCoroutine(Fade());
 	}
@@ -39,24 +39,24 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnQu
 	}
 
 	IEnumerator Fade() {
-		isFading = true;
-		queuedTxt = "";
+		IsFading = true;
+		QueuedTxt = "";
 		GetTextField ().CrossFadeColor (Color.clear, fadeTime, false, true);
 		yield return new WaitForSeconds (fadeTime);
-		SetText(queuedTxt);
-		queuedTxt = "";
-		GetTextField ().CrossFadeColor (oldColor, 0, false, true);
-		isFading = false;
+		SetText(QueuedTxt);
+		QueuedTxt = "";
+		GetTextField ().CrossFadeColor (OldColor, 0, false, true);
+		IsFading = false;
 	}
 		
     public void OnAddDigit(string nextDigit) {
-		string s = isFading ? queuedTxt : GetText();
+		string s = IsFading ? QueuedTxt : GetText();
 		s += nextDigit;
-		if (s.Length > maxDigits) {
+		if (s.Length > MaxDigits) {
 			s = s.Substring (1, s.Length-1);
 		}
-		if (isFading) {
-			queuedTxt = s;
+		if (IsFading) {
+			QueuedTxt = s;
 		} else {
 			SetText(s);
 			NotifySubscribers ();
@@ -72,10 +72,10 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnQu
 	}
 		
 	public void OnSubmitAnswer() {
-		answerHandler.OnAnswer (GetText());
+		AnswerHandler.OnAnswer (GetText());
 	}
 
 	void NotifySubscribers() {
-        answerChanged.Invoke(GetText().Length == 0);
+        AnswerChanged.Invoke(GetText().Length == 0);
 	}
 }

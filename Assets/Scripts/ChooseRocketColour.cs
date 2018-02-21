@@ -3,37 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChooseRocketColour : MonoBehaviour {
-	[SerializeField] MeshRenderer rocketMesh = null;
-	[SerializeField] ColorPickerCircle colourPicker = null;
-	bool isPaint;
-	public static readonly string prefsKey = "rocketColour";
+    [SerializeField] MeshRenderer RocketMesh = null;
+    [SerializeField] ColorPickerCircle ColourPicker = null;
+    bool IsPaint;
+	public static readonly string PrefsKey = "rocketColour";
 
 	void Start() {
-		colourPicker.gameObject.SetActive(false);
-		colourPicker.SetNewColor(rocketMesh.material.color);
+		ColourPicker.gameObject.SetActive(false);
+		ColourPicker.SetNewColor(RocketMesh.material.color);
 	}
 
 	void Update()
 	{
-		if (isPaint)
+		if (IsPaint)
 		{
-			rocketMesh.material.color = colourPicker.TheColor;
+			RocketMesh.material.color = ColourPicker.TheColor;
 		}
 	}
 
-	public static bool HasChosenColour() => MDPrefs.HasKey(prefsKey + ".r");
+	public static bool HasChosenColour() => MDPrefs.HasKey(PrefsKey + ".r");
 
 	public void StartPaint()
 	{
-		colourPicker.gameObject.SetActive(true);
-		isPaint = true;
+		ColourPicker.gameObject.SetActive(true);
+		IsPaint = true;
 	}
 
 	public void StopPaint()
 	{
-		if (isPaint) {
-			MDPrefs.SetColor (prefsKey, colourPicker.TheColor);
+		if (IsPaint) {
+			MDPrefs.SetColor (PrefsKey, ColourPicker.TheColor);
 		}
-		isPaint = false;
+		IsPaint = false;
 	}
 }

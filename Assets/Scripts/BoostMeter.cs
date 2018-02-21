@@ -2,69 +2,81 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoostMeter : MonoBehaviour, OnQuestionChanged, OnGiveUp, OnQuizAborted {
-	[SerializeField] RectTransform mask = null;
-	[SerializeField] Transform meter = null;
+public class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizAborted
+{
+    [SerializeField] RectTransform Mask = null;
+    [SerializeField] Transform Meter = null;
 
-	const float timeToZero = Question.FAST_TIME * 5.2F / 0.75F; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
-	const float hideTime = 0.3F;
+    const float TimeToZero = Question.FastTime * 5.2F / 0.75F; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
+    const float HideTime = 0.3F;
 
-	float originalY;
+    float OriginalY;
 
-	void Start() {
-		originalY = mask.localPosition.y;
-		meter.gameObject.SetActive (false);
-	}
+    void Start()
+    {
+        OriginalY = Mask.localPosition.y;
+        Meter.gameObject.SetActive(false);
+    }
 
-	public void OnQuizAborted() {
-		StopMeter ();
-		meter.gameObject.SetActive (false);
-	}
+    public void OnQuizAborted()
+    {
+        StopMeter();
+        Meter.gameObject.SetActive(false);
+    }
 
-	public void OnQuestionChanged(Question question) {
-		if (question != null && !question.isLaunchCode) {
-			ResetMask ();
-			ShowMeter ();
-			StartMeter (timeToZero);
-		}
-	}
+    public void OnQuestionChanged(Question question)
+    {
+        if (question != null && !question.IsLaunchCode)
+        {
+            ResetMask();
+            ShowMeter();
+            StartMeter(TimeToZero);
+        }
+    }
 
-	public void OnCorrectAnswer() {
-		StopMeter ();
-		HideMeter ();
-	}
+    public void OnCorrectAnswer()
+    {
+        StopMeter();
+        HideMeter();
+    }
 
-	public void OnGiveUp(Question question) {
-		StopMeter ();
-		meter.gameObject.SetActive (false);
-	}
+    public void OnGiveUp(Question question)
+    {
+        StopMeter();
+        Meter.gameObject.SetActive(false);
+    }
 
-	void ResetMask() {
-		SetMaskY (originalY);
-	}
+    void ResetMask()
+    {
+        SetMaskY(OriginalY);
+    }
 
-	void ShowMeter() {
-		meter.gameObject.SetActive (true);
-	}
+    void ShowMeter()
+    {
+        Meter.gameObject.SetActive(true);
+    }
 
-	void HideMeter() {
-		StartMeter(hideTime);
-	}
+    void HideMeter()
+    {
+        StartMeter(HideTime);
+    }
 
-	void StartMeter(float t) {
-		iTween.ValueTo(mask.gameObject, iTween.Hash("from", mask.localPosition.y, "to", mask.localPosition.y - mask.rect.height, "time", t, "onupdate", "SetMaskY"));
-	}
+    void StartMeter(float t)
+    {
+        iTween.ValueTo(Mask.gameObject, iTween.Hash("from", Mask.localPosition.y, "to", Mask.localPosition.y - Mask.rect.height, "time", t, "onupdate", "SetMaskY"));
+    }
 
-	void StopMeter() {
-		iTween.Stop (mask.gameObject);
-	}
+    void StopMeter()
+    {
+        iTween.Stop(Mask.gameObject);
+    }
 
-	void SetMaskY (float y)
-	{
-		meter.SetParent (mask.parent);
-		Vector3 pos = mask.localPosition;
-		pos.y = y;
-		mask.localPosition = pos;
-		meter.SetParent (mask);
-	}
+    void SetMaskY(float y)
+    {
+        Meter.SetParent(Mask.parent);
+        Vector3 pos = Mask.localPosition;
+        pos.y = y;
+        Mask.localPosition = pos;
+        Meter.SetParent(Mask);
+    }
 }

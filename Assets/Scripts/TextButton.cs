@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TextButton : MonoBehaviour {
-	[SerializeField] Button button = null;
-	[SerializeField] float fadedAlpha = 0.5F;
-	[SerializeField] float transitionTime = 0.1F;
-	[SerializeField] Text text = null;
-	bool wasInteractable = true;
+    [SerializeField] Button Button = null;
+    [SerializeField] float FadedAlpha = 0.5F;
+    [SerializeField] float TransitionTime = 0.1F;
+    [SerializeField] Text Text = null;
+    bool WasInteractable = true;
 
 	public void SetActive(bool b) {
 		gameObject.SetActive (b);
@@ -19,14 +19,14 @@ public class TextButton : MonoBehaviour {
 	}
 
 	void Update() {
-		if (wasInteractable != button.interactable) {
-			wasInteractable = button.interactable;
-			FadeTo (wasInteractable ? 1.0F : fadedAlpha);
+		if (WasInteractable != Button.interactable) {
+			WasInteractable = Button.interactable;
+			FadeTo (WasInteractable ? 1.0F : FadedAlpha);
 		}
 	}
 
 	void FadeTo(float tgtAlpha) {		
-		text.CrossFadeAlpha (tgtAlpha, transitionTime, false);
+		Text.CrossFadeAlpha (tgtAlpha, TransitionTime, false);
 	}
 }
 

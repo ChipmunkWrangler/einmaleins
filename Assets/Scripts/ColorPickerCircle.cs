@@ -5,7 +5,7 @@ public class ColorPickerCircle : MonoBehaviour {
 
     public Color TheColor { get; private set; } = Color.cyan;
 	[SerializeField] GameObject PointerMain = null;
-	[SerializeField] Collider raycastTarget = null;
+    [SerializeField] Collider RaycastTarget = null;
 
     private Vector3[] RPoints;
     private Vector3 CurLocalPos;
@@ -31,7 +31,7 @@ public class ColorPickerCircle : MonoBehaviour {
     {
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit) && hit.collider == raycastTarget) {
+		if (Physics.Raycast (ray, out hit) && hit.collider == RaycastTarget) {
 			CurLocalPos = transform.worldToLocalMatrix.MultiplyPoint (hit.point);
 			return true;
 		}

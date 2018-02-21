@@ -4,24 +4,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MDVersion : MonoBehaviour {
-    [SerializeField] Questions questions = null;
+    [SerializeField] Questions QuestionContainer = null;
 
-	const int majorVersion = 1;
-	const int minorVersion = 0;
-	const int buildNumber = 0;
+    const int MajorVersion = 1;
+    const int MinorVersion = 0;
+    const int BuildNumber = 0;
 
-	bool isChecking;
+    bool IsChecking;
 
-	static public string GetCurrentVersion () {
-		return majorVersion + "." + minorVersion + "." + buildNumber;
+	public static string GetCurrentVersion () {
+		return MajorVersion + "." + MinorVersion + "." + BuildNumber;
 	}
 
 	public void CheckVersion () {
-		if (isChecking) {
+		if (IsChecking) {
 			return;
 		}
 		Debug.unityLogger.logEnabled = Debug.isDebugBuild;	
-		isChecking = true;
+		IsChecking = true;
 		string oldVersion = PlayerPrefs.GetString( "version" );
 		if (oldVersion == GetCurrentVersion()) {
 			return;
@@ -48,7 +48,7 @@ public class MDVersion : MonoBehaviour {
 			break;
 		}
 		WriteNewVersion();
-		isChecking = false;
+		IsChecking = false;
 		SceneManager.LoadScene( "choosePlayer" );
 	}
 
@@ -74,19 +74,19 @@ public class MDVersion : MonoBehaviour {
 	void UpdateFrom_0_1_11_To_0_1_14 () {
 		var playerNameController = new PlayerNameController();
 		playerNameController.Load();
-		string oldName = playerNameController.curName;
-		foreach (string playerName in playerNameController.names) {
-			playerNameController.curName = playerName;
+		string oldName = playerNameController.CurName;
+		foreach (string playerName in playerNameController.Names) {
+			playerNameController.CurName = playerName;
 			playerNameController.Save();
 //			Debug.Log( "Updating question for " + playerName );
-			questions.gameObject.SetActive( true ); // load question list
-			foreach (Question question in questions.questions) {
+			QuestionContainer.gameObject.SetActive( true ); // load question list
+			foreach (Question question in QuestionContainer.QuestionArray) {
 				question.SetNewFromAnswerTime();
 			}
-			questions.Save();
-			questions.gameObject.SetActive( false );
+			QuestionContainer.Save();
+			QuestionContainer.gameObject.SetActive( false );
 		}
-		playerNameController.curName = oldName;
+		playerNameController.CurName = oldName;
 		playerNameController.Save();
 	}
 
@@ -94,19 +94,19 @@ public class MDVersion : MonoBehaviour {
 		const float oldAnswerTimeInitial = 3F + 0.01F;
 		var playerNameController = new PlayerNameController();
 		playerNameController.Load();
-		string oldName = playerNameController.curName;
-		foreach (string playerName in playerNameController.names) {
-			playerNameController.curName = playerName;
+		string oldName = playerNameController.CurName;
+		foreach (string playerName in playerNameController.Names) {
+			playerNameController.CurName = playerName;
 			playerNameController.Save();
 			Debug.Log( "Updating question for " + playerName );
-			questions.gameObject.SetActive( true ); // load question list
-			foreach (Question question in questions.questions) {
+			QuestionContainer.gameObject.SetActive( true ); // load question list
+			foreach (Question question in QuestionContainer.QuestionArray) {
 				question.UpdateInitialAnswerTime( oldAnswerTimeInitial );
 			}
-			questions.Save();
-			questions.gameObject.SetActive( false );
+			QuestionContainer.Save();
+			QuestionContainer.gameObject.SetActive( false );
 		}
-		playerNameController.curName = oldName;
+		playerNameController.CurName = oldName;
 		playerNameController.Save();
 	}
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TextDisplay : MonoBehaviour {
-	UnityEngine.UI.Text textField;
+    UnityEngine.UI.Text TextField;
 
 	void Start() {
 		GetTextField ().text = "";
@@ -16,10 +16,10 @@ public class TextDisplay : MonoBehaviour {
 	protected string GetText() => GetTextField ().text;
 
 	protected UnityEngine.UI.Text GetTextField() {
-		if (textField == null) {
-			textField = gameObject.GetComponent<UnityEngine.UI.Text> ();
-			UnityEngine.Assertions.Assert.IsNotNull (textField);
+		if (TextField == null) {
+			TextField = gameObject.GetComponent<UnityEngine.UI.Text> ();
+			UnityEngine.Assertions.Assert.IsNotNull (TextField);
 		}
-		return textField;
+		return TextField;
 	}
 }

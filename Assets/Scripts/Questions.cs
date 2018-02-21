@@ -3,27 +3,27 @@ using UnityEngine;
 using System.Linq;
 
 public class Questions : MonoBehaviour {
-    QuestionsPersistentData data = new QuestionsPersistentData();
+    readonly QuestionsPersistentData Data = new QuestionsPersistentData();
 
-    public static readonly int maxNum = 10;
-    public Question[] questions { get; private set; }
-	public static int GetNumQuestions () => maxNum * (maxNum + 1) / 2;
-    public Question GetGaveUpQuestion() => questions.FirstOrDefault(question => question.GaveUp());
-    public Question GetLaunchCodeQuestion() => questions.FirstOrDefault(question => question.isLaunchCode);
+    public static readonly int MaxNum = 10;
+    public Question[] QuestionArray { get; private set; }
+	public static int GetNumQuestions () => MaxNum * (MaxNum + 1) / 2;
+    public Question GetGaveUpQuestion() => QuestionArray.FirstOrDefault(question => question.GaveUp());
+    public Question GetLaunchCodeQuestion() => QuestionArray.FirstOrDefault(question => question.IsLaunchCode);
 
 	public void ResetForNewQuiz () {
-		foreach (Question question in questions) {
+		foreach (Question question in QuestionArray) {
 			question.ResetForNewQuiz();
 		}
 	}
 
 	public Question GetQuestion (bool isFrustrated, bool allowGaveUpQuestions) {
-		IEnumerable<Question> allowed = questions.Where( question => !question.wasAnsweredInThisQuiz && !question.IsMastered() && (allowGaveUpQuestions || !question.GaveUp()) );
+		IEnumerable<Question> allowed = QuestionArray.Where( question => !question.WasAnsweredInThisQuiz && !question.IsMastered() && (allowGaveUpQuestions || !question.GaveUp()) );
 
 		if (!allowed.Any()) {
-			allowed = questions.Where( question => !question.wasAnsweredInThisQuiz && !question.GaveUp() );
+			allowed = QuestionArray.Where( question => !question.WasAnsweredInThisQuiz && !question.GaveUp() );
 			if (!allowed.Any()) {
-				allowed = questions.Where( question => !question.wasAnsweredInThisQuiz );
+				allowed = QuestionArray.Where( question => !question.WasAnsweredInThisQuiz );
 				if (!allowed.Any()) {
 					return null; // should never happen
 				}
@@ -41,30 +41,30 @@ public class Questions : MonoBehaviour {
 	}
 
 	public void Save () {
-		data.Save();
+		Data.Save();
 	}
 
 	void OnEnable () {
-		data.Load();
-		questions = CreateQuestions();
+		Data.Load();
+		QuestionArray = CreateQuestions();
 	}
 
 	public Question[] CreateQuestions () {
-		var questions = new Question[GetNumQuestions()];
+        var qs = new Question[GetNumQuestions()];
 		int idx = 0;
-		for (int a = 1; a <= maxNum; ++a) {
-			for (int b = a; b <= maxNum; ++b) {
-				questions[ idx ] = new Question( a, b, data.questionData[ idx ] );
+		for (int a = 1; a <= MaxNum; ++a) {
+			for (int b = a; b <= MaxNum; ++b) {
+				qs[ idx ] = new Question( a, b, Data.QuestionData[ idx ] );
 				++idx;
 			}
 		}
-		return questions;
+		return qs;
 	}
 }
 
 [System.Serializable]
 public class QuestionsPersistentData {
-	public QuestionPersistentData[] questionData = new QuestionPersistentData[Questions.GetNumQuestions()];
+    public QuestionPersistentData[] QuestionData = new QuestionPersistentData[Questions.GetNumQuestions()];
 
 	const string prefsKey = "questions";
 
@@ -72,21 +72,21 @@ public class QuestionsPersistentData {
     public static bool WereQuestionsCreated() => MDPrefs.HasKey(prefsKey + ":ArrayLen");
 
 	public void Save () {
-		MDPrefs.SetInt( prefsKey + ":ArrayLen", questionData.Length );
-		for (int i = 0; i < questionData.Length; ++i) {
-			questionData[ i ].Save( GetQuestionKey( i ) ); // GetQuestionKey is needed for loading data from XML
+		MDPrefs.SetInt( prefsKey + ":ArrayLen", QuestionData.Length );
+		for (int i = 0; i < QuestionData.Length; ++i) {
+			QuestionData[ i ].Save( GetQuestionKey( i ) ); // GetQuestionKey is needed for loading data from XML
 		}
 	}
 
 	public void Load () {
-		UnityEngine.Assertions.Assert.AreEqual( MDPrefs.GetInt( prefsKey + ":ArrayLen", questionData.Length ), questionData.Length );
+		UnityEngine.Assertions.Assert.AreEqual( MDPrefs.GetInt( prefsKey + ":ArrayLen", QuestionData.Length ), QuestionData.Length );
 		bool shouldCreate = !WereQuestionsCreated();
-		for (int i = 0; i < questionData.Length; ++i) {
-			questionData[ i ] = new QuestionPersistentData();
+		for (int i = 0; i < QuestionData.Length; ++i) {
+			QuestionData[ i ] = new QuestionPersistentData();
 			if (shouldCreate) {
-				questionData[ i ].Create( GetQuestionKey( i ), i );
+				QuestionData[ i ].Create( GetQuestionKey( i ), i );
 			} else {
-				questionData[ i ].Load( GetQuestionKey( i ), i );
+				QuestionData[ i ].Load( GetQuestionKey( i ), i );
 			}
 		}
 	}

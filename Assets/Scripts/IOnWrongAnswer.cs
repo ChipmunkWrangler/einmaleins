@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface OnWrongAnswer  {
+public interface IOnWrongAnswer  {
 	void OnWrongAnswer(bool wasNew);
 }

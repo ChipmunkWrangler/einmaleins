@@ -6,6 +6,7 @@ public class PositionFx : MonoBehaviour {
     [SerializeField] Transform referencePoint = null;
 
 	void Start () {
+        Debug.Log("PositionFx");
 		StartCoroutine (InitFxPos ());
 	}
 

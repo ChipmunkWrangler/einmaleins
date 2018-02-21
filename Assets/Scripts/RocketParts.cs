@@ -5,71 +5,71 @@ using UnityEngine.UI;
 
 public class RocketParts : MonoBehaviour {
 	// public readonly
-	public static RocketParts instance { get; private set; }
+	public static RocketParts Instance { get; private set; }
 
-	public bool justUpgraded {
+	public bool JustUpgraded {
 		get {
-			return data.justUpgraded;
+			return Data.justUpgraded;
 		}
 		set {
-			data.justUpgraded = value;
-			data.Save();
+			Data.justUpgraded = value;
+			Data.Save();
 		}
 	}
 
-	public int numParts {
+	public int NumParts {
 		get {
-			return data.numParts;
+			return Data.numParts;
 		}
 		private set {
-			data.numParts = value;
-			data.Save();
+			Data.numParts = value;
+			Data.Save();
 		}
 	}
 
-	public bool isRocketBuilt {
+	public bool IsRocketBuilt {
 		get {
-			return data.isRocketBuilt;
+			return Data.isRocketBuilt;
 		}
 		set {
-			data.isRocketBuilt = value;
-			data.Save();
+			Data.isRocketBuilt = value;
+			Data.Save();
 		}
 	}
 
-	public int upgradeLevel {
+	public int UpgradeLevel {
 		get {
-			return data.upgradeLevel;
+			return Data.upgradeLevel;
 		}
 		private set {
-			data.upgradeLevel = value;
-			data.Save();
+			Data.upgradeLevel = value;
+			Data.Save();
 		}
 	}
 
-	public int numPartsRequired { 
+	public int NumPartsRequired { 
 		get {
-			return PARTS_PER_UPGRADE;
+			return PartsPerUpgrade;
 		}
 	}
 
-	public bool hasEnoughPartsToUpgrade {
+	public bool HasEnoughPartsToUpgrade {
 		get {
-			return numParts >= PARTS_PER_UPGRADE && upgradeLevel < maxUpgradeLevel;
+			return NumParts >= PartsPerUpgrade && UpgradeLevel < MaxUpgradeLevel;
 		}
 	}
 
-	public int maxUpgradeLevel {
+	public int MaxUpgradeLevel {
 		get {
-			UnityEngine.Assertions.Assert.AreEqual( Questions.GetNumQuestions() % PARTS_PER_UPGRADE, 0 );
-			return 1 + Questions.GetNumQuestions() / PARTS_PER_UPGRADE; // +1 for final bonus upgrade
+			UnityEngine.Assertions.Assert.AreEqual( Questions.GetNumQuestions() % PartsPerUpgrade, 0 );
+			return 1 + Questions.GetNumQuestions() / PartsPerUpgrade; // +1 for final bonus upgrade
 		}
 	}
 
 	// public commands
 	public bool Upgrade () {
-		if (hasEnoughPartsToUpgrade) {
-			numParts -= PARTS_PER_UPGRADE;
+		if (HasEnoughPartsToUpgrade) {
+			NumParts -= PartsPerUpgrade;
 			DoUpgrade();
 			return true;
 		}
@@ -77,40 +77,40 @@ public class RocketParts : MonoBehaviour {
 	}
 
 	public void Inc () {
-		++numParts;
+		++NumParts;
 	}
 
 	public void UnlockFinalUpgrade () {
-		numParts += numPartsRequired;
+		NumParts += NumPartsRequired;
 	}
 
 	public static void Reset () {
-		if (instance != null) {
-			Destroy( RocketParts.instance );	
+		if (Instance != null) {
+			Destroy( RocketParts.Instance );	
 		}
 	}
 
 	// private
-	const int PARTS_TO_BUILD_ROCKET = 0;
-	const int PARTS_PER_UPGRADE = 11;
+    const int PartsToBuildRocket = 0;
+    const int PartsPerUpgrade = 11;
 
-	RocketPartsPersistantData data;
+    RocketPartsPersistantData Data;
 
 	void Awake () {
-		if (instance == null) {
+		if (Instance == null) {
 //			DontDestroyOnLoad (gameObject);
-			instance = this;
-			data = new RocketPartsPersistantData();
-			data.Load();
-		} else if (instance != this) {
+			Instance = this;
+			Data = new RocketPartsPersistantData();
+			Data.Load();
+		} else if (Instance != this) {
 			Destroy( gameObject ); // there can be only one!
 		}
 	}
 
 	void DoUpgrade () {
-		data.justUpgraded = true;
-		++data.upgradeLevel;
-		data.Save();
+		Data.justUpgraded = true;
+		++Data.upgradeLevel;
+		Data.Save();
 	}
 }
 

@@ -6,20 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/choosePlayer.unity
+    path: Assets/Scenes/choosePlayer.unity
     guid: 72ce99a4b4692428faa943a9c60a9fbc
   - enabled: 1
-    path: Assets/stats.unity
+    path: Assets/Scenes/stats.unity
     guid: fbc92a2db213844cd81826a3c1091247
   - enabled: 1
-    path: Assets/launch.unity
+    path: Assets/Scenes/launch.unity
     guid: 5fdafb862936840caa110cb519d35174
   - enabled: 1
-    path: Assets/rocketBuilding.unity
+    path: Assets/Scenes/rocketBuilding.unity
     guid: 84031b6bde51a477c9ab9702f1f2ea14
   - enabled: 1
-    path: Assets/updateVersion.unity
+    path: Assets/Scenes/updateVersion.unity
     guid: 469c29610f2a64d18bf5a3e66cb9d9fb
   - enabled: 0
-    path: Assets/employeesOnly.unity
+    path: Assets/Scenes/employeesOnly.unity
     guid: 0f48378b89bf541f3b94e1c8dcc3ab9b

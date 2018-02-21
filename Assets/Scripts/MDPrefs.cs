@@ -148,7 +148,7 @@ public static class MDPrefs {
 
 	static string GetKey(string key) {
 		UnityEngine.Assertions.Assert.IsTrue (PlayerNameController.IsPlayerSet());
-		return PlayerPrefs.GetString (PlayerNameController.curPlayerPrefsKey) + ":" + key; // HACK should probably make all this nonstatic and use an instance of playerNameController instead of loading the name directly
+		return PlayerPrefs.GetString (PlayerNameController.CurPlayerPrefsKey) + ":" + key; // HACK should probably make all this nonstatic and use an instance of playerNameController instead of loading the name directly
 	}
 
 	static string GetLengthKey(string key) { 

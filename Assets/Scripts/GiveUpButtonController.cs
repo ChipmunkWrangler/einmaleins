@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GiveUpButtonController : MonoBehaviour, OnWrongAnswer, OnQuizAborted, OnQuestionChanged, OnGiveUp {
+public class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged, IOnGiveUp {
 	[SerializeField] UnityEngine.UI.Button button = null;
 	[SerializeField] UnityEngine.UI.Image image = null;
 
-	const float transitionTime = EnterAnswerButtonController.transitionTime;
+    const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
 	public void OnQuizAborted() {
 		SetInteractibility (false);
@@ -41,7 +41,7 @@ public class GiveUpButtonController : MonoBehaviour, OnWrongAnswer, OnQuizAborte
 	}
 
 	void ScaleTo(Vector3 tgtScale) {
-		iTween.ScaleTo(gameObject, iTween.Hash( "scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", transitionTime));
+		iTween.ScaleTo(gameObject, iTween.Hash( "scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
 	}
 
 }

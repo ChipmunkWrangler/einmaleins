@@ -278,4 +278,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TheColor: {r: 0, g: 1, b: 1, a: 1}
   PointerMain: {fileID: 1728694135454934}
-  raycastTarget: {fileID: 64259870441458546}
+  RaycastTarget: {fileID: 64259870441458546}

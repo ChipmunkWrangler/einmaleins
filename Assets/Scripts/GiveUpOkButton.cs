@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GiveUpOkButton : MonoBehaviour, OnGiveUp {
+public class GiveUpOkButton : MonoBehaviour, IOnGiveUp {
     [SerializeField] UnityEngine.UI.Button button = null;
 
-	const float transitionTime = EnterAnswerButtonController.transitionTime;
+    const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
 	void Start() {
 		Hide ();
@@ -26,6 +26,6 @@ public class GiveUpOkButton : MonoBehaviour, OnGiveUp {
 	}
 
 	void ScaleTo(Vector3 tgtScale) {
-		iTween.ScaleTo(button.gameObject, iTween.Hash( "scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", transitionTime));
+		iTween.ScaleTo(button.gameObject, iTween.Hash( "scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
 	}
 }

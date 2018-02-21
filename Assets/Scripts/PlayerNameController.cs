@@ -3,46 +3,50 @@ using System.Linq;
 
 public class PlayerNameController
 {
-	const string namesPrefsKey = "playerNames";
-    public static readonly string curPlayerPrefsKey = "curPlayer";
+    const string NamesPrefsKey = "playerNames";
+    public static readonly string CurPlayerPrefsKey = "curPlayer";
 
-	public string[] names { get; private set; }
+    public string[] Names { get; private set; }
 
-	public string curName;
+    public string CurName;
 
-    static public bool IsPlayerSet() => PlayerPrefs.HasKey(curPlayerPrefsKey) && PlayerPrefs.GetString(curPlayerPrefsKey).Length > 0;
+    public static bool IsPlayerSet() => PlayerPrefs.HasKey(CurPlayerPrefsKey) && PlayerPrefs.GetString(CurPlayerPrefsKey).Length > 0;
 
-    public bool IsNameValid(string playerName) => playerName.Length > 0 && !names.Contains(playerName);
+    public bool IsNameValid(string playerName) => playerName.Length > 0 && !Names.Contains(playerName);
 
-	public void Load ()
-	{
-		names = PlayerPrefsArray.GetStringArray (namesPrefsKey);
-		curName = IsPlayerSet () ? PlayerPrefs.GetString (curPlayerPrefsKey) : "";
-	}
+    public void Load()
+    {
+        Names = PlayerPrefsArray.GetStringArray(NamesPrefsKey);
+        CurName = IsPlayerSet() ? PlayerPrefs.GetString(CurPlayerPrefsKey) : "";
+    }
 
-	public void Save ()
-	{
-		PlayerPrefsArray.SetStringArray (namesPrefsKey, names);
-		PlayerPrefs.SetString (curPlayerPrefsKey, curName);
-	}
+    public void Save()
+    {
+        PlayerPrefsArray.SetStringArray(NamesPrefsKey, Names);
+        PlayerPrefs.SetString(CurPlayerPrefsKey, CurName);
+    }
 
-	public void AppendName (string name)
-	{
-		var newPlayerNames = new string[names.Length + 1];
-		for (int i = 0; i < names.Length; ++i) {
-			newPlayerNames [i] = names [i];
-		}
-		newPlayerNames [names.Length] = name;
-		names = newPlayerNames;
-	}
+    public void AppendName(string name)
+    {
+        var newPlayerNames = new string[Names.Length + 1];
+        for (int i = 0; i < Names.Length; ++i)
+        {
+            newPlayerNames[i] = Names[i];
+        }
+        newPlayerNames[Names.Length] = name;
+        Names = newPlayerNames;
+    }
 
-	public void Clear ()
-	{
-		if (names != null) {
-			System.Array.Clear (names, 0, names.Length);
-		} else {
-			names = new string[0];
-		}
-		curName = "";
-	}
+    public void Clear()
+    {
+        if (Names != null)
+        {
+            System.Array.Clear(Names, 0, Names.Length);
+        }
+        else
+        {
+            Names = new string[0];
+        }
+        CurName = "";
+    }
 }

@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StatsController : MonoBehaviour {
-	[SerializeField] StatsColumnController[] columns = null;
-    [SerializeField] Questions questions = null;
+    [SerializeField] StatsColumnController[] Columns = null;
+    [SerializeField] Questions QuestionContainer = null;
+    readonly StatsControllerPersistentData Data = new StatsControllerPersistentData();
 
-	StatsControllerPersistentData data = new StatsControllerPersistentData();
-
-	void Start () {
-		data.Load (columns.Length);
-		foreach (Question question in questions.questions) {
-			int i = question.a - 1;
-			int j = question.b - 1;
-			data.seenMastered[i][j] = columns [i].SetMasteryLevel (j, question, data.seenMastered[i][j]);
+    void Start () {
+		Data.Load (Columns.Length);
+		foreach (Question question in QuestionContainer.QuestionArray) {
+			int i = question.A - 1;
+			int j = question.B - 1;
+			Data.seenMastered[i][j] = Columns [i].SetMasteryLevel (j, question, Data.seenMastered[i][j]);
 			if (i != j) {
-				data.seenMastered [j] [i] = columns [j].SetMasteryLevel (i, question, data.seenMastered [j] [i]);
+				Data.seenMastered [j] [i] = Columns [j].SetMasteryLevel (i, question, Data.seenMastered [j] [i]);
 			}
 		}
-		foreach (StatsColumnController column in columns) {
+		foreach (StatsColumnController column in Columns) {
 			column.DoneSettingMasteryLevels ();
 		}
-		data.Save (columns.Length);
+		Data.Save (Columns.Length);
 	}
 }
 

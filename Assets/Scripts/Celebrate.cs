@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Celebrate : MonoBehaviour, OnWrongAnswer, OnQuestionChanged, OnQuizAborted {
-	public static readonly float duration = 3.0F;
-	[SerializeField] ParticleSystem[] exhaustParticles = null;
-	[SerializeField] ParticleSystem fastAnswerParticles = null;
-	[SerializeField] ParticleSystem masteryParticles = null;
-	[SerializeField] ParticleSystem smokeParticles = null;
-	[SerializeField] QuestionPicker questionPicker = null;
-	[SerializeField] bool continueAfterQuestions = false;
-	bool isCelebrating;
-	Coroutine coroutine;
+public class Celebrate : MonoBehaviour, IOnWrongAnswer, IOnQuestionChanged, IOnQuizAborted {
+	public static readonly float Duration = 3.0F;
+    [SerializeField] ParticleSystem[] ExhaustParticles = null;
+    [SerializeField] ParticleSystem FastAnswerParticles = null;
+    [SerializeField] ParticleSystem MasteryParticles = null;
+    [SerializeField] ParticleSystem SmokeParticles = null;
+    [SerializeField] QuestionPicker QPicker = null;
+    [SerializeField] bool ContinueAfterQuestions = false;
+    bool IsCelebrating;
+    Coroutine Co;
 
 	public void OnQuizAborted() {
 		StopTimer ();
@@ -21,7 +21,7 @@ public class Celebrate : MonoBehaviour, OnWrongAnswer, OnQuestionChanged, OnQuiz
 		
 	public void OnQuestionChanged(Question question) {
 		StopTimer ();
-		if (continueAfterQuestions && question == null) {
+		if (ContinueAfterQuestions && question == null) {
 			StartCelebrating (false, false); // indefinitely
 		} else {
 			StopCelebrating ();
@@ -30,9 +30,9 @@ public class Celebrate : MonoBehaviour, OnWrongAnswer, OnQuestionChanged, OnQuiz
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		StopTimer ();
-		if (question == null || !question.isLaunchCode) {
+		if (question == null || !question.IsLaunchCode) {
 			float percentOn = (question == null) ? 1F : Mathf.Min (1F, FlashThrust.GetThrustFactor (question.GetLastAnswerTime ()));
-			coroutine = StartCoroutine (DoCelebration (question != null && question.GetLastAnswerTime () <= Question.FAST_TIME, isNewlyMastered, percentOn));
+			Co = StartCoroutine (DoCelebration (question != null && question.GetLastAnswerTime () <= Question.FastTime, isNewlyMastered, percentOn));
 		}
 	}
 
@@ -42,30 +42,30 @@ public class Celebrate : MonoBehaviour, OnWrongAnswer, OnQuestionChanged, OnQuiz
 	}
 		
 	IEnumerator DoCelebration(bool isFastAnswer, bool isNewlyMastered, float percentOn) {
-		float exhaustTime = duration * percentOn;
+		float exhaustTime = Duration * percentOn;
 		if (exhaustTime > 0) {
 			StartCelebrating (isFastAnswer, isNewlyMastered);
 			yield return new WaitForSeconds (exhaustTime);
 			StopCelebrating ();
 		}
-		if (exhaustTime < duration) { 
+		if (exhaustTime < Duration) { 
 			StartSmoke ();
-			yield return new WaitForSeconds (duration - exhaustTime);
+			yield return new WaitForSeconds (Duration - exhaustTime);
 			StopSmoke ();
 		}
-		questionPicker.NextQuestion ();
+		QPicker.NextQuestion ();
 	}
 
 	void StartCelebrating(bool isFastAnswer, bool isNewlyMastered) {
-		if (!isCelebrating) {
-			isCelebrating = true;
+		if (!IsCelebrating) {
+			IsCelebrating = true;
 			GetExhaustParticles ().gameObject.SetActive (true);
 			GetExhaustParticles ().Play ();
 			if (isNewlyMastered) {
-				masteryParticles.Play ();
+				MasteryParticles.Play ();
 			}
 			if (isFastAnswer) {
-				fastAnswerParticles.Play ();
+				FastAnswerParticles.Play ();
 			}
 
 		}
@@ -73,28 +73,28 @@ public class Celebrate : MonoBehaviour, OnWrongAnswer, OnQuestionChanged, OnQuiz
 
 	void StopCelebrating ()
 	{
-		if (isCelebrating) {
+		if (IsCelebrating) {
 			GetExhaustParticles ().Stop ();
-			masteryParticles.Stop ();
-			fastAnswerParticles.Stop ();
-			isCelebrating = false;
+			MasteryParticles.Stop ();
+			FastAnswerParticles.Stop ();
+			IsCelebrating = false;
 		}
 	}
 
 	void StartSmoke() {
-		smokeParticles.Play ();
+		SmokeParticles.Play ();
 	}
 
 	void StopSmoke() {
-		smokeParticles.Stop ();
+		SmokeParticles.Stop ();
 	}
 
 	void StopTimer() {
-		if (coroutine != null) {
-			StopCoroutine (coroutine);
-			coroutine = null;
+		if (Co != null) {
+			StopCoroutine (Co);
+			Co = null;
 		}
 	}
 
-	ParticleSystem GetExhaustParticles() => exhaustParticles [RocketParts.instance.upgradeLevel];
+	ParticleSystem GetExhaustParticles() => ExhaustParticles [RocketParts.Instance.UpgradeLevel];
 }

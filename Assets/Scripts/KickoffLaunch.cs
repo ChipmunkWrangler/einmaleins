@@ -2,24 +2,24 @@
 using UnityEngine;
 
 public class KickoffLaunch : MonoBehaviour {
-	[SerializeField] Celebrate celebrate = null;
-	[SerializeField] float delay = 1.0F;
-	[SerializeField] int countdownTime = 3;
-	[SerializeField] UnityEngine.UI.Text countdownText = null;
-	[SerializeField] GameObject[] uiElementsToActivateOnLaunchCode = null;
-    [SerializeField] GameObject[] uiElementsToDeactivateOnLaunchCode = null;
-    [SerializeField] GameObject[] uiElementsToActivateOnLaunchButton = null;
-    [SerializeField] GameObject[] uiElementsToDeactivateOnLaunchButton = null;
-    [SerializeField] GameObject[] uiElementsToActivateOnCountdown = null;
-    [SerializeField] GameObject[] uiElementsToDeactivateOnCountdown = null;
-    [SerializeField] GameObject[] uiElementsToActivateOnPlay = null;
-    [SerializeField] GameObject[] uiElementsToDeactivateOnPlay = null;
-    [SerializeField] GameObject[] uiElementsToDeactivateIfGivingUpIsForbidden = null;
-    [SerializeField] GoalButtonControler goalButtonController = null;
-    [SerializeField] FlashThrust thrust = null;
-    [SerializeField] Questions questions = null;
-    [SerializeField] QuestionPicker questionPicker = null;
-    [SerializeField] Goal goal = null;
+    [SerializeField] Celebrate Celebrator = null;
+    [SerializeField] float Delay = 1.0F;
+    [SerializeField] int CountdownTime = 3;
+    [SerializeField] UnityEngine.UI.Text CountdownText = null;
+    [SerializeField] GameObject[] UIElementsToActivateOnLaunchCode = null;
+    [SerializeField] GameObject[] UIElementsToDeactivateOnLaunchCode = null;
+    [SerializeField] GameObject[] UIElementsToActivateOnLaunchButton = null;
+    [SerializeField] GameObject[] UIElementsToDeactivateOnLaunchButton = null;
+    [SerializeField] GameObject[] UIElementsToActivateOnCountdown = null;
+    [SerializeField] GameObject[] UIElementsToDeactivateOnCountdown = null;
+    [SerializeField] GameObject[] UIElementsToActivateOnPlay = null;
+    [SerializeField] GameObject[] UIElementsToDeactivateOnPlay = null;
+    [SerializeField] GameObject[] UIElementsToDeactivateIfGivingUpIsForbidden = null;
+    [SerializeField] GoalButtonControler GoalButtonController = null;
+    [SerializeField] FlashThrust Thrust = null;
+    [SerializeField] Questions QuestionContainer = null;
+    [SerializeField] QuestionPicker QPicker = null;
+    [SerializeField] Goal GoalStatus = null;
 
 	void Start () {
 		if (MDPrefs.GetBool ("autolaunch")) {
@@ -31,7 +31,7 @@ public class KickoffLaunch : MonoBehaviour {
 	}
 
 	public void PreLaunch() {
-		Question launchCodeQuestion = questions.GetGaveUpQuestion ();
+		Question launchCodeQuestion = QuestionContainer.GetGaveUpQuestion ();
 		if (launchCodeQuestion == null) {
 			Launch ();
 		} else {
@@ -44,63 +44,63 @@ public class KickoffLaunch : MonoBehaviour {
 	}
 
 	public void ShowLaunchButton() {
-		foreach (var element in uiElementsToActivateOnLaunchButton) {
+		foreach (var element in UIElementsToActivateOnLaunchButton) {
 			element.SetActive (true);
 		}
-		foreach (var element in uiElementsToDeactivateOnLaunchButton) {
+		foreach (var element in UIElementsToDeactivateOnLaunchButton) {
 			element.SetActive (false);
 		}
 
-		goalButtonController.OnQuestionChanged (null);
+		GoalButtonController.OnQuestionChanged (null);
 	}
 
 	IEnumerator Kickoff () {
-		thrust.OnCountdown ();
-		countdownText.text = "";
-		countdownText.gameObject.SetActive (true);
-		foreach (var element in uiElementsToActivateOnCountdown) {
+		Thrust.OnCountdown ();
+		CountdownText.text = "";
+		CountdownText.gameObject.SetActive (true);
+		foreach (var element in UIElementsToActivateOnCountdown) {
 			element.SetActive (true);
 		}
-		foreach (var element in uiElementsToDeactivateOnCountdown) {
+		foreach (var element in UIElementsToDeactivateOnCountdown) {
 			element.SetActive (false);
 		}
-		yield return new WaitForSeconds (delay);
-		for (int i = countdownTime; i > 0; --i) {
-			countdownText.text = i.ToString ();
+		yield return new WaitForSeconds (Delay);
+		for (int i = CountdownTime; i > 0; --i) {
+			CountdownText.text = i.ToString ();
 			yield return new WaitForSeconds (1.0F);
 		}
-		countdownText.text = "";
-		countdownText.gameObject.SetActive (false);
-		foreach (var element in uiElementsToDeactivateOnPlay) {
+		CountdownText.text = "";
+		CountdownText.gameObject.SetActive (false);
+		foreach (var element in UIElementsToDeactivateOnPlay) {
 			element.SetActive (false);
 		}
 		yield return null;
-		thrust.Accelerate ();
-		celebrate.OnCorrectAnswer (null, false); // this triggers the question once the flames are done
-		yield return new WaitForSeconds(Celebrate.duration);
-		foreach (var element in uiElementsToActivateOnPlay) {
+		Thrust.Accelerate ();
+		Celebrator.OnCorrectAnswer (null, false); // this triggers the question once the flames are done
+		yield return new WaitForSeconds(Celebrate.Duration);
+		foreach (var element in UIElementsToActivateOnPlay) {
 			element.SetActive (true);
 		}
-		if (!Goal.IsGivingUpAllowed(goal.CalcCurGoal())) {
-			foreach (var element in uiElementsToDeactivateIfGivingUpIsForbidden) {
+		if (!Goal.IsGivingUpAllowed(GoalStatus.CalcCurGoal())) {
+			foreach (var element in UIElementsToDeactivateIfGivingUpIsForbidden) {
 				element.SetActive (false);
 			}
 		}
 	}
 
 	void RequestLaunchCode(Question launchCodeQuestion) {
-		foreach (var element in uiElementsToActivateOnLaunchCode) {
+		foreach (var element in UIElementsToActivateOnLaunchCode) {
 			element.SetActive (true);
 		}
-		foreach (var element in uiElementsToDeactivateOnLaunchCode) {
+		foreach (var element in UIElementsToDeactivateOnLaunchCode) {
 			element.SetActive (false);
 		}
-		questionPicker.ShowQuestion (launchCodeQuestion);
-		launchCodeQuestion.isLaunchCode = true;
+		QPicker.ShowQuestion (launchCodeQuestion);
+		launchCodeQuestion.IsLaunchCode = true;
 	}
 
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered ) {
-		if (question.isLaunchCode) { 
+		if (question.IsLaunchCode) { 
 			Launch ();
 		}
 	}

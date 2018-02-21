@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 
 public class MDCulture {
-	static System.Globalization.CultureInfo ci;
+    static System.Globalization.CultureInfo CI;
 
 	public static System.Globalization.CultureInfo GetCulture()
 	{
-		if (ci == null) {
+		if (CI == null) {
 			string langId = PreciseLocale.GetLanguageID().Replace('_', '-');
-			ci = System.Globalization.CultureInfo.GetCultures (System.Globalization.CultureTypes.AllCultures).FirstOrDefault (x => x.Name == langId);
+			CI = System.Globalization.CultureInfo.GetCultures (System.Globalization.CultureTypes.AllCultures).FirstOrDefault (x => x.Name == langId);
 		}
-		return ci;
+		return CI;
 	}
 
 }

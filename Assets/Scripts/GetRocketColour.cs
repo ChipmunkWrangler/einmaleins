@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GetRocketColour : MonoBehaviour {
-	[SerializeField] Renderer rocketRenderer = null;
+    [SerializeField] Renderer RocketRenderer = null;
 
 	void Start () {
-		rocketRenderer.material.color = MDPrefs.GetColor (ChooseRocketColour.prefsKey, rocketRenderer.material.color);
+		RocketRenderer.material.color = MDPrefs.GetColor (ChooseRocketColour.PrefsKey, RocketRenderer.material.color);
 	}
 }

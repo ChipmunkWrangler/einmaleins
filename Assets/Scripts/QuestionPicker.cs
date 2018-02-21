@@ -7,16 +7,16 @@ public class CorrectAnswerEvent : UnityEvent<Question, bool /*isNewlyMastered*/>
 
 public class QuestionPicker : MonoBehaviour
 {
-    [SerializeField] GameObject[] subscribers = null;
-    [SerializeField] EffortTracker effortTracker = null;
-    [SerializeField] CorrectAnswerEvent correctAnswer = new CorrectAnswerEvent();
+    [SerializeField] GameObject[] Subscribers = null;
+    [SerializeField] EffortTracker EffortTracker = null;
+    [SerializeField] CorrectAnswerEvent CorrectAnswer = new CorrectAnswerEvent();
 
-    Question curQuestion;
-    SubscriberList<OnQuestionChanged> onQuestionChangeds;
-    SubscriberList<OnWrongAnswer> onWrongAnswers;
-    SubscriberList<OnQuizAborted> onQuizAborteds;
-    SubscriberList<OnGiveUp> onGiveUps;
-    float questionTime;
+    Question CurQuestion;
+    SubscriberList<IOnQuestionChanged> OnQuestionChangeds;
+    SubscriberList<IOnWrongAnswer> OnWrongAnswers;
+    SubscriberList<IOnQuizAborted> OnQuizAborteds;
+    SubscriberList<IOnGiveUp> OnGiveUps;
+    float QuestionTime;
 
     void Start()
     {
@@ -25,13 +25,13 @@ public class QuestionPicker : MonoBehaviour
 
     public void AbortQuiz()
     {
-        onQuizAborteds.Notify(subscriber => subscriber.OnQuizAborted());
+        OnQuizAborteds.Notify(subscriber => subscriber.OnQuizAborted());
         StopAllCoroutines();
     }
 
     public void NextQuestion()
     {
-        ShowQuestion((curQuestion != null && curQuestion.isLaunchCode) ? curQuestion : effortTracker.GetQuestion()); // if NextQuestion is called with curQuestion.isLaunchCode, the player gave up on the launch code, which means we should show it again
+        ShowQuestion((CurQuestion != null && CurQuestion.IsLaunchCode) ? CurQuestion : EffortTracker.GetQuestion()); // if NextQuestion is called with curQuestion.isLaunchCode, the player gave up on the launch code, which means we should show it again
                                                                                                                      //			StartCoroutine (AutoAnswer());
     }
 
@@ -44,49 +44,49 @@ public class QuestionPicker : MonoBehaviour
 
     public void OnAnswer(string answer)
     {
-        if (curQuestion == null || answer.Length == 0)
+        if (CurQuestion == null || answer.Length == 0)
         {
             return;
         }
-        bool isCorrect = curQuestion.IsAnswerCorrect(answer);
-        float answerTime = Time.time - questionTime;
+        bool isCorrect = CurQuestion.IsAnswerCorrect(answer);
+        float answerTime = Time.time - QuestionTime;
         HandleAnswer(isCorrect, answerTime);
-        effortTracker.Save();
+        EffortTracker.Save();
     }
 
     public void OnGiveUp()
     {
-        onGiveUps.Notify(subscriber => subscriber.OnGiveUp(curQuestion));
+        OnGiveUps.Notify(subscriber => subscriber.OnGiveUp(CurQuestion));
     }
 
     public void ShowQuestion(Question newQuestion)
     {
-        curQuestion = newQuestion;
-        onQuestionChangeds.Notify(subscriber => subscriber.OnQuestionChanged(curQuestion));
-        questionTime = Time.time;
+        CurQuestion = newQuestion;
+        OnQuestionChangeds.Notify(subscriber => subscriber.OnQuestionChanged(CurQuestion));
+        QuestionTime = Time.time;
     }
 
     // I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
     private void SplitSubscribers()
     {
-        onQuestionChangeds = new SubscriberList<OnQuestionChanged>(subscribers);
-        onWrongAnswers = new SubscriberList<OnWrongAnswer>(subscribers);
-        onQuizAborteds = new SubscriberList<OnQuizAborted>(subscribers);
-        onGiveUps = new SubscriberList<OnGiveUp>(subscribers);
+        OnQuestionChangeds = new SubscriberList<IOnQuestionChanged>(Subscribers);
+        OnWrongAnswers = new SubscriberList<IOnWrongAnswer>(Subscribers);
+        OnQuizAborteds = new SubscriberList<IOnQuizAborted>(Subscribers);
+        OnGiveUps = new SubscriberList<IOnGiveUp>(Subscribers);
     }
 
     void HandleAnswer(bool isCorrect, float answerTime)
     {
-        bool wasNew = curQuestion.IsNew();
-        bool isNewlyMastered = curQuestion.Answer(isCorrect, answerTime);
+        bool wasNew = CurQuestion.IsNew();
+        bool isNewlyMastered = CurQuestion.Answer(isCorrect, answerTime);
         if (isCorrect)
         {
-            correctAnswer.Invoke(curQuestion, isNewlyMastered);
-            curQuestion = null;
+            CorrectAnswer.Invoke(CurQuestion, isNewlyMastered);
+            CurQuestion = null;
         }
         else
         {
-            onWrongAnswers.Notify(subscriber => subscriber.OnWrongAnswer(wasNew));
+            OnWrongAnswers.Notify(subscriber => subscriber.OnWrongAnswer(wasNew));
         }
     }
 }

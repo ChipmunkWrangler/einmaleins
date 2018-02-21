@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface OnQuestionChanged  {
+public interface IOnQuestionChanged  {
 	void OnQuestionChanged(Question newQuestion);
 }

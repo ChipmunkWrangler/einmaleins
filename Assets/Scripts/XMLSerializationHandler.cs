@@ -3,11 +3,11 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
-public class XMLSerializationHandler
+public static class XMLSerializationHandler
 {
-	const string fName = "gamedata.xml";
+    const string FileName = "gamedata.xml";
 
-	static public void SaveToFile ()
+	public static void SaveToFile ()
 	{
 		try {
 			var serializer = new XmlSerializer (typeof(GameData));
@@ -23,7 +23,7 @@ public class XMLSerializationHandler
 		}
 	}
 
-	static public string GetAsString ()
+	public static string GetAsString ()
 	{
 		var serializer = new XmlSerializer (typeof(GameData));
 		using (var sw = new StringWriter ()) {
@@ -32,7 +32,7 @@ public class XMLSerializationHandler
 		}
 	}
 
-	static public GameData LoadFromFile ()
+	public static GameData LoadFromFile ()
 	{
 		GameData data = null;
 		try {
@@ -51,7 +51,7 @@ public class XMLSerializationHandler
 		return data;
 	}
 
-	static public void LoadFromString (string xml)
+	public static void LoadFromString (string xml)
 	{
 		try {
 			var reader = new StringReader (xml);
@@ -66,7 +66,7 @@ public class XMLSerializationHandler
 
 	static string GetPath ()
 	{
-		return Path.Combine (Application.persistentDataPath, fName);
+		return Path.Combine (Application.persistentDataPath, FileName);
 	}
 
 	static GameData GetData ()

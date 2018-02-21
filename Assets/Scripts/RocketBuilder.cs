@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketBuilder : MonoBehaviour {
-	[SerializeField] float builtY = 0;
-	[SerializeField] float hiddenY = -2.0F;
-	[SerializeField] float maxY = 1.0F;
-	[SerializeField] float buildingTime = 5.0F;
-	[SerializeField] float upgradeFlightTime = 5.0F;
-	[SerializeField] float buildingDelay = 1.0F;
-	[SerializeField] RocketPartCounter counter = null;
-	[SerializeField] UpgradeButton upgradeButton = null;
-	[SerializeField] ParticleSystem buildParticles = null;
-	[SerializeField] ParticleSystem[] exhaustParticles = null;
-	[SerializeField] GameObject launchButton = null;
-	[SerializeField] GameObject rocketPartsWidget = null;
-	[SerializeField] GameObject chooseColourButton = null;
+    [SerializeField] float BuiltY = 0;
+    [SerializeField] float HiddenY = -2.0F;
+    [SerializeField] float MaxY = 1.0F;
+    [SerializeField] float BuildingTime = 5.0F;
+    [SerializeField] float UpgradeFlightTime = 5.0F;
+    [SerializeField] float BuildingDelay = 1.0F;
+    [SerializeField] RocketPartCounter Counter = null;
+    [SerializeField] UpgradeButton UpgradeButton = null;
+    [SerializeField] ParticleSystem BuildParticles = null;
+    [SerializeField] ParticleSystem[] ExhaustParticles = null;
+    [SerializeField] GameObject LaunchButton = null;
+    [SerializeField] GameObject RocketPartsWidget = null;
+    [SerializeField] GameObject ChooseColourButton = null;
 
-	iTween.EaseType[] easeTypes = { //new iTween.EaseType[]
+    iTween.EaseType[] EaseTypes = { //new iTween.EaseType[]
 		iTween.EaseType.linear,
 		iTween.EaseType.easeInOutCubic,
 		iTween.EaseType.easeOutQuad,
@@ -28,39 +28,39 @@ public class RocketBuilder : MonoBehaviour {
 	};
 
 	void Start () {
-		chooseColourButton.SetActive (false);
-		if (RocketParts.instance.isRocketBuilt) {
-			SetY (builtY);
-			rocketPartsWidget.SetActive (RocketParts.instance.upgradeLevel < RocketParts.instance.maxUpgradeLevel - 1);
-			if (!RocketParts.instance.hasEnoughPartsToUpgrade) {
+		ChooseColourButton.SetActive (false);
+		if (RocketParts.Instance.IsRocketBuilt) {
+			SetY (BuiltY);
+			RocketPartsWidget.SetActive (RocketParts.Instance.UpgradeLevel < RocketParts.Instance.MaxUpgradeLevel - 1);
+			if (!RocketParts.Instance.HasEnoughPartsToUpgrade) {
 				DoneBuildingOrUpgrading ();
 			}
 		} else {
-			SetY (hiddenY);
-			rocketPartsWidget.SetActive (false);
+			SetY (HiddenY);
+			RocketPartsWidget.SetActive (false);
 			Build ();
 		}
 	}
 
 	public void OnUpgrade() {
-		UnityEngine.Assertions.Assert.AreEqual (exhaustParticles.Length - 1, RocketParts.instance.maxUpgradeLevel);
-		if (RocketParts.instance.Upgrade ()) {
-			counter.OnSpend (RocketParts.instance.numParts + RocketParts.instance.numPartsRequired, RocketParts.instance.numParts);
+		UnityEngine.Assertions.Assert.AreEqual (ExhaustParticles.Length - 1, RocketParts.Instance.MaxUpgradeLevel);
+		if (RocketParts.Instance.Upgrade ()) {
+			Counter.OnSpend (RocketParts.Instance.NumParts + RocketParts.Instance.NumPartsRequired, RocketParts.Instance.NumParts);
 			StartEngine ();
-			iTween.MoveTo (gameObject, iTween.Hash ("y", maxY, "time", upgradeFlightTime, "delay", buildingDelay, "easetype", easeTypes[RocketParts.instance.upgradeLevel], "oncomplete", "Descend"));
+			iTween.MoveTo (gameObject, iTween.Hash ("y", MaxY, "time", UpgradeFlightTime, "delay", BuildingDelay, "easetype", EaseTypes[RocketParts.Instance.UpgradeLevel], "oncomplete", "Descend"));
 		}
 	}
 
 	void StartEngine ()
 	{
-		for (int i = 0; i < exhaustParticles.Length; ++i) {
-			if (exhaustParticles [i] != null) {
-				exhaustParticles [i].gameObject.SetActive (false);
+		for (int i = 0; i < ExhaustParticles.Length; ++i) {
+			if (ExhaustParticles [i] != null) {
+				ExhaustParticles [i].gameObject.SetActive (false);
 			}
 		}
-		int upgradeLevel = RocketParts.instance.upgradeLevel;
-		exhaustParticles [upgradeLevel].gameObject.SetActive (true);
-		exhaustParticles [upgradeLevel].Play ();
+		int upgradeLevel = RocketParts.Instance.UpgradeLevel;
+		ExhaustParticles [upgradeLevel].gameObject.SetActive (true);
+		ExhaustParticles [upgradeLevel].Play ();
 	}
 
 	void Descend() {
@@ -72,30 +72,30 @@ public class RocketBuilder : MonoBehaviour {
 	}
 
 	void GotoBasePos(string onComplete) {
-		iTween.MoveTo (gameObject, iTween.Hash ("y", builtY, "time", buildingTime, "delay", buildingDelay, "easetype", iTween.EaseType.easeOutQuad, "oncomplete", onComplete));
+		iTween.MoveTo (gameObject, iTween.Hash ("y", BuiltY, "time", BuildingTime, "delay", BuildingDelay, "easetype", iTween.EaseType.easeOutQuad, "oncomplete", onComplete));
 	}
 
 	void Build ()
 	{
 		GotoBasePos("DoneBuilding");
-		buildParticles.Play ();
+		BuildParticles.Play ();
 		StartEngine ();
 	}
 
 	void DoneBuilding() {
-		RocketParts.instance.isRocketBuilt = true;
-		buildParticles.Stop ();
+		RocketParts.Instance.IsRocketBuilt = true;
+		BuildParticles.Stop ();
 		DoneBuildingOrUpgrading ();
 	}
 
 	void DoneBuildingOrUpgrading() {
-		exhaustParticles [RocketParts.instance.upgradeLevel].Stop ();
-		upgradeButton.Hide ();
+		ExhaustParticles [RocketParts.Instance.UpgradeLevel].Stop ();
+		UpgradeButton.Hide ();
 		if (ChooseRocketColour.HasChosenColour ()) {
-			launchButton.SetActive (true);
+			LaunchButton.SetActive (true);
 		} else {
-			launchButton.SetActive (false);
-			chooseColourButton.SetActive (true);
+			LaunchButton.SetActive (false);
+			ChooseColourButton.SetActive (true);
 		}
 	}
 		

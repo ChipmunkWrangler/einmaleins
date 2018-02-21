@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e37913b9f254327acffe0b4bd310aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subscribers:
+  Subscribers:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  isFlash: 0
+  IsFlash: 0
 --- !u!114 &114657463298905038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84,6 +84,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2179ecab0be94d81955ef567fdaae51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 3
-  particleParent: {fileID: 0}
-  questionPicker: {fileID: 114448925386902148}
+  Duration: 3
+  ParticleParent: {fileID: 0}
+  QPicker: {fileID: 114448925386902148}

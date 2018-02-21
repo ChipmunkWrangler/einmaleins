@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StatsColumnController : MonoBehaviour {
-	[SerializeField] UnityEngine.UI.Image[] cells = null;
-	[SerializeField] UnityEngine.UI.Image header = null;
-	[SerializeField] UnityEngine.UI.Image rowHeader = null;
-	[SerializeField] float fadeTime = 0.5F;
-	[SerializeField] Color highlightColor = Color.yellow;
+    [SerializeField] UnityEngine.UI.Image[] Cells = null;
+    [SerializeField] UnityEngine.UI.Image Header = null;
+    [SerializeField] UnityEngine.UI.Image RowHeader = null;
+    [SerializeField] float FadeTime = 0.5F;
+    [SerializeField] Color HighlightColor = Color.yellow;
 
-	int numMastered;
-	bool isSomethingHighlighed;
+    int NumMastered;
+    bool IsSomethingHighlighed;
 
 	public bool SetMasteryLevel(int row, Question q, bool seenMastered) {
 		if (q.IsMastered()) {
-			numMastered++;
+			NumMastered++;
 			if (seenMastered) {
-				cells [row].CrossFadeAlpha (0, 0, false);	
+				Cells [row].CrossFadeAlpha (0, 0, false);	
 			} else {
-				cells [row].color = highlightColor;
-				cells [row].CrossFadeAlpha (0, fadeTime, false);
-				isSomethingHighlighed = true;
+				Cells [row].color = HighlightColor;
+				Cells [row].CrossFadeAlpha (0, FadeTime, false);
+				IsSomethingHighlighed = true;
 			}
 			seenMastered = true;
 		}
@@ -28,19 +28,19 @@ public class StatsColumnController : MonoBehaviour {
 	}
 
 	public void DoneSettingMasteryLevels() {
-		if (numMastered >= Questions.maxNum) {
-			UnityEngine.UI.Text text = header.gameObject.GetComponentInChildren<UnityEngine.UI.Text> ();
-			UnityEngine.UI.Text rowHeaderText = rowHeader.gameObject.GetComponentInChildren<UnityEngine.UI.Text> ();
-			if (isSomethingHighlighed) {
-				header.color = highlightColor;
-				header.CrossFadeAlpha (0, fadeTime, false);
-				rowHeader.color = highlightColor;
-				rowHeader.CrossFadeAlpha (0, fadeTime, false);
-				text.CrossFadeAlpha (0, fadeTime, false);
-				rowHeaderText.CrossFadeAlpha (0, fadeTime, false);
+		if (NumMastered >= Questions.MaxNum) {
+			UnityEngine.UI.Text text = Header.gameObject.GetComponentInChildren<UnityEngine.UI.Text> ();
+			UnityEngine.UI.Text rowHeaderText = RowHeader.gameObject.GetComponentInChildren<UnityEngine.UI.Text> ();
+			if (IsSomethingHighlighed) {
+				Header.color = HighlightColor;
+				Header.CrossFadeAlpha (0, FadeTime, false);
+				RowHeader.color = HighlightColor;
+				RowHeader.CrossFadeAlpha (0, FadeTime, false);
+				text.CrossFadeAlpha (0, FadeTime, false);
+				rowHeaderText.CrossFadeAlpha (0, FadeTime, false);
 			} else {
-				header.CrossFadeAlpha (0, 0, false);
-				rowHeader.CrossFadeAlpha (0, 0, false);
+				Header.CrossFadeAlpha (0, 0, false);
+				RowHeader.CrossFadeAlpha (0, 0, false);
 				text.text = "";
 				rowHeaderText.text = "";
 			}
