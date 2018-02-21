@@ -396,8 +396,6 @@
     <Compile Include="Assets\Scripts\MDVersion.cs" />
     <Compile Include="Assets\Scripts\NewPlayerName.cs" />
     <Compile Include="Assets\Scripts\NumberButtonLayoutController.cs" />
-    <Compile Include="Assets\Scripts\OnAnswerChanged.cs" />
-    <Compile Include="Assets\Scripts\OnCorrectAnswer.cs" />
     <Compile Include="Assets\Scripts\OnGiveUp.cs" />
     <Compile Include="Assets\Scripts\OnQuestionChanged.cs" />
     <Compile Include="Assets\Scripts\OnQuizAborted.cs" />
@@ -415,7 +413,6 @@
     <Compile Include="Assets\Scripts\RocketMotionSolarSystem.cs" />
     <Compile Include="Assets\Scripts\RocketPartCounter.cs" />
     <Compile Include="Assets\Scripts\RocketParts.cs" />
-    <Compile Include="Assets\Scripts\Score.cs" />
     <Compile Include="Assets\Scripts\ScrollBackground.cs" />
     <Compile Include="Assets\Scripts\SendSaveDataByMail.cs" />
     <Compile Include="Assets\Scripts\ShowOnRight.cs" />
