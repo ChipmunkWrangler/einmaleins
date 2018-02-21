@@ -4399,7 +4399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answerHandler: {fileID: 382}
   maxDigits: 3
-  notifyOnAnswerChanged:
+  answerChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 32}

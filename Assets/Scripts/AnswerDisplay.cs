@@ -4,7 +4,7 @@ using UnityEngine;
 public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCorrectAnswer, OnQuizAborted, OnGiveUp {
 	[SerializeField] QuestionPicker answerHandler = null;
 	[SerializeField] int maxDigits = 0;
-    [SerializeField] BoolEvent notifyOnAnswerChanged = new BoolEvent();
+    [SerializeField] BoolEvent answerChanged = new BoolEvent();
 	string queuedTxt;
 	bool isFading;
 	Color oldColor;
@@ -76,6 +76,6 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 	}
 
 	void NotifySubscribers() {
-        notifyOnAnswerChanged.Invoke(GetText().Length == 0);
+        answerChanged.Invoke(GetText().Length == 0);
 	}
 }
