@@ -6,7 +6,7 @@ public class EnterAnswerButtonController : MonoBehaviour, OnWrongAnswer, OnQuizA
 	bool isHiding;
 	bool isShowing;
 
-	public const float transitionTime = 0.25F;
+    public const float transitionTime = 0.25F;
 
 	public void OnQuizAborted() {
 		Hide ();

@@ -3,12 +3,10 @@ using UnityEngine;
 using System.Linq;
 
 public class Questions : MonoBehaviour {
-	public const int maxNum = 10;
+    QuestionsPersistentData data = new QuestionsPersistentData();
 
-	public Question[] questions { get; private set; }
-
-	QuestionsPersistentData data = new QuestionsPersistentData();
-
+    public static readonly int maxNum = 10;
+    public Question[] questions { get; private set; }
 	public static int GetNumQuestions () => maxNum * (maxNum + 1) / 2;
     public Question GetGaveUpQuestion() => questions.FirstOrDefault(question => question.GaveUp());
     public Question GetLaunchCodeQuestion() => questions.FirstOrDefault(question => question.isLaunchCode);

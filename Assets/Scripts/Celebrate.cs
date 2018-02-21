@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Celebrate : MonoBehaviour, OnWrongAnswer, OnQuestionChanged, OnQuizAborted {
-	public const float duration = 3.0F;
+	public static readonly float duration = 3.0F;
 	[SerializeField] ParticleSystem[] exhaustParticles = null;
 	[SerializeField] ParticleSystem fastAnswerParticles = null;
 	[SerializeField] ParticleSystem masteryParticles = null;

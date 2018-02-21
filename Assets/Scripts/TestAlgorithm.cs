@@ -56,7 +56,7 @@ public class TestAlgorithm : MonoBehaviour {
 		List<float> answerTimes;
 		int timesAnsweredFast = 0;
 
-		public const int NUM_ANSWER_TIMES_TO_RECORD = 3;
+		const int NUM_ANSWER_TIMES_TO_RECORD = 3;
 		const float ANSWER_TIME_MAX = 60.0F;
 		const float INITIAL_ANSWER_TIME = TARGET_TIME + 0.01F;
 

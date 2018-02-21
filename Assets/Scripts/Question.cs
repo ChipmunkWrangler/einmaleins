@@ -166,8 +166,8 @@ public class QuestionPersistentData
     public bool gaveUp;
     public List<float> answerTimes;
 
-    [System.NonSerialized] public const int NUM_ANSWER_TIMES_TO_RECORD = 3;
-    [System.NonSerialized] public const float ANSWER_TIME_INITIAL = Question.FAST_TIME + 0.01F;
+    public static readonly int NUM_ANSWER_TIMES_TO_RECORD = 3;
+    public static readonly float ANSWER_TIME_INITIAL = Question.FAST_TIME + 0.01F;
 
     string prefsKey;
 

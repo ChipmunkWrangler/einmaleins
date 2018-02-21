@@ -4,7 +4,7 @@ using System.Linq;
 public class PlayerNameController
 {
 	const string namesPrefsKey = "playerNames";
-	public const string curPlayerPrefsKey = "curPlayer";
+    public static readonly string curPlayerPrefsKey = "curPlayer";
 
 	public string[] names { get; private set; }
 
