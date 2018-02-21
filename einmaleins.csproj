@@ -426,6 +426,7 @@
     <Compile Include="Assets\Scripts\TestAlgorithm.cs" />
     <Compile Include="Assets\Scripts\TextButton.cs" />
     <Compile Include="Assets\Scripts\TextDisplay.cs" />
+    <Compile Include="Assets\Scripts\UnityEventsWithParams.cs" />
     <Compile Include="Assets\Scripts\UpgradeButton.cs" />
     <Compile Include="Assets\Scripts\VersionDisplay.cs" />
     <Compile Include="Assets\Scripts\XMLSerializationHandler.cs" />

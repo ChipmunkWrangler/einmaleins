@@ -1,12 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCorrectAnswer, OnQuizAborted, OnGiveUp {
 	[SerializeField] QuestionPicker answerHandler = null;
 	[SerializeField] int maxDigits = 0;
-	[SerializeField] GameObject[] subscribers = null;
-	List<OnAnswerChanged> onAnswerChangedSubscribers;
+    [SerializeField] BoolEvent notifyOnAnswerChanged = new BoolEvent();
 	string queuedTxt;
 	bool isFading;
 	Color oldColor;
@@ -15,7 +13,6 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 
 	void Start() {
 		oldColor = GetTextField ().color;
-		SplitSubscribers ();
 		SetText ("");
 	}
 
@@ -79,21 +76,6 @@ public class AnswerDisplay : TextDisplay, OnQuestionChanged, OnWrongAnswer, OnCo
 	}
 
 	void NotifySubscribers() {
-		bool isEmpty = GetText ().Length == 0;
-		foreach (OnAnswerChanged subscriber in onAnswerChangedSubscribers) {
-			subscriber.OnAnswerChanged (isEmpty);
-		}
-	}
-
-	// I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
-	private void SplitSubscribers() {
-		onAnswerChangedSubscribers = new List<OnAnswerChanged> ();
-		foreach(GameObject subscriber in subscribers) {
-			OnAnswerChanged[] onAnswerChangeds = subscriber.GetComponents<OnAnswerChanged>();
-			UnityEngine.Assertions.Assert.AreNotEqual (onAnswerChangeds.Length, 0);				
-			foreach(OnAnswerChanged s in onAnswerChangeds) {
-				onAnswerChangedSubscribers.Add (s);
-			}
-		}
+        notifyOnAnswerChanged.Invoke(GetText().Length == 0);
 	}
 }
