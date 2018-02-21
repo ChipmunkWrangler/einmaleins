@@ -6,16 +6,31 @@ using UnityEngine.Events;
 [Serializable]
 public class CorrectAnswerEvent : UnityEvent<Question, bool /*isNewlyMastered*/> { }
 
+public class SubscriberList<TSubscriber>  {
+    public List<TSubscriber> Subscribers = new List<TSubscriber>();
+
+    public SubscriberList(GameObject[] subscriberContainers)
+    {
+        foreach (GameObject subscriberContainer in subscriberContainers)
+        {
+            foreach (TSubscriber subscriber in subscriberContainer.GetComponents<TSubscriber>())
+            {
+                Subscribers.Add(subscriber);
+            }
+        }
+    }
+}
+
 public class QuestionPicker : MonoBehaviour {
 	[SerializeField] GameObject[] subscribers = null;
 	[SerializeField] EffortTracker effortTracker = null;
     [SerializeField] CorrectAnswerEvent correctAnswer = new CorrectAnswerEvent();
 
 	Question curQuestion;
-	List<OnQuestionChanged> onQuestionChangedSubscribers;
-	List<OnWrongAnswer> onWrongAnswerSubscribers;
-	List<OnQuizAborted> onQuizAbortedSubscribers;
-	List<OnGiveUp> onGiveUpSubscribers;
+    SubscriberList<OnQuestionChanged> onQuestionChangeds;
+    SubscriberList<OnWrongAnswer> onWrongAnswers;
+    SubscriberList<OnQuizAborted> onQuizAborteds;
+    SubscriberList<OnGiveUp> onGiveUps;
 	float questionTime;
 
 	void Start () {
@@ -23,7 +38,7 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	public void AbortQuiz() {
-		foreach (OnQuizAborted subscriber in onQuizAbortedSubscribers) {
+		foreach (OnQuizAborted subscriber in onQuizAborteds.Subscribers) {
 			subscriber.OnQuizAborted ();
 		}
 		StopAllCoroutines ();
@@ -52,7 +67,7 @@ public class QuestionPicker : MonoBehaviour {
 	}
 
 	public void OnGiveUp() {
-		foreach (OnGiveUp subscriber in onGiveUpSubscribers) {
+		foreach (OnGiveUp subscriber in onGiveUps.Subscribers) {
 			subscriber.OnGiveUp (curQuestion);
 		}
 		curQuestion.GiveUp ();
@@ -61,7 +76,7 @@ public class QuestionPicker : MonoBehaviour {
 	public void ShowQuestion (Question newQuestion)
 	{
 		curQuestion = newQuestion;
-		foreach (OnQuestionChanged subscriber in onQuestionChangedSubscribers) {
+		foreach (OnQuestionChanged subscriber in onQuestionChangeds.Subscribers) {
 			subscriber.OnQuestionChanged (curQuestion);
 		}
 		questionTime = Time.time;
@@ -69,28 +84,10 @@ public class QuestionPicker : MonoBehaviour {
 		
 	// I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
 	private void SplitSubscribers() {
-		onQuestionChangedSubscribers = new List<OnQuestionChanged> ();
-		onWrongAnswerSubscribers = new List<OnWrongAnswer> ();
-		onQuizAbortedSubscribers = new List<OnQuizAborted> ();
-		onGiveUpSubscribers = new List<OnGiveUp> ();
-		foreach(GameObject subscriber in subscribers) {
-			OnQuestionChanged[] onQuestionChangeds = subscriber.GetComponents<OnQuestionChanged>();
-			foreach(OnQuestionChanged s in onQuestionChangeds) {
-				onQuestionChangedSubscribers.Add (s);
-			}
-			OnWrongAnswer[] onWrongAnswers = subscriber.GetComponents<OnWrongAnswer>();
-			foreach(OnWrongAnswer s in onWrongAnswers) {
-				onWrongAnswerSubscribers.Add (s);
-			}
-			OnQuizAborted[] onQuizAborteds = subscriber.GetComponents<OnQuizAborted>();
-			foreach(OnQuizAborted s in onQuizAborteds) {
-				onQuizAbortedSubscribers.Add (s);
-			}
-			OnGiveUp[] onGiveUps = subscriber.GetComponents<OnGiveUp>();
-			foreach(OnGiveUp s in onGiveUps) {
-				onGiveUpSubscribers.Add (s);
-			}
-		}
+		onQuestionChangeds = new SubscriberList<OnQuestionChanged> (subscribers);
+        onWrongAnswers = new SubscriberList<OnWrongAnswer> (subscribers);
+        onQuizAborteds = new SubscriberList<OnQuizAborted> (subscribers);
+        onGiveUps = new SubscriberList<OnGiveUp> (subscribers);		
 	}
 
 	void HandleAnswer (bool isCorrect, float answerTime)
@@ -102,7 +99,7 @@ public class QuestionPicker : MonoBehaviour {
 			curQuestion = null;
 		}
 		else {
-			foreach (OnWrongAnswer subscriber in onWrongAnswerSubscribers) {
+            foreach (OnWrongAnswer subscriber in onWrongAnswers.Subscribers) {
 				subscriber.OnWrongAnswer (wasNew);
 			}
 		}
