@@ -829,6 +829,11 @@ MonoBehaviour:
   button: {fileID: 1566283461}
   label: {fileID: 480844863}
   engineTermPrefix: engineNames_
+--- !u!1 &550289647 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1728694135454934, guid: a7a68ecaab4c649aa9c49c12f5d4921f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1418089430}
 --- !u!1 &929832777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,6 +1548,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114556644107204194, guid: a7a68ecaab4c649aa9c49c12f5d4921f,
+        type: 2}
+      propertyPath: pointerMain
+      value: 
+      objectReference: {fileID: 550289647}
+    - target: {fileID: 114556644107204194, guid: a7a68ecaab4c649aa9c49c12f5d4921f,
+        type: 2}
+      propertyPath: pointerLocation
+      value: 
+      objectReference: {fileID: 550289647}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7a68ecaab4c649aa9c49c12f5d4921f, type: 2}
   m_IsPrefabParent: 0

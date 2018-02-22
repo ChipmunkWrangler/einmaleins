@@ -2,12 +2,12 @@
 
 public class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged, IOnGiveUp
 {
+    public const float TransitionTime = 0.25F;
+
     [SerializeField] UnityEngine.UI.Button button = null;
 
     bool isHiding;
     bool isShowing;
-
-    public const float TransitionTime = 0.25F;
 
     public void OnQuizAborted()
     {

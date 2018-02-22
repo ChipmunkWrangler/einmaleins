@@ -1,13 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[System.Serializable]
-public class ForegroundDisplaySettings
-{
-    public float scale = 1.0F;
-    public float yPos;
-}
+﻿using UnityEngine;
 
 public class ShowSolarSystem : MonoBehaviour
 {
@@ -27,6 +18,8 @@ public class ShowSolarSystem : MonoBehaviour
     Vector3 originalScale;
     Transform particleSystemTransform;
 
+    public Renderer GetPlanet(int i) => planets[i];
+
     public float ZoomToPlanet(int i)
     {
         GameObject planet = planets[i].gameObject;
@@ -42,7 +35,10 @@ public class ShowSolarSystem : MonoBehaviour
         return duration;
     }
 
-    public Renderer GetPlanet(int i) => planets[i];
+    public void Reset()
+    {
+        transform.localScale = originalScale;
+    }
 
     void Start()
     {
@@ -73,11 +69,6 @@ public class ShowSolarSystem : MonoBehaviour
                 rocket.transform.localScale *= maintainMinScaleFactor;
             }
         }
-    }
-
-    public void Reset()
-    {
-        transform.localScale = originalScale;
     }
 
     void AdjustPlanetPositions()

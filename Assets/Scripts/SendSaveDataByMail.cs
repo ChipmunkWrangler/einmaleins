@@ -1,21 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using UnityEngine;
 
 public class SendSaveDataByMail : MonoBehaviour
 {
-    [SerializeField] UnityEngine.UI.Text statusLine = null;
-    [SerializeField] UnityEngine.UI.Button sendButton = null;
-
     const string Sender = "einmaleinsreport@crazy-chipmunk.com";
     const string Receiver = "testers@crazy-chipmunk.com";
     const string Server = "v078528.kasserver.com";
     const int Port = 25;
+
     static readonly string Password = MailPassword.Password;
+
+    [SerializeField] UnityEngine.UI.Text statusLine = null;
+    [SerializeField] UnityEngine.UI.Button sendButton = null;
 
     public void SendReport()
     {
@@ -40,10 +39,7 @@ public class SendSaveDataByMail : MonoBehaviour
             smtpServer.Credentials = new NetworkCredential(Sender, Password) as ICredentialsByHost;
             smtpServer.EnableSsl = true;
             statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation("Sending message...");
-            ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-            {
-                return true;
-            };
+            ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
             try
             {
                 smtpServer.Send(mail);

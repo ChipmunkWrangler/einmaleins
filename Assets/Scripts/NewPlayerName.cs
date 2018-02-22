@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class NewPlayerName : MonoBehaviour {
+public class NewPlayerName : MonoBehaviour
+{
     [SerializeField] GameObject enterNamePanel = null;
     [SerializeField] TextButton[] playerButtons = null;
     [SerializeField] Button playButton = null;
@@ -17,78 +16,93 @@ public class NewPlayerName : MonoBehaviour {
     bool buttonsAlreadyPressed;
     PlayerNameController playerNameController;
 
-	void Start () {
-		playerNameController = new PlayerNameController();
-		playerNameController.Load();
-		if (PlayerNameController.IsPlayerSet()) {
-			RocketParts.Reset();
-			TargetPlanet.Reset();
-		} // else this is initial start
-		ActivatePlayButton( false );
-		int numPlayers = playerNameController.Names.Length;
-		enterNamePanel.SetActive( numPlayers < playerButtons.Length );
-		if (numPlayers == 0) {
-			inputField.Select();
-		}
-		for (int i = 0; i < numPlayers; ++i) {
-			playerButtons[ i ].SetText( playerNameController.Names[ i ] );
-			playerButtons[ i ].SetActive( true );
-		}
-		for (int i = numPlayers; i < playerButtons.Length; ++i) {
-			playerButtons[ i ].SetActive( false );
-		}
-	}
+    public void OnPlayerNameChanged(string name)
+    {
+        if (!buttonsAlreadyPressed)
+        {
+            ActivatePlayButton(playerNameController.IsNameValid(name));
+            newName = name;
+        }
+    }
 
+    public void OnPlayerNameButton(int i)
+    {
+        if (!buttonsAlreadyPressed)
+        {
+            playerNameController.CurName = playerNameController.Names[i];
+            Play();
+        }
+    }
 
-	public void OnPlayerNameChanged (string name) {
-		if (!buttonsAlreadyPressed) {
-			ActivatePlayButton( playerNameController.IsNameValid( name ) );
-			newName = name;
-		}
-	}
+    public void OnPlay()
+    {
+        if (!buttonsAlreadyPressed)
+        {
+            playerNameController.AppendName(newName);
+            playerNameController.CurName = newName;
+            Play();
+        }
+    }
 
-	public void OnPlayerNameButton (int i) {
-		if (!buttonsAlreadyPressed) {
-			playerNameController.CurName = playerNameController.Names[ i ];
-			Play();
-		}
-	}
+    void Start()
+    {
+        playerNameController = new PlayerNameController();
+        playerNameController.Load();
+        if (PlayerNameController.IsPlayerSet())
+        {
+            RocketParts.Reset();
+            TargetPlanet.Reset();
+        } // else this is initial start
+        ActivatePlayButton(false);
+        int numPlayers = playerNameController.Names.Length;
+        enterNamePanel.SetActive(numPlayers < playerButtons.Length);
+        if (numPlayers == 0)
+        {
+            inputField.Select();
+        }
+        for (int i = 0; i < numPlayers; ++i)
+        {
+            playerButtons[i].SetText(playerNameController.Names[i]);
+            playerButtons[i].SetActive(true);
+        }
+        for (int i = numPlayers; i < playerButtons.Length; ++i)
+        {
+            playerButtons[i].SetActive(false);
+        }
+    }
 
-	public void OnPlay () {
-		if (!buttonsAlreadyPressed) {
-			playerNameController.AppendName( newName );
-			playerNameController.CurName = newName;
-			Play();
-		}
-	}
+    void ActivatePlayButton(bool b)
+    {
+        playButton.interactable = b;
+        playButtonImage.CrossFadeAlpha(b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false);
+    }
 
-	void ActivatePlayButton (bool b) {
-		playButton.interactable = b;
-		playButtonImage.CrossFadeAlpha( b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false );
-	}
+    void Play()
+    {
+        // todo transition
+        DisableButtons();
+        playerNameController.Save();
+        PlayerPrefs.Save();
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(IsRocketBuilt() ? "launch" : "rocketBuilding");
+    }
 
-	void Play () {
-		// todo transition
-		DisableButtons();
-		playerNameController.Save();
-		PlayerPrefs.Save();
-		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync( IsRocketBuilt() ? "launch" : "rocketBuilding" );
-	}
+    bool IsRocketBuilt()
+    {
+        if (PlayerNameController.IsPlayerSet())
+        {
+            rocketPartsGameObj.SetActive(true);
+            return RocketParts.Instance.IsRocketBuilt && ChooseRocketColour.HasChosenColour();
+        }
+        return false;
+    }
 
-	bool IsRocketBuilt () {
-		if (PlayerNameController.IsPlayerSet()) {
-			rocketPartsGameObj.SetActive( true );
-			return RocketParts.Instance.IsRocketBuilt && ChooseRocketColour.HasChosenColour();
-		}
-		return false;
-	}
-
-	void DisableButtons () {
-		buttonsAlreadyPressed = true;			
-		playButton.enabled = false;
-		foreach (TextButton button in playerButtons) {
-			button.enabled = false;
-		}
-	}
+    void DisableButtons()
+    {
+        buttonsAlreadyPressed = true;
+        playButton.enabled = false;
+        foreach (TextButton button in playerButtons)
+        {
+            button.enabled = false;
+        }
+    }
 }
-

@@ -5,6 +5,27 @@ using UnityEngine.UI;
 
 public class FlashThrust : MonoBehaviour, IOnQuestionChanged
 {
+    const float AllottedTime = Question.FastTime; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight
+    const float MinThrustFactor = 0.1F;
+    const int V = 4;
+    const string RecordPrefsKey = "recordHeight";
+    const string HeightFormat = "N0";
+    const string Unit = " km";
+
+    static float q;
+    static float maxThrustFactor;
+
+    readonly string[] planetReachedTexts =
+    {
+        "Mars erreicht!",
+        "Jupiter erreicht!",
+        "Saturn erreicht!",
+        "Uranus erreicht!",
+        "Neptun erreicht!",
+        "Pluto erreicht!",
+        "Ende erreicht!" // should never happen
+    };
+
     [SerializeField] GameObject heightWidget = null;
     [SerializeField] Text heightText = null;
     [SerializeField] Text recordHeightText = null;
@@ -19,24 +40,7 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
     [SerializeField] EffortTracker effortTracker = null;
     [SerializeField] QuestionPicker questionPicker = null;
     [SerializeField] Goal goal = null;
-    public float Speed { get; private set; } // km per second
-    public float Height { get; private set; } // km
 
-    readonly string[] PlanetReachedTexts = {
-        "Mars erreicht!",
-        "Jupiter erreicht!",
-        "Saturn erreicht!",
-        "Uranus erreicht!",
-        "Neptun erreicht!",
-        "Pluto erreicht!",
-        "Ende erreicht!" // should never happen
-	};
-
-    const float AllottedTime = Question.FastTime; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight
-    const float MinThrustFactor = 0.1F;
-    const int V = 4;
-    static float q;
-    static float maxThrustFactor;
     float baseThrust;
     float gravity;
     float recordHeight;
@@ -47,14 +51,11 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
     bool checkForRecord;
     Goal.CurGoal curGoal;
 
-    const string RecordPrefsKey = "recordHeight";
-    const string HeightFormat = "N0";
-    const string Unit = " km";
+    public float Speed { get; private set; } // km per second
+    public float Height { get; private set; } // km
 
-    public static float GetThrustFactor(float timeRequired) => MinThrustFactor + (maxThrustFactor - MinThrustFactor) / Mathf.Pow(1.0F + q * Mathf.Exp(timeRequired - AllottedTime), 1.0F / V);
-
+    public static float GetThrustFactor(float timeRequired) => MinThrustFactor + ((maxThrustFactor - MinThrustFactor) / GetThrustFraction(timeRequired));
     public float GetMaxSingleQuestionSpeed() => GetHeightIncrease(AllottedTime) / Celebrate.Duration;
-
     public void OnCorrectAnswer(Question question, bool isNewlyMastered)
     {
         if (question == null || !question.IsLaunchCode)
@@ -86,19 +87,24 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
         Debug.Log("old speed = " + oldSpeed + " speed = " + Speed);
     }
 
+    public void OnCountdown()
+    {
+        curGoal = goal.CalcCurGoal();
+        UnityEngine.Assertions.Assert.IsTrue(curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
+        InitRecord();
+        InitPhysics(curGoal == Goal.CurGoal.GAUNTLET);
+        isRunning = true;
+        Height = 0;
+        Speed = 0;
+        noMoreQuestions = false;
+    }
+
     static float GetTargetHeight() => TargetPlanet.GetPlanetHeight(RocketParts.Instance.UpgradeLevel);
-    static float CalcQ(float m, float M) => Mathf.Pow((M - m) / (1F - m), V) - 1F;
+    static float CalcQ(float min, float max) => Mathf.Pow((max - min) / (1F - min), V) - 1F;
     static float CalcBaseThrust(bool isGauntlet) => GetTargetHeight() / (EffortTracker.GetNumAnswersInQuiz(isGauntlet) + 1); // +1 because there is an initial launch thrust
+    static float GetThrustFraction(float timeRequired) => Mathf.Pow(1.0F + (q * Mathf.Exp(timeRequired - AllottedTime)), 1.0F / V);
     static float CalcMaxThrustFactor()
     {
-        //      float minHeightRatio = float.MaxValue;
-        //      for (int i = 0; i < TargetPlanet.GetNumPlanets() - 1; ++i) {
-        //          float heightRatio = TargetPlanet.GetPlanetHeight (i + 1) / TargetPlanet.GetPlanetHeight (i);
-        //          if (heightRatio < minHeightRatio) {
-        //              minHeightRatio = heightRatio;
-        //          }
-        //      }
-        //      return minHeightRatio;
         int u = RocketParts.Instance.UpgradeLevel;
         return TargetPlanet.GetPlanetHeight(u + 1) / TargetPlanet.GetPlanetHeight(u);
     }
@@ -213,25 +219,13 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
         effortTracker.EndQuiz();
     }
 
-    public void OnCountdown()
-    {
-        curGoal = goal.CalcCurGoal();
-        UnityEngine.Assertions.Assert.IsTrue(curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
-        InitRecord();
-        InitPhysics(curGoal == Goal.CurGoal.GAUNTLET);
-        isRunning = true;
-        Height = 0;
-        Speed = 0;
-        noMoreQuestions = false;
-    }
-
     IEnumerator CelebrateReachingPlanet(int planetIdx)
     {
         float zoomTime = zoomToPlanet.ZoomToPlanet(planetIdx);
         UnityEngine.Assertions.Assert.IsTrue(zoomTime - planetAchievementTextDelay >= 0);
         ClearAchievementText(planetAchievementTextDelay * 0.9F);
         yield return new WaitForSeconds(planetAchievementTextDelay);
-        ActivateAchievementText(PlanetReachedTexts[planetIdx]);
+        ActivateAchievementText(planetReachedTexts[planetIdx]);
         yield return new WaitForSeconds(zoomTime - planetAchievementTextDelay);
         PrepareNewStart();
         yield return null;

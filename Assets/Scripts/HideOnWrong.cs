@@ -1,26 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class HideOnWrong : MonoBehaviour, IOnWrongAnswer, IOnGiveUp {
-    [SerializeField] float timeToHide = 0;
-
+public class HideOnWrong : MonoBehaviour, IOnWrongAnswer, IOnGiveUp
+{
     const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
-	public void OnWrongAnswer(bool wasNew) {
-		ScaleDown ();
-		ScaleUpAfterDelay ();
-	}
+    [SerializeField] float timeToHide = 0;
 
-	public void OnGiveUp(Question question) {
-		ScaleDown ();
-	}
+    public void OnWrongAnswer(bool wasNew)
+    {
+        ScaleDown();
+        ScaleUpAfterDelay();
+    }
 
-	void ScaleDown() {
-		iTween.ScaleTo (gameObject, iTween.Hash ("scale", Vector3.zero, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
-	}
+    public void OnGiveUp(Question question)
+    {
+        ScaleDown();
+    }
 
-	void ScaleUpAfterDelay() {
-		iTween.ScaleTo (gameObject, iTween.Hash ("scale", Vector3.one, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime, "delay", timeToHide + TransitionTime));
-	}
+    void ScaleDown()
+    {
+        iTween.ScaleTo(gameObject, iTween.Hash("scale", Vector3.zero, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
+    }
+
+    void ScaleUpAfterDelay()
+    {
+        iTween.ScaleTo(gameObject, iTween.Hash("scale", Vector3.one, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime, "delay", timeToHide + TransitionTime));
+    }
 }

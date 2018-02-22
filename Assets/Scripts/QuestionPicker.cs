@@ -2,9 +2,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[Serializable]
-public class CorrectAnswerEvent : UnityEvent<Question, bool /*isNewlyMastered*/> { }
-
 public class QuestionPicker : MonoBehaviour
 {
     [SerializeField] GameObject[] subscribers = null;
@@ -18,11 +15,6 @@ public class QuestionPicker : MonoBehaviour
     SubscriberList<IOnGiveUp> onGiveUps;
     float questionTime;
 
-    void Start()
-    {
-        SplitSubscribers();
-    }
-
     public void AbortQuiz()
     {
         onQuizAborteds.Notify(subscriber => subscriber.OnQuizAborted());
@@ -32,15 +24,8 @@ public class QuestionPicker : MonoBehaviour
     public void NextQuestion()
     {
         ShowQuestion((curQuestion != null && curQuestion.IsLaunchCode) ? curQuestion : effortTracker.GetQuestion()); // if NextQuestion is called with curQuestion.isLaunchCode, the player gave up on the launch code, which means we should show it again
-                                                                                                                     //			StartCoroutine (AutoAnswer());
+        // StartCoroutine (AutoAnswer());
     }
-
-    //	IEnumerator AutoAnswer() {
-    //		yield return new WaitForSeconds (Question.FAST_TIME);
-    //		if (curQuestion != null) {
-    //			OnAnswer ((curQuestion.a * curQuestion.b).ToString ());
-    //		}
-    //	}
 
     public void OnAnswer(string answer)
     {
@@ -66,8 +51,13 @@ public class QuestionPicker : MonoBehaviour
         questionTime = Time.time;
     }
 
+    void Start()
+    {
+        SplitSubscribers();
+    }
+
     // I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
-    private void SplitSubscribers()
+    void SplitSubscribers()
     {
         onQuestionChangeds = new SubscriberList<IOnQuestionChanged>(subscribers);
         onWrongAnswers = new SubscriberList<IOnWrongAnswer>(subscribers);
@@ -89,4 +79,16 @@ public class QuestionPicker : MonoBehaviour
             onWrongAnswers.Notify(subscriber => subscriber.OnWrongAnswer(wasNew));
         }
     }
+/*
+    Enumerator AutoAnswer()
+    {
+        yield return new WaitForSeconds(Question.FAST_TIME);
+        if (curQuestion != null)
+        {
+            OnAnswer((curQuestion.a * curQuestion.b).ToString());
+        }
+    }
+*/
+    [Serializable]
+    public class CorrectAnswerEvent : UnityEvent<Question, bool /*isNewlyMastered*/> { }
 }

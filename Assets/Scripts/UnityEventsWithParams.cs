@@ -1,5 +1,5 @@
 ﻿using System;
 using UnityEngine.Events;
 
-[Serializable] 
+[Serializable]
 public class BoolEvent : UnityEvent<bool> { }

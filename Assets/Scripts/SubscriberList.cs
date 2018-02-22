@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SubscriberList<T>
 {
-    readonly List<T> Subscribers = new List<T>();
+    readonly List<T> subscribers = new List<T>();
 
     public SubscriberList(GameObject[] subscriberContainers)
     {
@@ -12,14 +12,14 @@ public class SubscriberList<T>
         {
             foreach (T subscriber in subscriberContainer.GetComponents<T>())
             {
-                Subscribers.Add(subscriber);
+                subscribers.Add(subscriber);
             }
         }
     }
 
     public void Notify(Action<T> handler)
     {
-        foreach (T subscriber in Subscribers)
+        foreach (T subscriber in subscribers)
         {
             handler(subscriber);
         }

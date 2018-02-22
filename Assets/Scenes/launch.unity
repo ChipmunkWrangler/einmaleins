@@ -1548,7 +1548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66af34da429114161b307023ec74d7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questions: {fileID: 0}
+  questions: {fileID: 124914251}
 --- !u!4 &111
 Transform:
   m_ObjectHideFlags: 0
@@ -5172,8 +5172,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: CorrectAnswerEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    m_TypeName: QuestionPicker+CorrectAnswerEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7289,7 +7289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c7fe022e0c94ed79afb0ba7b5b1b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HeightScale: 0.0001
 --- !u!4 &451636924
 Transform:
   m_ObjectHideFlags: 0

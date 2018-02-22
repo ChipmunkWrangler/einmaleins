@@ -1,20 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShowOnRight : MonoBehaviour, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted
 {
+    const float TransitionTime = EnterAnswerButtonController.TransitionTime;
+
     [SerializeField] bool hideOnRight = false;
     [SerializeField] bool evenIfWrongFirst = false;
 
-    const float TransitionTime = EnterAnswerButtonController.TransitionTime;
-
     bool wasWrong;
-
-    void Start()
-    {
-        gameObject.transform.localScale = hideOnRight ? Vector3.one : Vector3.zero;
-    }
 
     public void OnCorrectAnswer()
     {
@@ -38,6 +31,11 @@ public class ShowOnRight : MonoBehaviour, IOnQuestionChanged, IOnWrongAnswer, IO
     public void OnWrongAnswer(bool wasNew)
     {
         wasWrong = true;
+    }
+
+    void Start()
+    {
+        gameObject.transform.localScale = hideOnRight ? Vector3.one : Vector3.zero;
     }
 
     void ScaleTo(Vector3 tgtScale)

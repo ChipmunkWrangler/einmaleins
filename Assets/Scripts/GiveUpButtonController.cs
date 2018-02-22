@@ -2,46 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged, IOnGiveUp {
-	[SerializeField] UnityEngine.UI.Button button = null;
-	[SerializeField] UnityEngine.UI.Image image = null;
-
+public class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged, IOnGiveUp
+{
     const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
-	public void OnQuizAborted() {
-		SetInteractibility (false);
-	}
+    [SerializeField] UnityEngine.UI.Button button = null;
+    [SerializeField] UnityEngine.UI.Image image = null;
 
-	public void OnCorrectAnswer () {
-		SetInteractibility (false);
-	}
+    public void OnQuizAborted()
+    {
+        SetInteractibility(false);
+    }
 
-	public void OnWrongAnswer (bool wasNew) {
-		SetInteractibility (true);
-	}
+    public void OnCorrectAnswer()
+    {
+        SetInteractibility(false);
+    }
 
-	public void OnQuestionChanged(Question question) {
-		SetInteractibility (question != null);
-	}
+    public void OnWrongAnswer(bool wasNew)
+    {
+        SetInteractibility(true);
+    }
 
-	public void OnAnswerChanged(bool isAnswerEmpty) {
-		SetInteractibility (isAnswerEmpty);
-	}
+    public void OnQuestionChanged(Question question)
+    {
+        SetInteractibility(question != null);
+    }
 
-	public void OnGiveUp(Question question) {
-		SetInteractibility (false);
-	}
+    public void OnAnswerChanged(bool isAnswerEmpty)
+    {
+        SetInteractibility(isAnswerEmpty);
+    }
 
-	void SetInteractibility(bool b) {
-		if (button.interactable != b) {
-			button.interactable = b;
-			image.raycastTarget = b; // want to be able to tap the ok button, which is behind this one, immediately
-			ScaleTo (b ? Vector3.one : Vector3.zero);
-		}
-	}
+    public void OnGiveUp(Question question)
+    {
+        SetInteractibility(false);
+    }
 
-	void ScaleTo(Vector3 tgtScale) {
-		iTween.ScaleTo(gameObject, iTween.Hash( "scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
-	}
+    void SetInteractibility(bool b)
+    {
+        if (button.interactable != b)
+        {
+            button.interactable = b;
+            image.raycastTarget = b; // want to be able to tap the ok button, which is behind this one, immediately
+            ScaleTo(b ? Vector3.one : Vector3.zero);
+        }
+    }
 
+    void ScaleTo(Vector3 tgtScale)
+    {
+        iTween.ScaleTo(gameObject, iTween.Hash("scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
+    }
 }

@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizAborted
 {
-    [SerializeField] RectTransform mask = null;
-    [SerializeField] Transform meter = null;
-
     const float TimeToZero = Question.FastTime * 5.2F / 0.75F; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
     const float HideTime = 0.3F;
 
-    float originalY;
+    [SerializeField] RectTransform mask = null;
+    [SerializeField] Transform meter = null;
 
-    void Start()
-    {
-        originalY = mask.localPosition.y;
-        meter.gameObject.SetActive(false);
-    }
+    float originalY;
 
     public void OnQuizAborted()
     {
@@ -43,6 +37,12 @@ public class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizA
     public void OnGiveUp(Question question)
     {
         StopMeter();
+        meter.gameObject.SetActive(false);
+    }
+
+    void Start()
+    {
+        originalY = mask.localPosition.y;
         meter.gameObject.SetActive(false);
     }
 

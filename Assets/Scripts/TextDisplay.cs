@@ -1,25 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class TextDisplay : MonoBehaviour {
-    UnityEngine.UI.Text TextField;
+public class TextDisplay : MonoBehaviour
+{
+    Text textField;
 
-	void Start() {
-		GetTextField ().text = "";
-	}
+    protected void SetText(string text)
+    {
+        GetTextField().text = text;
+    }
 
-	protected void SetText(string text) {
-		GetTextField ().text = text;
-	}
+    protected string GetText() => GetTextField().text;
 
-	protected string GetText() => GetTextField ().text;
+    protected Text GetTextField()
+    {
+        if (textField == null)
+        {
+            textField = gameObject.GetComponent<Text>();
+            UnityEngine.Assertions.Assert.IsNotNull(textField);
+        }
+        return textField;
+    }
 
-	protected UnityEngine.UI.Text GetTextField() {
-		if (TextField == null) {
-			TextField = gameObject.GetComponent<UnityEngine.UI.Text> ();
-			UnityEngine.Assertions.Assert.IsNotNull (TextField);
-		}
-		return TextField;
-	}
+    void Start()
+    {
+        GetTextField().text = "";
+    }
 }

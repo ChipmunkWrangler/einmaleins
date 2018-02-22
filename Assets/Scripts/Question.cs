@@ -1,45 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class Question
 {
-    public int A { get; private set; }
-    public int B { get; private set; }
-    public bool WasAnsweredInThisQuiz { get; private set; }
-    public bool IsLaunchCode;
-
     public const float FastTime = 4.0F;
+
     const float AnswerTimeMax = 60.0F;
     const float WrongAnswerTimePenalty = 1F;
-    readonly QuestionPersistentData Data;
+    readonly QuestionPersistentData data;
 
     public Question(int a, int b, QuestionPersistentData data)
     {
         A = a;
         B = b;
-        Data = data;
+        this.data = data;
     }
 
+    public bool IsLaunchCode { get; set; }
+    public int A { get; private set; }
+    public int B { get; private set; }
+    public bool WasAnsweredInThisQuiz { get; private set; }
+
     public int GetAnswer() => A * B;
-
-    public bool WasWrong() => Data.WasWrong;
-
-    public bool IsNew() => Data.IsNew;
-
-    public bool GaveUp() => Data.GaveUp;
-
+    public bool WasWrong() => data.WasWrong;
+    public bool IsNew() => data.IsNew;
+    public bool GaveUp() => data.GaveUp;
     public bool IsMastered() => GetAverageAnswerTime() <= FastTime;
-
-    public float GetLastAnswerTime() => Data.AnswerTimes[Data.AnswerTimes.Count - 1];
-
-    public float GetAverageAnswerTime() => Data.AnswerTimes.Average();
+    public float GetLastAnswerTime() => data.AnswerTimes[data.AnswerTimes.Count - 1];
+    public float GetAverageAnswerTime() => data.AnswerTimes.Average();
 
     public void SetNewFromAnswerTime()
     {
         bool isNew = true;
-        foreach (float answerTime in Data.AnswerTimes)
+        foreach (float answerTime in data.AnswerTimes)
         {
             if (answerTime != QuestionPersistentData.AnswerTimeInitial)
             {
@@ -47,7 +42,7 @@ public class Question
                 break;
             }
         }
-        Data.IsNew = isNew;
+        data.IsNew = isNew;
     }
 
     public bool IsAnswerCorrect(string answer)
@@ -62,8 +57,8 @@ public class Question
 
     public void Ask()
     {
-        Data.WasWrong = false;
-        Data.GaveUp = false;
+        data.WasWrong = false;
+        data.GaveUp = false;
         IsLaunchCode = false;
     }
 
@@ -78,17 +73,17 @@ public class Question
         if (isCorrect)
         {
             RecordAnswerTime(GetAdjustedTime(timeRequired));
-            Data.IsNew = false;
+            data.IsNew = false;
             WasAnsweredInThisQuiz = true;
-            if (!Data.WasMastered && IsMastered())
+            if (!data.WasMastered && IsMastered())
             {
                 isNewlyMastered = true;
-                Data.WasMastered = true;
+                data.WasMastered = true;
             }
         }
         else
         {
-            Data.WasWrong = true;
+            data.WasWrong = true;
         }
         Debug.Log(ToString());
         return isNewlyMastered;
@@ -96,16 +91,16 @@ public class Question
 
     public void GiveUp()
     {
-        Data.IsNew = false;
-        Data.GaveUp = true;
+        data.IsNew = false;
+        data.GaveUp = true;
         WasAnsweredInThisQuiz = true;
-        Data.Save();
+        data.Save();
     }
 
     public override string ToString()
     {
-        string s = Data.Idx + " is " + A + " * " + B + " : asMastered = " + Data.WasMastered + " wasWrong = " + Data.WasWrong + " isNew = " + Data.IsNew + " gaveUp " + Data.GaveUp + " averageTime " + GetAverageAnswerTime() + " times = ";
-        foreach (var time in Data.AnswerTimes)
+        string s = data.Idx + " is " + A + " * " + B + " : asMastered = " + data.WasMastered + " wasWrong = " + data.WasWrong + " isNew = " + data.IsNew + " gaveUp " + data.GaveUp + " averageTime " + GetAverageAnswerTime() + " times = ";
+        foreach (var time in data.AnswerTimes)
         {
             s += time + " ";
         }
@@ -115,19 +110,19 @@ public class Question
     public void UpdateInitialAnswerTime(float oldAnswerTimeInitial)
     {
         var newAnswerTimes = new List<float>();
-        foreach (var time in Data.AnswerTimes)
+        foreach (var time in data.AnswerTimes)
         {
             newAnswerTimes.Add(time == oldAnswerTimeInitial ? QuestionPersistentData.AnswerTimeInitial : time);
         }
-        Data.AnswerTimes = newAnswerTimes;
+        data.AnswerTimes = newAnswerTimes;
     }
 
     void RecordAnswerTime(float timeRequired)
     {
-        Data.AnswerTimes.Add(timeRequired);
-        if (Data.AnswerTimes.Count > QuestionPersistentData.NumAnswerTimesToRecord)
+        data.AnswerTimes.Add(timeRequired);
+        if (data.AnswerTimes.Count > QuestionPersistentData.NumAnswerTimesToRecord)
         {
-            Data.AnswerTimes.RemoveRange(0, Data.AnswerTimes.Count - QuestionPersistentData.NumAnswerTimesToRecord);
+            data.AnswerTimes.RemoveRange(0, data.AnswerTimes.Count - QuestionPersistentData.NumAnswerTimesToRecord);
         }
     }
 
@@ -137,7 +132,7 @@ public class Question
         {
             timeRequired = AnswerTimeMax;
         }
-        else if (Data.WasWrong)
+        else if (data.WasWrong)
         {
             timeRequired += WrongAnswerTimePenalty;
         }
@@ -146,73 +141,5 @@ public class Question
             timeRequired = AnswerTimeMax;
         }
         return timeRequired;
-    }
-
-}
-
-[System.Serializable]
-public class QuestionPersistentData
-{
-    public int Idx;
-    public bool WasMastered;
-    // even if it is no longer mastered. This is for awarding rocket parts
-    public bool WasWrong;
-    // if a question is answered wrong, then wasWrong is true until it is next asked
-    public bool IsNew = true;
-    public bool GaveUp;
-    public List<float> AnswerTimes;
-
-    public static readonly int NumAnswerTimesToRecord = 3;
-    public static readonly float AnswerTimeInitial = Question.FastTime + 0.01F;
-
-    string PrefsKey;
-
-    public void Load(string prefsKey, int idx)
-    {
-        PrefsKey = prefsKey;
-        Idx = idx;
-        AnswerTimes = GetAnswerTimes(PrefsKey);
-        WasMastered = MDPrefs.GetBool(PrefsKey + ":wasMastered");
-        WasWrong = MDPrefs.GetBool(PrefsKey + ":wasWrong");
-        IsNew = MDPrefs.GetBool(PrefsKey + ":isNew", defaultValue: true);
-        GaveUp = MDPrefs.GetBool(PrefsKey + ":gaveUp");
-    }
-
-    public void Create(string prefsKey, int idx)
-    {
-        PrefsKey = prefsKey;
-        Idx = idx;
-        AnswerTimes = GetNewAnswerTimes();
-    }
-
-    public void Save(string prefsKey = "")
-    {
-        if (prefsKey == "")
-        {
-            prefsKey = PrefsKey;
-        }
-        UnityEngine.Assertions.Assert.AreNotEqual(prefsKey.Length, 0);
-        SetAnswerTimes(prefsKey, AnswerTimes);
-        MDPrefs.SetBool(prefsKey + ":wasMastered", WasMastered);
-        MDPrefs.SetBool(prefsKey + ":wasWrong", WasWrong);
-        MDPrefs.SetBool(prefsKey + ":isNew", IsNew);
-        MDPrefs.SetBool(prefsKey + ":gaveUp", GaveUp);
-    }
-
-    static List<float> GetAnswerTimes(string prefsKey) => MDPrefs.GetFloatArray(prefsKey + ":times").ToList();
-
-    static void SetAnswerTimes(string prefsKey, List<float> answerTimes)
-    {
-        MDPrefs.SetFloatArray(prefsKey + ":times", answerTimes.ToArray());
-    }
-
-    static List<float> GetNewAnswerTimes()
-    {
-        var answerTimes = new List<float>();
-        for (int i = 0; i < NumAnswerTimesToRecord; ++i)
-        {
-            answerTimes.Add(AnswerTimeInitial);
-        }
-        return answerTimes;
     }
 }

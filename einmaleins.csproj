@@ -524,6 +524,12 @@
     <Compile Include="Assets\xARM\Windows\xARMPreviewWindow.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Assets\Scripts\EffortTrackerPersistantData.cs" />
+    <Compile Include="Assets\Scripts\QuestionPersistentData.cs" />
+    <Compile Include="Assets\Scripts\QuestionsPersistentData.cs" />
+    <Compile Include="Assets\Scripts\RocketPartsPersistantData.cs" />
+    <Compile Include="Assets\Scripts\StatsControllerPersistentData.cs" />
+    <Compile Include="Assets\Scripts\TargetPlanetPersistentData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />

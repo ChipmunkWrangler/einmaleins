@@ -3,20 +3,14 @@ using UnityEngine;
 
 public class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted, IOnGiveUp
 {
+    const float FadeTime = EnterAnswerButtonController.TransitionTime;
+
     [SerializeField] QuestionPicker answerHandler = null;
     [SerializeField] int maxDigits = 0;
     [SerializeField] BoolEvent answerChanged = new BoolEvent();
     string queuedTxt;
     bool isFading;
     Color oldColor;
-
-    const float FadeTime = EnterAnswerButtonController.TransitionTime;
-
-    void Start()
-    {
-        oldColor = GetTextField().color;
-        SetText("");
-    }
 
     public void OnQuizAborted()
     {
@@ -43,18 +37,6 @@ public class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IO
     public void OnGiveUp(Question question)
     {
         SetText(question.GetAnswer().ToString());
-    }
-
-    IEnumerator Fade()
-    {
-        isFading = true;
-        queuedTxt = "";
-        GetTextField().CrossFadeColor(Color.clear, FadeTime, false, true);
-        yield return new WaitForSeconds(FadeTime);
-        SetText(queuedTxt);
-        queuedTxt = "";
-        GetTextField().CrossFadeColor(oldColor, 0, false, true);
-        isFading = false;
     }
 
     public void OnAddDigit(string nextDigit)
@@ -89,6 +71,24 @@ public class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IO
     public void OnSubmitAnswer()
     {
         answerHandler.OnAnswer(GetText());
+    }
+
+    void Start()
+    {
+        oldColor = GetTextField().color;
+        SetText("");
+    }
+
+    IEnumerator Fade()
+    {
+        isFading = true;
+        queuedTxt = "";
+        GetTextField().CrossFadeColor(Color.clear, FadeTime, false, true);
+        yield return new WaitForSeconds(FadeTime);
+        SetText(queuedTxt);
+        queuedTxt = "";
+        GetTextField().CrossFadeColor(oldColor, 0, false, true);
+        isFading = false;
     }
 
     void NotifySubscribers()

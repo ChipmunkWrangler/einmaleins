@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Celebrate : MonoBehaviour, IOnWrongAnswer, IOnQuestionChanged, IOnQuizAborted {
-	public static readonly float Duration = 3.0F;
+public class Celebrate : MonoBehaviour, IOnWrongAnswer, IOnQuestionChanged, IOnQuizAborted
+{
+    public static readonly float Duration = 3.0F;
     [SerializeField] ParticleSystem[] exhaustParticles = null;
     [SerializeField] ParticleSystem fastAnswerParticles = null;
     [SerializeField] ParticleSystem masteryParticles = null;
@@ -13,88 +14,107 @@ public class Celebrate : MonoBehaviour, IOnWrongAnswer, IOnQuestionChanged, IOnQ
     bool isCelebrating;
     Coroutine coroutine;
 
-	public void OnQuizAborted() {
-		StopTimer ();
-		StopCelebrating ();
-		StopSmoke ();
-	}
-		
-	public void OnQuestionChanged(Question question) {
-		StopTimer ();
-		if (continueAfterQuestions && question == null) {
-			StartCelebrating (false, false); // indefinitely
-		} else {
-			StopCelebrating ();
-		}
-	}
+    public void OnQuizAborted()
+    {
+        StopTimer();
+        StopCelebrating();
+        StopSmoke();
+    }
 
-	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
-		StopTimer ();
-		if (question == null || !question.IsLaunchCode) {
-			float percentOn = (question == null) ? 1F : Mathf.Min (1F, FlashThrust.GetThrustFactor (question.GetLastAnswerTime ()));
-			coroutine = StartCoroutine (DoCelebration (question != null && question.GetLastAnswerTime () <= Question.FastTime, isNewlyMastered, percentOn));
-		}
-	}
+    public void OnQuestionChanged(Question question)
+    {
+        StopTimer();
+        if (continueAfterQuestions && question == null)
+        {
+            StartCelebrating(false, false); // indefinitely
+        }
+        else
+        {
+            StopCelebrating();
+        }
+    }
 
-	public void OnWrongAnswer(bool wasNew) {
-		StopTimer ();
-		StopCelebrating ();
-	}
-		
-	IEnumerator DoCelebration(bool isFastAnswer, bool isNewlyMastered, float percentOn) {
-		float exhaustTime = Duration * percentOn;
-		if (exhaustTime > 0) {
-			StartCelebrating (isFastAnswer, isNewlyMastered);
-			yield return new WaitForSeconds (exhaustTime);
-			StopCelebrating ();
-		}
-		if (exhaustTime < Duration) { 
-			StartSmoke ();
-			yield return new WaitForSeconds (Duration - exhaustTime);
-			StopSmoke ();
-		}
-		questionPicker.NextQuestion ();
-	}
+    public void OnCorrectAnswer(Question question, bool isNewlyMastered)
+    {
+        StopTimer();
+        if (question == null || !question.IsLaunchCode)
+        {
+            float percentOn = (question == null) ? 1F : Mathf.Min(1F, FlashThrust.GetThrustFactor(question.GetLastAnswerTime()));
+            coroutine = StartCoroutine(DoCelebration(question != null && question.GetLastAnswerTime() <= Question.FastTime, isNewlyMastered, percentOn));
+        }
+    }
 
-	void StartCelebrating(bool isFastAnswer, bool isNewlyMastered) {
-		if (!isCelebrating) {
-			isCelebrating = true;
-			GetExhaustParticles ().gameObject.SetActive (true);
-			GetExhaustParticles ().Play ();
-			if (isNewlyMastered) {
-				masteryParticles.Play ();
-			}
-			if (isFastAnswer) {
-				fastAnswerParticles.Play ();
-			}
+    public void OnWrongAnswer(bool wasNew)
+    {
+        StopTimer();
+        StopCelebrating();
+    }
 
-		}
-	}
+    IEnumerator DoCelebration(bool isFastAnswer, bool isNewlyMastered, float percentOn)
+    {
+        float exhaustTime = Duration * percentOn;
+        if (exhaustTime > 0)
+        {
+            StartCelebrating(isFastAnswer, isNewlyMastered);
+            yield return new WaitForSeconds(exhaustTime);
+            StopCelebrating();
+        }
+        if (exhaustTime < Duration)
+        {
+            StartSmoke();
+            yield return new WaitForSeconds(Duration - exhaustTime);
+            StopSmoke();
+        }
+        questionPicker.NextQuestion();
+    }
 
-	void StopCelebrating ()
-	{
-		if (isCelebrating) {
-			GetExhaustParticles ().Stop ();
-			masteryParticles.Stop ();
-			fastAnswerParticles.Stop ();
-			isCelebrating = false;
-		}
-	}
+    void StartCelebrating(bool isFastAnswer, bool isNewlyMastered)
+    {
+        if (!isCelebrating)
+        {
+            isCelebrating = true;
+            GetExhaustParticles().gameObject.SetActive(true);
+            GetExhaustParticles().Play();
+            if (isNewlyMastered)
+            {
+                masteryParticles.Play();
+            }
+            if (isFastAnswer)
+            {
+                fastAnswerParticles.Play();
+            }
+        }
+    }
 
-	void StartSmoke() {
-		smokeParticles.Play ();
-	}
+    void StopCelebrating()
+    {
+        if (isCelebrating)
+        {
+            GetExhaustParticles().Stop();
+            masteryParticles.Stop();
+            fastAnswerParticles.Stop();
+            isCelebrating = false;
+        }
+    }
 
-	void StopSmoke() {
-		smokeParticles.Stop ();
-	}
+    void StartSmoke()
+    {
+        smokeParticles.Play();
+    }
 
-	void StopTimer() {
-		if (coroutine != null) {
-			StopCoroutine (coroutine);
-			coroutine = null;
-		}
-	}
+    void StopSmoke()
+    {
+        smokeParticles.Stop();
+    }
 
-	ParticleSystem GetExhaustParticles() => exhaustParticles [RocketParts.Instance.UpgradeLevel];
+    void StopTimer()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        }
+    }
+
+    ParticleSystem GetExhaustParticles() => exhaustParticles[RocketParts.Instance.UpgradeLevel];
 }

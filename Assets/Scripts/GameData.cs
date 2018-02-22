@@ -3,26 +3,26 @@
 [System.Serializable]
 public class GameData
 {
-    public string Version = "";
-    public List<PlayerData> PlayerList = new List<PlayerData>();
+    readonly PlayerNameController playerNameController = new PlayerNameController();
 
-    readonly PlayerNameController PlayerNameController = new PlayerNameController();
+    public string Version { get; set; } = "";
+    public List<PlayerData> PlayerList { get; set; } = new List<PlayerData>();
 
     public void Load()
     {
         Version = MDVersion.GetCurrentVersion();
-        PlayerNameController.Load();
-        string oldName = PlayerNameController.CurName;
-        foreach (string playerName in PlayerNameController.Names)
+        playerNameController.Load();
+        string oldName = playerNameController.CurName;
+        foreach (string playerName in playerNameController.Names)
         {
-            PlayerNameController.CurName = playerName;
-            PlayerNameController.Save();
+            playerNameController.CurName = playerName;
+            playerNameController.Save();
             var playerData = new PlayerData();
             playerData.Load(playerName);
             PlayerList.Add(playerData);
         }
-        PlayerNameController.CurName = oldName;
-        PlayerNameController.Save();
+        playerNameController.CurName = oldName;
+        playerNameController.Save();
     }
 
     public void Save()
@@ -33,16 +33,16 @@ public class GameData
         }
         UnityEngine.PlayerPrefs.DeleteAll();
         MDVersion.WriteNewVersion();
-        PlayerNameController.Clear();
+        playerNameController.Clear();
         foreach (PlayerData playerData in PlayerList)
         {
-            PlayerNameController.AppendName(playerData.PlayerName);
-            PlayerNameController.CurName = playerData.PlayerName;
-            PlayerNameController.Save();
+            playerNameController.AppendName(playerData.PlayerName);
+            playerNameController.CurName = playerData.PlayerName;
+            playerNameController.Save();
             playerData.Save();
         }
-        PlayerNameController.CurName = "";
-        PlayerNameController.Save();
+        playerNameController.CurName = "";
+        playerNameController.Save();
         UnityEngine.PlayerPrefs.Save();
     }
 }

@@ -1,14 +1,14 @@
-﻿using UnityEngine;
-using System.Linq;
+﻿using System.Linq;
+using UnityEngine;
 
 public class PlayerNameController
 {
-    const string NamesPrefsKey = "playerNames";
     public static readonly string CurPlayerPrefsKey = "curPlayer";
 
-    public string[] Names { get; private set; }
+    const string NamesPrefsKey = "playerNames";
 
-    public string CurName;
+    public string CurName { get; set; }
+    public string[] Names { get; private set; }
 
     public static bool IsPlayerSet() => PlayerPrefs.HasKey(CurPlayerPrefsKey) && PlayerPrefs.GetString(CurPlayerPrefsKey).Length > 0;
 
