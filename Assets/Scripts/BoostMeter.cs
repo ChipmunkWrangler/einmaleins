@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizAborted
 {
-    [SerializeField] RectTransform Mask = null;
-    [SerializeField] Transform Meter = null;
+    [SerializeField] RectTransform mask = null;
+    [SerializeField] Transform meter = null;
 
     const float TimeToZero = Question.FastTime * 5.2F / 0.75F; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
     const float HideTime = 0.3F;
 
-    float OriginalY;
+    float originalY;
 
     void Start()
     {
-        OriginalY = Mask.localPosition.y;
-        Meter.gameObject.SetActive(false);
+        originalY = mask.localPosition.y;
+        meter.gameObject.SetActive(false);
     }
 
     public void OnQuizAborted()
     {
         StopMeter();
-        Meter.gameObject.SetActive(false);
+        meter.gameObject.SetActive(false);
     }
 
     public void OnQuestionChanged(Question question)
@@ -43,17 +43,17 @@ public class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizA
     public void OnGiveUp(Question question)
     {
         StopMeter();
-        Meter.gameObject.SetActive(false);
+        meter.gameObject.SetActive(false);
     }
 
     void ResetMask()
     {
-        SetMaskY(OriginalY);
+        SetMaskY(originalY);
     }
 
     void ShowMeter()
     {
-        Meter.gameObject.SetActive(true);
+        meter.gameObject.SetActive(true);
     }
 
     void HideMeter()
@@ -63,20 +63,20 @@ public class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizA
 
     void StartMeter(float t)
     {
-        iTween.ValueTo(Mask.gameObject, iTween.Hash("from", Mask.localPosition.y, "to", Mask.localPosition.y - Mask.rect.height, "time", t, "onupdate", "SetMaskY"));
+        iTween.ValueTo(mask.gameObject, iTween.Hash("from", mask.localPosition.y, "to", mask.localPosition.y - mask.rect.height, "time", t, "onupdate", "SetMaskY"));
     }
 
     void StopMeter()
     {
-        iTween.Stop(Mask.gameObject);
+        iTween.Stop(mask.gameObject);
     }
 
     void SetMaskY(float y)
     {
-        Meter.SetParent(Mask.parent);
-        Vector3 pos = Mask.localPosition;
+        meter.SetParent(mask.parent);
+        Vector3 pos = mask.localPosition;
         pos.y = y;
-        Mask.localPosition = pos;
-        Meter.SetParent(Mask);
+        mask.localPosition = pos;
+        meter.SetParent(mask);
     }
 }

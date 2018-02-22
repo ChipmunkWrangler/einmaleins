@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ff68875e9644411919c698156a74fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cells:
+  cells:
   - {fileID: 114294438943395406}
   - {fileID: 114776462898300030}
   - {fileID: 114468027759307750}
@@ -338,11 +338,11 @@ MonoBehaviour:
   - {fileID: 114174423993411606}
   - {fileID: 114746656756751420}
   - {fileID: 114087074422446182}
-  Header: {fileID: 114329627375299462}
-  RowHeader: {fileID: 0}
-  PremasteredAlpha: 0.7
-  FadeTime: 5
-  HighlightColor: {r: 0.9098039, g: 0.9098039, b: 0, a: 1}
+  header: {fileID: 114329627375299462}
+  rowHeader: {fileID: 0}
+  premasteredAlpha: 0.7
+  fadeTime: 5
+  highlightColor: {r: 0.9098039, g: 0.9098039, b: 0, a: 1}
 --- !u!114 &114174423993411606
 MonoBehaviour:
   m_ObjectHideFlags: 1

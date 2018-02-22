@@ -4,20 +4,20 @@ using System.Collections;
 public class ColorPickerCircle : MonoBehaviour {
 
     public Color TheColor { get; private set; } = Color.cyan;
-	[SerializeField] GameObject PointerMain = null;
-    [SerializeField] Collider RaycastTarget = null;
+    [SerializeField] GameObject pointerMain = null;
+    [SerializeField] Collider raycastTarget = null;
 
-    private Vector3[] RPoints;
-    private Vector3 CurLocalPos;
-    private Vector3 CurBary = Vector3.up;
-    private Color CircleColor = Color.red;
+    Vector3[] rPoints;
+    Vector3 curLocalPos;
+    Vector3 curBary = Vector3.up;
+    Color circleColor = Color.red;
 
 	// Use this for initialization
 	void Awake () {
         float h, s, v;
         Color.RGBToHSV(TheColor, out h, out s, out v);
 //        Debug.Log("HSV = " + v.ToString() + "," + h.ToString() + "," + v.ToString() + ", color = " + TheColor.ToString());
-        RPoints = new Vector3[3];
+        rPoints = new Vector3[3];
         SetNewColor(TheColor);
     }
 	
@@ -31,8 +31,8 @@ public class ColorPickerCircle : MonoBehaviour {
     {
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit) && hit.collider == RaycastTarget) {
-			CurLocalPos = transform.worldToLocalMatrix.MultiplyPoint (hit.point);
+		if (Physics.Raycast (ray, out hit) && hit.collider == raycastTarget) {
+			curLocalPos = transform.worldToLocalMatrix.MultiplyPoint (hit.point);
 			return true;
 		}
 		return false;
@@ -43,30 +43,30 @@ public class ColorPickerCircle : MonoBehaviour {
         TheColor = NewColor;
         float h, s, v;
         Color.RGBToHSV(TheColor, out h, out s, out v);
-        CircleColor = Color.HSVToRGB(h, 1, 1);
-        PointerMain.transform.localEulerAngles = Vector3.back * (h * 360F);
-        CurBary.y = 1F - v;
-        CurBary.x = v * s;
-        CurBary.z = 1F - CurBary.y - CurBary.x;
-        CurLocalPos = RPoints[0] * CurBary.x + RPoints[1] * CurBary.y + RPoints[2] * CurBary.z;
+        circleColor = Color.HSVToRGB(h, 1, 1);
+        pointerMain.transform.localEulerAngles = Vector3.back * (h * 360F);
+        curBary.y = 1F - v;
+        curBary.x = v * s;
+        curBary.z = 1F - curBary.y - curBary.x;
+        curLocalPos = rPoints[0] * curBary.x + rPoints[1] * curBary.y + rPoints[2] * curBary.z;
     }
 
     private void CheckCirclePosition()
     {
-        float a = Vector3.Angle(Vector3.left, CurLocalPos);
-        if (CurLocalPos.y < 0)
+        float a = Vector3.Angle(Vector3.left, curLocalPos);
+        if (curLocalPos.y < 0)
             a = 360F - a;
 
-        CircleColor = Color.HSVToRGB(a / 360F, 1F, 1F); 
-        PointerMain.transform.localEulerAngles = Vector3.back * a;
+        circleColor = Color.HSVToRGB(a / 360F, 1F, 1F); 
+        pointerMain.transform.localEulerAngles = Vector3.back * a;
         SetColor();
     }
 
     private void SetColor()
     {
         float h, v, s;
-        Color.RGBToHSV(CircleColor, out h, out v, out s);
-        Color c = (CurBary.y > .9999) ? Color.black : Color.HSVToRGB(h, CurBary.x / (1F - CurBary.y), 1F - CurBary.y);
+        Color.RGBToHSV(circleColor, out h, out v, out s);
+        Color c = (curBary.y > .9999) ? Color.black : Color.HSVToRGB(h, curBary.x / (1F - curBary.y), 1F - curBary.y);
         c.a = 1F;
         TheColor = c;
     }

@@ -4,8 +4,8 @@ public class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQui
 {
     [SerializeField] UnityEngine.UI.Button button = null;
 
-    bool IsHiding;
-    bool IsShowing;
+    bool isHiding;
+    bool isShowing;
 
     public const float TransitionTime = 0.25F;
 
@@ -49,23 +49,23 @@ public class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQui
 
     void Show()
     {
-        if (!IsShowing)
+        if (!isShowing)
         {
             ScaleTo(Vector3.one);
-            IsShowing = true;
+            isShowing = true;
         }
-        IsHiding = false;
+        isHiding = false;
         button.interactable = true;
     }
 
     void Hide()
     {
-        if (!IsHiding)
+        if (!isHiding)
         {
             ScaleTo(Vector3.zero);
-            IsHiding = true;
+            isHiding = true;
         }
-        IsShowing = false;
+        isShowing = false;
         button.interactable = false;
     }
 

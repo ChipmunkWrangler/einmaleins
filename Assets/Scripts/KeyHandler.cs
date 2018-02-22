@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class KeyHandler : MonoBehaviour {
-    [SerializeField] string BackSceneName = "choosePlayer";
-    bool IsLoadingScene;
+    [SerializeField] string backSceneName = "choosePlayer";
+    bool isLoadingScene;
 
 	void Update () {
-		if (!IsLoadingScene && Input.GetKeyDown(KeyCode.Escape)) { 
-			IsLoadingScene = true;
-			if (BackSceneName == "EXIT") {
+		if (!isLoadingScene && Input.GetKeyDown(KeyCode.Escape)) { 
+			isLoadingScene = true;
+			if (backSceneName == "EXIT") {
 				Application.Quit ();
 			} else {
-				UnityEngine.SceneManagement.SceneManager.LoadSceneAsync (BackSceneName);
+				UnityEngine.SceneManagement.SceneManager.LoadSceneAsync (backSceneName);
 			}
 		}  	
 	}

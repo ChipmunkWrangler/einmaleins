@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 public class EffortTracker : MonoBehaviour, IOnWrongAnswer, IOnGiveUp {
-    [SerializeField] Goal GoalStatus = null;
-    [SerializeField] Questions QuestionContainer = null;
-    [SerializeField] Fuel Fuel = null;
+    [SerializeField] Goal goal = null;
+    [SerializeField] Questions questions = null;
+    [SerializeField] Fuel fuel = null;
 
     const int FrustrationWrong = 2; // N.B. Since the question is repeated until it is correct, the net effect will be FRUSTRATION_WRONG * n - FRUSTRATION_RIGHT (or _FAST)
     const int FrustrationGiveUp = 2;
@@ -21,11 +21,11 @@ public class EffortTracker : MonoBehaviour, IOnWrongAnswer, IOnGiveUp {
 		}
 		set {
 			numAnswersLeftInQuiz = value;
-			Fuel.UpdateFuelDisplay (numAnswersLeftInQuiz);
+			fuel.UpdateFuelDisplay (numAnswersLeftInQuiz);
 		}
 	}
-    bool IsQuizStarted;
-    bool AllowGivingUp;
+    bool isQuizStarted;
+    bool allowGivingUp;
 
 	public bool IsDoneForToday() => Data.IsDoneForToday ();
 
@@ -33,13 +33,13 @@ public class EffortTracker : MonoBehaviour, IOnWrongAnswer, IOnGiveUp {
 		float answerTime = question.GetLastAnswerTime ();
 		Data.TimeToday += answerTime + Celebrate.Duration;
 		Data.Frustration += (answerTime <= Question.FastTime) ? FrustrationFast : FrustrationRight;
-		if (IsQuizStarted) {
+		if (isQuizStarted) {
 			--NumAnswersLeftInQuiz;
 		}
 	}
 
 	public Question GetQuestion() {
-		if (!IsQuizStarted) {
+		if (!isQuizStarted) {
 			StartQuiz ();
 		}
 		Debug.Log ("frustration = " + Data.Frustration + " numAnswersInQuiz " + NumAnswersLeftInQuiz);
@@ -49,17 +49,17 @@ public class EffortTracker : MonoBehaviour, IOnWrongAnswer, IOnGiveUp {
 		bool isFrustrated = Data.Frustration > 0;
 
 		if (NumAnswersLeftInQuiz <= NumAnswersLeftWhenLaunchCodeAsked && !isFrustrated) {
-			Question q = QuestionContainer.GetLaunchCodeQuestion ();
+			Question q = questions.GetLaunchCodeQuestion ();
 			if (q != null) {
 				return q;
 			}
 		}
-		return QuestionContainer.GetQuestion (isFrustrated, !AllowGivingUp);
+		return questions.GetQuestion (isFrustrated, !allowGivingUp);
 	}
 
 	public void OnWrongAnswer(bool wasNew) {
 		Data.Frustration += FrustrationWrong;
-		if (IsQuizStarted) {
+		if (isQuizStarted) {
 			--NumAnswersLeftInQuiz;
 		}
 	}
@@ -74,16 +74,16 @@ public class EffortTracker : MonoBehaviour, IOnWrongAnswer, IOnGiveUp {
 
 	void StartQuiz() {
 		Data.Load ();
-		Goal.CurGoal curGoal = GoalStatus.CalcCurGoal();
+		Goal.CurGoal curGoal = goal.CalcCurGoal();
 		UnityEngine.Assertions.Assert.IsTrue (curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
-		AllowGivingUp = Goal.IsGivingUpAllowed(curGoal);
+		allowGivingUp = Goal.IsGivingUpAllowed(curGoal);
 		NumAnswersLeftInQuiz = GetNumAnswersInQuiz(curGoal == Goal.CurGoal.GAUNTLET);
-		QuestionContainer.ResetForNewQuiz();
-		IsQuizStarted = true;
+		questions.ResetForNewQuiz();
+		isQuizStarted = true;
 	}
 
 	public void EndQuiz() {
-		IsQuizStarted = false;
+		isQuizStarted = false;
 		RocketParts.Instance.JustUpgraded = false;
 		++Data.QuizzesToday;
 		Save ();
@@ -91,7 +91,7 @@ public class EffortTracker : MonoBehaviour, IOnWrongAnswer, IOnGiveUp {
 
 	public void Save() {
 		Data.Save ();
-		QuestionContainer.Save ();
+		questions.Save ();
 	}
 }
 

@@ -4,24 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class RocketPartCounter : MonoBehaviour, IOnQuestionChanged, IOnQuizAborted {
-    [SerializeField] Text NumText = null;
-    [SerializeField] Image[] ImagesToHighlight = null;
-    [SerializeField] Text[] TextsToHighlight = null;
-    [SerializeField] Text[] TextsToFadeOut = null;
-    [SerializeField] int BaseFontSize = 0;
-    [SerializeField] Color HighlightColour = Color.yellow;
-    [SerializeField] int HighlightFontSize = 0;
-    [SerializeField] float HighlightFadeTime = 0.5F;
-    [SerializeField] float ScoreCountdownDuration = 5.0F;
-    [SerializeField] float ScoreCountdownDelay = 0.5F;
+    [SerializeField] Text numText = null;
+    [SerializeField] Image[] imagesToHighlight = null;
+    [SerializeField] Text[] textsToHighlight = null;
+    [SerializeField] Text[] textsToFadeOut = null;
+    [SerializeField] int baseFontSize = 0;
+    [SerializeField] Color highlightColour = Color.yellow;
+    [SerializeField] int highlightFontSize = 0;
+    [SerializeField] float highlightFadeTime = 0.5F;
+    [SerializeField] float scoreCountdownDuration = 5.0F;
+    [SerializeField] float scoreCountdownDelay = 0.5F;
 
-    Color[] BaseColor;
+    Color[] baseColor;
 
 	void Awake() {
-		BaseColor = new Color[TextsToHighlight.Length];
+		baseColor = new Color[textsToHighlight.Length];
 		int i = 0;
-		foreach (Text text in TextsToHighlight) {
-			BaseColor [i++] = text.color;
+		foreach (Text text in textsToHighlight) {
+			baseColor [i++] = text.color;
 		}
 	}
 
@@ -36,14 +36,14 @@ public class RocketPartCounter : MonoBehaviour, IOnQuestionChanged, IOnQuizAbort
 	public void OnCorrectAnswer(Question question, bool isNewlyMastered) {
 		if (isNewlyMastered) {
 			RocketParts.Instance.Inc ();
-			foreach (Image image in ImagesToHighlight) {
-				StartCoroutine (FadeImage (HighlightColour, HighlightFadeTime, image));
+			foreach (Image image in imagesToHighlight) {
+				StartCoroutine (FadeImage (highlightColour, highlightFadeTime, image));
 			}
-			foreach (Text text in TextsToHighlight) {
-				StartCoroutine (FadeText (HighlightColour, HighlightFadeTime, text));
+			foreach (Text text in textsToHighlight) {
+				StartCoroutine (FadeText (highlightColour, highlightFadeTime, text));
 			}
-			foreach (Text text in TextsToHighlight) {
-				StartCoroutine (Scale (HighlightFontSize, HighlightFadeTime, text));
+			foreach (Text text in textsToHighlight) {
+				StartCoroutine (Scale (highlightFontSize, highlightFadeTime, text));
 			}
 			UpdateText (RocketParts.Instance.NumParts);
 		}
@@ -63,11 +63,11 @@ public class RocketPartCounter : MonoBehaviour, IOnQuestionChanged, IOnQuizAbort
 	void Unhighlight ()
 	{
 		int i = 0;
-		foreach (Text text in TextsToHighlight) {
-			StartCoroutine (FadeText (BaseColor [i++], HighlightFadeTime, text));
+		foreach (Text text in textsToHighlight) {
+			StartCoroutine (FadeText (baseColor [i++], highlightFadeTime, text));
 		}
-		foreach (Text text in TextsToHighlight) {
-			StartCoroutine (Scale (BaseFontSize, HighlightFadeTime, text));
+		foreach (Text text in textsToHighlight) {
+			StartCoroutine (Scale (baseFontSize, highlightFadeTime, text));
 		}
 	}
 
@@ -106,20 +106,20 @@ public class RocketPartCounter : MonoBehaviour, IOnQuestionChanged, IOnQuizAbort
 
 	void UpdateText (int numParts) {
 		if (RocketParts.Instance.UpgradeLevel >= RocketParts.Instance.MaxUpgradeLevel - 1 && numParts <= 0) { // the numParts check is for counting down following the final upgrade. -1 is because the final upgrade had hidden rocket parts
-			if (NumText.text.Length > 0) {
-				NumText.text = "";
-				foreach (Text text in TextsToFadeOut) {
+			if (numText.text.Length > 0) {
+				numText.text = "";
+				foreach (Text text in textsToFadeOut) {
 					text.text = "";
 				}
 			}
 		} else {
-			NumText.text = I2.Loc.LocalizationManager.GetTermTranslation ("numRocketParts").Replace("{[numParts]}", numParts.ToString()).Replace("{[numPartsRequired]}", RocketParts.Instance.NumPartsRequired.ToString());
+			numText.text = I2.Loc.LocalizationManager.GetTermTranslation ("numRocketParts").Replace("{[numParts]}", numParts.ToString()).Replace("{[numPartsRequired]}", RocketParts.Instance.NumPartsRequired.ToString());
 		}
 	}
 
 	IEnumerator CountTextDown(int oldScore, int newScore) {
-		yield return new WaitForSeconds (ScoreCountdownDelay);
-		float secsPerNum = Mathf.Abs(ScoreCountdownDuration / (float)(newScore - oldScore));
+		yield return new WaitForSeconds (scoreCountdownDelay);
+		float secsPerNum = Mathf.Abs(scoreCountdownDuration / (float)(newScore - oldScore));
 		for (int i = oldScore; i >= newScore; --i) {
 			UpdateText( i );
 			yield return new WaitForSeconds(secsPerNum);

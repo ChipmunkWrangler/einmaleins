@@ -4,11 +4,11 @@ using System.Linq;
 
 public class GoalButtonControler : MonoBehaviour, IOnQuestionChanged
 {
-    [SerializeField] LaunchButtonController LaunchButton = null;
-    [SerializeField] GameObject UpgradeButton = null;
-    [SerializeField] GameObject DoneText = null;
-    [SerializeField] GameObject YouWinText = null;
-    [SerializeField] Goal GoalStatus = null;
+    [SerializeField] LaunchButtonController launchButton = null;
+    [SerializeField] GameObject upgradeButton = null;
+    [SerializeField] GameObject doneText = null;
+    [SerializeField] GameObject youWinText = null;
+    [SerializeField] Goal goal = null;
 
     public void OnQuestionChanged(Question question)
     {
@@ -17,27 +17,27 @@ public class GoalButtonControler : MonoBehaviour, IOnQuestionChanged
 
     void UpdateButtonStatus(bool noMoreQuestions = true)
     {
-        LaunchButton.Deactivate();
-        UpgradeButton.SetActive(false);
-        YouWinText.SetActive(false);
-        DoneText.SetActive(false);
+        launchButton.Deactivate();
+        upgradeButton.SetActive(false);
+        youWinText.SetActive(false);
+        doneText.SetActive(false);
         if (noMoreQuestions)
         {
-            switch (GoalStatus.CalcCurGoal())
+            switch (goal.CalcCurGoal())
             {
                 case Goal.CurGoal.UPGRADE_ROCKET:
-                    UpgradeButton.SetActive(true);
+                    upgradeButton.SetActive(true);
                     break;
                 case Goal.CurGoal.FLY_TO_PLANET:
                 case Goal.CurGoal.GAUNTLET:
-                    LaunchButton.ActivateLaunch();
+                    launchButton.ActivateLaunch();
                     break;
                 case Goal.CurGoal.DONE_FOR_TODAY:
-                    DoneText.SetActive(true);
+                    doneText.SetActive(true);
                     break;
                 case Goal.CurGoal.WON:
-                    LaunchButton.ActivateLaunch();
-                    YouWinText.SetActive(true);
+                    launchButton.ActivateLaunch();
+                    youWinText.SetActive(true);
                     break;
             }
         }

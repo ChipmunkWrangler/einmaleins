@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NumberButtonLayoutController : MonoBehaviour {
-    [SerializeField] Transform SmallScreenParent = null;
-    [SerializeField] float MaxSmallScreenInches = 2.5F;
-    [SerializeField] Transform MultiplierStars = null;
+    [SerializeField] Transform smallScreenParent = null;
+    [SerializeField] float maxSmallScreenInches = 2.5F;
+    [SerializeField] Transform multiplierStars = null;
 	void Start () {
 		if (IsSmallScreen()) {
 			UseCompactButtonLayout ();
@@ -20,16 +20,16 @@ public class NumberButtonLayoutController : MonoBehaviour {
 		} 
 		Debug.Log (Screen.width);
 		Debug.Log (Screen.width / dpi);
-		return Screen.width / dpi <= MaxSmallScreenInches;
+		return Screen.width / dpi <= maxSmallScreenInches;
 	}
 
 	void UseCompactButtonLayout ()
 	{
 		while (transform.childCount > 0) {
-			transform.GetChild (0).SetParent (SmallScreenParent);
+			transform.GetChild (0).SetParent (smallScreenParent);
 		}
-		if (MultiplierStars) {
-			MultiplierStars.localRotation = Quaternion.Euler (0, 0, -90.0F);
+		if (multiplierStars) {
+			multiplierStars.localRotation = Quaternion.Euler (0, 0, -90.0F);
 		}
 	}
 }

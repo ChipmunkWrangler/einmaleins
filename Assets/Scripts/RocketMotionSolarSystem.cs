@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketMotionSolarSystem : MonoBehaviour {
-    [SerializeField] FlashThrust Thrust = null;
-    [SerializeField] Params ParamObj = null;
-    float MinY;
+    [SerializeField] FlashThrust thrust = null;
+    [SerializeField] Params paramObj = null;
+    float minY;
 
 	void Start() {
-		MinY = gameObject.transform.position.y;
+		minY = gameObject.transform.position.y;
 	}
 
 	void Update () {
@@ -17,7 +17,7 @@ public class RocketMotionSolarSystem : MonoBehaviour {
 
 	void Ascend() {
 		Vector3 pos = gameObject.transform.position;
-		pos.y = MinY + Thrust.Height * ParamObj.HeightScale * gameObject.transform.parent.localScale.y;
+		pos.y = minY + thrust.Height * paramObj.HeightScale * gameObject.transform.parent.localScale.y;
 		gameObject.transform.position = pos;
 	}
 }

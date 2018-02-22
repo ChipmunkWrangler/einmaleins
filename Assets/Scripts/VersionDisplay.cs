@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VersionDisplay : MonoBehaviour {
-    [SerializeField] UnityEngine.UI.Text Text = null;
+    [SerializeField] UnityEngine.UI.Text text = null;
 	void Start () {
-		Text.text = MDVersion.GetCurrentVersion ();
+		text.text = MDVersion.GetCurrentVersion ();
 	}
 }

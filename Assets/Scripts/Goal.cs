@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Goal : MonoBehaviour {
-    [SerializeField] EffortTracker EffortTracker = null;
+    [SerializeField] EffortTracker effortTracker = null;
 
 	public enum CurGoal {
 		UPGRADE_ROCKET,
@@ -40,5 +40,5 @@ public class Goal : MonoBehaviour {
     static bool ShouldUpgrade() => (RocketParts.Instance.HasEnoughPartsToUpgrade || !ChooseRocketColour.HasChosenColour()) && !RocketParts.Instance.JustUpgraded;
     static bool IsLeavingSolarSystem() => TargetPlanet.GetTargetPlanetIdx() > TargetPlanet.GetMaxPlanetIdx();
 
-    bool IsDoneForToday() => EffortTracker.IsDoneForToday() && !RocketParts.Instance.JustUpgraded;
+    bool IsDoneForToday() => effortTracker.IsDoneForToday() && !RocketParts.Instance.JustUpgraded;
 }

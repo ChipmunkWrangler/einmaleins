@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StatsController : MonoBehaviour {
-    [SerializeField] StatsColumnController[] Columns = null;
-    [SerializeField] Questions QuestionContainer = null;
+    [SerializeField] StatsColumnController[] columns = null;
+    [SerializeField] Questions questions = null;
     readonly StatsControllerPersistentData Data = new StatsControllerPersistentData();
 
     void Start () {
-		Data.Load (Columns.Length);
-		foreach (Question question in QuestionContainer.QuestionArray) {
+		Data.Load (columns.Length);
+		foreach (Question question in questions.QuestionArray) {
 			int i = question.A - 1;
 			int j = question.B - 1;
-			Data.seenMastered[i][j] = Columns [i].SetMasteryLevel (j, question, Data.seenMastered[i][j]);
+			Data.seenMastered[i][j] = columns [i].SetMasteryLevel (j, question, Data.seenMastered[i][j]);
 			if (i != j) {
-				Data.seenMastered [j] [i] = Columns [j].SetMasteryLevel (i, question, Data.seenMastered [j] [i]);
+				Data.seenMastered [j] [i] = columns [j].SetMasteryLevel (i, question, Data.seenMastered [j] [i]);
 			}
 		}
-		foreach (StatsColumnController column in Columns) {
+		foreach (StatsColumnController column in columns) {
 			column.DoneSettingMasteryLevels ();
 		}
-		Data.Save (Columns.Length);
+		Data.Save (columns.Length);
 	}
 }
 

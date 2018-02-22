@@ -838,8 +838,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aad7195606cc4fa0850224027ac7808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputField: {fileID: 1139126641}
-  StatusLine: {fileID: 1143997633}
+  inputField: {fileID: 1139126641}
+  statusLine: {fileID: 1143997633}
 --- !u!224 &738776895
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1561,7 +1561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66af34da429114161b307023ec74d7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuestionContainer: {fileID: 0}
+  questions: {fileID: 0}
 --- !u!4 &1401368597
 Transform:
   m_ObjectHideFlags: 0
@@ -1710,8 +1710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47ac4486ec2645c38f9652c6bae1fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatusLine: {fileID: 1143997633}
-  SendButton: {fileID: 456714954}
+  statusLine: {fileID: 1143997633}
+  sendButton: {fileID: 456714954}
 --- !u!4 &1777714958
 Transform:
   m_ObjectHideFlags: 0

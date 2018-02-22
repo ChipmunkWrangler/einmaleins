@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Fuel : MonoBehaviour {
-    [SerializeField] UnityEngine.UI.Text FuelCountText = null;
+    [SerializeField] UnityEngine.UI.Text fuelCountText = null;
 
 	void Start() {
 		UpdateFuelDisplay (EffortTracker.GetNumAnswersInQuiz (Goal.IsReadyForGauntlet ()));
@@ -11,6 +11,6 @@ public class Fuel : MonoBehaviour {
 
 	public void UpdateFuelDisplay(int numAnswersLeftInQuiz) {
 		int fuelCount = Mathf.Max(0, numAnswersLeftInQuiz);
-		FuelCountText.text = fuelCount.ToString();
+		fuelCountText.text = fuelCount.ToString();
 	}
 }

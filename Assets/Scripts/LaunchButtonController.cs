@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
 public class LaunchButtonController : MonoBehaviour {
-    [SerializeField] UnityEngine.UI.Button LaunchButton = null;
-    [SerializeField] UnityEngine.UI.Text LaunchButtonText = null;
+    [SerializeField] UnityEngine.UI.Button launchButton = null;
+    [SerializeField] UnityEngine.UI.Text launchButtonText = null;
 
     readonly string[] LaunchButtonLabels = {
 		"Auf zum Mars",
@@ -15,13 +15,13 @@ public class LaunchButtonController : MonoBehaviour {
 	};
 
 	public void Deactivate() {
-		LaunchButton.enabled = false;
-		LaunchButton.gameObject.SetActive(false);
+		launchButton.enabled = false;
+		launchButton.gameObject.SetActive(false);
 	}
 
 	public void ActivateLaunch() {
-		LaunchButtonText.text = I2.Loc.LocalizationManager.GetTermTranslation (LaunchButtonLabels [TargetPlanet.GetTargetPlanetIdx ()]);
-		LaunchButton.enabled = true;
-		LaunchButton.gameObject.SetActive (true);
+		launchButtonText.text = I2.Loc.LocalizationManager.GetTermTranslation (LaunchButtonLabels [TargetPlanet.GetTargetPlanetIdx ()]);
+		launchButton.enabled = true;
+		launchButton.gameObject.SetActive (true);
 	}
 }

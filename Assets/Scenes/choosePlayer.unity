@@ -321,18 +321,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3994ee7e011436d91733f3f15d02f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnterNamePanel: {fileID: 1308412198}
-  PlayerButtons:
+  enterNamePanel: {fileID: 1308412198}
+  playerButtons:
   - {fileID: 235820493}
   - {fileID: 1009282700}
   - {fileID: 104777414}
   - {fileID: 589766884}
-  PlayButton: {fileID: 939087455}
-  PlayButtonImage: {fileID: 73560128}
-  InputFld: {fileID: 2067377592}
-  ButtonFadeAlpha: 0
-  ButtonFadeDuration: 0.1
-  RocketPartsGameObj: {fileID: 1976815057}
+  playButton: {fileID: 939087455}
+  playButtonImage: {fileID: 73560128}
+  inputField: {fileID: 2067377592}
+  buttonFadeAlpha: 0
+  buttonFadeDuration: 0.1
+  rocketPartsGameObj: {fileID: 1976815057}
 --- !u!4 &230957309
 Transform:
   m_ObjectHideFlags: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66af34da429114161b307023ec74d7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuestionContainer: {fileID: 0}
+  questions: {fileID: 0}
 --- !u!1001 &235820486
 Prefab:
   m_ObjectHideFlags: 0
@@ -573,7 +573,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114665242417109496, guid: 80789d946d47a4809893515e25e0ac79,
         type: 2}
-      propertyPath: BackSceneName
+      propertyPath: backSceneName
       value: EXIT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1358,7 +1358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef291d70416444ecca63bfab1a1a8c50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 1563725406}
+  text: {fileID: 1563725406}
 --- !u!1 &1582237225
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,20 +19,20 @@ public class TestAlgorithm : MonoBehaviour {
     const float MinThrustFactor = 0.1F;
     const int V = 4;
 	class KidModel {
-        int InitialChanceOfCorrect; // lowered by difficulty
-        int ImprovementRate;
+        int initialChanceOfCorrect; // lowered by difficulty
+        int improvementRate;
         readonly float InitialAnswerTimeMax; // increased by difficulty
         readonly float AnswerTimeImprovementRate;
 
         public KidModel(int initialChanceOfCorrect, int improvementRate, float initialAnswerTimeMax, float answerTimeImprovementRate) {
-			InitialChanceOfCorrect = initialChanceOfCorrect;
-			ImprovementRate = improvementRate;
+			initialChanceOfCorrect = initialChanceOfCorrect;
+			improvementRate = improvementRate;
 			InitialAnswerTimeMax  = initialAnswerTimeMax;
 			AnswerTimeImprovementRate = answerTimeImprovementRate;
 		}
 
 		public bool AnswersCorrectly(TestQuestion question) {
-			int chance = InitialChanceOfCorrect + ImprovementRate * (question.TimesAnsweredCorrectly + question.TimesAnsweredWrong) - question.BaseDifficulty;
+			int chance = initialChanceOfCorrect + improvementRate * (question.TimesAnsweredCorrectly + question.TimesAnsweredWrong) - question.BaseDifficulty;
 //			Debug.Log ("Chance of correctness = " + chance);
 			return Random.Range(0, 100) < chance;
 		}

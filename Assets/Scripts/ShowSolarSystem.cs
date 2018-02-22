@@ -11,79 +11,79 @@ public class ForegroundDisplaySettings
 
 public class ShowSolarSystem : MonoBehaviour
 {
-    [SerializeField] float VerticalPadding = 0.1F; // 1.0 would be the whole screen
-    [SerializeField] Renderer Rocket = null;
-    [SerializeField] GameObject ParticleParent = null;
-    [SerializeField] Renderer[] Planets = null;
-    [SerializeField] Renderer Earth = null;
-    [SerializeField] float MinParticleScale = 0.1F;
-    [SerializeField] GameObject RecordLine = null;
-    [SerializeField] float ZoomInTime = 5.0F;
-    [SerializeField] float ZoomOutTime = 5.0F;
-    [SerializeField] float PreDelay = 2.0F;
-    [SerializeField] float PostDelay = 2.0F;
-    [SerializeField] float[] PlanetZooms = null;
-    [SerializeField] float[] PlanetYs = null;
-    Vector3 OriginalScale;
-    Transform ParticleSystemTransform;
+    [SerializeField] float verticalPadding = 0.1F; // 1.0 would be the whole screen
+    [SerializeField] Renderer rocket = null;
+    [SerializeField] GameObject particleParent = null;
+    [SerializeField] Renderer[] planets = null;
+    [SerializeField] Renderer earth = null;
+    [SerializeField] float minParticleScale = 0.1F;
+    [SerializeField] GameObject recordLine = null;
+    [SerializeField] float zoomInTime = 5.0F;
+    [SerializeField] float zoomOutTime = 5.0F;
+    [SerializeField] float preDelay = 2.0F;
+    [SerializeField] float postDelay = 2.0F;
+    [SerializeField] float[] planetZooms = null;
+    [SerializeField] float[] planetYs = null;
+    Vector3 originalScale;
+    Transform particleSystemTransform;
 
     public float ZoomToPlanet(int i)
     {
-        GameObject planet = Planets[i].gameObject;
+        GameObject planet = planets[i].gameObject;
         Transform oldTransform = planet.transform;
-        float zoomedScale = PlanetZooms[i];
-        iTween.MoveTo(planet, iTween.Hash("y", PlanetYs[i], "time", ZoomInTime, "delay", PreDelay, "islocal", true));
-        iTween.ScaleTo(planet, iTween.Hash("scale", new Vector3(zoomedScale, zoomedScale, 1.0F), "time", ZoomInTime, "delay", PreDelay));
-        float duration = PreDelay + ZoomInTime + PostDelay;
+        float zoomedScale = planetZooms[i];
+        iTween.MoveTo(planet, iTween.Hash("y", planetYs[i], "time", zoomInTime, "delay", preDelay, "islocal", true));
+        iTween.ScaleTo(planet, iTween.Hash("scale", new Vector3(zoomedScale, zoomedScale, 1.0F), "time", zoomInTime, "delay", preDelay));
+        float duration = preDelay + zoomInTime + postDelay;
         // then zoom out again
-        iTween.MoveTo(planet, iTween.Hash("y", oldTransform.localPosition.y, "time", ZoomOutTime, "delay", PreDelay + ZoomInTime, "islocal", true));
-        iTween.ScaleTo(planet, iTween.Hash("scale", oldTransform.localScale, "time", ZoomOutTime, "delay", PreDelay + ZoomInTime));
-        duration += ZoomOutTime;
+        iTween.MoveTo(planet, iTween.Hash("y", oldTransform.localPosition.y, "time", zoomOutTime, "delay", preDelay + zoomInTime, "islocal", true));
+        iTween.ScaleTo(planet, iTween.Hash("scale", oldTransform.localScale, "time", zoomOutTime, "delay", preDelay + zoomInTime));
+        duration += zoomOutTime;
         return duration;
     }
 
-    public Renderer GetPlanet(int i) => Planets[i];
+    public Renderer GetPlanet(int i) => planets[i];
 
     void Start()
     {
-        OriginalScale = transform.localScale;
+        originalScale = transform.localScale;
         AdjustPlanetPositions();
     }
 
     void Update()
     {
-        if (ParticleSystemTransform == null)
+        if (particleSystemTransform == null)
         {
-            ParticleSystem sys = ParticleParent.GetComponentInChildren<ParticleSystem>(false);
+            ParticleSystem sys = particleParent.GetComponentInChildren<ParticleSystem>(false);
             if (sys != null)
             {
-                ParticleSystemTransform = sys.transform;
+                particleSystemTransform = sys.transform;
             }
         }
-        float viewportTop = Camera.main.WorldToViewportPoint(Rocket.bounds.max).y + VerticalPadding;
+        float viewportTop = Camera.main.WorldToViewportPoint(rocket.bounds.max).y + verticalPadding;
         if (viewportTop > 1.0F)
         {
             transform.localScale /= viewportTop;
-            ParticleSystemTransform.localScale /= viewportTop;
-            RecordLine.transform.localScale *= viewportTop;
-            float maintainMinScaleFactor = MinParticleScale / ParticleSystemTransform.localScale.y;
+            particleSystemTransform.localScale /= viewportTop;
+            recordLine.transform.localScale *= viewportTop;
+            float maintainMinScaleFactor = minParticleScale / particleSystemTransform.localScale.y;
             if (maintainMinScaleFactor > 1.0F)
             {
-                ParticleSystemTransform.localScale *= maintainMinScaleFactor;
-                Rocket.transform.localScale *= maintainMinScaleFactor;
+                particleSystemTransform.localScale *= maintainMinScaleFactor;
+                rocket.transform.localScale *= maintainMinScaleFactor;
             }
         }
     }
 
     public void Reset()
     {
-        transform.localScale = OriginalScale;
+        transform.localScale = originalScale;
     }
 
     void AdjustPlanetPositions()
     {
-        float earthAndRocketOffsets = Earth.bounds.extents.y + Rocket.bounds.size.y;
-        foreach (var planet in Planets)
+        float earthAndRocketOffsets = earth.bounds.extents.y + rocket.bounds.size.y;
+        foreach (var planet in planets)
         {
             Vector3 newPos = planet.transform.position;  // planet.transform.y could be replaced by TargetPlanet.heights, except that newPos is already in a manipulated space due to its parent
             float offset = planet.bounds.extents.y + earthAndRocketOffsets;

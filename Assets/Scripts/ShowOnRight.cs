@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class ShowOnRight : MonoBehaviour, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted
 {
-    [SerializeField] bool HideOnRight = false;
-    [SerializeField] bool EvenIfWrongFirst = false;
+    [SerializeField] bool hideOnRight = false;
+    [SerializeField] bool evenIfWrongFirst = false;
 
     const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
-    bool WasWrong;
+    bool wasWrong;
 
     void Start()
     {
-        gameObject.transform.localScale = HideOnRight ? Vector3.one : Vector3.zero;
+        gameObject.transform.localScale = hideOnRight ? Vector3.one : Vector3.zero;
     }
 
     public void OnCorrectAnswer()
     {
-        if (EvenIfWrongFirst || !WasWrong)
+        if (evenIfWrongFirst || !wasWrong)
         {
-            ScaleTo(HideOnRight ? Vector3.zero : Vector3.one);
+            ScaleTo(hideOnRight ? Vector3.zero : Vector3.one);
         }
     }
 
@@ -31,13 +31,13 @@ public class ShowOnRight : MonoBehaviour, IOnQuestionChanged, IOnWrongAnswer, IO
 
     public void OnQuestionChanged(Question question)
     {
-        WasWrong = false;
-        ScaleTo(HideOnRight == (question != null) ? Vector3.one : Vector3.zero);
+        wasWrong = false;
+        ScaleTo(hideOnRight == (question != null) ? Vector3.one : Vector3.zero);
     }
 
     public void OnWrongAnswer(bool wasNew)
     {
-        WasWrong = true;
+        wasWrong = true;
     }
 
     void ScaleTo(Vector3 tgtScale)

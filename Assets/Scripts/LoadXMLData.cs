@@ -2,23 +2,23 @@
 using UnityEngine.UI;
 
 public class LoadXMLData : MonoBehaviour {
-    [SerializeField] Text InputField = null;
-    [SerializeField] Text StatusLine = null;
+    [SerializeField] Text inputField = null;
+    [SerializeField] Text statusLine = null;
 
 	public void LoadFromInputField () {
 		try {
-			XMLSerializationHandler.LoadFromString( InputField.text );
+			XMLSerializationHandler.LoadFromString( inputField.text );
 		} catch (System.Exception ex) {
-			StatusLine.text = AssemblyCSharp.ExceptionPrettyPrint.Msg( ex );
+			statusLine.text = AssemblyCSharp.ExceptionPrettyPrint.Msg( ex );
 		}	
 	}
 
 	public void LoadFromFile () {
 		try {
 			XMLSerializationHandler.LoadFromFile();
-			StatusLine.text = I2.Loc.LocalizationManager.GetTermTranslation( "Data loaded." );
+			statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation( "Data loaded." );
 		} catch (System.Exception ex) {
-			StatusLine.text = AssemblyCSharp.ExceptionPrettyPrint.Msg( ex );
+			statusLine.text = AssemblyCSharp.ExceptionPrettyPrint.Msg( ex );
 		}	
 	}
 }

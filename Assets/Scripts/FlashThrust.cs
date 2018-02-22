@@ -5,20 +5,20 @@ using UnityEngine.UI;
 
 public class FlashThrust : MonoBehaviour, IOnQuestionChanged
 {
-    [SerializeField] GameObject HeightWidget = null;
-    [SerializeField] Text HeightText = null;
-    [SerializeField] Text RecordHeightText = null;
-    [SerializeField] KickoffLaunch Launch = null;
-    [SerializeField] GameObject OldRecord = null;
-    [SerializeField] Params ParamObj = null;
-    [SerializeField] Text AchievementText = null;
-    [SerializeField] string RecordBrokenMsg = "Neuer Rekord!";
-    [SerializeField] ShowSolarSystem ZoomToPlanet = null;
-    [SerializeField] float AchievementTextTransitionTime = 3.0F;
-    [SerializeField] float PlanetAchievementTextDelay = 2.0F;
-    [SerializeField] EffortTracker EffortTracker = null;
-    [SerializeField] QuestionPicker QPicker = null;
-    [SerializeField] Goal GoalStatus = null;
+    [SerializeField] GameObject heightWidget = null;
+    [SerializeField] Text heightText = null;
+    [SerializeField] Text recordHeightText = null;
+    [SerializeField] KickoffLaunch launch = null;
+    [SerializeField] GameObject oldRecord = null;
+    [SerializeField] Params paramObj = null;
+    [SerializeField] Text achievementText = null;
+    [SerializeField] string recordBrokenMsg = "Neuer Rekord!";
+    [SerializeField] ShowSolarSystem zoomToPlanet = null;
+    [SerializeField] float achievementTextTransitionTime = 3.0F;
+    [SerializeField] float planetAchievementTextDelay = 2.0F;
+    [SerializeField] EffortTracker effortTracker = null;
+    [SerializeField] QuestionPicker questionPicker = null;
+    [SerializeField] Goal goal = null;
     public float Speed { get; private set; } // km per second
     public float Height { get; private set; } // km
 
@@ -35,23 +35,23 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
     const float AllottedTime = Question.FastTime; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight
     const float MinThrustFactor = 0.1F;
     const int V = 4;
-    static float Q;
-    static float MaxThrustFactor;
-    float BaseThrust;
-    float Gravity;
-    float RecordHeight;
-    float EarnedHeight;
-    bool IsRunning;
-    System.IFormatProvider FormatProvider;
-    bool NoMoreQuestions;
-    bool CheckForRecord;
-    Goal.CurGoal CurGoal;
+    static float q;
+    static float maxThrustFactor;
+    float baseThrust;
+    float gravity;
+    float recordHeight;
+    float earnedHeight;
+    bool isRunning;
+    System.IFormatProvider formatProvider;
+    bool noMoreQuestions;
+    bool checkForRecord;
+    Goal.CurGoal curGoal;
 
     const string RecordPrefsKey = "recordHeight";
     const string HeightFormat = "N0";
     const string Unit = " km";
 
-    public static float GetThrustFactor(float timeRequired) => MinThrustFactor + (MaxThrustFactor - MinThrustFactor) / Mathf.Pow(1.0F + Q * Mathf.Exp(timeRequired - AllottedTime), 1.0F / V);
+    public static float GetThrustFactor(float timeRequired) => MinThrustFactor + (maxThrustFactor - MinThrustFactor) / Mathf.Pow(1.0F + q * Mathf.Exp(timeRequired - AllottedTime), 1.0F / V);
 
     public float GetMaxSingleQuestionSpeed() => GetHeightIncrease(AllottedTime) / Celebrate.Duration;
 
@@ -67,9 +67,9 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
     {
         if (question == null)
         {
-            NoMoreQuestions = true;
+            noMoreQuestions = true;
         }
-        else if (IsRunning)
+        else if (isRunning)
         { // test
             question.Ask();
         }
@@ -77,11 +77,11 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
 
     public void Accelerate(float answerTime = AllottedTime)
     {
-        EarnedHeight += GetHeightIncrease(answerTime);
-        float deltaHeight = EarnedHeight - Height;
+        earnedHeight += GetHeightIncrease(answerTime);
+        float deltaHeight = earnedHeight - Height;
         UnityEngine.Assertions.Assert.IsTrue(deltaHeight > 0);
         float oldSpeed = Speed;
-        Speed = Mathf.Sqrt(2F * deltaHeight * Gravity);
+        Speed = Mathf.Sqrt(2F * deltaHeight * gravity);
         UnityEngine.Assertions.Assert.IsTrue(Speed > oldSpeed);
         Debug.Log("old speed = " + oldSpeed + " speed = " + Speed);
     }
@@ -103,62 +103,62 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
         return TargetPlanet.GetPlanetHeight(u + 1) / TargetPlanet.GetPlanetHeight(u);
     }
 
-    bool IsTargetPlanetReached() => CurGoal != Goal.CurGoal.WON && Height > TargetPlanet.GetPlanetHeight(TargetPlanet.GetTargetPlanetIdx());
-    float GetHeightIncrease(float timeRequired) => BaseThrust * GetThrustFactor(timeRequired);
+    bool IsTargetPlanetReached() => curGoal != Goal.CurGoal.WON && Height > TargetPlanet.GetPlanetHeight(TargetPlanet.GetTargetPlanetIdx());
+    float GetHeightIncrease(float timeRequired) => baseThrust * GetThrustFactor(timeRequired);
 
     void Start()
     {
         InitScoreWidget();
-        OldRecord.SetActive(CheckForRecord);
+        oldRecord.SetActive(checkForRecord);
     }
 
     void InitScoreWidget()
     {
-        FormatProvider = MDCulture.GetCulture();
-        HeightWidget.SetActive(true);
-        HeightText.text = "0";
+        formatProvider = MDCulture.GetCulture();
+        heightWidget.SetActive(true);
+        heightText.text = "0";
         InitRecordHeight();
-        RecordHeightText.text = RecordHeight.ToString(HeightFormat) + Unit;
+        recordHeightText.text = recordHeight.ToString(HeightFormat) + Unit;
     }
 
     void InitRecordHeight()
     {
-        RecordHeight = MDPrefs.GetFloat(RecordPrefsKey, 0);
+        recordHeight = MDPrefs.GetFloat(RecordPrefsKey, 0);
     }
 
     void InitOldRecordLine(bool enable)
     {
-        var recordPos = OldRecord.transform.position;
-        recordPos.y += RecordHeight * ParamObj.HeightScale * OldRecord.transform.parent.localScale.y;
-        OldRecord.transform.position = recordPos;
-        OldRecord.SetActive(enable);
+        var recordPos = oldRecord.transform.position;
+        recordPos.y += recordHeight * paramObj.HeightScale * oldRecord.transform.parent.localScale.y;
+        oldRecord.transform.position = recordPos;
+        oldRecord.SetActive(enable);
     }
 
     void InitRecord()
     {
         InitRecordHeight();
-        CheckForRecord = RecordHeight > 0;
-        InitOldRecordLine(CheckForRecord);
+        checkForRecord = recordHeight > 0;
+        InitOldRecordLine(checkForRecord);
     }
 
     void InitPhysics(bool isGauntlet)
     {
-        MaxThrustFactor = CalcMaxThrustFactor();
-        Q = CalcQ(MinThrustFactor, MaxThrustFactor);
-        BaseThrust = CalcBaseThrust(isGauntlet);
-        Gravity = CalcGravity();
+        maxThrustFactor = CalcMaxThrustFactor();
+        q = CalcQ(MinThrustFactor, maxThrustFactor);
+        baseThrust = CalcBaseThrust(isGauntlet);
+        gravity = CalcGravity();
     }
 
     void Update()
     {
-        if (IsRunning)
+        if (isRunning)
         {
-            Speed -= Gravity * Time.deltaTime;
+            Speed -= gravity * Time.deltaTime;
             if (Speed > 0)
             {
                 Ascend();
             }
-            else if (NoMoreQuestions)
+            else if (noMoreQuestions)
             {
                 OnDone();
             }
@@ -168,9 +168,9 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
     void Ascend()
     {
         Height += Speed * Time.deltaTime;
-        RecordHeight = UpdateRecord(Height, RecordHeight, RecordPrefsKey);
-        HeightText.text = Height.ToString(HeightFormat, FormatProvider) + Unit;
-        RecordHeightText.text = RecordHeight.ToString(HeightFormat, FormatProvider) + Unit;
+        recordHeight = UpdateRecord(Height, recordHeight, RecordPrefsKey);
+        heightText.text = Height.ToString(HeightFormat, formatProvider) + Unit;
+        recordHeightText.text = recordHeight.ToString(HeightFormat, formatProvider) + Unit;
         if (IsTargetPlanetReached())
         {
             ReachPlanet();
@@ -187,8 +187,8 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
             RocketParts.Instance.UnlockFinalUpgrade();
         }
         StopRunning();
-        QPicker.AbortQuiz();
-        OldRecord.SetActive(false);
+        questionPicker.AbortQuiz();
+        oldRecord.SetActive(false);
         StartCoroutine(CelebrateReachingPlanet(planetReachedIdx));
     }
 
@@ -201,62 +201,62 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
 
     void PrepareNewStart()
     {
-        NoMoreQuestions = false;
-        Launch.ShowLaunchButton();
+        noMoreQuestions = false;
+        launch.ShowLaunchButton();
     }
 
     void StopRunning()
     {
         Debug.Log("StopRunning");
         Speed = 0;
-        IsRunning = false;
-        EffortTracker.EndQuiz();
+        isRunning = false;
+        effortTracker.EndQuiz();
     }
 
     public void OnCountdown()
     {
-        CurGoal = GoalStatus.CalcCurGoal();
-        UnityEngine.Assertions.Assert.IsTrue(CurGoal == Goal.CurGoal.FLY_TO_PLANET || CurGoal == Goal.CurGoal.GAUNTLET || CurGoal == Goal.CurGoal.WON, "unexpected goal " + CurGoal);
+        curGoal = goal.CalcCurGoal();
+        UnityEngine.Assertions.Assert.IsTrue(curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
         InitRecord();
-        InitPhysics(CurGoal == Goal.CurGoal.GAUNTLET);
-        IsRunning = true;
+        InitPhysics(curGoal == Goal.CurGoal.GAUNTLET);
+        isRunning = true;
         Height = 0;
         Speed = 0;
-        NoMoreQuestions = false;
+        noMoreQuestions = false;
     }
 
     IEnumerator CelebrateReachingPlanet(int planetIdx)
     {
-        float zoomTime = ZoomToPlanet.ZoomToPlanet(planetIdx);
-        UnityEngine.Assertions.Assert.IsTrue(zoomTime - PlanetAchievementTextDelay >= 0);
-        ClearAchievementText(PlanetAchievementTextDelay * 0.9F);
-        yield return new WaitForSeconds(PlanetAchievementTextDelay);
+        float zoomTime = zoomToPlanet.ZoomToPlanet(planetIdx);
+        UnityEngine.Assertions.Assert.IsTrue(zoomTime - planetAchievementTextDelay >= 0);
+        ClearAchievementText(planetAchievementTextDelay * 0.9F);
+        yield return new WaitForSeconds(planetAchievementTextDelay);
         ActivateAchievementText(PlanetReachedTexts[planetIdx]);
-        yield return new WaitForSeconds(zoomTime - PlanetAchievementTextDelay);
+        yield return new WaitForSeconds(zoomTime - planetAchievementTextDelay);
         PrepareNewStart();
         yield return null;
     }
 
     void ClearAchievementText(float transitionTime)
     {
-        if (AchievementText.text.Length > 0)
+        if (achievementText.text.Length > 0)
         {
-            iTween.ScaleTo(AchievementText.gameObject, iTween.Hash("scale", Vector3.zero, "time", transitionTime));
+            iTween.ScaleTo(achievementText.gameObject, iTween.Hash("scale", Vector3.zero, "time", transitionTime));
         }
     }
 
     void ActivateAchievementText(string term)
     {
-        AchievementText.text = I2.Loc.LocalizationManager.GetTermTranslation(term);
-        AchievementText.CrossFadeAlpha(1.0F, 0, false);
-        AchievementText.CrossFadeAlpha(0, AchievementTextTransitionTime, false);
-        AchievementText.transform.localScale = Vector3.zero;
-        iTween.ScaleTo(AchievementText.gameObject, iTween.Hash("scale", Vector3.one, "time", AchievementTextTransitionTime, "easeType", iTween.EaseType.easeOutQuad));
+        achievementText.text = I2.Loc.LocalizationManager.GetTermTranslation(term);
+        achievementText.CrossFadeAlpha(1.0F, 0, false);
+        achievementText.CrossFadeAlpha(0, achievementTextTransitionTime, false);
+        achievementText.transform.localScale = Vector3.zero;
+        iTween.ScaleTo(achievementText.gameObject, iTween.Hash("scale", Vector3.one, "time", achievementTextTransitionTime, "easeType", iTween.EaseType.easeOutQuad));
     }
 
     void CelebrateBreakingRecord()
     {
-        ActivateAchievementText(RecordBrokenMsg);
+        ActivateAchievementText(recordBrokenMsg);
     }
 
     float UpdateRecord(float dist, float record, string key)
@@ -265,9 +265,9 @@ public class FlashThrust : MonoBehaviour, IOnQuestionChanged
         {
             record = dist;
             MDPrefs.SetFloat(key, record);
-            if (CheckForRecord)
+            if (checkForRecord)
             {
-                CheckForRecord = false;
+                checkForRecord = false;
                 CelebrateBreakingRecord();
             }
         }
