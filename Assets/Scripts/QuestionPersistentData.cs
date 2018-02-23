@@ -18,7 +18,7 @@ public class QuestionPersistentData
 
     public void Load(string prefsKey, int idx)
     {
-        prefsKey = prefsKey;
+        this.prefsKey = prefsKey;
         Idx = idx;
         AnswerTimes = GetAnswerTimes(prefsKey);
         WasMastered = MDPrefs.GetBool(prefsKey + ":wasMastered");
@@ -29,7 +29,7 @@ public class QuestionPersistentData
 
     public void Create(string prefsKey, int idx)
     {
-        prefsKey = prefsKey;
+        this.prefsKey = prefsKey;
         Idx = idx;
         AnswerTimes = GetNewAnswerTimes();
     }
@@ -38,7 +38,7 @@ public class QuestionPersistentData
     {
         if (prefsKey == "")
         {
-            prefsKey = prefsKey;
+            prefsKey = this.prefsKey;
         }
         UnityEngine.Assertions.Assert.AreNotEqual(prefsKey.Length, 0);
         SetAnswerTimes(prefsKey, AnswerTimes);
