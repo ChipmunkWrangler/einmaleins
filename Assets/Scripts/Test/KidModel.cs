@@ -1,28 +1,32 @@
 ﻿using UnityEngine;
-class KidModel
+
+namespace TimesTables.Test
 {
-    readonly float initialAnswerTimeMax; // increased by difficulty
-    readonly float answerTimeImprovementRate;
-    int initialChanceOfCorrect; // lowered by difficulty
-    int improvementRate;
-
-    public KidModel(int initialChanceOfCorrect, int improvementRate, float initialAnswerTimeMax, float answerTimeImprovementRate)
+    class KidModel
     {
-        this.initialChanceOfCorrect = initialChanceOfCorrect;
-        this.improvementRate = improvementRate;
-        this.initialAnswerTimeMax = initialAnswerTimeMax;
-        this.answerTimeImprovementRate = answerTimeImprovementRate;
-    }
+        readonly float initialAnswerTimeMax; // increased by difficulty
+        readonly float answerTimeImprovementRate;
+        int initialChanceOfCorrect; // lowered by difficulty
+        int improvementRate;
 
-    public bool AnswersCorrectly(TestQuestion question)
-    {
-        int chance = initialChanceOfCorrect + (improvementRate * (question.TimesAnsweredCorrectly + question.TimesAnsweredWrong)) - question.BaseDifficulty;
-        return Random.Range(0, 100) < chance;
-    }
+        public KidModel(int initialChanceOfCorrect, int improvementRate, float initialAnswerTimeMax, float answerTimeImprovementRate)
+        {
+            this.initialChanceOfCorrect = initialChanceOfCorrect;
+            this.improvementRate = improvementRate;
+            this.initialAnswerTimeMax = initialAnswerTimeMax;
+            this.answerTimeImprovementRate = answerTimeImprovementRate;
+        }
 
-    public float AnswerTime(TestQuestion question)
-    {
-        float maxTime = Mathf.Max(TestAlgorithm.TargetTime, initialAnswerTimeMax - (question.TimesAnsweredCorrectly * answerTimeImprovementRate) + question.BaseDifficulty);
-        return Random.Range(TestAlgorithm.MinAnswerTime, maxTime);
+        public bool AnswersCorrectly(TestQuestion question)
+        {
+            int chance = initialChanceOfCorrect + (improvementRate * (question.TimesAnsweredCorrectly + question.TimesAnsweredWrong)) - question.BaseDifficulty;
+            return Random.Range(0, 100) < chance;
+        }
+
+        public float AnswerTime(TestQuestion question)
+        {
+            float maxTime = Mathf.Max(TestAlgorithm.TargetTime, initialAnswerTimeMax - (question.TimesAnsweredCorrectly * answerTimeImprovementRate) + question.BaseDifficulty);
+            return Random.Range(TestAlgorithm.MinAnswerTime, maxTime);
+        }
     }
 }
