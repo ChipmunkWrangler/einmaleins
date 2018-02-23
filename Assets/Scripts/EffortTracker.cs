@@ -107,9 +107,9 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer, IOnGiveUp
     {
         data.Load();
         Goal.CurGoal curGoal = goal.CalcCurGoal();
-        UnityEngine.Assertions.Assert.IsTrue(curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
+        UnityEngine.Assertions.Assert.IsTrue(curGoal == Goal.CurGoal.FlyToPlanet || curGoal == Goal.CurGoal.Gauntlet || curGoal == Goal.CurGoal.Won, "unexpected goal " + curGoal);
         allowGivingUp = Goal.IsGivingUpAllowed(curGoal);
-        NumAnswersLeftInQuiz = GetNumAnswersInQuiz(curGoal == Goal.CurGoal.GAUNTLET);
+        NumAnswersLeftInQuiz = GetNumAnswersInQuiz(curGoal == Goal.CurGoal.Gauntlet);
         questions.ResetForNewQuiz();
         isQuizStarted = true;
     }

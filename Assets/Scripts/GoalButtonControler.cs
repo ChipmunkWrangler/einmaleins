@@ -23,17 +23,17 @@ class GoalButtonControler : MonoBehaviour, IOnQuestionChanged
         {
             switch (goal.CalcCurGoal())
             {
-                case Goal.CurGoal.UPGRADE_ROCKET:
+                case Goal.CurGoal.UpgradeRocket:
                     upgradeButton.SetActive(true);
                     break;
-                case Goal.CurGoal.FLY_TO_PLANET:
-                case Goal.CurGoal.GAUNTLET:
+                case Goal.CurGoal.FlyToPlanet:
+                case Goal.CurGoal.Gauntlet:
                     launchButton.ActivateLaunch();
                     break;
-                case Goal.CurGoal.DONE_FOR_TODAY:
+                case Goal.CurGoal.DoneForToday:
                     doneText.SetActive(true);
                     break;
-                case Goal.CurGoal.WON:
+                case Goal.CurGoal.Won:
                     launchButton.ActivateLaunch();
                     youWinText.SetActive(true);
                     break;

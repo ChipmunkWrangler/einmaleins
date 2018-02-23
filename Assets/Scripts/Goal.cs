@@ -9,14 +9,14 @@ class Goal : MonoBehaviour
 
     public enum CurGoal
     {
-        UPGRADE_ROCKET,
-        FLY_TO_PLANET,
-        GAUNTLET,
-        DONE_FOR_TODAY,
-        WON // try to get high score
+        UpgradeRocket,
+        FlyToPlanet,
+        Gauntlet,
+        DoneForToday,
+        Won // try to get high score
     }
 
-    public static bool IsGivingUpAllowed(CurGoal curGoal) => curGoal == Goal.CurGoal.FLY_TO_PLANET;
+    public static bool IsGivingUpAllowed(CurGoal curGoal) => curGoal == Goal.CurGoal.FlyToPlanet;
 
     public static bool IsReadyForGauntlet()
     {
@@ -29,19 +29,19 @@ class Goal : MonoBehaviour
         CurGoal curGoal;
         if (ShouldUpgrade())
         {
-            curGoal = CurGoal.UPGRADE_ROCKET;
+            curGoal = CurGoal.UpgradeRocket;
         }
         else if (IsDoneForToday())
         {
-            curGoal = CurGoal.DONE_FOR_TODAY;
+            curGoal = CurGoal.DoneForToday;
         }
         else if (IsLeavingSolarSystem())
         {
-            curGoal = CurGoal.WON;
+            curGoal = CurGoal.Won;
         }
         else
         {
-            curGoal = IsReadyForGauntlet() ? CurGoal.GAUNTLET : CurGoal.FLY_TO_PLANET;
+            curGoal = IsReadyForGauntlet() ? CurGoal.Gauntlet : CurGoal.FlyToPlanet;
         }
 
         return curGoal;

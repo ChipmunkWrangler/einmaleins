@@ -71,9 +71,9 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
     public void OnCountdown()
     {
         curGoal = goal.CalcCurGoal();
-        UnityEngine.Assertions.Assert.IsTrue(curGoal == Goal.CurGoal.FLY_TO_PLANET || curGoal == Goal.CurGoal.GAUNTLET || curGoal == Goal.CurGoal.WON, "unexpected goal " + curGoal);
+        UnityEngine.Assertions.Assert.IsTrue(curGoal == Goal.CurGoal.FlyToPlanet || curGoal == Goal.CurGoal.Gauntlet || curGoal == Goal.CurGoal.Won, "unexpected goal " + curGoal);
         InitRecord();
-        InitPhysics(curGoal == Goal.CurGoal.GAUNTLET);
+        InitPhysics(curGoal == Goal.CurGoal.Gauntlet);
         isRunning = true;
         Height = 0;
         Speed = 0;
@@ -102,7 +102,7 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
         return TargetPlanet.GetPlanetHeight(u + 1) / TargetPlanet.GetPlanetHeight(u);
     }
 
-    bool IsTargetPlanetReached() => curGoal != Goal.CurGoal.WON && Height > TargetPlanet.GetPlanetHeight(TargetPlanet.GetTargetPlanetIdx());
+    bool IsTargetPlanetReached() => curGoal != Goal.CurGoal.Won && Height > TargetPlanet.GetPlanetHeight(TargetPlanet.GetTargetPlanetIdx());
     float GetHeightIncrease(float timeRequired) => baseThrust * GetThrustFactor(timeRequired);
 
     void OnCorrectAnswer(Question question, bool isNewlyMastered)
