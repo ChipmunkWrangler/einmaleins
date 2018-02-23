@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 class TestAlgorithm : MonoBehaviour
 {
+    public const float TargetTime = 3.0F;
+    public const float MinAnswerTime = 1.0F;
+
     public static readonly float[] PlanetHeights = TargetPlanet.Heights;
 
-    const float TargetTime = 3.0F;
     const int MinQuizzesPerDay = 3;
     const int MinTimePerDay = 5 * 60;
     const int MaxQuestionsPerQuiz = 7; // because that's enough to get previous questions out of short term memory, I guess
-    const float MinAnswerTime = 1.0F;
     const int FrustrationWrong = 2; // N.B. Since the question is repeated until it is correct, the net effect will be FRUSTRATION_WRONG * n - FRUSTRATION_RIGHT (or _FAST)
     const int FrustrationRight = -1;
     const int FrustrationFast = -2;
@@ -202,130 +202,5 @@ class TestAlgorithm : MonoBehaviour
         float min = minThrustFactor;
         float max = maxThrustFactor;
         return Mathf.Pow((max - min) / (1.0F - min), v) - 1.0F;
-    }
-
-    class KidModel
-    {
-        readonly float initialAnswerTimeMax; // increased by difficulty
-        readonly float answerTimeImprovementRate;
-        int initialChanceOfCorrect; // lowered by difficulty
-        int improvementRate;
-
-        public KidModel(int initialChanceOfCorrect, int improvementRate, float initialAnswerTimeMax, float answerTimeImprovementRate)
-        {
-            this.initialChanceOfCorrect = initialChanceOfCorrect;
-            this.improvementRate = improvementRate;
-            this.initialAnswerTimeMax = initialAnswerTimeMax;
-            this.answerTimeImprovementRate = answerTimeImprovementRate;
-        }
-
-        public bool AnswersCorrectly(TestQuestion question)
-        {
-            int chance = initialChanceOfCorrect + (improvementRate * (question.TimesAnsweredCorrectly + question.TimesAnsweredWrong)) - question.BaseDifficulty;
-            return Random.Range(0, 100) < chance;
-        }
-
-        public float AnswerTime(TestQuestion question)
-        {
-            float maxTime = Mathf.Max(TargetTime, initialAnswerTimeMax - (question.TimesAnsweredCorrectly * answerTimeImprovementRate) + question.BaseDifficulty);
-            return Random.Range(MinAnswerTime, maxTime);
-        }
-    }
-
-    class TestQuestion
-    {
-        const int NumAnswerTimesToRecord = 3;
-        const float AnswerTimeMax = 60.0F;
-        const float InitialAnswerTime = TargetTime + 0.01F;
-
-        List<float> answerTimes;
-        int timesAnsweredFast;
-
-        public TestQuestion(int baseDifficulty)
-        {
-            BaseDifficulty = baseDifficulty;
-            TimesAnsweredCorrectly = 0;
-            TimesAnsweredWrong = 0;
-            WasWrong = false;
-            WasAsked = false;
-            IsNew = true;
-            InitAnswerTimes();
-        }
-
-        public int BaseDifficulty { get; private set; }
-        public int TimesAnsweredCorrectly { get; private set; }
-        public int TimesAnsweredWrong { get; private set; }
-        public bool WasWrong { get; private set; }
-        public bool WasAsked { get; private set; }
-        public bool IsNew { get; private set; }
-        public bool WasMastered { get; private set; }
-        public bool IsMastered() => GetAverageAnswerTime() < TargetTime;
-        public float GetAverageAnswerTime() => answerTimes.Average();
-
-        public void ResetForNewQuiz()
-        {
-            WasAsked = false;
-        }
-
-        public void Ask()
-        {
-            WasWrong = false;
-            WasAsked = true;
-            IsNew = false;
-        }
-
-        public bool AnswerRight(float time)
-        {
-            ++TimesAnsweredCorrectly;
-            RecordAnswerTime(time);
-            if (time <= TargetTime)
-            {
-                ++timesAnsweredFast;
-            }
-            bool newlyMastered = false;
-            if (!WasMastered)
-            {
-                if (IsMastered())
-                {
-                    newlyMastered = true;
-                    WasMastered = true;
-                }
-            }
-            return newlyMastered;
-        }
-
-        public void AnswerWrong()
-        {
-            ++TimesAnsweredWrong;
-            WasWrong = true;
-        }
-
-        public override string ToString()
-        {
-            string s = "Q" + BaseDifficulty + " Answered wrong " + TimesAnsweredWrong + " correct " + TimesAnsweredCorrectly + " fast " + timesAnsweredFast + " averageTime = " + GetAverageAnswerTime() + " times ";
-            foreach (var time in answerTimes)
-            {
-                s += time + " ";
-            }
-            return s;
-        }
-
-        void InitAnswerTimes()
-        {
-            answerTimes = new List<float>(NumAnswerTimesToRecord);
-            for (int i = 0; i < NumAnswerTimesToRecord; ++i)
-            {
-                answerTimes.Add(InitialAnswerTime);
-            }
-        }
-
-        void RecordAnswerTime(float timeRequired)
-        {
-            answerTimes.Add(Mathf.Min(timeRequired, AnswerTimeMax));
-            if (answerTimes.Count > NumAnswerTimesToRecord)
-            {
-                answerTimes.RemoveRange(0, answerTimes.Count - NumAnswerTimesToRecord);
-            }
-        }
     }
 }

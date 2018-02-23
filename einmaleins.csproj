@@ -487,7 +487,7 @@
     <Compile Include="Assets\Scripts\StatsController.cs" />
     <Compile Include="Assets\Scripts\SubscriberList.cs" />
     <Compile Include="Assets\Scripts\TargetPlanet.cs" />
-    <Compile Include="Assets\Scripts\TestAlgorithm.cs" />
+    <Compile Include="Assets\Scripts\Test\TestAlgorithm.cs" />
     <Compile Include="Assets\Scripts\TextButton.cs" />
     <Compile Include="Assets\Scripts\TextDisplay.cs" />
     <Compile Include="Assets\Scripts\UnityEventsWithParams.cs" />
@@ -530,6 +530,8 @@
     <Compile Include="Assets\Scripts\RocketPartsPersistantData.cs" />
     <Compile Include="Assets\Scripts\StatsControllerPersistentData.cs" />
     <Compile Include="Assets\Scripts\TargetPlanetPersistentData.cs" />
+    <Compile Include="Assets\Scripts\Test\KidModel.cs" />
+    <Compile Include="Assets\Scripts\Test\TestQuestion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />
