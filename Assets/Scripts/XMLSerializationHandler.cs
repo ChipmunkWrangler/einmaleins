@@ -48,7 +48,7 @@ public static class XMLSerializationHandler
                 using (FileStream file = File.OpenRead(GetPath()))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(GameData));
-                    data = serializer.Deserialize(file) as GameData;
+                    data = (GameData)serializer.Deserialize(file);
                     data.Save();
                 }
             }
@@ -67,7 +67,7 @@ public static class XMLSerializationHandler
         {
             var reader = new StringReader(xml);
             var serializer = new XmlSerializer(typeof(GameData));
-            GameData data = serializer.Deserialize(reader) as GameData;
+            GameData data = (GameData)serializer.Deserialize(reader);
             data.Save();
         }
         catch (System.Exception ex)
