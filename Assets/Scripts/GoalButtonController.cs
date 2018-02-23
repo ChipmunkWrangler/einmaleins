@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class GoalButtonControler : MonoBehaviour, IOnQuestionChanged
+class GoalButtonController : MonoBehaviour, IOnQuestionChanged
 {
     [SerializeField] LaunchButtonController launchButton = null;
     [SerializeField] GameObject upgradeButton = null;

@@ -16,7 +16,7 @@ class KickoffLaunch : MonoBehaviour
     [SerializeField] GameObject[] uiElementsToActivateOnPlay = null;
     [SerializeField] GameObject[] uiElementsToDeactivateOnPlay = null;
     [SerializeField] GameObject[] uiElementsToDeactivateIfGivingUpIsForbidden = null;
-    [SerializeField] GoalButtonControler goalButtonController = null;
+    [SerializeField] GoalButtonController goalButtonController = null;
     [SerializeField] FlashThrust thrust = null;
     [SerializeField] Questions questions = null;
     [SerializeField] QuestionPicker questionPicker = null;

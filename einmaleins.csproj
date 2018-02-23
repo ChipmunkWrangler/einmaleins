@@ -445,7 +445,7 @@
     <Compile Include="Assets\Scripts\GiveUpButtonController.cs" />
     <Compile Include="Assets\Scripts\GiveUpOkButton.cs" />
     <Compile Include="Assets\Scripts\Goal.cs" />
-    <Compile Include="Assets\Scripts\GoalButtonControler.cs" />
+    <Compile Include="Assets\Scripts\GoalButtonController.cs" />
     <Compile Include="Assets\Scripts\GotoBuildRocket.cs" />
     <Compile Include="Assets\Scripts\GotoChoosePlayer.cs" />
     <Compile Include="Assets\Scripts\GotoLaunch.cs" />
