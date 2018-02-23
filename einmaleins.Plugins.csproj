@@ -321,17 +321,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Scripts\randomParticleRotation.cs" />
-    <Compile Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Scripts\ReverseNormals.cs" />
-    <Compile Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Scripts\rotation.cs" />
-    <Compile Include="Assets\Plugins\Pixelplacement\iTween\iTween.cs" />
-    <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\MoveSample.cs" />
-    <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\RotateSample.cs" />
-    <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\SampleInfo.cs" />
-    <Compile Include="Assets\Plugins\PlayerPrefsEditor\PlayerPrefsUtility.cs" />
-    <Compile Include="Assets\Plugins\PlayerPrefsEditor\SimpleEncryption.cs" />
-    <Compile Include="Assets\Plugins\PlayerPrefsPlus\Plugins\PlayerPrefsArray.cs" />
-    <Compile Include="Assets\Plugins\PlayerPrefsPlus\Plugins\PlayerPrefsPlus.cs" />
+    <Compile Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Scripts\randomParticleRotation.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Scripts\ReverseNormals.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Scripts\rotation.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Assets\Plugins\Pixelplacement\iTween\iTween.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\MoveSample.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\RotateSample.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\SampleInfo.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Assets\Plugins\PlayerPrefsEditor\PlayerPrefsUtility.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Assets\Plugins\PlayerPrefsEditor\SimpleEncryption.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Assets\Plugins\PlayerPrefsPlus\Plugins\PlayerPrefsArray.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Assets\Plugins\PlayerPrefsPlus\Plugins\PlayerPrefsPlus.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />
