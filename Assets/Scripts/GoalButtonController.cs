@@ -37,6 +37,8 @@ class GoalButtonController : MonoBehaviour, IOnQuestionChanged
                     launchButton.ActivateLaunch();
                     youWinText.SetActive(true);
                     break;
+                default:
+                    throw new System.ArgumentException("Invalid goal: " + goal.CalcCurGoal());                                                      
             }
         }
     }
