@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RocketParts : MonoBehaviour
+class RocketParts : MonoBehaviour
 {
     const int PartsToBuildRocket = 0;
     const int PartsPerUpgrade = 11;

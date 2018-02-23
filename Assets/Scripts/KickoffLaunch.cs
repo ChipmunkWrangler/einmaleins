@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class KickoffLaunch : MonoBehaviour
+class KickoffLaunch : MonoBehaviour
 {
     [SerializeField] Celebrate celebrate = null;
     [SerializeField] float delay = 1.0F;

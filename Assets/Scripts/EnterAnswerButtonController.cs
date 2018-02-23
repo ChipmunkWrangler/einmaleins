@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged, IOnGiveUp
+class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged, IOnGiveUp
 {
     public const float TransitionTime = 0.25F;
 

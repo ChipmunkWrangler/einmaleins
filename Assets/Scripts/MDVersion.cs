@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MDVersion : MonoBehaviour
+class MDVersion : MonoBehaviour
 {
     const int MajorVersion = 1;
     const int MinorVersion = 0;

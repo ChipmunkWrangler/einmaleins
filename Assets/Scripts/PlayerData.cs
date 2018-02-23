@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-public class PlayerData
+class PlayerData
 {
     readonly RocketPartsPersistantData rocketPartsData = new RocketPartsPersistantData();
     readonly TargetPlanetPersistentData targetPlanetData = new TargetPlanetPersistentData();

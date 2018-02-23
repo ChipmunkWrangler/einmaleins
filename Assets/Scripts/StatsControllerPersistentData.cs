@@ -1,4 +1,4 @@
-﻿public class StatsControllerPersistentData
+﻿class StatsControllerPersistentData
 {
     const string PrefsKey = "seenMastered";
 

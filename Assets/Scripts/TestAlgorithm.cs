@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class TestAlgorithm : MonoBehaviour
+class TestAlgorithm : MonoBehaviour
 {
     public static readonly float[] PlanetHeights = TargetPlanet.Heights;
 

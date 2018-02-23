@@ -2,7 +2,7 @@
 using System.Linq;
 
 [System.Serializable]
-public class QuestionPersistentData
+class QuestionPersistentData
 {
     public static readonly int NumAnswerTimesToRecord = 3;
     public static readonly float AnswerTimeInitial = Question.FastTime + 0.01F;

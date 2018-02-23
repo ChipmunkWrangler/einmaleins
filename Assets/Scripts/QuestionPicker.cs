@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class QuestionPicker : MonoBehaviour
+class QuestionPicker : MonoBehaviour
 {
     [SerializeField] GameObject[] subscribers = null;
     [SerializeField] EffortTracker effortTracker = null;
@@ -90,5 +90,5 @@ public class QuestionPicker : MonoBehaviour
     }
 */
     [Serializable]
-    public class CorrectAnswerEvent : UnityEvent<Question, bool /*isNewlyMastered*/> { }
+    class CorrectAnswerEvent : UnityEvent<Question, bool /*isNewlyMastered*/> { }
 }

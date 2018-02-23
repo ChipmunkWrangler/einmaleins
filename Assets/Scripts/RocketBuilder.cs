@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketBuilder : MonoBehaviour
+class RocketBuilder : MonoBehaviour
 {
     [SerializeField] float builtY = 0;
     [SerializeField] float hiddenY = -2.0F;

@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 using UnityEngine;
 
-public static class XMLSerializationHandler
+static class XMLSerializationHandler
 {
     const string FileName = "gamedata.xml";
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class QuestionDisplay : TextDisplay, IOnQuestionChanged, IOnQuizAborted
+class QuestionDisplay : TextDisplay, IOnQuestionChanged, IOnQuizAborted
 {
     public void OnQuestionChanged(Question question)
     {

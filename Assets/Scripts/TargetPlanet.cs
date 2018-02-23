@@ -1,4 +1,4 @@
-﻿public static class TargetPlanet
+﻿static class TargetPlanet
 {
     public static readonly float[] Heights =
     {

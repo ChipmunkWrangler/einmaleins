@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class NumberButtonLayoutController : MonoBehaviour
+class NumberButtonLayoutController : MonoBehaviour
 {
     [SerializeField] Transform smallScreenParent = null;
     [SerializeField] float maxSmallScreenInches = 2.5F;

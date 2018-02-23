@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class VersionDisplay : MonoBehaviour
+class VersionDisplay : MonoBehaviour
 {
     [SerializeField] UnityEngine.UI.Text text = null;
     void Start()

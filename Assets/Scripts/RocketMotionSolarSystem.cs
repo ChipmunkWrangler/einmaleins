@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketMotionSolarSystem : MonoBehaviour
+class RocketMotionSolarSystem : MonoBehaviour
 {
     [SerializeField] FlashThrust thrust = null;
     [SerializeField] Params paramObj = null;

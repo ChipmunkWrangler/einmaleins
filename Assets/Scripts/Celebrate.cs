@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Celebrate : MonoBehaviour, IOnWrongAnswer, IOnQuestionChanged, IOnQuizAborted
+class Celebrate : MonoBehaviour, IOnWrongAnswer, IOnQuestionChanged, IOnQuizAborted
 {
     public static readonly float Duration = 3.0F;
     [SerializeField] ParticleSystem[] exhaustParticles = null;

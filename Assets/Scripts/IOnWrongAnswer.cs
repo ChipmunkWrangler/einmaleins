@@ -1,4 +1,4 @@
-﻿public interface IOnWrongAnswer
+﻿internal interface IOnWrongAnswer
 {
     void OnWrongAnswer(bool wasNew);
 }

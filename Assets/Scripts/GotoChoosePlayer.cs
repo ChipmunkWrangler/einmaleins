@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GotoChoosePlayer : MonoBehaviour
+class GotoChoosePlayer : MonoBehaviour
 {
     public void LoadChoosePlayerScene()
     {

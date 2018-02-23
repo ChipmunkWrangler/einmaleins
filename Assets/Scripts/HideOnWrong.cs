@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class HideOnWrong : MonoBehaviour, IOnWrongAnswer, IOnGiveUp
+class HideOnWrong : MonoBehaviour, IOnWrongAnswer, IOnGiveUp
 {
     const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 

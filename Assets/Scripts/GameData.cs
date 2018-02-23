@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
-public class GameData
+class GameData
 {
     readonly PlayerNameController playerNameController = new PlayerNameController();
 

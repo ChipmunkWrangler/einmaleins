@@ -1,4 +1,4 @@
-﻿public interface IOnQuizAborted
+﻿internal interface IOnQuizAborted
 {
     void OnQuizAborted();
 }

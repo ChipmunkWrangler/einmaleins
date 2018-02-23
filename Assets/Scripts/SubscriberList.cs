@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubscriberList<T>
+class SubscriberList<T>
 {
     readonly List<T> subscribers = new List<T>();
 

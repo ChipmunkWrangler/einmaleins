@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChooseRocketColour : MonoBehaviour
+class ChooseRocketColour : MonoBehaviour
 {
     public static readonly string PrefsKey = "rocketColour";
 

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-public class PlayerNameController
+class PlayerNameController
 {
     public static readonly string CurPlayerPrefsKey = "curPlayer";
 

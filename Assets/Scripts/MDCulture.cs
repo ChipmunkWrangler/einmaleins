@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-public class MDCulture
+class MDCulture
 {
     static System.Globalization.CultureInfo ci;
 

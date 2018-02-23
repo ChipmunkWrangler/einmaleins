@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GotoBuildRocket : MonoBehaviour
+class GotoBuildRocket : MonoBehaviour
 {
     public void LoadScene()
     {

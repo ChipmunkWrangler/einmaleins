@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EffortTracker : MonoBehaviour, IOnWrongAnswer, IOnGiveUp
+class EffortTracker : MonoBehaviour, IOnWrongAnswer, IOnGiveUp
 {
     const int FrustrationWrong = 2; // N.B. Since the question is repeated until it is correct, the net effect will be FRUSTRATION_WRONG * n - FRUSTRATION_RIGHT (or _FAST)
     const int FrustrationGiveUp = 2;

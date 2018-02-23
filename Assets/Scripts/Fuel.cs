@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fuel : MonoBehaviour
+class Fuel : MonoBehaviour
 {
     [SerializeField] UnityEngine.UI.Text fuelCountText = null;
 

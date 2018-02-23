@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class Questions : MonoBehaviour
+class Questions : MonoBehaviour
 {
     public static readonly int MaxNum = 10;
 

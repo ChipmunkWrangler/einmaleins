@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadXMLData : MonoBehaviour
+class LoadXMLData : MonoBehaviour
 {
     [SerializeField] Text inputField = null;
     [SerializeField] Text statusLine = null;
@@ -14,7 +14,7 @@ public class LoadXMLData : MonoBehaviour
         }
         catch (System.Exception ex)
         {
-            statusLine.text = AssemblyCSharp.ExceptionPrettyPrint.Msg(ex);
+            statusLine.text = ExceptionPrettyPrint.Msg(ex);
         }
     }
 
@@ -27,7 +27,7 @@ public class LoadXMLData : MonoBehaviour
         }
         catch (System.Exception ex)
         {
-            statusLine.text = AssemblyCSharp.ExceptionPrettyPrint.Msg(ex);
+            statusLine.text = ExceptionPrettyPrint.Msg(ex);
         }
     }
 }

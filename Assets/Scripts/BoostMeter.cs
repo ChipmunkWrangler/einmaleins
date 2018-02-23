@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizAborted
+class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizAborted
 {
     const float TimeToZero = Question.FastTime * 5.2F / 0.75F; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
     const float HideTime = 0.3F;

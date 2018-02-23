@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class StatsController : MonoBehaviour
+class StatsController : MonoBehaviour
 {
     readonly StatsControllerPersistentData data = new StatsControllerPersistentData();
 

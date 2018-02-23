@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GotoLaunch : MonoBehaviour
+class GotoLaunch : MonoBehaviour
 {
     [SerializeField] UnityEngine.UI.Button button = null;
 

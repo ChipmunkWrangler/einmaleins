@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GiveUpOkButton : MonoBehaviour, IOnGiveUp
+class GiveUpOkButton : MonoBehaviour, IOnGiveUp
 {
     const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 

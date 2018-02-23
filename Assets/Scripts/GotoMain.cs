@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GotoMain : MonoBehaviour
+class GotoMain : MonoBehaviour
 {
     public void LoadScene()
     {

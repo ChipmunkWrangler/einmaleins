@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetRocketColour : MonoBehaviour
+class GetRocketColour : MonoBehaviour
 {
     [SerializeField] Renderer rocketRenderer = null;
 

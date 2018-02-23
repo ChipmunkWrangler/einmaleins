@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-public class TargetPlanetPersistentData
+class TargetPlanetPersistentData
 {
     public int TargetPlanetIdx { get; set; }
     public int LastReachedPlanetIdx { get; set; }

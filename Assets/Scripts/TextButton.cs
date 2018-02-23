@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextButton : MonoBehaviour
+class TextButton : MonoBehaviour
 {
     [SerializeField] Button button = null;
     [SerializeField] float fadedAlpha = 0.5F;

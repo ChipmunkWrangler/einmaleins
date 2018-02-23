@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class UpgradeButton : MonoBehaviour
+class UpgradeButton : MonoBehaviour
 {
     [SerializeField] UnityEngine.UI.Button button = null;
     [SerializeField] UnityEngine.UI.Text label = null;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ShowOnRight : MonoBehaviour, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted
+class ShowOnRight : MonoBehaviour, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted
 {
     const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 

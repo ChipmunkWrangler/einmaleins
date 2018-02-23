@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IOnQuestionChanged
+internal interface IOnQuestionChanged
 {
     void OnQuestionChanged(Question newQuestion);
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class KeyHandler : MonoBehaviour
+class KeyHandler : MonoBehaviour
 {
     [SerializeField] string backSceneName = "choosePlayer";
     bool isLoadingScene;

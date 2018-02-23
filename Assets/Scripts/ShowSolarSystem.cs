@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ShowSolarSystem : MonoBehaviour
+class ShowSolarSystem : MonoBehaviour
 {
     [SerializeField] float verticalPadding = 0.1F; // 1.0 would be the whole screen
     [SerializeField] Renderer rocket = null;

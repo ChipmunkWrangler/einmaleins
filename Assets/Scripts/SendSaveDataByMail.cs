@@ -4,7 +4,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class SendSaveDataByMail : MonoBehaviour
+class SendSaveDataByMail : MonoBehaviour
 {
     const string Sender = "einmaleinsreport@crazy-chipmunk.com";
     const string Receiver = "testers@crazy-chipmunk.com";
@@ -48,7 +48,7 @@ public class SendSaveDataByMail : MonoBehaviour
             catch (System.Exception ex)
             {
                 string s = I2.Loc.LocalizationManager.GetTermTranslation("Error! Please email the following to") + ": \"";
-                statusLine.text = s + AssemblyCSharp.ExceptionPrettyPrint.Msg(ex) + "\"";
+                statusLine.text = s + ExceptionPrettyPrint.Msg(ex) + "\"";
             }
         }
     }

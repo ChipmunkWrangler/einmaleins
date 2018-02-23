@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GotoScene : MonoBehaviour
+class GotoScene : MonoBehaviour
 {
     public void LoadScene(string sceneName)
     {

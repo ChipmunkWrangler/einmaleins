@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FlashThrust : MonoBehaviour, IOnQuestionChanged
+class FlashThrust : MonoBehaviour, IOnQuestionChanged
 {
     const float AllottedTime = Question.FastTime; // If a player answers all questions correctly, each in targetAnswerTime, she reaches maxAttainableHeight
     const float MinThrustFactor = 0.1F;

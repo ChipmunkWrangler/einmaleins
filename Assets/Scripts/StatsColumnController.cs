@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatsColumnController : MonoBehaviour
+class StatsColumnController : MonoBehaviour
 {
     [SerializeField] UnityEngine.UI.Image[] cells = null;
     [SerializeField] UnityEngine.UI.Image header = null;

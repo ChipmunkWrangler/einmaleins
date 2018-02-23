@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class PositionFx : MonoBehaviour
+class PositionFx : MonoBehaviour
 {
     [SerializeField] Transform referencePoint = null;
 

@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-public class RocketPartsPersistantData
+class RocketPartsPersistantData
 {
     const string PrefsKey = "rocketParts";
 

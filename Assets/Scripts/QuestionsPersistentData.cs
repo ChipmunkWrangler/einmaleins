@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-public class QuestionsPersistentData
+class QuestionsPersistentData
 {
     const string PrefsKey = "questions";
 

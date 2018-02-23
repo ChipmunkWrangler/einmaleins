@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class TextDisplay : MonoBehaviour
+class TextDisplay : MonoBehaviour
 {
     Text textField;
 

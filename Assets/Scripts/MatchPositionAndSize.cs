@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MatchPositionAndSize : MonoBehaviour
+class MatchPositionAndSize : MonoBehaviour
 {
     [SerializeField] RectTransform target = null;
     [SerializeField] RectTransform source = null;

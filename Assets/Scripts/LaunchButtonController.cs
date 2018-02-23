@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class LaunchButtonController : MonoBehaviour
+class LaunchButtonController : MonoBehaviour
 {
     readonly string[] launchButtonLabels = 
     {

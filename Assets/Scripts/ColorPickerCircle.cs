@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ColorPickerCircle : MonoBehaviour
+class ColorPickerCircle : MonoBehaviour
 {
     [SerializeField] GameObject pointerLocation = null;
     [SerializeField] Collider raycastTarget = null;

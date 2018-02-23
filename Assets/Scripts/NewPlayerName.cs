@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class NewPlayerName : MonoBehaviour
+class NewPlayerName : MonoBehaviour
 {
     [SerializeField] GameObject enterNamePanel = null;
     [SerializeField] TextButton[] playerButtons = null;

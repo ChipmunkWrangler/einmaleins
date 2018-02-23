@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GotoStats : MonoBehaviour
+class GotoStats : MonoBehaviour
 {
     public void LoadStatsScene()
     {

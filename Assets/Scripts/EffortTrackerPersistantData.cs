@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-public class EffortTrackerPersistantData
+class EffortTrackerPersistantData
 {
     const string PrefsKey = "effortTracking";
     const int MinFrustration = -2;
