@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using CrazyChipmunk;
+using UnityEngine;
+
 class EffortTrackerPersistantData
 {
     const string PrefsKey = "effortTracking";
@@ -28,24 +30,24 @@ class EffortTrackerPersistantData
 
     public void Save()
     {
-        MDPrefs.SetDateTime(PrefsKey + ":date", System.DateTime.Today);
-        MDPrefs.SetInt(PrefsKey + ":frustration", Frustration);
-        MDPrefs.SetInt(PrefsKey + ":quizzesToday", QuizzesToday);
-        MDPrefs.SetFloat(PrefsKey + ":timeToday", TimeToday);
+        Prefs.SetDateTime(PrefsKey + ":date", System.DateTime.Today);
+        Prefs.SetInt(PrefsKey + ":frustration", Frustration);
+        Prefs.SetInt(PrefsKey + ":quizzesToday", QuizzesToday);
+        Prefs.SetFloat(PrefsKey + ":timeToday", TimeToday);
     }
 
     public void Load()
     {
-        Frustration = MDPrefs.GetInt(PrefsKey + ":frustration", 0);
-        if (MDPrefs.GetDateTime(PrefsKey + ":date", System.DateTime.MinValue) < System.DateTime.Today)
+        Frustration = Prefs.GetInt(PrefsKey + ":frustration", 0);
+        if (Prefs.GetDateTime(PrefsKey + ":date", System.DateTime.MinValue) < System.DateTime.Today)
         {
             QuizzesToday = 0;
             TimeToday = 0;
         }
         else
         {
-            QuizzesToday = MDPrefs.GetInt(PrefsKey + ":quizzesToday", 0);
-            TimeToday = MDPrefs.GetFloat(PrefsKey + ":timeToday", 0);
+            QuizzesToday = Prefs.GetInt(PrefsKey + ":quizzesToday", 0);
+            TimeToday = Prefs.GetFloat(PrefsKey + ":timeToday", 0);
         }
     }
 }

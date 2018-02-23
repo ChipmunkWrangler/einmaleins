@@ -1,4 +1,6 @@
-﻿static class TargetPlanet
+﻿using CrazyChipmunk;
+
+static class TargetPlanet
 {
     public static readonly float[] Heights =
     {
@@ -27,14 +29,14 @@
     {
         if (lastReachedPlanetIdx < -1)
         {
-            lastReachedPlanetIdx = MDPrefs.GetInt(LastReachedKey, -1);
+            lastReachedPlanetIdx = Prefs.GetInt(LastReachedKey, -1);
         }
         return lastReachedPlanetIdx;
     }
 
     public static void SetLastReachedIdx(int planetIdx)
     {
-        MDPrefs.SetInt(LastReachedKey, planetIdx);
+        Prefs.SetInt(LastReachedKey, planetIdx);
         lastReachedPlanetIdx = planetIdx;
     }
 
@@ -47,7 +49,7 @@
     {
         if (targetPlanetIdx < 0)
         {
-            targetPlanetIdx = MDPrefs.GetInt(TargetKey, 0);
+            targetPlanetIdx = Prefs.GetInt(TargetKey, 0);
         }
         return targetPlanetIdx;
     }
@@ -57,7 +59,7 @@
 
     public static void SetTargetPlanetIdx(int newIdx)
     {
-        MDPrefs.SetInt(TargetKey, newIdx);
+        Prefs.SetInt(TargetKey, newIdx);
         targetPlanetIdx = newIdx;
     }
 }

@@ -1,4 +1,6 @@
-﻿[System.Serializable]
+﻿using CrazyChipmunk;
+
+[System.Serializable]
 class RocketPartsPersistantData
 {
     const string PrefsKey = "rocketParts";
@@ -10,17 +12,17 @@ class RocketPartsPersistantData
 
     public void Save()
     {
-        MDPrefs.SetBool(PrefsKey + ":isBuilt", IsRocketBuilt);
-        MDPrefs.SetInt(PrefsKey + ":upgradeLevel", UpgradeLevel);
-        MDPrefs.SetBool(PrefsKey + ":justUpgraded", JustUpgraded);
-        MDPrefs.SetInt(PrefsKey, NumParts);
+        Prefs.SetBool(PrefsKey + ":isBuilt", IsRocketBuilt);
+        Prefs.SetInt(PrefsKey + ":upgradeLevel", UpgradeLevel);
+        Prefs.SetBool(PrefsKey + ":justUpgraded", JustUpgraded);
+        Prefs.SetInt(PrefsKey, NumParts);
     }
 
     public void Load()
     {
-        NumParts = MDPrefs.GetInt(PrefsKey, 0);
-        IsRocketBuilt = MDPrefs.GetBool(PrefsKey + ":isBuilt");
-        UpgradeLevel = MDPrefs.GetInt(PrefsKey + ":upgradeLevel", 0);
-        JustUpgraded = MDPrefs.GetBool(PrefsKey + ":justUpgraded");
+        NumParts = Prefs.GetInt(PrefsKey, 0);
+        IsRocketBuilt = Prefs.GetBool(PrefsKey + ":isBuilt");
+        UpgradeLevel = Prefs.GetInt(PrefsKey + ":upgradeLevel", 0);
+        JustUpgraded = Prefs.GetBool(PrefsKey + ":justUpgraded");
     }
 }

@@ -464,7 +464,7 @@
     <Compile Include="Assets\Scripts\MailPassword.cs" />
     <Compile Include="Assets\Scripts\MatchPositionAndSize.cs" />
     <Compile Include="Assets\Scripts\MDCulture.cs" />
-    <Compile Include="Assets\Scripts\MDPrefs.cs" />
+    <Compile Include="Assets\Scripts\Prefs.cs" />
     <Compile Include="Assets\Scripts\MDVersion.cs" />
     <Compile Include="Assets\Scripts\NewPlayerName.cs" />
     <Compile Include="Assets\Scripts\NumberButtonLayoutController.cs" />

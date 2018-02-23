@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using CrazyChipmunk;
 using UnityEngine;
 
 class KickoffLaunch : MonoBehaviour
@@ -64,9 +65,9 @@ class KickoffLaunch : MonoBehaviour
 
     void Start()
     {
-        if (MDPrefs.GetBool("autolaunch"))
+        if (Prefs.GetBool("autolaunch"))
         {
-            MDPrefs.SetBool("autolaunch", false);
+            Prefs.SetBool("autolaunch", false);
             PreLaunch();
         }
         else

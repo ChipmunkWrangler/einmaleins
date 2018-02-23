@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CrazyChipmunk;
 
 class ChooseRocketColour : MonoBehaviour
 {
@@ -10,7 +11,7 @@ class ChooseRocketColour : MonoBehaviour
     [SerializeField] ColorPickerCircle colourPicker = null;
     bool isPaint;
 
-    public static bool HasChosenColour() => MDPrefs.HasKey(PrefsKey + ".r");
+    public static bool HasChosenColour() => Prefs.HasKey(PrefsKey + ".r");
 
     public void StartPaint()
     {
@@ -22,7 +23,7 @@ class ChooseRocketColour : MonoBehaviour
     {
         if (isPaint)
         {
-            MDPrefs.SetColor(PrefsKey, colourPicker.TheColor);
+            Prefs.SetColor(PrefsKey, colourPicker.TheColor);
         }
         isPaint = false;
     }

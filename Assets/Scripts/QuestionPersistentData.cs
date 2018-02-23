@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CrazyChipmunk;
 
 [System.Serializable]
 class QuestionPersistentData
@@ -21,10 +22,10 @@ class QuestionPersistentData
         this.prefsKey = prefsKey;
         Idx = idx;
         AnswerTimes = GetAnswerTimes(prefsKey);
-        WasMastered = MDPrefs.GetBool(prefsKey + ":wasMastered");
-        WasWrong = MDPrefs.GetBool(prefsKey + ":wasWrong");
-        IsNew = MDPrefs.GetBool(prefsKey + ":isNew", defaultValue: true);
-        GaveUp = MDPrefs.GetBool(prefsKey + ":gaveUp");
+        WasMastered = Prefs.GetBool(prefsKey + ":wasMastered");
+        WasWrong = Prefs.GetBool(prefsKey + ":wasWrong");
+        IsNew = Prefs.GetBool(prefsKey + ":isNew", defaultValue: true);
+        GaveUp = Prefs.GetBool(prefsKey + ":gaveUp");
     }
 
     public void Create(string prefsKey, int idx)
@@ -42,17 +43,17 @@ class QuestionPersistentData
         }
         UnityEngine.Assertions.Assert.AreNotEqual(prefsKey.Length, 0);
         SetAnswerTimes(prefsKey, AnswerTimes);
-        MDPrefs.SetBool(prefsKey + ":wasMastered", WasMastered);
-        MDPrefs.SetBool(prefsKey + ":wasWrong", WasWrong);
-        MDPrefs.SetBool(prefsKey + ":isNew", IsNew);
-        MDPrefs.SetBool(prefsKey + ":gaveUp", GaveUp);
+        Prefs.SetBool(prefsKey + ":wasMastered", WasMastered);
+        Prefs.SetBool(prefsKey + ":wasWrong", WasWrong);
+        Prefs.SetBool(prefsKey + ":isNew", IsNew);
+        Prefs.SetBool(prefsKey + ":gaveUp", GaveUp);
     }
 
-    static List<float> GetAnswerTimes(string prefsKey) => MDPrefs.GetFloatArray(prefsKey + ":times").ToList();
+    static List<float> GetAnswerTimes(string prefsKey) => Prefs.GetFloatArray(prefsKey + ":times").ToList();
 
     static void SetAnswerTimes(string prefsKey, List<float> answerTimes)
     {
-        MDPrefs.SetFloatArray(prefsKey + ":times", answerTimes.ToArray());
+        Prefs.SetFloatArray(prefsKey + ":times", answerTimes.ToArray());
     }
 
     static List<float> GetNewAnswerTimes()

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using CrazyChipmunk;
 using UnityEngine;
 
 class GetRocketColour : MonoBehaviour
@@ -8,6 +7,6 @@ class GetRocketColour : MonoBehaviour
 
     void Start()
     {
-        rocketRenderer.material.color = MDPrefs.GetColor(ChooseRocketColour.PrefsKey, rocketRenderer.material.color);
+        rocketRenderer.material.color = Prefs.GetColor(ChooseRocketColour.PrefsKey, rocketRenderer.material.color);
     }
 }

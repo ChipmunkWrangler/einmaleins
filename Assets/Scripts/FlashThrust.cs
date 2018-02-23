@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using CrazyChipmunk;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -130,7 +130,7 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
 
     void InitRecordHeight()
     {
-        recordHeight = MDPrefs.GetFloat(RecordPrefsKey, 0);
+        recordHeight = Prefs.GetFloat(RecordPrefsKey, 0);
     }
 
     void InitOldRecordLine(bool enable)
@@ -259,7 +259,7 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
         if (dist > record)
         {
             record = dist;
-            MDPrefs.SetFloat(key, record);
+            Prefs.SetFloat(key, record);
             if (checkForRecord)
             {
                 checkForRecord = false;

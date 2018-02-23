@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CrazyChipmunk;
+using UnityEngine;
 
 class GotoLaunch : MonoBehaviour
 {
@@ -7,7 +8,7 @@ class GotoLaunch : MonoBehaviour
     public void LoadLaunchScene(bool autolaunch)
     {
         button.enabled = false;
-        MDPrefs.SetBool("autolaunch", autolaunch);
+        Prefs.SetBool("autolaunch", autolaunch);
         PlayerPrefs.Save();
         UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("launch");
     }
