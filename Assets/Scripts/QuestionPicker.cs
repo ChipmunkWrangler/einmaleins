@@ -12,8 +12,27 @@ class QuestionPicker : MonoBehaviour
     SubscriberList<IOnQuestionChanged> onQuestionChangeds;
     SubscriberList<IOnWrongAnswer> onWrongAnswers;
     SubscriberList<IOnQuizAborted> onQuizAborteds;
-    SubscriberList<IOnGiveUp> onGiveUps;
     float questionTime;
+
+    public string CurAnswer
+    {
+        get
+        {
+            return curQuestion?.GetAnswer().ToString() ?? "";
+        }
+
+        set
+        {
+            if (curQuestion == null || value.Length == 0)
+            {
+                return;
+            }
+            bool isCorrect = curQuestion.IsAnswerCorrect(value);
+            float answerTime = Time.time - questionTime;
+            HandleAnswer(isCorrect, answerTime);
+            effortTracker.Save();
+        }
+    }
 
     public void AbortQuiz()
     {
@@ -25,23 +44,6 @@ class QuestionPicker : MonoBehaviour
     {
         ShowQuestion((curQuestion != null && curQuestion.IsLaunchCode) ? curQuestion : effortTracker.GetQuestion()); // if NextQuestion is called with curQuestion.isLaunchCode, the player gave up on the launch code, which means we should show it again
         // StartCoroutine (AutoAnswer());
-    }
-
-    public void OnAnswer(string answer)
-    {
-        if (curQuestion == null || answer.Length == 0)
-        {
-            return;
-        }
-        bool isCorrect = curQuestion.IsAnswerCorrect(answer);
-        float answerTime = Time.time - questionTime;
-        HandleAnswer(isCorrect, answerTime);
-        effortTracker.Save();
-    }
-
-    public void OnGiveUp()
-    {
-        onGiveUps.Notify(subscriber => subscriber.OnGiveUp(curQuestion));
     }
 
     public void ShowQuestion(Question newQuestion)
@@ -62,7 +64,6 @@ class QuestionPicker : MonoBehaviour
         onQuestionChangeds = new SubscriberList<IOnQuestionChanged>(subscribers);
         onWrongAnswers = new SubscriberList<IOnWrongAnswer>(subscribers);
         onQuizAborteds = new SubscriberList<IOnQuizAborted>(subscribers);
-        onGiveUps = new SubscriberList<IOnGiveUp>(subscribers);
     }
 
     void HandleAnswer(bool isCorrect, float answerTime)

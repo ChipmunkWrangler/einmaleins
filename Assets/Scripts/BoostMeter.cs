@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizAborted
+class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnQuizAborted
 {
     const float TimeToZero = Question.FastTime * 5.2F / 0.75F; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
     const float HideTime = 0.3F;
@@ -11,6 +11,12 @@ class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizAborted
     [SerializeField] Transform meter = null;
 
     float originalY;
+
+    public void OnGiveUp()
+    {
+        StopMeter();
+        meter.gameObject.SetActive(false);
+    }
 
     void IOnQuizAborted.OnQuizAborted()
     {
@@ -26,12 +32,6 @@ class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizAborted
             ShowMeter();
             StartMeter(TimeToZero);
         }
-    }
-
-    void IOnGiveUp.OnGiveUp(Question question)
-    {
-        StopMeter();
-        meter.gameObject.SetActive(false);
     }
 
     void OnCorrectAnswer()

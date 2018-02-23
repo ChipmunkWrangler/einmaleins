@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 
-class HideOnWrong : MonoBehaviour, IOnWrongAnswer, IOnGiveUp
+class HideOnWrong : MonoBehaviour, IOnWrongAnswer
 {
     const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
     [SerializeField] float timeToHide = 0;
 
+    public void OnGiveUp()
+    {
+        ScaleDown();
+    }
+
     void IOnWrongAnswer.OnWrongAnswer(bool wasNew)
     {
         ScaleDown();
         ScaleUpAfterDelay();
-    }
-
-    void IOnGiveUp.OnGiveUp(Question question)
-    {
-        ScaleDown();
     }
 
     void ScaleDown()

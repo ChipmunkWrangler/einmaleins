@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged, IOnGiveUp
+class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged
 {
     const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
     [SerializeField] UnityEngine.UI.Button button = null;
     [SerializeField] UnityEngine.UI.Image image = null;
+
+    public void OnGiveUp()
+    {
+        SetInteractibility(false);
+    }
 
     void IOnQuizAborted.OnQuizAborted()
     {
@@ -22,11 +27,6 @@ class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IO
     void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
         SetInteractibility(question != null);
-    }
-
-    void IOnGiveUp.OnGiveUp(Question question)
-    {
-        SetInteractibility(false);
     }
 
     void OnCorrectAnswer()

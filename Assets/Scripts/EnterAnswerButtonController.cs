@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged, IOnGiveUp
+class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged
 {
     public const float TransitionTime = 0.25F;
 
@@ -8,6 +8,11 @@ class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborte
 
     bool isHiding;
     bool isShowing;
+
+    public void OnGiveUp()
+    {
+        Hide();
+    }
 
     void IOnWrongAnswer.OnWrongAnswer(bool wasNew)
     {
@@ -30,11 +35,6 @@ class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborte
             Show(); // behind the give up button
             button.interactable = false;
         }
-    }
-
-    void IOnGiveUp.OnGiveUp(Question question)
-    {
-        Hide();
     }
 
     void OnCorrectAnswer()

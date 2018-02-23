@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted, IOnGiveUp
+class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted
 {
     const float FadeTime = EnterAnswerButtonController.TransitionTime;
 
@@ -11,6 +11,11 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
     string queuedTxt;
     bool isFading;
     Color oldColor;
+
+    public void OnGiveUp()
+    {
+        SetText(answerHandler.CurAnswer);
+    }
 
     void IOnQuizAborted.OnQuizAborted()
     {
@@ -27,11 +32,6 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
         GetTextField().color = oldColor;
         StopAllCoroutines();
         StartCoroutine(Fade());
-    }
-
-    void IOnGiveUp.OnGiveUp(Question question)
-    {
-        SetText(question.GetAnswer().ToString());
     }
 
     void OnCorrectAnswer()
@@ -70,7 +70,7 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
 
     void OnSubmitAnswer()
     {
-        answerHandler.OnAnswer(GetText());
+        answerHandler.CurAnswer = GetText();
     }
 
     void Start()

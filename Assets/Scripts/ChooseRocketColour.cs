@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using CrazyChipmunk;
 using UnityEngine;
-using CrazyChipmunk;
 
 class ChooseRocketColour : MonoBehaviour
 {

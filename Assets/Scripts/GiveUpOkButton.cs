@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class GiveUpOkButton : MonoBehaviour, IOnGiveUp
+class GiveUpOkButton : MonoBehaviour
 {
     const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
     [SerializeField] UnityEngine.UI.Button button = null;
 
-    void IOnGiveUp.OnGiveUp(Question question)
+    public void OnGiveUp()
     {
         Show();
     }

@@ -436,6 +436,7 @@
     <Compile Include="Assets\Scripts\ChooseRocketColour.cs" />
     <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
     <Compile Include="Assets\Scripts\EffortTracker.cs" />
+    <Compile Include="Assets\Scripts\EffortTrackerPersistantData.cs" />
     <Compile Include="Assets\Scripts\EnterAnswerButtonController.cs" />
     <Compile Include="Assets\Scripts\ExceptionPrettyPrint.cs" />
     <Compile Include="Assets\Scripts\FlashThrust.cs" />
@@ -453,7 +454,6 @@
     <Compile Include="Assets\Scripts\GotoScene.cs" />
     <Compile Include="Assets\Scripts\GotoStats.cs" />
     <Compile Include="Assets\Scripts\HideOnWrong.cs" />
-    <Compile Include="Assets\Scripts\IOnGiveUp.cs" />
     <Compile Include="Assets\Scripts\IOnQuestionChanged.cs" />
     <Compile Include="Assets\Scripts\IOnQuizAborted.cs" />
     <Compile Include="Assets\Scripts\IOnWrongAnswer.cs" />
@@ -464,7 +464,6 @@
     <Compile Include="Assets\Scripts\MailPassword.cs" />
     <Compile Include="Assets\Scripts\MatchPositionAndSize.cs" />
     <Compile Include="Assets\Scripts\MDCulture.cs" />
-    <Compile Include="Assets\Scripts\Prefs.cs" />
     <Compile Include="Assets\Scripts\MDVersion.cs" />
     <Compile Include="Assets\Scripts\NewPlayerName.cs" />
     <Compile Include="Assets\Scripts\NumberButtonLayoutController.cs" />
@@ -472,22 +471,30 @@
     <Compile Include="Assets\Scripts\PlayerData.cs" />
     <Compile Include="Assets\Scripts\PlayerNameController.cs" />
     <Compile Include="Assets\Scripts\PositionFx.cs" />
+    <Compile Include="Assets\Scripts\Prefs.cs" />
     <Compile Include="Assets\Scripts\Question.cs" />
     <Compile Include="Assets\Scripts\QuestionDisplay.cs" />
+    <Compile Include="Assets\Scripts\QuestionPersistentData.cs" />
     <Compile Include="Assets\Scripts\QuestionPicker.cs" />
     <Compile Include="Assets\Scripts\Questions.cs" />
+    <Compile Include="Assets\Scripts\QuestionsPersistentData.cs" />
     <Compile Include="Assets\Scripts\RocketBuilder.cs" />
     <Compile Include="Assets\Scripts\RocketMotionSolarSystem.cs" />
     <Compile Include="Assets\Scripts\RocketPartCounter.cs" />
     <Compile Include="Assets\Scripts\RocketParts.cs" />
+    <Compile Include="Assets\Scripts\RocketPartsPersistantData.cs" />
     <Compile Include="Assets\Scripts\SendSaveDataByMail.cs" />
     <Compile Include="Assets\Scripts\ShowOnRight.cs" />
     <Compile Include="Assets\Scripts\ShowSolarSystem.cs" />
     <Compile Include="Assets\Scripts\StatsColumnController.cs" />
     <Compile Include="Assets\Scripts\StatsController.cs" />
+    <Compile Include="Assets\Scripts\StatsControllerPersistentData.cs" />
     <Compile Include="Assets\Scripts\SubscriberList.cs" />
     <Compile Include="Assets\Scripts\TargetPlanet.cs" />
+    <Compile Include="Assets\Scripts\TargetPlanetPersistentData.cs" />
+    <Compile Include="Assets\Scripts\Test\KidModel.cs" />
     <Compile Include="Assets\Scripts\Test\TestAlgorithm.cs" />
+    <Compile Include="Assets\Scripts\Test\TestQuestion.cs" />
     <Compile Include="Assets\Scripts\TextButton.cs" />
     <Compile Include="Assets\Scripts\TextDisplay.cs" />
     <Compile Include="Assets\Scripts\UnityEventsWithParams.cs" />
@@ -524,14 +531,6 @@
     <Compile Include="Assets\xARM\Windows\xARMPreviewWindow.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Assets\Scripts\EffortTrackerPersistantData.cs" />
-    <Compile Include="Assets\Scripts\QuestionPersistentData.cs" />
-    <Compile Include="Assets\Scripts\QuestionsPersistentData.cs" />
-    <Compile Include="Assets\Scripts\RocketPartsPersistantData.cs" />
-    <Compile Include="Assets\Scripts\StatsControllerPersistentData.cs" />
-    <Compile Include="Assets\Scripts\TargetPlanetPersistentData.cs" />
-    <Compile Include="Assets\Scripts\Test\KidModel.cs" />
-    <Compile Include="Assets\Scripts\Test\TestQuestion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />
