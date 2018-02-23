@@ -18,12 +18,26 @@ class RocketPartCounter : MonoBehaviour, IOnQuestionChanged, IOnQuizAborted
 
     Color[] baseColor;
 
-    public void OnQuestionChanged(Question question)
+    public void Spend(int oldNumParts, int newNumParts)
+    {
+        StopAllCoroutines();
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(CountTextDown(oldNumParts, newNumParts));
+        }
+    }
+
+    void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
         Unhighlight();
     }
 
-    public void OnCorrectAnswer(Question question, bool isNewlyMastered)
+    void IOnQuizAborted.OnQuizAborted()
+    {
+        Unhighlight();
+    }
+
+    void OnCorrectAnswer(Question question, bool isNewlyMastered)
     {
         if (isNewlyMastered)
         {
@@ -41,20 +55,6 @@ class RocketPartCounter : MonoBehaviour, IOnQuestionChanged, IOnQuizAborted
                 StartCoroutine(Scale(highlightFontSize, highlightFadeTime, text));
             }
             UpdateText(RocketParts.Instance.NumParts);
-        }
-    }
-
-    public void OnQuizAborted()
-    {
-        Unhighlight();
-    }
-
-    public void OnSpend(int oldNumParts, int newNumParts)
-    {
-        StopAllCoroutines();
-        if (gameObject.activeInHierarchy)
-        {
-            StartCoroutine(CountTextDown(oldNumParts, newNumParts));
         }
     }
 

@@ -56,25 +56,6 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
 
     public static float GetThrustFactor(float timeRequired) => MinThrustFactor + ((maxThrustFactor - MinThrustFactor) / GetThrustFraction(timeRequired));
     public float GetMaxSingleQuestionSpeed() => GetHeightIncrease(AllottedTime) / Celebrate.Duration;
-    public void OnCorrectAnswer(Question question, bool isNewlyMastered)
-    {
-        if (question == null || !question.IsLaunchCode)
-        {
-            Accelerate(question?.GetLastAnswerTime() ?? AllottedTime);
-        }
-    }
-
-    public void OnQuestionChanged(Question question)
-    {
-        if (question == null)
-        {
-            noMoreQuestions = true;
-        }
-        else if (isRunning)
-        { // test
-            question.Ask();
-        }
-    }
 
     public void Accelerate(float answerTime = AllottedTime)
     {
@@ -99,6 +80,18 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
         noMoreQuestions = false;
     }
 
+    void IOnQuestionChanged.OnQuestionChanged(Question question)
+    {
+        if (question == null)
+        {
+            noMoreQuestions = true;
+        }
+        else if (isRunning)
+        { // test
+            question.Ask();
+        }
+    }
+
     static float GetTargetHeight() => TargetPlanet.GetPlanetHeight(RocketParts.Instance.UpgradeLevel);
     static float CalcQ(float min, float max) => Mathf.Pow((max - min) / (1F - min), V) - 1F;
     static float CalcBaseThrust(bool isGauntlet) => GetTargetHeight() / (EffortTracker.GetNumAnswersInQuiz(isGauntlet) + 1); // +1 because there is an initial launch thrust
@@ -111,6 +104,14 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
 
     bool IsTargetPlanetReached() => curGoal != Goal.CurGoal.WON && Height > TargetPlanet.GetPlanetHeight(TargetPlanet.GetTargetPlanetIdx());
     float GetHeightIncrease(float timeRequired) => baseThrust * GetThrustFactor(timeRequired);
+
+    void OnCorrectAnswer(Question question, bool isNewlyMastered)
+    {
+        if (question == null || !question.IsLaunchCode)
+        {
+            Accelerate(question?.GetLastAnswerTime() ?? AllottedTime);
+        }
+    }
 
     void Start()
     {

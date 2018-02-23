@@ -12,34 +12,34 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
     bool isFading;
     Color oldColor;
 
-    public void OnQuizAborted()
+    void IOnQuizAborted.OnQuizAborted()
     {
         SetText("");
     }
 
-    public void OnQuestionChanged(Question question)
+    void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
         SetText("");
     }
 
-    public void OnWrongAnswer(bool wasNew)
+    void IOnWrongAnswer.OnWrongAnswer(bool wasNew)
     {
         GetTextField().color = oldColor;
         StopAllCoroutines();
         StartCoroutine(Fade());
     }
 
-    public void OnCorrectAnswer()
-    {
-        SetText("");
-    }
-
-    public void OnGiveUp(Question question)
+    void IOnGiveUp.OnGiveUp(Question question)
     {
         SetText(question.GetAnswer().ToString());
     }
 
-    public void OnAddDigit(string nextDigit)
+    void OnCorrectAnswer()
+    {
+        SetText("");
+    }
+
+    void OnAddDigit(string nextDigit)
     {
         string s = isFading ? queuedTxt : GetText();
         s += nextDigit;
@@ -58,7 +58,7 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
         }
     }
 
-    public void OnBackspace()
+    void OnBackspace()
     {
         string answerTxt = GetText();
         if (answerTxt.Length > 0)
@@ -68,7 +68,7 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
         }
     }
 
-    public void OnSubmitAnswer()
+    void OnSubmitAnswer()
     {
         answerHandler.OnAnswer(GetText());
     }

@@ -8,12 +8,12 @@ class GiveUpOkButton : MonoBehaviour, IOnGiveUp
 
     [SerializeField] UnityEngine.UI.Button button = null;
 
-    public void OnGiveUp(Question question)
+    void IOnGiveUp.OnGiveUp(Question question)
     {
         Show();
     }
 
-    public void Hide()
+    void Hide()
     {
         button.enabled = false;
         ScaleTo(Vector3.zero);

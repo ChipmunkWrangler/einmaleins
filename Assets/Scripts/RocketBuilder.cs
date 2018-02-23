@@ -34,7 +34,7 @@ class RocketBuilder : MonoBehaviour
         UnityEngine.Assertions.Assert.AreEqual(exhaustParticles.Length - 1, RocketParts.Instance.MaxUpgradeLevel);
         if (RocketParts.Instance.Upgrade())
         {
-            counter.OnSpend(RocketParts.Instance.NumParts + RocketParts.Instance.NumPartsRequired, RocketParts.Instance.NumParts);
+            counter.Spend(RocketParts.Instance.NumParts + RocketParts.Instance.NumPartsRequired, RocketParts.Instance.NumParts);
             StartEngine();
             iTween.MoveTo(gameObject, iTween.Hash("y", maxY, "time", upgradeFlightTime, "delay", buildingDelay, "easetype", easeTypes[RocketParts.Instance.UpgradeLevel], "oncomplete", "Descend"));
         }

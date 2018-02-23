@@ -9,28 +9,28 @@ class ShowOnRight : MonoBehaviour, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
 
     bool wasWrong;
 
-    public void OnCorrectAnswer()
-    {
-        if (evenIfWrongFirst || !wasWrong)
-        {
-            ScaleTo(hideOnRight ? Vector3.zero : Vector3.one);
-        }
-    }
-
-    public void OnQuizAborted()
+    void IOnQuizAborted.OnQuizAborted()
     {
         ScaleTo(Vector3.zero);
     }
 
-    public void OnQuestionChanged(Question question)
+    void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
         wasWrong = false;
         ScaleTo(hideOnRight == (question != null) ? Vector3.one : Vector3.zero);
     }
 
-    public void OnWrongAnswer(bool wasNew)
+    void IOnWrongAnswer.OnWrongAnswer(bool wasNew)
     {
         wasWrong = true;
+    }
+
+    void OnCorrectAnswer()
+    {
+        if (evenIfWrongFirst || !wasWrong)
+        {
+            ScaleTo(hideOnRight ? Vector3.zero : Vector3.one);
+        }
     }
 
     void Start()

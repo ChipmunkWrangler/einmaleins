@@ -9,34 +9,34 @@ class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IO
     [SerializeField] UnityEngine.UI.Button button = null;
     [SerializeField] UnityEngine.UI.Image image = null;
 
-    public void OnQuizAborted()
+    void IOnQuizAborted.OnQuizAborted()
     {
         SetInteractibility(false);
     }
 
-    public void OnCorrectAnswer()
-    {
-        SetInteractibility(false);
-    }
-
-    public void OnWrongAnswer(bool wasNew)
+    void IOnWrongAnswer.OnWrongAnswer(bool wasNew)
     {
         SetInteractibility(true);
     }
 
-    public void OnQuestionChanged(Question question)
+    void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
         SetInteractibility(question != null);
     }
 
-    public void OnAnswerChanged(bool isAnswerEmpty)
-    {
-        SetInteractibility(isAnswerEmpty);
-    }
-
-    public void OnGiveUp(Question question)
+    void IOnGiveUp.OnGiveUp(Question question)
     {
         SetInteractibility(false);
+    }
+
+    void OnCorrectAnswer()
+    {
+        SetInteractibility(false);
+    }
+
+    void OnAnswerChanged(bool isAnswerEmpty)
+    {
+        SetInteractibility(isAnswerEmpty);
     }
 
     void SetInteractibility(bool b)

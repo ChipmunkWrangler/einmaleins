@@ -12,13 +12,13 @@ class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizAborted
 
     float originalY;
 
-    public void OnQuizAborted()
+    void IOnQuizAborted.OnQuizAborted()
     {
         StopMeter();
         meter.gameObject.SetActive(false);
     }
 
-    public void OnQuestionChanged(Question question)
+    void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
         if (question != null && !question.IsLaunchCode)
         {
@@ -28,16 +28,16 @@ class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnGiveUp, IOnQuizAborted
         }
     }
 
-    public void OnCorrectAnswer()
-    {
-        StopMeter();
-        HideMeter();
-    }
-
-    public void OnGiveUp(Question question)
+    void IOnGiveUp.OnGiveUp(Question question)
     {
         StopMeter();
         meter.gameObject.SetActive(false);
+    }
+
+    void OnCorrectAnswer()
+    {
+        StopMeter();
+        HideMeter();
     }
 
     void Start()

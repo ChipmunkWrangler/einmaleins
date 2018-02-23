@@ -14,14 +14,24 @@ class Celebrate : MonoBehaviour, IOnWrongAnswer, IOnQuestionChanged, IOnQuizAbor
     bool isCelebrating;
     Coroutine coroutine;
 
-    public void OnQuizAborted()
+    public void OnCorrectAnswer(Question question, bool isNewlyMastered)
+    {
+        StopTimer();
+        if (question == null || !question.IsLaunchCode)
+        {
+            float percentOn = (question == null) ? 1F : Mathf.Min(1F, FlashThrust.GetThrustFactor(question.GetLastAnswerTime()));
+            coroutine = StartCoroutine(DoCelebration(question != null && question.GetLastAnswerTime() <= Question.FastTime, isNewlyMastered, percentOn));
+        }
+    }
+
+    void IOnQuizAborted.OnQuizAborted()
     {
         StopTimer();
         StopCelebrating();
         StopSmoke();
     }
 
-    public void OnQuestionChanged(Question question)
+    void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
         StopTimer();
         if (continueAfterQuestions && question == null)
@@ -34,17 +44,7 @@ class Celebrate : MonoBehaviour, IOnWrongAnswer, IOnQuestionChanged, IOnQuizAbor
         }
     }
 
-    public void OnCorrectAnswer(Question question, bool isNewlyMastered)
-    {
-        StopTimer();
-        if (question == null || !question.IsLaunchCode)
-        {
-            float percentOn = (question == null) ? 1F : Mathf.Min(1F, FlashThrust.GetThrustFactor(question.GetLastAnswerTime()));
-            coroutine = StartCoroutine(DoCelebration(question != null && question.GetLastAnswerTime() <= Question.FastTime, isNewlyMastered, percentOn));
-        }
-    }
-
-    public void OnWrongAnswer(bool wasNew)
+    void IOnWrongAnswer.OnWrongAnswer(bool wasNew)
     {
         StopTimer();
         StopCelebrating();

@@ -2,7 +2,7 @@
 
 class QuestionDisplay : TextDisplay, IOnQuestionChanged, IOnQuizAborted
 {
-    public void OnQuestionChanged(Question question)
+    void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
         string s = "";
         if (question != null)
@@ -15,12 +15,12 @@ class QuestionDisplay : TextDisplay, IOnQuestionChanged, IOnQuizAborted
         SetText(s);
     }
 
-    public void OnCorrectAnswer()
+    void IOnQuizAborted.OnQuizAborted()
     {
         SetText("");
     }
 
-    public void OnQuizAborted()
+    void OnCorrectAnswer()
     {
         SetText("");
     }

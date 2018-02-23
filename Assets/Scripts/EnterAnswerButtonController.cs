@@ -9,22 +9,17 @@ class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborte
     bool isHiding;
     bool isShowing;
 
-    public void OnQuizAborted()
-    {
-        Hide();
-    }
-
-    public void OnCorrectAnswer()
-    {
-        Hide();
-    }
-
-    public void OnWrongAnswer(bool wasNew)
+    void IOnWrongAnswer.OnWrongAnswer(bool wasNew)
     {
         button.interactable = false; // don't hide, just show the give up button on top
     }
 
-    public void OnQuestionChanged(Question question)
+    void IOnQuizAborted.OnQuizAborted()
+    {
+        Hide();
+    }
+
+    void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
         if (question == null)
         {
@@ -37,14 +32,19 @@ class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborte
         }
     }
 
-    public void OnAnswerChanged(bool isAnswerEmpty)
-    {
-        button.interactable = !isAnswerEmpty;
-    }
-
-    public void OnGiveUp(Question question)
+    void IOnGiveUp.OnGiveUp(Question question)
     {
         Hide();
+    }
+
+    void OnCorrectAnswer()
+    {
+        Hide();
+    }
+
+    void OnAnswerChanged(bool isAnswerEmpty)
+    {
+        button.interactable = !isAnswerEmpty;
     }
 
     void Show()

@@ -6,13 +6,13 @@ class HideOnWrong : MonoBehaviour, IOnWrongAnswer, IOnGiveUp
 
     [SerializeField] float timeToHide = 0;
 
-    public void OnWrongAnswer(bool wasNew)
+    void IOnWrongAnswer.OnWrongAnswer(bool wasNew)
     {
         ScaleDown();
         ScaleUpAfterDelay();
     }
 
-    public void OnGiveUp(Question question)
+    void IOnGiveUp.OnGiveUp(Question question)
     {
         ScaleDown();
     }
