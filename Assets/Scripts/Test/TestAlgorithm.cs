@@ -1,8 +1,10 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-namespace TimesTables.Test
+namespace TimesTablesTest
 {
+    using Helper;
+
     class TestAlgorithm : MonoBehaviour
     {
         public const float TargetTime = 3.0F;

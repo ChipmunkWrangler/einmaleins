@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TimesTables.Test
+namespace TimesTablesTest.Helper
 {
     class KidModel
     {
