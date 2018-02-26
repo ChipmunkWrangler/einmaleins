@@ -286,9 +286,6 @@
     <Reference Include="UnityEditor.OSXStandalone.Extensions">
       <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.iOS_I2Loc.Xcode">
       <HintPath>Assets/I2/Localization/Scripts/Editor/Unity XCode/UnityEditor.iOS_I2Loc.Xcode.dll</HintPath>
     </Reference>
@@ -312,6 +309,9 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>/Users/rafael/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -486,6 +486,14 @@
     <Compile Include="Assets\Scripts\SendSaveDataByMail.cs" />
     <Compile Include="Assets\Scripts\ShowOnRight.cs" />
     <Compile Include="Assets\Scripts\ShowSolarSystem.cs" />
+    <Compile Include="Assets\Scripts\Source\Awaiters.cs" />
+    <Compile Include="Assets\Scripts\Source\AwaitExtensions.cs" />
+    <Compile Include="Assets\Scripts\Source\IEnumeratorAwaitExtensions.cs" />
+    <Compile Include="Assets\Scripts\Source\Internal\AsyncCoroutineRunner.cs" />
+    <Compile Include="Assets\Scripts\Source\Internal\SyncContextUtil.cs" />
+    <Compile Include="Assets\Scripts\Source\TaskExtensions.cs" />
+    <Compile Include="Assets\Scripts\Source\WaitForBackgroundThread.cs" />
+    <Compile Include="Assets\Scripts\Source\WaitForUpdate.cs" />
     <Compile Include="Assets\Scripts\StatsColumnController.cs" />
     <Compile Include="Assets\Scripts\StatsController.cs" />
     <Compile Include="Assets\Scripts\StatsControllerPersistentData.cs" />
