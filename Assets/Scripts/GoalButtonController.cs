@@ -38,7 +38,7 @@ class GoalButtonController : MonoBehaviour, IOnQuestionChanged
                     youWinText.SetActive(true);
                     break;
                 default:
-                    throw new System.ArgumentException("Invalid goal: " + goal.CalcCurGoal());                                                      
+                    throw new System.InvalidOperationException("Invalid goal: " + goal.CalcCurGoal());                                                      
             }
         }
     }
