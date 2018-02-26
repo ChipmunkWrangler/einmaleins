@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted
@@ -79,7 +79,7 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
         SetText("");
     }
 
-    IEnumerator Fade()
+    IEnumerator<WaitForSec> Fade()
     {
         isFading = true;
         queuedTxt = "";

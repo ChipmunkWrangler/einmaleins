@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using CrazyChipmunk;
 using UnityEngine;
 
@@ -76,7 +76,7 @@ class KickoffLaunch : MonoBehaviour
         }
     }
 
-    IEnumerator Kickoff()
+    IEnumerator<WaitForSeconds> Kickoff()
     {
         thrust.OnCountdown();
         countdownText.text = "";

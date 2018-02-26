@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using CrazyChipmunk;
 using UnityEngine;
 using UnityEngine.UI;
@@ -220,7 +220,7 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
         effortTracker.EndQuiz();
     }
 
-    IEnumerator CelebrateReachingPlanet(int planetIdx)
+    IEnumerator<WaitForSeconds> CelebrateReachingPlanet(int planetIdx)
     {
         float zoomTime = zoomToPlanet.ZoomToPlanet(planetIdx);
         UnityEngine.Assertions.Assert.IsTrue(zoomTime - planetAchievementTextDelay >= 0);

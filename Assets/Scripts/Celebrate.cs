@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 class Celebrate : MonoBehaviour, IOnWrongAnswer, IOnQuestionChanged, IOnQuizAborted
@@ -50,7 +49,7 @@ class Celebrate : MonoBehaviour, IOnWrongAnswer, IOnQuestionChanged, IOnQuizAbor
         StopCelebrating();
     }
 
-    IEnumerator DoCelebration(bool isFastAnswer, bool isNewlyMastered, float percentOn)
+    IEnumerator<WaitForSeconds> DoCelebration(bool isFastAnswer, bool isNewlyMastered, float percentOn)
     {
         float exhaustTime = Duration * percentOn;
         if (exhaustTime > 0)

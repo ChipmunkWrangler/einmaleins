@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 class PositionFx : MonoBehaviour
@@ -11,7 +11,7 @@ class PositionFx : MonoBehaviour
         StartCoroutine(InitFxPos());
     }
 
-    IEnumerator InitFxPos()
+    IEnumerator<WaitForSeconds> InitFxPos()
     {
         yield return new WaitForSeconds(0.5F); // Grid or Clock buttons need to be established first HACK
         Vector3 newPos = Camera.main.ScreenToWorldPoint(referencePoint.position);
