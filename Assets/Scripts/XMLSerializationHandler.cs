@@ -22,8 +22,8 @@ static class XMLSerializationHandler
         }
         catch (System.Exception ex)
         {
-            Debug.Log(ex.ToString());
-            throw ex;
+            Debug.Log(ExceptionPrettyPrint.Msg(ex));
+            throw;
         }
     }
 
@@ -55,8 +55,8 @@ static class XMLSerializationHandler
         }
         catch (System.Exception ex)
         {
-            Debug.Log(ex.ToString());
-            throw ex;
+            Debug.Log(ExceptionPrettyPrint.Msg(ex));
+            throw;
         }
         return data;
     }
@@ -72,8 +72,8 @@ static class XMLSerializationHandler
         }
         catch (System.Exception ex)
         {
-            Debug.Log(ex.ToString());
-            throw ex;
+            Debug.Log(ExceptionPrettyPrint.Msg(ex));
+            throw;
         }
     }
 
