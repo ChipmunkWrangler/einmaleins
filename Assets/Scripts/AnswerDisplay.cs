@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 using UnityEngine;
 
 class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted
 {
-    const float FadeTime = EnterAnswerButtonController.TransitionTime;
+    const float FadeSeconds = EnterAnswerButtonController.TransitionTime;
 
     [SerializeField] QuestionPicker answerHandler = null;
     [SerializeField] int maxDigits = 0;
@@ -30,8 +30,7 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
     void IOnWrongAnswer.OnWrongAnswer(bool wasNew)
     {
         GetTextField().color = oldColor;
-        StopAllCoroutines();
-        StartCoroutine(Fade());
+        Fade().WrapErrors();
     }
 
     void OnCorrectAnswer()
@@ -79,12 +78,16 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
         SetText("");
     }
 
-    IEnumerator<WaitForSec> Fade()
+    async Task Fade()
     {
+        if (isFading)
+        {
+            return;
+        }
         isFading = true;
         queuedTxt = "";
-        GetTextField().CrossFadeColor(Color.clear, FadeTime, false, true);
-        yield return new WaitForSeconds(FadeTime);
+        GetTextField().CrossFadeColor(Color.clear, FadeSeconds, false, true);
+        await new WaitForSeconds(FadeSeconds);
         SetText(queuedTxt);
         queuedTxt = "";
         GetTextField().CrossFadeColor(oldColor, 0, false, true);
