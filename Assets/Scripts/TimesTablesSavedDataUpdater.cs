@@ -1,11 +1,11 @@
-using UnityEngine;
 using CrazyChipmunk;
+using UnityEngine;
 
-class TimesTablesVersionUpdater : VersionUpdater
+class TimesTablesSavedDataUpdater : SavedDataUpdater
 {
     [SerializeField] Questions questions = null;
 
-    public override void UpdateVersion(string fromVersion, string toVersion)
+    public override void UpdateData(string fromVersion, string toVersion)
     {
         switch (fromVersion)
         {

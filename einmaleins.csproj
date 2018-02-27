@@ -539,9 +539,10 @@
     <Compile Include="Assets\xARM\Windows\xARMPreviewWindow.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Assets\Scripts\VersionNumber.cs" />
-    <Compile Include="Assets\Scripts\TimesTablesVersionUpdater.cs" />
-    <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdater.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataVersionModel.cs" />
+    <Compile Include="Assets\Scripts\TimesTablesSavedDataUpdater.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataUpdater.cs" />
+    <Compile Include="Assets\Scripts\TimesTablesSavedDataVersionModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />

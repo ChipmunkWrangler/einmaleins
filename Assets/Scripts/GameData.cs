@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 class GameData
@@ -10,7 +11,7 @@ class GameData
 
     public void Load()
     {
-        Version = VersionNumber.GetCurrentVersion();
+        Version = Application.version;
         playerNameController.Load();
         string oldName = playerNameController.CurName;
         foreach (string playerName in playerNameController.Names)
@@ -27,12 +28,13 @@ class GameData
 
     public void Save()
     {
-        if (Version != VersionNumber.GetCurrentVersion())
+        if (Version != Application.version)
         {
-            throw new System.NotSupportedException("File version " + Version + " doesn't match current version " + VersionNumber.GetCurrentVersion());
+            throw new System.NotSupportedException("File version " + Version + " doesn't match current version " + Application.version);
         }
-        UnityEngine.PlayerPrefs.DeleteAll();
-        VersionNumber.WriteNewVersion();
+        PlayerPrefs.DeleteAll();
+        var versionModel = new TimesTablesSavedDataVersionModel();
+        versionModel.Version = Application.version;
         playerNameController.Clear();
         foreach (PlayerData playerData in PlayerList)
         {
@@ -43,6 +45,6 @@ class GameData
         }
         playerNameController.CurName = "";
         playerNameController.Save();
-        UnityEngine.PlayerPrefs.Save();
+        PlayerPrefs.Save();
     }
 }

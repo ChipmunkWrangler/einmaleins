@@ -5,7 +5,8 @@ namespace CrazyChipmunk
 {
     class VersionUpdateChecker : MonoBehaviour
     {
-        [SerializeField] VersionUpdater updater = null;
+        [SerializeField] SavedDataVersionModel versionModel = null;
+        [SerializeField] SavedDataUpdater updater = null;
         [SerializeField] string updateScene = "updateVersion";
         [SerializeField] string postUpdateScene = "";
 
@@ -13,10 +14,6 @@ namespace CrazyChipmunk
 
         void Start()
         {
-            if (updater == null)
-            {
-                throw new UnassignedReferenceException("updater not set in VersionUpdateChecker");
-            }
             CheckVersion();
         }
 
@@ -50,7 +47,7 @@ namespace CrazyChipmunk
                 Debug.Log("isUpdating");
                 return false;
             }
-            return VersionNumber.GetSavedVersion() != VersionNumber.GetCurrentVersion();
+            return versionModel.Version != Application.version;
         }
 
         bool IsInUpdateScene()
@@ -74,8 +71,8 @@ namespace CrazyChipmunk
         void DoUpdate()
         {
             isUpdating = true;
-            updater.UpdateVersion(VersionNumber.GetSavedVersion(), VersionNumber.GetCurrentVersion());
-            VersionNumber.WriteNewVersion();
+            updater.UpdateData(versionModel.Version, Application.version);
+            versionModel.Version = Application.version;
             isUpdating = false;
         }
     }
