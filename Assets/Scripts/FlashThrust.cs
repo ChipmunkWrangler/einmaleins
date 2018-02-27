@@ -94,7 +94,6 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
 
     static float GetTargetHeight() => TargetPlanet.GetPlanetHeight(RocketParts.Instance.UpgradeLevel);
     static float CalcQ(float min, float max) => Mathf.Pow((max - min) / (1F - min), V) - 1F;
-    static float CalcBaseThrust(bool isGauntlet) => GetTargetHeight() / (EffortTracker.GetNumAnswersInQuiz(isGauntlet) + 1); // +1 because there is an initial launch thrust
     static float GetThrustFraction(float timeRequired) => Mathf.Pow(1.0F + (q * Mathf.Exp(timeRequired - AllottedTime)), 1.0F / V);
     static float CalcMaxThrustFactor()
     {
@@ -102,6 +101,7 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
         return TargetPlanet.GetPlanetHeight(u + 1) / TargetPlanet.GetPlanetHeight(u);
     }
 
+    float CalcBaseThrust(bool isGauntlet) => GetTargetHeight() / (effortTracker.GetNumAnswersInQuiz(isGauntlet) + 1); // +1 because there is an initial launch thrust
     bool IsTargetPlanetReached() => curGoal != Goal.CurGoal.Won && Height > TargetPlanet.GetPlanetHeight(TargetPlanet.GetTargetPlanetIdx());
     float GetHeightIncrease(float timeRequired) => baseThrust * GetThrustFactor(timeRequired);
 

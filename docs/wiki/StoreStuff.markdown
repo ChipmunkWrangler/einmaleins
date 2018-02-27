@@ -1,8 +1,7 @@
 [MarketingExperiments](MarketingExperiments)
 #Marketing Ideas
-* Tell Bob & Filkers where to get it on iOS and Android (see email draft)
- * Make free version so that flaregamers and filkers can rate it
 * Ravensburger or other partnerships: I give them a finished product, they stamp it and get 20%
+* Add a refund policy for android: if you don't like it, tell me why and I will refund your money.
 * Friendly art
 * Copy F2P best practises, since they are not overdone in the kid / edugame space
 * Nasa partnership: from toddler to astronaut

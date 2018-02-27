@@ -379,7 +379,7 @@
     <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataVersionModel.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdateChecker.cs" />
     <Compile Include="Assets\Scripts\EffortTracker.cs" />
-    <Compile Include="Assets\Scripts\EffortTrackerPersistantData.cs" />
+    <Compile Include="Assets\Scripts\EffortTrackerPersistentData.cs" />
     <Compile Include="Assets\Scripts\EnterAnswerButtonController.cs" />
     <Compile Include="Assets\Scripts\ExceptionPrettyPrint.cs" />
     <Compile Include="Assets\Scripts\FlashThrust.cs" />

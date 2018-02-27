@@ -5,11 +5,20 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
     [SerializeField] Goal goal = null;
     [SerializeField] Questions questions = null;
     [SerializeField] Fuel fuel = null;
+    [SerializeField] EffortTrackerConfig config = null;
 
-    EffortTrackerPersistantData data = new EffortTrackerPersistantData();
+    EffortTrackerPersistentData data = null;
     int numAnswersLeftInQuiz;
     bool isQuizStarted;
     bool allowGivingUp;
+
+    public int QuizzesToday { get { return Data.QuizzesToday; } set { Data.QuizzesToday = value; } }
+    public float TimeToday { get { return Data.TimeToday; } set { Data.TimeToday = value; } }
+    public int Frustration
+    {
+        get { return Data.Frustration; }
+        set { Data.Frustration = Mathf.Clamp(value, config.MinFrustration, config.MaxFrustration); }
+    }
 
     int NumAnswersLeftInQuiz
     {
@@ -24,18 +33,27 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
         }
     }
 
-    public static int GetNumAnswersInQuiz(bool isGauntlet)
+    EffortTrackerPersistentData Data
     {
-        return isGauntlet ? EffortTrackerConfig.GauntletAskListLength : EffortTrackerConfig.NumAnswersPerQuiz;
+        get
+        {
+            if (data == null)
+            {
+                data = new EffortTrackerPersistentData();
+                data.Load();
+            }
+            return data;
+        }
     }
 
-    public bool IsDoneForToday() => data.IsDoneForToday();
+    public bool IsDoneForToday() => Data.QuizzesToday >= config.MinQuizzesPerDay && Data.TimeToday >= config.MinTimePerDay;
+    public int GetNumAnswersInQuiz(bool isGauntlet) => isGauntlet ? config.GauntletAskListLength : config.NumAnswersPerQuiz;
 
     public void OnCorrectAnswer(Question question, bool isNewlyMastered)
     {
         float answerTime = question.GetLastAnswerTime();
-        data.TimeToday += answerTime + Celebrate.Duration;
-        data.Frustration += (answerTime <= Question.FastTime) ? EffortTrackerConfig.FrustrationFast : EffortTrackerConfig.FrustrationRight;
+        Data.TimeToday += answerTime + Celebrate.Duration;
+        Data.Frustration += (answerTime <= Question.FastTime) ? config.FrustrationFast : config.FrustrationRight;
         if (isQuizStarted)
         {
             --NumAnswersLeftInQuiz;
@@ -48,14 +66,14 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
         {
             StartQuiz();
         }
-        Debug.Log("frustration = " + data.Frustration + " numAnswersInQuiz " + NumAnswersLeftInQuiz);
+        Debug.Log("frustration = " + Data.Frustration + " numAnswersInQuiz " + NumAnswersLeftInQuiz);
         if (NumAnswersLeftInQuiz <= 0)
         {
             return null;
         }
-        bool isFrustrated = data.Frustration > 0;
+        bool isFrustrated = Data.Frustration > 0;
 
-        if (NumAnswersLeftInQuiz <= EffortTrackerConfig.NumAnswersLeftWhenLaunchCodeAsked && !isFrustrated)
+        if (NumAnswersLeftInQuiz <= config.NumAnswersLeftWhenLaunchCodeAsked && !isFrustrated)
         {
             Question q = questions.GetLaunchCodeQuestion();
             if (q != null)
@@ -68,7 +86,7 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
 
     public void OnWrongAnswer(bool wasNew)
     {
-        data.Frustration += EffortTrackerConfig.FrustrationWrong;
+        Data.Frustration += config.FrustrationWrong;
         if (isQuizStarted)
         {
             --NumAnswersLeftInQuiz;
@@ -77,26 +95,26 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
 
     public void OnGiveUp()
     {
-        data.Frustration += EffortTrackerConfig.FrustrationGiveUp;
+        Data.Frustration += config.FrustrationGiveUp;
     }
 
     public void EndQuiz()
     {
         isQuizStarted = false;
         RocketParts.Instance.JustUpgraded = false;
-        ++data.QuizzesToday;
+        ++Data.QuizzesToday;
         Save();
     }
 
     public void Save()
     {
-        data.Save();
+        Data.Save();
         questions.Save();
     }
 
     void StartQuiz()
     {
-        data.Load();
+        Data.Load();
         Goal.CurGoal curGoal = goal.CalcCurGoal();
         UnityEngine.Assertions.Assert.IsTrue(curGoal == Goal.CurGoal.FlyToPlanet || curGoal == Goal.CurGoal.Gauntlet || curGoal == Goal.CurGoal.Won, "unexpected goal " + curGoal);
         allowGivingUp = Goal.IsGivingUpAllowed(curGoal);
