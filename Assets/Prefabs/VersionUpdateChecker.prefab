@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4070765470002938}
   - component: {fileID: 114142276171277902}
-  - component: {fileID: 114297224793258322}
+  - component: {fileID: 114221680428666552}
   m_Layer: 0
   m_Name: VersionUpdateChecker
   m_TagString: Untagged
@@ -52,11 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a027e2228b304c469e35b7fac0a8187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  versionModel: {fileID: 114297224793258322}
+  versionModel: {fileID: 114221680428666552}
   updater: {fileID: 0}
   updateScene: updateVersion
   postUpdateScene: choosePlayer
---- !u!114 &114297224793258322
+--- !u!114 &114221680428666552
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

@@ -375,7 +375,6 @@
     <Compile Include="Assets\Scripts\Celebrate.cs" />
     <Compile Include="Assets\Scripts\ChooseRocketColour.cs" />
     <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
-    <Compile Include="Assets\Scripts\CrazyChipmunk\RangedVal.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataUpdater.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataVersionModel.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdateChecker.cs" />
@@ -408,7 +407,6 @@
     <Compile Include="Assets\Scripts\MailPassword.cs" />
     <Compile Include="Assets\Scripts\MatchPositionAndSize.cs" />
     <Compile Include="Assets\Scripts\MDCulture.cs" />
-    <Compile Include="Assets\Scripts\MiscLibs\MinMaxRangeAttribute.cs" />
     <Compile Include="Assets\Scripts\NewPlayerName.cs" />
     <Compile Include="Assets\Scripts\NumberButtonLayoutController.cs" />
     <Compile Include="Assets\Scripts\Params.cs" />
