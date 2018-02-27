@@ -5,10 +5,11 @@ namespace CrazyChipmunk
 {
     class VersionUpdateChecker : MonoBehaviour
     {
-        bool isUpdating;
         [SerializeField] VersionUpdater updater = null;
-        [SerializeField] string updateScene = null;
-        [SerializeField] Scene postUpdateScene;
+        [SerializeField] string updateScene = "updateVersion";
+        [SerializeField] string postUpdateScene = "";
+
+        bool isUpdating;
 
         void Start()
         {
@@ -64,9 +65,9 @@ namespace CrazyChipmunk
 
         void LeaveUpdateScene()
         {
-            if (postUpdateScene != null)
+            if (postUpdateScene != "")
             {
-                SceneManager.LoadScene(postUpdateScene.buildIndex);
+                SceneManager.LoadScene(postUpdateScene);
             }
         }
 

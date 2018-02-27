@@ -1,6 +1,7 @@
 using UnityEngine;
+using CrazyChipmunk;
 
-class VersionUpdater : CrazyChipmunk.VersionUpdater
+class TimesTablesVersionUpdater : VersionUpdater
 {
     [SerializeField] Questions questions = null;
 

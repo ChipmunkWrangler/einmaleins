@@ -786,7 +786,6 @@ GameObject:
   - component: {fileID: 388}
   - component: {fileID: 389}
   - component: {fileID: 92}
-  - component: {fileID: 110}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1537,18 +1536,6 @@ MonoBehaviour:
   mGUI_ShowReferences: 0
   mGUI_ShowTems: 1
   mGUI_ShowCallback: 0
---- !u!114 &110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 58}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66af34da429114161b307023ec74d7f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questions: {fileID: 124914251}
 --- !u!4 &111
 Transform:
   m_ObjectHideFlags: 0
@@ -8354,6 +8341,53 @@ Transform:
   m_Father: {fileID: 102}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &888910046
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4070765470002938, guid: 5dc03da27ffea4f74a094a520a8a53bc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 84.357155
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070765470002938, guid: 5dc03da27ffea4f74a094a520a8a53bc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 243.08694
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070765470002938, guid: 5dc03da27ffea4f74a094a520a8a53bc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070765470002938, guid: 5dc03da27ffea4f74a094a520a8a53bc, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070765470002938, guid: 5dc03da27ffea4f74a094a520a8a53bc, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070765470002938, guid: 5dc03da27ffea4f74a094a520a8a53bc, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070765470002938, guid: 5dc03da27ffea4f74a094a520a8a53bc, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070765470002938, guid: 5dc03da27ffea4f74a094a520a8a53bc, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114778659805985622, guid: 5dc03da27ffea4f74a094a520a8a53bc,
+        type: 2}
+      propertyPath: questions
+      value: 
+      objectReference: {fileID: 124914251}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5dc03da27ffea4f74a094a520a8a53bc, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &901887785
 Prefab:
   m_ObjectHideFlags: 0

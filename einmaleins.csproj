@@ -540,7 +540,7 @@
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Assets\Scripts\VersionNumber.cs" />
-    <Compile Include="Assets\Scripts\VersionUpdater.cs" />
+    <Compile Include="Assets\Scripts\TimesTablesVersionUpdater.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdater.cs" />
   </ItemGroup>
   <ItemGroup>
