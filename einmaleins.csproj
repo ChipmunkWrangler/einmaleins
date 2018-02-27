@@ -327,108 +327,40 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\I2\Common\CoroutineManager.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\EventCallback.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleLanguages.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleTranslation.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleTranslation_Post.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Export_CSV.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Export_Google.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Import_CSV.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Import_Google.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Misc.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Google\SimpleJSON.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\LanguageSource.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\LocalizationManager.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\LocalizationReader.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Localize.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\LocalizeDropdown.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\ILocalizeTarget.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_2DToolKit.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_NGUI.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_SVG.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_TextMeshPro.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_UnityStandard.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_UnityUI.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\AutoChangeCultureInfo.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\LocalizationParamsManager.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\LocalizedString.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\PersistentStorage.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\RegisterGlobalParameters.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\ResourceManager.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\RTLFixer.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\SetLanguage.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\SetLanguageDropdown.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\I2\Localization\Scripts\Utils\StringObfuscator.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\PreciseLocale\PreciseLocale.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
+    <Compile Include="Assets\I2\Common\CoroutineManager.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\EventCallback.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleLanguages.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleTranslation.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Google\GoogleTranslation_Post.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Export_CSV.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Export_Google.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Import_CSV.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Import_Google.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Google\LanguageSource_Misc.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Google\SimpleJSON.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\LanguageSource.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\LocalizationManager.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\LocalizationReader.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Localize.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\LocalizeDropdown.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Targets\ILocalizeTarget.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_2DToolKit.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_NGUI.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_SVG.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_TextMeshPro.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_UnityStandard.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Targets\LocalizeTarget_UnityUI.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Utils\AutoChangeCultureInfo.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Utils\LocalizationParamsManager.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Utils\LocalizedString.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Utils\PersistentStorage.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Utils\RegisterGlobalParameters.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Utils\ResourceManager.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Utils\RTLFixer.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Utils\SetLanguage.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Utils\SetLanguageDropdown.cs" />
+    <Compile Include="Assets\I2\Localization\Scripts\Utils\StringObfuscator.cs" />
+    <Compile Include="Assets\PreciseLocale\PreciseLocale.cs" />
     <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
     <Compile Include="Assets\Scripts\AwaitAsync\Awaiters.cs" />
     <Compile Include="Assets\Scripts\AwaitAsync\AwaitExtensions.cs" />
@@ -443,6 +375,10 @@
     <Compile Include="Assets\Scripts\Celebrate.cs" />
     <Compile Include="Assets\Scripts\ChooseRocketColour.cs" />
     <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\RangedVal.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataUpdater.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataVersionModel.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdateChecker.cs" />
     <Compile Include="Assets\Scripts\EffortTracker.cs" />
     <Compile Include="Assets\Scripts\EffortTrackerPersistantData.cs" />
     <Compile Include="Assets\Scripts\EnterAnswerButtonController.cs" />
@@ -472,7 +408,7 @@
     <Compile Include="Assets\Scripts\MailPassword.cs" />
     <Compile Include="Assets\Scripts\MatchPositionAndSize.cs" />
     <Compile Include="Assets\Scripts\MDCulture.cs" />
-    <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdateChecker.cs" />
+    <Compile Include="Assets\Scripts\MiscLibs\MinMaxRangeAttribute.cs" />
     <Compile Include="Assets\Scripts\NewPlayerName.cs" />
     <Compile Include="Assets\Scripts\NumberButtonLayoutController.cs" />
     <Compile Include="Assets\Scripts\Params.cs" />
@@ -505,44 +441,22 @@
     <Compile Include="Assets\Scripts\Test\TestQuestion.cs" />
     <Compile Include="Assets\Scripts\TextButton.cs" />
     <Compile Include="Assets\Scripts\TextDisplay.cs" />
+    <Compile Include="Assets\Scripts\TimesTablesSavedDataUpdater.cs" />
+    <Compile Include="Assets\Scripts\TimesTablesSavedDataVersionModel.cs" />
     <Compile Include="Assets\Scripts\UnityEventsWithParams.cs" />
     <Compile Include="Assets\Scripts\UpgradeButton.cs" />
     <Compile Include="Assets\Scripts\VersionDisplay.cs" />
     <Compile Include="Assets\Scripts\XMLSerializationHandler.cs" />
-    <Compile Include="Assets\xARM\Classes\xARMClasses.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\xARM\Components\xARMDelegatesExample.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\xARM\Components\xARMDelegateUGUI.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\xARM\Components\xARMProxy.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\xARM\Managers\xARMConfig.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\xARM\Managers\xARMManager.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\xARM\Windows\xARMGalleryWindow.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\xARM\Windows\xARMHotkeys.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\xARM\Windows\xARMOptionsWindow.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\xARM\Windows\xARMPreviewWindow.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataVersionModel.cs" />
-    <Compile Include="Assets\Scripts\TimesTablesSavedDataUpdater.cs" />
-    <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataUpdater.cs" />
-    <Compile Include="Assets\Scripts\TimesTablesSavedDataVersionModel.cs" />
+    <Compile Include="Assets\xARM\Classes\xARMClasses.cs" />
+    <Compile Include="Assets\xARM\Components\xARMDelegatesExample.cs" />
+    <Compile Include="Assets\xARM\Components\xARMDelegateUGUI.cs" />
+    <Compile Include="Assets\xARM\Components\xARMProxy.cs" />
+    <Compile Include="Assets\xARM\Managers\xARMConfig.cs" />
+    <Compile Include="Assets\xARM\Managers\xARMManager.cs" />
+    <Compile Include="Assets\xARM\Windows\xARMGalleryWindow.cs" />
+    <Compile Include="Assets\xARM\Windows\xARMHotkeys.cs" />
+    <Compile Include="Assets\xARM\Windows\xARMOptionsWindow.cs" />
+    <Compile Include="Assets\xARM\Windows\xARMPreviewWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />

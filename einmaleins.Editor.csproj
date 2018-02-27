@@ -335,6 +335,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\RangedFloatDrawer.cs" />
     <Compile Include="Assets\I2\Common\Editor\EditorTools.cs" />
     <Compile Include="Assets\I2\Common\Editor\I2AboutWindow.cs" />
     <Compile Include="Assets\I2\Common\Editor\I2Analytics.cs" />
