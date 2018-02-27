@@ -472,7 +472,7 @@
     <Compile Include="Assets\Scripts\MailPassword.cs" />
     <Compile Include="Assets\Scripts\MatchPositionAndSize.cs" />
     <Compile Include="Assets\Scripts\MDCulture.cs" />
-    <Compile Include="Assets\Scripts\MDVersion.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdateChecker.cs" />
     <Compile Include="Assets\Scripts\NewPlayerName.cs" />
     <Compile Include="Assets\Scripts\NumberButtonLayoutController.cs" />
     <Compile Include="Assets\Scripts\Params.cs" />
@@ -539,6 +539,9 @@
     <Compile Include="Assets\xARM\Windows\xARMPreviewWindow.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Assets\Scripts\VersionNumber.cs" />
+    <Compile Include="Assets\Scripts\VersionUpdater.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdater.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />

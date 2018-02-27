@@ -1,46 +1,12 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine;
 
-class MDVersion : MonoBehaviour
+class VersionUpdater : CrazyChipmunk.VersionUpdater
 {
-    const int MajorVersion = 1;
-    const int MinorVersion = 0;
-    const int BuildNumber = 0;
-
     [SerializeField] Questions questions = null;
 
-    bool isChecking;
-
-    public static string GetCurrentVersion()
+    public override void UpdateVersion(string fromVersion, string toVersion)
     {
-        return MajorVersion + "." + MinorVersion + "." + BuildNumber;
-    }
-
-    public static void WriteNewVersion()
-    {
-        PlayerPrefs.SetString("version", GetCurrentVersion());
-        PlayerPrefs.Save();
-    }
-
-    public void CheckVersion()
-    {
-        if (isChecking)
-        {
-            return;
-        }
-        Debug.unityLogger.logEnabled = Debug.isDebugBuild;
-        isChecking = true;
-        string oldVersion = PlayerPrefs.GetString("version");
-        if (oldVersion == GetCurrentVersion())
-        {
-            return;
-        }
-        if (SceneManager.GetActiveScene().name != "updateVersion")
-        {
-            SceneManager.LoadScene("updateVersion");
-            return;
-        }
-        switch (oldVersion)
+        switch (fromVersion)
         {
             case "0.1.14":
                 break;
@@ -53,30 +19,15 @@ class MDVersion : MonoBehaviour
             case "0.1.9":
             case "0.1.8":
                 UpdateFrom_0_1_8_To_0_1_11();
+                UpdateFrom_0_1_11_To_0_1_14();
                 break;
             default:
-                RestartWithNewVersion();
+                GiveUpAndDestroyData();
                 break;
         }
-        WriteNewVersion();
-        isChecking = false;
-        SceneManager.LoadScene("choosePlayer");
     }
 
-    void Start()
-    {
-        CheckVersion();
-    }
-
-    void OnApplicationPause(bool pauseStatus)
-    {
-        if (!pauseStatus)
-        {
-            CheckVersion();
-        }
-    }
-
-    void RestartWithNewVersion()
+    void GiveUpAndDestroyData()
     {
         PlayerPrefs.DeleteAll();
     }

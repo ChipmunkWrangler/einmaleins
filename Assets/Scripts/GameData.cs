@@ -10,7 +10,7 @@ class GameData
 
     public void Load()
     {
-        Version = MDVersion.GetCurrentVersion();
+        Version = VersionNumber.GetCurrentVersion();
         playerNameController.Load();
         string oldName = playerNameController.CurName;
         foreach (string playerName in playerNameController.Names)
@@ -27,12 +27,12 @@ class GameData
 
     public void Save()
     {
-        if (Version != MDVersion.GetCurrentVersion())
+        if (Version != VersionNumber.GetCurrentVersion())
         {
-            throw new System.NotSupportedException("File version " + Version + " doesn't match current version " + MDVersion.GetCurrentVersion());
+            throw new System.NotSupportedException("File version " + Version + " doesn't match current version " + VersionNumber.GetCurrentVersion());
         }
         UnityEngine.PlayerPrefs.DeleteAll();
-        MDVersion.WriteNewVersion();
+        VersionNumber.WriteNewVersion();
         playerNameController.Clear();
         foreach (PlayerData playerData in PlayerList)
         {
