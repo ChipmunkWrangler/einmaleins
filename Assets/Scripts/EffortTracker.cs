@@ -2,20 +2,11 @@
 
 class EffortTracker : MonoBehaviour, IOnWrongAnswer
 {
-    const int FrustrationWrong = 2; // N.B. Since the question is repeated until it is correct, the net effect will be FRUSTRATION_WRONG * n - FRUSTRATION_RIGHT (or _FAST)
-    const int FrustrationGiveUp = 2;
-    const int FrustrationRight = -1;
-    const int FrustrationFast = -2;
-    const int NumAnswersPerQuiz = 7; // the bigger this is, the more new questions the kid will be confronted with at once
-    const int GauntletAskListLength = 55;
-    const int NumAnswersLeftWhenLaunchCodeAsked = 3;
-
-    readonly EffortTrackerPersistantData data = new EffortTrackerPersistantData();
-
     [SerializeField] Goal goal = null;
     [SerializeField] Questions questions = null;
     [SerializeField] Fuel fuel = null;
 
+    EffortTrackerPersistantData data = new EffortTrackerPersistantData();
     int numAnswersLeftInQuiz;
     bool isQuizStarted;
     bool allowGivingUp;
@@ -35,7 +26,7 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
 
     public static int GetNumAnswersInQuiz(bool isGauntlet)
     {
-        return isGauntlet ? GauntletAskListLength : NumAnswersPerQuiz;
+        return isGauntlet ? EffortTrackerConfig.GauntletAskListLength : EffortTrackerConfig.NumAnswersPerQuiz;
     }
 
     public bool IsDoneForToday() => data.IsDoneForToday();
@@ -44,7 +35,7 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
     {
         float answerTime = question.GetLastAnswerTime();
         data.TimeToday += answerTime + Celebrate.Duration;
-        data.Frustration += (answerTime <= Question.FastTime) ? FrustrationFast : FrustrationRight;
+        data.Frustration += (answerTime <= Question.FastTime) ? EffortTrackerConfig.FrustrationFast : EffortTrackerConfig.FrustrationRight;
         if (isQuizStarted)
         {
             --NumAnswersLeftInQuiz;
@@ -64,7 +55,7 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
         }
         bool isFrustrated = data.Frustration > 0;
 
-        if (NumAnswersLeftInQuiz <= NumAnswersLeftWhenLaunchCodeAsked && !isFrustrated)
+        if (NumAnswersLeftInQuiz <= EffortTrackerConfig.NumAnswersLeftWhenLaunchCodeAsked && !isFrustrated)
         {
             Question q = questions.GetLaunchCodeQuestion();
             if (q != null)
@@ -77,7 +68,7 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
 
     public void OnWrongAnswer(bool wasNew)
     {
-        data.Frustration += FrustrationWrong;
+        data.Frustration += EffortTrackerConfig.FrustrationWrong;
         if (isQuizStarted)
         {
             --NumAnswersLeftInQuiz;
@@ -86,7 +77,7 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
 
     public void OnGiveUp()
     {
-        data.Frustration += FrustrationGiveUp;
+        data.Frustration += EffortTrackerConfig.FrustrationGiveUp;
     }
 
     public void EndQuiz()

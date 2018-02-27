@@ -455,6 +455,7 @@
     <Compile Include="Assets\xARM\Windows\xARMHotkeys.cs" />
     <Compile Include="Assets\xARM\Windows\xARMOptionsWindow.cs" />
     <Compile Include="Assets\xARM\Windows\xARMPreviewWindow.cs" />
+    <Compile Include="Assets\Scripts\EffortTrackerConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />

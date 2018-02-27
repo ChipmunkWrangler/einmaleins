@@ -4,10 +4,6 @@ using UnityEngine;
 class EffortTrackerPersistantData
 {
     const string PrefsKey = "effortTracking";
-    const int MinFrustration = -2;
-    const int MaxFrustration = 3;
-    const int MinQuizzesPerDay = 3;
-    const float MinTimePerDay = 5 * 60.0F;
 
     int frustration;
 
@@ -16,7 +12,7 @@ class EffortTrackerPersistantData
     public int Frustration
     {
         get { return frustration; }
-        set { frustration = Mathf.Clamp(value, MinFrustration, MaxFrustration); }
+        set { frustration = Mathf.Clamp(value, EffortTrackerConfig.MinFrustration, EffortTrackerConfig.MaxFrustration); }
     }
 
     public bool IsDoneForToday()
@@ -25,7 +21,7 @@ class EffortTrackerPersistantData
         {
             Load();
         }
-        return QuizzesToday >= MinQuizzesPerDay && TimeToday >= MinTimePerDay;
+        return QuizzesToday >= EffortTrackerConfig.MinQuizzesPerDay && TimeToday >= EffortTrackerConfig.MinTimePerDay;
     }
 
     public void Save()
