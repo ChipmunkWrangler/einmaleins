@@ -1,6 +1,6 @@
 ﻿using CrazyChipmunk;
 
-// A player's save state
+/// <summary>Saved state of how much time and effort the player has invested today</summary>
 class EffortTrackerPersistentData
 {
     const string PrefsKey = "effortTracking";
