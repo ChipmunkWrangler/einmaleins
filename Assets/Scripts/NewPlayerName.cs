@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using CrazyChipmunk;
+using UnityEngine;
 using UnityEngine.UI;
 
 class NewPlayerName : MonoBehaviour
 {
-    [SerializeField] GameObject enterNamePanel = null;
+    [SerializeField] GameEvent listFullEvent = null;
     [SerializeField] TextButton[] playerButtons = null;
     [SerializeField] Button playButton = null;
     [SerializeField] Image playButtonImage = null;
@@ -55,7 +56,10 @@ class NewPlayerName : MonoBehaviour
         } // else this is initial start
         ActivatePlayButton(false);
         int numPlayers = playerNameController.Names.Length;
-        enterNamePanel.SetActive(numPlayers < playerButtons.Length);
+        if (numPlayers >= playerButtons.Length)
+        {
+            listFullEvent.Raise();
+        }
         if (numPlayers == 0)
         {
             inputField.Select();

@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3994ee7e011436d91733f3f15d02f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enterNamePanel: {fileID: 1308412198}
+  listFullEvent: {fileID: 11400000, guid: 0b7bcaf82f43b4366b59ed822a596d67, type: 2}
   playerButtons:
   - {fileID: 235820493}
   - {fileID: 1009282700}
@@ -1101,6 +1101,7 @@ GameObject:
   - component: {fileID: 1308412199}
   - component: {fileID: 1308412201}
   - component: {fileID: 1308412202}
+  - component: {fileID: 1308412200}
   m_Layer: 5
   m_Name: EnterNamePanel
   m_TagString: Untagged
@@ -1128,6 +1129,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1308412200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1308412198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad98c9d48c168417587f1d6cf8aa885c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subscribeTo: {fileID: 11400000, guid: 0b7bcaf82f43b4366b59ed822a596d67, type: 2}
+  respondWith:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1308412198}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!222 &1308412201
 CanvasRenderer:
   m_ObjectHideFlags: 0
