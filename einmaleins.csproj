@@ -399,7 +399,6 @@
     <Compile Include="Assets\Scripts\GotoScene.cs" />
     <Compile Include="Assets\Scripts\GotoStats.cs" />
     <Compile Include="Assets\Scripts\HideOnWrong.cs" />
-    <Compile Include="Assets\Scripts\InitialGameSceneLoader.cs" />
     <Compile Include="Assets\Scripts\IOnQuestionChanged.cs" />
     <Compile Include="Assets\Scripts\IOnQuizAborted.cs" />
     <Compile Include="Assets\Scripts\IOnWrongAnswer.cs" />
