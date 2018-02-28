@@ -374,6 +374,8 @@
     <Compile Include="Assets\Scripts\Celebrate.cs" />
     <Compile Include="Assets\Scripts\ChooseRocketColour.cs" />
     <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\GameEvent.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\GameEventSubscriber.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataUpdater.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataVersionModel.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdateChecker.cs" />
@@ -385,8 +387,6 @@
     <Compile Include="Assets\Scripts\FlashThrust.cs" />
     <Compile Include="Assets\Scripts\Fuel.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
-    <Compile Include="Assets\Scripts\GameEvent.cs" />
-    <Compile Include="Assets\Scripts\GameEventSubscriber.cs" />
     <Compile Include="Assets\Scripts\GetRocketColour.cs" />
     <Compile Include="Assets\Scripts\GiveUpButtonController.cs" />
     <Compile Include="Assets\Scripts\GiveUpOkButton.cs" />
