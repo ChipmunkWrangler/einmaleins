@@ -426,7 +426,7 @@
     <Compile Include="Assets\Scripts\RocketMotionSolarSystem.cs" />
     <Compile Include="Assets\Scripts\RocketPartCounter.cs" />
     <Compile Include="Assets\Scripts\RocketParts.cs" />
-    <Compile Include="Assets\Scripts\RocketPartsPersistantData.cs" />
+    <Compile Include="Assets\Scripts\RocketPartsPersistentData.cs" />
     <Compile Include="Assets\Scripts\SendSaveDataByMail.cs" />
     <Compile Include="Assets\Scripts\ShowOnRight.cs" />
     <Compile Include="Assets\Scripts\ShowSolarSystem.cs" />

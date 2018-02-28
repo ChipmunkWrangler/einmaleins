@@ -1,7 +1,7 @@
 ﻿using CrazyChipmunk;
 
 [System.Serializable]
-class RocketPartsPersistantData
+class RocketPartsPersistentData
 {
     const string PrefsKey = "rocketParts";
 

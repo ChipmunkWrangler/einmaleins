@@ -1,7 +1,7 @@
 ﻿[System.Serializable]
 class PlayerData
 {
-    readonly RocketPartsPersistantData rocketPartsData = new RocketPartsPersistantData();
+    readonly RocketPartsPersistentData rocketPartsData = new RocketPartsPersistentData();
     readonly TargetPlanetPersistentData targetPlanetData = new TargetPlanetPersistentData();
     readonly EffortTrackerPersistentData effortTrackerData = new EffortTrackerPersistentData();
     readonly StatsControllerPersistentData statsControllerData = new StatsControllerPersistentData();
