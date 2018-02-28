@@ -11,7 +11,7 @@ class NewPlayerName : MonoBehaviour
     [SerializeField] InputField inputField = null;
     [SerializeField] float buttonFadeAlpha = 0.5F;
     [SerializeField] float buttonFadeDuration = 0.1F;
-    [SerializeField] GameObject rocketPartsGameObj = null;
+    [SerializeField] InitialGameSceneLoader sceneLoader = null;
 
     string newName;
     bool buttonsAlreadyPressed;
@@ -87,18 +87,9 @@ class NewPlayerName : MonoBehaviour
         DisableButtons();
         playerNameController.Save();
         PlayerPrefs.Save();
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(IsRocketBuilt() ? "launch" : "rocketBuilding");
+        sceneLoader.LoadInitialGameScene();
     }
 
-    bool IsRocketBuilt()
-    {
-        if (PlayerNameController.IsPlayerSet())
-        {
-            rocketPartsGameObj.SetActive(true);
-            return RocketParts.Instance.IsRocketBuilt && ChooseRocketColour.HasChosenColour();
-        }
-        return false;
-    }
 
     void DisableButtons()
     {

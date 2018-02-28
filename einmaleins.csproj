@@ -447,6 +447,7 @@
     <Compile Include="Assets\Scripts\UpgradeButton.cs" />
     <Compile Include="Assets\Scripts\VersionDisplay.cs" />
     <Compile Include="Assets\Scripts\XMLSerializationHandler.cs" />
+    <Compile Include="Assets\Scripts\InitialGameSceneLoader.cs" />
     <Compile Include="Assets\ThirdParty\PreciseLocale\PreciseLocale.cs" />
     <Compile Include="Assets\ThirdParty\xARM\Classes\xARMClasses.cs" />
     <Compile Include="Assets\ThirdParty\xARM\Components\xARMDelegatesExample.cs" />
