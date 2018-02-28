@@ -9,7 +9,7 @@ namespace CrazyChipmunk
     {
         List<GameEventSubscriber> subscribers = new List<GameEventSubscriber>();
 
-        public void Notify()
+        public void Raise()
         {
             for (int i = subscribers.Count; i >= 0; --i)
             {

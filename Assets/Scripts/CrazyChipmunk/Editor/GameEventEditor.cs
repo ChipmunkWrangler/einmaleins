@@ -13,8 +13,8 @@ namespace CrazyChipmunk
             GUI.enabled = Application.isPlaying;
 
             GameEvent e = target as GameEvent;
-            if (GUILayout.Button("Test"))
-                e.Notify();
+            if (GUILayout.Button("Raise"))
+                e.Raise();
         }
     }
 }
