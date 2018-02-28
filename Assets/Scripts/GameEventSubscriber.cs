@@ -1,19 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class GameEventSubscriber : MonoBehaviour {
-    [SerializeField] GameEvent subscribeTo = null;
-    [SerializeField] UnityEvent respondWith = null;
+namespace CrazyChipmunk
+{
+    public class GameEventSubscriber : MonoBehaviour
+    {
+        [SerializeField] GameEvent subscribeTo = null;
+        [SerializeField] UnityEvent respondWith = null;
 
     public void OnGameEvent() {
-        respondWith.Invoke();
-    }
+            respondWith.Invoke();
+        }
 
-    void OnEnable() {
-        subscribeTo.Subscribe(this);
-    }
-    private void OnDisable()
-    {
-        subscribeTo.Unsubscribe(this);
+        void OnEnable()
+        {
+            subscribeTo.Subscribe(this);
+        }
+
+        private void OnDisable()
+        {
+            subscribeTo.Unsubscribe(this);
+        }
     }
 }
