@@ -365,6 +365,7 @@
     <Compile Include="Assets\I2\Localization\Scripts\Editor\PostProcessBuild_UnloadLanguages.cs" />
     <Compile Include="Assets\I2\Localization\Scripts\Editor\Tools_NGUI_to_I2.cs" />
     <Compile Include="Assets\I2\Localization\Scripts\Editor\UpgradeManager.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\Editor\GameEventEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Effects\Shared\Shaders\SurfaceShader_VC.shader" />
