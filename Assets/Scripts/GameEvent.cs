@@ -12,7 +12,7 @@ namespace CrazyChipmunk
         {
             for (int i = subscribers.Count; i >= 0; --i)
             {
-            subscribers[i].OnGameEvent();
+                subscribers[i].OnEvent();
             }
         }
 

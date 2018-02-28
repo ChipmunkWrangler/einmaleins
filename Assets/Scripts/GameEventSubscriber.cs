@@ -8,7 +8,8 @@ namespace CrazyChipmunk
         [SerializeField] GameEvent subscribeTo = null;
         [SerializeField] UnityEvent respondWith = null;
 
-    public void OnGameEvent() {
+        public void OnEvent()
+        {
             respondWith.Invoke();
         }
 
