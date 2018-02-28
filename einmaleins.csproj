@@ -286,6 +286,9 @@
     <Reference Include="UnityEditor.OSXStandalone.Extensions">
       <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.iOS_I2Loc.Xcode">
       <HintPath>Assets/I2/Localization/Scripts/Editor/Unity XCode/UnityEditor.iOS_I2Loc.Xcode.dll</HintPath>
     </Reference>
@@ -309,9 +312,6 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>/Users/rafael/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -360,7 +360,6 @@
     <Compile Include="Assets\I2\Localization\Scripts\Utils\SetLanguage.cs" />
     <Compile Include="Assets\I2\Localization\Scripts\Utils\SetLanguageDropdown.cs" />
     <Compile Include="Assets\I2\Localization\Scripts\Utils\StringObfuscator.cs" />
-    <Compile Include="Assets\PreciseLocale\PreciseLocale.cs" />
     <Compile Include="Assets\Scripts\AnswerDisplay.cs" />
     <Compile Include="Assets\Scripts\AwaitAsync\Awaiters.cs" />
     <Compile Include="Assets\Scripts\AwaitAsync\AwaitExtensions.cs" />
@@ -379,6 +378,7 @@
     <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataVersionModel.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdateChecker.cs" />
     <Compile Include="Assets\Scripts\EffortTracker.cs" />
+    <Compile Include="Assets\Scripts\EffortTrackerConfig.cs" />
     <Compile Include="Assets\Scripts\EffortTrackerPersistentData.cs" />
     <Compile Include="Assets\Scripts\EnterAnswerButtonController.cs" />
     <Compile Include="Assets\Scripts\ExceptionPrettyPrint.cs" />
@@ -445,27 +445,27 @@
     <Compile Include="Assets\Scripts\UpgradeButton.cs" />
     <Compile Include="Assets\Scripts\VersionDisplay.cs" />
     <Compile Include="Assets\Scripts\XMLSerializationHandler.cs" />
-    <Compile Include="Assets\xARM\Classes\xARMClasses.cs" />
-    <Compile Include="Assets\xARM\Components\xARMDelegatesExample.cs" />
-    <Compile Include="Assets\xARM\Components\xARMDelegateUGUI.cs" />
-    <Compile Include="Assets\xARM\Components\xARMProxy.cs" />
-    <Compile Include="Assets\xARM\Managers\xARMConfig.cs" />
-    <Compile Include="Assets\xARM\Managers\xARMManager.cs" />
-    <Compile Include="Assets\xARM\Windows\xARMGalleryWindow.cs" />
-    <Compile Include="Assets\xARM\Windows\xARMHotkeys.cs" />
-    <Compile Include="Assets\xARM\Windows\xARMOptionsWindow.cs" />
-    <Compile Include="Assets\xARM\Windows\xARMPreviewWindow.cs" />
-    <Compile Include="Assets\Scripts\EffortTrackerConfig.cs" />
+    <Compile Include="Assets\ThirdParty\PreciseLocale\PreciseLocale.cs" />
+    <Compile Include="Assets\ThirdParty\xARM\Classes\xARMClasses.cs" />
+    <Compile Include="Assets\ThirdParty\xARM\Components\xARMDelegatesExample.cs" />
+    <Compile Include="Assets\ThirdParty\xARM\Components\xARMDelegateUGUI.cs" />
+    <Compile Include="Assets\ThirdParty\xARM\Components\xARMProxy.cs" />
+    <Compile Include="Assets\ThirdParty\xARM\Managers\xARMConfig.cs" />
+    <Compile Include="Assets\ThirdParty\xARM\Managers\xARMManager.cs" />
+    <Compile Include="Assets\ThirdParty\xARM\Windows\xARMGalleryWindow.cs" />
+    <Compile Include="Assets\ThirdParty\xARM\Windows\xARMHotkeys.cs" />
+    <Compile Include="Assets\ThirdParty\xARM\Windows\xARMOptionsWindow.cs" />
+    <Compile Include="Assets\ThirdParty\xARM\Windows\xARMPreviewWindow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\ColorPickerTriangle\Shaders\VertexColor.shader" />
-    <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
+    <None Include="Assets\Effects\Shared\Shaders\SurfaceShader_VC.shader" />
     <None Include="Assets\I2\Localization\Scripts\Editor\Unity XCode\Xcode.txt" />
     <None Include="Assets\Plugins\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
     <None Include="Assets\Plugins\PlayerPrefsEditor\README.txt" />
     <None Include="Assets\Shaders\TintWithAlphaMask.shader" />
-    <None Include="Assets\xARM\_Changelog.txt" />
+    <None Include="Assets\ThirdParty\ColorPickerTriangle\Shaders\VertexColor.shader" />
+    <None Include="Assets\ThirdParty\xARM\_Changelog.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
