@@ -4,6 +4,7 @@ using UnityEngine.Assertions;
 
 namespace CrazyChipmunk
 {
+    [CreateAssetMenu(menuName = "CrazyChipmunk/GameEvent")]
     public class GameEvent : ScriptableObject
     {
         List<GameEventSubscriber> subscribers = new List<GameEventSubscriber>();
