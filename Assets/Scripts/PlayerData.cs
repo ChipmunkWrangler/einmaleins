@@ -3,7 +3,7 @@ class PlayerData
 {
     readonly RocketPartsPersistantData rocketPartsData = new RocketPartsPersistantData();
     readonly TargetPlanetPersistentData targetPlanetData = new TargetPlanetPersistentData();
-    readonly EffortTrackerPersistantData effortTrackerData = new EffortTrackerPersistantData();
+    readonly EffortTrackerPersistentData effortTrackerData = new EffortTrackerPersistentData();
     readonly StatsControllerPersistentData statsControllerData = new StatsControllerPersistentData();
     readonly QuestionsPersistentData questionsData = new QuestionsPersistentData();
 

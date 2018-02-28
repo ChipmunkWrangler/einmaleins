@@ -1,32 +1,13 @@
 ﻿using CrazyChipmunk;
-using UnityEngine;
 
-class EffortTrackerPersistantData
+// A player's save state
+class EffortTrackerPersistentData
 {
     const string PrefsKey = "effortTracking";
-    const int MinFrustration = -2;
-    const int MaxFrustration = 3;
-    const int MinQuizzesPerDay = 3;
-    const float MinTimePerDay = 5 * 60.0F;
 
-    int frustration;
-
-    public int QuizzesToday { get; set; } = -1;
+    public int Frustration { get; set; }
+    public int QuizzesToday { get; set; }
     public float TimeToday { get; set; }
-    public int Frustration
-    {
-        get { return frustration; }
-        set { frustration = Mathf.Clamp(value, MinFrustration, MaxFrustration); }
-    }
-
-    public bool IsDoneForToday()
-    {
-        if (QuizzesToday < 0)
-        {
-            Load();
-        }
-        return QuizzesToday >= MinQuizzesPerDay && TimeToday >= MinTimePerDay;
-    }
 
     public void Save()
     {

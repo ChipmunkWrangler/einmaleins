@@ -1303,6 +1303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuelCountText: {fileID: 1472541385}
+  effortTracker: {fileID: 124914249}
 --- !u!1 &93
 GameObject:
   m_ObjectHideFlags: 0
@@ -6338,7 +6339,8 @@ GameObject:
 --- !u!1 &124914248
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 1031813062199024, guid: dbc51a807d3c440c291277fa1f3bdb93,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
@@ -6355,7 +6357,8 @@ GameObject:
 --- !u!114 &124914249
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 114418931680984268, guid: dbc51a807d3c440c291277fa1f3bdb93,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 124914248}
   m_Enabled: 1
@@ -6366,10 +6369,12 @@ MonoBehaviour:
   goal: {fileID: 1045511061}
   questions: {fileID: 124914251}
   fuel: {fileID: 92}
+  config: {fileID: 11400000, guid: 16370ebc62894430bbf6e1d49fbc09ab, type: 2}
 --- !u!4 &124914250
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 4739158764657512, guid: dbc51a807d3c440c291277fa1f3bdb93,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 124914248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -6382,7 +6387,8 @@ Transform:
 --- !u!114 &124914251
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 114218604804497532, guid: dbc51a807d3c440c291277fa1f3bdb93,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 124914248}
   m_Enabled: 1
