@@ -385,6 +385,8 @@
     <Compile Include="Assets\Scripts\FlashThrust.cs" />
     <Compile Include="Assets\Scripts\Fuel.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
+    <Compile Include="Assets\Scripts\GameEvent.cs" />
+    <Compile Include="Assets\Scripts\GameEventSubscriber.cs" />
     <Compile Include="Assets\Scripts\GetRocketColour.cs" />
     <Compile Include="Assets\Scripts\GiveUpButtonController.cs" />
     <Compile Include="Assets\Scripts\GiveUpOkButton.cs" />
@@ -397,6 +399,7 @@
     <Compile Include="Assets\Scripts\GotoScene.cs" />
     <Compile Include="Assets\Scripts\GotoStats.cs" />
     <Compile Include="Assets\Scripts\HideOnWrong.cs" />
+    <Compile Include="Assets\Scripts\InitialGameSceneLoader.cs" />
     <Compile Include="Assets\Scripts\IOnQuestionChanged.cs" />
     <Compile Include="Assets\Scripts\IOnQuizAborted.cs" />
     <Compile Include="Assets\Scripts\IOnWrongAnswer.cs" />
