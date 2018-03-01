@@ -4,9 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "InitialGameSceneLoader", menuName = "TimesTables/InitialGameSceneLoader")]
 class InitialGameSceneLoader : ScriptableObject
 {
-    [SerializeField] PersistentStringReference curPlayerName = null;
-
-    RocketPartsPersistentData rocketPartsData = new RocketPartsPersistentData();
+    [SerializeField] RocketColour rocketColour = null;
+    [SerializeField] RocketPartsPersistentData rocketPartsData = null;
+    [SerializeField] StringVariable curPlayerName = null;
 
     public void LoadInitialGameScene()
     {
@@ -23,7 +23,7 @@ class InitialGameSceneLoader : ScriptableObject
         if (curPlayerName.Value != "")
         {
             rocketPartsData.Load();
-            return rocketPartsData.IsRocketBuilt && ChooseRocketColour.HasChosenColour();
+            return rocketPartsData.IsRocketBuilt && rocketColour.HasChosenColour();
         }
         return false;
     }

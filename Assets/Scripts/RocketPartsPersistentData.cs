@@ -1,9 +1,13 @@
-﻿using CrazyChipmunk;
+﻿using System;
+using CrazyChipmunk;
+using UnityEngine;
 
-[System.Serializable]
-class RocketPartsPersistentData
+[CreateAssetMenu(menuName = "TimesTables/RocketPartsPersistentData")]
+class RocketPartsPersistentData : ScriptableObject
 {
     const string PrefsKey = "rocketParts";
+
+    [SerializeField] Prefs prefs = null;
 
     public bool JustUpgraded { get; set; }
     public int NumParts { get; set; }
@@ -12,17 +16,17 @@ class RocketPartsPersistentData
 
     public void Save()
     {
-        Prefs.SetBool(PrefsKey + ":isBuilt", IsRocketBuilt);
-        Prefs.SetInt(PrefsKey + ":upgradeLevel", UpgradeLevel);
-        Prefs.SetBool(PrefsKey + ":justUpgraded", JustUpgraded);
-        Prefs.SetInt(PrefsKey, NumParts);
+        prefs.SetBool(PrefsKey + ":isBuilt", IsRocketBuilt);
+        prefs.SetInt(PrefsKey + ":upgradeLevel", UpgradeLevel);
+        prefs.SetBool(PrefsKey + ":justUpgraded", JustUpgraded);
+        prefs.SetInt(PrefsKey, NumParts);
     }
 
     public void Load()
     {
-        NumParts = Prefs.GetInt(PrefsKey, 0);
-        IsRocketBuilt = Prefs.GetBool(PrefsKey + ":isBuilt");
-        UpgradeLevel = Prefs.GetInt(PrefsKey + ":upgradeLevel", 0);
-        JustUpgraded = Prefs.GetBool(PrefsKey + ":justUpgraded");
+        NumParts = prefs.GetInt(PrefsKey, 0);
+        IsRocketBuilt = prefs.GetBool(PrefsKey + ":isBuilt");
+        UpgradeLevel = prefs.GetInt(PrefsKey + ":upgradeLevel", 0);
+        JustUpgraded = prefs.GetBool(PrefsKey + ":justUpgraded");
     }
 }

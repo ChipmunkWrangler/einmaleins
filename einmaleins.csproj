@@ -373,6 +373,7 @@
     <Compile Include="Assets\Scripts\CCInputField.cs" />
     <Compile Include="Assets\Scripts\Celebrate.cs" />
     <Compile Include="Assets\Scripts\ChooseRocketColour.cs" />
+    <Compile Include="Assets\Scripts\RocketColour.cs" />
     <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\GameEvent.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\GameEventSubscriber.cs" />

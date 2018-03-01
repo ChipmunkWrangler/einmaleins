@@ -3,13 +3,10 @@ using UnityEngine;
 
 class ChooseRocketColour : MonoBehaviour
 {
-    public static readonly string PrefsKey = "rocketColour";
-
     [SerializeField] MeshRenderer rocketMesh = null;
     [SerializeField] ColorPickerCircle colourPicker = null;
+    [SerializeField] RocketColour data = null;
     bool isPaint;
-
-    public static bool HasChosenColour() => Prefs.HasKey(PrefsKey + ".r");
 
     public void StartPaint()
     {
@@ -21,7 +18,7 @@ class ChooseRocketColour : MonoBehaviour
     {
         if (isPaint)
         {
-            Prefs.SetColor(PrefsKey, colourPicker.TheColor);
+            data.SetColour(colourPicker.TheColor);
         }
         isPaint = false;
     }

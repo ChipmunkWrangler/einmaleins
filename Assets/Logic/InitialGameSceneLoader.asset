@@ -11,4 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e59a29e7c48d4f1086a760828094cee, type: 3}
   m_Name: InitialGameSceneLoader
   m_EditorClassIdentifier: 
-  curPlayerName: {fileID: 11400000, guid: 0dbddac0463364579a271243787c2e5a, type: 2}
+  rocketColour: {fileID: 11400000, guid: f7afb808e2a6847819c32b653d2a42fb, type: 2}
+  rocketPartsData: {fileID: 11400000, guid: 40392891c60644d2fad010dd4671fb49, type: 2}
+  curPlayerName: {fileID: 11400000, guid: c0496012543614a2b8d5fbe4e29c9e9a, type: 2}

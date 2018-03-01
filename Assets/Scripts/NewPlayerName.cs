@@ -12,7 +12,7 @@ class NewPlayerName : MonoBehaviour
     [SerializeField] float buttonFadeAlpha = 0.5F;
     [SerializeField] float buttonFadeDuration = 0.1F;
     [SerializeField] InitialGameSceneLoader sceneLoader = null;
-    [SerializeField] PersistentStringReference playerName = null;
+    [SerializeField] StringVariable playerName = null;
 
     string newName;
     bool buttonsAlreadyPressed;
@@ -22,7 +22,7 @@ class NewPlayerName : MonoBehaviour
     {
         if (!buttonsAlreadyPressed)
         {
-            ActivatePlayButton(playerName.Value != "");
+            ActivatePlayButton(playerNameController.IsNameValid(name));
             newName = name;
         }
     }

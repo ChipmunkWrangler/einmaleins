@@ -1,4 +1,6 @@
-﻿[System.Serializable]
+﻿using System;
+// todo this is broken as long as the PersistentDatas are ScriptableObjects 
+[Serializable]
 class PlayerData
 {
     readonly RocketPartsPersistentData rocketPartsData = new RocketPartsPersistentData();
