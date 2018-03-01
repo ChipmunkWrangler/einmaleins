@@ -3,7 +3,7 @@ using UnityEngine;
 
 class PlayerNameController
 {
-    public static readonly string CurPlayerPrefsKey = "curPlayer";
+    public static readonly string CurPlayerPrefsKey = "curPlayer"; // todo this should be an instance of the PlayerName PlayerPrefsString, but atm static classes call IsPlayerSet.
 
     const string NamesPrefsKey = "playerNames";
 

@@ -376,8 +376,11 @@
     <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\GameEvent.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\GameEventSubscriber.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\PersistentStringReference.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\PlayerPrefsStringReference.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataUpdater.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataVersionModel.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\StringVariable.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdateChecker.cs" />
     <Compile Include="Assets\Scripts\EffortTracker.cs" />
     <Compile Include="Assets\Scripts\EffortTrackerConfig.cs" />
@@ -399,6 +402,7 @@
     <Compile Include="Assets\Scripts\GotoScene.cs" />
     <Compile Include="Assets\Scripts\GotoStats.cs" />
     <Compile Include="Assets\Scripts\HideOnWrong.cs" />
+    <Compile Include="Assets\Scripts\InitialGameSceneLoader.cs" />
     <Compile Include="Assets\Scripts\IOnQuestionChanged.cs" />
     <Compile Include="Assets\Scripts\IOnQuizAborted.cs" />
     <Compile Include="Assets\Scripts\IOnWrongAnswer.cs" />
@@ -447,7 +451,6 @@
     <Compile Include="Assets\Scripts\UpgradeButton.cs" />
     <Compile Include="Assets\Scripts\VersionDisplay.cs" />
     <Compile Include="Assets\Scripts\XMLSerializationHandler.cs" />
-    <Compile Include="Assets\Scripts\InitialGameSceneLoader.cs" />
     <Compile Include="Assets\ThirdParty\PreciseLocale\PreciseLocale.cs" />
     <Compile Include="Assets\ThirdParty\xARM\Classes\xARMClasses.cs" />
     <Compile Include="Assets\ThirdParty\xARM\Components\xARMDelegatesExample.cs" />

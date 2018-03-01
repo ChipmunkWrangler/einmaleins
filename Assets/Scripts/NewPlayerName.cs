@@ -12,6 +12,7 @@ class NewPlayerName : MonoBehaviour
     [SerializeField] float buttonFadeAlpha = 0.5F;
     [SerializeField] float buttonFadeDuration = 0.1F;
     [SerializeField] InitialGameSceneLoader sceneLoader = null;
+    [SerializeField] PersistentStringReference playerName = null;
 
     string newName;
     bool buttonsAlreadyPressed;
@@ -21,7 +22,7 @@ class NewPlayerName : MonoBehaviour
     {
         if (!buttonsAlreadyPressed)
         {
-            ActivatePlayButton(playerNameController.IsNameValid(name));
+            ActivatePlayButton(playerName.Value != "");
             newName = name;
         }
     }
@@ -30,7 +31,7 @@ class NewPlayerName : MonoBehaviour
     {
         if (!buttonsAlreadyPressed)
         {
-            playerNameController.CurName = playerNameController.Names[i];
+            playerName.Value = playerNameController.Names[i];
             Play();
         }
     }
@@ -40,7 +41,7 @@ class NewPlayerName : MonoBehaviour
         if (!buttonsAlreadyPressed)
         {
             playerNameController.AppendName(newName);
-            playerNameController.CurName = newName;
+            playerName.Value = newName;
             Play();
         }
     }
@@ -49,7 +50,7 @@ class NewPlayerName : MonoBehaviour
     {
         playerNameController = new PlayerNameController();
         playerNameController.Load();
-        if (PlayerNameController.IsPlayerSet())
+        if (playerName.Value != "")
         {
             RocketParts.Reset();
             TargetPlanet.Reset();

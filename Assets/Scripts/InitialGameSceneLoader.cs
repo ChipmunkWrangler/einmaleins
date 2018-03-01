@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using CrazyChipmunk;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "InitialGameSceneLoader", menuName = "TimesTables/InitialGameSceneLoader")]
 class InitialGameSceneLoader : ScriptableObject
 {
+    [SerializeField] PersistentStringReference curPlayerName = null;
+
     RocketPartsPersistentData rocketPartsData = new RocketPartsPersistentData();
 
     public void LoadInitialGameScene()
@@ -17,7 +20,7 @@ class InitialGameSceneLoader : ScriptableObject
 
     bool IsRocketBuilt()
     {
-        if (PlayerNameController.IsPlayerSet())
+        if (curPlayerName.Value != "")
         {
             rocketPartsData.Load();
             return rocketPartsData.IsRocketBuilt && ChooseRocketColour.HasChosenColour();

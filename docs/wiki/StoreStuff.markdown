@@ -1,6 +1,7 @@
 [MarketingExperiments](MarketingExperiments)
 #Marketing Ideas
 * Ravensburger or other partnerships: I give them a finished product, they stamp it and get 20%
+* Mention "no ads"
 * Add a refund policy for android: if you don't like it, tell me why and I will refund your money.
 * Friendly art
 * Copy F2P best practises, since they are not overdone in the kid / edugame space
