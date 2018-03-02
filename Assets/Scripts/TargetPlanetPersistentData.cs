@@ -1,18 +1,23 @@
-﻿[System.Serializable]
-class TargetPlanetPersistentData
+﻿using System;
+using UnityEngine;
+
+[Serializable]
+class TargetPlanetPersistentData : ScriptableObject
 {
+    [SerializeField] TargetPlanet targetPlanet = null;
+
     public int TargetPlanetIdx { get; set; }
     public int LastReachedPlanetIdx { get; set; }
 
     public void Load()
     {
-        TargetPlanetIdx = TargetPlanet.GetTargetPlanetIdx();
-        LastReachedPlanetIdx = TargetPlanet.GetLastReachedIdx();
+        TargetPlanetIdx = targetPlanet.GetTargetPlanetIdx();
+        LastReachedPlanetIdx = targetPlanet.GetLastReachedIdx();
     }
 
     public void Save()
     {
-        TargetPlanet.SetTargetPlanetIdx(TargetPlanetIdx);
-        TargetPlanet.SetLastReachedIdx(LastReachedPlanetIdx);
+        targetPlanet.SetTargetPlanetIdx(TargetPlanetIdx);
+        targetPlanet.SetLastReachedIdx(LastReachedPlanetIdx);
     }
 }

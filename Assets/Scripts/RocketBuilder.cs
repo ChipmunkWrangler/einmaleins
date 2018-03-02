@@ -15,6 +15,7 @@ class RocketBuilder : MonoBehaviour
     [SerializeField] GameObject launchButton = null;
     [SerializeField] GameObject rocketPartsWidget = null;
     [SerializeField] GameObject chooseColourButton = null;
+    [SerializeField] RocketColour chooseRocketColourData = null;
 
     iTween.EaseType[] easeTypes =
     {
@@ -105,7 +106,7 @@ class RocketBuilder : MonoBehaviour
     {
         exhaustParticles[RocketParts.Instance.UpgradeLevel].Stop();
         upgradeButton.Hide();
-        if (ChooseRocketColour.HasChosenColour())
+        if (chooseRocketColourData.HasChosenColour())
         {
             launchButton.SetActive(true);
         }

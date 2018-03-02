@@ -6,11 +6,12 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
     [SerializeField] Questions questions = null;
     [SerializeField] Fuel fuel = null;
     [SerializeField] EffortTrackerConfig config = null;
+    [SerializeField] EffortTrackerPersistentData data = null;
 
-    EffortTrackerPersistentData data = null;
     int numAnswersLeftInQuiz;
     bool isQuizStarted;
     bool allowGivingUp;
+    bool isDataLoaded;
 
     public int QuizzesToday { get { return Data.QuizzesToday; } set { Data.QuizzesToday = value; } }
     public float TimeToday { get { return Data.TimeToday; } set { Data.TimeToday = value; } }
@@ -37,10 +38,10 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
     {
         get
         {
-            if (data == null)
+            if (!isDataLoaded)
             {
-                data = new EffortTrackerPersistentData();
                 data.Load();
+                isDataLoaded = true;
             }
             return data;
         }

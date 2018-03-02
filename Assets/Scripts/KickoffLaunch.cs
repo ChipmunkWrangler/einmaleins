@@ -22,6 +22,7 @@ class KickoffLaunch : MonoBehaviour
     [SerializeField] Questions questions = null;
     [SerializeField] QuestionPicker questionPicker = null;
     [SerializeField] Goal goal = null;
+    [SerializeField] Prefs prefs = null;
 
     public void PreLaunch()
     {
@@ -65,9 +66,9 @@ class KickoffLaunch : MonoBehaviour
 
     void Start()
     {
-        if (Prefs.GetBool("autolaunch"))
+        if (prefs.GetBool("autolaunch"))
         {
-            Prefs.SetBool("autolaunch", false);
+            prefs.SetBool("autolaunch", false);
             PreLaunch();
         }
         else

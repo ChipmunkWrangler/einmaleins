@@ -2,6 +2,8 @@
 
 class LaunchButtonController : MonoBehaviour
 {
+    [SerializeField] TargetPlanet targetPlanet = null;
+
     readonly string[] launchButtonLabels = 
     {
         "Auf zum Mars",
@@ -24,7 +26,7 @@ class LaunchButtonController : MonoBehaviour
 
     public void ActivateLaunch()
     {
-        launchButtonText.text = I2.Loc.LocalizationManager.GetTermTranslation(launchButtonLabels[TargetPlanet.GetTargetPlanetIdx()]);
+        launchButtonText.text = I2.Loc.LocalizationManager.GetTermTranslation(launchButtonLabels[targetPlanet.GetTargetPlanetIdx()]);
         launchButton.enabled = true;
         launchButton.gameObject.SetActive(true);
     }

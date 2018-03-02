@@ -6,7 +6,7 @@ class Questions : MonoBehaviour
 {
     public static readonly int MaxNum = 10;
 
-    readonly QuestionsPersistentData data = new QuestionsPersistentData();
+    [SerializeField] QuestionsPersistentData data = null;
 
     public Question[] QuestionArray { get; private set; }
 

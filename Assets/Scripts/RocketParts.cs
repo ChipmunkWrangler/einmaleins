@@ -5,7 +5,7 @@ class RocketParts : MonoBehaviour
     const int PartsToBuildRocket = 0;
     const int PartsPerUpgrade = 11;
 
-    RocketPartsPersistentData data;
+    [SerializeField] RocketPartsPersistentData data;
 
     public static RocketParts Instance { get; private set; }
     public bool JustUpgraded
@@ -119,7 +119,6 @@ class RocketParts : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            data = new RocketPartsPersistentData();
             data.Load();
         }
         else if (Instance != this)

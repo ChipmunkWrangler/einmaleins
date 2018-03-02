@@ -2,8 +2,7 @@
 
 class StatsController : MonoBehaviour
 {
-    readonly StatsControllerPersistentData data = new StatsControllerPersistentData();
-
+    [SerializeField] StatsControllerPersistentData data = null;
     [SerializeField] StatsColumnController[] columns = null;
     [SerializeField] Questions questions = null;
 

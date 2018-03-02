@@ -1,7 +1,11 @@
 ﻿using CrazyChipmunk;
+using UnityEngine;
 
-static class TargetPlanet
+[CreateAssetMenu(menuName = "TimesTables/TargetPlanet")]
+class TargetPlanet : ScriptableObject
 {
+    [SerializeField] Prefs prefs = null;
+
     public static readonly float[] Heights =
     {
         7.8e+07F,
@@ -25,31 +29,31 @@ static class TargetPlanet
         lastReachedPlanetIdx = -2;
     }
 
-    public static int GetLastReachedIdx()
+    public int GetLastReachedIdx()
     {
         if (lastReachedPlanetIdx < -1)
         {
-            lastReachedPlanetIdx = Prefs.GetInt(LastReachedKey, -1);
+            lastReachedPlanetIdx = prefs.GetInt(LastReachedKey, -1);
         }
         return lastReachedPlanetIdx;
     }
 
-    public static void SetLastReachedIdx(int planetIdx)
+    public void SetLastReachedIdx(int planetIdx)
     {
-        Prefs.SetInt(LastReachedKey, planetIdx);
+        prefs.SetInt(LastReachedKey, planetIdx);
         lastReachedPlanetIdx = planetIdx;
     }
 
-    public static void TargetNextPlanet()
+    public void TargetNextPlanet()
     {
         SetTargetPlanetIdx(GetTargetPlanetIdx() + 1);
     }
 
-    public static int GetTargetPlanetIdx()
+    public int GetTargetPlanetIdx()
     {
         if (targetPlanetIdx < 0)
         {
-            targetPlanetIdx = Prefs.GetInt(TargetKey, 0);
+            targetPlanetIdx = prefs.GetInt(TargetKey, 0);
         }
         return targetPlanetIdx;
     }
@@ -57,9 +61,9 @@ static class TargetPlanet
     public static int GetMaxPlanetIdx() => Heights.Length - 1;
     public static float GetPlanetHeight(int i) => (i < Heights.Length) ? Heights[i] : FinalHeight;
 
-    public static void SetTargetPlanetIdx(int newIdx)
+    public void SetTargetPlanetIdx(int newIdx)
     {
-        Prefs.SetInt(TargetKey, newIdx);
+        prefs.SetInt(TargetKey, newIdx);
         targetPlanetIdx = newIdx;
     }
 }

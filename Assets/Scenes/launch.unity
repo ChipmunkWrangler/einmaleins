@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556e7b4b4515b466eb9026f8ee3f0acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
   rocketRenderer: {fileID: 134}
 --- !u!1 &18
 GameObject:
@@ -582,6 +583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e82f07b4b384cdbaf14afbaa1dbf8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetPlanet: {fileID: 11400000, guid: c8b20d20c82e2478c9801de51b53c4eb, type: 2}
   launchButton: {fileID: 359}
   launchButtonText: {fileID: 412}
 --- !u!1 &40
@@ -1304,6 +1306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuelCountText: {fileID: 1472541385}
   effortTracker: {fileID: 124914249}
+  goal: {fileID: 1045511061}
 --- !u!1 &93
 GameObject:
   m_ObjectHideFlags: 0
@@ -4462,6 +4465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3927e17dd1849afb6ae93f9014de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
   button: {fileID: 359}
 --- !u!114 &358
 MonoBehaviour:
@@ -5215,6 +5219,7 @@ MonoBehaviour:
   questions: {fileID: 124914251}
   questionPicker: {fileID: 382}
   goal: {fileID: 1045511061}
+  prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
 --- !u!114 &389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5240,6 +5245,8 @@ MonoBehaviour:
   effortTracker: {fileID: 124914249}
   questionPicker: {fileID: 382}
   goal: {fileID: 1045511061}
+  prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
+  targetPlanet: {fileID: 11400000, guid: c8b20d20c82e2478c9801de51b53c4eb, type: 2}
 --- !u!114 &390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6370,6 +6377,7 @@ MonoBehaviour:
   questions: {fileID: 124914251}
   fuel: {fileID: 92}
   config: {fileID: 11400000, guid: 16370ebc62894430bbf6e1d49fbc09ab, type: 2}
+  data: {fileID: 11400000, guid: 230a5e81a03624db7a769727a49bcef6, type: 2}
 --- !u!4 &124914250
 Transform:
   m_ObjectHideFlags: 0
@@ -6396,6 +6404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b6cc6d7bd74c2a983bb2420b573f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: b493a8486f4f6467a823b8ad3e8b96f8, type: 2}
 --- !u!1 &153225807
 GameObject:
   m_ObjectHideFlags: 0
@@ -8620,6 +8629,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effortTracker: {fileID: 124914249}
+  chooseRocketColourData: {fileID: 11400000, guid: f7afb808e2a6847819c32b653d2a42fb,
+    type: 2}
+  targetPlanet: {fileID: 11400000, guid: c8b20d20c82e2478c9801de51b53c4eb, type: 2}
 --- !u!4 &1045511062
 Transform:
   m_ObjectHideFlags: 0

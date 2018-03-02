@@ -40,6 +40,8 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
     [SerializeField] EffortTracker effortTracker = null;
     [SerializeField] QuestionPicker questionPicker = null;
     [SerializeField] Goal goal = null;
+    [SerializeField] Prefs prefs = null;
+    [SerializeField] TargetPlanet targetPlanet = null;
 
     float baseThrust;
     float gravity;
@@ -102,7 +104,7 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
     }
 
     float CalcBaseThrust(bool isGauntlet) => GetTargetHeight() / (effortTracker.GetNumAnswersInQuiz(isGauntlet) + 1); // +1 because there is an initial launch thrust
-    bool IsTargetPlanetReached() => curGoal != Goal.CurGoal.Won && Height > TargetPlanet.GetPlanetHeight(TargetPlanet.GetTargetPlanetIdx());
+    bool IsTargetPlanetReached() => curGoal != Goal.CurGoal.Won && Height > TargetPlanet.GetPlanetHeight(targetPlanet.GetTargetPlanetIdx());
     float GetHeightIncrease(float timeRequired) => baseThrust * GetThrustFactor(timeRequired);
 
     void OnCorrectAnswer(Question question, bool isNewlyMastered)
@@ -130,7 +132,7 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
 
     void InitRecordHeight()
     {
-        recordHeight = Prefs.GetFloat(RecordPrefsKey, 0);
+        recordHeight = prefs.GetFloat(RecordPrefsKey, 0);
     }
 
     void InitOldRecordLine(bool enable)
@@ -186,9 +188,9 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
 
     void ReachPlanet()
     {
-        int planetReachedIdx = TargetPlanet.GetTargetPlanetIdx();
-        TargetPlanet.SetLastReachedIdx(planetReachedIdx);
-        TargetPlanet.TargetNextPlanet();
+        int planetReachedIdx = targetPlanet.GetTargetPlanetIdx();
+        targetPlanet.SetLastReachedIdx(planetReachedIdx);
+        targetPlanet.TargetNextPlanet();
         if (planetReachedIdx == TargetPlanet.GetMaxPlanetIdx())
         {
             RocketParts.Instance.UnlockFinalUpgrade();
@@ -259,7 +261,7 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
         if (dist > record)
         {
             record = dist;
-            Prefs.SetFloat(key, record);
+            prefs.SetFloat(key, record);
             if (checkForRecord)
             {
                 checkForRecord = false;

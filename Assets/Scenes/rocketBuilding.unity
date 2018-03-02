@@ -950,6 +950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketMesh: {fileID: 1842585747}
   colourPicker: {fileID: 1263629864}
+  data: {fileID: 11400000, guid: f7afb808e2a6847819c32b653d2a42fb, type: 2}
 --- !u!4 &1077023826
 Transform:
   m_ObjectHideFlags: 0
@@ -1769,6 +1770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3927e17dd1849afb6ae93f9014de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
   button: {fileID: 1543442574}
 --- !u!114 &1543442573
 MonoBehaviour:
@@ -2479,6 +2481,8 @@ MonoBehaviour:
   launchButton: {fileID: 1543442568}
   rocketPartsWidget: {fileID: 1238403552}
   chooseColourButton: {fileID: 205790327}
+  chooseRocketColourData: {fileID: 11400000, guid: f7afb808e2a6847819c32b653d2a42fb,
+    type: 2}
 --- !u!114 &1842585751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2490,6 +2494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556e7b4b4515b466eb9026f8ee3f0acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
   rocketRenderer: {fileID: 1842585747}
 --- !u!1 &1894804566
 GameObject:

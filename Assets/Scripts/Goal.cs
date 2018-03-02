@@ -5,6 +5,8 @@ using UnityEngine.UI;
 class Goal : MonoBehaviour
 {
     [SerializeField] EffortTracker effortTracker = null;
+    [SerializeField] RocketColour chooseRocketColourData = null;
+    [SerializeField] TargetPlanet targetPlanet = null;
 
     public enum CurGoal
     {
@@ -17,9 +19,9 @@ class Goal : MonoBehaviour
 
     public static bool IsGivingUpAllowed(CurGoal curGoal) => curGoal == Goal.CurGoal.FlyToPlanet;
 
-    public static bool IsReadyForGauntlet()
+    public bool IsReadyForGauntlet()
     {
-        return (TargetPlanet.GetTargetPlanetIdx() == TargetPlanet.GetMaxPlanetIdx()) &&
+        return (targetPlanet.GetTargetPlanetIdx() == TargetPlanet.GetMaxPlanetIdx()) &&
             RocketParts.Instance.UpgradeLevel == RocketParts.Instance.MaxUpgradeLevel - 1;
     }
 
@@ -46,8 +48,8 @@ class Goal : MonoBehaviour
         return curGoal;
     }
 
-    static bool ShouldUpgrade() => (RocketParts.Instance.HasEnoughPartsToUpgrade || !ChooseRocketColour.HasChosenColour()) && !RocketParts.Instance.JustUpgraded;
-    static bool IsLeavingSolarSystem() => TargetPlanet.GetTargetPlanetIdx() > TargetPlanet.GetMaxPlanetIdx();
+    bool ShouldUpgrade() => (RocketParts.Instance.HasEnoughPartsToUpgrade || !chooseRocketColourData.HasChosenColour()) && !RocketParts.Instance.JustUpgraded;
+    bool IsLeavingSolarSystem() => targetPlanet.GetTargetPlanetIdx() > TargetPlanet.GetMaxPlanetIdx();
 
     bool IsDoneForToday() => effortTracker.IsDoneForToday() && !RocketParts.Instance.JustUpgraded;
 }

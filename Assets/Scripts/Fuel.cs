@@ -5,6 +5,7 @@ class Fuel : MonoBehaviour
 {
     [SerializeField] UnityEngine.UI.Text fuelCountText = null;
     [SerializeField] EffortTracker effortTracker = null;
+    [SerializeField] Goal goal = null;
 
     public void UpdateFuelDisplay(int numAnswersLeftInQuiz)
     {
@@ -14,6 +15,6 @@ class Fuel : MonoBehaviour
 
     void Start()
     {
-        UpdateFuelDisplay(effortTracker.GetNumAnswersInQuiz(Goal.IsReadyForGauntlet()));
+        UpdateFuelDisplay(effortTracker.GetNumAnswersInQuiz(goal.IsReadyForGauntlet()));
     }
 }
