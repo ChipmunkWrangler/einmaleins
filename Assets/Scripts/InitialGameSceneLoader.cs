@@ -6,7 +6,7 @@ class InitialGameSceneLoader : ScriptableObject
 {
     [SerializeField] RocketColour rocketColour = null;
     [SerializeField] RocketPartsPersistentData rocketPartsData = null;
-    [SerializeField] StringReadOnly curPlayerName = null;
+    [SerializeField] ReadOnlyString curPlayerName = null;
 
     public void LoadInitialGameScene()
     {

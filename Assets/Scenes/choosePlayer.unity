@@ -332,7 +332,7 @@ MonoBehaviour:
   buttonFadeAlpha: 0
   buttonFadeDuration: 0.1
   sceneLoader: {fileID: 11400000, guid: 6cf60aae7c9594fe5982baf1a10d101b, type: 2}
-  playerName: {fileID: 11400000, guid: c0496012543614a2b8d5fbe4e29c9e9a, type: 2}
+  playerName: {fileID: 11400000, guid: 075884fb41b5f418d82c22a1b1b4795a, type: 2}
 --- !u!4 &230957309
 Transform:
   m_ObjectHideFlags: 0

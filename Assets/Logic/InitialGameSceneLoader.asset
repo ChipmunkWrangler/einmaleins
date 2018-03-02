@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketColour: {fileID: 11400000, guid: f7afb808e2a6847819c32b653d2a42fb, type: 2}
   rocketPartsData: {fileID: 11400000, guid: 40392891c60644d2fad010dd4671fb49, type: 2}
-  curPlayerName: {fileID: 11400000, guid: c0496012543614a2b8d5fbe4e29c9e9a, type: 2}
+  curPlayerName: {fileID: 11400000, guid: 075884fb41b5f418d82c22a1b1b4795a, type: 2}

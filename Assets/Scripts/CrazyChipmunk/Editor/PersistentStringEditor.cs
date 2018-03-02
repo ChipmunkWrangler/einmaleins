@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CrazyChipmunk
 {
-    [CustomPropertyDrawer(typeof(PersistentStringReference))]
+    [CustomPropertyDrawer(typeof(PersistentString))]
     public class StringReferenceDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)

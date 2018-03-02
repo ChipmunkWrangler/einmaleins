@@ -5,7 +5,7 @@ namespace CrazyChipmunk
     [CreateAssetMenu(menuName = "CrazyChipmunk/Prefs")]
     public class Prefs : ScriptableObject
     {
-        [SerializeField] StringReadOnly playerName = null;
+        [SerializeField] ReadOnlyString playerName = null;
 
         public bool HasKey(string key) => PlayerPrefs.HasKey(GetKey(key));
 

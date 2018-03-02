@@ -2,7 +2,7 @@
 
 namespace CrazyChipmunk
 {
-    public class StringReadOnly : ScriptableObject
+    public class ReadOnlyString : ScriptableObject
     {
         [SerializeField] protected string val = null;
 
@@ -11,7 +11,7 @@ namespace CrazyChipmunk
             get { return val; }
         }
 
-        public static implicit operator string(StringReadOnly reference)
+        public static implicit operator string(ReadOnlyString reference)
         {
             return reference.Value;
         }

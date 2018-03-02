@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c5ab775fdf542218eec61e8f2fce39, type: 3}
   m_Name: Prefs
   m_EditorClassIdentifier: 
-  PlayerName: {fileID: 11400000, guid: c0496012543614a2b8d5fbe4e29c9e9a, type: 2}
+  playerName: {fileID: 11400000, guid: 075884fb41b5f418d82c22a1b1b4795a, type: 2}

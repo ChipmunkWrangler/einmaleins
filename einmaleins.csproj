@@ -376,14 +376,14 @@
     <Compile Include="Assets\Scripts\ColorPickerCircle.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\GameEvent.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\GameEventSubscriber.cs" />
-    <Compile Include="Assets\Scripts\CrazyChipmunk\PersistentStringReference.cs" />
-    <Compile Include="Assets\Scripts\CrazyChipmunk\PlayerPrefsStringReference.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\PersistentString.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\PlayerPrefsString.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataUpdater.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\SavedDataVersionModel.cs" />
-    <Compile Include="Assets\Scripts\CrazyChipmunk\StringReadOnly.cs">
+    <Compile Include="Assets\Scripts\CrazyChipmunk\ReadOnlyString.cs">
       <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Assets\Scripts\CrazyChipmunk\StringVariable.cs" />
+    <Compile Include="Assets\Scripts\CrazyChipmunk\VariableString.cs" />
     <Compile Include="Assets\Scripts\CrazyChipmunk\VersionUpdateChecker.cs" />
     <Compile Include="Assets\Scripts\EffortTracker.cs" />
     <Compile Include="Assets\Scripts\EffortTrackerConfig.cs" />

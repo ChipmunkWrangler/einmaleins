@@ -4,11 +4,11 @@ namespace CrazyChipmunk
 {
     // can't be generic or an interface, otherwise fields of this type can't be assigned in the editor
     [CreateAssetMenu(menuName = "CrazyChipmunk/String")]
-    public class StringVariable : StringReadOnly
+    public class VariableString : ReadOnlyString
     {
-        public new string Value
+        public new virtual string Value
         {
-            get { return val; }
+            get { return base.Value; }
             set { val = value; }
         }
     }
