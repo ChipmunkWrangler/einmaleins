@@ -13,10 +13,10 @@ class NewPlayerName : MonoBehaviour
     [SerializeField] float buttonFadeDuration = 0.1F;
     [SerializeField] InitialGameSceneLoader sceneLoader = null;
     [SerializeField] VariableString playerName = null;
+    [SerializeField] PlayerNameController playerNameController;
 
     string newName;
     bool buttonsAlreadyPressed;
-    PlayerNameController playerNameController;
 
     public void OnPlayerNameChanged(string name)
     {
@@ -48,7 +48,6 @@ class NewPlayerName : MonoBehaviour
 
     void Start()
     {
-        playerNameController = new PlayerNameController();
         playerNameController.Load();
         if (playerName != "")
         {

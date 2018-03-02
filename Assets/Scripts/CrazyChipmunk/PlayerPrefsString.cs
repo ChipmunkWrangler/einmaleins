@@ -11,14 +11,15 @@ namespace CrazyChipmunk
     {
         [SerializeField] string uniqueKey = Guid.NewGuid().ToString();
 
-        override protected string Load()
+        protected override string Load()
         {
             return PlayerPrefs.GetString(uniqueKey);
         }
 
-        override protected void Save(string val)
+        protected override void Save(string value)
         {
-            PlayerPrefs.SetString(uniqueKey, val);
+            PlayerPrefs.SetString(uniqueKey, value);
+            PlayerPrefs.Save();
         }
     }
 }

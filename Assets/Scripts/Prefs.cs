@@ -184,7 +184,7 @@ namespace CrazyChipmunk
 
         string GetKey(string key)
         {
-            UnityEngine.Assertions.Assert.IsTrue(PlayerNameController.IsPlayerSet());
+            UnityEngine.Assertions.Assert.IsTrue(playerName?.Get()?.Length > 0);
             return playerName + ":" + key;
         }
 

@@ -333,6 +333,8 @@ MonoBehaviour:
   buttonFadeDuration: 0.1
   sceneLoader: {fileID: 11400000, guid: 6cf60aae7c9594fe5982baf1a10d101b, type: 2}
   playerName: {fileID: 11400000, guid: 075884fb41b5f418d82c22a1b1b4795a, type: 2}
+  playerNameController: {fileID: 11400000, guid: b6afd5a00406944dca750a37bb432164,
+    type: 2}
 --- !u!4 &230957309
 Transform:
   m_ObjectHideFlags: 0

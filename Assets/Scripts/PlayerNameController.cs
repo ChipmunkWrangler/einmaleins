@@ -1,29 +1,26 @@
 ﻿using System.Linq;
 using UnityEngine;
+using CrazyChipmunk;
 
-class PlayerNameController
+[CreateAssetMenu(menuName = "TimesTables/PlayerNameController")]
+class PlayerNameController : ScriptableObject
 {
-    static readonly string CurPlayerPrefsKey = "curPlayer"; // todo this should be an instance of the PlayerName PlayerPrefsString, but atm static classes call IsPlayerSet.
+    [SerializeField] VariableString playerName = null;
 
     const string NamesPrefsKey = "playerNames";
 
-    public string CurName { get; set; }
     public string[] Names { get; private set; }
-
-    public static bool IsPlayerSet() => PlayerPrefs.HasKey(CurPlayerPrefsKey) && PlayerPrefs.GetString(CurPlayerPrefsKey).Length > 0;
 
     public bool IsNameValid(string playerName) => playerName.Length > 0 && !Names.Contains(playerName);
 
     public void Load()
     {
         Names = PlayerPrefsArray.GetStringArray(NamesPrefsKey);
-        CurName = IsPlayerSet() ? PlayerPrefs.GetString(CurPlayerPrefsKey) : "";
     }
 
     public void Save()
     {
         PlayerPrefsArray.SetStringArray(NamesPrefsKey, Names);
-        PlayerPrefs.SetString(CurPlayerPrefsKey, CurName);
     }
 
     public void AppendName(string name)
@@ -47,6 +44,6 @@ class PlayerNameController
         {
             Names = new string[0];
         }
-        CurName = "";
+        playerName.Value = ""; // todo there should ideally be only one writer for PlayerName, and it is NewPlayerName
     }
 }

@@ -6,14 +6,19 @@ namespace CrazyChipmunk
     {
         [SerializeField] protected string val = null;
 
-        public string Value
+        public virtual string Get()
         {
-            get { return val; }
+            return val;
         }
 
         public static implicit operator string(ReadOnlyString reference)
         {
-            return reference.Value;
+            return reference.Get();
+        }
+
+        protected virtual void Set(string value) 
+        {
+            val = value;
         }
     }
 }

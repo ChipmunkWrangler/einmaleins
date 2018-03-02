@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b6cc6d7bd74c2a983bb2420b573f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 0}
 --- !u!4 &222184331
 Transform:
   m_ObjectHideFlags: 0
@@ -223,6 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questions: {fileID: 222184330}
+  playerName: {fileID: 11400000, guid: 075884fb41b5f418d82c22a1b1b4795a, type: 2}
+  playerNameController: {fileID: 11400000, guid: b6afd5a00406944dca750a37bb432164,
+    type: 2}
 --- !u!4 &925472480
 Transform:
   m_ObjectHideFlags: 0
@@ -457,16 +461,10 @@ Prefab:
         type: 2}
       propertyPath: versionModel
       value: 
-      objectReference: {fileID: 1679074403}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5dc03da27ffea4f74a094a520a8a53bc, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1679074403 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114297224793258322, guid: 5dc03da27ffea4f74a094a520a8a53bc,
-    type: 2}
-  m_PrefabInternal: {fileID: 1679074401}
-  m_Script: {fileID: 11500000, guid: 3b4d70b516b2c4a10a4ae0f8a8754aa4, type: 3}
 --- !u!1 &1880853326
 GameObject:
   m_ObjectHideFlags: 0

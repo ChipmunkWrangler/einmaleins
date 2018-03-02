@@ -4,6 +4,8 @@ using UnityEngine;
 class TimesTablesSavedDataUpdater : SavedDataUpdater
 {
     [SerializeField] Questions questions = null;
+    [SerializeField] VariableString playerName = null;
+    [SerializeField] PlayerNameController playerNameController = null;
 
     public override void UpdateData(string fromVersion, string toVersion)
     {
@@ -35,12 +37,11 @@ class TimesTablesSavedDataUpdater : SavedDataUpdater
 
     void UpdateFrom_0_1_11_To_0_1_14()
     {
-        var playerNameController = new PlayerNameController();
         playerNameController.Load();
-        string oldName = playerNameController.CurName;
-        foreach (string playerName in playerNameController.Names)
+        string oldName = playerName;
+        foreach (string name in playerNameController.Names)
         {
-            playerNameController.CurName = playerName;
+            playerName.Value = name;
             playerNameController.Save();
             questions.gameObject.SetActive(true); // load question list
             foreach (Question question in questions.QuestionArray)
@@ -50,21 +51,20 @@ class TimesTablesSavedDataUpdater : SavedDataUpdater
             questions.Save();
             questions.gameObject.SetActive(false);
         }
-        playerNameController.CurName = oldName;
+        playerName.Value = oldName;
         playerNameController.Save();
     }
 
     void UpdateFrom_0_1_8_To_0_1_11()
     {
         const float OldAnswerTimeInitial = 3F + 0.01F;
-        var playerNameController = new PlayerNameController();
         playerNameController.Load();
-        string oldName = playerNameController.CurName;
-        foreach (string playerName in playerNameController.Names)
+        string oldName = playerName;
+        foreach (string name in playerNameController.Names)
         {
-            playerNameController.CurName = playerName;
+            playerName.Value = name;
             playerNameController.Save();
-            Debug.Log("Updating question for " + playerName);
+            Debug.Log("Updating question for " + name);
             questions.gameObject.SetActive(true); // load question list
             foreach (Question question in questions.QuestionArray)
             {
@@ -73,7 +73,7 @@ class TimesTablesSavedDataUpdater : SavedDataUpdater
             questions.Save();
             questions.gameObject.SetActive(false);
         }
-        playerNameController.CurName = oldName;
+        playerName.Value = oldName;
         playerNameController.Save();
     }
 }

@@ -7,26 +7,29 @@ namespace CrazyChipmunk
     {
         bool initialized;
 
-        public override string Value
+        public override string Get()
         {
-            get
+            if (!initialized)
             {
-                if (!initialized)
-                {
-                    base.Value = Load();
-                    initialized = true;
-                }
-                return base.Value;
-            }
-            set
-            {
-                base.Value = value;
-                Save(value);
+                val = Load();
                 initialized = true;
             }
+            return base.Get();
         }
 
-        abstract protected string Load();
-        abstract protected void Save(string val);
+        protected override void Set(string value)
+        {
+            base.Set(value);
+            Save(value);
+            initialized = true;
+        }
+
+        protected abstract string Load();
+        protected abstract void Save(string value);
+
+        void OnEnable()
+        {
+            initialized = false;
+        }
     }
 }

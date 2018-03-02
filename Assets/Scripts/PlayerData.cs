@@ -13,11 +13,8 @@ class PlayerData
 
     public void Load(string name)
     {
-        if (PlayerNameController.IsPlayerSet())
-        {
-            RocketParts.Reset();
-            TargetPlanet.Reset();
-        }
+        RocketParts.Reset();
+        TargetPlanet.Reset();
         PlayerName = name;
         rocketPartsData.Load();
         effortTrackerData.Load();
