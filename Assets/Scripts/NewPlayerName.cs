@@ -50,7 +50,7 @@ class NewPlayerName : MonoBehaviour
     {
         playerNameController = new PlayerNameController();
         playerNameController.Load();
-        if (playerName.Value != "")
+        if (playerName != "")
         {
             RocketParts.Reset();
             TargetPlanet.Reset();

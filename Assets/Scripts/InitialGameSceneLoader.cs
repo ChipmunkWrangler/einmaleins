@@ -6,7 +6,7 @@ class InitialGameSceneLoader : ScriptableObject
 {
     [SerializeField] RocketColour rocketColour = null;
     [SerializeField] RocketPartsPersistentData rocketPartsData = null;
-    [SerializeField] StringVariable curPlayerName = null;
+    [SerializeField] StringReadOnly curPlayerName = null;
 
     public void LoadInitialGameScene()
     {
@@ -20,7 +20,7 @@ class InitialGameSceneLoader : ScriptableObject
 
     bool IsRocketBuilt()
     {
-        if (curPlayerName.Value != "")
+        if (curPlayerName != "")
         {
             rocketPartsData.Load();
             return rocketPartsData.IsRocketBuilt && rocketColour.HasChosenColour();

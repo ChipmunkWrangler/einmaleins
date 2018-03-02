@@ -5,7 +5,7 @@ namespace CrazyChipmunk
     [CreateAssetMenu(menuName = "CrazyChipmunk/Prefs")]
     public class Prefs : ScriptableObject
     {
-        [SerializeField] StringVariable PlayerName = null;
+        [SerializeField] StringReadOnly playerName = null;
 
         public bool HasKey(string key) => PlayerPrefs.HasKey(GetKey(key));
 
@@ -185,7 +185,7 @@ namespace CrazyChipmunk
         string GetKey(string key)
         {
             UnityEngine.Assertions.Assert.IsTrue(PlayerNameController.IsPlayerSet());
-            return PlayerName.Value + ":" + key;
+            return playerName + ":" + key;
         }
 
         string GetLengthKey(string key)
