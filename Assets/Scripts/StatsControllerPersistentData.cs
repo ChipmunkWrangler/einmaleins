@@ -1,8 +1,12 @@
 ﻿using CrazyChipmunk;
+using UnityEngine;
 
-class StatsControllerPersistentData
+[CreateAssetMenu(menuName = "TimesTables/StatsControllerData")]
+class StatsControllerPersistentData : ScriptableObject
 {
     const string PrefsKey = "seenMastered";
+
+    [SerializeField] Prefs prefs = null;
 
     public bool[][] SeenMastered { get; set; }
 
@@ -12,7 +16,7 @@ class StatsControllerPersistentData
         for (int i = 0; i < numMax; ++i)
         {
             string key = PrefsKey + ":" + i;
-            SeenMastered[i] = Prefs.GetBoolArray(key);
+            SeenMastered[i] = prefs.GetBoolArray(key);
             if (SeenMastered[i].Length == 0)
             {
                 SeenMastered[i] = new bool[numMax];
@@ -24,7 +28,7 @@ class StatsControllerPersistentData
     {
         for (int i = 0; i < numMax; ++i)
         {
-            Prefs.SetBoolArray(PrefsKey + ":" + i, SeenMastered[i]);
+            prefs.SetBoolArray(PrefsKey + ":" + i, SeenMastered[i]);
         }
     }
 }
