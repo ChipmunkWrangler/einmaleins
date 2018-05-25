@@ -461,10 +461,16 @@ Prefab:
         type: 2}
       propertyPath: versionModel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1679074402}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5dc03da27ffea4f74a094a520a8a53bc, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1679074402 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114221680428666552, guid: 5dc03da27ffea4f74a094a520a8a53bc,
+    type: 2}
+  m_PrefabInternal: {fileID: 1679074401}
+  m_Script: {fileID: 11500000, guid: 3b4d70b516b2c4a10a4ae0f8a8754aa4, type: 3}
 --- !u!1 &1880853326
 GameObject:
   m_ObjectHideFlags: 0

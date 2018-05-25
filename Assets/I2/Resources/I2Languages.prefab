@@ -593,6 +593,16 @@ MonoBehaviour:
     - Data loaded.
     - Daten geladen.
     Flags: 0000
+  - Term: divisionSlash
+    TermType: 0
+    Description: 
+    Languages:
+    - 
+    - 
+    Languages_Touch:
+    - "\xF7"
+    - "\u2236"
+    Flags: 0000
   mLanguages:
   - Name: English
     Code: en

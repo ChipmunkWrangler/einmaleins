@@ -13,7 +13,7 @@ class NewPlayerName : MonoBehaviour
     [SerializeField] float buttonFadeDuration = 0.1F;
     [SerializeField] InitialGameSceneLoader sceneLoader = null;
     [SerializeField] VariableString playerName = null;
-    [SerializeField] PlayerNameController playerNameController;
+    [SerializeField] PlayerNameController playerNameController = null;
 
     string newName;
     bool buttonsAlreadyPressed;

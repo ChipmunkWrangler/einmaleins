@@ -2,9 +2,9 @@
 using System.Linq;
 using UnityEngine;
 
-class Question
+abstract class Question
 {
-    public const float FastTime = 4.0F;
+    public const float FastTime = 6.0F;
 
     const float AnswerTimeMax = 60.0F;
     const float WrongAnswerTimePenalty = 1F;
@@ -22,7 +22,9 @@ class Question
     public int B { get; private set; }
     public bool WasAnsweredInThisQuiz { get; private set; }
 
-    public int GetAnswer() => A * B;
+    public abstract int GetAnswer();
+    public abstract string GetLocalizedString(); // the question to be posed to the user
+
     public bool WasWrong() => data.WasWrong;
     public bool IsNew() => data.IsNew;
     public bool GaveUp() => data.GaveUp;
@@ -98,7 +100,7 @@ class Question
 
     public override string ToString()
     {
-        string s = data.Idx + " is " + A + " * " + B + " : asMastered = " + data.WasMastered + " wasWrong = " + data.WasWrong + " isNew = " + data.IsNew + " gaveUp " + data.GaveUp + " averageTime " + GetAverageAnswerTime() + " times = ";
+        string s = data.Idx + " is '" + GetLocalizedString() + "' : asMastered = " + data.WasMastered + " wasWrong = " + data.WasWrong + " isNew = " + data.IsNew + " gaveUp " + data.GaveUp + " averageTime " + GetAverageAnswerTime() + " times = ";
         foreach (var time in data.AnswerTimes)
         {
             s += time + " ";

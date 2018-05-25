@@ -7,7 +7,7 @@ class PlayerData
     readonly TargetPlanetPersistentData targetPlanetData = new TargetPlanetPersistentData();
     readonly EffortTrackerPersistentData effortTrackerData = new EffortTrackerPersistentData();
     readonly StatsControllerPersistentData statsControllerData = new StatsControllerPersistentData();
-    readonly QuestionsPersistentData questionsData = new QuestionsPersistentData();
+    readonly QuestionsPersistentData questionsData = new QuestionsPersistentData(); 
 
     public string PlayerName { get; set; }
 
@@ -18,16 +18,16 @@ class PlayerData
         PlayerName = name;
         rocketPartsData.Load();
         effortTrackerData.Load();
-        statsControllerData.Load(Questions.MaxNum);
+        statsControllerData.Load(QuestionGenerator.MaxMultiplicand);
         targetPlanetData.Load();
-        questionsData.Load();
+        //questionsData.Load(); // TODO Need to know what kind of Questions
     }
 
     public void Save()
     {
         rocketPartsData.Save();
         effortTrackerData.Save();
-        statsControllerData.Save(Questions.MaxNum);
+        statsControllerData.Save(QuestionGenerator.MaxMultiplicand);
         targetPlanetData.Save();
         questionsData.Save();
     }

@@ -4,13 +4,12 @@ using UnityEngine;
 
 class Questions : MonoBehaviour
 {
-    public static readonly int MaxNum = 10;
-
     [SerializeField] QuestionsPersistentData data = null;
+    readonly QuestionGenerator questionGenerator = new DivisionQuestionGenerator();
 
     public Question[] QuestionArray { get; private set; }
 
-    public static int GetNumQuestions() => MaxNum * (MaxNum + 1) / 2;
+    public int GetNumQuestions() => questionGenerator.GetNumQuestions();
     public Question GetGaveUpQuestion() => QuestionArray.FirstOrDefault(question => question.GaveUp());
     public Question GetLaunchCodeQuestion() => QuestionArray.FirstOrDefault(question => question.IsLaunchCode);
 
@@ -56,24 +55,14 @@ class Questions : MonoBehaviour
         data.Save();
     }
 
-    public Question[] CreateQuestions()
+    Question[] CreateQuestions()
     {
-        var qs = new Question[GetNumQuestions()];
-        int idx = 0;
-        for (int a = 1; a <= MaxNum; ++a)
-        {
-            for (int b = a; b <= MaxNum; ++b)
-            {
-                qs[idx] = new Question(a, b, data.QuestionData[idx]);
-                ++idx;
-            }
-        }
-        return qs;
+        return questionGenerator.Generate(data);
     }
 
     void OnEnable()
     {
-        data.Load();
+        data.Load(questionGenerator.GetNumQuestions());
         QuestionArray = CreateQuestions();
     }
 }

@@ -33,7 +33,7 @@ class StatsColumnController : MonoBehaviour
 
     public void DoneSettingMasteryLevels()
     {
-        if (numMastered >= Questions.MaxNum)
+        if (numMastered >= QuestionGenerator.MaxMultiplicand)
         {
             UnityEngine.UI.Text text = header.gameObject.GetComponentInChildren<UnityEngine.UI.Text>();
             UnityEngine.UI.Text rowHeaderText = rowHeader.gameObject.GetComponentInChildren<UnityEngine.UI.Text>();

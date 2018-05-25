@@ -3,7 +3,8 @@
 class RocketParts : MonoBehaviour
 {
     const int PartsToBuildRocket = 0;
-    const int PartsPerUpgrade = 11;
+    const int PartsPerUpgrade = 20;
+    const int numQuestionsToFullUpgrades = 100;
 
     [SerializeField] RocketPartsPersistentData data = null;
 
@@ -80,8 +81,8 @@ class RocketParts : MonoBehaviour
     {
         get
         {
-            UnityEngine.Assertions.Assert.AreEqual(Questions.GetNumQuestions() % PartsPerUpgrade, 0);
-            return 1 + (Questions.GetNumQuestions() / PartsPerUpgrade); // +1 for final bonus upgrade
+            UnityEngine.Assertions.Assert.AreEqual(numQuestionsToFullUpgrades % PartsPerUpgrade, 0);
+            return 1 + (numQuestionsToFullUpgrades / PartsPerUpgrade); // +1 for final bonus upgrade
         }
     }
 
