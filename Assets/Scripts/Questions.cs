@@ -9,7 +9,6 @@ class Questions : MonoBehaviour
 
     public Question[] QuestionArray { get; private set; }
 
-    public int GetNumQuestions() => questionGenerator.GetNumQuestions();
     public Question GetGaveUpQuestion() => QuestionArray.FirstOrDefault(question => question.GaveUp());
     public Question GetLaunchCodeQuestion() => QuestionArray.FirstOrDefault(question => question.IsLaunchCode);
 
