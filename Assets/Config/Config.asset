@@ -20,5 +20,5 @@ MonoBehaviour:
   FrustrationRight: -1
   FrustrationFast: -2
   NumAnswersPerQuiz: 7
-  GauntletAskListLength: 55
+  GauntletAskListLength: 100
   NumAnswersLeftWhenLaunchCodeAsked: 3
