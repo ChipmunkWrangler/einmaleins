@@ -47,7 +47,7 @@ namespace I2.Loc
 				mKeyToExplore = GUILayout.TextField(mKeyToExplore, EditorStyles.toolbarTextField, GUILayout.ExpandWidth(true));
 				if (GUILayout.Button("Create", "toolbarbutton", GUILayout.Width(60)))
 				{
-					LanguageSource.ValidateFullTerm( ref mKeyToExplore );
+					LanguageSourceData.ValidateFullTerm( ref mKeyToExplore );
 					EditorApplication.update += ReplaceSelectedTerms;
 				}
 			GUILayout.EndHorizontal();
@@ -109,7 +109,6 @@ namespace I2.Loc
 					termData.TermType 		= oldTerm.TermType;
 					termData.Description	= oldTerm.Description;
 					System.Array.Copy(oldTerm.Languages, termData.Languages, oldTerm.Languages.Length);
-					System.Array.Copy(oldTerm.Languages_Touch, termData.Languages_Touch, oldTerm.Languages_Touch.Length);
 				}
 			}
 
@@ -128,9 +127,9 @@ namespace I2.Loc
 			DoParseTermsInCurrentScene();
 
 			//--[ Update Selected Categories ]-------------
-			string mNewCategory = LanguageSource.GetCategoryFromFullTerm(sNewKey);
+			string mNewCategory = LanguageSourceData.GetCategoryFromFullTerm(sNewKey);
 			if (mNewCategory == string.Empty)
-				mNewCategory = LanguageSource.EmptyCategory;
+				mNewCategory = LanguageSourceData.EmptyCategory;
 			if (!mSelectedCategories.Contains(mNewCategory))
 				mSelectedCategories.Add (mNewCategory);
 			//RemoveUnusedCategoriesFromSelected();

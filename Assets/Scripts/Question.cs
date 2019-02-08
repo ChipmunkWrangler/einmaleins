@@ -7,7 +7,7 @@ abstract class Question
     public const float FastTime = 6.0F;
 
     const float AnswerTimeMax = 60.0F;
-    const float WrongAnswerTimePenalty = 1F;
+    const float WrongAnswerTimePenalty = 1.5F;
     readonly QuestionPersistentData data;
 
     public Question(int a, int b, QuestionPersistentData data)
@@ -28,7 +28,7 @@ abstract class Question
     public bool WasWrong() => data.WasWrong;
     public bool IsNew() => data.IsNew;
     public bool GaveUp() => data.GaveUp;
-    public bool IsMastered() => GetAverageAnswerTime() <= FastTime;
+    public bool IsMastered() => !WasWrong() && GetAverageAnswerTime() <= FastTime;
     public float GetLastAnswerTime() => data.AnswerTimes[data.AnswerTimes.Count - 1];
     public float GetAverageAnswerTime() => data.AnswerTimes.Average();
 

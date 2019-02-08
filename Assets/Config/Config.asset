@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinFrustration: -2
   MaxFrustration: 3
-  MinQuizzesPerDay: 3
+  MinQuizzesPerDay: 999
   MinTimePerDay: 300
   FrustrationWrong: 2
   FrustrationGiveUp: 2

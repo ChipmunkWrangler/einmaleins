@@ -131,17 +131,21 @@ namespace I2.Loc
 					int iLanguage = LanIndexes[i];
 					bool isRTL = LocalizationManager.IsRTL( mLanguageSource.mLanguages[iLanguage].Code );
 					AppendToCharSet( sb, termData.Languages[iLanguage], isRTL );
-					AppendToCharSet( sb, termData.Languages_Touch[iLanguage], isRTL );
 				}
 			}
-			mCharSet = new string(sb.ToArray().OrderBy(c=>c).ToArray ());
+            var bytes = System.Text.Encoding.UTF8.GetBytes( sb.ToArray().OrderBy(c => c).ToArray() );
+            mCharSet = System.Text.Encoding.UTF8.GetString(bytes);
 		}
 
 		void AppendToCharSet( HashSet<char> sb, string text, bool isRTL )
 		{
 			if (string.IsNullOrEmpty (text))
 				return;
-			if (isRTL)
+
+            text = RemoveTagsPrefix(text, "[i2p_");
+            text = RemoveTagsPrefix(text, "[i2s_");
+
+            if (isRTL)
 				text = RTLFixer.Fix( text );
 
             foreach (char c in text)
@@ -155,9 +159,29 @@ namespace I2.Loc
                     sb.Add(c);
             }
 		}
-		
+
+        // Given "[i2p_"  it removes all tags that start with that  (e.g. [i2p_Zero]  [i2p_One], etc)
+        string RemoveTagsPrefix(string text, string tagPrefix)
+        {
+            int idx = 0;
+            while (idx < text.Length)
+            {
+                idx = text.IndexOf(tagPrefix);
+                if (idx < 0)
+                    break;
+
+                int idx2 = text.IndexOf(']', idx);
+                if (idx2 < 0)
+                    break;
+
+                text = text.Remove(idx, idx2 - idx+1);
+            }
+            return text;
+
+        }
 
 
-		#endregion
-	}
+
+        #endregion
+    }
 }

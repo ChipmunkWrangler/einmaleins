@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace I2.Loc
 {
-	public partial class LanguageSource
+	public partial class LanguageSourceData
 	{
 		public string Import_CSV( string Category, string CSVstring, eSpreadsheetUpdateMode UpdateMode = eSpreadsheetUpdateMode.Replace, char Separator = ',' )
 		{
@@ -91,7 +91,7 @@ namespace I2.Loc
 				if (!string.IsNullOrEmpty(LanCode))
 					LanIdx = GetLanguageIndexFromCode(LanCode);
 				else
-					LanIdx = GetLanguageIndex(LanName);
+					LanIdx = GetLanguageIndex(LanName, SkipDisabled:false);
 
 				if (LanIdx < 0)
 				{
@@ -113,23 +113,28 @@ namespace I2.Loc
 				if (termData.Languages.Length < nLanguages)
 				{
 					Array.Resize( ref termData.Languages, nLanguages );
-					Array.Resize( ref termData.Languages_Touch, nLanguages );
 					Array.Resize( ref termData.Flags, nLanguages );
 				}
 			}
-			
-			//--[ Keys ]--------------
 
-			for (int i=1, imax=CSV.Count; i<imax; ++i)
-			{
-				Tokens = CSV[i];
-				string sKey = string.IsNullOrEmpty (Category) ? Tokens[0] : string.Concat( Category, "/", Tokens[0]);
-				bool isTouch = false;
-				if (sKey.EndsWith("[touch]"))
-				{
-					sKey = sKey.Remove(sKey.Length-"[touch]".Length);
-					isTouch = true;
-				}
+            //--[ Keys ]--------------
+
+            for (int i = 1, imax = CSV.Count; i < imax; ++i)
+            {
+                Tokens = CSV[i];
+                string sKey = string.IsNullOrEmpty(Category) ? Tokens[0] : string.Concat(Category, "/", Tokens[0]);
+
+                string specialization = null;
+                if (sKey.EndsWith("]"))
+                {
+                    int idx = sKey.LastIndexOf('[');
+                    if (idx>0)
+                    {
+                        specialization = sKey.Substring(idx + 1, sKey.Length - idx - 2);
+                        if (specialization == "touch") specialization = "Touch";
+                        sKey = sKey.Remove(idx);
+                    }
+                }
 				ValidateFullTerm(ref sKey);
 				if (string.IsNullOrEmpty(sKey))
 					continue;
@@ -143,10 +148,9 @@ namespace I2.Loc
 					termData.Term = sKey;
 
 					termData.Languages = new string[ mLanguages.Count ];
-					termData.Languages_Touch = new string[ mLanguages.Count ];
 					termData.Flags = new byte[ mLanguages.Count ];
 					for (int j=0; j<mLanguages.Count; ++j) 
-						termData.Languages[j] = termData.Languages_Touch[j] = string.Empty;
+						termData.Languages[j] = string.Empty;
 
 					mTerms.Add (termData);
 					mDictionary.Add (sKey, termData);
@@ -162,36 +166,28 @@ namespace I2.Loc
 				if (DescColumnIdx>0)
 					termData.Description = Tokens[DescColumnIdx];
 
-				for (int j=0; j<LanIndices.Length && j<Tokens.Length-LanguagesStartIdx; ++j)
-					if (!string.IsNullOrEmpty(Tokens[j+LanguagesStartIdx]))	// Only change the translation if there is a new value
-					{
-						var lanIdx = LanIndices[j];
-						if (lanIdx < 0)
-								continue;
-						var value = Tokens[j+LanguagesStartIdx];
-						//var isAuto = false;// value.Contains("[i2auto]");
-						//if (isAuto)
-							//value = value.Replace ("[i2auto]", string.Empty);
+                for (int j = 0; j < LanIndices.Length && j < Tokens.Length - LanguagesStartIdx; ++j)
+                    if (!string.IsNullOrEmpty(Tokens[j + LanguagesStartIdx]))   // Only change the translation if there is a new value
+                    {
+                        var lanIdx = LanIndices[j];
+                        if (lanIdx < 0)
+                            continue;
+                        var value = Tokens[j + LanguagesStartIdx];
 
-						//if (value=="-")
-						//	value = string.Empty;
+                        if (value == "-")
+                            value = string.Empty;
+                        else
+                        if (value == "")
+                            value = null;
 
-						if (isTouch)
-						{
-							termData.Languages_Touch[ lanIdx ] = value;
-							/*if (isAuto)  termData.Flags[lanIdx] |= (byte)TranslationFlag.AutoTranslated_Touch;
-									else */termData.Flags[lanIdx] &= byte.MaxValue ^ ((byte)TranslationFlag.AutoTranslated_Touch);
-						}
-						else
-						{
-							termData.Languages[ lanIdx ] = value;
-							/*if (isAuto)  termData.Flags[lanIdx] |= (byte)TranslationFlag.AutoTranslated_Normal;
-									else*/ termData.Flags[lanIdx] &= byte.MaxValue ^ ((byte)TranslationFlag.AutoTranslated_Normal);
-						}
-					}
-			}
-
-			return string.Empty;
+                        termData.SetTranslation(lanIdx, value, specialization);
+                    }
+            }
+            if (Application.isPlaying)
+            {
+                SaveLanguages(HasUnloadedLanguages());
+            }
+            return string.Empty;
 		}
 
 		bool ArrayContains( string MainText, params string[] texts )
@@ -210,5 +206,48 @@ namespace I2.Loc
 			
 			return eTermType.Text;
 		}
-	}
+
+        #region Language Cache format
+
+        void Import_Language_from_Cache(int langIndex, string langData, bool useFallback, bool onlyCurrentSpecialization)
+        {
+            int index = 0;
+            while (index < langData.Length)
+            {
+                int nextIndex = langData.IndexOf("[i2t]", index);
+                if (nextIndex < 0) nextIndex = langData.Length;
+
+                // check for errors
+                int termNameEnd = langData.IndexOf("=", index);
+                if (termNameEnd >= nextIndex)
+                    return;
+
+                string termName = langData.Substring(index, termNameEnd - index);
+                index = termNameEnd+1;
+
+                var termData = GetTermData(termName, false);
+                if (termData != null)
+                {
+                    string translation = null;
+
+                    if (index != nextIndex)
+                    {
+                        translation = langData.Substring(index, nextIndex - index);
+                        if (translation.StartsWith("[i2fb]"))
+                        {
+                            translation = (useFallback) ? translation.Substring(6) : null;
+                        }
+                        if (onlyCurrentSpecialization && translation != null)
+                        {
+                            translation = SpecializationManager.GetSpecializedText(translation, null);
+                        }
+                    }
+                    termData.Languages[langIndex] = translation;
+                }
+                index = nextIndex + 5;
+            }
+        }
+
+        #endregion
+    }
 }

@@ -1,20 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine.Networking;
 
 namespace I2.Loc
 {
 	public enum eSpreadsheetUpdateMode { None, Replace, Merge, AddNewTerms };
 
-	public partial class LanguageSource
+	public partial class LanguageSourceData
 	{
-		public WWW Export_Google_CreateWWWcall( eSpreadsheetUpdateMode UpdateMode = eSpreadsheetUpdateMode.Replace )
+		public UnityWebRequest Export_Google_CreateWWWcall( eSpreadsheetUpdateMode UpdateMode = eSpreadsheetUpdateMode.Replace )
 		{
-			#if UNITY_WEBPLAYER
+            #if UNITY_WEBPLAYER
 			Debug.Log ("Contacting google translation is not yet supported on WebPlayer" );
 			return null;
-			#else
-			string Data = Export_Google_CreateData();
+#else
+            string Data = Export_Google_CreateData();
 
 			WWWForm form = new WWWForm();
 			form.AddField("key", Google_SpreadsheetKey);
@@ -22,9 +23,14 @@ namespace I2.Loc
 			form.AddField("data", Data);
 			form.AddField("updateMode", UpdateMode.ToString());
 
-            
-			WWW www = new WWW(LocalizationManager.GetWebServiceURL(this), form);
-			return www;
+            #if UNITY_EDITOR
+            form.AddField("password", Google_Password);
+#endif
+
+
+            UnityWebRequest www = UnityWebRequest.Post(LocalizationManager.GetWebServiceURL(this), form);
+            I2Utils.SendWebRequest(www);
+            return www;
 			#endif
 		}
 
@@ -41,8 +47,11 @@ namespace I2.Loc
 				else
 					Builder.Append("<I2Loc>");
 
-				//string CSV = Export_CSV(category);
-				string CSV = Export_I2CSV(category);
+                #if !UNITY_EDITOR
+                    bool Spreadsheet_SpecializationAsRows = true;
+                #endif
+
+                string CSV = Export_I2CSV(category, specializationsAsRows:Spreadsheet_SpecializationAsRows);
 				Builder.Append(category);
 				Builder.Append("<I2Loc>");
 				Builder.Append(CSV);

@@ -5,112 +5,19 @@ using UnityEngine;
 namespace I2.Loc
 {
     #if UNITY_EDITOR
-        [UnityEditor.InitializeOnLoad]
-#endif
-
-	public class LocalizeTarget_NGUI_Image : LocalizeTarget<UISprite>
-	{
-        static LocalizeTarget_NGUI_Image() { AutoRegister(); }
-        [I2RuntimeInitialize] static void AutoRegister()
-        {
-            LocalizationManager.RegisterTarget(new LocalizeTarget_NGUI_Image());
-        }
-
-		public override string GetName () { return "NGUI UISprite"; }
-        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Sprite; }
-        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.UIAtlas; }
-        public override bool CanUseSecondaryTerm () { return true; }
-		public override bool AllowMainTermToBeRTL () { return false; }
-		public override bool AllowSecondTermToBeRTL () { return false; }
-
-		public override void GetFinalTerms ( Localize cmp, string Main, string Secondary, out string primaryTerm, out string secondaryTerm )
-		{
-            var mTarget = GetTarget(cmp);
-			primaryTerm = mTarget.spriteName;
-			secondaryTerm = (mTarget.atlas != null ? mTarget.atlas.name : string.Empty);
-        }
-
-
-        public override void DoLocalize ( Localize cmp, string mainTranslation, string secondaryTranslation )
-		{
-            var mTarget = GetTarget(cmp);
-            if (mTarget.spriteName == mainTranslation)
-                return;
-
-            //--[ Localize Atlas ]----------
-            UIAtlas newAtlas = cmp.GetSecondaryTranslatedObj<UIAtlas>(ref mainTranslation, ref secondaryTranslation);
-            bool bChanged = false;
-            if (newAtlas != null && mTarget.atlas != newAtlas)
-            {
-                mTarget.atlas = newAtlas;
-                bChanged = true;
-            }
-
-            if (mTarget.spriteName != mainTranslation && mTarget.atlas.GetSprite(mainTranslation) != null)
-            {
-                mTarget.spriteName = mainTranslation;
-                bChanged = true;
-            }
-            if (bChanged)
-                mTarget.MakePixelPerfect();
-        }
-	}
-
-    #if UNITY_EDITOR
-        [UnityEditor.InitializeOnLoad]
-#endif
-
-    public class LocalizeTarget_NGUI_Texture : LocalizeTarget<UITexture>
-    {
-        static LocalizeTarget_NGUI_Texture() { AutoRegister(); }
-        [I2RuntimeInitialize]
-        static void AutoRegister()
-        {
-            LocalizationManager.RegisterTarget(new LocalizeTarget_NGUI_Texture());
-        }
-        public override string GetName() { return "NGUI UITexture"; }
-        public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Texture; }
-        public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.Text; }
-        public override bool CanUseSecondaryTerm() { return false; }
-        public override bool AllowMainTermToBeRTL() { return false; }
-        public override bool AllowSecondTermToBeRTL() { return false; }
-
-        public override void GetFinalTerms(Localize cmp, string Main, string Secondary, out string primaryTerm, out string secondaryTerm)
-        {
-            var mTarget = GetTarget(cmp);
-            primaryTerm = mTarget.mainTexture.name;
-            secondaryTerm = null;
-        }
-
-        public override void DoLocalize(Localize cmp, string mainTranslation, string secondaryTranslation)
-        {
-            var mTarget = GetTarget(cmp);
-            Texture Old = mTarget.mainTexture;
-            if (Old != null && Old.name != mainTranslation)
-            {
-                mTarget.mainTexture = cmp.FindTranslatedObject<Texture>(mainTranslation);
-                mTarget.MakePixelPerfect();
-            }
-        }
-    }
-
-    #if UNITY_EDITOR
-        [UnityEditor.InitializeOnLoad]
-#endif
+    [UnityEditor.InitializeOnLoad] 
+    #endif
 
     public class LocalizeTarget_NGUI_Label : LocalizeTarget<UILabel>
     {
         static LocalizeTarget_NGUI_Label() { AutoRegister(); }
-        [I2RuntimeInitialize] static void AutoRegister()
-        {
-            LocalizationManager.RegisterTarget(new LocalizeTarget_NGUI_Label());
-        }
-        public NGUIText.Alignment mAlignment_RTL = NGUIText.Alignment.Right;
-        public NGUIText.Alignment mAlignment_LTR = NGUIText.Alignment.Left;
-        public bool mAlignmentWasRTL;
-        public bool mInitializeAlignment = true;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)] static void AutoRegister() { LocalizationManager.RegisterTarget(new LocalizeTargetDesc_Type<UILabel, LocalizeTarget_NGUI_Label>() { Name = "NGUI Label", Priority = 100 }); }
 
-        public override string GetName() { return "UILabel"; }
+        NGUIText.Alignment mAlignment_RTL = NGUIText.Alignment.Right;
+        NGUIText.Alignment mAlignment_LTR = NGUIText.Alignment.Left;
+        bool mAlignmentWasRTL;
+        bool mInitializeAlignment = true;
+
         public override eTermType GetPrimaryTermType(Localize cmp) { return eTermType.Text; }
         public override eTermType GetSecondaryTermType(Localize cmp) { return eTermType.UIFont; }
         public override bool CanUseSecondaryTerm() { return true; }
@@ -119,16 +26,13 @@ namespace I2.Loc
 
         public override void GetFinalTerms(Localize cmp, string Main, string Secondary, out string primaryTerm, out string secondaryTerm)
         {
-            var mTarget = GetTarget(cmp);
-            primaryTerm = mTarget.text;
+            primaryTerm = mTarget ? mTarget.text : null;
             secondaryTerm = (mTarget.ambigiousFont != null ? mTarget.ambigiousFont.name : string.Empty); ;
         }
 
 
         public override void DoLocalize(Localize cmp, string mainTranslation, string secondaryTranslation)
         {
-            var mTarget = GetTarget(cmp);
-
             //--[ Localize Font Object ]----------
             Font newFont = cmp.GetSecondaryTranslatedObj<Font>(ref mainTranslation, ref secondaryTranslation);
             if (newFont != null)
@@ -136,12 +40,19 @@ namespace I2.Loc
                 if (newFont != mTarget.ambigiousFont)
                     mTarget.ambigiousFont = newFont;
             }
-            else
+            if (newFont==null)
             {
                 UIFont newUIFont = cmp.GetSecondaryTranslatedObj<UIFont>(ref mainTranslation, ref secondaryTranslation);
                 if (newUIFont != null && mTarget.ambigiousFont != newUIFont)
                     mTarget.ambigiousFont = newUIFont;
             }
+            if (newFont == null)
+            {
+                NGUIFont newUIFont = cmp.GetSecondaryTranslatedObj<NGUIFont>(ref mainTranslation, ref secondaryTranslation);
+                if (newUIFont != null && mTarget.ambigiousFont != newUIFont)
+                    mTarget.ambigiousFont = newUIFont;
+            }
+
 
             if (mInitializeAlignment)
             {
