@@ -3,8 +3,8 @@ using UnityEngine;
 
 class GotoLaunch : MonoBehaviour
 {
-    [SerializeField] Prefs prefs = null;
-    [SerializeField] UnityEngine.UI.Button button = null;
+    [SerializeField] private Prefs prefs;
+    [SerializeField] private UnityEngine.UI.Button button;
 
     public void LoadLaunchScene(bool autolaunch)
     {

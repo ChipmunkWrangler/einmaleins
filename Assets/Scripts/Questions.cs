@@ -4,8 +4,8 @@ using UnityEngine;
 
 class Questions : MonoBehaviour
 {
-    [SerializeField] QuestionsPersistentData data = null;
     readonly QuestionGenerator questionGenerator = new DivisionQuestionGenerator();
+    [SerializeField] private QuestionsPersistentData data;
 
     public Question[] QuestionArray { get; private set; }
 
@@ -22,7 +22,8 @@ class Questions : MonoBehaviour
 
     public Question GetQuestion(bool isFrustrated, bool allowGaveUpQuestions)
     {
-        IEnumerable<Question> allowed = QuestionArray.Where(question => !question.WasAnsweredInThisQuiz && !question.IsMastered() && (allowGaveUpQuestions || !question.GaveUp()));
+        IEnumerable<Question> allowed = QuestionArray.Where(question =>
+            !question.WasAnsweredInThisQuiz && !question.IsMastered() && (allowGaveUpQuestions || !question.GaveUp()));
 
         if (!allowed.Any())
         {
@@ -36,15 +37,18 @@ class Questions : MonoBehaviour
                 }
             }
         }
+
         IEnumerable<Question> candidates = allowed.Where(question => question.WasWrong());
         if (!candidates.Any())
         {
             candidates = allowed.Where(question => !question.IsNew());
             if (!candidates.Any())
-            { // then give a new question
+            {
+                // then give a new question
                 return isFrustrated ? allowed.First() : allowed.ElementAt(Random.Range(0, allowed.Count()));
             }
         }
+
         var orderedCandidates = candidates.OrderBy(q => q.GetAverageAnswerTime());
         return isFrustrated ? orderedCandidates.First() : orderedCandidates.Last();
     }
@@ -53,6 +57,7 @@ class Questions : MonoBehaviour
     {
         data.Save();
     }
+
 
     Question[] CreateQuestions()
     {

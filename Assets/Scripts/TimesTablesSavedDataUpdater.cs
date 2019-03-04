@@ -3,9 +3,9 @@ using UnityEngine;
 
 class TimesTablesSavedDataUpdater : SavedDataUpdater
 {
-    [SerializeField] Questions questions = null;
-    [SerializeField] VariableString playerName = null;
-    [SerializeField] PlayerNameController playerNameController = null;
+    [SerializeField] Questions questions;
+    [SerializeField] VariableString playerName;
+    [SerializeField] PlayerNameController playerNameController;
 
     public override void UpdateData(string fromVersion, string toVersion)
     {
@@ -48,9 +48,11 @@ class TimesTablesSavedDataUpdater : SavedDataUpdater
             {
                 question.SetNewFromAnswerTime();
             }
+
             questions.Save();
             questions.gameObject.SetActive(false);
         }
+
         playerName.Value = oldName;
         playerNameController.Save();
     }
@@ -70,9 +72,11 @@ class TimesTablesSavedDataUpdater : SavedDataUpdater
             {
                 question.UpdateInitialAnswerTime(OldAnswerTimeInitial);
             }
+
             questions.Save();
             questions.gameObject.SetActive(false);
         }
+
         playerName.Value = oldName;
         playerNameController.Save();
     }
