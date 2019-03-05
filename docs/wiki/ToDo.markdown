@@ -1,6 +1,20 @@
 [Ideas](Ideas)
 
 # ToDo 
+## v1.0.1
+* [ ] Test stats with division
+* [ ] multiplication
+* [ ] Switch back to mult player
+* [ ] Mult gauntlet
+* [ ] Div gauntlet
+* [ ] Rocket part in div
+* [ ] Launch in div (no stats), switch to mult player, stats
+* [ ] Switch between circle and square
+* [ ] Fix first upgrade particle effects
+* [ ] Test all particle effects
+* [ ] Test all on device
+* [ ] Upload version
+* [ ] Email dude, tell him about testflight or have him wait
 ## v1.0.0 
 * [o] Update web page
     * [o] Generate links for app store buttons and add them to web pages
