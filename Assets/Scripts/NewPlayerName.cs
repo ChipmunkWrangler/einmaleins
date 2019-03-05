@@ -8,7 +8,8 @@ class NewPlayerName : MonoBehaviour
     [SerializeField] TextButton[] playerButtons;
     [SerializeField] Button playMultiplicationButton;
     [SerializeField] Button playDivisionButton;
-    [SerializeField] Image playButtonImage;
+    [SerializeField] Text playMultiplicationSymbol;
+    [SerializeField] Text playDivisionSymbol;
     [SerializeField] InputField inputField;
     [SerializeField] float buttonFadeAlpha = 0.5F;
     [SerializeField] float buttonFadeDuration = 0.1F;
@@ -87,7 +88,8 @@ class NewPlayerName : MonoBehaviour
     {
         playMultiplicationButton.interactable = b;
         playDivisionButton.interactable = b;
-        playButtonImage.CrossFadeAlpha(b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false);
+        playMultiplicationSymbol.CrossFadeAlpha(b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false);
+        playDivisionSymbol.CrossFadeAlpha(b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false);
     }
 
     void Play()
