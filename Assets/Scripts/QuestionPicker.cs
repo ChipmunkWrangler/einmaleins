@@ -77,6 +77,11 @@ internal class QuestionPicker : MonoBehaviour
             onWrongAnswers.Notify(subscriber => subscriber.OnWrongAnswer(wasNew));
         }
     }
+    
+    public void OnGiveUp()
+    {
+        curQuestion?.GiveUp();
+    }
 
 /*
     Enumerator AutoAnswer()

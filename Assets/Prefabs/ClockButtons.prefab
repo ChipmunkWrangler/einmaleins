@@ -311,6 +311,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: OnGiveUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &4218261894698620460
@@ -345,8 +356,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9286c7ef91280489582dc374f58bbab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 4218261894912406246}
   source: {fileID: 4218261894698620450}
+  target: {fileID: 4218261894912406246}
 --- !u!114 &4218261894698620451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,8 +521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideOnRight: 1
   evenIfWrongFirst: 1
+  hideOnRight: 1
 --- !u!114 &4218261894912406227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,8 +686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideOnRight: 1
   evenIfWrongFirst: 1
+  hideOnRight: 1
 --- !u!114 &4218261894912406128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,8 +934,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideOnRight: 1
   evenIfWrongFirst: 1
+  hideOnRight: 1
 --- !u!114 &4218261894912406120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1113,11 +1124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e7c5b876c950478dba1267a442f6444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallScreenParent: {fileID: 0}
-  normalParent: {fileID: 4218261894912406223}
   maxSmallScreenInches: 2.5
-  multiplierStars: {fileID: 0}
   prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
+  multiplierStars: {fileID: 0}
+  smallScreenParent: {fileID: 0}
 --- !u!1 &4218261894912406442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,8 +1277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideOnRight: 1
   evenIfWrongFirst: 1
+  hideOnRight: 1
 --- !u!114 &4218261894912406087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1598,8 +1608,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideOnRight: 1
   evenIfWrongFirst: 1
+  hideOnRight: 1
 --- !u!114 &4218261894912406138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1929,8 +1939,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideOnRight: 1
   evenIfWrongFirst: 1
+  hideOnRight: 1
 --- !u!114 &4218261894912406101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2177,8 +2187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideOnRight: 1
   evenIfWrongFirst: 1
+  hideOnRight: 1
 --- !u!114 &4218261894912406164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2591,8 +2601,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideOnRight: 1
   evenIfWrongFirst: 1
+  hideOnRight: 1
 --- !u!114 &4218261894912406231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2904,8 +2914,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideOnRight: 1
   evenIfWrongFirst: 1
+  hideOnRight: 1
 --- !u!114 &4218261894912406194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3152,8 +3162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideOnRight: 1
   evenIfWrongFirst: 1
+  hideOnRight: 1
 --- !u!114 &4218261894912406184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3317,8 +3327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7603c8e1a5a3740a9be8dc5437162b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideOnRight: 1
   evenIfWrongFirst: 1
+  hideOnRight: 1
 --- !u!114 &4218261894912406206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3596,8 +3606,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9286c7ef91280489582dc374f58bbab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 4218261894912406246}
   source: {fileID: 4218261895175901689}
+  target: {fileID: 4218261894912406246}
 --- !u!114 &4218261895175901690
 MonoBehaviour:
   m_ObjectHideFlags: 0
