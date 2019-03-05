@@ -30,13 +30,14 @@ public static class xARMManager {
 	
 	// Ref to GameView
 	private static EditorWindow _gameView;
-	public static Vector2 GameViewToolbarOffset = new Vector2(0,17);
+	private static EditorWindow _sceneView;
 	public static int YScrollOffset = 5;
 	private static Vector2 defaultGameViewResolution;
+	public static Vector2 TargetGameViewResolution;
 	
 	// was the list of SCs changed?
 	public static bool AvailScreenCapsChanged = false;
-	public static xARMScreenCap UpdatingScreenCap;
+	public static xARMScreenCap UpdatingScreenCap; // only set while Update
 
 	// time of last change in editor
 	private static double lastChangeInEditorTime = 0;
@@ -47,11 +48,9 @@ public static class xARMManager {
 	public static bool PreviewIsUpdating = false;
 	public static bool ScreenCapUpdateInProgress = false; // true from trigger SC-update, wait x frames, until read SC from screen
 	public static bool FinalizeScreenCapInProgress = false; // true after all SCs are updated, while GV changes to default resolution
-	private  static bool skipNextUpdate = false;
+	private static bool skipNextUpdate = false;
 	private static string currentScene = GetCurrentScene();
 	public static bool HideGameViewToggle = false;
-
-
 
 	// Delegate to run code before/after ScreenCap update
 	public static OnStartScreenCapUpdateDelegate OnStartScreenCapUpdate;
@@ -127,6 +126,24 @@ public static class xARMManager {
 			return _gameView;
 		}
 	}
+
+	public static EditorWindow SceneView{
+		get {
+			// get Ref if necessary
+			if(!_sceneView){
+				foreach(EditorWindow curr in Resources.FindObjectsOfTypeAll(typeof(EditorWindow))){
+#if UNITY_4_0 || UNITY_4_0_1 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3|| UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_5_0
+					if(curr.title == "UnityEditor.SceneView") _sceneView = curr;
+#else
+					if(curr.titleContent.text == "Scene") _sceneView = curr;
+#endif
+				}
+			}
+
+			return _sceneView;
+		}
+	}
+
 		
 	private static xARMPreviewWindow myxARMPreviewWindow{
 		get {
@@ -240,6 +257,16 @@ public static class xARMManager {
 		}
 	}
 
+	public static bool SceneViewHasFocus{
+		get {
+			if(SceneView){
+				return SceneView.Equals(EditorWindow.focusedWindow);
+			} else {
+				return false;
+			}
+		}
+	}
+
 	// returns Editor's current mode
 	public static EditorMode CurrEditorMode{
 		get {
@@ -273,14 +300,16 @@ public static class xARMManager {
 		addOrUpdateScreenCap(new xARMScreenCap("iPhone", 		new Vector2(1136, 640), "WDVGA","16:9~", 	4.0f, 326, "@2x", 	xARMScreenCapGroup.iOS, 1, 29.6f, "iPhone SE, 5S, 5C, 5 & iPod touch 6., 5."));
 		addOrUpdateScreenCap(new xARMScreenCap("iPad", 			new Vector2(2048, 1536), "QXGA","", 		9.7f, 264, "@2x", 	xARMScreenCapGroup.iOS, 2, 20.7f, "iPad 4., 3., Pro (9.7), Air 2, Air"));
 		addOrUpdateScreenCap(new xARMScreenCap("iPad mini", 	new Vector2(2048, 1536), "QXGA","", 		7.9f, 326, "@2x", 	xARMScreenCapGroup.iOS, 2, 20.7f, "iPad mini 4, mini 3, mini 2"));
-		addOrUpdateScreenCap(new xARMScreenCap("iPhone", 		new Vector2(1334, 750), "custom", "16:9~", 	4.7f, 326, "@2x", 	xARMScreenCapGroup.iOS, 3, 20.1f, "iPhone 7, 6S, 6"));
+		addOrUpdateScreenCap(new xARMScreenCap("iPhone", 		new Vector2(1334, 750), "custom", "16:9~", 	4.7f, 326, "@2x", 	xARMScreenCapGroup.iOS, 3, 20.1f, "iPhone 8, 7, 6S, 6"));
 		addOrUpdateScreenCap(new xARMScreenCap("iPad", 			new Vector2(1024, 768), "XGA",	"", 		9.7f, 132, "@1x", 	xARMScreenCapGroup.iOS, 4, 11.4f, "iPad 2., 1."));
 		addOrUpdateScreenCap(new xARMScreenCap("iPad mini", 	new Vector2(1024, 768), "XGA",	"", 		7.9f, 163, "@1x", 	xARMScreenCapGroup.iOS, 4, 11.4f, "iPad mini"));
-		addOrUpdateScreenCap(new xARMScreenCap("iPhone", 		new Vector2(1920, 1080), "FHD", "", 		5.5f, 401, "@2.6x",	xARMScreenCapGroup.iOS, 5, 10.3f, "iPhone 7 Plus, 6S Plus, 6 Plus (Unity uses native resolution)"));
+		addOrUpdateScreenCap(new xARMScreenCap("iPhone", 		new Vector2(1920, 1080), "FHD", "", 		5.5f, 401, "@2.6x",	xARMScreenCapGroup.iOS, 5, 10.3f, "iPhone 8 Plus, 7 Plus, 6S Plus, 6 Plus"));
 		addOrUpdateScreenCap(new xARMScreenCap("iPhone", 		new Vector2(960, 640), "DVGA", 	"", 		3.5f, 326, "@2x", 	xARMScreenCapGroup.iOS, 6,  5.3f, "iPhone 4S, 4 & iPod touch 4."));
-		addOrUpdateScreenCap(new xARMScreenCap("iPad Pro",	 	new Vector2(2732, 2048), "custom", "4:3~", 12.9f, 264, "@2x", 	xARMScreenCapGroup.iOS, 7,  0.1f, "iPad Pro (12.9)"), new xARMScreenCap(new Vector2(2732, 2048), 12.22f, xARMScreenCapGroup.iOS)); 
-		addOrUpdateScreenCap(new xARMScreenCap("iPhone", 		new Vector2(480, 320), "HVGA",	"",			3.5f, 163, "@1x", 	xARMScreenCapGroup.iOS, 8,    0f, "iPhone 3GS, 3G, 1 & iPod touch 3., 2., 1."));
-		addOrUpdateScreenCap(new xARMScreenCap("iPhone", 		new Vector2(2208, 1242), "custom", "", 		5.5f,   0, "@3x", 	xARMScreenCapGroup.iOS, 999, -1f, "Probable future iPhone resolution"));
+		addOrUpdateScreenCap(new xARMScreenCap("iPad Pro",	 	new Vector2(2732, 2048), "custom", "4:3~", 12.9f, 264, "@2x", 	xARMScreenCapGroup.iOS, 7,  0.1f, "iPad Pro (12.9)")); 
+		addOrUpdateScreenCap(new xARMScreenCap("iPhone",		new Vector2(480, 320), "HVGA",	"",			3.5f, 163, "@1x", 	xARMScreenCapGroup.iOS, 8,    0f, "iPhone 3GS, 3G, 1 & iPod touch 3., 2., 1."));
+		addOrUpdateScreenCap(new xARMScreenCap("iPhone",		new Vector2(2436, 1125), "custom", "19.5:9",5.8f, 458, "@3x",	xARMScreenCapGroup.iOS, 999, -1f, "iPhone X"));
+		addOrUpdateScreenCap(new xARMScreenCap("iPhone",		new Vector2(2001, 1125), "custom", "16:9",  4.7f, 458, "@3x",	xARMScreenCapGroup.iOS, 999, -1f, "iPhone X 16:9 (with letterbox)"));
+
 
 		// Android 
 		addOrUpdateScreenCap(new xARMScreenCap("", 			new Vector2(1280, 720), "HD", "", 			4.7f, 0, "", 			xARMScreenCapGroup.Android,  1, 28.9f, "Galaxy Nexus, Fire Phone, Galaxy Note 2 (5.5), ..."));
@@ -311,6 +340,7 @@ public static class xARMManager {
 		addOrUpdateScreenCap(new xARMScreenCap("", 			new Vector2(640, 360), "nHD","", 			3.5f, 0, "", 			xARMScreenCapGroup.Android,999,   -1f, "..."));
 		addOrUpdateScreenCap(new xARMScreenCap("", 			new Vector2(1066, 600), "custom","", 		7.6f, 0, "", 			xARMScreenCapGroup.Android,999,   -1f, "..."));
 		addOrUpdateScreenCap(new xARMScreenCap("", 			new Vector2(960, 640), "DVGA","", 			4.0f, 0, "", 			xARMScreenCapGroup.Android,999,   -1f, "..."));
+
 
 		// Windows Phone 8
 		addOrUpdateScreenCap(new xARMScreenCap("", 			new Vector2(800, 480), "WVGA","", 			4.0f, 0, "",			xARMScreenCapGroup.WinPhone8, 1, 54.6f, "Lumia 620 (3.8), 520, 525 (4.0), 720, 820 (4.3), 625 (4.7), ..."));
@@ -570,8 +600,12 @@ public static class xARMManager {
 			xARMPreviewWindow.WarningBoxText = "Could not update all ScreenCaps. Switch 'GameView' to 'Free Aspect'.";
 
 #else	// 5.4+
-			xARMGalleryWindow.WarningBoxText = "Could not update all ScreenCaps. Switch 'GameView' to 'Free Aspect' and (de)activate Retina/HiDPI mode in Options.";
-			xARMPreviewWindow.WarningBoxText = "Could not update all ScreenCaps. Switch 'GameView' to 'Free Aspect' and (de)activate Retina/HiDPI mode in Options.";
+
+			// detect HiDPI mode and toolbar offset
+			AutoDetectGameViewSettings(screenCap.Resolution, new Vector2(Screen.width, Screen.height));
+
+			xARMGalleryWindow.WarningBoxText = "Could not update all ScreenCaps. Ensure 'GameView' is set to 'Free Aspect' and retry (Auto detect of HiDPI mode and toolbar offset was executed).";
+			xARMPreviewWindow.WarningBoxText = "Could not update all ScreenCaps. Ensure 'GameView' is set to 'Free Aspect' and retry (Auto detect of HiDPI mode and toolbar offset was executed).";
 
 #endif
 		}
@@ -599,11 +633,11 @@ public static class xARMManager {
 		if(OnFinalizeScreenCapUpdate != null) OnFinalizeScreenCapUpdate ();
 	}
 
-	private static void AbortUpdatePreview(){
+	public static void AbortUpdatePreview(){
 		AbortUpdate(ref PreviewIsUpdating);
 	}
 
-	private static void AbortUpdateGallery(){
+	public static void AbortUpdateGallery(){
 		AbortUpdate(ref GalleryIsUpdating);
 	}
 
@@ -662,6 +696,9 @@ public static class xARMManager {
 
 
 	private static void ResizeGameView(Vector2 newSize, bool force = false){
+
+		TargetGameViewResolution = newSize;
+
 		// get current Game View resolution
 		Vector2 screen = new Vector2(Screen.width, Screen.height);
 
@@ -675,7 +712,7 @@ public static class xARMManager {
 			// screen.y /= 2;
 			screen.x = currentGameViewRect.width;
 			screen.y = currentGameViewRect.height;
-			screen -= GameViewToolbarOffset;
+			screen -= Config.GameViewToolbarOffset;
 
 		}
 
@@ -712,8 +749,6 @@ public static class xARMManager {
 		}
 		// if not forced resize only on resolution changes
 		else if(newSize.x != screen.x || newSize.y != screen.y){ 
-			
-//			xARMProxy.DebugLog("resize! " + screen.ToString());
 
 			// save original values
 			Vector2 prevMinSize, prevMaxSize;
@@ -724,7 +759,7 @@ public static class xARMManager {
 			FloatingGameView (newSize);
 			
 			// add toolbar offset
-			Vector2 newSizeWithOffset = newSize + GameViewToolbarOffset;
+			Vector2 newSizeWithOffset = newSize + Config.GameViewToolbarOffset;
 
 			// ensure resize
 			GameView.minSize = newSizeWithOffset;
@@ -738,6 +773,40 @@ public static class xARMManager {
 			skipNextUpdate = true;
 		}
 	}
+
+    private static void AutoDetectGameViewSettings(Vector2 wantedSize, Vector2 actualSize)
+    {
+
+        if (xARMManager.Config.AutoDetectGameViewSettings)
+        {
+            // set HiDPI mode
+            if (wantedSize.x == actualSize.x * 2)
+            {
+                xARMManager.Config.EditorUsesHIDPI = false;
+                Debug.Log("xARM switched HiDPI mode to: off");
+
+            }
+            else if (wantedSize.x == actualSize.x / 2)
+            {
+                xARMManager.Config.EditorUsesHIDPI = true;
+                Debug.Log("xARM switched HiDPI mode to: on");
+            }
+
+            // set toolbar offset if x is correct
+            if (wantedSize.x == actualSize.x)
+            {
+
+#if UNITY_EDITOR_WIN
+			// get actual offset
+            Config.GameViewToolbarOffset = new Vector2(0, wantedSize.y - actualSize.y + Config.GameViewToolbarOffset.y);
+
+#else // on Mac offset is always the same (see also config default)
+                Config.GameViewToolbarOffset = new Vector2(0, 17);
+#endif
+                Debug.Log("xARM switched game view toolbar offset to: " + Config.GameViewToolbarOffset.ToString());
+            }
+        }
+    }
 
 	public static void ResizeGameViewToDefault(){
 		ResizeGameView (xARMManager.DefaultGameViewResolution);
@@ -755,7 +824,7 @@ public static class xARMManager {
 		}
 
 		// add offset
-		size += GameViewToolbarOffset;
+		size += Config.GameViewToolbarOffset;
 		
 		int width = Mathf.RoundToInt(size.x);
 		int height = Mathf.RoundToInt(size.y);
@@ -778,18 +847,26 @@ public static class xARMManager {
 				// workaround: 0,12 is the position while switching edit<->play mode
 				CurrentGameViewPosition != new Vector2(0f, 12f) && 
 				CurrentGameViewPosition != new Vector2(0f, 12f + YScrollOffset) && 
-				// workaround: assume odd y-scrolling, if Game View has only moved y+yScrollOffset
+				CurrentGameViewPosition != new Vector2(0f, 22f) && 
+				CurrentGameViewPosition != new Vector2(0f, 22f + YScrollOffset) && 
+				// workaround: assume odd y-scrolling, if Game View has only moved y+/-yScrollOffset
 				CurrentGameViewPosition != new Vector2(Config.GameViewPosition.x, Config.GameViewPosition.y + YScrollOffset) &&
+				CurrentGameViewPosition != new Vector2(Config.GameViewPosition.x, Config.GameViewPosition.y - YScrollOffset) &&
 				// workaround: hide GV position (fast repeated clicking on "Hide GV")
 				CurrentGameViewPosition != new Vector2(Config.HiddenGameViewPosition.x, Config.HiddenGameViewPosition.y) &&
 				CurrentGameViewPosition != new Vector2(Config.HiddenGameViewPosition.x, Config.HiddenGameViewPosition.y + YScrollOffset) 
 			){
 				// save position
+				// Debug.Log("Save GV Pos: " + CurrentGameViewPosition.ToString());
 				Config.GameViewPosition = CurrentGameViewPosition;
+			} else {
+				// skip
+				// Debug.Log(" - Skip save GV Pos: " + CurrentGameViewPosition.ToString());
 			}
 		} 
 		else if(!Config.AutoTraceGameViewPosition && !Config.HideGameView) { // use fixed GV position
 			Config.GameViewPosition = Config.FixedGameViewPosition;
+
 		}
 	}
 

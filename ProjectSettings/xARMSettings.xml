@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xARMConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Version>1.7</Version>
+<xARMConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Version>1.8.2</Version>
   <AvailScreenCaps>
     <xARMScreenCap>
       <Name>Android</Name>
@@ -984,7 +984,7 @@
     <xARMScreenCap>
       <Name>iPhone</Name>
       <LongName>iPhone 4.7″ @2x (16:9~) 1334x750px (custom)</LongName>
-      <Description>iPhone 7, 6S, 6</Description>
+      <Description>iPhone 8, 7, 6S, 6</Description>
       <Resolution>
         <x>1334</x>
         <y>750</y>
@@ -1457,7 +1457,7 @@
     <xARMScreenCap>
       <Name>iPhone</Name>
       <LongName>iPhone 5.5″ @2.6x (16:9) 1920x1080px (FHD)</LongName>
-      <Description>iPhone 7 Plus, 6S Plus, 6 Plus (Unity uses native resolution)</Description>
+      <Description>iPhone 8 Plus, 7 Plus, 6S Plus, 6 Plus</Description>
       <Resolution>
         <x>1920</x>
         <y>1080</y>
@@ -1480,7 +1480,7 @@
     <xARMScreenCap>
       <Name>iPhone</Name>
       <LongName>iPhone 5.5″ @2.6x (16:9) 1080x1920px (FHD)</LongName>
-      <Description>iPhone 7 Plus, 6S Plus, 6 Plus (Unity uses native resolution)</Description>
+      <Description>iPhone 8 Plus, 7 Plus, 6S Plus, 6 Plus</Description>
       <Resolution>
         <x>1080</x>
         <y>1920</y>
@@ -4091,7 +4091,7 @@
     <xARMScreenCap>
       <Name>iPhone</Name>
       <LongName>iPhone 4.7″ @2x (16:9~) 750x1334px (custom)</LongName>
-      <Description>iPhone 7, 6S, 6</Description>
+      <Description>iPhone 8, 7, 6S, 6</Description>
       <Resolution>
         <x>750</x>
         <y>1334</y>
@@ -4272,6 +4272,98 @@
       <IsBaseRes>true</IsBaseRes>
       <Enabled>true</Enabled>
     </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>iPhone</Name>
+      <LongName>iPhone 5.8″ @3x (19.5:9) 2436x1125px (custom)</LongName>
+      <Description>iPhone X</Description>
+      <Resolution>
+        <x>2436</x>
+        <y>1125</y>
+      </Resolution>
+      <ResolutionLabel>custom</ResolutionLabel>
+      <Aspect>2.16533327</Aspect>
+      <AspectLabel>19.5:9</AspectLabel>
+      <Diagonal>5.8</Diagonal>
+      <DPI>458</DPI>
+      <DPILabel>@3x</DPILabel>
+      <DPIFactor>0</DPIFactor>
+      <Group>iOS</Group>
+      <StatisticsPositioning>999</StatisticsPositioning>
+      <StatisticsUsedPercent>-1</StatisticsUsedPercent>
+      <IsLandscape>true</IsLandscape>
+      <IsPortrait>false</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>false</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>iPhone</Name>
+      <LongName>iPhone 4.7″ @3x (16:9) 2001x1125px (custom)</LongName>
+      <Description>iPhone X 16:9 (with letterbox)</Description>
+      <Resolution>
+        <x>2001</x>
+        <y>1125</y>
+      </Resolution>
+      <ResolutionLabel>custom</ResolutionLabel>
+      <Aspect>1.77866662</Aspect>
+      <AspectLabel>16:9</AspectLabel>
+      <Diagonal>4.7</Diagonal>
+      <DPI>458</DPI>
+      <DPILabel>@3x</DPILabel>
+      <DPIFactor>0</DPIFactor>
+      <Group>iOS</Group>
+      <StatisticsPositioning>999</StatisticsPositioning>
+      <StatisticsUsedPercent>-1</StatisticsUsedPercent>
+      <IsLandscape>true</IsLandscape>
+      <IsPortrait>false</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>false</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>iPhone</Name>
+      <LongName>iPhone 5.8″ @3x (19.5:9) 1125x2436px (custom)</LongName>
+      <Description>iPhone X</Description>
+      <Resolution>
+        <x>1125</x>
+        <y>2436</y>
+      </Resolution>
+      <ResolutionLabel>custom</ResolutionLabel>
+      <Aspect>0.461822659</Aspect>
+      <AspectLabel>19.5:9</AspectLabel>
+      <Diagonal>5.8</Diagonal>
+      <DPI>458</DPI>
+      <DPILabel>@3x</DPILabel>
+      <DPIFactor>0</DPIFactor>
+      <Group>iOS</Group>
+      <StatisticsPositioning>999</StatisticsPositioning>
+      <StatisticsUsedPercent>-1</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>false</Enabled>
+    </xARMScreenCap>
+    <xARMScreenCap>
+      <Name>iPhone</Name>
+      <LongName>iPhone 4.7″ @3x (16:9) 1125x2001px (custom)</LongName>
+      <Description>iPhone X 16:9 (with letterbox)</Description>
+      <Resolution>
+        <x>1125</x>
+        <y>2001</y>
+      </Resolution>
+      <ResolutionLabel>custom</ResolutionLabel>
+      <Aspect>0.5622189</Aspect>
+      <AspectLabel>16:9</AspectLabel>
+      <Diagonal>4.7</Diagonal>
+      <DPI>458</DPI>
+      <DPILabel>@3x</DPILabel>
+      <DPIFactor>0</DPIFactor>
+      <Group>iOS</Group>
+      <StatisticsPositioning>999</StatisticsPositioning>
+      <StatisticsUsedPercent>-1</StatisticsUsedPercent>
+      <IsLandscape>false</IsLandscape>
+      <IsPortrait>true</IsPortrait>
+      <IsBaseRes>true</IsBaseRes>
+      <Enabled>false</Enabled>
+    </xARMScreenCap>
   </AvailScreenCaps>
   <FoldoutContact>true</FoldoutContact>
   <FoldoutOptions>true</FoldoutOptions>
@@ -4292,6 +4384,7 @@
     <y>160</y>
   </FixedScreenCapSize>
   <UpdatePreviewWhileGameViewHasFocus>true</UpdatePreviewWhileGameViewHasFocus>
+  <UpdateGalleryWhileSceneViewHasFocus>false</UpdateGalleryWhileSceneViewHasFocus>
   <GameViewInheritsPreviewSize>true</GameViewInheritsPreviewSize>
   <FallbackGameViewSize>
     <x>480</x>
@@ -4304,7 +4397,12 @@
   <IntegrationUGUIPhySizeKeepDPI>true</IntegrationUGUIPhySizeKeepDPI>
   <ExportPath>/Users/rafael/Documents/dev/einmaleins/Screenshots</ExportPath>
   <AutoTraceGameViewPosition>true</AutoTraceGameViewPosition>
+  <AutoDetectGameViewSettings>true</AutoDetectGameViewSettings>
   <EditorUsesHIDPI>false</EditorUsesHIDPI>
+  <GameViewToolbarOffset>
+    <x>0</x>
+    <y>17</y>
+  </GameViewToolbarOffset>
   <FixedGameViewPosition>
     <x>0</x>
     <y>44</y>
@@ -4314,7 +4412,7 @@
     <y>35</y>
   </HiddenGameViewPosition>
   <HideGameView>true</HideGameView>
-  <PreviewSelectedScreenCapIndex>6</PreviewSelectedScreenCapIndex>
+  <PreviewSelectedScreenCapIndex>1</PreviewSelectedScreenCapIndex>
   <PreviewAutoUpdateInEditorMode>false</PreviewAutoUpdateInEditorMode>
   <PreviewAutoUpdateInPauseMode>true</PreviewAutoUpdateInPauseMode>
   <PreviewAutoUpdateInPlayMode>false</PreviewAutoUpdateInPlayMode>
@@ -4323,7 +4421,7 @@
   <PreviewUpdateIntervalLimitEdit>12</PreviewUpdateIntervalLimitEdit>
   <PreviewUpdateIntervalLimitPlay>30</PreviewUpdateIntervalLimitPlay>
   <GalleryAutoUpdateInEditorMode>false</GalleryAutoUpdateInEditorMode>
-  <GalleryAutoUpdateInPauseMode>false</GalleryAutoUpdateInPauseMode>
+  <GalleryAutoUpdateInPauseMode>true</GalleryAutoUpdateInPauseMode>
   <GalleryScreenCapsPerRow>1</GalleryScreenCapsPerRow>
   <GalleryUpdateIntervalLimitEdit>12</GalleryUpdateIntervalLimitEdit>
   <GameViewPosition>

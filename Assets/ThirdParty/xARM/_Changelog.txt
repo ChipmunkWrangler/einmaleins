@@ -265,4 +265,30 @@ Version		Change
 	+ Stats of all ScreenCaps are updated
 	+ New ScrennCaps (e.g. 4K)
 	+ Bugfix: Infinit update loop 
+
+
+1.8
+	+ Unity 2017.2 support
+	+ New/updated ScreenCaps for:
+		+ iPhone X
+		+ iPhone X (at 16:9)
+		+ iPhone 8
+		+ iPhone 8 Plus
+	+ New Option: Update Gallery while Scene View has focus
+	+ Bugfix: (By default) Gallery does not update while Scene View has focus
+	+ Bugfix: Game View does no longer keep sliding upwards under some circumstances
+	+ Bugfix: Game View position is kept on Edit-Play mode switch
+
+
+1.8.1
+	+ Unity 2017.3 support
+	+ Bugfix: Fast switching between ScreenCaps in Gallery does no longer cause an "could not update" warning
+	+ Bugfix: Preview is updated after Play-Edit mode switch (was not under some conditions)
+
+
+1.8.2
+    + Unity 2018.1 support
+    + Auto detect for HiDPI mode
+    + Auto detect for Game View offset (Windows only)
+
 */

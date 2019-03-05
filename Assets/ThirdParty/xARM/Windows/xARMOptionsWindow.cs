@@ -138,9 +138,15 @@ public class xARMOptionsWindow : ScriptableWizard {
 
 #if UNITY_4_0 || UNITY_4_0_1 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3|| UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3
 #else	// 5.4+
-			GUILayout.Label ("Editor Mode", EditorStyles.boldLabel);
-			xARMManager.Config.EditorUsesHIDPI = GUILayout.Toggle (xARMManager.Config.EditorUsesHIDPI, "Editor is using Retina/HiDPI mode.");
-			EditorGUILayout.Space ();
+            GUILayout.Label("Editor Mode and Game View Toolbar Offset", EditorStyles.boldLabel);
+            xARMManager.Config.AutoDetectGameViewSettings = GUILayout.Toggle(xARMManager.Config.AutoDetectGameViewSettings, "Auto detect settings");
+            if (!xARMManager.Config.AutoDetectGameViewSettings)
+            {
+                xARMManager.Config.EditorUsesHIDPI = GUILayout.Toggle(xARMManager.Config.EditorUsesHIDPI, "Editor is using Retina/HiDPI mode.");
+                EditorGUILayout.Space();
+                xARMManager.Config.GameViewToolbarOffset = new Vector2(0, EditorGUILayout.IntField("Offset", (int)xARMManager.Config.GameViewToolbarOffset.y));
+            }
+            EditorGUILayout.Space();
 #endif
 
 			GUILayout.Label ("Game View Position", EditorStyles.boldLabel);
@@ -249,6 +255,9 @@ public class xARMOptionsWindow : ScriptableWizard {
 			GUILayout.Label ("Update Limit", EditorStyles.boldLabel);
 			GUILayout.Label ("Maximum updates per second (FPS)");
 			xARMManager.Config.GalleryUpdateIntervalLimitEdit = EditorGUILayout.IntField ("Edit mode", xARMManager.Config.GalleryUpdateIntervalLimitEdit);
+			EditorGUILayout.Space ();
+			GUILayout.Label ("Update Control", EditorStyles.boldLabel);
+			xARMManager.Config.UpdateGalleryWhileSceneViewHasFocus = GUILayout.Toggle (xARMManager.Config.UpdateGalleryWhileSceneViewHasFocus, "Update while Scene View has focus");
 			EditorGUILayout.Space ();
 			GUILayout.Label ("ScreenCap Size", EditorStyles.boldLabel);
 			xARMManager.Config.UseFixedScreenCapSize = GUILayout.Toggle (xARMManager.Config.UseFixedScreenCapSize, "Display all ScreenCaps at the same fixed size");

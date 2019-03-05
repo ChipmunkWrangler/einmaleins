@@ -23,6 +23,8 @@ public class xARMPreviewWindow : EditorWindow {
 	private static float updateInterval;
 	// switch Game View to new default resolution on next update
 	private static bool resizeGameViewToNewDefault = false;
+	// abort updates on Editor mode changes
+	private static EditorMode lastEditorMode;
 
 	// GUI
 	public static bool RepaintNextUpdate = false;
@@ -68,6 +70,7 @@ public class xARMPreviewWindow : EditorWindow {
 		// Init everything
 		xARMManager.CreateProxyGO ();
 
+
 		// ensure correct display after Edit->Pause/Play mode switch
 		RepaintNextUpdate = true;
 	}
@@ -75,6 +78,12 @@ public class xARMPreviewWindow : EditorWindow {
 	void Update(){
 		// send heartbeat
 		xARMManager.SendHeartbeatPreview();
+
+		// abort update on Editor mode switch
+		if (lastEditorMode != xARMManager.CurrEditorMode){
+			xARMManager.AbortUpdatePreview ();
+		}
+		lastEditorMode = xARMManager.CurrEditorMode;
 
 		// ensures a xARM Proxy exists
 		xARMManager.CreateProxyGO ();

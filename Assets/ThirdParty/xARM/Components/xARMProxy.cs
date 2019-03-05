@@ -30,7 +30,7 @@ public class xARMProxy : MonoBehaviour {
 	#region Function
 	void OnEnable(){
 		// add delegate to reset on scene switch
-		EditorApplication.hierarchyWindowChanged += xARMManager.ResetOnSceneSwitch;
+        EditorApplication.hierarchyChanged += xARMManager.ResetOnSceneSwitch;
 		// check heartbeat of windows
 		EditorApplication.update += xARMManager.CheckHeartbeat;
 	}
@@ -57,7 +57,7 @@ public class xARMProxy : MonoBehaviour {
 
 	void OnDestroy(){
 		// remove delegate to reset on scene switch
-		EditorApplication.hierarchyWindowChanged -= xARMManager.ResetOnSceneSwitch;
+        EditorApplication.hierarchyChanged -= xARMManager.ResetOnSceneSwitch;
 		// check heartbeat of windows
 		EditorApplication.update -= xARMManager.CheckHeartbeat;
 	}
@@ -76,7 +76,10 @@ public class xARMProxy : MonoBehaviour {
 
 		yield return new WaitForEndOfFrame();
 
-		xARMManager.ReadScreenCapFromGameView (screenCapToUpdate);
+		// final check if this yield is still relevant
+		if(xARMManager.TargetGameViewResolution == screenCapToUpdate.Resolution) { // 
+			xARMManager.ReadScreenCapFromGameView (screenCapToUpdate);
+		}
 
 		xARMManager.ScreenCapUpdateInProgress = false;
 	}
@@ -89,6 +92,7 @@ public class xARMProxy : MonoBehaviour {
 	}
 	
 	private IEnumerator WaitXFrames(xARMScreenCap screenCap, int frameCount){
+
 		while (frameCount > 0){
 			yield return null; // wait until next frame
 			frameCount--;

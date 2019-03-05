@@ -32,6 +32,7 @@ public class xARMGalleryWindow : EditorWindow {
 	// GUI look
 	public static bool RepaintNextUpdate = false;
 	private static Vector2 scrollPos;
+	private static Rect scaleRatioRectLayout;
 	private static GUIStyle labelStyle = new GUIStyle();
 	
 	private static int screenCapMinWidth = 160;
@@ -146,7 +147,15 @@ public class xARMGalleryWindow : EditorWindow {
 				activeScreenCaps = xARMManager.ActiveScreenCaps;
 
 				// execute update?
-				if(activeScreenCaps.Count != 0 && xARMManager.ProxyGO && !xARMManager.PreviewIsUpdating && !xARMManager.GameViewHasFocus && !xARMManager.OtherUpdateInProgress){
+				if(activeScreenCaps.Count != 0 && xARMManager.ProxyGO 
+					&& !xARMManager.PreviewIsUpdating && !xARMManager.OtherUpdateInProgress
+					&& !xARMManager.GameViewHasFocus 
+					&& (!xARMManager.SceneViewHasFocus
+						|| (xARMManager.SceneViewHasFocus
+							&& xARMManager.Config.UpdateGalleryWhileSceneViewHasFocus
+						)
+					)
+				){
 					// find next screenCap to update
 					if(currScreenCapIndex >= activeScreenCaps.Count) currScreenCapIndex = 0;
 					xARMScreenCap currScreenCap = activeScreenCaps[currScreenCapIndex];
@@ -251,8 +260,8 @@ public class xARMGalleryWindow : EditorWindow {
 		if(WarningBoxText != "") GUILayout.Label (WarningBoxText);
 		if(InfoBoxText != "") GUILayout.Label (InfoBoxText);
 #else
-		if(WarningBoxText != "") EditorGUILayout.HelpBox (WarningBoxText, MessageType.Warning, true); // Unity 3.3 Error
-		if(InfoBoxText != "") EditorGUILayout.HelpBox (InfoBoxText, MessageType.Info, true); // Unity 3.3 Error
+		if(WarningBoxText != "") EditorGUILayout.HelpBox (WarningBoxText, MessageType.Warning, true);
+		if(InfoBoxText != "") EditorGUILayout.HelpBox (InfoBoxText, MessageType.Info, true);
 #endif
 	}
 	

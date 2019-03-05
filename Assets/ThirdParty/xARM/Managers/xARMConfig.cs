@@ -14,7 +14,7 @@ public class xARMConfig {
 	#region Fields
 
 	[XmlIgnore]
-	public static string xARMVersion = "1.7";
+	public static string xARMVersion = "1.8.2";
 	
 #if UNITY_3_3 || UNITY_3_4 || UNITY_3_5
 	private static string settingsFilePath = Application.dataPath + "/../xARMSettings.xml";
@@ -49,6 +49,7 @@ public class xARMConfig {
 	private bool useFixedScreenCapSize = false;
 	private Vector2 fixedScreenCapSize = new Vector2(160, 160);
 	private bool updatePreviewWhileGameViewHasFocus = true;
+	private bool updateGalleryWhileSceneViewHasFocus = false;
 	private bool gameViewInheritsPreviewSize = true;
 	private Vector2 fallbackGameViewSize = new Vector2(480, 320);
 	private int framesToWait = 2;
@@ -56,9 +57,11 @@ public class xARMConfig {
 	private float scaleRatioCM = 0.9f;
 	private bool integrationUGUIPhySize = true;
 	private bool integrationUGUIPhySizeKeepDPI = true;
-	private string exportPath = "";
-	private bool autoTraceGameViewPosition = true;
+    private string exportPath = "";
+    private bool autoTraceGameViewPosition = true;
+    private bool autoDetectGameViewSettings = true;
 	private bool editorUsesHIDPI = false;
+	private Vector2 gameViewToolbarOffset = new Vector2 (0,17); // default for Mac
 	private Vector2 fixedGameViewPosition = new Vector2(0,44);
 	private Vector2 hiddenGameViewPosition = new Vector2(0,3000);
 	
@@ -270,6 +273,17 @@ public class xARMConfig {
 		}
 	}
 
+	public bool UpdateGalleryWhileSceneViewHasFocus {
+		get {
+			return updateGalleryWhileSceneViewHasFocus;
+		}
+		set {
+			MarkConfigAsChanged (updateGalleryWhileSceneViewHasFocus, value);
+
+			updateGalleryWhileSceneViewHasFocus = value;
+		}
+	}
+
 	public bool GameViewInheritsPreviewSize {
 		get {
 			return gameViewInheritsPreviewSize;
@@ -367,16 +381,33 @@ public class xARMConfig {
 		}
 	}
 
-	public bool AutoTraceGameViewPosition {
-		get {
-			return autoTraceGameViewPosition;
-		}
-		set {
-			MarkConfigAsChanged (autoTraceGameViewPosition, value);
+    public bool AutoTraceGameViewPosition
+    {
+        get
+        {
+            return autoTraceGameViewPosition;
+        }
+        set
+        {
+            MarkConfigAsChanged(autoTraceGameViewPosition, value);
 
-			autoTraceGameViewPosition = value;
-		}
-	}
+            autoTraceGameViewPosition = value;
+        }
+    }
+
+    public bool AutoDetectGameViewSettings
+    {
+        get
+        {
+            return autoDetectGameViewSettings;
+        }
+        set
+        {
+            MarkConfigAsChanged(autoDetectGameViewSettings, value);
+
+            autoDetectGameViewSettings = value;
+        }
+    }
 
 	public bool EditorUsesHIDPI {
 		get {
@@ -386,6 +417,17 @@ public class xARMConfig {
 			MarkConfigAsChanged (editorUsesHIDPI, value);
 
 			editorUsesHIDPI = value;
+		}
+	}
+	
+	public Vector2 GameViewToolbarOffset {
+		get {
+			return gameViewToolbarOffset;
+		}
+		set {
+			MarkConfigAsChanged (gameViewToolbarOffset, value);
+
+			gameViewToolbarOffset = value;
 		}
 	}
 
