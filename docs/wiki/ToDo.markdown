@@ -8,10 +8,11 @@
 * [X] Div gauntlet
 * [X] Rocket part in div
 * [X] Launch in div (no stats), switch to mult player, stats
-* [ ] Switch between circle and square
+* [X] Switch between circle and square
 * [X] Fix first upgrade particle effects
 * [X] New record text?
 * [X] Test all particle effects
+* [ ] Test old data
 * [ ] Test all on device
 * [ ] Upload version
 * [ ] Email dude, tell him about testflight or have him wait

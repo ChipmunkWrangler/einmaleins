@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-class GotoSettings : MonoBehaviour
+internal class GotoSettings : MonoBehaviour
 {
     public void LoadSettingsScene()
     {
         PlayerPrefs.Save();
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("settings");
+        SceneManager.LoadSceneAsync("settings");
     }
 }

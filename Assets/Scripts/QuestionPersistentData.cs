@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System;
 using CrazyChipmunk;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 [Serializable]
 [CreateAssetMenu(menuName = "TimesTables/QuestionPersistentData")]
-class QuestionPersistentData : ScriptableObject
+internal class QuestionPersistentData : ScriptableObject
 {
     public static readonly int NumAnswerTimesToRecord = 3;
     public static readonly float AnswerTimeInitial = Question.FastTime + 0.01F;
 
-    Prefs prefs;
-    string prefsKey;
+    private Prefs prefs;
+    private string prefsKey;
 
     public int Idx { get; set; }
     public bool WasMastered { get; set; } // even if it is no longer mastered. This is for awarding rocket parts
@@ -29,7 +30,7 @@ class QuestionPersistentData : ScriptableObject
         AnswerTimes = GetAnswerTimes(prefsKey);
         WasMastered = prefs.GetBool(prefsKey + ":wasMastered");
         WasWrong = prefs.GetBool(prefsKey + ":wasWrong");
-        IsNew = prefs.GetBool(prefsKey + ":isNew", defaultValue: true);
+        IsNew = prefs.GetBool(prefsKey + ":isNew", true);
         GaveUp = prefs.GetBool(prefsKey + ":gaveUp");
     }
 
@@ -43,11 +44,8 @@ class QuestionPersistentData : ScriptableObject
 
     public void Save(string prefsKey = "")
     {
-        if (prefsKey == "")
-        {
-            prefsKey = this.prefsKey;
-        }
-        UnityEngine.Assertions.Assert.AreNotEqual(prefsKey.Length, 0);
+        if (prefsKey == "") prefsKey = this.prefsKey;
+        Assert.AreNotEqual(prefsKey.Length, 0);
         SetAnswerTimes(prefsKey, AnswerTimes);
         prefs.SetBool(prefsKey + ":wasMastered", WasMastered);
         prefs.SetBool(prefsKey + ":wasWrong", WasWrong);
@@ -55,20 +53,20 @@ class QuestionPersistentData : ScriptableObject
         prefs.SetBool(prefsKey + ":gaveUp", GaveUp);
     }
 
-    List<float> GetAnswerTimes(string prefsKey) => prefs.GetFloatArray(prefsKey + ":times").ToList();
+    private List<float> GetAnswerTimes(string prefsKey)
+    {
+        return prefs.GetFloatArray(prefsKey + ":times").ToList();
+    }
 
-    void SetAnswerTimes(string prefsKey, List<float> answerTimes)
+    private void SetAnswerTimes(string prefsKey, List<float> answerTimes)
     {
         prefs.SetFloatArray(prefsKey + ":times", answerTimes.ToArray());
     }
 
-    static List<float> GetNewAnswerTimes()
+    private static List<float> GetNewAnswerTimes()
     {
         var answerTimes = new List<float>();
-        for (int i = 0; i < NumAnswerTimesToRecord; ++i)
-        {
-            answerTimes.Add(AnswerTimeInitial);
-        }
+        for (var i = 0; i < NumAnswerTimesToRecord; ++i) answerTimes.Add(AnswerTimeInitial);
         return answerTimes;
     }
 }

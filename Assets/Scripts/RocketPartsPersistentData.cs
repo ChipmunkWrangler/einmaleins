@@ -1,13 +1,12 @@
-﻿using System;
-using CrazyChipmunk;
+﻿using CrazyChipmunk;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "TimesTables/RocketPartsPersistentData")]
-class RocketPartsPersistentData : ScriptableObject
+internal class RocketPartsPersistentData : ScriptableObject
 {
-    const string PrefsKey = "rocketParts";
+    private const string PrefsKey = "rocketParts";
 
-    [SerializeField] Prefs prefs = null;
+    [SerializeField] private Prefs prefs;
 
     public bool JustUpgraded { get; set; }
     public int NumParts { get; set; }

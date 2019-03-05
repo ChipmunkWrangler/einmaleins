@@ -1,12 +1,9 @@
-﻿class QuestionDisplay : TextDisplay, IOnQuestionChanged, IOnQuizAborted
+﻿internal class QuestionDisplay : TextDisplay, IOnQuestionChanged, IOnQuizAborted
 {
     void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
-        string s = "";
-        if (question != null)
-        {
-            s = question.GetLocalizedString();
-        }
+        var s = "";
+        if (question != null) s = question.GetLocalizedString();
         SetText(s);
     }
 
@@ -15,7 +12,7 @@
         SetText("");
     }
 
-    void OnCorrectAnswer()
+    private void OnCorrectAnswer()
     {
         SetText("");
     }

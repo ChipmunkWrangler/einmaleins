@@ -1,25 +1,25 @@
 ﻿using UnityEngine;
 
-class RocketMotionSolarSystem : MonoBehaviour
+internal class RocketMotionSolarSystem : MonoBehaviour
 {
-    [SerializeField] FlashThrust thrust = null;
-    [SerializeField] Params paramObj = null;
-    float minY;
+    private float minY;
+    [SerializeField] private Params paramObj;
+    [SerializeField] private FlashThrust thrust;
 
-    void Start()
+    private void Start()
     {
         minY = gameObject.transform.position.y;
     }
 
-    void Update()
+    private void Update()
     {
         Ascend();
     }
 
-    void Ascend()
+    private void Ascend()
     {
-        Vector3 pos = gameObject.transform.position;
-        pos.y = minY + (thrust.Height * paramObj.HeightScale * gameObject.transform.parent.localScale.y);
+        var pos = gameObject.transform.position;
+        pos.y = minY + thrust.Height * paramObj.HeightScale * gameObject.transform.parent.localScale.y;
         gameObject.transform.position = pos;
     }
 }

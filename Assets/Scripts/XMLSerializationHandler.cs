@@ -1,18 +1,20 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Text;
 using System.Xml.Serialization;
 using UnityEngine;
 
-static class XMLSerializationHandler
+internal static class XMLSerializationHandler
 {
-    const string FileName = "gamedata.xml";
+    private const string FileName = "gamedata.xml";
 
     public static void SaveToFile()
     {
         try
         {
             var serializer = new XmlSerializer(typeof(GameData));
-            System.Text.Encoding encoding = System.Text.Encoding.GetEncoding("UTF-8");
-            using (FileStream file = File.Open(GetPath(), FileMode.Create, FileAccess.Write, FileShare.None))
+            var encoding = Encoding.GetEncoding("UTF-8");
+            using (var file = File.Open(GetPath(), FileMode.Create, FileAccess.Write, FileShare.None))
             {
                 using (var sw = new StreamWriter(file, encoding))
                 {
@@ -20,7 +22,7 @@ static class XMLSerializationHandler
                 }
             }
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             Debug.Log(ExceptionPrettyPrint.Msg(ex));
             throw;
@@ -42,22 +44,21 @@ static class XMLSerializationHandler
         GameData data = null;
         try
         {
-            string path = GetPath();
+            var path = GetPath();
             if (File.Exists(path))
-            {
-                using (FileStream file = File.OpenRead(GetPath()))
+                using (var file = File.OpenRead(GetPath()))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(GameData));
-                    data = (GameData)serializer.Deserialize(file);
+                    var serializer = new XmlSerializer(typeof(GameData));
+                    data = (GameData) serializer.Deserialize(file);
                     data.Save();
                 }
-            }
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             Debug.Log(ExceptionPrettyPrint.Msg(ex));
             throw;
         }
+
         return data;
     }
 
@@ -67,22 +68,22 @@ static class XMLSerializationHandler
         {
             var reader = new StringReader(xml);
             var serializer = new XmlSerializer(typeof(GameData));
-            GameData data = (GameData)serializer.Deserialize(reader);
+            var data = (GameData) serializer.Deserialize(reader);
             data.Save();
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             Debug.Log(ExceptionPrettyPrint.Msg(ex));
             throw;
         }
     }
 
-    static string GetPath()
+    private static string GetPath()
     {
         return Path.Combine(Application.persistentDataPath, FileName);
     }
 
-    static GameData GetData()
+    private static GameData GetData()
     {
         var data = new GameData();
         data.Load();

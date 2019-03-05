@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
-abstract class Question
+internal abstract class Question
 {
     public const float FastTime = 4.0F;
 
-    const float AnswerTimeMax = 60.0F;
-    const float WrongAnswerTimePenalty = 1.5F;
-    readonly QuestionPersistentData data;
+    private const float AnswerTimeMax = 60.0F;
+    private const float WrongAnswerTimePenalty = 1.5F;
+    private readonly QuestionPersistentData data;
 
     public Question(int a, int b, QuestionPersistentData data)
     {
@@ -18,41 +17,60 @@ abstract class Question
     }
 
     public bool IsLaunchCode { get; set; }
-    public int A { get; private set; }
-    public int B { get; private set; }
+    public int A { get; }
+    public int B { get; }
     public bool WasAnsweredInThisQuiz { get; private set; }
 
     public abstract int GetAnswer();
     public abstract string GetLocalizedString(); // the question to be posed to the user
 
-    public bool WasWrong() => data.WasWrong;
-    public bool IsNew() => data.IsNew;
-    public bool GaveUp() => data.GaveUp;
-    public bool IsMastered() => !WasWrong() && GetAverageAnswerTime() <= FastTime;
-    public float GetLastAnswerTime() => data.AnswerTimes[data.AnswerTimes.Count - 1];
-    public float GetAverageAnswerTime() => data.AnswerTimes.Average();
+    public bool WasWrong()
+    {
+        return data.WasWrong;
+    }
+
+    public bool IsNew()
+    {
+        return data.IsNew;
+    }
+
+    public bool GaveUp()
+    {
+        return data.GaveUp;
+    }
+
+    public bool IsMastered()
+    {
+        return !WasWrong() && GetAverageAnswerTime() <= FastTime;
+    }
+
+    public float GetLastAnswerTime()
+    {
+        return data.AnswerTimes[data.AnswerTimes.Count - 1];
+    }
+
+    public float GetAverageAnswerTime()
+    {
+        return data.AnswerTimes.Average();
+    }
 
     public void SetNewFromAnswerTime()
     {
-        bool isNew = true;
-        foreach (float answerTime in data.AnswerTimes)
-        {
+        var isNew = true;
+        foreach (var answerTime in data.AnswerTimes)
             if (answerTime != QuestionPersistentData.AnswerTimeInitial)
             {
                 isNew = false;
                 break;
             }
-        }
+
         data.IsNew = isNew;
     }
 
     public bool IsAnswerCorrect(string answer)
     {
         int result;
-        if (int.TryParse(answer, out result))
-        {
-            return result == GetAnswer();
-        }
+        if (int.TryParse(answer, out result)) return result == GetAnswer();
         return false;
     }
 
@@ -70,7 +88,7 @@ abstract class Question
 
     public bool Answer(bool isCorrect, float timeRequired)
     {
-        bool isNewlyMastered = false;
+        var isNewlyMastered = false;
         if (isCorrect)
         {
             RecordAnswerTime(GetAdjustedTime(timeRequired));
@@ -86,6 +104,7 @@ abstract class Question
         {
             data.WasWrong = true;
         }
+
 //        Debug.Log(ToString());
         return isNewlyMastered;
     }
@@ -100,11 +119,10 @@ abstract class Question
 
     public override string ToString()
     {
-        string s = data.Idx + " is '" + GetLocalizedString() + "' : asMastered = " + data.WasMastered + " wasWrong = " + data.WasWrong + " isNew = " + data.IsNew + " gaveUp " + data.GaveUp + " averageTime " + GetAverageAnswerTime() + " times = ";
-        foreach (var time in data.AnswerTimes)
-        {
-            s += time + " ";
-        }
+        var s = data.Idx + " is '" + GetLocalizedString() + "' : asMastered = " + data.WasMastered + " wasWrong = " +
+                data.WasWrong + " isNew = " + data.IsNew + " gaveUp " + data.GaveUp + " averageTime " +
+                GetAverageAnswerTime() + " times = ";
+        foreach (var time in data.AnswerTimes) s += time + " ";
         return s;
     }
 
@@ -112,35 +130,23 @@ abstract class Question
     {
         var newAnswerTimes = new List<float>();
         foreach (var time in data.AnswerTimes)
-        {
             newAnswerTimes.Add(time == oldAnswerTimeInitial ? QuestionPersistentData.AnswerTimeInitial : time);
-        }
         data.AnswerTimes = newAnswerTimes;
     }
 
-    void RecordAnswerTime(float timeRequired)
+    private void RecordAnswerTime(float timeRequired)
     {
         data.AnswerTimes.Add(timeRequired);
         if (data.AnswerTimes.Count > QuestionPersistentData.NumAnswerTimesToRecord)
-        {
             data.AnswerTimes.RemoveRange(0, data.AnswerTimes.Count - QuestionPersistentData.NumAnswerTimesToRecord);
-        }
     }
 
-    float GetAdjustedTime(float timeRequired)
+    private float GetAdjustedTime(float timeRequired)
     {
         if (IsLaunchCode)
-        {
             timeRequired = AnswerTimeMax;
-        }
-        else if (data.WasWrong)
-        {
-            timeRequired += WrongAnswerTimePenalty;
-        }
-        if (timeRequired > AnswerTimeMax)
-        {
-            timeRequired = AnswerTimeMax;
-        }
+        else if (data.WasWrong) timeRequired += WrongAnswerTimePenalty;
+        if (timeRequired > AnswerTimeMax) timeRequired = AnswerTimeMax;
         return timeRequired;
     }
 }

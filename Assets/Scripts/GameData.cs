@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-class GameData
+[Serializable]
+internal class GameData
 {
-    readonly PlayerNameController playerNameController = new PlayerNameController(); // todo bug! is scriptable object now
+    private readonly PlayerNameController
+        playerNameController = new PlayerNameController(); // todo bug! is scriptable object now
 
     public string Version { get; set; } = "";
     public List<PlayerData> PlayerList { get; set; } = new List<PlayerData>();
@@ -29,20 +31,20 @@ class GameData
     public void Save()
     {
         if (Version != Application.version)
-        {
-            throw new System.NotSupportedException("File version " + Version + " doesn't match current version " + Application.version);
-        }
+            throw new NotSupportedException("File version " + Version + " doesn't match current version " +
+                                            Application.version);
         PlayerPrefs.DeleteAll();
         var versionModel = new TimesTablesSavedDataVersionModel();
         versionModel.Version = Application.version;
         playerNameController.Clear();
-        foreach (PlayerData playerData in PlayerList)
+        foreach (var playerData in PlayerList)
         {
             playerNameController.AppendName(playerData.PlayerName);
             //playerNameController.CurName = playerData.PlayerName;
             playerNameController.Save();
             playerData.Save();
         }
+
         //playerNameController.CurName = "";
         playerNameController.Save();
         PlayerPrefs.Save();

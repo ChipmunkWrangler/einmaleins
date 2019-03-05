@@ -1,12 +1,11 @@
-﻿using CrazyChipmunk;
-using UnityEngine;
+﻿using UnityEngine;
 
-class ChooseRocketColour : MonoBehaviour
+internal class ChooseRocketColour : MonoBehaviour
 {
-    [SerializeField] MeshRenderer rocketMesh = null;
-    [SerializeField] ColorPickerCircle colourPicker = null;
-    [SerializeField] RocketColour data = null;
-    bool isPaint;
+    [SerializeField] private ColorPickerCircle colourPicker;
+    [SerializeField] private RocketColour data;
+    private bool isPaint;
+    [SerializeField] private MeshRenderer rocketMesh;
 
     public void StartPaint()
     {
@@ -16,24 +15,18 @@ class ChooseRocketColour : MonoBehaviour
 
     public void StopPaint()
     {
-        if (isPaint)
-        {
-            data.SetColour(colourPicker.TheColor);
-        }
+        if (isPaint) data.SetColour(colourPicker.TheColor);
         isPaint = false;
     }
 
-    void Start()
+    private void Start()
     {
         colourPicker.gameObject.SetActive(false);
         colourPicker.SetNewColor(rocketMesh.material.color);
     }
 
-    void Update()
+    private void Update()
     {
-        if (isPaint)
-        {
-            rocketMesh.material.color = colourPicker.TheColor;
-        }
+        if (isPaint) rocketMesh.material.color = colourPicker.TheColor;
     }
 }

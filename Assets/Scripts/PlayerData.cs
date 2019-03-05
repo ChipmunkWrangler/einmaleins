@@ -1,13 +1,14 @@
 ﻿using System;
+
 // todo this is broken as long as the PersistentDatas are ScriptableObjects 
 [Serializable]
-class PlayerData
+internal class PlayerData
 {
-    readonly RocketPartsPersistentData rocketPartsData = new RocketPartsPersistentData();
-    readonly TargetPlanetPersistentData targetPlanetData = new TargetPlanetPersistentData();
-    readonly EffortTrackerPersistentData effortTrackerData = new EffortTrackerPersistentData();
-    readonly StatsControllerPersistentData statsControllerData = new StatsControllerPersistentData();
-    readonly QuestionsPersistentData questionsData = new QuestionsPersistentData(); 
+    private readonly EffortTrackerPersistentData effortTrackerData = new EffortTrackerPersistentData();
+    private readonly QuestionsPersistentData questionsData = new QuestionsPersistentData();
+    private readonly RocketPartsPersistentData rocketPartsData = new RocketPartsPersistentData();
+    private readonly StatsControllerPersistentData statsControllerData = new StatsControllerPersistentData();
+    private readonly TargetPlanetPersistentData targetPlanetData = new TargetPlanetPersistentData();
 
     public string PlayerName { get; set; }
 

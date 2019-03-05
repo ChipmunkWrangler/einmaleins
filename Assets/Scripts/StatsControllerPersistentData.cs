@@ -2,33 +2,27 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "TimesTables/StatsControllerData")]
-class StatsControllerPersistentData : ScriptableObject
+internal class StatsControllerPersistentData : ScriptableObject
 {
-    const string PrefsKey = "seenMastered";
+    private const string PrefsKey = "seenMastered";
 
-    [SerializeField] Prefs prefs = null;
+    [SerializeField] private Prefs prefs;
 
     public bool[][] SeenMastered { get; set; }
 
     public void Load(int numMax)
     {
         SeenMastered = new bool[numMax][];
-        for (int i = 0; i < numMax; ++i)
+        for (var i = 0; i < numMax; ++i)
         {
-            string key = PrefsKey + ":" + i;
+            var key = PrefsKey + ":" + i;
             SeenMastered[i] = prefs.GetBoolArray(key);
-            if (SeenMastered[i].Length == 0)
-            {
-                SeenMastered[i] = new bool[numMax];
-            }
+            if (SeenMastered[i].Length == 0) SeenMastered[i] = new bool[numMax];
         }
     }
 
     public void Save(int numMax)
     {
-        for (int i = 0; i < numMax; ++i)
-        {
-            prefs.SetBoolArray(PrefsKey + ":" + i, SeenMastered[i]);
-        }
+        for (var i = 0; i < numMax; ++i) prefs.SetBoolArray(PrefsKey + ":" + i, SeenMastered[i]);
     }
 }

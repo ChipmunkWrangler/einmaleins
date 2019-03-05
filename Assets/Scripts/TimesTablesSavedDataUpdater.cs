@@ -1,11 +1,11 @@
 using CrazyChipmunk;
 using UnityEngine;
 
-class TimesTablesSavedDataUpdater : SavedDataUpdater
+internal class TimesTablesSavedDataUpdater : SavedDataUpdater
 {
-    [SerializeField] Questions questions;
-    [SerializeField] VariableString playerName;
-    [SerializeField] PlayerNameController playerNameController;
+    [SerializeField] private VariableString playerName;
+    [SerializeField] private PlayerNameController playerNameController;
+    [SerializeField] private Questions questions;
 
     public override void UpdateData(string fromVersion, string toVersion)
     {
@@ -31,24 +31,21 @@ class TimesTablesSavedDataUpdater : SavedDataUpdater
         }
     }
 
-    void GiveUpAndDestroyData()
+    private void GiveUpAndDestroyData()
     {
         PlayerPrefs.DeleteAll();
     }
 
-    void UpdateFrom_0_1_11_To_0_1_14()
+    private void UpdateFrom_0_1_11_To_0_1_14()
     {
         playerNameController.Load();
         string oldName = playerName;
-        foreach (string name in playerNameController.Names)
+        foreach (var name in playerNameController.Names)
         {
             playerName.Value = name;
             playerNameController.Save();
             questions.gameObject.SetActive(true); // load question list
-            foreach (Question question in questions.QuestionArray)
-            {
-                question.SetNewFromAnswerTime();
-            }
+            foreach (var question in questions.QuestionArray) question.SetNewFromAnswerTime();
 
             questions.Save();
             questions.gameObject.SetActive(false);
@@ -58,21 +55,18 @@ class TimesTablesSavedDataUpdater : SavedDataUpdater
         playerNameController.Save();
     }
 
-    void UpdateFrom_0_1_8_To_0_1_11()
+    private void UpdateFrom_0_1_8_To_0_1_11()
     {
         const float OldAnswerTimeInitial = 3F + 0.01F;
         playerNameController.Load();
         string oldName = playerName;
-        foreach (string name in playerNameController.Names)
+        foreach (var name in playerNameController.Names)
         {
             playerName.Value = name;
             playerNameController.Save();
             Debug.Log("Updating question for " + name);
             questions.gameObject.SetActive(true); // load question list
-            foreach (Question question in questions.QuestionArray)
-            {
-                question.UpdateInitialAnswerTime(OldAnswerTimeInitial);
-            }
+            foreach (var question in questions.QuestionArray) question.UpdateInitialAnswerTime(OldAnswerTimeInitial);
 
             questions.Save();
             questions.gameObject.SetActive(false);

@@ -1,27 +1,18 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnQuizAborted
+internal class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnQuizAborted
 {
-    const float TimeToZero = Question.FastTime * 5.2F / 0.75F; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
-    const float HideTime = 0.3F;
+    private const float
+        TimeToZero =
+            Question.FastTime * 5.2F /
+            0.75F; // 5.2 is the original height, 0.75 is the y that should be covered in FAST_TIME
 
-    [SerializeField] RectTransform mask = null;
-    [SerializeField] Transform meter = null;
+    private const float HideTime = 0.3F;
 
-    float originalY;
+    [SerializeField] private RectTransform mask;
+    [SerializeField] private Transform meter;
 
-    public void OnGiveUp()
-    {
-        StopMeter();
-        meter.gameObject.SetActive(false);
-    }
-
-    void IOnQuizAborted.OnQuizAborted()
-    {
-        StopMeter();
-        meter.gameObject.SetActive(false);
-    }
+    private float originalY;
 
     void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
@@ -33,47 +24,61 @@ class BoostMeter : MonoBehaviour, IOnQuestionChanged, IOnQuizAborted
         }
     }
 
-    void OnCorrectAnswer()
+    void IOnQuizAborted.OnQuizAborted()
+    {
+        StopMeter();
+        meter.gameObject.SetActive(false);
+    }
+
+    public void OnGiveUp()
+    {
+        StopMeter();
+        meter.gameObject.SetActive(false);
+    }
+
+    private void OnCorrectAnswer()
     {
         StopMeter();
         HideMeter();
     }
 
-    void Start()
+    private void Start()
     {
         originalY = mask.localPosition.y;
         meter.gameObject.SetActive(false);
     }
 
-    void ResetMask()
+    private void ResetMask()
     {
         SetMaskY(originalY);
     }
 
-    void ShowMeter()
+    private void ShowMeter()
     {
         meter.gameObject.SetActive(true);
     }
 
-    void HideMeter()
+    private void HideMeter()
     {
         StartMeter(HideTime);
     }
 
-    void StartMeter(float t)
+    private void StartMeter(float t)
     {
-        iTween.ValueTo(mask.gameObject, iTween.Hash("from", mask.localPosition.y, "to", mask.localPosition.y - mask.rect.height, "time", t, "onupdate", "SetMaskY"));
+        iTween.ValueTo(mask.gameObject,
+            iTween.Hash("from", mask.localPosition.y, "to", mask.localPosition.y - mask.rect.height, "time", t,
+                "onupdate", "SetMaskY"));
     }
 
-    void StopMeter()
+    private void StopMeter()
     {
         iTween.Stop(mask.gameObject);
     }
 
-    void SetMaskY(float y)
+    private void SetMaskY(float y)
     {
         meter.SetParent(mask.parent);
-        Vector3 pos = mask.localPosition;
+        var pos = mask.localPosition;
         pos.y = y;
         mask.localPosition = pos;
         meter.SetParent(mask);

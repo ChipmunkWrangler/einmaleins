@@ -1,16 +1,18 @@
 ﻿using CrazyChipmunk;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-class GotoLaunch : MonoBehaviour
+internal class GotoLaunch : MonoBehaviour
 {
+    [SerializeField] private Button button;
     [SerializeField] private Prefs prefs;
-    [SerializeField] private UnityEngine.UI.Button button;
 
     public void LoadLaunchScene(bool autolaunch)
     {
         button.enabled = false;
         prefs.SetBool("autolaunch", autolaunch);
         PlayerPrefs.Save();
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("launch");
+        SceneManager.LoadSceneAsync("launch");
     }
 }

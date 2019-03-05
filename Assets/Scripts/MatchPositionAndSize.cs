@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-class MatchPositionAndSize : MonoBehaviour
+internal class MatchPositionAndSize : MonoBehaviour
 {
-    [SerializeField] RectTransform target = null;
-    [SerializeField] RectTransform source = null;
+    [SerializeField] private RectTransform source;
+    [SerializeField] private RectTransform target;
 
-    void Update()
+    private void Update()
     {
         source.position = target.position;
         source.sizeDelta = target.sizeDelta;

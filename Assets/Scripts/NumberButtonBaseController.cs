@@ -19,23 +19,16 @@ internal abstract class NumberButtonBaseController : MonoBehaviour
 
     protected virtual void UpdateLayout()
     {
-        if (UserChosenLayout == "grid" || (UserChosenLayout == "" && IsSmallScreen()))
-        {
+        if (UserChosenLayout == "grid" || UserChosenLayout == "" && IsSmallScreen())
             UseCompactButtonLayout();
-        }
         else
-        {
             UseNormalButtonLayout();
-        }
     }
 
     private bool IsSmallScreen()
     {
         var dpi = Screen.dpi;
-        if (dpi == 0)
-        {
-            return false;
-        }
+        if (dpi == 0) return false;
 
         return Screen.width / dpi <= maxSmallScreenInches;
     }

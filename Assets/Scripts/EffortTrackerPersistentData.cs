@@ -1,12 +1,13 @@
-﻿using CrazyChipmunk;
+﻿using System;
+using CrazyChipmunk;
 using UnityEngine;
 
 /// <summary>Saved state of how much time and effort the player has invested today</summary>
 [CreateAssetMenu(menuName = "TimesTables/EffortTrackerPersistentData")]
-class EffortTrackerPersistentData : ScriptableObject
+internal class EffortTrackerPersistentData : ScriptableObject
 {
-    [SerializeField] Prefs prefs = null;
-    const string PrefsKey = "effortTracking";
+    private const string PrefsKey = "effortTracking";
+    [SerializeField] private Prefs prefs;
 
     public int Frustration { get; set; }
     public int QuizzesToday { get; set; }
@@ -14,7 +15,7 @@ class EffortTrackerPersistentData : ScriptableObject
 
     public void Save()
     {
-        prefs.SetDateTime(PrefsKey + ":date", System.DateTime.Today);
+        prefs.SetDateTime(PrefsKey + ":date", DateTime.Today);
         prefs.SetInt(PrefsKey + ":frustration", Frustration);
         prefs.SetInt(PrefsKey + ":quizzesToday", QuizzesToday);
         prefs.SetFloat(PrefsKey + ":timeToday", TimeToday);
@@ -23,7 +24,7 @@ class EffortTrackerPersistentData : ScriptableObject
     public void Load()
     {
         Frustration = prefs.GetInt(PrefsKey + ":frustration", 0);
-        if (prefs.GetDateTime(PrefsKey + ":date", System.DateTime.MinValue) < System.DateTime.Today)
+        if (prefs.GetDateTime(PrefsKey + ":date", DateTime.MinValue) < DateTime.Today)
         {
             QuizzesToday = 0;
             TimeToday = 0;

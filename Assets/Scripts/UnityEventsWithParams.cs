@@ -2,4 +2,6 @@
 using UnityEngine.Events;
 
 [Serializable]
-class BoolEvent : UnityEvent<bool> { }
+internal class BoolEvent : UnityEvent<bool>
+{
+}

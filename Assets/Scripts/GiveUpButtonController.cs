@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged
+internal class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged
 {
-    const float TransitionTime = EnterAnswerButtonController.TransitionTime;
+    private const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
-    [SerializeField] UnityEngine.UI.Button button = null;
-    [SerializeField] UnityEngine.UI.Image image = null;
+    [SerializeField] private Button button;
+    [SerializeField] private Image image;
 
-    public void OnGiveUp()
+    void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
-        SetInteractibility(false);
+        SetInteractibility(question != null);
     }
 
     void IOnQuizAborted.OnQuizAborted()
@@ -23,22 +23,22 @@ class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IO
         SetInteractibility(true);
     }
 
-    void IOnQuestionChanged.OnQuestionChanged(Question question)
-    {
-        SetInteractibility(question != null);
-    }
-
-    void OnCorrectAnswer()
+    public void OnGiveUp()
     {
         SetInteractibility(false);
     }
 
-    void OnAnswerChanged(bool isAnswerEmpty)
+    private void OnCorrectAnswer()
+    {
+        SetInteractibility(false);
+    }
+
+    private void OnAnswerChanged(bool isAnswerEmpty)
     {
         SetInteractibility(isAnswerEmpty);
     }
 
-    void SetInteractibility(bool b)
+    private void SetInteractibility(bool b)
     {
         if (button.interactable != b)
         {
@@ -48,8 +48,9 @@ class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IO
         }
     }
 
-    void ScaleTo(Vector3 tgtScale)
+    private void ScaleTo(Vector3 tgtScale)
     {
-        iTween.ScaleTo(gameObject, iTween.Hash("scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
+        iTween.ScaleTo(gameObject,
+            iTween.Hash("scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
     }
 }

@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-class GotoBuildRocket : MonoBehaviour
+internal class GotoBuildRocket : MonoBehaviour
 {
     public void LoadScene()
     {
         PlayerPrefs.Save();
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("rocketBuilding");
+        SceneManager.LoadSceneAsync("rocketBuilding");
     }
 }

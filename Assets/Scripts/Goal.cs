@@ -1,13 +1,7 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-class Goal : MonoBehaviour
+internal class Goal : MonoBehaviour
 {
-    [SerializeField] EffortTracker effortTracker = null;
-    [SerializeField] RocketColour chooseRocketColourData = null;
-    [SerializeField] TargetPlanet targetPlanet = null;
-
     public enum CurGoal
     {
         UpgradeRocket,
@@ -17,39 +11,49 @@ class Goal : MonoBehaviour
         Won // try to get high score
     }
 
-    public static bool IsGivingUpAllowed(CurGoal curGoal) => curGoal == Goal.CurGoal.FlyToPlanet;
+    [SerializeField] private RocketColour chooseRocketColourData;
+    [SerializeField] private EffortTracker effortTracker;
+    [SerializeField] private TargetPlanet targetPlanet;
+
+    public static bool IsGivingUpAllowed(CurGoal curGoal)
+    {
+        return curGoal == CurGoal.FlyToPlanet;
+    }
 
     public bool IsReadyForGauntlet()
     {
-        return (targetPlanet.GetTargetPlanetIdx() == TargetPlanet.GetMaxPlanetIdx()) &&
-            RocketParts.Instance.UpgradeLevel == RocketParts.Instance.MaxUpgradeLevel - 1;
+        return targetPlanet.GetTargetPlanetIdx() == TargetPlanet.GetMaxPlanetIdx() &&
+               RocketParts.Instance.UpgradeLevel == RocketParts.Instance.MaxUpgradeLevel - 1;
     }
 
     public CurGoal CalcCurGoal()
     {
         CurGoal curGoal;
         if (ShouldUpgrade())
-        {
             curGoal = CurGoal.UpgradeRocket;
-        }
         else if (IsDoneForToday())
-        {
             curGoal = CurGoal.DoneForToday;
-        }
         else if (IsLeavingSolarSystem())
-        {
             curGoal = CurGoal.Won;
-        }
         else
-        {
             curGoal = IsReadyForGauntlet() ? CurGoal.Gauntlet : CurGoal.FlyToPlanet;
-        }
 
         return curGoal;
     }
 
-    bool ShouldUpgrade() => (RocketParts.Instance.HasEnoughPartsToUpgrade || !chooseRocketColourData.HasChosenColour()) && !RocketParts.Instance.JustUpgraded;
-    bool IsLeavingSolarSystem() => targetPlanet.GetTargetPlanetIdx() > TargetPlanet.GetMaxPlanetIdx();
+    private bool ShouldUpgrade()
+    {
+        return (RocketParts.Instance.HasEnoughPartsToUpgrade || !chooseRocketColourData.HasChosenColour()) &&
+               !RocketParts.Instance.JustUpgraded;
+    }
 
-    bool IsDoneForToday() => effortTracker.IsDoneForToday() && !RocketParts.Instance.JustUpgraded;
+    private bool IsLeavingSolarSystem()
+    {
+        return targetPlanet.GetTargetPlanetIdx() > TargetPlanet.GetMaxPlanetIdx();
+    }
+
+    private bool IsDoneForToday()
+    {
+        return effortTracker.IsDoneForToday() && !RocketParts.Instance.JustUpgraded;
+    }
 }

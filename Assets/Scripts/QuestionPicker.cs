@@ -2,33 +2,27 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-class QuestionPicker : MonoBehaviour
+internal class QuestionPicker : MonoBehaviour
 {
-    [SerializeField] GameObject[] subscribers = null;
-    [SerializeField] EffortTracker effortTracker = null;
-    [SerializeField] CorrectAnswerEvent correctAnswer = new CorrectAnswerEvent();
+    [SerializeField] private CorrectAnswerEvent correctAnswer = new CorrectAnswerEvent();
 
-    Question curQuestion;
-    SubscriberList<IOnQuestionChanged> onQuestionChangeds;
-    SubscriberList<IOnWrongAnswer> onWrongAnswers;
-    SubscriberList<IOnQuizAborted> onQuizAborteds;
-    float questionTime;
+    private Question curQuestion;
+    [SerializeField] private EffortTracker effortTracker;
+    private SubscriberList<IOnQuestionChanged> onQuestionChangeds;
+    private SubscriberList<IOnQuizAborted> onQuizAborteds;
+    private SubscriberList<IOnWrongAnswer> onWrongAnswers;
+    private float questionTime;
+    [SerializeField] private GameObject[] subscribers;
 
     public string CurAnswer
     {
-        get
-        {
-            return curQuestion?.GetAnswer().ToString() ?? "";
-        }
+        get => curQuestion?.GetAnswer().ToString() ?? "";
 
         set
         {
-            if (curQuestion == null || value.Length == 0)
-            {
-                return;
-            }
-            bool isCorrect = curQuestion.IsAnswerCorrect(value);
-            float answerTime = Time.time - questionTime;
+            if (curQuestion == null || value.Length == 0) return;
+            var isCorrect = curQuestion.IsAnswerCorrect(value);
+            var answerTime = Time.time - questionTime;
             HandleAnswer(isCorrect, answerTime);
             effortTracker.Save();
         }
@@ -42,7 +36,10 @@ class QuestionPicker : MonoBehaviour
 
     public void NextQuestion()
     {
-        ShowQuestion((curQuestion != null && curQuestion.IsLaunchCode) ? curQuestion : effortTracker.GetQuestion()); // if NextQuestion is called with curQuestion.isLaunchCode, the player gave up on the launch code, which means we should show it again
+        ShowQuestion(curQuestion != null && curQuestion.IsLaunchCode
+            ? curQuestion
+            : effortTracker
+                .GetQuestion()); // if NextQuestion is called with curQuestion.isLaunchCode, the player gave up on the launch code, which means we should show it again
         // StartCoroutine (AutoAnswer());
     }
 
@@ -53,23 +50,23 @@ class QuestionPicker : MonoBehaviour
         questionTime = Time.time;
     }
 
-    void Start()
+    private void Start()
     {
         SplitSubscribers();
     }
 
     // I can't figure out a way to get the editor to display a list of OnQuestionChangeds (since an Interface can't be Serializable)...
-    void SplitSubscribers()
+    private void SplitSubscribers()
     {
         onQuestionChangeds = new SubscriberList<IOnQuestionChanged>(subscribers);
         onWrongAnswers = new SubscriberList<IOnWrongAnswer>(subscribers);
         onQuizAborteds = new SubscriberList<IOnQuizAborted>(subscribers);
     }
 
-    void HandleAnswer(bool isCorrect, float answerTime)
+    private void HandleAnswer(bool isCorrect, float answerTime)
     {
-        bool wasNew = curQuestion.IsNew();
-        bool isNewlyMastered = curQuestion.Answer(isCorrect, answerTime);
+        var wasNew = curQuestion.IsNew();
+        var isNewlyMastered = curQuestion.Answer(isCorrect, answerTime);
         if (isCorrect)
         {
             correctAnswer.Invoke(curQuestion, isNewlyMastered);
@@ -80,6 +77,7 @@ class QuestionPicker : MonoBehaviour
             onWrongAnswers.Notify(subscriber => subscriber.OnWrongAnswer(wasNew));
         }
     }
+
 /*
     Enumerator AutoAnswer()
     {
@@ -91,5 +89,7 @@ class QuestionPicker : MonoBehaviour
     }
 */
     [Serializable]
-    class CorrectAnswerEvent : UnityEvent<Question, bool /*isNewlyMastered*/> { }
+    private class CorrectAnswerEvent : UnityEvent<Question, bool /*isNewlyMastered*/>
+    {
+    }
 }

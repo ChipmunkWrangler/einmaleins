@@ -13,6 +13,7 @@ public static class ExceptionPrettyPrint
             ex = ex.InnerException;
             msg.Append(" " + ex.Message);
         }
+
         return msg.ToString();
     }
 }

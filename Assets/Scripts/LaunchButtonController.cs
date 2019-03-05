@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using I2.Loc;
+using UnityEngine;
+using UnityEngine.UI;
 
-class LaunchButtonController : MonoBehaviour
+internal class LaunchButtonController : MonoBehaviour
 {
-    [SerializeField] TargetPlanet targetPlanet = null;
-
-    readonly string[] launchButtonLabels = 
+    private readonly string[] launchButtonLabels =
     {
         "Auf zum Mars",
         "Auf zum Jupiter",
@@ -15,8 +15,9 @@ class LaunchButtonController : MonoBehaviour
         "Auf ins All"
     };
 
-    [SerializeField] UnityEngine.UI.Button launchButton = null;
-    [SerializeField] UnityEngine.UI.Text launchButtonText = null;
+    [SerializeField] private Button launchButton;
+    [SerializeField] private Text launchButtonText;
+    [SerializeField] private TargetPlanet targetPlanet;
 
     public void Deactivate()
     {
@@ -26,7 +27,8 @@ class LaunchButtonController : MonoBehaviour
 
     public void ActivateLaunch()
     {
-        launchButtonText.text = I2.Loc.LocalizationManager.GetTermTranslation(launchButtonLabels[targetPlanet.GetTargetPlanetIdx()]);
+        launchButtonText.text =
+            LocalizationManager.GetTermTranslation(launchButtonLabels[targetPlanet.GetTargetPlanetIdx()]);
         launchButton.enabled = true;
         launchButton.gameObject.SetActive(true);
     }

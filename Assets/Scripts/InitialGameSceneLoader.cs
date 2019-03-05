@@ -1,30 +1,32 @@
 ﻿using CrazyChipmunk;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "InitialGameSceneLoader", menuName = "TimesTables/InitialGameSceneLoader")]
-class InitialGameSceneLoader : ScriptableObject
+internal class InitialGameSceneLoader : ScriptableObject
 {
-    [SerializeField] RocketColour rocketColour = null;
-    [SerializeField] RocketPartsPersistentData rocketPartsData = null;
-    [SerializeField] ReadOnlyString curPlayerName = null;
+    [SerializeField] private ReadOnlyString curPlayerName;
+    [SerializeField] private RocketColour rocketColour;
+    [SerializeField] private RocketPartsPersistentData rocketPartsData;
 
     public void LoadInitialGameScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(ChooseScene());
+        SceneManager.LoadSceneAsync(ChooseScene());
     }
 
-    string ChooseScene()
+    private string ChooseScene()
     {
         return IsRocketBuilt() ? "launch" : "rocketBuilding";
     }
 
-    bool IsRocketBuilt()
+    private bool IsRocketBuilt()
     {
         if (curPlayerName != "")
         {
             rocketPartsData.Load();
             return rocketPartsData.IsRocketBuilt && rocketColour.HasChosenColour();
         }
+
         return false;
     }
 }

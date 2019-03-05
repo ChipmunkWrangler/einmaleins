@@ -2,9 +2,9 @@
 using UnityEngine;
 
 [Serializable]
-class TargetPlanetPersistentData : ScriptableObject
+internal class TargetPlanetPersistentData : ScriptableObject
 {
-    [SerializeField] TargetPlanet targetPlanet = null;
+    [SerializeField] private TargetPlanet targetPlanet;
 
     public int TargetPlanetIdx { get; set; }
     public int LastReachedPlanetIdx { get; set; }

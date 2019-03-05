@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine.UI;
 
-class CCInputField : UnityEngine.UI.InputField
+internal class CCInputField : InputField
 {
     protected override void OnDisable()
     {

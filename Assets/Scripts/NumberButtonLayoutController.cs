@@ -11,14 +11,8 @@ internal class NumberButtonLayoutController : NumberButtonBaseController
 
     protected override void UseCompactButtonLayout()
     {
-        while (transform.childCount > 0)
-        {
-            transform.GetChild(0).SetParent(smallScreenParent);
-        }
+        while (transform.childCount > 0) transform.GetChild(0).SetParent(smallScreenParent);
 
-        if (multiplierStars)
-        {
-            multiplierStars.localRotation = Quaternion.Euler(0, 0, -90.0F);
-        }
+        if (multiplierStars) multiplierStars.localRotation = Quaternion.Euler(0, 0, -90.0F);
     }
 }

@@ -1,36 +1,37 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-class GiveUpOkButton : MonoBehaviour
+internal class GiveUpOkButton : MonoBehaviour
 {
-    const float TransitionTime = EnterAnswerButtonController.TransitionTime;
+    private const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
-    [SerializeField] UnityEngine.UI.Button button = null;
+    [SerializeField] private Button button;
 
     public void OnGiveUp()
     {
         Show();
     }
 
-    void Hide()
+    private void Hide()
     {
         button.enabled = false;
         ScaleTo(Vector3.zero);
     }
 
-    void Start()
+    private void Start()
     {
         Hide();
     }
 
-    void Show()
+    private void Show()
     {
         button.enabled = true;
         ScaleTo(Vector3.one);
     }
 
-    void ScaleTo(Vector3 tgtScale)
+    private void ScaleTo(Vector3 tgtScale)
     {
-        iTween.ScaleTo(button.gameObject, iTween.Hash("scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
+        iTween.ScaleTo(button.gameObject,
+            iTween.Hash("scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
     }
 }

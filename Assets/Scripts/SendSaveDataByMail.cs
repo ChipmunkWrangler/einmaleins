@@ -1,20 +1,21 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Mail;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
+using I2.Loc;
 using UnityEngine;
+using UnityEngine.UI;
 
-class SendSaveDataByMail : MonoBehaviour
+internal class SendSaveDataByMail : MonoBehaviour
 {
-    const string Sender = "einmaleinsreport@crazy-chipmunk.com";
-    const string Receiver = "testers@crazy-chipmunk.com";
-    const string Server = "v078528.kasserver.com";
-    const int Port = 25;
+    private const string Sender = "einmaleinsreport@crazy-chipmunk.com";
+    private const string Receiver = "testers@crazy-chipmunk.com";
+    private const string Server = "v078528.kasserver.com";
+    private const int Port = 25;
 
-    static readonly string Password = MailPassword.Password;
+    private static readonly string Password = MailPassword.Password;
+    [SerializeField] private Button sendButton;
 
-    [SerializeField] UnityEngine.UI.Text statusLine = null;
-    [SerializeField] UnityEngine.UI.Button sendButton = null;
+    [SerializeField] private Text statusLine;
 
     public void SendReport()
     {
@@ -23,7 +24,7 @@ class SendSaveDataByMail : MonoBehaviour
         sendButton.interactable = true;
     }
 
-    void Send(string title, string body)
+    private void Send(string title, string body)
     {
         using (var mail = new MailMessage())
         {
@@ -33,21 +34,21 @@ class SendSaveDataByMail : MonoBehaviour
             mail.Body = body;
             mail.Priority = MailPriority.Normal;
 
-            statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation("Connecting to Smtp Server...");
+            statusLine.text = LocalizationManager.GetTermTranslation("Connecting to Smtp Server...");
 
             var smtpServer = new SmtpClient(Server, Port);
-            smtpServer.Credentials = new NetworkCredential(Sender, Password) as ICredentialsByHost;
+            smtpServer.Credentials = new NetworkCredential(Sender, Password);
             smtpServer.EnableSsl = true;
-            statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation("Sending message...");
-            ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+            statusLine.text = LocalizationManager.GetTermTranslation("Sending message...");
+            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             try
             {
                 smtpServer.Send(mail);
-                statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation("Message sent. Thanks!");
+                statusLine.text = LocalizationManager.GetTermTranslation("Message sent. Thanks!");
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                string s = I2.Loc.LocalizationManager.GetTermTranslation("Error! Please email the following to") + ": \"";
+                var s = LocalizationManager.GetTermTranslation("Error! Please email the following to") + ": \"";
                 statusLine.text = s + ExceptionPrettyPrint.Msg(ex) + "\"";
             }
         }

@@ -1,26 +1,29 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace CrazyChipmunk
 {
     [CreateAssetMenu(menuName = "CrazyChipmunk/Prefs")]
     public class Prefs : ScriptableObject
     {
-        [SerializeField] ReadOnlyString playerName;
+        [SerializeField] private ReadOnlyString playerName;
 
-        public bool HasKey(string key) => PlayerPrefs.HasKey(GetKey(key));
+        public bool HasKey(string key)
+        {
+            return PlayerPrefs.HasKey(GetKey(key));
+        }
 
         public void DeleteKey(string key)
         {
-            string arrayKey = GetArrayKey(key);
+            var arrayKey = GetArrayKey(key);
             if (arrayKey.Length > 0)
-            { // is array 
-                string lengthKey = GetLengthKey(arrayKey);
-                int length = PlayerPrefs.GetInt(lengthKey);
-                string arrayKeyWithPlayer = GetKey(arrayKey);
-                for (int i = 0; i < length; ++i)
-                {
-                    PlayerPrefs.DeleteKey(arrayKeyWithPlayer + ":" + i);
-                }
+            {
+                // is array 
+                var lengthKey = GetLengthKey(arrayKey);
+                var length = PlayerPrefs.GetInt(lengthKey);
+                var arrayKeyWithPlayer = GetKey(arrayKey);
+                for (var i = 0; i < length; ++i) PlayerPrefs.DeleteKey(arrayKeyWithPlayer + ":" + i);
                 PlayerPrefs.DeleteKey(lengthKey);
             }
             else
@@ -29,33 +32,57 @@ namespace CrazyChipmunk
             }
         }
 
-        public int GetInt(string key, int defaultValue) => PlayerPrefs.GetInt(GetKey(key), defaultValue);
+        public int GetInt(string key, int defaultValue)
+        {
+            return PlayerPrefs.GetInt(GetKey(key), defaultValue);
+        }
+
         public void SetInt(string key, int i)
         {
             PlayerPrefs.SetInt(GetKey(key), i);
         }
-        public float GetFloat(string key, float defaultValue) => PlayerPrefs.GetFloat(GetKey(key), defaultValue);
+
+        public float GetFloat(string key, float defaultValue)
+        {
+            return PlayerPrefs.GetFloat(GetKey(key), defaultValue);
+        }
+
         public void SetFloat(string key, float f)
         {
             PlayerPrefs.SetFloat(GetKey(key), f);
         }
-        public string GetString(string key, string defaultValue = default(string)) => PlayerPrefs.GetString(GetKey(key), defaultValue);
+
+        public string GetString(string key, string defaultValue = default)
+        {
+            return PlayerPrefs.GetString(GetKey(key), defaultValue);
+        }
+
         public void SetString(string key, string s)
         {
             PlayerPrefs.SetString(GetKey(key), s);
         }
-        public bool GetBool(string key, bool defaultValue = default(bool)) => PlayerPrefsUtility.GetBool(GetKey(key), defaultValue);
+
+        public bool GetBool(string key, bool defaultValue = default)
+        {
+            return PlayerPrefsUtility.GetBool(GetKey(key), defaultValue);
+        }
+
         public void SetBool(string key, bool b)
         {
             PlayerPrefsUtility.SetBool(GetKey(key), b);
         }
 
-        public System.DateTime GetDateTime(string key, System.DateTime defaultValue) => PlayerPrefsUtility.GetDateTime(GetKey(key), defaultValue);
-        public void SetDateTime(string key, System.DateTime dateTime)
+        public DateTime GetDateTime(string key, DateTime defaultValue)
+        {
+            return PlayerPrefsUtility.GetDateTime(GetKey(key), defaultValue);
+        }
+
+        public void SetDateTime(string key, DateTime dateTime)
         {
             PlayerPrefsUtility.SetDateTime(GetKey(key), dateTime);
         }
-        public Color GetColor(string key, Color defaultValue = default(Color))
+
+        public Color GetColor(string key, Color defaultValue = default)
         {
             key = GetKey(key);
             Color color;
@@ -65,6 +92,7 @@ namespace CrazyChipmunk
             color.a = PlayerPrefs.GetFloat(key + ".a", defaultValue.a);
             return color;
         }
+
         public void SetColor(string key, Color color)
         {
             key = GetKey(key);
@@ -73,25 +101,20 @@ namespace CrazyChipmunk
             PlayerPrefs.SetFloat(key + ".b", color.b);
             PlayerPrefs.SetFloat(key + ".a", color.a);
         }
+
         public void SetIntArray(string key, int[] value)
         {
             key += ":IntArray";
             SetLength(key, value.Length);
-            for (int i = 0; i < value.Length; ++i)
-            {
-                SetInt(key + ":" + i.ToString(), value[i]);
-            }
+            for (var i = 0; i < value.Length; ++i) SetInt(key + ":" + i, value[i]);
         }
 
-        public int[] GetIntArray(string key, int dfault = default(int))
+        public int[] GetIntArray(string key, int dfault = default)
         {
             key += ":IntArray";
-            int length = GetLength(key);
+            var length = GetLength(key);
             var returns = new int[length];
-            for (int i = 0; i < length; ++i)
-            {
-                returns.SetValue(GetInt(key + ":" + i, dfault), i);
-            }
+            for (var i = 0; i < length; ++i) returns.SetValue(GetInt(key + ":" + i, dfault), i);
             return returns;
         }
 
@@ -99,34 +122,25 @@ namespace CrazyChipmunk
         {
             key += ":FloatArray";
             SetLength(key, value.Length);
-            for (int i = 0; i < value.Length; ++i)
-            {
-                SetFloat(key + ":" + i.ToString(), value[i]);
-            }
+            for (var i = 0; i < value.Length; ++i) SetFloat(key + ":" + i, value[i]);
         }
 
         // Get an array of floats
         public float[] GetFloatArray(string key)
         {
             key += ":FloatArray";
-            int length = GetLength(key);
+            var length = GetLength(key);
             var returns = new float[length];
-            for (int i = 0; i < length; ++i)
-            {
-                returns.SetValue(GetFloat(key + ":" + i, default(float)), i);
-            }
+            for (var i = 0; i < length; ++i) returns.SetValue(GetFloat(key + ":" + i, default), i);
             return returns;
         }
 
         public string[] GetStringArray(string key)
         {
             key += ":StringArray";
-            int length = GetLength(key);
+            var length = GetLength(key);
             var returns = new string[length];
-            for (int i = 0; i < length; ++i)
-            {
-                returns.SetValue(GetString(key + ":" + i), i);
-            }
+            for (var i = 0; i < length; ++i) returns.SetValue(GetString(key + ":" + i), i);
             return returns;
         }
 
@@ -134,68 +148,53 @@ namespace CrazyChipmunk
         {
             key += ":StringArray";
             SetLength(key, value.Length);
-            for (int i = 0; i < value.Length; ++i)
-            {
-                SetString(key + ":" + i.ToString(), value[i]);
-            }
+            for (var i = 0; i < value.Length; ++i) SetString(key + ":" + i, value[i]);
         }
 
         public void SetBoolArray(string key, bool[] value)
         {
             key += ":BoolArray";
             SetLength(key, value.Length);
-            for (int i = 0; i < value.Length; ++i)
-            {
-                SetBool(key + ":" + i, value[i]);
-            }
+            for (var i = 0; i < value.Length; ++i) SetBool(key + ":" + i, value[i]);
         }
 
         public bool[] GetBoolArray(string key)
         {
             key += ":BoolArray";
-            int length = GetLength(key);
+            var length = GetLength(key);
             var returns = new bool[length];
-            for (int i = 0; i < length; ++i)
-            {
-                returns.SetValue(GetBool(key + ":" + i), i);
-            }
+            for (var i = 0; i < length; ++i) returns.SetValue(GetBool(key + ":" + i), i);
             return returns;
         }
 
-        string GetArrayKey(string key)
+        private string GetArrayKey(string key)
         {
-            string arrayKey = key + ":IntArray";
-            if (PlayerPrefs.HasKey(GetLengthKey(arrayKey)))
-            {
-                return arrayKey;
-            }
+            var arrayKey = key + ":IntArray";
+            if (PlayerPrefs.HasKey(GetLengthKey(arrayKey))) return arrayKey;
             arrayKey = key + ":FloatArray";
-            if (PlayerPrefs.HasKey(GetLengthKey(arrayKey)))
-            {
-                return arrayKey;
-            }
+            if (PlayerPrefs.HasKey(GetLengthKey(arrayKey))) return arrayKey;
             arrayKey = key + ":StringArray";
-            if (PlayerPrefs.HasKey(GetLengthKey(arrayKey)))
-            {
-                return arrayKey;
-            }
+            if (PlayerPrefs.HasKey(GetLengthKey(arrayKey))) return arrayKey;
             return "";
         }
 
-        string GetKey(string key)
+        private string GetKey(string key)
         {
-            UnityEngine.Assertions.Assert.IsTrue(playerName?.Get()?.Length > 0);
+            Assert.IsTrue(playerName?.Get()?.Length > 0);
             return playerName + ":" + key;
         }
 
-        string GetLengthKey(string key)
+        private string GetLengthKey(string key)
         {
             return GetKey(key) + ":ArrayLen";
         }
 
-        int GetLength(string key) => PlayerPrefs.GetInt(GetLengthKey(key));
+        private int GetLength(string key)
+        {
+            return PlayerPrefs.GetInt(GetLengthKey(key));
+        }
 
-        void SetLength(string key, int len)
+        private void SetLength(string key, int len)
         {
             PlayerPrefs.SetInt(GetLengthKey(key), len);
         }

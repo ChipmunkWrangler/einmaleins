@@ -1,22 +1,21 @@
 ﻿using CrazyChipmunk;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-class RocketParts : MonoBehaviour
+internal class RocketParts : MonoBehaviour
 {
-    const int PartsToBuildRocket = 0;
+    private const int PartsToBuildRocket = 0;
+
+    [SerializeField] private RocketPartsPersistentData data;
+    [SerializeField] private Prefs prefs;
     private int numQuestionsToFullUpgrades => QuestionGenerator.GetNumQuestions(prefs);
     private int PartsPerUpgrade => numQuestionsToFullUpgrades / 5;
 
-    [SerializeField] RocketPartsPersistentData data;
-    [SerializeField] Prefs prefs;
-
     public static RocketParts Instance { get; private set; }
+
     public bool JustUpgraded
     {
-        get
-        {
-            return data.JustUpgraded;
-        }
+        get => data.JustUpgraded;
         set
         {
             data.JustUpgraded = value;
@@ -26,10 +25,7 @@ class RocketParts : MonoBehaviour
 
     public int NumParts
     {
-        get
-        {
-            return data.NumParts;
-        }
+        get => data.NumParts;
         private set
         {
             data.NumParts = value;
@@ -39,10 +35,7 @@ class RocketParts : MonoBehaviour
 
     public bool IsRocketBuilt
     {
-        get
-        {
-            return data.IsRocketBuilt;
-        }
+        get => data.IsRocketBuilt;
         set
         {
             data.IsRocketBuilt = value;
@@ -52,10 +45,7 @@ class RocketParts : MonoBehaviour
 
     public int UpgradeLevel
     {
-        get
-        {
-            return data.UpgradeLevel;
-        }
+        get => data.UpgradeLevel;
         private set
         {
             data.UpgradeLevel = value;
@@ -63,37 +53,22 @@ class RocketParts : MonoBehaviour
         }
     }
 
-    public int NumPartsRequired
-    {
-        get
-        {
-            return PartsPerUpgrade;
-        }
-    }
+    public int NumPartsRequired => PartsPerUpgrade;
 
-    public bool HasEnoughPartsToUpgrade
-    {
-        get
-        {
-            return NumParts >= PartsPerUpgrade && UpgradeLevel < MaxUpgradeLevel;
-        }
-    }
+    public bool HasEnoughPartsToUpgrade => NumParts >= PartsPerUpgrade && UpgradeLevel < MaxUpgradeLevel;
 
     public int MaxUpgradeLevel
     {
         get
         {
-            UnityEngine.Assertions.Assert.AreEqual(numQuestionsToFullUpgrades % PartsPerUpgrade, 0);
-            return 1 + (numQuestionsToFullUpgrades / PartsPerUpgrade); // +1 for final bonus upgrade
+            Assert.AreEqual(numQuestionsToFullUpgrades % PartsPerUpgrade, 0);
+            return 1 + numQuestionsToFullUpgrades / PartsPerUpgrade; // +1 for final bonus upgrade
         }
     }
 
     public static void Reset()
     {
-        if (Instance != null)
-        {
-            Destroy(RocketParts.Instance);
-        }
+        if (Instance != null) Destroy(Instance);
     }
 
     public bool Upgrade()
@@ -104,6 +79,7 @@ class RocketParts : MonoBehaviour
             DoUpgrade();
             return true;
         }
+
         return false;
     }
 
@@ -117,7 +93,7 @@ class RocketParts : MonoBehaviour
         NumParts += NumPartsRequired;
     }
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -130,7 +106,7 @@ class RocketParts : MonoBehaviour
         }
     }
 
-    void DoUpgrade()
+    private void DoUpgrade()
     {
         data.JustUpgraded = true;
         ++data.UpgradeLevel;

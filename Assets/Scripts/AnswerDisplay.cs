@@ -1,28 +1,23 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted
+internal class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAborted
 {
-    const float FadeSeconds = EnterAnswerButtonController.TransitionTime;
+    private const float FadeSeconds = EnterAnswerButtonController.TransitionTime;
+    [SerializeField] private BoolEvent answerChanged = new BoolEvent();
 
-    [SerializeField] QuestionPicker answerHandler = null;
-    [SerializeField] int maxDigits = 0;
-    [SerializeField] BoolEvent answerChanged = new BoolEvent();
-    string queuedTxt;
-    bool isFading;
-    Color oldColor;
+    [SerializeField] private QuestionPicker answerHandler;
+    private bool isFading;
+    [SerializeField] private int maxDigits;
+    private Color oldColor;
+    private string queuedTxt;
 
-    public void OnGiveUp()
-    {
-        SetText(answerHandler.CurAnswer);
-    }
-
-    void IOnQuizAborted.OnQuizAborted()
+    void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
         SetText("");
     }
 
-    void IOnQuestionChanged.OnQuestionChanged(Question question)
+    void IOnQuizAborted.OnQuizAborted()
     {
         SetText("");
     }
@@ -33,19 +28,21 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
         Fade().WrapErrors();
     }
 
-    void OnCorrectAnswer()
+    public void OnGiveUp()
+    {
+        SetText(answerHandler.CurAnswer);
+    }
+
+    private void OnCorrectAnswer()
     {
         SetText("");
     }
 
-    void OnAddDigit(string nextDigit)
+    private void OnAddDigit(string nextDigit)
     {
-        string s = isFading ? queuedTxt : GetText();
+        var s = isFading ? queuedTxt : GetText();
         s += nextDigit;
-        if (s.Length > maxDigits)
-        {
-            s = s.Substring(1, s.Length - 1);
-        }
+        if (s.Length > maxDigits) s = s.Substring(1, s.Length - 1);
         if (isFading)
         {
             queuedTxt = s;
@@ -57,9 +54,9 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
         }
     }
 
-    void OnBackspace()
+    private void OnBackspace()
     {
-        string answerTxt = GetText();
+        var answerTxt = GetText();
         if (answerTxt.Length > 0)
         {
             SetText(answerTxt.Substring(0, answerTxt.Length - 1));
@@ -67,23 +64,20 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
         }
     }
 
-    void OnSubmitAnswer()
+    private void OnSubmitAnswer()
     {
         answerHandler.CurAnswer = GetText();
     }
 
-    void Start()
+    private void Start()
     {
         oldColor = GetTextField().color;
         SetText("");
     }
 
-    async Task Fade()
+    private async Task Fade()
     {
-        if (isFading)
-        {
-            return;
-        }
+        if (isFading) return;
         isFading = true;
         queuedTxt = "";
         GetTextField().CrossFadeColor(Color.clear, FadeSeconds, false, true);
@@ -94,7 +88,7 @@ class AnswerDisplay : TextDisplay, IOnQuestionChanged, IOnWrongAnswer, IOnQuizAb
         isFading = false;
     }
 
-    void NotifySubscribers()
+    private void NotifySubscribers()
     {
         answerChanged.Invoke(GetText().Length == 0);
     }

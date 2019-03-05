@@ -2,15 +2,18 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "TimesTables/RocketColour")]
-class RocketColour : ScriptableObject
+internal class RocketColour : ScriptableObject
 {
-    [SerializeField] Prefs prefs = null;
     public static readonly string PrefsKey = "rocketColour";
+    [SerializeField] private Prefs prefs;
 
-    public bool HasChosenColour() => prefs.HasKey(PrefsKey + ".r");
+    public bool HasChosenColour()
+    {
+        return prefs.HasKey(PrefsKey + ".r");
+    }
+
     public void SetColour(Color c)
     {
         prefs.SetColor(PrefsKey, c);
     }
 }
-

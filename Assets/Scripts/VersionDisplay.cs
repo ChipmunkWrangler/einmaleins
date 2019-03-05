@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
-class VersionDisplay : MonoBehaviour
+internal class VersionDisplay : MonoBehaviour
 {
-    [SerializeField] UnityEngine.UI.Text text = null;
-    void Start()
+    [SerializeField] private Text text;
+
+    private void Start()
     {
         text.text = Application.version;
     }

@@ -1,16 +1,18 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 
-class MDCulture
+internal class MDCulture
 {
-    static System.Globalization.CultureInfo ci;
+    private static CultureInfo ci;
 
-    public static System.Globalization.CultureInfo GetCulture()
+    public static CultureInfo GetCulture()
     {
         if (ci == null)
         {
-            string langId = PreciseLocale.GetLanguageID().Replace('_', '-');
-            ci = System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.AllCultures).FirstOrDefault(x => x.Name == langId);
+            var langId = PreciseLocale.GetLanguageID().Replace('_', '-');
+            ci = CultureInfo.GetCultures(CultureTypes.AllCultures).FirstOrDefault(x => x.Name == langId);
         }
+
         return ci;
     }
 }

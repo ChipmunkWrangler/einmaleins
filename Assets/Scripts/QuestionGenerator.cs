@@ -1,16 +1,13 @@
-﻿using System;
-using CrazyChipmunk;
-using UnityEditor.PackageManager;
+﻿using CrazyChipmunk;
 using UnityEngine;
-using UnityScript.Parser;
 
-abstract class QuestionGenerator
+internal abstract class QuestionGenerator
 {
     public const int MaxMultiplicand = 10;
 
     public static QuestionGenerator Factory(Prefs prefs)
     {
-        string typeName = GetQuestionType(prefs);
+        var typeName = GetQuestionType(prefs);
         switch (typeName)
         {
             case "multiplication":
@@ -37,7 +34,7 @@ abstract class QuestionGenerator
 
     public static int GetNumQuestions(Prefs prefs)
     {
-        string typeName = GetQuestionType(prefs);
+        var typeName = GetQuestionType(prefs);
         switch (typeName)
         {
             case "multiplication":

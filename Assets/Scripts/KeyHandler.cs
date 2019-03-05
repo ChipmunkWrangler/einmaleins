@@ -1,23 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-class KeyHandler : MonoBehaviour
+internal class KeyHandler : MonoBehaviour
 {
-    [SerializeField] string backSceneName = "choosePlayer";
-    bool isLoadingScene;
+    [SerializeField] private string backSceneName = "choosePlayer";
+    private bool isLoadingScene;
 
-    void Update()
+    private void Update()
     {
         if (!isLoadingScene && Input.GetKeyDown(KeyCode.Escape))
         {
             isLoadingScene = true;
             if (backSceneName == "EXIT")
-            {
                 Application.Quit();
-            }
             else
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(backSceneName);
-            }
+                SceneManager.LoadSceneAsync(backSceneName);
         }
     }
 }

@@ -1,28 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
-class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged
+internal class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborted, IOnQuestionChanged
 {
     public const float TransitionTime = 0.25F;
 
-    [SerializeField] UnityEngine.UI.Button button = null;
+    [SerializeField] private Button button;
 
-    bool isHiding;
-    bool isShowing;
-
-    public void OnGiveUp()
-    {
-        Hide();
-    }
-
-    void IOnWrongAnswer.OnWrongAnswer(bool wasNew)
-    {
-        button.interactable = false; // don't hide, just show the give up button on top
-    }
-
-    void IOnQuizAborted.OnQuizAborted()
-    {
-        Hide();
-    }
+    private bool isHiding;
+    private bool isShowing;
 
     void IOnQuestionChanged.OnQuestionChanged(Question question)
     {
@@ -37,40 +23,58 @@ class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAborte
         }
     }
 
-    void OnCorrectAnswer()
+    void IOnQuizAborted.OnQuizAborted()
     {
         Hide();
     }
 
-    void OnAnswerChanged(bool isAnswerEmpty)
+    void IOnWrongAnswer.OnWrongAnswer(bool wasNew)
+    {
+        button.interactable = false; // don't hide, just show the give up button on top
+    }
+
+    public void OnGiveUp()
+    {
+        Hide();
+    }
+
+    private void OnCorrectAnswer()
+    {
+        Hide();
+    }
+
+    private void OnAnswerChanged(bool isAnswerEmpty)
     {
         button.interactable = !isAnswerEmpty;
     }
 
-    void Show()
+    private void Show()
     {
         if (!isShowing)
         {
             ScaleTo(Vector3.one);
             isShowing = true;
         }
+
         isHiding = false;
         button.interactable = true;
     }
 
-    void Hide()
+    private void Hide()
     {
         if (!isHiding)
         {
             ScaleTo(Vector3.zero);
             isHiding = true;
         }
+
         isShowing = false;
         button.interactable = false;
     }
 
-    void ScaleTo(Vector3 tgtScale)
+    private void ScaleTo(Vector3 tgtScale)
     {
-        iTween.ScaleTo(gameObject, iTween.Hash("scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
+        iTween.ScaleTo(gameObject,
+            iTween.Hash("scale", tgtScale, "easeType", iTween.EaseType.easeInSine, "time", TransitionTime));
     }
 }

@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
-class StatsColumnController : MonoBehaviour
+internal class StatsColumnController : MonoBehaviour
 {
-    [SerializeField] UnityEngine.UI.Image[] cells = null;
-    [SerializeField] UnityEngine.UI.Image header = null;
-    [SerializeField] UnityEngine.UI.Image rowHeader = null;
-    [SerializeField] float fadeTime = 0.5F;
-    [SerializeField] Color highlightColor = Color.yellow;
+    [SerializeField] private Image[] cells;
+    [SerializeField] private float fadeTime = 0.5F;
+    [SerializeField] private Image header;
+    [SerializeField] private Color highlightColor = Color.yellow;
+    private bool isSomethingHighlighed;
 
-    int numMastered;
-    bool isSomethingHighlighed;
+    private int numMastered;
+    [SerializeField] private Image rowHeader;
 
     public bool SetMasteryLevel(int row, Question q, bool seenMastered)
     {
@@ -26,8 +27,10 @@ class StatsColumnController : MonoBehaviour
                 cells[row].CrossFadeAlpha(0, fadeTime, false);
                 isSomethingHighlighed = true;
             }
+
             seenMastered = true;
         }
+
         return seenMastered;
     }
 
@@ -35,8 +38,8 @@ class StatsColumnController : MonoBehaviour
     {
         if (numMastered >= QuestionGenerator.MaxMultiplicand)
         {
-            UnityEngine.UI.Text text = header.gameObject.GetComponentInChildren<UnityEngine.UI.Text>();
-            UnityEngine.UI.Text rowHeaderText = rowHeader.gameObject.GetComponentInChildren<UnityEngine.UI.Text>();
+            var text = header.gameObject.GetComponentInChildren<Text>();
+            var rowHeaderText = rowHeader.gameObject.GetComponentInChildren<Text>();
             if (isSomethingHighlighed)
             {
                 header.color = highlightColor;

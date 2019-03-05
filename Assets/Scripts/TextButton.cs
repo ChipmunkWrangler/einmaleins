@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-class TextButton : MonoBehaviour
+internal class TextButton : MonoBehaviour
 {
-    [SerializeField] Button button = null;
-    [SerializeField] float fadedAlpha = 0.5F;
-    [SerializeField] float transitionTime = 0.1F;
-    [SerializeField] Text text = null;
-    bool wasInteractable = true;
+    [SerializeField] private Button button;
+    [SerializeField] private float fadedAlpha = 0.5F;
+    [SerializeField] private Text text;
+    [SerializeField] private float transitionTime = 0.1F;
+    private bool wasInteractable = true;
 
     public void SetActive(bool b)
     {
@@ -16,10 +16,10 @@ class TextButton : MonoBehaviour
 
     public void SetText(string newText)
     {
-        GetComponentInChildren<UnityEngine.UI.Text>().text = newText;
+        GetComponentInChildren<Text>().text = newText;
     }
 
-    void Update()
+    private void Update()
     {
         if (wasInteractable != button.interactable)
         {
@@ -28,7 +28,7 @@ class TextButton : MonoBehaviour
         }
     }
 
-    void FadeTo(float tgtAlpha)
+    private void FadeTo(float tgtAlpha)
     {
         text.CrossFadeAlpha(tgtAlpha, transitionTime, false);
     }

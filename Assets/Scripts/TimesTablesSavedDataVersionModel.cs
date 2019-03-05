@@ -1,13 +1,11 @@
+using CrazyChipmunk;
 using UnityEngine;
 
-public class TimesTablesSavedDataVersionModel : CrazyChipmunk.SavedDataVersionModel
+public class TimesTablesSavedDataVersionModel : SavedDataVersionModel
 {
     public override string Version
     {
-        get
-        {
-            return PlayerPrefs.GetString("version");
-        }
+        get => PlayerPrefs.GetString("version");
 
         set
         {

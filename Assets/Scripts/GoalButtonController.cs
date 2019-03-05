@@ -1,26 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-class GoalButtonController : MonoBehaviour, IOnQuestionChanged
+internal class GoalButtonController : MonoBehaviour, IOnQuestionChanged
 {
-    [SerializeField] LaunchButtonController launchButton = null;
-    [SerializeField] GameObject upgradeButton = null;
-    [SerializeField] GameObject doneText = null;
-    [SerializeField] GameObject youWinText = null;
-    [SerializeField] Goal goal = null;
+    [SerializeField] private GameObject doneText;
+    [SerializeField] private Goal goal;
+    [SerializeField] private LaunchButtonController launchButton;
+    [SerializeField] private GameObject upgradeButton;
+    [SerializeField] private GameObject youWinText;
 
     public void OnQuestionChanged(Question question)
     {
-        UpdateButtonStatus(noMoreQuestions: question == null);
+        UpdateButtonStatus(question == null);
     }
 
-    void UpdateButtonStatus(bool noMoreQuestions = true)
+    private void UpdateButtonStatus(bool noMoreQuestions = true)
     {
         launchButton.Deactivate();
         upgradeButton.SetActive(false);
         youWinText.SetActive(false);
         doneText.SetActive(false);
         if (noMoreQuestions)
-        {
             switch (goal.CalcCurGoal())
             {
                 case Goal.CurGoal.UpgradeRocket:
@@ -38,8 +38,7 @@ class GoalButtonController : MonoBehaviour, IOnQuestionChanged
                     youWinText.SetActive(true);
                     break;
                 default:
-                    throw new System.InvalidOperationException("Invalid goal: " + goal.CalcCurGoal());                                                      
+                    throw new InvalidOperationException("Invalid goal: " + goal.CalcCurGoal());
             }
-        }
     }
 }

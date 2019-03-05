@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-class GotoChoosePlayer : MonoBehaviour
+internal class GotoChoosePlayer : MonoBehaviour
 {
     public void LoadChoosePlayerScene()
     {
         PlayerPrefs.Save();
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("choosePlayer");
+        SceneManager.LoadSceneAsync("choosePlayer");
     }
 }

@@ -2,9 +2,11 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "TimesTables/TargetPlanet")]
-class TargetPlanet : ScriptableObject
+internal class TargetPlanet : ScriptableObject
 {
-    [SerializeField] Prefs prefs = null;
+    private const string TargetKey = "targetPlanet";
+    private const string LastReachedKey = "lastReachedPlanet";
+    private const float FinalHeight = 9999999999F;
 
     public static readonly float[] Heights =
     {
@@ -16,12 +18,9 @@ class TargetPlanet : ScriptableObject
         5.772e+09F
     };
 
-    const string TargetKey = "targetPlanet";
-    const string LastReachedKey = "lastReachedPlanet";
-    const float FinalHeight = 9999999999F;
-
-    static int targetPlanetIdx = -1;
-    static int lastReachedPlanetIdx = -2;
+    private static int targetPlanetIdx = -1;
+    private static int lastReachedPlanetIdx = -2;
+    [SerializeField] private Prefs prefs;
 
     public static void Reset()
     {
@@ -31,10 +30,7 @@ class TargetPlanet : ScriptableObject
 
     public int GetLastReachedIdx()
     {
-        if (lastReachedPlanetIdx < -1)
-        {
-            lastReachedPlanetIdx = prefs.GetInt(LastReachedKey, -1);
-        }
+        if (lastReachedPlanetIdx < -1) lastReachedPlanetIdx = prefs.GetInt(LastReachedKey, -1);
         return lastReachedPlanetIdx;
     }
 
@@ -51,15 +47,19 @@ class TargetPlanet : ScriptableObject
 
     public int GetTargetPlanetIdx()
     {
-        if (targetPlanetIdx < 0)
-        {
-            targetPlanetIdx = prefs.GetInt(TargetKey, 0);
-        }
+        if (targetPlanetIdx < 0) targetPlanetIdx = prefs.GetInt(TargetKey, 0);
         return targetPlanetIdx;
     }
 
-    public static int GetMaxPlanetIdx() => Heights.Length - 1;
-    public static float GetPlanetHeight(int i) => (i < Heights.Length) ? Heights[i] : FinalHeight;
+    public static int GetMaxPlanetIdx()
+    {
+        return Heights.Length - 1;
+    }
+
+    public static float GetPlanetHeight(int i)
+    {
+        return i < Heights.Length ? Heights[i] : FinalHeight;
+    }
 
     public void SetTargetPlanetIdx(int newIdx)
     {

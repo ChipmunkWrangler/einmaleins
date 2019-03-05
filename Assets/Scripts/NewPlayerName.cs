@@ -2,24 +2,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-class NewPlayerName : MonoBehaviour
+internal class NewPlayerName : MonoBehaviour
 {
-    [SerializeField] GameEvent listFullEvent;
-    [SerializeField] TextButton[] playerButtons;
-    [SerializeField] Button playMultiplicationButton;
-    [SerializeField] Button playDivisionButton;
-    [SerializeField] Text playMultiplicationSymbol;
-    [SerializeField] Text playDivisionSymbol;
-    [SerializeField] InputField inputField;
-    [SerializeField] float buttonFadeAlpha = 0.5F;
-    [SerializeField] float buttonFadeDuration = 0.1F;
-    [SerializeField] InitialGameSceneLoader sceneLoader;
-    [SerializeField] VariableString playerName;
-    [SerializeField] PlayerNameController playerNameController;
-    [SerializeField] Prefs prefs;
+    [SerializeField] private float buttonFadeAlpha = 0.5F;
+    [SerializeField] private float buttonFadeDuration = 0.1F;
+    private bool buttonsAlreadyPressed;
+    [SerializeField] private InputField inputField;
+    [SerializeField] private GameEvent listFullEvent;
 
-    string newName;
-    bool buttonsAlreadyPressed;
+    private string newName;
+    [SerializeField] private Button playDivisionButton;
+    [SerializeField] private Text playDivisionSymbol;
+    [SerializeField] private TextButton[] playerButtons;
+    [SerializeField] private VariableString playerName;
+    [SerializeField] private PlayerNameController playerNameController;
+    [SerializeField] private Button playMultiplicationButton;
+    [SerializeField] private Text playMultiplicationSymbol;
+    [SerializeField] private Prefs prefs;
+    [SerializeField] private InitialGameSceneLoader sceneLoader;
 
     public NewPlayerName()
     {
@@ -55,7 +55,7 @@ class NewPlayerName : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
         playerNameController.Load();
         if (playerName != "")
@@ -63,28 +63,21 @@ class NewPlayerName : MonoBehaviour
             RocketParts.Reset();
             TargetPlanet.Reset();
         } // else this is initial start
+
         ActivatePlayButton(false);
-        int numPlayers = playerNameController.Names.Length;
-        if (numPlayers >= playerButtons.Length)
-        {
-            listFullEvent.Raise();
-        }
-        if (numPlayers == 0)
-        {
-            inputField.Select();
-        }
-        for (int i = 0; i < numPlayers; ++i)
+        var numPlayers = playerNameController.Names.Length;
+        if (numPlayers >= playerButtons.Length) listFullEvent.Raise();
+        if (numPlayers == 0) inputField.Select();
+        for (var i = 0; i < numPlayers; ++i)
         {
             playerButtons[i].SetText(playerNameController.Names[i]);
             playerButtons[i].SetActive(true);
         }
-        for (int i = numPlayers; i < playerButtons.Length; ++i)
-        {
-            playerButtons[i].SetActive(false);
-        }
+
+        for (var i = numPlayers; i < playerButtons.Length; ++i) playerButtons[i].SetActive(false);
     }
 
-    void ActivatePlayButton(bool b)
+    private void ActivatePlayButton(bool b)
     {
         playMultiplicationButton.interactable = b;
         playDivisionButton.interactable = b;
@@ -92,7 +85,7 @@ class NewPlayerName : MonoBehaviour
         playDivisionSymbol.CrossFadeAlpha(b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false);
     }
 
-    void Play()
+    private void Play()
     {
         // todo transition
         DisableButtons();
@@ -102,14 +95,11 @@ class NewPlayerName : MonoBehaviour
     }
 
 
-    void DisableButtons()
+    private void DisableButtons()
     {
         buttonsAlreadyPressed = true;
         playMultiplicationButton.enabled = false;
         playDivisionButton.enabled = false;
-        foreach (TextButton button in playerButtons)
-        {
-            button.enabled = false;
-        }
+        foreach (var button in playerButtons) button.enabled = false;
     }
 }

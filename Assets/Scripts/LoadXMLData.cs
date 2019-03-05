@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using I2.Loc;
+using UnityEngine;
 using UnityEngine.UI;
 
-class LoadXMLData : MonoBehaviour
+internal class LoadXMLData : MonoBehaviour
 {
-    [SerializeField] Text inputField = null;
-    [SerializeField] Text statusLine = null;
+    [SerializeField] private Text inputField;
+    [SerializeField] private Text statusLine;
 
     public void LoadFromInputField()
     {
@@ -12,7 +14,7 @@ class LoadXMLData : MonoBehaviour
         {
             XMLSerializationHandler.LoadFromString(inputField.text);
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             statusLine.text = ExceptionPrettyPrint.Msg(ex);
         }
@@ -23,9 +25,9 @@ class LoadXMLData : MonoBehaviour
         try
         {
             XMLSerializationHandler.LoadFromFile();
-            statusLine.text = I2.Loc.LocalizationManager.GetTermTranslation("Data loaded.");
+            statusLine.text = LocalizationManager.GetTermTranslation("Data loaded.");
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             statusLine.text = ExceptionPrettyPrint.Msg(ex);
         }

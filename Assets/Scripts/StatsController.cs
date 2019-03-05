@@ -1,28 +1,23 @@
 ﻿using UnityEngine;
 
-class StatsController : MonoBehaviour
+internal class StatsController : MonoBehaviour
 {
-    [SerializeField] StatsControllerPersistentData data = null;
-    [SerializeField] StatsColumnController[] columns = null;
-    [SerializeField] Questions questions = null;
+    [SerializeField] private StatsColumnController[] columns;
+    [SerializeField] private StatsControllerPersistentData data;
+    [SerializeField] private Questions questions;
 
-    void Start()
+    private void Start()
     {
         data.Load(columns.Length);
-        foreach (Question question in questions.QuestionArray)
+        foreach (var question in questions.QuestionArray)
         {
-            int i = question.A - 1;
-            int j = question.B - 1;
+            var i = question.A - 1;
+            var j = question.B - 1;
             data.SeenMastered[i][j] = columns[i].SetMasteryLevel(j, question, data.SeenMastered[i][j]);
-            if (i != j)
-            {
-                data.SeenMastered[j][i] = columns[j].SetMasteryLevel(i, question, data.SeenMastered[j][i]);
-            }
+            if (i != j) data.SeenMastered[j][i] = columns[j].SetMasteryLevel(i, question, data.SeenMastered[j][i]);
         }
-        foreach (StatsColumnController column in columns)
-        {
-            column.DoneSettingMasteryLevels();
-        }
+
+        foreach (var column in columns) column.DoneSettingMasteryLevels();
         data.Save(columns.Length);
     }
 }
