@@ -12,10 +12,19 @@
 * [X] Fix first upgrade particle effects
 * [X] New record text?
 * [X] Test all particle effects
-* [ ] Test old data
+* [X] Test old data
 * [ ] Test all on device
+* [ ] Test multiplication in German
 * [ ] Upload version
-* [ ] Email dude, tell him about testflight or have him wait
+* [X] Email dude, tell him about testflight or have him wait
+* [ ] If you are typing in the answer when you reach a planet, the answer text doesn't disappear
+* [ ] Grid layout doesn't fit on my ipad
+* [ ] What is the logic when you ask for help? Seems different on device...
+* [ ] Says "Get antimatter drive" for the last three! Changes colour at the end, though. 
+* [ ] Reached Uranus text doesn't appear, Neptune either
+* [ ] Last upgrade came after gauntlet
+* [ ] Test "Stop for the day" message
+      
 ## v1.0.0 
 * [o] Update web page
     * [o] Generate links for app store buttons and add them to web pages
