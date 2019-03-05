@@ -462,6 +462,15 @@ MonoBehaviour:
       - "Tastenanordnung Ver\xE4ndern"
       Flags: 0000
       Languages_Touch: []
+    - Term: UpdateVersionError
+      TermType: 0
+      Description: 
+      Languages:
+      - Can't convert save data. Please contact support@crazy-chipmunk.com.
+      - Fehler bei der Aktualisierung des Speicherstandes. Bitte support@crazy-chipmunk.com
+        kontaktieren.
+      Flags: 0000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: App_Name

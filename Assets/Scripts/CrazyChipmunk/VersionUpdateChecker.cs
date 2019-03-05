@@ -31,11 +31,13 @@ namespace CrazyChipmunk
             {
                 return;
             }
+
             if (!IsInUpdateScene())
             {
                 EnterUpdateScene(); // this will cause VersionUpdateChecker.Start() and hence CheckVersion to be called again, since they should also be instantiated in the update scene
                 return;
             }
+
             DoUpdate();
             LeaveUpdateScene();
         }
@@ -47,6 +49,7 @@ namespace CrazyChipmunk
                 Debug.Log("isUpdating");
                 return false;
             }
+
             return versionModel.Version != Application.version;
         }
 
@@ -71,9 +74,15 @@ namespace CrazyChipmunk
         void DoUpdate()
         {
             isUpdating = true;
-            updater.UpdateData(versionModel.Version, Application.version);
-            versionModel.Version = Application.version;
-            isUpdating = false;
+            if (updater.UpdateData(versionModel.Version, Application.version))
+            {
+                versionModel.Version = Application.version;
+                isUpdating = false;
+            }
+            else
+            {
+                postUpdateScene = "";
+            }
         }
     }
 }

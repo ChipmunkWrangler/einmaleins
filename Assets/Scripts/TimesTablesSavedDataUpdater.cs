@@ -1,13 +1,15 @@
 using CrazyChipmunk;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 internal class TimesTablesSavedDataUpdater : SavedDataUpdater
 {
     [SerializeField] private VariableString playerName;
     [SerializeField] private PlayerNameController playerNameController;
     [SerializeField] private Questions questions;
+    [SerializeField] private GameObject versionErrorText;
 
-    public override void UpdateData(string fromVersion, string toVersion)
+    public override bool UpdateData(string fromVersion, string toVersion)
     {
         switch (fromVersion)
         {
@@ -28,15 +30,23 @@ internal class TimesTablesSavedDataUpdater : SavedDataUpdater
                 UpdateFrom_0_1_11_To_0_1_14();
                 break;
             default:
-                GiveUpAndDestroyData();
-                break;
+                ShowVersionError();
+                return false;
+//                GiveUpAndDestroyData();
         }
+
+        return true;
     }
 
-    private void GiveUpAndDestroyData()
+    private void ShowVersionError()
     {
-        PlayerPrefs.DeleteAll();
+        versionErrorText?.SetActive(true);
     }
+
+//    private void GiveUpAndDestroyData()
+//    {
+//        PlayerPrefs.DeleteAll();
+//    }
 
     private void UpdateFrom_0_1_11_To_0_1_14()
     {
