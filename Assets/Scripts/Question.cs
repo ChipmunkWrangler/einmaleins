@@ -4,7 +4,7 @@ using UnityEngine;
 
 abstract class Question
 {
-    public const float FastTime = 6.0F;
+    public const float FastTime = 4.0F;
 
     const float AnswerTimeMax = 60.0F;
     const float WrongAnswerTimePenalty = 1.5F;

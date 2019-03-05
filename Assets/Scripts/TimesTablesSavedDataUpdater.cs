@@ -12,6 +12,7 @@ class TimesTablesSavedDataUpdater : SavedDataUpdater
         switch (fromVersion)
         {
             case "0.1.14":
+            case "1.0.0":
                 break;
             case "0.1.13":
             case "0.1.12":

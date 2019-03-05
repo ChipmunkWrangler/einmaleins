@@ -2,7 +2,8 @@
 
 class MultiplicationQuestionGenerator : QuestionGenerator
 {
-    public override int GetNumQuestions() => MaxMultiplicand * (MaxMultiplicand + 1) / 2;
+    public const int NumQuestions = MaxMultiplicand * (MaxMultiplicand + 1) / 2;
+    public override int GetNumQuestions() => NumQuestions;
 
     public override Question[] Generate(QuestionsPersistentData data)
     {

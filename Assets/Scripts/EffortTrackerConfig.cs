@@ -13,6 +13,5 @@ public class EffortTrackerConfig : ScriptableObject
     public int FrustrationRight = -1;
     public int FrustrationFast = -2;
     public int NumAnswersPerQuiz = 7; // the bigger this is, the more new questions the kid will be confronted with at once
-    public int GauntletAskListLength = 55;
     public int NumAnswersLeftWhenLaunchCodeAsked = 3;
 }

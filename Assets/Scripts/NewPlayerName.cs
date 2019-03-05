@@ -4,19 +4,26 @@ using UnityEngine.UI;
 
 class NewPlayerName : MonoBehaviour
 {
-    [SerializeField] GameEvent listFullEvent = null;
-    [SerializeField] TextButton[] playerButtons = null;
-    [SerializeField] Button playButton = null;
-    [SerializeField] Image playButtonImage = null;
-    [SerializeField] InputField inputField = null;
+    [SerializeField] GameEvent listFullEvent;
+    [SerializeField] TextButton[] playerButtons;
+    [SerializeField] Button playMultiplicationButton;
+    [SerializeField] Button playDivisionButton;
+    [SerializeField] Image playButtonImage;
+    [SerializeField] InputField inputField;
     [SerializeField] float buttonFadeAlpha = 0.5F;
     [SerializeField] float buttonFadeDuration = 0.1F;
-    [SerializeField] InitialGameSceneLoader sceneLoader = null;
-    [SerializeField] VariableString playerName = null;
-    [SerializeField] PlayerNameController playerNameController = null;
+    [SerializeField] InitialGameSceneLoader sceneLoader;
+    [SerializeField] VariableString playerName;
+    [SerializeField] PlayerNameController playerNameController;
+    [SerializeField] Prefs prefs;
 
     string newName;
     bool buttonsAlreadyPressed;
+
+    public NewPlayerName()
+    {
+        playerButtons = null;
+    }
 
     public void OnPlayerNameChanged(string name)
     {
@@ -36,12 +43,13 @@ class NewPlayerName : MonoBehaviour
         }
     }
 
-    public void OnPlay()
+    public void OnPlay(string questionType)
     {
         if (!buttonsAlreadyPressed)
         {
             playerNameController.AppendName(newName);
             playerName.Value = newName;
+            QuestionGenerator.SetQuestionType(prefs, questionType);
             Play();
         }
     }
@@ -77,7 +85,8 @@ class NewPlayerName : MonoBehaviour
 
     void ActivatePlayButton(bool b)
     {
-        playButton.interactable = b;
+        playMultiplicationButton.interactable = b;
+        playDivisionButton.interactable = b;
         playButtonImage.CrossFadeAlpha(b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false);
     }
 
@@ -94,7 +103,8 @@ class NewPlayerName : MonoBehaviour
     void DisableButtons()
     {
         buttonsAlreadyPressed = true;
-        playButton.enabled = false;
+        playMultiplicationButton.enabled = false;
+        playDivisionButton.enabled = false;
         foreach (TextButton button in playerButtons)
         {
             button.enabled = false;

@@ -2,7 +2,8 @@
 
 class DivisionQuestionGenerator : QuestionGenerator
 {
-    public override int GetNumQuestions() => MaxMultiplicand * MaxMultiplicand;
+    public const int NumQuestions = MaxMultiplicand * MaxMultiplicand;
+    public override int GetNumQuestions() => NumQuestions;
 
     public override Question[] Generate(QuestionsPersistentData data) 
     {

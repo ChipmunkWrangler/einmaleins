@@ -1,17 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CrazyChipmunk;
 using UnityEngine;
 
 class Questions : MonoBehaviour
 {
-    readonly QuestionGenerator questionGenerator = new DivisionQuestionGenerator();
     [SerializeField] private QuestionsPersistentData data;
+    [SerializeField] private Prefs prefs;
+
+    private QuestionGenerator questionGenerator;
 
     public Question[] QuestionArray { get; private set; }
 
     public Question GetGaveUpQuestion() => QuestionArray.FirstOrDefault(question => question.GaveUp());
     public Question GetLaunchCodeQuestion() => QuestionArray.FirstOrDefault(question => question.IsLaunchCode);
-
+    public int NumQuestions => questionGenerator.GetNumQuestions();
     public void ResetForNewQuiz()
     {
         foreach (Question question in QuestionArray)
@@ -64,9 +67,17 @@ class Questions : MonoBehaviour
         return questionGenerator.Generate(data);
     }
 
+    private void Awake()
+    {
+        if (questionGenerator == null)
+        {
+            questionGenerator = QuestionGenerator.Factory(prefs);
+        }
+    }
+
     void OnEnable()
     {
-        data.Load(questionGenerator.GetNumQuestions());
+        data.Load(NumQuestions);
         QuestionArray = CreateQuestions();
     }
 }

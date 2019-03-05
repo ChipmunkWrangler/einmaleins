@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using CrazyChipmunk;
+using UnityEngine;
 
 class RocketParts : MonoBehaviour
 {
     const int PartsToBuildRocket = 0;
-    const int PartsPerUpgrade = 20;
-    const int numQuestionsToFullUpgrades = 100;
+    private int numQuestionsToFullUpgrades => QuestionGenerator.GetNumQuestions(prefs);
+    private int PartsPerUpgrade => numQuestionsToFullUpgrades / 5;
 
-    [SerializeField] RocketPartsPersistentData data = null;
+    [SerializeField] RocketPartsPersistentData data;
+    [SerializeField] Prefs prefs;
 
     public static RocketParts Instance { get; private set; }
     public bool JustUpgraded

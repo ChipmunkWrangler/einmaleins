@@ -55,10 +55,11 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
         }
     }
 
-    public int GetNumAnswersInQuiz(bool isGauntlet) => isGauntlet ? config.GauntletAskListLength : config.NumAnswersPerQuiz;
     public bool IsDoneForToday() =>
         Data.QuizzesToday >= config.MinQuizzesPerDay && Data.TimeToday >= config.MinTimePerDay;
 
+    public int GetNumAnswersInQuiz(bool isGauntlet) =>
+        isGauntlet ? questions.NumQuestions : config.NumAnswersPerQuiz;
 
     public void OnCorrectAnswer(Question question, bool isNewlyMastered)
     {
