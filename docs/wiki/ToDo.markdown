@@ -10,8 +10,8 @@
 * [X] Launch in div (no stats), switch to mult player, stats
 * [ ] Switch between circle and square
 * [X] Fix first upgrade particle effects
-* [ ] New record text?
-* [ ] Test all particle effects
+* [X] New record text?
+* [X] Test all particle effects
 * [ ] Test all on device
 * [ ] Upload version
 * [ ] Email dude, tell him about testflight or have him wait

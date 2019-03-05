@@ -181,6 +181,7 @@
     <Compile Include="Assets\Scripts\GotoLaunch.cs" />
     <Compile Include="Assets\Scripts\GotoMain.cs" />
     <Compile Include="Assets\Scripts\GotoScene.cs" />
+    <Compile Include="Assets\Scripts\GotoSettings.cs" />
     <Compile Include="Assets\Scripts\GotoStats.cs" />
     <Compile Include="Assets\Scripts\HideOnWrong.cs" />
     <Compile Include="Assets\Scripts\InitialGameSceneLoader.cs" />
@@ -197,7 +198,9 @@
     <Compile Include="Assets\Scripts\MultiplicationQuestion.cs" />
     <Compile Include="Assets\Scripts\MultiplicationQuestionGenerator.cs" />
     <Compile Include="Assets\Scripts\NewPlayerName.cs" />
+    <Compile Include="Assets\Scripts\NumberButtonBaseController.cs" />
     <Compile Include="Assets\Scripts\NumberButtonLayoutController.cs" />
+    <Compile Include="Assets\Scripts\NumberButtonSettingsController.cs" />
     <Compile Include="Assets\Scripts\Params.cs" />
     <Compile Include="Assets\Scripts\PlayerData.cs" />
     <Compile Include="Assets\Scripts\PlayerNameController.cs" />

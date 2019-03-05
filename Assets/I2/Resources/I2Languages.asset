@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -20,136 +21,110 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - What's your name?
       - "Wie hei\xDFt Du?"
+      Flags: 0000
+      Languages_Touch: []
     - Term: Neuer Spielername eingeben...
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Type new player's name...
       - Neuer Spielername eingeben...
+      Flags: 0000
+      Languages_Touch: []
     - Term: "H\xF6he:"
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - 'Height:'
       - "H\xF6he:"
+      Flags: 0000
+      Languages_Touch: []
     - Term: "Max. H\xF6he:"
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - 'Max Height:'
       - "Max. H\xF6he:"
+      Flags: 0000
+      Languages_Touch: []
     - Term: 'Rekord:'
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - 'Record:'
       - 'Rekord:'
+      Flags: 0000
+      Languages_Touch: []
     - Term: 'Raketenteile:'
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - 'Rocket Parts:'
       - 'Raketenteile:'
-    - Term: "F\xFCr Heute fertig!"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: "F\xFCr Heute fertig "
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Done for today!
       - "F\xFCr Heute fertig!"
+      Flags: 0000
+      Languages_Touch: []
     - Term: Rakete verbessern
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Upgrade rocket
       - Rakete verbessern
-    - Term: Du hast gewonnen! Spiel nur weiter, wenn du Lust hast
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Du hast gewonnen Spiel nur weiter wenn du Lust hast
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - 'You win!
 
         You can keep playing if you want to'
       - 'Du hast gewonnen!
 
         Spiel nur weiter, wenn Du lust hast'
+      Flags: 0000
+      Languages_Touch: []
     - Term: Raketenteile holen
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Get more parts
       - Raketenteile holen
+      Flags: 0000
+      Languages_Touch: []
     - Term: Raketenteile
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Rocket Parts
       - Raketenteile
+      Flags: 0000
+      Languages_Touch: []
     - Term: Punkte
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Points
       - Punkte
-    - Term: Erreiche Jupiter, um Deine Rakete zu verbessern
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Erreiche Jupiter um Deine Rakete zu verbessern
       TermType: 0
       Description: 
       Languages:
       - 
       - 
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
+      Languages_Touch: []
     - Term: Auf zum Mars
       TermType: 0
       Description: 
@@ -157,9 +132,7 @@ MonoBehaviour:
       - Mars ho!
       - Auf zum Mars
       Flags: 0000
-      Languages_Touch:
-      - Go to Mars!
-      - 
+      Languages_Touch: []
     - Term: Auf zum Jupiter
       TermType: 0
       Description: 
@@ -167,9 +140,7 @@ MonoBehaviour:
       - On to Jupiter!
       - Auf zum Jupiter
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
+      Languages_Touch: []
     - Term: Auf zum Saturn
       TermType: 0
       Description: 
@@ -177,9 +148,7 @@ MonoBehaviour:
       - Off to Saturn!
       - Auf zum Saturn
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
+      Languages_Touch: []
     - Term: Auf zum Uranus
       TermType: 0
       Description: 
@@ -187,9 +156,7 @@ MonoBehaviour:
       - Uranus ahead!
       - Auf zum Uranus
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
+      Languages_Touch: []
     - Term: Auf zum Neptun
       TermType: 0
       Description: 
@@ -197,9 +164,7 @@ MonoBehaviour:
       - On to Neptune!
       - Auf zum Neptun
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
+      Languages_Touch: []
     - Term: Auf zum Pluto
       TermType: 0
       Description: 
@@ -207,9 +172,7 @@ MonoBehaviour:
       - Off to Pluto!
       - Auf zum Pluto
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
+      Languages_Touch: []
     - Term: Auf ins All
       TermType: 0
       Description: 
@@ -217,9 +180,7 @@ MonoBehaviour:
       - Into Deep Space!
       - Auf ins All
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
+      Languages_Touch: []
     - Term: engineNames_0
       TermType: 0
       Description: 
@@ -227,9 +188,7 @@ MonoBehaviour:
       - 'Get Arcjet Engine '
       - Lichtbogentriebwerk einbauen
       Flags: 0000
-      Languages_Touch:
-      - Get Arcjet Engine
-      - 
+      Languages_Touch: []
     - Term: engineNames_1
       TermType: 0
       Description: 
@@ -237,9 +196,7 @@ MonoBehaviour:
       - Get Ion Drive
       - Ionenantrieb einbauen
       Flags: 0000
-      Languages_Touch:
-      - Get Fusion Reactor
-      - Fusionsreaktor einbauen
+      Languages_Touch: []
     - Term: engineNames_2
       TermType: 0
       Description: 
@@ -247,9 +204,7 @@ MonoBehaviour:
       - Get Fusion Reactor
       - Fusionsreaktor einbauen
       Flags: 0000
-      Languages_Touch:
-      - Get Plasma Chamber
-      - Plasmakammer einbauen
+      Languages_Touch: []
     - Term: engineNames_3
       TermType: 0
       Description: 
@@ -257,9 +212,7 @@ MonoBehaviour:
       - Get Antimatter Drive
       - Antimaterienantrieb einbauen
       Flags: 0000
-      Languages_Touch:
-      - Get Ion Drive
-      - Ionenantrieb einbauen
+      Languages_Touch: []
     - Term: engineNames_4
       TermType: 0
       Description: 
@@ -267,79 +220,63 @@ MonoBehaviour:
       - Get Antimatter Drive
       - Antimaterienantrieb einbauen
       Flags: 0000
-      Languages_Touch:
-      - Add extra fuel tanks
-      - "Treibstofftanks vergr\xF6\xDFern"
-    - Term: Mars erreicht!
+      Languages_Touch: []
+    - Term: 'Mars erreicht '
       TermType: 0
       Description: 
       Languages:
       - Reached Mars!
       - Mars erreicht!
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
-    - Term: Jupiter erreicht!
+      Languages_Touch: []
+    - Term: 'Jupiter erreicht '
       TermType: 0
       Description: 
       Languages:
       - Reached Jupiter!
       - Jupiter erreicht!
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
-    - Term: Saturn erreicht!
+      Languages_Touch: []
+    - Term: 'Saturn erreicht '
       TermType: 0
       Description: 
       Languages:
       - Reached Saturn!
       - Saturn erreicht!
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
-    - Term: Uranus erreicht!
+      Languages_Touch: []
+    - Term: 'Uranus erreicht '
       TermType: 0
       Description: 
       Languages:
       - Reached Uranus!
       - Uranus erreicht!
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
-    - Term: Neptun erreicht!
+      Languages_Touch: []
+    - Term: 'Neptun erreicht '
       TermType: 0
       Description: 
       Languages:
       - Reached Neptune!
       - Neptun erreicht!
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
-    - Term: Pluto erreicht!
+      Languages_Touch: []
+    - Term: 'Pluto erreicht '
       TermType: 0
       Description: 
       Languages:
       - Reached Pluto!
       - Pluto erreicht!
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
-    - Term: Ende erreicht!
+      Languages_Touch: []
+    - Term: 'Ende erreicht '
       TermType: 0
       Description: 
       Languages:
       - In Deep Space!
       - Ende erreicht!
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
+      Languages_Touch: []
     - Term: numRocketParts
       TermType: 0
       Description: 
@@ -347,9 +284,7 @@ MonoBehaviour:
       - '{[numParts]} of {[numPartsRequired]}'
       - '{[numParts]} von {[numPartsRequired]}'
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
+      Languages_Touch: []
     - Term: Rakete bauen
       TermType: 0
       Description: 
@@ -357,29 +292,23 @@ MonoBehaviour:
       - Build Rocket
       - Rakete bauen
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
-    - Term: Rechenrakete starten!
+      Languages_Touch: []
+    - Term: 'Rechenrakete starten '
       TermType: 0
       Description: 
       Languages:
       - Launch!
       - "Rechenrakete starten!\t"
       Flags: 0000
-      Languages_Touch:
-      - 
-      - Rechenrakete starten!
-    - Term: Neuer Rekord!
+      Languages_Touch: []
+    - Term: 'Neuer Rekord '
       TermType: 0
       Description: 
       Languages:
       - New Record!
       - Neuer Rekord!
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
+      Languages_Touch: []
     - Term: 'Treibstoff:'
       TermType: 0
       Description: 
@@ -387,180 +316,152 @@ MonoBehaviour:
       - 'Fuel:'
       - 'Treibstoff:'
       Flags: 0000
-      Languages_Touch:
-      - 
-      - 
+      Languages_Touch: []
     - Term: App wird aktualisiert...
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Updating...
       - App wird aktualisiert...
+      Flags: 0000
+      Languages_Touch: []
     - Term: App_Name
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Times Tables
       - Einmaleins
+      Flags: 0000
+      Languages_Touch: []
     - Term: engineNames_5
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Get Antimatter Drive
       - Antimaterienantrieb einbauen
+      Flags: 0000
+      Languages_Touch: []
     - Term: Change Rocket Colour
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Choose Rocket Colour
       - "Raketenfarbe w\xE4hlen"
+      Flags: 0000
+      Languages_Touch: []
     - Term: Enter Launch Code
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Enter Launch Code
       - Startcode eingeben
+      Flags: 0000
+      Languages_Touch: []
     - Term: multiplicationDot
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - " \xD7 "
       - " \xB7 "
+      Flags: 0000
+      Languages_Touch: []
     - Term: Employees Only
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Employees Only
       - "Nur f\xFCr Mitarbeiter"
+      Flags: 0000
+      Languages_Touch: []
     - Term: Daten Exportieren
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Send Game State to Rafael
       - Spielstand an Rafael verschicken
+      Flags: 0000
+      Languages_Touch: []
     - Term: Connecting to Smtp Server...
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Connecting to Smtp Server...
       - Verbindung zum Server wird aufgebaut...
+      Flags: 0000
+      Languages_Touch: []
     - Term: Sending message...
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Sending message...
       - Nachricht wird verschickt...
-    - Term: Message sent. Thanks!
+      Flags: 0000
+      Languages_Touch: []
+    - Term: 'Message sent. Thanks '
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Game state sent. Thanks!
       - Daten wurden verschickt. Danke!
-    - Term: Error! Please email the following to
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Error Please email the following to
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Message could not be sent. Please email the following to testers@crazy-chipmunk.com
       - Nachricht konnte nicht verschickt werden. Bitte Folgendes an testers@crazy-chipmunk.com
         schicken
+      Flags: 0000
+      Languages_Touch: []
     - Term: Spielstand Laden
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Load Game State
       - Spielstand Laden
+      Flags: 0000
+      Languages_Touch: []
     - Term: Diese Daten Laden
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Load This Data (overwrites existing accounts!)
       - "Diese Daten Laden  (\xFCberschreibt vorhandene Konten!)"
+      Flags: 0000
+      Languages_Touch: []
     - Term: Spielstand von Datei Laden
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Load Game State From File
       - Spielstand von Datei Laden
+      Flags: 0000
+      Languages_Touch: []
     - Term: Data loaded.
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - Data loaded.
       - Daten geladen.
+      Flags: 0000
+      Languages_Touch: []
     - Term: divisionSlash
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      Flags: 0000
-      Languages_Touch:
       - "\xF7"
       - "\u2236"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: "Tastenanordnung Ver\xE4ndern"
+      TermType: 0
+      Description: 
+      Languages:
+      - Change Button Layout
+      - "Tastenanordnung Ver\xE4ndern"
+      Flags: 0000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: App_Name
