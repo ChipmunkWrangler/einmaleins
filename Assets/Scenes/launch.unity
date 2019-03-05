@@ -6798,7 +6798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b493a8486f4f6467a823b8ad3e8b96f8, type: 2}
-  prefs: {fileID: 0}
+  prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
 --- !u!1 &153225807
 GameObject:
   m_ObjectHideFlags: 0
