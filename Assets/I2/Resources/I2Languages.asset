@@ -65,7 +65,7 @@ MonoBehaviour:
       - 'Raketenteile:'
       Flags: 0000
       Languages_Touch: []
-    - Term: "F\xFCr Heute fertig "
+    - Term: "F\xFCr Heute fertig"
       TermType: 0
       Description: 
       Languages:
@@ -209,19 +209,19 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - Get Antimatter Drive
-      - Antimaterienantrieb einbauen
+      - Get Plasma Chamber
+      - Plasmakammer einbauen
       Flags: 0000
       Languages_Touch: []
     - Term: engineNames_4
       TermType: 0
       Description: 
       Languages:
-      - Get Antimatter Drive
-      - Antimaterienantrieb einbauen
+      - Add Extra Fuel Tanks
+      - "Treibstofftanks vergr\xF6\xDFern"
       Flags: 0000
       Languages_Touch: []
-    - Term: 'Mars erreicht '
+    - Term: Mars erreicht
       TermType: 0
       Description: 
       Languages:
@@ -229,7 +229,7 @@ MonoBehaviour:
       - Mars erreicht!
       Flags: 0000
       Languages_Touch: []
-    - Term: 'Jupiter erreicht '
+    - Term: Jupiter erreicht
       TermType: 0
       Description: 
       Languages:
@@ -237,7 +237,7 @@ MonoBehaviour:
       - Jupiter erreicht!
       Flags: 0000
       Languages_Touch: []
-    - Term: 'Saturn erreicht '
+    - Term: Saturn erreicht
       TermType: 0
       Description: 
       Languages:
@@ -245,7 +245,7 @@ MonoBehaviour:
       - Saturn erreicht!
       Flags: 0000
       Languages_Touch: []
-    - Term: 'Uranus erreicht '
+    - Term: Uranus erreicht
       TermType: 0
       Description: 
       Languages:
@@ -253,7 +253,7 @@ MonoBehaviour:
       - Uranus erreicht!
       Flags: 0000
       Languages_Touch: []
-    - Term: 'Neptun erreicht '
+    - Term: Neptun erreicht
       TermType: 0
       Description: 
       Languages:
@@ -261,7 +261,7 @@ MonoBehaviour:
       - Neptun erreicht!
       Flags: 0000
       Languages_Touch: []
-    - Term: 'Pluto erreicht '
+    - Term: Pluto erreicht
       TermType: 0
       Description: 
       Languages:
@@ -269,7 +269,7 @@ MonoBehaviour:
       - Pluto erreicht!
       Flags: 0000
       Languages_Touch: []
-    - Term: 'Ende erreicht '
+    - Term: Ende erreicht
       TermType: 0
       Description: 
       Languages:
@@ -293,7 +293,7 @@ MonoBehaviour:
       - Rakete bauen
       Flags: 0000
       Languages_Touch: []
-    - Term: 'Rechenrakete starten '
+    - Term: Rechenrakete starten
       TermType: 0
       Description: 
       Languages:
@@ -301,7 +301,7 @@ MonoBehaviour:
       - "Rechenrakete starten!\t"
       Flags: 0000
       Languages_Touch: []
-    - Term: 'Neuer Rekord '
+    - Term: Neuer Rekord
       TermType: 0
       Description: 
       Languages:
@@ -397,7 +397,7 @@ MonoBehaviour:
       - Nachricht wird verschickt...
       Flags: 0000
       Languages_Touch: []
-    - Term: 'Message sent. Thanks '
+    - Term: Message sent. Thanks
       TermType: 0
       Description: 
       Languages:

@@ -23,13 +23,13 @@ internal class FlashThrust : MonoBehaviour, IOnQuestionChanged
 
     private readonly string[] planetReachedTexts =
     {
-        "Mars erreicht!",
-        "Jupiter erreicht!",
-        "Saturn erreicht!",
-        "Uranus erreicht!",
-        "Neptun erreicht!",
-        "Pluto erreicht!",
-        "Ende erreicht!" // should never happen
+        "Mars erreicht",
+        "Jupiter erreicht",
+        "Saturn erreicht",
+        "Uranus erreicht",
+        "Neptun erreicht",
+        "Pluto erreicht",
+        "Ende erreicht" // should never happen
     };
 
     [SerializeField] private Text achievementText;
@@ -54,7 +54,7 @@ internal class FlashThrust : MonoBehaviour, IOnQuestionChanged
     [SerializeField] private float planetAchievementTextDelay = 2.0F;
     [SerializeField] private Prefs prefs;
     [SerializeField] private QuestionPicker questionPicker;
-    [SerializeField] private string recordBrokenMsg = "Neuer Rekord!";
+    [SerializeField] private string recordBrokenMsg = "Neuer Rekord";
     private float recordHeight;
     [SerializeField] private Text recordHeightText;
     [SerializeField] private TargetPlanet targetPlanet;
