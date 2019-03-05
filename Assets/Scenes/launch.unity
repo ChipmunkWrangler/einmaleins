@@ -6978,25 +6978,5 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7484206588180747482, guid: 46354ba183b6541b3ae941e684cbde0e,
-        type: 3}
-      propertyPath: m_CellSize.x
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 7484206588180747482, guid: 46354ba183b6541b3ae941e684cbde0e,
-        type: 3}
-      propertyPath: m_CellSize.y
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 7484206588180747482, guid: 46354ba183b6541b3ae941e684cbde0e,
-        type: 3}
-      propertyPath: m_Spacing.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7484206588180747482, guid: 46354ba183b6541b3ae941e684cbde0e,
-        type: 3}
-      propertyPath: m_Spacing.y
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46354ba183b6541b3ae941e684cbde0e, type: 3}

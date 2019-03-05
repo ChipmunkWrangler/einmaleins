@@ -26,12 +26,13 @@ Instead, you need something like:
 * [ ] Test multiplication in German
 * [ ] Upload version
 * [X] Email dude, tell him about testflight or have him wait
-* [ ] Grid layout doesn't fit on my ipad
-* [ ] What is the logic when you ask for help? Seems different on device...
+* [X] Grid layout doesn't fit on my ipad
+* [X] What is the logic when you ask for help? Seems different on device...
 * [X] Says "Get antimatter drive" for the last three! Changes colour at the end, though. 
 * [X] Reached Uranus text doesn't appear, Neptune either
 * [X] Last upgrade came after gauntlet
-* [ ] Test "Stop for the day" message
+* [X] Test "Stop for the day" message.
+* [ ] Launch codes!
       
 ## v1.0.0 
 * [o] Update web page

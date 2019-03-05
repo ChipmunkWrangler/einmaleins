@@ -3,22 +3,22 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cad40eaf270a446c3afa2d062b63e965, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  MinFrustration: -2
-  MaxFrustration: 3
-  MinQuizzesPerDay: 999
-  MinTimePerDay: 300
-  FrustrationWrong: 2
+  FrustrationFast: -2
   FrustrationGiveUp: 2
   FrustrationRight: -1
-  FrustrationFast: -2
-  NumAnswersPerQuiz: 7
-  GauntletAskListLength: 100
+  FrustrationWrong: 2
+  MaxFrustration: 3
+  MinFrustration: -2
+  MinQuizzesPerDay: 3
+  MinTimePerDay: 300
   NumAnswersLeftWhenLaunchCodeAsked: 3
+  NumAnswersPerQuiz: 7
