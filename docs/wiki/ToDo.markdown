@@ -3,13 +3,14 @@
 # ToDo 
 ## v1.0.1
 * [X] test stats with multiplication
-* [ ] Switch back to mult player
-* [ ] Mult gauntlet
-* [ ] Div gauntlet
-* [ ] Rocket part in div
+* [X] Switch back to mult player
+* [X] Mult gauntlet
+* [X] Div gauntlet
+* [X] Rocket part in div
 * [X] Launch in div (no stats), switch to mult player, stats
 * [ ] Switch between circle and square
-* [ ] Fix first upgrade particle effects
+* [X] Fix first upgrade particle effects
+* [ ] New record text?
 * [ ] Test all particle effects
 * [ ] Test all on device
 * [ ] Upload version
