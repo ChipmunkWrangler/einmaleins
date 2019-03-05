@@ -79,7 +79,7 @@ class EffortTracker : MonoBehaviour, IOnWrongAnswer
             StartQuiz();
         }
 
-        Debug.Log("frustration = " + Data.Frustration + " numAnswersInQuiz " + NumAnswersLeftInQuiz);
+//        Debug.Log("frustration = " + Data.Frustration + " numAnswersInQuiz " + NumAnswersLeftInQuiz);
         if (NumAnswersLeftInQuiz <= 0)
         {
             return null;

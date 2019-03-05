@@ -17,7 +17,7 @@ class NumberButtonLayoutController : MonoBehaviour
     bool IsSmallScreen()
     {
         float dpi = Screen.dpi;
-        Debug.Log(dpi);
+//        Debug.Log(dpi);
         if (dpi == 0)
         {
             return false;

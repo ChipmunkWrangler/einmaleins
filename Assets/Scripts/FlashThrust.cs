@@ -67,7 +67,7 @@ class FlashThrust : MonoBehaviour, IOnQuestionChanged
         float oldSpeed = Speed;
         Speed = Mathf.Sqrt(2F * deltaHeight * gravity);
         UnityEngine.Assertions.Assert.IsTrue(Speed > oldSpeed);
-        Debug.Log("old speed = " + oldSpeed + " speed = " + Speed);
+//        Debug.Log("old speed = " + oldSpeed + " speed = " + Speed);
     }
 
     public void OnCountdown()

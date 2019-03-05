@@ -86,7 +86,7 @@ abstract class Question
         {
             data.WasWrong = true;
         }
-        Debug.Log(ToString());
+//        Debug.Log(ToString());
         return isNewlyMastered;
     }
 
