@@ -193,24 +193,24 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - Get Ion Drive
-      - Ionenantrieb einbauen
+      - Get Fusion Reactor
+      - Fusionsreaktor einbauen
       Flags: 0000
       Languages_Touch: []
     - Term: engineNames_2
       TermType: 0
       Description: 
       Languages:
-      - Get Fusion Reactor
-      - Fusionsreaktor einbauen
+      - Get Plasma Chamber
+      - Plasmakammer einbauen
       Flags: 0000
       Languages_Touch: []
     - Term: engineNames_3
       TermType: 0
       Description: 
       Languages:
-      - Get Plasma Chamber
-      - Plasmakammer einbauen
+      - Get Ion Drive
+      - Ionenantrieb einbauen
       Flags: 0000
       Languages_Touch: []
     - Term: engineNames_4

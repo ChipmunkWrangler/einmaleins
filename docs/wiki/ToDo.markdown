@@ -1,7 +1,16 @@
 [Ideas](Ideas)
 
 # ToDo 
-## v1.0.1
+## v1.2.0
+Better handling of "I don't know" questions. ATM I put them off until the gauntlet, which sucks.
+The reason was that you wanted to make it work for people who don't know higher than NxN for N < 10.
+Instead, you need something like: 
+ - Allow selection of max number in settings screen
+ - Don't show these
+ - Prefer, don't hide, questions that you gave up on
+ - Alert the player when they have answered all the questions up to their N and suggest increasing N (don't let them reach a higher planet than they should)
+[ ] If you are typing in the answer when you reach a planet, the answer text doesn't disappear
+## v1.1.0
 * [X] test stats with multiplication
 * [X] Switch back to mult player
 * [X] Mult gauntlet
@@ -17,12 +26,11 @@
 * [ ] Test multiplication in German
 * [ ] Upload version
 * [X] Email dude, tell him about testflight or have him wait
-* [ ] If you are typing in the answer when you reach a planet, the answer text doesn't disappear
 * [ ] Grid layout doesn't fit on my ipad
 * [ ] What is the logic when you ask for help? Seems different on device...
-* [ ] Says "Get antimatter drive" for the last three! Changes colour at the end, though. 
-* [ ] Reached Uranus text doesn't appear, Neptune either
-* [ ] Last upgrade came after gauntlet
+* [X] Says "Get antimatter drive" for the last three! Changes colour at the end, though. 
+* [X] Reached Uranus text doesn't appear, Neptune either
+* [X] Last upgrade came after gauntlet
 * [ ] Test "Stop for the day" message
       
 ## v1.0.0 
