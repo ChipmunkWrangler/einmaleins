@@ -14,13 +14,13 @@ Instead, you need something like:
 ## v1.1.0
 * [X] test stats with multiplication
 * [X] Switch back to mult player
-* [X] Mult gauntlet
+* [ ] Mult gauntlet
 * [X] Div gauntlet
 * [X] Rocket part in div
 * [X] Launch in div (no stats), switch to mult player, stats
-* [X] Switch between circle and square
+* [ ] Switch between circle and square
 * [X] Fix first upgrade particle effects
-* [X] New record text?
+* [ ] New record text?
 * [X] Test all particle effects
 * [X] Test old data
 * [ ] Test all on device
@@ -29,11 +29,11 @@ Instead, you need something like:
 * [X] Email dude, tell him about testflight or have him wait
 * [X] Grid layout doesn't fit on my ipad
 * [X] What is the logic when you ask for help? Seems different on device...
-* [X] Says "Get antimatter drive" for the last three! Changes colour at the end, though. 
-* [X] Reached Uranus text doesn't appear, Neptune either
+* [ ] Says "Get antimatter drive" for the last three! Changes colour at the end, though. 
+* [ ] Reached Uranus text doesn't appear, Neptune either
 * [X] Last upgrade came after gauntlet
-* [X] Test "Stop for the day" message.
-* [X] Launch codes! GiveUp is never called!
+* [ ] Test "Stop for the day" message.
+* [ ] Launch codes! GiveUp is never called!
       
 ## v1.0.0 
 * [o] Update web page
