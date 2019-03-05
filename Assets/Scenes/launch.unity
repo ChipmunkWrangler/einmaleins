@@ -5580,7 +5580,7 @@ MonoBehaviour:
   oldRecord: {fileID: 1862998282}
   paramObj: {fileID: 451636923}
   achievementText: {fileID: 379558591}
-  recordBrokenMsg: Neuer Rekord!
+  recordBrokenMsg: Neuer Rekord
   zoomToPlanet: {fileID: 315}
   achievementTextTransitionTime: 5
   planetAchievementTextDelay: 2
