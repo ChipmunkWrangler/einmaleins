@@ -522,9 +522,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e82f07b4b384cdbaf14afbaa1dbf8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPlanet: {fileID: 11400000, guid: c8b20d20c82e2478c9801de51b53c4eb, type: 2}
   launchButton: {fileID: 359}
   launchButtonText: {fileID: 412}
+  targetPlanet: {fileID: 11400000, guid: c8b20d20c82e2478c9801de51b53c4eb, type: 2}
 --- !u!1 &41 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4218261894912406477, guid: 8b711b5f899404f1181f601a02be9963,
@@ -1012,8 +1012,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d903cdf7bfe450d9909763bb8073ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelCountText: {fileID: 1472541385}
   effortTracker: {fileID: 124914249}
+  fuelCountText: {fileID: 1472541385}
   goal: {fileID: 1045511061}
 --- !u!1 &94 stripped
 GameObject:
@@ -2535,8 +2535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a7ed69adc4d47d9a9dd21ded6b8605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalPadding: 0.3
-  rocket: {fileID: 134}
+  earth: {fileID: 184}
+  minParticleScale: 0.1
   particleParent: {fileID: 2}
   planets:
   - {fileID: 178}
@@ -2547,20 +2547,6 @@ MonoBehaviour:
   - {fileID: 181}
   - {fileID: 179}
   - {fileID: 1862998284}
-  earth: {fileID: 184}
-  minParticleScale: 0.1
-  recordLine: {fileID: 1862998282}
-  zoomInTime: 7
-  zoomOutTime: 3
-  preDelay: 0
-  postDelay: 0
-  planetZooms:
-  - 1400
-  - 10000
-  - 10000
-  - 40000
-  - 60000
-  - 60000
   planetYs:
   - 9000
   - 55000
@@ -2568,6 +2554,20 @@ MonoBehaviour:
   - 288000
   - 470000
   - 640000
+  planetZooms:
+  - 1400
+  - 10000
+  - 10000
+  - 40000
+  - 60000
+  - 60000
+  postDelay: 0
+  preDelay: 0
+  recordLine: {fileID: 1862998282}
+  rocket: {fileID: 134}
+  verticalPadding: 0.3
+  zoomInTime: 7
+  zoomOutTime: 3
 --- !u!114 &316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2740,8 +2740,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 318}
   fadedAlpha: 0.5
-  transitionTime: 0.1
   text: {fileID: 352}
+  transitionTime: 0.1
 --- !u!114 &323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2841,8 +2841,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca896ef25736242469ae9e972c8fdac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: {fileID: 389}
   paramObj: {fileID: 451636923}
+  thrust: {fileID: 389}
 --- !u!114 &343 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4218261894912406195, guid: 8b711b5f899404f1181f601a02be9963,
@@ -2960,8 +2960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff982de9835a43549d3dfda5a054095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  answerHandler: {fileID: 382}
-  maxDigits: 3
   answerChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2988,6 +2986,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: BoolEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  answerHandler: {fileID: 382}
+  maxDigits: 3
 --- !u!114 &355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3001,11 +3001,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c71f8c72bd53b454197552907a2a9c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doneText: {fileID: 95}
+  goal: {fileID: 1045511061}
   launchButton: {fileID: 38}
   upgradeButton: {fileID: 8}
-  doneText: {fileID: 95}
   youWinText: {fileID: 550210464}
-  goal: {fileID: 1045511061}
 --- !u!114 &356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3040,8 +3040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3927e17dd1849afb6ae93f9014de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
   button: {fileID: 359}
+  prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
 --- !u!114 &358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3057,8 +3057,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 359}
   fadedAlpha: 0.5
-  transitionTime: 0.1
   text: {fileID: 412}
+  transitionTime: 0.1
 --- !u!114 &359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3293,30 +3293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e37913b9f254327acffe0b4bd310aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subscribers:
-  - {fileID: 36}
-  - {fileID: 20}
-  - {fileID: 66}
-  - {fileID: 58}
-  - {fileID: 35}
-  - {fileID: 20}
-  - {fileID: 117313298}
-  - {fileID: 24}
-  - {fileID: 75}
-  - {fileID: 19}
-  - {fileID: 41}
-  - {fileID: 69}
-  - {fileID: 64}
-  - {fileID: 3}
-  - {fileID: 78}
-  - {fileID: 22}
-  - {fileID: 94}
-  - {fileID: 124914248}
-  - {fileID: 825374071}
-  - {fileID: 1615401487}
-  - {fileID: 482485701}
-  - {fileID: 811033116}
-  effortTracker: {fileID: 124914249}
   correctAnswer:
     m_PersistentCalls:
       m_Calls:
@@ -3553,6 +3529,30 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: QuestionPicker+CorrectAnswerEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  effortTracker: {fileID: 124914249}
+  subscribers:
+  - {fileID: 36}
+  - {fileID: 20}
+  - {fileID: 66}
+  - {fileID: 58}
+  - {fileID: 35}
+  - {fileID: 20}
+  - {fileID: 117313298}
+  - {fileID: 24}
+  - {fileID: 75}
+  - {fileID: 19}
+  - {fileID: 41}
+  - {fileID: 69}
+  - {fileID: 64}
+  - {fileID: 3}
+  - {fileID: 78}
+  - {fileID: 22}
+  - {fileID: 94}
+  - {fileID: 124914248}
+  - {fileID: 825374071}
+  - {fileID: 1615401487}
+  - {fileID: 482485701}
+  - {fileID: 811033116}
 --- !u!114 &388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3566,26 +3566,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   celebrate: {fileID: 390}
-  delay: 1
-  countdownTime: 3
   countdownText: {fileID: 327}
-  uiElementsToActivateOnLaunchCode:
-  - {fileID: 295702855}
-  uiElementsToDeactivateOnLaunchCode:
-  - {fileID: 8}
-  - {fileID: 37}
-  - {fileID: 18}
+  countdownTime: 3
+  delay: 1
+  goal: {fileID: 1045511061}
+  goalButtonController: {fileID: 355}
+  prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
+  questionPicker: {fileID: 382}
+  questions: {fileID: 124914251}
+  thrust: {fileID: 389}
+  uiElementsToActivateOnCountdown:
+  - {fileID: 15}
   uiElementsToActivateOnLaunchButton:
   - {fileID: 18}
   - {fileID: 81}
   - {fileID: 1344230728}
-  uiElementsToDeactivateOnLaunchButton:
-  - {fileID: 67}
-  - {fileID: 1535142616}
-  - {fileID: 15}
+  uiElementsToActivateOnLaunchCode:
   - {fileID: 295702855}
-  uiElementsToActivateOnCountdown:
-  - {fileID: 15}
+  uiElementsToActivateOnPlay:
+  - {fileID: 67}
+  - {fileID: 18}
+  - {fileID: 1535142616}
+  uiElementsToDeactivateIfGivingUpIsForbidden:
+  - {fileID: 811033116}
+  - {fileID: 482485701}
   uiElementsToDeactivateOnCountdown:
   - {fileID: 67}
   - {fileID: 18}
@@ -3593,23 +3597,19 @@ MonoBehaviour:
   - {fileID: 37}
   - {fileID: 1535142616}
   - {fileID: 295702855}
-  uiElementsToActivateOnPlay:
+  uiElementsToDeactivateOnLaunchButton:
   - {fileID: 67}
-  - {fileID: 18}
   - {fileID: 1535142616}
+  - {fileID: 15}
+  - {fileID: 295702855}
+  uiElementsToDeactivateOnLaunchCode:
+  - {fileID: 8}
+  - {fileID: 37}
+  - {fileID: 18}
   uiElementsToDeactivateOnPlay:
   - {fileID: 81}
   - {fileID: 15}
   - {fileID: 1344230728}
-  uiElementsToDeactivateIfGivingUpIsForbidden:
-  - {fileID: 811033116}
-  - {fileID: 482485701}
-  goalButtonController: {fileID: 355}
-  thrust: {fileID: 389}
-  questions: {fileID: 124914251}
-  questionPicker: {fileID: 382}
-  goal: {fileID: 1045511061}
-  prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
 --- !u!114 &389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3622,22 +3622,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e73f6e9ab93349a1b582c5445fc646c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightWidget: {fileID: 55}
+  achievementText: {fileID: 379558591}
+  achievementTextTransitionTime: 5
+  effortTracker: {fileID: 124914249}
+  goal: {fileID: 1045511061}
   heightText: {fileID: 430}
-  recordHeightText: {fileID: 306}
+  heightWidget: {fileID: 55}
   launch: {fileID: 388}
   oldRecord: {fileID: 1862998282}
   paramObj: {fileID: 451636923}
-  achievementText: {fileID: 379558591}
-  recordBrokenMsg: Neuer Rekord
-  zoomToPlanet: {fileID: 315}
-  achievementTextTransitionTime: 5
   planetAchievementTextDelay: 2
-  effortTracker: {fileID: 124914249}
-  questionPicker: {fileID: 382}
-  goal: {fileID: 1045511061}
   prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
+  questionPicker: {fileID: 382}
+  recordBrokenMsg: Neuer Rekord
+  recordHeightText: {fileID: 306}
   targetPlanet: {fileID: 11400000, guid: c8b20d20c82e2478c9801de51b53c4eb, type: 2}
+  zoomToPlanet: {fileID: 315}
 --- !u!114 &390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3651,6 +3651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2179ecab0be94d81955ef567fdaae51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  continueAfterQuestions: 0
   exhaustParticles:
   - {fileID: 170}
   - {fileID: 2098998517}
@@ -3661,9 +3662,8 @@ MonoBehaviour:
   - {fileID: 166}
   fastAnswerParticles: {fileID: 901887787}
   masteryParticles: {fileID: 730397358}
-  smokeParticles: {fileID: 1471158002}
   questionPicker: {fileID: 382}
-  continueAfterQuestions: 0
+  smokeParticles: {fileID: 1471158002}
 --- !u!114 &397 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4218261894912406121, guid: 8b711b5f899404f1181f601a02be9963,
@@ -4032,11 +4032,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f1f237b82c10418dabfeb0d85b3bb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goal: {fileID: 1045511061}
-  questions: {fileID: 124914251}
-  fuel: {fileID: 92}
   config: {fileID: 11400000, guid: 16370ebc62894430bbf6e1d49fbc09ab, type: 2}
   data: {fileID: 11400000, guid: 230a5e81a03624db7a769727a49bcef6, type: 2}
+  fuel: {fileID: 92}
+  goal: {fileID: 1045511061}
+  questions: {fileID: 124914251}
 --- !u!4 &124914250
 Transform:
   m_ObjectHideFlags: 0
@@ -5745,9 +5745,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb4a2d2b9b7384a1db98589726599889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effortTracker: {fileID: 124914249}
   chooseRocketColourData: {fileID: 11400000, guid: f7afb808e2a6847819c32b653d2a42fb,
     type: 2}
+  effortTracker: {fileID: 124914249}
   targetPlanet: {fileID: 11400000, guid: c8b20d20c82e2478c9801de51b53c4eb, type: 2}
 --- !u!4 &1045511062
 Transform:
@@ -6443,19 +6443,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724261f2c3195438e92bf894f0b8e891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numText: {fileID: 95769376}
+  baseFontSize: 30
+  highlightColour: {r: 0.9098039, g: 0.9098039, b: 0, a: 1}
+  highlightFadeTime: 0.5
+  highlightFontSize: 49
   imagesToHighlight: []
+  numText: {fileID: 95769376}
+  scoreCountdownDelay: 0.5
+  scoreCountdownDuration: 5
+  textsToFadeOut:
+  - {fileID: 232395213}
   textsToHighlight:
   - {fileID: 232395213}
   - {fileID: 95769376}
-  textsToFadeOut:
-  - {fileID: 232395213}
-  baseFontSize: 30
-  highlightColour: {r: 0.9098039, g: 0.9098039, b: 0, a: 1}
-  highlightFontSize: 49
-  highlightFadeTime: 0.5
-  scoreCountdownDuration: 5
-  scoreCountdownDelay: 0.5
 --- !u!198 &1662732573 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198820737869467406, guid: 97558bf9f2ab24a2d92e51c992308848,
@@ -6848,7 +6848,13 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 124914249}
-    m_RemovedComponents: []
+    - target: {fileID: 4218261894912406135, guid: 8b711b5f899404f1181f601a02be9963,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4218261894912406135, guid: 8b711b5f899404f1181f601a02be9963, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8b711b5f899404f1181f601a02be9963, type: 3}
 --- !u!1001 &7484206589380312576
 PrefabInstance:
@@ -6940,7 +6946,7 @@ PrefabInstance:
     - target: {fileID: 7484206588180747481, guid: 46354ba183b6541b3ae941e684cbde0e,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 865
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 7484206588180747481, guid: 46354ba183b6541b3ae941e684cbde0e,
         type: 3}
@@ -6971,6 +6977,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484206588180747482, guid: 46354ba183b6541b3ae941e684cbde0e,
+        type: 3}
+      propertyPath: m_CellSize.x
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484206588180747482, guid: 46354ba183b6541b3ae941e684cbde0e,
+        type: 3}
+      propertyPath: m_CellSize.y
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484206588180747482, guid: 46354ba183b6541b3ae941e684cbde0e,
+        type: 3}
+      propertyPath: m_Spacing.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484206588180747482, guid: 46354ba183b6541b3ae941e684cbde0e,
+        type: 3}
+      propertyPath: m_Spacing.y
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46354ba183b6541b3ae941e684cbde0e, type: 3}
