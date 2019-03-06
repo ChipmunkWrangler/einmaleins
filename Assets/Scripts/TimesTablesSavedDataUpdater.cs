@@ -13,6 +13,7 @@ internal class TimesTablesSavedDataUpdater : SavedDataUpdater
     {
         switch (fromVersion)
         {
+            case "":
             case "0.1.14":
             case "1.0.0":
             case "1.0":
@@ -32,7 +33,6 @@ internal class TimesTablesSavedDataUpdater : SavedDataUpdater
             default:
                 ShowVersionError();
                 return false;
-//                GiveUpAndDestroyData();
         }
 
         return true;
@@ -42,11 +42,6 @@ internal class TimesTablesSavedDataUpdater : SavedDataUpdater
     {
         versionErrorText?.SetActive(true);
     }
-
-//    private void GiveUpAndDestroyData()
-//    {
-//        PlayerPrefs.DeleteAll();
-//    }
 
     private void UpdateFrom_0_1_11_To_0_1_14()
     {
