@@ -2,6 +2,7 @@
 
 # ToDo 
 ## v1.2.0
+Figure out how to change copyright in the IPA
 Better handling of "I don't know" questions. ATM I put them off until the gauntlet, which sucks.
 The reason was that you wanted to make it work for people who don't know higher than NxN for N < 10.
 WAIT: ACTUALLY, IT MAY BE BECAUSE OF THE LAUNCH CODES, WHICH DIDN'T WORK BECAUSE OF A BUG!
