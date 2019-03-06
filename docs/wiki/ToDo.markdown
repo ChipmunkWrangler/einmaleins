@@ -18,22 +18,22 @@ Instead, you need something like:
 * [X] Div gauntlet
 * [X] Rocket part in div
 * [X] Launch in div (no stats), switch to mult player, stats
-* [ ] Switch between circle and square
+* [X] Switch between circle and square
 * [X] Fix first upgrade particle effects
-* [ ] New record text?
+* [X] New record text?
 * [X] Test all particle effects
 * [X] Test old data
-* [ ] Test all on device
-* [ ] Test multiplication in German
-* [ ] Upload version
+* [X] Test all on device
+* [X] Test multiplication in German
+* [X] Upload version
 * [X] Email dude, tell him about testflight or have him wait
 * [X] Grid layout doesn't fit on my ipad
 * [X] What is the logic when you ask for help? Seems different on device...
 * [ ] Says "Get antimatter drive" for the last three! Changes colour at the end, though. 
-* [ ] Reached Uranus text doesn't appear, Neptune either
+* [X] Reached Uranus text doesn't appear, Neptune either
 * [X] Last upgrade came after gauntlet
-* [ ] Test "Stop for the day" message.
-* [ ] Launch codes! GiveUp is never called!
+* [X] Test "Stop for the day" message.
+* [X] Launch codes! GiveUp is never called!
       
 ## v1.0.0 
 * [o] Update web page
