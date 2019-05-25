@@ -1129,6 +1129,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282753732}
   m_CullTransparentMesh: 0
+--- !u!114 &309748424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332e36893e7cf4a49b3c1f72f76cd5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 198967645}
 --- !u!1001 &325059782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1145,6 +1158,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: "\xF7"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8832731504152761554, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
@@ -1270,11 +1293,21 @@ PrefabInstance:
         type: 3}
       propertyPath: mLocalizeTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1212743843}
     - target: {fileID: 8171054197155947653, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: mTerm
       value: divisionSlash
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832731504735910580, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832731504735910580, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268d4a886f37f4dbc8a8ee93df4f30c4, type: 3}
@@ -2483,6 +2516,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActivateMultiplication
       objectReference: {fileID: 0}
+    - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_Text
+      value: "\xD7"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_FontData.m_AlignByGeometry
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8832731504152761554, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2607,6 +2660,16 @@ PrefabInstance:
         type: 3}
       propertyPath: mLocalizeTarget
       value: 
+      objectReference: {fileID: 309748424}
+    - target: {fileID: 8832731504735910580, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832731504735910580, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268d4a886f37f4dbc8a8ee93df4f30c4, type: 3}
@@ -3390,6 +3453,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e6e815623d34dcf94034538b51a4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1212743843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332e36893e7cf4a49b3c1f72f76cd5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 2013431548}
 --- !u!1001 &1250884806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4280,7 +4356,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0000037162565}
+  m_AnchoredPosition: {x: 0, y: -0.00002680659}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1488403818

@@ -361,8 +361,8 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - " \xD7 "
-      - " \xB7 "
+      - "\xD7"
+      - Multiplikation
       Flags: 0000
       Languages_Touch: []
     - Term: Employees Only
@@ -451,7 +451,7 @@ MonoBehaviour:
       Description: 
       Languages:
       - "\xF7"
-      - "\u2236"
+      - Division
       Flags: 0000
       Languages_Touch: []
     - Term: "Tastenanordnung Ver\xE4ndern"
