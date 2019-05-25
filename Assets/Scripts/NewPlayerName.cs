@@ -1,4 +1,5 @@
-﻿using CrazyChipmunk;
+﻿using System;
+using CrazyChipmunk;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,8 @@ internal class NewPlayerName : MonoBehaviour
     [SerializeField] private Text playMultiplicationSymbol;
     [SerializeField] private Prefs prefs;
     [SerializeField] private InitialGameSceneLoader sceneLoader;
+    [SerializeField] private RectTransform playerNameContainer;
+    [SerializeField] private VerticalLayoutGroup playerNameLayout;
 
     public NewPlayerName()
     {
@@ -28,31 +31,25 @@ internal class NewPlayerName : MonoBehaviour
 
     public void OnPlayerNameChanged(string name)
     {
-        if (!buttonsAlreadyPressed)
-        {
-            ActivatePlayButton(playerNameController.IsNameValid(name));
-            newName = name;
-        }
+        if (buttonsAlreadyPressed) return;
+        ActivatePlayButton(playerNameController.IsNameValid(name));
+        newName = name;
     }
 
     public void OnPlayerNameButton(int i)
     {
-        if (!buttonsAlreadyPressed)
-        {
-            playerName.Value = playerNameController.Names[i];
-            Play();
-        }
+        if (buttonsAlreadyPressed) return;
+        playerName.Value = playerNameController.Names[i];
+        Play();
     }
 
     public void OnPlay(string questionType)
     {
-        if (!buttonsAlreadyPressed)
-        {
-            playerNameController.AppendName(newName);
-            playerName.Value = newName;
-            QuestionGenerator.SetQuestionType(prefs, questionType);
-            Play();
-        }
+        if (buttonsAlreadyPressed) return;
+        playerNameController.AppendName(newName);
+        playerName.Value = newName;
+        QuestionGenerator.SetQuestionType(prefs, questionType);
+        Play();
     }
 
     private void Start()
@@ -75,6 +72,12 @@ internal class NewPlayerName : MonoBehaviour
         }
 
         for (var i = numPlayers; i < playerButtons.Length; ++i) playerButtons[i].SetActive(false);
+        if (numPlayers <= 0) return;
+        var rectHeight = (playerButtons[0].transform as RectTransform).rect.height;
+        var spacing = playerNameLayout.spacing;
+        Debug.Log(rectHeight.ToString());
+        playerNameContainer.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,
+            (rectHeight + spacing) * numPlayers + spacing);
     }
 
     private void ActivatePlayButton(bool b)

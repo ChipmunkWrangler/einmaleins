@@ -2,6 +2,16 @@
 
 # ToDo 
 ## v1.2.0
+Change content height based on number of buttons
+Get scrollview working:
+must be 1100 high = -(-980 (last button pos)) + 100 
+the buttons are 160 high. 100 = 160/2 + 20 (spacing)
+The buttons are 700 wide
+
+Remove grey background
+Remove ugly white scrollbar
+Ensure scrollview looks right when there are fewer than 4 players
+
 Figure out how to change copyright in the IPA
 Find better ways to handle division. At the least, make the German buttons in the new player screen unconfusing.
 Better handling of "I don't know" questions. ATM I put them off until the gauntlet, which sucks.
