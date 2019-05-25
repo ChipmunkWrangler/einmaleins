@@ -18,6 +18,8 @@ internal class TimesTablesSavedDataUpdater : SavedDataUpdater
             case "1.0.0":
             case "1.0":
             case "1.1":
+            case "1.1.0":
+            case "1.1.1":
                 break;
             case "0.1.13":
             case "0.1.12":

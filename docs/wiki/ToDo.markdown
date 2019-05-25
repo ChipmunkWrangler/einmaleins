@@ -1,19 +1,9 @@
 [Ideas](Ideas)
 
 # ToDo 
-## v1.2.0
-Change content height based on number of buttons
-Get scrollview working:
-must be 1100 high = -(-980 (last button pos)) + 100 
-the buttons are 160 high. 100 = 160/2 + 20 (spacing)
-The buttons are 700 wide
-
-Remove grey background
-Remove ugly white scrollbar
-Ensure scrollview looks right when there are fewer than 4 players
-
+## v1.3.0
 Figure out how to change copyright in the IPA
-Find better ways to handle division. At the least, make the German buttons in the new player screen unconfusing.
+Find better ways to handle division.
 Better handling of "I don't know" questions. ATM I put them off until the gauntlet, which sucks.
 The reason was that you wanted to make it work for people who don't know higher than NxN for N < 10.
 WAIT: ACTUALLY, IT MAY BE BECAUSE OF THE LAUNCH CODES, WHICH DIDN'T WORK BECAUSE OF A BUG!
@@ -24,6 +14,8 @@ Instead, you need something like:
  - Alert the player when they have answered all the questions up to their N and suggest increasing N (don't let them reach a higher planet than they should)
  - Tell Bert for Emile
 [ ] If you are typing in the answer when you reach a planet, the answer text doesn't disappear. Note that AnswerDisplay.OnQuizAborted is presumably called, emptying the answer string, but if you hit the button at the right time, it adds a new number. Maybe the buttons should deactivate on OnQuizAborted (the enter button already does); otherwise AnswerDisplay should track state and reject input between OnQuizAborted and OnQuestionChanged.
+## v1.2.0
+Allow up to 32 players
 ## v1.1.0
 * [X] test stats with multiplication
 * [X] Switch back to mult player
