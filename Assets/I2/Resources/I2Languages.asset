@@ -361,8 +361,8 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - "\xD7"
-      - Multiplikation
+      - " \xD7 "
+      - ' '
       Flags: 0000
       Languages_Touch: []
     - Term: Employees Only
@@ -451,7 +451,7 @@ MonoBehaviour:
       Description: 
       Languages:
       - "\xF7"
-      - Division
+      - ' '
       Flags: 0000
       Languages_Touch: []
     - Term: "Tastenanordnung Ver\xE4ndern"
@@ -469,6 +469,22 @@ MonoBehaviour:
       - Can't convert save data. Please contact support@crazy-chipmunk.com.
       - Fehler bei der Aktualisierung des Speicherstandes. Bitte support@crazy-chipmunk.com
         kontaktieren.
+      Flags: 0000
+      Languages_Touch: []
+    - Term: mal
+      TermType: 0
+      Description: 
+      Languages:
+      - ' '
+      - mal
+      Flags: 0000
+      Languages_Touch: []
+    - Term: durch
+      TermType: 0
+      Description: 
+      Languages:
+      - ' '
+      - durch
       Flags: 0000
       Languages_Touch: []
     CaseInsensitiveTerms: 0

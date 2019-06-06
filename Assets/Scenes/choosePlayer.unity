@@ -1170,12 +1170,12 @@ PrefabInstance:
     - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: m_Text
-      value: "\xF7"
+      value: ' '
       objectReference: {fileID: 0}
     - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: m_FontData.m_BestFit
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
@@ -1315,13 +1315,28 @@ PrefabInstance:
     - target: {fileID: 8832731504735910580, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 8832731504735910580, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 5353728764539223203, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_Text
+      value: durch
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632477033308479243, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: mTerm
+      value: durch
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632477033308479243, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: mLocalizeTarget
+      value: 
+      objectReference: {fileID: 1302049443}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268d4a886f37f4dbc8a8ee93df4f30c4, type: 3}
 --- !u!224 &325059783 stripped
@@ -1340,6 +1355,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &325059785 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5353728764539223203, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 325059782}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &336914627
@@ -1721,6 +1748,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80789d946d47a4809893515e25e0ac79, type: 3}
+--- !u!114 &371486622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332e36893e7cf4a49b3c1f72f76cd5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 832566219}
 --- !u!1001 &455541979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1913,7 +1953,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Type new player's name...
+  m_Text: Neuer Spielername eingeben...
 --- !u!222 &493458610
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2553,12 +2593,12 @@ PrefabInstance:
     - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: m_Text
-      value: "\xD7"
+      value: ' '
       objectReference: {fileID: 0}
     - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: m_FontData.m_BestFit
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
@@ -2698,13 +2738,23 @@ PrefabInstance:
     - target: {fileID: 8832731504735910580, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 8832731504735910580, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 5353728764539223203, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: m_Text
+      value: mal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632477033308479243, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+        type: 3}
+      propertyPath: mLocalizeTarget
+      value: 
+      objectReference: {fileID: 371486622}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268d4a886f37f4dbc8a8ee93df4f30c4, type: 3}
 --- !u!224 &832566218 stripped
@@ -2713,6 +2763,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 832566217}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &832566219 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5353728764539223203, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 832566217}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &832566220 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8832731504152761552, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
@@ -3742,6 +3804,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e6e815623d34dcf94034538b51a4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1302049443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332e36893e7cf4a49b3c1f72f76cd5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 325059785}
 --- !u!1 &1308412198
 GameObject:
   m_ObjectHideFlags: 0
@@ -4722,7 +4797,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: What's your name?
+  m_Text: "Wie hei\xDFt Du?"
 --- !u!222 &1614191644
 CanvasRenderer:
   m_ObjectHideFlags: 0
