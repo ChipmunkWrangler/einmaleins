@@ -16,7 +16,6 @@ Instead, you need something like:
 [ ] If you are typing in the answer when you reach a planet, the answer text doesn't disappear. Note that AnswerDisplay.OnQuizAborted is presumably called, emptying the answer string, but if you hit the button at the right time, it adds a new number. Maybe the buttons should deactivate on OnQuizAborted (the enter button already does); otherwise AnswerDisplay should track state and reject input between OnQuizAborted and OnQuestionChanged.
 ## v1.2.0
 Allow up to 32 players
-Fix bug: Lichtbogentriebwerk einbauen is shown immediately
 Take screenshots for 6.5"
 ## v1.1.0
 * [X] test stats with multiplication

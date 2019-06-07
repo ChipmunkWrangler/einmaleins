@@ -1,11 +1,11 @@
-* [.] Deploy
+* [o] Deploy
  * [X] Update MDVersion to handle previous version
  * [X] Update version number in iOS build settings
  * [ ] Update build and/or version numbers in Android build settings
- * [ ] use xARM to test the devices with the highest resolution, smallest & largest height & width, and extreme aspect ratios 16:9 and 4:3
- * [ ] Ensure that screenshots / video are up to date
-  * [ ] Add grid button screenshots for small devices
- * [ ] Test on device 
+ * [X] use xARM to test the devices with the highest resolution, smallest & largest height & width, and extreme aspect ratios 16:9 and 4:3
+ * [X] Ensure that screenshots / video are up to date
+  * [X] Add grid button screenshots for small devices
+ * [ ] Test on device IN GERMAN TOO 
   * [ ] Test data version update
   * [ ] Test starting with no players
   * [ ] Text switching to grid layout
@@ -26,8 +26,8 @@
   * [ ] Test reaching Pluto (all questions should be mastered, all upgrades done, gauntlet. Impossible to reach early)
   * [ ] Test post-gauntlet
  * [ ] Ensure that Datenschutzerklärung is still true (e.g. if you add tracking or cross-branding). Model is https://www.carlsen.de/datenschutzerklaerung-apps 
- * [ ] iOS Build
-  * [ ] Build in unity
+ * [.] iOS Build
+  * [X] Build in unity
   * [ ] Upload in XCode
    * [ ] 1) choose "generic iOS device" (don't choose Ipad or any other devices connected or a simulator) 
    * [ ] 2) Go to Product --> Archive
