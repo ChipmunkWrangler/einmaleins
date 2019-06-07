@@ -14,11 +14,13 @@ internal class NewPlayerName : MonoBehaviour
     private string newName;
     [SerializeField] private Button playDivisionButton;
     [SerializeField] private Text playDivisionSymbol;
+    [SerializeField] private Text playDivisionName;
     [SerializeField] private TextButton[] playerButtons;
     [SerializeField] private VariableString playerName;
     [SerializeField] private PlayerNameController playerNameController;
     [SerializeField] private Button playMultiplicationButton;
     [SerializeField] private Text playMultiplicationSymbol;
+    [SerializeField] private Text playMultiplicationName;
     [SerializeField] private Prefs prefs;
     [SerializeField] private InitialGameSceneLoader sceneLoader;
     [SerializeField] private RectTransform playerNameContainer;
@@ -86,6 +88,8 @@ internal class NewPlayerName : MonoBehaviour
         playDivisionButton.interactable = b;
         playMultiplicationSymbol.CrossFadeAlpha(b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false);
         playDivisionSymbol.CrossFadeAlpha(b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false);
+        playMultiplicationName.CrossFadeAlpha(b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false);
+        playDivisionName.CrossFadeAlpha(b ? 1.0F : buttonFadeAlpha, buttonFadeDuration, false);
     }
 
     private void Play()
@@ -101,8 +105,16 @@ internal class NewPlayerName : MonoBehaviour
     private void DisableButtons()
     {
         buttonsAlreadyPressed = true;
-        playMultiplicationButton.enabled = false;
-        playDivisionButton.enabled = false;
+        Deactivate(playDivisionButton);
+        Deactivate(playMultiplicationButton);
         foreach (var button in playerButtons) button.enabled = false;
+    }
+
+    private static void Deactivate(Selectable button)
+    {
+        if (!button.interactable) return;
+        button.enabled =
+            false; // if interactable is false, setting enabled to false changes the appearance of the button
+        Console.Write("Disabled");
     }
 }

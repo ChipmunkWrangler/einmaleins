@@ -773,6 +773,7 @@ MonoBehaviour:
   listFullEvent: {fileID: 11400000, guid: 0b7bcaf82f43b4366b59ed822a596d67, type: 2}
   playDivisionButton: {fileID: 325059784}
   playDivisionSymbol: {fileID: 2013431548}
+  playDivisionName: {fileID: 325059785}
   playerButtons:
   - {fileID: 235820493}
   - {fileID: 1009282700}
@@ -811,6 +812,7 @@ MonoBehaviour:
     type: 2}
   playMultiplicationButton: {fileID: 832566220}
   playMultiplicationSymbol: {fileID: 198967645}
+  playMultiplicationName: {fileID: 832566219}
   prefs: {fileID: 11400000, guid: bd1d174591bb84772a6e987f27bc9327, type: 2}
   sceneLoader: {fileID: 11400000, guid: 6cf60aae7c9594fe5982baf1a10d101b, type: 2}
   playerNameContainer: {fileID: 1488403817}
