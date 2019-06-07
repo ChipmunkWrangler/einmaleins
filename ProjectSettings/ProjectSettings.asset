@@ -164,7 +164,7 @@ PlayerSettings:
     Android: com.crazy_chipmunk.einmaleinspaid
     iPhone: com.crazy-chipmunk.einmaleins
   buildNumber:
-    iPhone: 4
+    iPhone: 5
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
