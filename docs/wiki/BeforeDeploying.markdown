@@ -26,14 +26,14 @@
   * [ ] Test reaching Pluto (all questions should be mastered, all upgrades done, gauntlet. Impossible to reach early)
   * [ ] Test post-gauntlet
  * [ ] Ensure that Datenschutzerklärung is still true (e.g. if you add tracking or cross-branding). Model is https://www.carlsen.de/datenschutzerklaerung-apps 
- * [o] iOS Build
+ * [.] iOS Build
   * [X] Build in unity
-  * [X] Upload in XCode
-   * [X] choose "generic iOS device" (don't choose Ipad or any other devices connected or a simulator) 
-   * [X] Use the search spyglass under the play button in Xcode to find "UIApplicationExitsOnSuspend" and click the minus sign to remove the key.
-   * [X] Go to Product --> Archive
-   * [X] it should open the archive in the Organizer. Click "validate" 
-   * [X] Click "Distribute App" with default options. Optional: When you get to the second screen after Distribute App, choose Export instead of Upload, and give the resulting file to ApplicationLoader. This only works if your apple@ account is only signed up with one team, but it allows you (in settings... advanced) to turn off all protocols except DAV, which avoid the "Negotiating connection" freeze.
+  * [ ] Upload in XCode
+   * [ ] choose "generic iOS device" (don't choose Ipad or any other devices connected or a simulator) 
+   * [ ] Use the search spyglass under the play button in Xcode to find "UIApplicationExitsOnSuspend" and click the minus sign to remove the key.
+   * [ ] Go to Product --> Archive
+   * [ ] it should open the archive in the Organizer. Click "validate" 
+   * [ ] Click "Distribute App" with default options. Optional: When you get to the second screen after Distribute App, choose Export instead of Upload, and give the resulting file to ApplicationLoader. This only works if your apple@ account is only signed up with one team, but it allows you (in settings... advanced) to turn off all protocols except DAV, which avoid the "Negotiating connection" freeze.
   * [ ] When you get the first email ("processed"), go to iTunesConnect and
    * [ ] update compliance info at iTunesConnect
    * [ ] Check "Test Information" under IOSBuilds...Test Details in testflight, in the right language -- see Texts below (https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1296879662/testflight?section=build&subsection=testdetails&id=24416006)
