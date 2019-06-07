@@ -1181,7 +1181,7 @@ PrefabInstance:
     - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: m_Text
-      value: ' '
+      value: " \xF7 "
       objectReference: {fileID: 0}
     - target: {fileID: 8832731504735910577, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
@@ -1321,7 +1321,7 @@ PrefabInstance:
     - target: {fileID: 8171054197155947653, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
       propertyPath: mTerm
-      value: divisionSlash
+      value: divisionSymbolChoosePlayer
       objectReference: {fileID: 0}
     - target: {fileID: 8832731504735910580, guid: 268d4a886f37f4dbc8a8ee93df4f30c4,
         type: 3}
@@ -6146,8 +6146,8 @@ MonoBehaviour:
   mGUI_ShowReferences: 0
   mGUI_ShowTems: 1
   mGUI_ShowCallback: 0
-  mLocalizeTarget: {fileID: 0}
-  mLocalizeTargetName: 
+  mLocalizeTarget: {fileID: 787185604}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_UnityUI_Text
 --- !u!114 &2043050734
 MonoBehaviour:
   m_ObjectHideFlags: 0

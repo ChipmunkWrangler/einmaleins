@@ -362,7 +362,7 @@ MonoBehaviour:
       Description: 
       Languages:
       - " \xD7 "
-      - ' '
+      - " \xB7 "
       Flags: 0000
       Languages_Touch: []
     - Term: Employees Only
@@ -450,8 +450,8 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - "\xF7"
-      - ' '
+      - " \xF7 "
+      - " \u2236 "
       Flags: 0000
       Languages_Touch: []
     - Term: "Tastenanordnung Ver\xE4ndern"
@@ -485,6 +485,22 @@ MonoBehaviour:
       Languages:
       - ' '
       - durch
+      Flags: 0000
+      Languages_Touch: []
+    - Term: divisionSymbolChoosePlayer
+      TermType: 0
+      Description: 
+      Languages:
+      - " \xF7 "
+      - ' '
+      Flags: 0000
+      Languages_Touch: []
+    - Term: multiplicationSymbolChoosePlayer
+      TermType: 0
+      Description: 
+      Languages:
+      - " \xD7 "
+      - ' '
       Flags: 0000
       Languages_Touch: []
     CaseInsensitiveTerms: 0
