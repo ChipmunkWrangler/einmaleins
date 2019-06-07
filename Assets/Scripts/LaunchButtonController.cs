@@ -15,7 +15,7 @@ internal class LaunchButtonController : MonoBehaviour
         "Auf ins All"
     };
 
-    [SerializeField] private Button launchButton;
+    [SerializeField] private Selectable launchButton;
     [SerializeField] private Text launchButtonText;
     [SerializeField] private TargetPlanet targetPlanet;
 

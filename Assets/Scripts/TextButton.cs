@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 internal class TextButton : MonoBehaviour
 {
-    [SerializeField] private Button button;
+    [SerializeField] private Selectable button;
     [SerializeField] private float fadedAlpha = 0.5F;
     [SerializeField] private Text text;
     [SerializeField] private float transitionTime = 0.1F;

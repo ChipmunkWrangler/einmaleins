@@ -5,7 +5,7 @@ internal class GiveUpButtonController : MonoBehaviour, IOnWrongAnswer, IOnQuizAb
 {
     private const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
-    [SerializeField] private Button button;
+    [SerializeField] private Selectable button;
     [SerializeField] private Image image;
 
     void IOnQuestionChanged.OnQuestionChanged(Question question)

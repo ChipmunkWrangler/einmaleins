@@ -5,7 +5,7 @@ internal class EnterAnswerButtonController : MonoBehaviour, IOnWrongAnswer, IOnQ
 {
     public const float TransitionTime = 0.25F;
 
-    [SerializeField] private Button button;
+    [SerializeField] private Selectable button;
 
     private bool isHiding;
     private bool isShowing;

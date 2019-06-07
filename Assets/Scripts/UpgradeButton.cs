@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 internal class UpgradeButton : MonoBehaviour
 {
-    [SerializeField] private Button button;
+    [SerializeField] private Selectable button;
     [SerializeField] private string engineTermPrefix = "engineNames_";
     [SerializeField] private Text label;
 

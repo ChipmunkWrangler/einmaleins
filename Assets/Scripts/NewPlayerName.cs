@@ -12,13 +12,13 @@ internal class NewPlayerName : MonoBehaviour
     [SerializeField] private GameEvent listFullEvent;
 
     private string newName;
-    [SerializeField] private Button playDivisionButton;
+    [SerializeField] private Selectable playDivisionButton;
     [SerializeField] private Text playDivisionSymbol;
     [SerializeField] private Text playDivisionName;
     [SerializeField] private TextButton[] playerButtons;
     [SerializeField] private VariableString playerName;
     [SerializeField] private PlayerNameController playerNameController;
-    [SerializeField] private Button playMultiplicationButton;
+    [SerializeField] private Selectable playMultiplicationButton;
     [SerializeField] private Text playMultiplicationSymbol;
     [SerializeField] private Text playMultiplicationName;
     [SerializeField] private Prefs prefs;

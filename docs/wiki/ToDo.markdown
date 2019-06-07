@@ -17,6 +17,8 @@ Instead, you need something like:
 ## v1.2.0
 Allow up to 32 players
 Take screenshots for 6.5"
+Clearer division and multiplication selection for German
+Bugfix: play buttons no longer light up when an existing player is selected
 ## v1.1.0
 * [X] test stats with multiplication
 * [X] Switch back to mult player

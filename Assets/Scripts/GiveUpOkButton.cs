@@ -5,7 +5,7 @@ internal class GiveUpOkButton : MonoBehaviour
 {
     private const float TransitionTime = EnterAnswerButtonController.TransitionTime;
 
-    [SerializeField] private Button button;
+    [SerializeField] private Selectable button;
 
     public void OnGiveUp()
     {

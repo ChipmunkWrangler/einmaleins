@@ -13,7 +13,7 @@ internal class SendSaveDataByMail : MonoBehaviour
     private const int Port = 25;
 
     private static readonly string Password = MailPassword.Password;
-    [SerializeField] private Button sendButton;
+    [SerializeField] private Selectable sendButton;
 
     [SerializeField] private Text statusLine;
 

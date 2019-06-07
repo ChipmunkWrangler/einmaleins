@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 internal class GotoLaunch : MonoBehaviour
 {
-    [SerializeField] private Button button;
+    [SerializeField] private Selectable button;
     [SerializeField] private Prefs prefs;
 
     public void LoadLaunchScene(bool autolaunch)
